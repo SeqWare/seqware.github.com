@@ -60,7 +60,7 @@ virtualization software.  You need to be comfortable with Linux before moving
 forward with SeqWare, specifically the Bash shell, using an editor like vim or
 emacs, and some experience programming in Java.</p>
 
-<p>To learning about Linux, the Bash shell, and Java we recommend the O&#8217;Reilly series of books:</p>
+<p>To learn about Linux, the Bash shell, and Java we recommend the O&#8217;Reilly series of books:</p>
 
 <ul>
 <li><a href="http://amzn.com/B0093T2G3I">Linux in a Nutshell</a></li>
@@ -74,7 +74,7 @@ emacs, and some experience programming in Java.</p>
 <p>We have created a VirtualBox VM with all SeqWare projects pre-installed along
 with some sample data.  This is the easiest way to get started with SeqWare
 since it requires no installation and configuration on your part.  While the
-download is pretty large, you will not incure per hour fees as you do when
+download is pretty large, you will not incur per hour fees as you do when
 running on Amazon so it is a great way to get started with SeqWare, kick the
 tires, and see if this is something you want to use more.</p>
 
@@ -90,7 +90,7 @@ OS you currently have.</p>
 
 <p>Next, you will need to download our current VM image which is linked below.
 Please make sure you are using the latest version, when we post a new one we
-will tweet about it so consider following us in Twitter.</p>
+will tweet about it so consider following us on Twitter.</p>
 
 <ul>
 <li><a href="https://s3.amazonaws.com/nimbusinformatics.exchange/private/SeqWareVM_0.12.5-r5163_CentOS_6.2_20120815.ova">SeqWareVM_0.12.5-r5163_CentOS_6.2_20120815.ova</a></li>
@@ -103,7 +103,7 @@ walkthrough of using this VM).</p>
 
 <p class="warning"><strong>Note:</strong>
 When you import the VM you need to set your memory and CPU correctly.  Do not
-overcommitt resources (espcially memory) since that will cause the machine to
+overcommit resources (espcially memory) since that will cause the machine to
 &#8220;swap&#8221; memory to disk and slow your computer to a crawl. This VM is intended
 for you to see SeqWare in action and then create your own workflows. If you are
 making a workflow that will take 16GB of memory then you will need a VM running
@@ -147,7 +147,7 @@ see <a href="http://aws.amazon.com/ec2/instance-types/">Cluster Compute Quadrupl
 Instance</a>. These machines provide
 23GB of memory and 2x quad core &#8220;Nehalem&#8221; processors which is typically
 sufficient for analyzing a human exome within about 4 hours depending on the
-speicfics of your workflows.</p>
+specfics of your workflows.</p>
 
 <div class="section" id="getting-an-amazon-cloud-account">
 <h3>Getting an Amazon Cloud Account</h3>
@@ -171,14 +171,14 @@ speicfics of your workflows.</p>
 
 <p><img src="../../assets/images/amazon_launcher.png" alt="SeqWare AWS Console" width="600px"></p>
 
-<p class="warning"><strong>Tip:</strong>Make sure you open port 22 for ssh and port 8080 for the SeqWare Portal and Web Service.</p>
+<p class="warning"><strong>Tip:</strong>Make sure you open port 22 for SSH and port 8080 for the SeqWare Portal and Web Service.</p>
 
 
 </div>
 <div class="section" id="logging-in">
 <h3>Logging In</h3>
 
-<p>Unlike the local VM there is no graphical desktop to log into.  Instead you will need to follow the directions on the Amazon site for usind <kbd>ssh</kbd> to log into your running VM.  There you will have a command line interface to interact with the SeqWare tools. You can also view the SeqWare Portal and SeqWare Web Service remotely in your browser.</p>
+<p>Unlike the local VM there is no graphical desktop to log into.  Instead you will need to follow the directions on the Amazon site for using <kbd>ssh</kbd> to log into your running VM.  There you will have a command line interface to interact with the SeqWare tools. You can also view the SeqWare Portal and SeqWare Web Service remotely in your browser.</p>
 
 </div>
 <div class="section" id="what-can-you-do-with-it">
