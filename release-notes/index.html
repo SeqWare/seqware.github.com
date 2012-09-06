@@ -34,6 +34,137 @@
 <div class="header">
 <h1>Release Notes</h1>
 </div>
+<!---
+I did this via exporting to Excel from JIRA and then copying the appropriate columns, after removing OICR employee specific-tasks
+We still have to manually delete the parent task IDs for technical tasks though. There should be a cleaner way.
+-->
+
+
+<div class="section" id="0-13-1-2012-09-03">
+<h2>0.13.1 (2012-09-03)</h2>
+
+<div class="section" id="defect">
+<h3>Defect</h3>
+
+<ul>
+<li>SEQWARE-1140 - WorkflowLauncher doesn&#8217;t use command line arguments when scheduling workflows</li>
+</ul>
+</div>
+<div class="section" id="improvement">
+<h3>Improvement</h3>
+
+<ul>
+<li>SEQWARE-1141 - Allow WorkflowRunReporter to print to a user-specified file name or to stdout</li>
+</ul>
+</div>
+<div class="section" id="story">
+<h3>Story</h3>
+
+<ul>
+<li>SEQWARE-414 - Empty entries in ini files for workflows should still go into workflow_param table</li>
+<li>SEQWARE-1121 - Poster for Genome Informatics</li>
+</ul>
+</div>
+<div class="section" id="task">
+<h3>Task</h3>
+
+<ul>
+<li>SEQWARE-1127 - install nanoc in seqware dev</li>
+<li>SEQWARE-1142 - move sqwprod postgres data to nfs</li>
+</ul>
+</div>
+<div class="section" id="technical-task">
+<h3>Technical Task</h3>
+
+<ul>
+<li>SEQWARE-1088 - Create implementation of Friendly prefixes for TagSets (and other classes)</li>
+<li>SEQWARE-1091 - Create nested hash structures for Feature Tags</li>
+<li>SEQWARE-1118 - SO Synonym support</li>
+<li>SEQWARE-1120 - Prepare for DCC tutorial</li>
+<li>SEQWARE-1131 - Debug VCF File importer zipped files</li>
+<li>SEQWARE-1117 - structural changes (launching, monitoring, etc.) divergence &#8230; needs to be merged into 2.0 of workflow</li>
+<li>SEQWARE-1021 - Record performance/test range/token filters</li>
+<li>SEQWARE-565 - Add attribute support to ProvisionFiles and Generic Metadata Saver</li>
+<li>SEQWARE-1033 - VEP workflow: debug with metadata</li>
+<li>SEQWARE-1111 - Finish VCF parser with new QE parameters</li>
+<li>SEQWARE-1113 - Finish collating tagset between Annovar and VEP</li>
+<li>SEQWARE-1074 - add workflow attribute</li>
+<li>SEQWARE-1075 - add workflow run attribute</li>
+<li>SEQWARE-1114 - bulk import of attributes</li>
+<li>SEQWARE-1044 - Debug with metadata</li>
+<li>SEQWARE-1053 - WoW: Debug without metadata</li>
+<li>SEQWARE-1054 - WoW: debug with metadata</li>
+<li>SEQWARE-1106 - Install all necessary workflows on sqwstage</li>
+<li>SEQWARE-1098 - If Run is Skipped, Lanes and Iuses will be Automatically Skipped</li>
+<li>SEQWARE-1122 - Create Introduction</li>
+<li>SEQWARE-1123 - Outline and finish methods</li>
+<li>SEQWARE-1124 - Experiment and Get Statistics for a ICGC Load</li>
+<li>SEQWARE-1125 - Map/Reduce statistics collection with in-memory comparison</li>
+<li>SEQWARE-1126 - Programmatic Access and Acknowledgements</li>
+</ul>
+</div>
+</div>
+<div class="section" id="0-13-0-2012-08-20">
+<h2>0.13.0 (2012-08-20)</h2>
+
+<div class="section" id="story">
+<h3>Story</h3>
+
+<ul>
+<li>SEQWARE-97 - Add plugin architecture for deciders, move from Perl to Java</li>
+<li>SEQWARE-1037 - Get the cluster and hboot talking</li>
+</ul>
+</div>
+<div class="section" id="task">
+<h3>Task</h3>
+
+<ul>
+<li>SEQWARE-1015 - Web service users need access to a report showing status information from both LIMS and SeqWare</li>
+<li>SEQWARE-1077 - Webservice issues</li>
+</ul>
+</div>
+<div class="section" id="technical-task">
+<h3>Technical task</h3>
+
+<ul>
+<li>SEQWARE-1017 - Deal with Unknown Scanner Exception bug</li>
+<li>SEQWARE-1019 - Catch-up specification for Query Engine</li>
+<li>SEQWARE-1020 - Refactor plug-ins, implement install of plug-ins via classpath</li>
+<li>SEQWARE-1023 - Implement loader with SO term support</li>
+<li>SEQWARE-1024 - Update command-line loader with SO term support</li>
+<li>SEQWARE-1064 - Debug existing map/reduce tasks on the cluster</li>
+<li>SEQWARE-1065 - Implement tests for SO integration</li>
+<li>SEQWARE-1066 - Add command-line tool doc for Morgan by End of Week</li>
+<li>SEQWARE-1067 - Convert Java logging to Log4j</li>
+<li>SEQWARE-175 - Convert workflow launching script into Java Plugin</li>
+<li>SEQWARE-1089 - Convert workflow status to Java Plugin</li>
+<li>SEQWARE-839 - Ensure install process works via command line and web service</li>
+<li>SEQWARE-340 - Allow pushing of workflows by S3 upload</li>
+<li>SEQWARE-342 - Allow pulling of files from mutually readable file system</li>
+<li>SEQWARE-343 - Code install process through web service</li>
+<li>SEQWARE-1032 - VEP workflow: debug without metadata</li>
+<li>SEQWARE-1034 - VEP workflow: write spec for VCF file parsing</li>
+<li>SEQWARE-1035 - VEP workflow: write script for VCF file parsing</li>
+<li>SEQWARE-1026 - bug fix for experiment attribute</li>
+<li>SEQWARE-1068 - add file attribute</li>
+<li>SEQWARE-1069 - add ius attribute</li>
+<li>SEQWARE-1070 - add lane attribute</li>
+<li>SEQWARE-1071 - add processing attribute</li>
+<li>SEQWARE-1073 - add study attribute</li>
+<li>SEQWARE-1079 - add sample attribute</li>
+<li>SEQWARE-1084 - try attribute annotation command line to make sure that all attribute tables work</li>
+<li>SEQWARE-1090 - change the xml output of all the attribute tables</li>
+<li>SEQWARE-1040 - Install QE cmd line tools locally</li>
+<li>SEQWARE-1041 - Create bundle and import into git</li>
+<li>SEQWARE-1042 - Implement jobs</li>
+<li>SEQWARE-1043 - Debug without metadata</li>
+<li>SEQWARE-1059 - Install dependencies into artifactory</li>
+<li>SEQWARE-1060 - Test the connection</li>
+<li>SEQWARE-1045 - WoW: create bundle and import into git</li>
+<li>SEQWARE-1048 - WoW: implement the jobs (get the hint from Brian about how to execute processes locally)</li>
+</ul>
+</div>
+</div>
 <div class="section" id="0-12-5-2012-08-06">
 <h2>0.12.5 (2012-08-06)</h2>
 
@@ -44,7 +175,7 @@
 <li>SEQWARE-955 - hboot.res</li>
 <li>SEQWARE-969 - Implement HighCapacity FeatureSets</li>
 <li>SEQWARE-975 - Create and Tag Release</li>
-<li>SEQWARE-1004 - Add biojava dependencies to our artifactory</li>
+<li>SEQWARE-1004 - Add guava dependencies to our artifactory</li>
 </ul>
 </div>
 <div class="section" id="story">
