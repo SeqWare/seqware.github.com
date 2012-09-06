@@ -70,7 +70,7 @@
 <ol>
 <li>You will want to go to the <a href="https://github.com/SeqWare/seqware">SeqWare Github repository</a> and run the command <code>git clone git@github.com:SeqWare/seqware.git seqware_github</code>
 </li>
-<li>You will also need to setup Hadoop and HBase if it is not already setup. We highly recommend <a href="https://ccp.cloudera.com/display/CDH4DOC/CDH4+Quick+Start+Guide">Cloudea&#8217;s CDH packages</a> since they are tested for package incompatibilities between Hadoop projects (which are still common). It is also worth double-checking the web interface for HBase which is usually at <a href="http://localhost:60010/master-status">http://localhost:60010/master-status</a>.</li>
+<li>You will also need to setup Hadoop and HBase if it is not already setup. We highly recommend <a href="https://ccp.cloudera.com/display/CDH4DOC/CDH4+Quick+Start+Guide">Cloudera&#8217;s CDH packages</a> since they are tested for package incompatibilities between Hadoop projects (which are still common). It is also worth double-checking the web interface for HBase which is usually at <a href="http://localhost:60010/master-status">http://localhost:60010/master-status</a>.</li>
 </ol>
 <p>For both the VM and a local development environment, continue here:</p>
 
@@ -82,7 +82,8 @@
 
 
 <ol>
-<li>Refresh the seqware engine by doing a <code>git fetch</code> and <code>git pull</code> in the seqware_github directory.</li>
+<li>Refresh the code for the query engine by doing a <code>git fetch</code> and <code>git pull</code> in the seqware_github directory. On the VM, you may need to merge changes or simply discard changes with a command such as <code>git checkout seqware-queryengine/src/main/java/com/github/seqware/queryengine/Constants.java</code>
+</li>
 <li>If the <a href="http://localhost:60010/master-status">web interface</a> for HBase stalls or is inactive, you may need to restart the HBase processes. This can be done by the following commands:
 <pre title="Title of the snippet">
 sudo bash
@@ -101,7 +102,7 @@ mvn clean install
 mvn javadoc:javadoc
 mvn javadoc:test-javadoc
 </pre>
-This will generate javadoc documentation for both the main code and the testing code.</li>
+This will generate javadoc documentation for both the main code and the testing code in <code>seqware-queryengine/target/site/apidocs/index.html</code> and <code>seqware-queryengine/target/site/testapidocs/index.html</code> respectively.</li>
 </ol>
 </div>
 <div class="section" id="loading-data">
@@ -111,7 +112,7 @@ This will generate javadoc documentation for both the main code and the testing 
 
 <pre title="Title of the snippet">
   <kbd>cd ...</kbd>
-  <kbd>mvn install -Dmaven.test.skip=true</kbd>
+  <kbd>mvn clean install -Dmaven.test.skip=true</kbd>
   <kbd>cd seqware-distribution/target</kbd>
 </pre>
 
@@ -124,7 +125,7 @@ This will generate javadoc documentation for both the main code and the testing 
 <span class="prompt">~/seqware_github/seqware-distribution/target$</span> <kbd>java -classpath seqware-queryengine-0.12.0-full.jar com.github.seqware.queryengine.system.ReferenceCreator</kbd>
 Only 0 arguments found
 ReferenceCreator <reference_name> [output_file]
-<span class="prompt">~/seqware_github/seqware-distribution/target$</span> <kbd>java -classpath seqware-queryengine-0.12.0-full.jar com.github.seqware.queryengine.system.ReferenceCreator hg_19 keyValue_ref.out</kbd>
+<span class="prompt">~/seqware_github/seqware-distribution/target$</span> <kbd>java -classpath seqware-queryengine-0.12.0-full.jar com.github.seqware.queryengine.system.ReferenceCreator hg_42 keyValue_ref.out</kbd>
 Reference written with an ID of:
 59a1aca5-4a5f-4006-b395-ca8cb5dd8c50
 <span class="prompt">~/seqware_github/seqware-distribution/target$</span> <kbd>cat keyValue_ref.out</kbd>
@@ -157,7 +158,7 @@ TagSetID    5e7a2327-08ac-4455-9687-ec4c3737074f
 <p>The previous steps should only really need to be done once when first setting up a namespace. Afterwards, the VCF file importer can be called repeatedly for each of your datasets.</p>
 
 <pre title="Title of the snippet">
-<span class="prompt">~/seqware_github/seqware-distribution/target$</span> <kbd> java -classpath seqware-queryengine-0.12.0-full.jar com.github.seqware.queryengine.system.importers.SOFeatureImporter ../../seqware-queryengine/src/test/resources/com/github/seqware/queryengine/system/FeatureImporter/consequences_annotated.vcf -o keyValueVCF.out -r 59a1aca5-4a5f-4006-b395-ca8cb5dd8c50 -s 5e7a2327-08ac-4455-9687-ec4c3737074f -w VCFVariantImportWorker </kbd>
+<span class="prompt">~/seqware_github/seqware-distribution/target$</span> <kbd> java -classpath seqware-queryengine-0.12.0-full.jar com.github.seqware.queryengine.system.importers.SOFeatureImporter</kbd>
 usage: SOFeatureImporter
  -a <adhoctagset>   (optional) an ID for an ad hoc TagSet, Tags will
                     either be found or added to this set, a new TagSet
@@ -235,6 +236,15 @@ In general, operations that iterate through a feature set, read or update indivi
 <h2>Testing</h2>
 
 <p>The testing directories are <code>com.github.seqware.queryengine.model.test</code>, <code>com.github.seqware.queryengine.impl.test</code>, and <code>com.github.seqware.queryengine.system.test</code>. These directories test the model objects that outside developers can manipulate and interact with, specific features of the back-end, and the command-line tools respectively. Note that the tests can be run from a <code>TestSuite</code> that is available in each directory while new tests should be added to the <code>DynamicSuiteBuilder</code> in each directory. Note that the tests in the model directory can be run against a variety of back-ends and two serialization techniques.</p>
+
+<p>Note, after running through the full test suite multiple times, the tests run against the simpler back-ends with no optimization will slow down. This can be fixed by running the following code via the HBase shell in order to clear out all stored data:</p>
+
+<pre title="Title of the snippet">
+  <kbd>hbase shell</kbd>
+  <kbd>disable_all '.*'</kbd>
+  <kbd>drop_all '.*'</kbd>
+</pre>
+
 
 </div>
 <div class="section" id="features">
