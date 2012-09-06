@@ -36,11 +36,12 @@
 <span class="active" title="You're here."><span>SeqWare Query Engine</span></span><ol class="toc">
 <li><a href="#overview">Overview</a></li>
 <li><a href="#admin-setup">Admin Setup</a></li>
-<li><a href="#features">Features</a></li>
 <li><a href="#loading-data">Loading Data</a></li>
 <li><a href="#querying-data">Querying Data</a></li>
+<li><a href="#testing">Testing</a></li>
+<li><a href="#features">Features</a></li>
+<li><a href="#extending-the-query-engine">Extending the Query Engine</a></li>
 <li><a href="#making-custom-plugins">Making Custom Plugins</a></li>
-<li><a href="#running-tests">Running Tests</a></li>
 <li><a href="#more-to-come">More to Come &#8230;</a></li>
 </ol>
 </li>
@@ -58,7 +59,7 @@
 <div class="section" id="overview">
 <h2>Overview</h2>
 
-<p>The SeqWare Query Engine is intended to be a universal store for sequence variants. The current iteration of the SeqWare Query engine has the ability to store and search data stored in a modern NoSQL database, HBase.</p>
+<p>The SeqWare Query Engine is intended to be a universal store for sequence variants. Features include fine-grained control over versioning, a plug-in framework for new MapReduce plug-ins, rich value tags/annotations on most objects, and set organization. The current iteration of the SeqWare Query engine has the ability to store and search data stored in a modern NoSQL database, HBase, while using Google&#8217;s Protocol Buffers for serialization.</p>
 
 </div>
 <div class="section" id="admin-setup">
@@ -73,10 +74,10 @@
 </ol>
 <p>For both the VM and a local development environment, continue here:</p>
 
-<p>There are a number of constants that may have to be set, particularly for a developer. These are currently in the <code>com.github.seqware.queryengine.Constants</code> file although they will be moved to an external configuration file. In particular, you should set your <code>NAMESPACE</code> to avoid collisions with other developers and if you wish for your distribution jar to be automatically copied to the cluster when launching MapReduce tasks, you will need to correct the <code>DEVELOPMENT_DEPENDENCY</code>.</p>
+<p>There are a number of constants that may have to be set, particularly for a developer. These are currently in the <code>com.github.seqware.queryengine.Constants</code> file although they will eventually be moved to an external configuration file. In particular, you should set your <code>NAMESPACE</code> to avoid collisions with other developers and if you wish for your distribution jar to be automatically copied to the cluster when launching MapReduce tasks, you will need to correct the <code>DEVELOPMENT_DEPENDENCY</code>.</p>
 
 <p class="warning"><strong>Note:</strong>
-       It is important that you check your <code>NAMESPACE</code>, <code>HBASE_REMOTE_TESTING</code>, and <code>HBASE_PROPERTIES</code> variables. While these will be moved out to an external config file, they currently control the prefix for your tables, whether you connect to a local install of HBase, and which remote install of HBase you want to connect to respectively.
+       It is important that you check your <code>NAMESPACE</code>, <code>HBASE_REMOTE_TESTING</code>, and <code>HBASE_PROPERTIES</code> variables. They currently control the prefix for your tables, whether you connect to a local install of HBase, and which remote install of HBase you want to connect to respectively.
 </p>
 
 
@@ -100,17 +101,13 @@ mvn clean install
 mvn javadoc:javadoc
 mvn javadoc:test-javadoc
 </pre>
-</li>
+This will generate javadoc documentation for both the main code and the testing code.</li>
 </ol>
-</div>
-<div class="section" id="features">
-<h2>Features</h2>
-
 </div>
 <div class="section" id="loading-data">
 <h2>Loading Data</h2>
 
-<p>We currently load data via our command-line programs. In order to do this, you will want to go to the root directory and compile a full version of our jar with dependencies included. You will also need to skip the tests for our other components. This should look something like:</p>
+<p>We currently load data via our command-line programs. In order to do this, you will want to go to the root directory and compile a full version of our jar with dependencies included. You will probably wish to skip the tests for our other components. This should look something like:</p>
 
 <pre title="Title of the snippet">
   <kbd>cd ...</kbd>
@@ -121,7 +118,7 @@ mvn javadoc:test-javadoc
 
 <p>In this distribution directory, you can run our command line tools for import.</p>
 
-<p>The first time you run these tools in a new namespace, you may wish to create a common reference and then create an ad hoc tag set for all terms that do not match Sequence Ontology (SO) terms.</p>
+<p>The first time you run these tools in a new namespace, you may wish to create a common reference and then create an ad hoc tag set that will store all tags that do not match known terms.</p>
 
 <pre title="Title of the snippet">
 <span class="prompt">~/seqware_github/seqware-distribution/target$</span> <kbd>java -classpath seqware-queryengine-0.12.0-full.jar com.github.seqware.queryengine.system.ReferenceCreator</kbd>
@@ -143,7 +140,7 @@ TagSetID    84ec5dfb-1cba-4b7b-b06a-eebbfc3dfd60
 </tagset></reference_name></pre>
 
 
-<p>You may also wish to pre-populate the database with SO terms in a TagSet:</p>
+<p>You may also wish to pre-populate the database with (Sequence Ontology) SO terms in a TagSet:</p>
 
 <pre title="Title of the snippet">
 <span class="prompt">~/seqware_github/seqware-distribution/target$</span> <kbd>java -classpath seqware-queryengine-0.12.0-full.jar com.github.seqware.queryengine.system.importers.OBOImporter</kbd>
@@ -157,7 +154,7 @@ TagSetID    5e7a2327-08ac-4455-9687-ec4c3737074f
 </input_file></pre>
 
 
-<p>The previous steps should only really be done once when first setting up a namespace. Afterwards, the VCF file importer can be called.</p>
+<p>The previous steps should only really need to be done once when first setting up a namespace. Afterwards, the VCF file importer can be called repeatedly for each of your datasets.</p>
 
 <pre title="Title of the snippet">
 <span class="prompt">~/seqware_github/seqware-distribution/target$</span> <kbd> java -classpath seqware-queryengine-0.12.0-full.jar com.github.seqware.queryengine.system.importers.SOFeatureImporter ../../seqware-queryengine/src/test/resources/com/github/seqware/queryengine/system/FeatureImporter/consequences_annotated.vcf -o keyValueVCF.out -r 59a1aca5-4a5f-4006-b395-ca8cb5dd8c50 -s 5e7a2327-08ac-4455-9687-ec4c3737074f -w VCFVariantImportWorker </kbd>
@@ -192,13 +189,87 @@ FeatureSetID    99d3cc0e-26e0-4b23-9ebf-90fbe07a6c5e
 <div class="section" id="querying-data">
 <h2>Querying Data</h2>
 
+<p>The SOFeatureImporter will output a FeatureSet ID that should be used as part of the input to the VCFDumper command in order to export a FeatureSet.</p>
+
+<pre title="Title of the snippet">
+<span class="prompt">~/seqware_github/seqware-distribution/target$</span> <kbd>  java -classpath seqware-queryengine-0.12.0-full.jar com.github.seqware.queryengine.system.exporters.VCFDumper</kbd>
+0 arguments found
+VCFDumper <featuresetid> [outputFile]
+<span class="prompt">~/seqware_github/seqware-distribution/target$</span> <kbd>  java -classpath seqware-queryengine-0.12.0-full.jar com.github.seqware.queryengine.system.exporters.VCFDumper 99d3cc0e-26e0-4b23-9ebf-90fbe07a6c5e test_out.vcf</kbd>
+<span class="prompt">~/seqware_github/seqware-distribution/target$</span> <kbd>  sort test_out.vcf &gt; sorted_test_out.vcf</kbd>
+<span class="prompt">~/seqware_github/seqware-distribution/target$</span> <kbd>  sort ../../seqware-queryengine/src/test/resources/com/github/seqware/queryengine/system/FeatureImporter/consequences_annotated.vcf  &gt; control.vcf</kbd>
+<span class="prompt">~/seqware_github/seqware-distribution/target$</span> <kbd>  diff sorted_test_out.vcf control.vcf</kbd>
+</featuresetid></pre>
+
+
+<p>Most of these commands use non-zero return codes to indicate that an error occurred. For example:</p>
+
+<pre title="Title of the snippet">
+<span class="prompt">~/seqware_github/seqware-distribution/target$</span> <kbd>  java -classpath seqware-queryengine-0.12.0-full.jar com.github.seqware.queryengine.system.importers.SOFeatureImporter -i ../../seqware-queryengine/src/test/resources/com/github/seqware/queryengine/system/FeatureImporter/test_invalid.vcf -o keyValueVCF.out -r 59a1aca5-4a5f-4006-b395-ca8cb5dd8c50 -s 5e7a2327-08ac-4455-9687-ec4c3737074f -a 84ec5dfb-1cba-4b7b-b06a-eebbfc3dfd60 -w VCFVariantImportWorker</kbd>
+[SeqWare Query Engine] 1    [Thread-3] FATAL com.github.seqware.queryengine.system.importers.workers.VCFVariantImportWorker  - Exception thrown with file: ../../seqware-queryengine/src/test/resources/com/github/seqware/queryengine/system/FeatureImporter/test_invalid.vcf
+java.lang.NumberFormatException: For input string: &#8220;51xxx&#8221;
+    at java.lang.NumberFormatException.forInputString(NumberFormatException.java:48)
+    at java.lang.Integer.parseInt(Integer.java:458)
+    at java.lang.Integer.parseInt(Integer.java:499)
+    at com.github.seqware.queryengine.system.importers.workers.VCFVariantImportWorker.run(VCFVariantImportWorker.java:273)
+<span class="prompt">~/seqware_github/seqware-distribution/target$</span> <kbd>  echo $?</kbd>
+10
+</pre>
+
+
+<p>The default VCFDumper simply exports all Features that are in a FeatureSet. However, it is also an excellent starting point for experimenting with new queries and various features of the query engine.</p>
+
+<p>One example of how one may wish to extend and adapt the VCFDumper is available in <code>com.github.seqware.queryengine.tutorial.BrianTest</code> while specific queries can be found in <code>com.github.seqware.queryengine.model.test.QueryInterfaceTest</code> and copy-and-pasted into <code>BrianTest</code>.</p>
+
+<p class="warning"><strong>Note:</strong>
+ More details on the inner workings of the query engine will be available in &#8220;Extending the Query Engine.&#8221; However, for a developer that will primarily interact with the model objects and command-line tools, the most important distinction to be aware of is which operations update individual features in a feature set and which operations perform a copy-on-write operation for the whole feature set since the latter is much more expensive. 
+
+In general, operations that iterate through a feature set, read or update individual features. Operations that go through the Query Interface and call plug-ins will perform a copy-on-write. Operations that perform a copy-on-write always provide a TTL (time-to-live) parameter.
+</p>
+
+
+<p><code>QueryInterfaceTest</code> brings us to the code in the testing directories which demonstrate many of the features available to the Query Engine.</p>
+
+</div>
+<div class="section" id="testing">
+<h2>Testing</h2>
+
+<p>The testing directories are <code>com.github.seqware.queryengine.model.test</code>, <code>com.github.seqware.queryengine.impl.test</code>, and <code>com.github.seqware.queryengine.system.test</code>. These directories test the model objects that outside developers can manipulate and interact with, specific features of the back-end, and the command-line tools respectively. Note that the tests can be run from a <code>TestSuite</code> that is available in each directory while new tests should be added to the <code>DynamicSuiteBuilder</code> in each directory. Note that the tests in the model directory can be run against a variety of back-ends and two serialization techniques.</p>
+
+</div>
+<div class="section" id="features">
+<h2>Features</h2>
+
+<p>Our unit tests are designed to test and highlight various features that are available in the Query Engine. Some highlights include:</p>
+
+<ul>
+<li>QueryInterface - demonstrates our query language and running queries that create new filtered feature sets</li>
+<li>TaggableTest - demonstrates how to associate tags, read tags, and what can be stored in tags</li>
+<li>TTLTest - demonstrates storing and reading time-to-live fields</li>
+<li>FriendlyNameTest - an interface for explicitly naming objects rather than using randomly generated IDs</li>
+<li>SOFeatureImporterTest - demonstrates various some options available to the feature importer command-line tool</li>
+</ul>
+</div>
+<div class="section" id="extending-the-query-engine">
+<h2>Extending the Query Engine</h2>
+
+<p>Seeing how the command-line tools work in <code>com.github.seqware.queryengine.system</code> is a good introduction to our QueryEngine. In particular, <code>VCFImportWorker</code> and <code>VCFDumper</code> show how a front-end developer should interact with our code. New entities are created via the <code>CreateUpdateManager</code> and Queries are performed through the <code>QueryInterface</code>. Note the use of a Builder Design Pattern in the <code>ImportWorker</code>. This allows us to abstract the actual implementation of many of our model classes and emphasizes the idea that we create objects that are largely immutable once we write them to the database although we can always write new versions.</p>
+
 </div>
 <div class="section" id="making-custom-plugins">
 <h2>Making Custom Plugins</h2>
 
-</div>
-<div class="section" id="running-tests">
-<h2>Running Tests</h2>
+<p>TODO: This is still a work in progress.</p>
+
+<p>Currently, the plug-in infrastructure allows you to:</p>
+
+<ul>
+<li>Install, list, and call arbitrary plug-ins via the <code>installAnalysisPlugin</code>, <code>getAnalysisPlugins</code>, and <code>getFeaturesByPlugin</code> methods in the <code>QueryInterface</code> class and demonstrated in <code>QueryInterfaceTest</code>.</li>
+<li>Specify and prototype new plug-ins by working in the <code>com.github.seqware.queryengine.plugins.inmemory</code> directory.</li>
+<li>Create new Map/Reduce plugins by extending <code>AnalysisPluginInterface</code> directly or (preferred) extending the plugins in <code>com.github.seqware.queryengine.plugins.hbasemr</code>
+</li>
+</ul>
+<p>We intend on further cleaning up the plug-in architecture, improving the persistence of analysis events, and adding support for scan plug-ins.</p>
 
 </div>
 <div class="section" id="more-to-come">
