@@ -70,7 +70,7 @@
 <ol>
 <li>You will want to go to the <a href="https://github.com/SeqWare/seqware">SeqWare Github repository</a> and run the command <code>git clone git@github.com:SeqWare/seqware.git seqware_github</code>
 </li>
-<li>You will also need to setup Hadoop and HBase if it is not already setup. We highly recommend <a href="https://ccp.cloudera.com/display/CDH4DOC/CDH4+Quick+Start+Guide">Cloudera&#8217;s CDH packages</a> since they are tested for package incompatibilities between Hadoop projects (which are still common). It is also worth double-checking the web interface for HBase which is usually at <a href="http://localhost:60010/master-status">http://localhost:60010/master-status</a>.</li>
+<li>You will also need to setup Hadoop and HBase if it is not already setup. We highly recommend <a href="https://ccp.cloudera.com/display/CDH4DOC/CDH4+Quick+Start+Guide">Cloudera&#8217;s CDH packages</a> since they are tested for package incompatibilities between Hadoop projects (which are still common). It is also worth double-checking the web interface for HBase which is usually at <a href="http://localhost:60010/master-status">http://localhost:60010/master-status</a> once you have gone through the setup tutorials in order to confirm that HBase is setup correctly.</li>
 </ol>
 <p>For both the VM and a local development environment, continue here:</p>
 
@@ -119,25 +119,26 @@ This will generate javadoc documentation for both the main code and the testing 
 
 <p>In this distribution directory, you can run our command line tools for import.</p>
 
-<p>The first time you run these tools in a new namespace, you may wish to create a common reference and then create an ad hoc tag set that will store all tags that do not match known terms.</p>
+<p>The first time you run these tools in a new namespace, you may wish to create a common reference and then create an ad hoc tag set that will store all tags that do not match known tags. Most of our command-line tools output a key value file that you can keep in order to record the ID of your created objects.</p>
 
 <pre title="Title of the snippet">
 <span class="prompt">~/seqware_github/seqware-distribution/target$</span> <kbd>java -classpath seqware-queryengine-0.12.0-full.jar com.github.seqware.queryengine.system.ReferenceCreator</kbd>
 Only 0 arguments found
 ReferenceCreator <reference_name> [output_file]
-<span class="prompt">~/seqware_github/seqware-distribution/target$</span> <kbd>java -classpath seqware-queryengine-0.12.0-full.jar com.github.seqware.queryengine.system.ReferenceCreator hg_42 keyValue_ref.out</kbd>
+<span class="prompt">~/seqware_github/seqware-distribution/target$</span> <kbd>java -classpath seqware-queryengine-0.12.0-full.jar com.github.seqware.queryengine.system.ReferenceCreator hg_19 keyValue_ref.out</kbd>
 Reference written with an ID of:
-59a1aca5-4a5f-4006-b395-ca8cb5dd8c50
+hg_19
 <span class="prompt">~/seqware_github/seqware-distribution/target$</span> <kbd>cat keyValue_ref.out</kbd>
-referenceID    59a1aca5-4a5f-4006-b395-ca8cb5dd8c50
+referenceID    hg_19
 <span class="prompt">~/seqware_github/seqware-distribution/target$</span> <kbd>java -classpath seqware-queryengine-0.12.0-full.jar com.github.seqware.queryengine.system.TagSetCreator</kbd>
 Only 0 arguments found
 TagSetCreator <tagset name> [output_file]
 <span class="prompt">~/seqware_github/seqware-distribution/target$</span> <kbd>java -classpath seqware-queryengine-0.12.0-full.jar com.github.seqware.queryengine.system.TagSetCreator ad_hoc keyValue_adHoc.out</kbd>
 TagSet written with an ID of:
-84ec5dfb-1cba-4b7b-b06a-eebbfc3dfd60
+ad_hoc
 <span class="prompt">~/seqware_github/seqware-distribution/target$</span> <kbd>cat keyValue_adHoc.out</kbd>
-TagSetID    84ec5dfb-1cba-4b7b-b06a-eebbfc3dfd60
+TagSetID    ad_hoc
+namespace   batman
 </tagset></reference_name></pre>
 
 
@@ -148,10 +149,11 @@ TagSetID    84ec5dfb-1cba-4b7b-b06a-eebbfc3dfd60
 Only 0 arguments found
 OBOImporter <input_file> [output_file]
 <span class="prompt">~/seqware_github/seqware-distribution/target$</span> <kbd>java -classpath seqware-queryengine-0.12.0-full.jar com.github.seqware.queryengine.system.importers.OBOImporter ../../seqware-queryengine/src/test/resources/com/github/seqware/queryengine/system/so.obo keyValueOBO.out</kbd>
-3870 terms written to a TagSet written with an ID of:
-5e7a2327-08ac-4455-9687-ec4c3737074f
+6861 terms written to a TagSet written with an ID of:
+c0323336-13ab-4eb9-afb0-b4fdc6d9af78
 <span class="prompt">dyuen@odl-dyuen:~/seqware_github/seqware-distribution/target$</span> <kbd>cat keyValueOBO.out</kbd>
-TagSetID    5e7a2327-08ac-4455-9687-ec4c3737074f
+TagSetID    c0323336-13ab-4eb9-afb0-b4fdc6d9af78
+namespace   batman
 </input_file></pre>
 
 
@@ -162,9 +164,14 @@ TagSetID    5e7a2327-08ac-4455-9687-ec4c3737074f
 usage: SOFeatureImporter
  -a <adhoctagset>   (optional) an ID for an ad hoc TagSet, Tags will
                     either be found or added to this set, a new TagSet
-                    will be generated if none is specified here
+                    will be generated if this option is not used
+ -b <batch_size>    (optional) batch-size for the number of features in
+                    memory to keep before a flush, will automatically be
+                    chosen if not specified, we use 100000 for now
  -c                 (optional) whether we are working with compressed
                     input
+ -f <featureset>    (optional) for benchmarking for now, append features
+                    to an existing featureset
  -i <inputfile>     (required) comma separated input files
  -o <outputfile>    (optional) output file with our resulting key values
  -r <reference>     (required) the reference ID to attach our FeatureSet
@@ -176,15 +183,17 @@ usage: SOFeatureImporter
                     our import
  -w <worker>        (required) the work module and thus the type of file
                     we are working with
-<span class="prompt">~/seqware_github/seqware-distribution/target$</span> <kbd> java -classpath seqware-queryengine-0.12.0-full.jar com.github.seqware.queryengine.system.importers.SOFeatureImporter -i ../../seqware-queryengine/src/test/resources/com/github/seqware/queryengine/system/FeatureImporter/consequences_annotated.vcf -o keyValueVCF.out -r 59a1aca5-4a5f-4006-b395-ca8cb5dd8c50 -s 5e7a2327-08ac-4455-9687-ec4c3737074f -a 84ec5dfb-1cba-4b7b-b06a-eebbfc3dfd60 -w VCFVariantImportWorker </kbd>
+<span class="prompt">~/seqware_github/seqware-distribution/target$</span> <kbd> java -classpath seqware-queryengine-0.12.0-full.jar com.github.seqware.queryengine.system.importers.SOFeatureImporter -i ../../seqware-queryengine/src/test/resources/com/github/seqware/queryengine/system/FeatureImporter/consequences_annotated.vcf -o keyValueVCF.out -r hg_19 -s c0323336-13ab-4eb9-afb0-b4fdc6d9af78 -a ad_hoc -w VCFVariantImportWorker </kbd>
 FeatureSet written with an ID of:
-99d3cc0e-26e0-4b23-9ebf-90fbe07a6c5e
+835488d4-bfed-4f8a-b7ef-1c8222555df5
 <span class="prompt">~/seqware_github/seqware-distribution/target$</span> <kbd> echo $? </kbd>
 0
 <span class="prompt">~/seqware_github/seqware-distribution/target$</span> <kbd> cat keyValueVCF.out </kbd>
-FeatureSetID    99d3cc0e-26e0-4b23-9ebf-90fbe07a6c5e
-</worker></threads></tagset></reference></outputfile></inputfile></adhoctagset></pre>
+FeatureSetID    835488d4-bfed-4f8a-b7ef-1c8222555df5
+</worker></threads></tagset></reference></outputfile></inputfile></featureset></batch_size></adhoctagset></pre>
 
+
+<p>The ID of your feature sets and parameters will obviously change from run to run. Depending on the size of your data, you may also need to either tune the size of your batches (via the <code>'-b</code> option) when loading features or allocate more memory to java (<code>java -Xmx4096m -classpath ... </code>).</p>
 
 </div>
 <div class="section" id="querying-data">
@@ -196,7 +205,7 @@ FeatureSetID    99d3cc0e-26e0-4b23-9ebf-90fbe07a6c5e
 <span class="prompt">~/seqware_github/seqware-distribution/target$</span> <kbd>  java -classpath seqware-queryengine-0.12.0-full.jar com.github.seqware.queryengine.system.exporters.VCFDumper</kbd>
 0 arguments found
 VCFDumper <featuresetid> [outputFile]
-<span class="prompt">~/seqware_github/seqware-distribution/target$</span> <kbd>  java -classpath seqware-queryengine-0.12.0-full.jar com.github.seqware.queryengine.system.exporters.VCFDumper 99d3cc0e-26e0-4b23-9ebf-90fbe07a6c5e test_out.vcf</kbd>
+<span class="prompt">~/seqware_github/seqware-distribution/target$</span> <kbd>  java -classpath seqware-queryengine-0.12.0-full.jar com.github.seqware.queryengine.system.exporters.VCFDumper 835488d4-bfed-4f8a-b7ef-1c8222555df5 test_out.vcf</kbd>
 <span class="prompt">~/seqware_github/seqware-distribution/target$</span> <kbd>  sort test_out.vcf &gt; sorted_test_out.vcf</kbd>
 <span class="prompt">~/seqware_github/seqware-distribution/target$</span> <kbd>  sort ../../seqware-queryengine/src/test/resources/com/github/seqware/queryengine/system/FeatureImporter/consequences_annotated.vcf  &gt; control.vcf</kbd>
 <span class="prompt">~/seqware_github/seqware-distribution/target$</span> <kbd>  diff sorted_test_out.vcf control.vcf</kbd>
@@ -231,6 +240,62 @@ In general, operations that iterate through a feature set, read or update indivi
 
 <p><code>QueryInterfaceTest</code> brings us to the code in the testing directories which demonstrate many of the features available to the Query Engine.</p>
 
+<p>A quick aid that can be used to quickly test out queries is the <code>QueryVCFDumper</code>. This class takes in a featureID as input and a class name for a class that implements the <code>com.github.seqware.queryengine.system.exporters.QueryDumperInterface</code> in order to perform a few queries and output the last feature set to VCF format.</p>
+
+<p>Here is an example of how to interact with the utility, here we run through compiling a few queries and running them.</p>
+
+<pre title="Title of the snippet">
+<span class="prompt">~/seqware_github/seqware-distribution/target$</span> <kbd>  cp ../../seqware-queryengine/src/test/java/com/github/seqware/queryengine/system/test/queryDumper/VCFDumperParameterExample.java QueryTutorial.java</kbd>
+<span class="prompt">~/seqware_github/seqware-distribution/target$</span> <kbd> gvim QueryTutorial.java</kbd>
+<span class="prompt">~/seqware_github/seqware-distribution/target$</span> <kbd> javac -cp seqware-queryengine-0.12.0-full.jar QueryTutorial.java</kbd>
+<span class="prompt">~/seqware_github/seqware-distribution/target$</span> <kbd> jar cvf QueryTutorial.jar QueryTutorial.class </kbd>
+added manifest
+adding: QueryTutorial.class(in = 2273) (out= 859)(deflated 62%)
+<span class="prompt">~/seqware_github/seqware-distribution/target$</span> <kbd>export HADOOP_CLASSPATH=/home/dyuen/seqware_github/seqware-distribution/target/QueryTutorial.jar:/home/dyuen/seqware_github/seqware-distribution/target/seqware-queryengine-0.12.0-full.jar </kbd>
+<span class="prompt">~/seqware_github/seqware-distribution/target$</span> <kbd>hadoop jar seqware-queryengine-0.12.0-full.jar com.github.seqware.queryengine.system.exporters.QueryVCFDumper -f 835488d4-bfed-4f8a-b7ef-1c8222555df5 -k keyValue.out -o output.vcf -p QueryTutorial</kbd>
+</pre>
+
+
+<p>During the <code>gvim</code> step, it is important to delete the package line, change the classname, and then perform the required changes to the queries. For example, to search for intron_variants rather than non_synonymous_codon, we will need to change the file to the following:</p>
+
+<pre title="Title of the snippet"><code class="language-java"><span class="keyword">import</span> <span class="include">com.github.seqware.queryengine.factory.SWQEFactory</span>;
+<span class="keyword">import</span> <span class="include">com.github.seqware.queryengine.kernel.RPNStack</span>;
+<span class="keyword">import</span> <span class="include">com.github.seqware.queryengine.model.FeatureSet</span>;
+<span class="keyword">import</span> <span class="include">com.github.seqware.queryengine.model.QueryFuture</span>;
+<span class="keyword">import</span> <span class="include">com.github.seqware.queryengine.model.QueryInterface</span>;
+<span class="keyword">import</span> <span class="include">com.github.seqware.queryengine.system.exporters.QueryDumperInterface</span>;
+
+<span class="comment">/**
+ * An example of a parameter file. See more possible Queries in {@link QueryInterfaceTest}.
+ * @author dyuen
+ */</span>
+<span class="directive">public</span> <span class="type">class</span> <span class="class">QueryTutorial</span> <span class="directive">implements</span> QueryDumperInterface{
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> <span class="type">int</span> getNumQueries() {
+        <span class="comment">// we will run three queries</span>
+        <span class="keyword">return</span> <span class="integer">3</span>;
+    }
+
+    <span class="annotation">@Override</span>
+    <span class="directive">public</span> QueryFuture getQuery(FeatureSet set, <span class="type">int</span> queryNum) {
+        <span class="keyword">if</span> (queryNum == <span class="integer">0</span>){
+            <span class="comment">/// limits us to CHROM #21</span>
+            <span class="keyword">return</span> SWQEFactory.getQueryInterface().getFeaturesByAttributes(<span class="integer">0</span>, set, <span class="keyword">new</span> RPNStack(<span class="keyword">new</span> RPNStack.FeatureAttribute(<span class="string"><span class="delimiter">"</span><span class="content">seqid</span><span class="delimiter">"</span></span>), <span class="keyword">new</span> RPNStack.Constant(<span class="string"><span class="delimiter">"</span><span class="content">21</span><span class="delimiter">"</span></span>), RPNStack.Operation.EQUAL));
+        } <span class="keyword">else</span> <span class="keyword">if</span> (queryNum == <span class="integer">1</span>){
+            <span class="comment">// limits us to the range of 20000000 through 30000000</span>
+            <span class="keyword">return</span> SWQEFactory.getQueryInterface().getFeaturesByRange(<span class="integer">0</span>, set, QueryInterface.Location.INCLUDES, <span class="string"><span class="delimiter">"</span><span class="content">21</span><span class="delimiter">"</span></span>, <span class="integer">20000000</span>, <span class="integer">30000000</span>);
+        } <span class="keyword">else</span>{
+            <span class="comment">// limits us to features with a particular tag</span>
+            <span class="keyword">return</span> SWQEFactory.getQueryInterface().getFeaturesByAttributes(<span class="integer">0</span>, set, <span class="keyword">new</span> RPNStack(<span class="keyword">new</span> RPNStack.TagOccurrence(<span class="string"><span class="delimiter">"</span><span class="content">intron_variant</span><span class="delimiter">"</span></span>)));
+        }
+    }
+    
+}</code></pre>
+
+
+<p>Also note that we run the jar via the <code>hadoop jar</code> command rather than the basic <code>java -classpath</code> command. This allows hadoop to connect to a TaskTracker and launch MapReduce queries whether on the local machine or on a remote cluster.</p>
+
 </div>
 <div class="section" id="testing">
 <h2>Testing</h2>
@@ -244,6 +309,13 @@ In general, operations that iterate through a feature set, read or update indivi
   <kbd>disable_all '.*'</kbd>
   <kbd>drop_all '.*'</kbd>
 </pre>
+
+
+
+
+<p class="warning"><strong>Note:</strong>
+    This will destroy all data on the HBase storage. If you have any doubt or are working in a production environment, it is better to restrict the delete to one namespace, for example <code>disable_all '<namespace>.*' </namespace></code>
+</p>
 
 
 </div>
