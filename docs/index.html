@@ -3,9 +3,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="UTF-8">
-<title>SeqWare › Documentation</title>
+<title>SeqWare › Attribute Annotator</title>
 <meta content="nanoc 3.4.0" name="generator">
-<link href="../assets/style-v17.css" media="screen" rel="stylesheet" type="text/css">
+<link href="../../assets/style-v17.css" media="screen" rel="stylesheet" type="text/css">
 <link href="http://feeds.feedburner.com/seqware" rel="alternate" title="The SeqWare Blog" type="application/atom+xml">
 <script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script>
 </head>
@@ -14,83 +14,160 @@
 <!-- ***** navigation ***** -->
 <div class="nav">
 <ol>
-<li><a href="../"><span>Home</span></a></li>
-<li><a href="../blog/"><span>News</span></a></li>
-<li><span class="active" title="You're here."><span>Documentation</span></span></li>
-<li><a href="../community/"><span>Community</span></a></li>
-<li><a href="../partners/"><span>Partners</span></a></li>
-<li><a href="../about/"><span>About</span></a></li>
+<li><a href="../../"><span>Home</span></a></li>
+<li><a href="../../blog/"><span>News</span></a></li>
+<li><a href="../"><span>Documentation</span></a></li>
+<li><a href="../../community/"><span>Community</span></a></li>
+<li><a href="../../partners/"><span>Partners</span></a></li>
+<li><a href="../../about/"><span>About</span></a></li>
 </ol>
 </div>
 <!-- ***** sidebar ***** -->
 <div class="side">
 <ol>
-<li><a href="1-introduction/"><span>Introduction to SeqWare</span></a></li>
-<li><a href="2-installation/"><span>Installation</span></a></li>
-<li><a href="3-getting-started/"><span>Getting Started</span></a></li>
-<li><a href="4-metadb/"><span>SeqWare MetaDB</span></a></li>
-<li><a href="5-portal/"><span>SeqWare Portal</span></a></li>
-<li><a href="6-pipeline/"><span>SeqWare Pipeline</span></a></li>
-<li><a href="7-web-service/"><span>SeqWare Web Service</span></a></li>
-<li><a href="8-query-engine/"><span>SeqWare Query Engine</span></a></li>
-<li><a href="9-glossary/"><span>Glossary</span></a></li>
-<li><a href="10-faq/"><span>Frequently Asked Questions</span></a></li>
-<li><a href="11-api/"><span>APIs</span></a></li>
+<li><a href="../1-introduction/"><span>Introduction to SeqWare</span></a></li>
+<li><a href="../2-installation/"><span>Installation</span></a></li>
+<li><a href="../3-getting-started/"><span>Getting Started</span></a></li>
+<li><a href="../4-metadb/"><span>SeqWare MetaDB</span></a></li>
+<li><a href="../5-portal/"><span>SeqWare Portal</span></a></li>
+<li><a href="../6-pipeline/"><span>SeqWare Pipeline</span></a></li>
+<li><a href="../7-web-service/"><span>SeqWare Web Service</span></a></li>
+<li><a href="../8-query-engine/"><span>SeqWare Query Engine</span></a></li>
+<li><a href="../9-glossary/"><span>Glossary</span></a></li>
+<li><a href="../10-faq/"><span>Frequently Asked Questions</span></a></li>
+<li><a href="../11-api/"><span>APIs</span></a></li>
 </ol>
 </div>
 <!-- ***** body ***** -->
 <div class="body">
 <div class="article">
 <div class="header">
-<h1>Documentation</h1>
+<h1>Attribute Annotator</h1>
 </div>
-<p class="warning"><strong>Note:</strong> This guide is a work in progress.</p>
+<p>The Attribute Annotator is a SeqWare plugin that allow you to annotate Lanes, IUSes and Sequencer Runs with Key-Value pairs or &#8216;skip&#8217; fields. The &#8216;skip&#8217; field is a boolean that indicates to a decider that the results from that lane, IUS or sequencer run should be skipped in downstream annotation. When the &#8216;skip&#8217; field is enabled through this plugin, a key-value pair can also be added that describes the reason for skipping the lane, ius or sequencer run. Alternatively, this plugin also allows an object to be annotated with any key-value pair.</p>
 
+<div class="section" id="requirements">
+<h2>Requirements</h2>
 
-<p></p>
-
-<p>This is the core documentation for the SeqWare project, including all the
-various sub-projects. We wanted to create a single manual that would bring
-together all of our documentation since much of it is currently spread across a
-poorly-organized wiki.  While this guide is organized by logical sections that
-flow from one to the next you do not need to read the whole thing in order to
-get started.  Take a look at the tutorials in the &#8220;Getting Started&#8221; section
-which will walk you through the core functionality such as SeqWare Pipeline.
-Because SeqWare is a fairly complex software stack (with some
-difficult-to-configure dependencies) we assume most users will start with a VM,
-either a local VirtualBox VM or an Amazon Machine Image (AMI) on Amazon&#8217;s
-cloud.</p>
-
-<div class="section" id="conventions">
-<h2>Conventions</h2>
-
-<p>The SeqWare documentation uses a few conventions for markup:</p>
+<p>In order to run the WorkflowRunReporter plugin, you must have the following available to you:</p>
 
 <ul>
-<li>
-<i>Italic text</i> introduces new terms.</li>
-<li>
-<code>Monospaced text</code> is used for code snippets.</li>
-<li>
-<kbd>Monospaced, bold text</kbd> is used for commands that should be typed literally.</li>
-<li>
-<var>Monospaced, italic text</var> is used for text that should be replaced with user-supplied values.</li>
+<li>SeqWare Pipeline JAR (0.11.4 or higher)</li>
+<li>SeqWare settings file set up to contact the SeqWare Web service (contact your local SeqWare admin to get the path)</li>
 </ul>
-<p>The documentation also contains quite a few blocks of code snippets. These are marked up like this:</p>
+</div>
+<div class="section" id="command-line-parameters">
+<h2>Command line parameters</h2>
 
-<pre title="Title of the snippet"><code class="language-ruby"><span class="keyword">class</span> <span class="class">Lorem::Ipsum</span>
-  <span class="keyword">def</span> <span class="function">dolor</span>
-    [ <span class="symbol">:foo</span>, <span class="string"><span class="delimiter">"</span><span class="content">sit amet, consectetur adipisicing elit</span><span class="delimiter">"</span></span>, <span class="integer">123</span> ]
-  <span class="keyword">end</span>
-<span class="keyword">end</span></code></pre>
+<p>You can annotate the following attributes:</p>
 
+<table>
+<tr>
+<th>
+Command-line option</th>    <th>Description</th>
+</tr>
+<tr>
+<td>
+&#8211;sequencer-run-accession, -sr</td> <td>The SWID of the sequencer run to annotate.</td>
+</tr>
+<tr>
+<td>
+&#8211;lane-accession, -l</td>
+<td>The SWID of the lane to annotate.</td>
+</tr>
+<tr>
+<td>
+&#8211;ius-accession, -i </td>   <td>The SWID of the ius to annotate.</td>
+</tr>
+<tr>
+<td>
+&#8211;experiment-accession, -e</td> <td>    The SWID of the experiment to annotate.</td>
+</tr>
+<tr>
+<td>
+&#8211;processing-accession, -p  </td>   <td>    The SWID of the processing to annotate.</td>
+</tr>
+<tr>
+<td>
+&#8211;sample-accession, -s  </td>   <td>The SWID of the sample to annotate.</td>
+</tr>
+<tr>
+<td>
+&#8211;study-accession, -st  </td>   <td>The SWID of the study to annotate.</td>
+</tr>
+<tr>
+<td>
+&#8211;workflow-accession, -w    </td>   <td>The SWID of the workflow to annotate.</td>
+</tr>
+<tr>
+<td>
+&#8211;workflow-run-accession, -wr   </td>   <td>The SWID of the workflow run to annotate.</td>
+</tr>
+<tr>
+<td>
+&#8211;skip  </td>   <td>Sets the &#8216;skip&#8217; flag to either true or false</td>
+</tr>
+<tr>
+<td>
+&#8211;key   </td>   <td>The key that defines this attribute. The default value is &#8216;skip&#8217;.</td>
+</tr>
+<tr>
+<td>
+&#8211;value </td>   <td>The description of this key. If not specified, no attribute will be created.</td>
+</tr>
+<tr>
+<td>
+&#8211;file  </td>   <td>A CSV file that with multiple TYPE, SWID, KEY, VALUE</td>
+</tr>
+</table>
+<p>There are four ways to use this plugin</p>
 
-<p>Bash shell input/output are marked up in a similar way. Note that the prompt is
-always included, but should never be typed. Here’s an example:</p>
+<ul>
+<li>Annotate an attribute with &#8216;skip&#8217;</li>
+<li>Annotate an attribute with &#8216;skip&#8217; and a description</li>
+<li>Annotate an attribute with a key-value pair</li>
+<li>Bulk annotate attributes with a CSV file</li>
+</ul>
+</div>
+<div class="section" id="examples">
+<h2>Examples</h2>
 
-<pre title="Title of the snippet"><span class="prompt">some-dir%</span> <kbd>echo "hello" &amp;&amp; cd other-dir</kbd>
-hello
-<span class="prompt">other-dir%</span></pre>
+<p>Set the &#8216;skip&#8217; value of lane with SWID 1234 to &#8216;true&#8217;. No key-value annotations are added.</p>
+
+<pre><code>java -jar seqware-distribution/target/seqware-pipeline-0.12.1-full.jar --plugin net.sourceforge.seqware.pipeline.plugins.AttributeAnnotator -- --lane-accession 1234 --skip true
+</code></pre>
+
+<p>Set the &#8216;skip&#8217; value of sequencer run with SWID 3456 to &#8216;true&#8217; and enter a key-value pair with the key &#8220;skip&#8221; and value &#8220;Improperly entered into the LIMS&#8221;. Notice that the key is not specified but defaults to &#8216;skip&#8217;.</p>
+
+<pre><code>java -jar seqware-distribution/target/seqware-pipeline-0.12.1-full.jar --plugin net.sourceforge.seqware.pipeline.plugins.AttributeAnnotator -- --sequencer-run-accession 3456 --skip true --value "Improperly entered into the LIMS"
+</code></pre>
+
+<p>Annotate the IUS with SWID 2345 with a key-value pair of key &#8220;dual-barcodes&#8221; and value &#8220;barcode 1&#8221;. The &#8216;skip&#8217; field is not affected.</p>
+
+<pre><code>java -jar seqware-distribution/target/seqware-pipeline-0.12.1-full.jar --plugin net.sourceforge.seqware.pipeline.plugins.AttributeAnnotator -- --ius-accession 2345 --key "dual-barcodes" --value "barcode 1"
+</code></pre>
+
+<p>Bulk insert attribute annotation with file</p>
+
+<pre><code>java -jar seqware-distribution/target/seqware-pipeline-0.12.1-full.jar --plugin net.sourceforge.seqware.pipeline.plugins.AttributeAnnotator -- --file
+</code></pre>
+
+<p>The file is in CSV format</p>
+
+<pre><code>e,106288,t11,v11
+e,106288,t21,v21
+e,106288,t31,v11
+e,1234,key1,value1
+s,1000,key1,value1
+st,321,key1,value1
+</code></pre>
+
+<p>View the annotated attributes</p>
+
+<p>To check the attribute annotation, you can use the similar URI. See <a href="http://seqware.github.com/seqware/">http://seqware.github.com/seqware/</a> for more detail.</p>
+
+<pre><code>http://host:port/seqware-webservice/lanes/{swid}?show=attributes
+</code></pre>
 </div>
 </div>
 </div>
