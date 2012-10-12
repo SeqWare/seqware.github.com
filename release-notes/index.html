@@ -34,12 +34,109 @@
 <div class="header">
 <h1>Release Notes</h1>
 </div>
+<!-- 
+Procedure now is at https://wiki.oicr.on.ca/pages/viewpage.action?pageId=44533172
+-->
+
+
+<div class="section" id="0-13-3-2012-10-09">
+<h2>0.13.3 (2012-10-09)</h2>
+
+<div class="section" id="defect">
+<h3>Defect</h3>
+
+<ul>
+<li>[SEQWARE-1204] - MetaDB procedure seems broken.</li>
+</ul>
+</div>
+<div class="section" id="improvement">
+<h3>Improvement</h3>
+
+<ul>
+<li>[SEQWARE-1191] - Put a link to github on the SeqWare website</li>
+</ul>
+</div>
+<div class="section" id="technical-task">
+<h3>Technical task</h3>
+
+<ul>
+<li>[SEQWARE-186] - Convert SeqWare svn repository to git</li>
+<li>[SEQWARE-669] - Updated Workflow Bundle SDK</li>
+<li>[SEQWARE-1155] - create java objects that can serialize to xml/json</li>
+<li>[SEQWARE-1175] - add lib as the default classpath, and force all .jar go to lib</li>
+<li>[SEQWARE-1176] - add dependencies in xml</li>
+<li>[SEQWARE-1177] - Get BundleManager &#8211;test working with current version</li>
+<li>[SEQWARE-1178] - Release a 0.12.5 version</li>
+<li>[SEQWARE-1179] - Upload the Javadocs for the released 0.12.5 version to the github website</li>
+<li>[SEQWARE-1180] - Merge the sf.net pom.xml with the github pom.xml and ensure building works</li>
+<li>[SEQWARE-1181] - Redirect Jenkins to github, Jenkins now does findbugs and pmd</li>
+<li>[SEQWARE-1182] - Configure Query Engine tests for jenkins compatibility</li>
+<li>[SEQWARE-1187] - Test out JavaCC versus ANTLR</li>
+<li>[SEQWARE-1188] - Implement parse trees and RPNStack builder via chosen lexer/parser</li>
+<li>[SEQWARE-1189] - Adapt QueryVCFDumper  for query language</li>
+<li>[SEQWARE-1190] - Create plugin of FeatureFilters</li>
+<li>[SEQWARE-1194] - create a workflow template for the workflow author</li>
+<li>[SEQWARE-1195] - modify workflowlauncher to create seqwareWorkflowObjectModel</li>
+<li>[SEQWARE-1197] - implement vep sample using the latest java workflow</li>
+<li>[SEQWARE-1198] - finalize the spec for java workflow</li>
+<li>[SEQWARE-1199] - modify xml workflow based on the new java workflow</li>
+<li>[SEQWARE-1200] - move archetype-workflow-v2 to git feature branch</li>
+<li>[SEQWARE-1201] - add uncommited code from svn to git</li>
+<li>[SEQWARE-1206] - Our workflow development docs on internal wiki need to be updated for 0.12.5.1</li>
+<li>[SEQWARE-1208] - Fix metaDB creation</li>
+<li>[SEQWARE-1209] - Ensure that the overall combination of unit tests and integration tests work properly</li>
+<li>[SEQWARE-1211] - Investigate relationship between HubFlow release process and maven release script</li>
+<li>[SEQWARE-1215] - Revise simplified workflow bundle spec and code review with Yong</li>
+<li>[SEQWARE-1226] - Make an even simpler hello world workflow archetype</li>
+<li>[SEQWARE-1227] - Improve documentation  and prepare for demo</li>
+<li>[SEQWARE-1228] - Finish Hello World app</li>
+<li>[SEQWARE-1229] - remove the job.getArguments().add()</li>
+<li>[SEQWARE-1230] - change Job object to interface</li>
+<li>[SEQWARE-1231] - change package name (net.sourceforge.seqware.pipeline.workflowV2.pegasus)</li>
+<li>[SEQWARE-1232] - create archetype-java-workflow, archetype-ftl-workflow</li>
+<li>[SEQWARE-1233] - get/set gcr-skip-if-missing and other options</li>
+<li>[SEQWARE-1234] - remove WorkflowInfo object</li>
+<li>[SEQWARE-1235] - move sw_cluster out of configs</li>
+<li>[SEQWARE-1238] - modify the code for simplified FTL-&gt;simplified XML-&gt;WorkflowDataModel based on the latest WorkflowDataModel</li>
+</ul>
+</div>
+</div>
+<div class="section" id="0-13-2-2012-09-20">
+<h2>0.13.2 (2012-09-20)</h2>
+
+<div class="section" id="task">
+<h3>Task</h3>
+
+<ul>
+<li>[SEQWARE-1164] - simplified workflow - auto dependencies</li>
+</ul>
+</div>
+<div class="section" id="technical-task">
+<h3>Technical task</h3>
+
+<ul>
+<li>[SEQWARE-287] - EC2 AMI</li>
+<li>[SEQWARE-498] - VirtualBox VM</li>
+<li>[SEQWARE-1086] - Create configuration file and parameter passing</li>
+<li>[SEQWARE-1115] - ensure that new syntax supports one of Morgan&#8217;s new workflows</li>
+<li>[SEQWARE-1116] - ensure that our archetype that will produce one of Morgan&#8217;s workflow that will use the new system, and launch</li>
+<li>[SEQWARE-1143] - Investigate VEP memory leak</li>
+<li>[SEQWARE-1144] - Report RetriesFailedWithDetails</li>
+<li>[SEQWARE-1145] - SeqWare Query Engine documentation</li>
+<li>[SEQWARE-1146] - Add ability to do tag and range queries from the dumper</li>
+<li>[SEQWARE-1147] - Debug query launch on machines without Hadoop</li>
+<li>[SEQWARE-1148] - Create tests for VCF Dumper (with tag and range queries)</li>
+<li>[SEQWARE-1157] - create a helloworld example for xml version</li>
+<li>[SEQWARE-1158] - try one of the Morgan&#8217;s workflow in xml</li>
+<li>[SEQWARE-1160] - Upgrade VCFDumper with poster code for M/R</li>
+<li>[SEQWARE-1174] - Identifying and testing out parser/lexer</li>
+</ul>
 <!---
 I did this via exporting to Excel from JIRA and then copying the appropriate columns, after removing OICR employee specific-tasks
 We still have to manually delete the parent task IDs for technical tasks though. There should be a cleaner way.
 -->
-
-
+</div>
+</div>
 <div class="section" id="0-13-1-2012-09-03">
 <h2>0.13.1 (2012-09-03)</h2>
 
