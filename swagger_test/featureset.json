@@ -2,11 +2,11 @@
   "apiVersion":"0.2",
   "swaggerVersion":"1.1",
   "basePath":"http://petstore.swagger.wordnik.com/api",
-  "resourcePath":"/store",
+  "resourcePath":"/featureset",
   "apis":[
     {
-      "path":"/store.{format}/order/{orderId}",
-      "description":"Operations about store",
+      "path":"/featureset.{format}/order/{orderId}",
+      "description":"Operations about featureset",
       "operations":[
         {
           "httpMethod":"GET",
@@ -65,8 +65,8 @@
       ]
     },
     {
-      "path":"/store.{format}/order",
-      "description":"Operations about store",
+      "path":"/featureset.{format}/order",
+      "description":"Operations about featureset",
       "operations":[
         {
           "httpMethod":"POST",

@@ -4,8 +4,8 @@
   "basePath":"http://localhost",
   "apis":[
     {
-      "path":"/store.{format}",
-      "description":"Operations about store"
+      "path":"/featureset.{format}",
+      "description":"Operations about featureset"
     },
     {
       "path":"/pet.{format}",
