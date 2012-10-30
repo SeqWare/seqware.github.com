@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<title>SeqWare › Workflow Examples</title>
+<meta content="nanoc 3.4.0" name="generator">
+<link href="../../assets/style-v17.css" media="screen" rel="stylesheet" type="text/css">
+<link href="http://feeds.feedburner.com/seqware" rel="alternate" title="The SeqWare Blog" type="application/atom+xml">
+<script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script>
+</head>
+<body>
+<div class="wrapper">
+<!-- ***** navigation ***** -->
+<div class="nav">
+<ol>
+<li><a href="../../"><span>Home</span></a></li>
+<li><a href="../../blog/"><span>News</span></a></li>
+<li><a href="../"><span>Documentation</span></a></li>
+<li><a href="../../community/"><span>Community</span></a></li>
+<li><a href="../../partners/"><span>Partners</span></a></li>
+<li><a href="../../about/"><span>About</span></a></li>
+</ol>
+</div>
+<!-- ***** sidebar ***** -->
+<div class="side">
+<ol>
+<li><a href="../1-introduction/"><span>Introduction to SeqWare</span></a></li>
+<li><a href="../2-installation/"><span>Installation</span></a></li>
+<li><a href="../3-getting-started/"><span>Getting Started</span></a></li>
+<li><a href="../4-metadb/"><span>SeqWare MetaDB</span></a></li>
+<li><a href="../5-portal/"><span>SeqWare Portal</span></a></li>
+<li><a href="../6-pipeline/"><span>SeqWare Pipeline</span></a></li>
+<li><a href="../7-web-service/"><span>SeqWare Web Service</span></a></li>
+<li><a href="../8-query-engine/"><span>SeqWare Query Engine</span></a></li>
+<li><a href="../9-glossary/"><span>Glossary</span></a></li>
+<li><a href="../10-faq/"><span>Frequently Asked Questions</span></a></li>
+<li><a href="../11-api/"><span>APIs</span></a></li>
+<li><a href="../13-code/"><span>Source Code</span></a></li>
+</ol>
+</div>
+<!-- ***** body ***** -->
+<div class="body">
+<div class="article">
+<div class="header">
+<h1>Workflow Examples</h1>
+</div>
+<p>Java Example</p>
+
+<pre><code>package net.sourceforge.seqware;
+
+
+import java.util.Map;
+import net.sourceforge.seqware.pipeline.workflowV2.AbstractWorkflowDataModel;
+import net.sourceforge.seqware.pipeline.workflowV2.model.Job;
+import net.sourceforge.seqware.pipeline.workflowV2.model.SqwFile;
+
+public class WorkflowClient extends AbstractWorkflowDataModel {
+
+    @Override
+    public Map&lt;String, SqwFile&gt; setupFiles() {
+        SqwFile file0 = this.createFile("file_in_0");
+        file0.setSourcePath(this.getWorkflowBaseDir()+"/data/input.txt");
+        file0.setType("text/plain");
+        file0.setIsInput(true);
+
+        SqwFile file2 = this.createFile("file_in_1");
+        file2.setSourcePath(this.getWorkflowBaseDir()+"/data/input.txt");
+        file2.setType("text/plain");
+        file2.setIsInput(true);
+
+        SqwFile file3 = this.createFile("file_in_2");
+        file3.setSourcePath(this.getWorkflowBaseDir()+"/data/input1.txt");
+        file3.setType("text/plain");
+        file3.setIsInput(true);
+
+        SqwFile file1 = this.createFile("file_out"); 
+        file1.setSourcePath("dir2/output");
+        file1.setType("text/plain");
+        file1.setIsOutput(true);
+        file1.setForceCopy(true);
+
+        return this.getFiles();
+    }
+
+    @Override
+    public void setupDirectory() {
+        this.addDirectory("dir1");
+        this.addDirectory("dir2");
+    }
+
+    @Override
+    public void buildWorkflow() {
+        Job job00 = this.getWorkflow().createBashJob("bash_mkdir");
+        job00.getCommand().addArgument("mkdir test1");      
+
+        Job job01 = this.getWorkflow().createPerlJob("perl_mkdir",      this.getWorkflowBaseDir()+"/dependency/perltest.pl");
+        job01.getCommand().addArgument("test2");
+
+        Job job02 = this.getWorkflow().createBashJob("bash_mkdir");
+        job02.setCommand("mkdir test3");
+
+        Job job03 = this.getWorkflow().createBashJob("bash_mkdir");
+        job03.setCommand("mkdir test4");
+
+        Job job10 = this.getWorkflow().createBashJob("bash_cp");
+        job10.setCommand("cp " + this.getFiles().get("file_in_0").getProvisionedPath() + " test1");
+        job10.addParent(job00);
+
+        Job job11 = this.getWorkflow().createBashJob("bash_cp");
+        job11.setCommand("cp " + this.getFiles().get("file_in_1").getProvisionedPath() + " test2");
+        job11.addParent(job01);
+
+        Job job13 = this.getWorkflow().createBashJob("bash_cp");
+        job13.setCommand("cp " + this.getFiles().get("file_in_2").getProvisionedPath() + " test4");
+        job13.addParent(job03);
+        SqwFile fileout13 =  new SqwFile();
+        fileout13.setIsOutput(true);
+        fileout13.setType("text/key-value");
+        fileout13.setSourcePath("test4/input1.txt");
+        fileout13.setForceCopy(true);
+        job13.addFile(fileout13);
+
+        Job job20 = this.getWorkflow().createBashJob("bash_cat");
+        job20.setCommand("cat test1/* test2/* &gt; dir1/output_tmp");
+        job20.addParent(job10);
+        job20.addParent(job11);
+        SqwFile fileout = new SqwFile();
+        fileout.setIsOutput(true);
+        fileout.setType("text/key-value");
+        fileout.setSourcePath("dir1/output_tmp");
+        fileout.setForceCopy(true);
+        job20.addFile(fileout);
+
+        Job job30 = this.getWorkflow().createBashJob("bash_3");
+        SqwFile file = new SqwFile();
+        file.setIsInput(true);
+        file.setType("text/key-value");
+        file.setSourcePath(this.getWorkflowBaseDir()+"/data/input3.txt");
+        job30.addFile(file);
+        job30.getCommand().addArgument("cat " + file.getProvisionedPath() + " dir1/output_tmp &gt; test3/input3" );
+        job30.addParent(job20);
+        job30.addParent(job02);
+
+        Job job31 = this.getWorkflow().createBashJob("bash_3");
+        job31.setCommand("cat test3/input3 &gt; dir2/output");
+        job31.addParent(job20);
+
+
+    }
+
+}
+</code></pre>
+
+<p>FTL Examples</p>
+
+<pre><code>&lt;workflow&gt;
+    &lt;files&gt;
+        &lt;file name="file_in_0" type="text/plain" forcecopy="false" sourcepath="${workflow_base_dir}/data/input.txt" input="true"/&gt;
+        &lt;file name="file_in_1" type="text/plain" forcecopy="false" sourcepath="${workflow_base_dir}/data/input.txt" input="true"/&gt;
+        &lt;file name="file_in_3" type="text/plain" forcecopy="false" sourcepath="${workflow_base_dir}/data/input1.txt" input="true"/&gt;
+        &lt;file name="file_out" type="text/plain" forcecopy="true" sourcepath="${workflow_base_dir}/dir2/output" input="false"/&gt;
+    &lt;/files&gt;
+    &lt;dirs&gt;
+        &lt;dir&gt;dir1&lt;/dir&gt;
+        &lt;dir&gt;dir2&lt;/dir&gt;
+    &lt;/dirs&gt;
+    &lt;jobs&gt;
+        &lt;job refid="ID000"&gt;
+           &lt;algorithm&gt;bash_mkdir&lt;/algorithm&gt;
+            &lt;argument&gt;mkdir test1&lt;/argument&gt;
+        &lt;/job&gt;
+        &lt;job refid="ID001" type="perl" script="${workflow_base_dir}/dependency/perltest.pl"&gt;
+           &lt;algorithm&gt;perl_mkdir&lt;/algorithm&gt;
+            &lt;argument&gt;test2&lt;/argument&gt;
+        &lt;/job&gt;
+        &lt;job refid="ID002"&gt;
+           &lt;algorithm&gt;bash_mkdir&lt;/algorithm&gt;
+            &lt;argument&gt;mkdir test3&lt;/argument&gt;
+        &lt;/job&gt;
+        &lt;job refid="ID003"&gt;
+           &lt;algorithm&gt;bash_mkdir&lt;/algorithm&gt;
+            &lt;argument&gt;mkdir test4&lt;/argument&gt;
+        &lt;/job&gt;
+
+        &lt;job refid="ID100"&gt;
+           &lt;algorithm&gt;bash_cp&lt;/algorithm&gt;
+            &lt;argument&gt;cp ${workflow_base_dir}/data/input.txt test1&lt;/argument&gt;
+           &lt;parent&gt;ID000&lt;/parent&gt;
+        &lt;/job&gt;
+        &lt;job refid="ID101"&gt;
+           &lt;algorithm&gt;bash_cp&lt;/algorithm&gt;
+            &lt;argument&gt;cp ${workflow_base_dir}/data/input.txt test2&lt;/argument&gt;
+           &lt;parent&gt;ID001&lt;/parent&gt;
+        &lt;/job&gt;
+        &lt;job refid="ID102"&gt;
+           &lt;algorithm&gt;bash_cp&lt;/algorithm&gt;
+            &lt;argument&gt;cp ${workflow_base_dir}/data/input1.txt test3&lt;/argument&gt;
+           &lt;parent&gt;ID002&lt;/parent&gt;
+            &lt;file name="file_out" type="text/plain" forcecopy="true" sourcepath="dir1/output13_tmp" input="false"/&gt;
+        &lt;/job&gt;
+    &lt;/jobs&gt;
+&lt;/workflow&gt;
+</code></pre>
+</div>
+</div>
+</div>
+<!-- ***** footer ***** -->
+<div id="footer">
+<p>SeqWare © 2007–2012 Brian O&#8217;Connor. SeqWare is released under the a <a rel="license" href="http://www.gnu.org/licenses/licenses.html">GNU GPL v3</a>. This site is built using the excellent <a href="http://nanoc.stoneship.org/">nanoc</a> tool and example site along with the <a href="http://www.fonts.info/info/press/free-fonts-for-font-face-embedding.htm">Graublau</a> and <a href="http://scripts.sil.org/Gentium">Gentium</a> fonts.</p>
+</div>
+</body>
+</html>
