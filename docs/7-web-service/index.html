@@ -34,11 +34,8 @@
 <li>
 <span class="active" title="You're here."><span>SeqWare Web Service</span></span><ol class="toc">
 <li><a href="#overview">Overview</a></li>
-<li><a href="#admin-setup">Admin Setup</a></li>
-<li><a href="#features">Features</a></li>
-<li><a href="#reporting">Reporting</a></li>
-<li><a href="#workflow-launching-monitoring">Workflow Launching, Monitoring</a></li>
-<li><a href="#data-retrieval">Data Retrieval</a></li>
+<li><a href="#setup-the-web-service">Setup the Web Service</a></li>
+<li><a href="#coming-soon">Coming Soon</a></li>
 </ol>
 </li>
 <li><a href="../8-query-engine/"><span>SeqWare Query Engine</span></a></li>
@@ -57,24 +54,163 @@
 <div class="section" id="overview">
 <h2>Overview</h2>
 
+<p>The purpose of the Web service in SeqWare is threefold. First, it allows individuals to connect to the database with user-specific permissions. Second, it prevents direct access to the database. Third, it allows remote users to query the database without needing to install the PostgreSQL client locally.</p>
+
+<p>In the first case, not all users should be able to access all studies in the MetadataDB. Some studies have proprietary information that should not be widely available. PostgreSQL cannot grant row-specific permissions for users. Authentication through the Web service will allow those users to view and change only those rows that they have permission to view.</p>
+
+<p>Secondly, direct access to the database should be discouraged. There is a great deal of business logic built into SeqWare that is not available at the database level. The database allows for much more flexibility than SeqWare Pipeline expects. Therefore it is advisable to redirect all database queries through a business logic layer that will preserve the hierarchy in the database.</p>
+
+<p>Thirdly, remote users can query the database without having to construct an SQL query and without needing to install the PostgreSQL client. We are using a RESTful Web service, in which most of the information needed by the Web service is provided in the HTTP URL and the message type. For example, navigating to /seqware-webservice-0.10.0/workflows is equivalent to &#8216;SELECT * FROM workflow;&#8217; in psql, and going to /seqware-webservice-0.10.0/workflows/1 is equivalent to &#8216;SELECT * FROM workflow WHERE sw_accession = 1;&#8217;. These queries may be executed either in a browser or programmatically.</p>
+
+<div class="section" id="configuration">
+<h3>Configuration</h3>
+
+<p>If you are working on our CentOS VM from <a href="../2-installation/">Installation</a> your settings file will already be present. Otherwise, your SeqWare settings file needs to be configured to use the Web service rather than the database or no metadata. This file is usually located at ~/.seqware/settings.</p>
+
+<p>There are four variables that need to be changed: SW_METADATA_METHOD, SW_REST_URL, SW_REST_USER, and SW_REST_PASS. The SW_REST_URL is the location of the deployed WebService from the previous step. &#8221;The SW_REST_USER and SW_REST_PASS are the web service username and password&#8221;. Below is an example snippet of a .seqware/settings file.</p>
+
+<pre><code>SW_METADATA_METHOD=webservice
+SW_REST_URL=http://localhost:8080/seqware-webservice-0.11.4
+SW_REST_USER=admin@admin.com
+SW_REST_PASS=admin
+</code></pre>
+
 </div>
+<div class="section" id="using-the-web-service">
+<h3>Using the Web Service</h3>
+
+<p>Providing the Web service is already installed for you, there are three approaches to using the Web service. In order from least to most programming, these are the options:</p>
+
+<ul>
+<li>&#8221;&#8217;Use SeqWare Pipeline with the Web service enabled:&#8221;&#8217; The only configuration necessary is to change your .seqware/settings file to point to the Web service. The seqware-pipeline jar will use the Web service instead of a direct database connection with no further changes.</li>
+<li>&#8221;&#8217;Use the Java API&#8221;&#8217;: When writing SeqWare plugins or workflow modules, you can access the Webservice through the Metadata object. This object gives you more direct control while hiding the business logic. For example, you can install a new workflow, create processing events, and schedule workflow runs programmatically through this system.</li>
+<li>&#8221;&#8217;Script to the Web service directly&#8221;&#8217;: Which would involve sending HTTP requests to the RESTful URLs and processing the response. Simple queries can also be entered directly into your browser, which will return XML describing the object. For example, you can get an XML representation of all of the studies in the database by going to http://localhost:8080/seqware-webservice-0.11.4/studies. Very little business logic is built into the Web service directly. The exception to this is <a href="https://sourceforge.net/apps/mediawiki/seqware/index.php?title=Running_workflows_through_the_Web_service">Running workflows through the Web service</a> See the Web Service <a href="../11-api/">API</a> for more details.</li>
+</ul>
+<p>The .seqware/settings file needs to be configured to use the Web service for the first two options. In the third option, you must provide the URL, username and password yourself.</p>
+
+</div>
+</div>
+<div class="section" id="setup-the-web-service">
+<h2>Setup the Web Service</h2>
+
+<p>The SeqWare Web service is the primary mechanism by which users can reach the SeqWare MetaDB. The Web service prevents the user from having to make SQL queries and facilitates building services on top of the MetaDB. Currently, there is a Java client located in the seqware-commons package that can be used to access the WebService, which is configured through the .seqware/settings file.</p>
+
+<div class="section" id="requirements">
+<h3>Requirements</h3>
+
+<p>SeqWare Web service requires:
+* Apache Tomcat 6.0+
+* Access to a Seqware MetaDB PostgreSQL database (See <a href="../4-metadb/">SeqWare MetaDB</a>)
+* A locally running PostgreSQL install that has a &#8216;seqware&#8217; user with CREATEDB privileges.
+* Maven 2.2.1+
+* The SeqWare WebService source code. (See <a href="../13-code/">Source Code</a>)</p>
+
+</div>
+<div class="section" id="testing">
+<h3>Testing</h3>
+
+<p>You need a test_seqware_meta_db database for the tests to work. You also need a seqware user (who owns this database) and our sample data loaded. For testing purposes, the Web Service creates its own database using the seqware user, so this user must have CREATEDB privileges in PostgreSQL.  Also, you should setup the plpgsql language in the test_seqware_meta_db, a very easy way to do this is to set it up in the template1 database.  Again, see the MetaDB setup guide for both steps.</p>
+
+<p>If you&#8217;ve setup your seqware user with createdb privileges and the plpgsql language you can actually just build and test the web service with Maven, it has a built-in Jetty server that will startup and test the web service.  You can trigger this just by doing:</p>
+
+<pre><code>mvn clean install
+</code></pre>
+
+<p>If you want to startup the Jetty server for interactive testing you can simply do:</p>
+
+<pre><code>mvn jetty:run
+</code></pre>
+
+</div>
+<div class="section" id="configuring-the-database-connection">
+<h3>Configuring the database connection</h3>
+
+<p>In the source, two files need to be edited with database information in order to successfully build, test and run the Web service on Apache Tomcat (assuming you want to point it to your real DB rather than the test DB created above).</p>
+
+<p>These files are located at:</p>
+
+<ul>
+<li>Running: <a href="https://github.com/SeqWare/seqware/blob/master/seqware-webservice/src/main/webapp/META-INF/context.xml">seqware-webservice/src/main/webapp/META-INF/context.xml</a> - change all parameters to match your local seqware_meta_db connection.</li>
+<li>Testing: <a href="https://github.com/SeqWare/seqware/blob/master/seqware-webservice/src/main/webapp/WEB-INF/jetty-env.xml">seqware-webservice/src/main/webapp/WEB-INF/jetty-env.xml</a> - leave the DB name as test_seqware_meta_db. This DB will be dropped and re-created at test runtime.</li>
+</ul>
+<p>Three variables need to be changed in each file to reflect your local setup:</p>
+
+<ul>
+<li>url=&#8221;jdbc:postgresql://localhost:5432/seqware_meta_db&#8221;</li>
+<li>username=&#8221;seqware&#8221;</li>
+<li>password=&#8221;password&#8221;</li>
+</ul>
+<p>The url, username and password need to be changed to reflect the local database. &#8221;The username and password are the PostgreSQL database username and password.&#8221;</p>
+
+</div>
+<div class="section" id="building">
+<h3>Building</h3>
+
+<p>In order to run all of the tests and create the WAR file for deployment, you can run the following from the root directory of the trunk. The WS has dependencies to seqware-common, seqware-pipeline, and seqware-queryengine, so all of those need to be available to Maven for building.</p>
+
+<pre><code>mvn clean install -DskipTests
+</code></pre>
+
+<p>Please see <a href="https://github.com/SeqWare/seqware/blob/master/README.md">the latest build notes</a> for further details.</p>
+
+<p>Running the above should run all of the tests and create the WAR file and XML file for deployment in seqware-webservice/target. The reason for skipping the tests is because the tests attempt to create and connect to a new database (named &#8220;test_seqware_meta_db&#8221;) and they will fail if the Web service is not configured to connect to this database. Since you changed the database to your &#8216;real&#8217; database in the last step, the tests will fail.</p>
+
+</div>
+<div class="section" id="deploying">
+<h3>Deploying</h3>
+
+<p>In order to deploy the Web service into Tomcat, drop the WAR from seqware-webservice/target into the webapps directory, and the XML into TOMCAT_HOME/conf/Catalina/localhost (maps to /etc/tomcat6/Catalina/localhost/ on many Linux distributions). On the SeqWare VM, these directories are /var/lib/tomcat6/webapps and /etc/tomcat6/Catalina/localhost.</p>
+
+<p>SeqWare WebService consumes quite a bit of memory, so configure your Tomcat instance with the following attributes:</p>
+
+<pre><code>JAVA_OPTS= -server -Xss1024K -Xms1G -Xmx2G -XX:MaxPermSize=128M -XX:NewSize=512m
+</code></pre>
+
+<p>This environment variable should either be set on your command line or in the conf/tomcat6.conf file, depending on your setup. On our production machines, these memory values are all doubled.</p>
+
+<p>Restart Tomcat with <tt>bin/shutdown.sh;bin/startup.sh</tt> (<tt>/etc/init.d/tomcat6 restart</tt> for Tomcat 6).</p>
+
+<p>You can double-check whether this setting was successfully set by going to http://localhost:8080/manager/status/all and checking the JVM section. You may need to edit your <tt>/etc/tomcat6/tomcat-users.xml</tt> file and add/enable the following lines in order to enable access to the tomcat manager</p>
+
+<pre><code>&lt;role rolename="manager"/&gt;
+&lt;role rolename="admin"/&gt;
+&lt;user username="admin" password="admin" roles="admin,manager"/&gt;
+</code></pre>
+
+<p>In some cases, tomcat will ignore configuring the JAVA_OPTS either on command line or in the /etc/init.d/tomcat6 . In these cases, you can try adding a setenv.sh file with the single line</p>
+
+<pre><code>export JAVA_OPTS="-server -Xss1024K -Xms1G -Xmx2G -XX:MaxPermSize=128M -XX:NewSize=512m"
+</code></pre>
+
+<p>&#8221;Note for Tomcat 6 Users&#8221;: Tomcat may ship with an outdated postgresql-jdbc jar that will conflict with the jar in the WAR. Replace any postgresql-jdbc jar in the lib directory with the most recent version of postgresq-jdbc (We use 9.0-801.jdbc3).</p>
+
+<p>The jar will deploy at http://localhost:8080/seqware-webservice-0.11.4, or http://host.address:port/seqware-webservice-x.x.x, where your host.address is the address of the machine running the Web service, the port is the Tomcat port, and seqware-webservice-x.x.x is the appropriate version number on the seqware-webservice WAR. Navigating to this address in your browser should not show an error message (you will have to authenticate with an appropriate username and password as specified in the MetadataDB).</p>
+
+</div>
+</div>
+<div class="section" id="coming-soon">
+<h2>Coming Soon</h2>
+
+<p><em>This guide is a work in progress.</em> In the future this will include more information on the following topics.</p>
+
 <div class="section" id="admin-setup">
-<h2>Admin Setup</h2>
+<h3>Admin Setup</h3>
 
 </div>
 <div class="section" id="features">
-<h2>Features</h2>
+<h3>Features</h3>
 
 </div>
 <div class="section" id="reporting">
-<h2>Reporting</h2>
+<h3>Reporting</h3>
 
 </div>
 <div class="section" id="workflow-launching-monitoring">
-<h2>Workflow Launching, Monitoring</h2>
+<h3>Workflow Launching, Monitoring</h3>
 
 </div>
-<div class="section" id="data-retrieval"><h2>Data Retrieval</h2></div>
+<div class="section" id="data-retrieval"><h3>Data Retrieval</h3></div>
+</div>
 </div>
 </div>
 </div>

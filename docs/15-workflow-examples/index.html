@@ -45,7 +45,10 @@
 <div class="header">
 <h1>Workflow Examples</h1>
 </div>
-<p>Java Example</p>
+<div class="section" id="java-simplified-workflow-bundles">
+<h2>Java Simplified Workflow Bundles</h2>
+
+<p>As described in <a href="../14-workflow-mvn/">Creating New Workflow Bundles and Modules Using Maven Archetypes</a>, new Java simplified workflow bundles are created through the <code>mvn archetype:generate</code> command and the <code>com.github.seqware:seqware-archetype-java-workflow (SeqWare Java workflow archetype)</code>.</p>
 
 <pre><code>package net.sourceforge.seqware;
 
@@ -152,7 +155,9 @@ public class WorkflowClient extends AbstractWorkflowDataModel {
 }
 </code></pre>
 
-<p>FTL Examples</p>
+<p>As described in <a href="../14-workflow-mvn/">Creating New Workflow Bundles and Modules Using Maven Archetypes</a>, new FTL workflow bundles are created through the <code>mvn archetype:generate</code> command and the <code>com.github.seqware:seqware-archetype-ftl-workflow (SeqWare FTL workflow archetype)</code>.</p>
+
+<p>The following is a more complex example than that provided by the basic archetype generate command.</p>
 
 <pre><code>&lt;workflow&gt;
     &lt;files&gt;
@@ -202,6 +207,7 @@ public class WorkflowClient extends AbstractWorkflowDataModel {
     &lt;/jobs&gt;
 &lt;/workflow&gt;
 </code></pre>
+</div>
 </div>
 </div>
 </div>

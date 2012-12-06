@@ -96,7 +96,7 @@
 
 <p>SeqWare is open source architecture built mostly in Java. In the <kbd>/home/seqware/SeqWare</kbd> directory you will see a jar file. This contains SeqWare Pipeline code that will allow you to interact with the SeqWare Web service (actually either on a VM, installed on another local machine/cluster, or in the cloud) that controls, among other things, workflow execution. This jar is, essentially, the command line interface for the whole SeqWare project.</p>
 
-<p class="warning"><strong>Tip:</strong> The VM will contain a recent version of the jar that we have validated with this tutorial.  You may want to upgrade to the latest version, though, which you can download from our continuous build server. Please choose the jar that has the -full suffix, e.g. <a href="http://jenkins.res.oicr.on.ca/job/seqware/lastStableBuild/net.sourceforge.seqware%24seqware-distribution/">seqware-distribution-0.12.5-SNAPSHOT-full.jar</a>. Keep in mind we make no promises that the latest version will be bug free!</p>
+<p class="warning"><strong>Tip:</strong> The VM will contain a recent version of the jar that we have validated with this tutorial.  You may want to upgrade to the latest version, though, which you can download from our continuous build server. Please choose the jar that has the -full suffix, e.g. <a href="http://jenkins.res.oicr.on.ca/job/seqware_github/lastStableBuild/com.github.seqware%24seqware-distribution/">seqware-distribution-0.13.6-SNAPSHOT-full.jar</a>. Keep in mind we make no promises that the latest version will be bug free!</p>
 
 </div>
 <div class="section" id="the-seqware-settings-file">
@@ -145,6 +145,25 @@ SW_DB=test_seqware_meta_db
 # most likely not used here at OICR
 AWS_ACCESS_KEY=lksjdflksjdklf
 AWS_SECRET_KEY=slkdjfeoiksdlkjflksjejlfkjeloijxelkj
+
+#
+# Settings for Oozie Workflow Engine
+#
+OOZIE_URL=http://localhost:11000/oozie 
+OOZIE_APP_ROOT=seqware_workflow 
+OOZIE_APP_PATH=hdfs://localhost:8020/user/seqware/ 
+OOZIE_JOBTRACKER=localhost:8021
+OOZIE_NAMENODE=hdfs://localhost:8020 
+OOZIE_QUEUENAME=default
+    
+HBASE.ZOOKEEPER.QUORUM=localhost 
+HBASE.ZOOKEEPER.PROPERTY.CLIENTPORT=2181
+HBASE.MASTER=localhost:60000
+MAPRED.JOB.TRACKER=localhost:8021
+FS.DEFAULT.NAME=hdfs://localhost:8020 
+FS.DEFAULTFS=hdfs://localhost:8020 
+FS.HDFS.IMPL=org.apache.hadoop.hdfs.DistributedFileSystem 
+OOZIE_WORK_DIR=/home/seqware/oozie
 </pre>
 
 </div>
@@ -153,12 +172,12 @@ AWS_SECRET_KEY=slkdjfeoiksdlkjflksjejlfkjeloijxelkj
 
 <p>SeqWare MetaDB lets you track studies, experiment, and samples and then link those to files (like FASTQ or something similar). You can then run workflows on those files, track the resulting files, and use those files for the next workflow.  You will want to set up your study, experiments, and samples before uploading your text or other data files.  This ensures you have “parents” to attach these files to.  Otherwise you will not be able to use them as parameters for workflows. </p>
 
-<p>You can do this either with the <a href="http://SeqWarePortal" title="SeqWare Portal">Portal</a> or via the command line tools below.</p>
+<p>You can do this either with the <a href="../../5-portal/">Portal</a> or via the command line tools below.</p>
 
 <div class="section" id="via-the-portal">
 <h3>Via the Portal</h3>
 
-<p>First, login to the portal, the URL is http://localhost:8080/SeqWarePortal and you will need to use the browser inside the VM to access this. The default username is <kbd>admin@admin.com&lt;/kdb&gt; and the default password is <kbd>admin&lt;/kdb&gt;.  Feel free to change your password in the web app.</kbd></kbd></p>
+<p>First, login to the portal, the URL is http://localhost:8080/SeqWarePortal and you will need to use the browser inside the VM to access this. The default username is <kbd>admin@admin.com</kbd> and the default password is <kbd>admin</kbd>.  Feel free to change your password in the web app.</p>
 
 <p class="warning"><strong>Tip:</strong>You could setup the VM so it gets a &#8220;real&#8221; IP address on your network, in which case you could access both the Portal and Web Service via any computer on your network.</p>
 
@@ -382,7 +401,7 @@ Since this is a low-level tool you may see many more parameters exposed with thi
 <p>Once a workflow has finished running you will want to list out the associated files and download the results.  While you can use the Portal for downloading files the best way to get files in bulk is to use our reporting tool. This produces a tab-delimited file that lists all the files produced for the workflows you are interested in.  You can then use the same ProvisionFiles utility above to pull files back.  Since the report produces a simple tab-delimited file you can easily automate the downloading of results by looping over the output files and calling ProvisionFiles using a script.</p>
 
 <pre>
-	java -jar seqware-pipeline-0.12.5.jar -p net.sourceforge.seqware.pipeline.plugins.SymLinkFileReporter -- --no-links --output-filename study_report --workflow-accession 7 --study Test
+	java -jar seqware-pipeline-0.12.5.jar -p net.sourceforge.seqware.pipeline.plugins.SymLinkFileReporter -- --no-links --output-filename study_report --workflow-accession 7 --study 'New Test Study'
 </pre>
 
 <p>The output here is a study_report.csv file that contains a line for each file (both those uploaded and those produced by workflows).  You can also filter by file types, for example if you want to see report bundles (not applicable to the HelloWorld workflow but you get the idea):</p>

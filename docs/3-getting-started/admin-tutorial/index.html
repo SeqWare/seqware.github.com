@@ -28,7 +28,16 @@
 <li><a href="../../1-introduction/"><span>Introduction to SeqWare</span></a></li>
 <li><a href="../../2-installation/"><span>Installation</span></a></li>
 <li>
-<a href="../"><span>Getting Started</span></a><ol class="toc"><li><a href="#by-the-end-of-these-tutorials">By the End of These Tutorials</a></li></ol>
+<a href="../"><span>Getting Started</span></a><ol class="toc">
+<li><a href="#by-the-end-of-these-tutorials">By the End of These Tutorials</a></li>
+<li><a href="#how-to-launch">How to Launch</a></li>
+<li><a href="#how-to-monitor">How to Monitor</a></li>
+<li><a href="#how-to-recover-workflows">How to Recover Workflows</a></li>
+<li><a href="#how-to-cancel-workflows">How to Cancel Workflows</a></li>
+<li><a href="#how-to-clean-up">How to Clean-up</a></li>
+<li><a href="#see-also">See Also</a></li>
+<li><a href="#coming-soon">Coming Soon</a></li>
+</ol>
 </li>
 <li><a href="../../4-metadb/"><span>SeqWare MetaDB</span></a></li>
 <li><a href="../../5-portal/"><span>SeqWare Portal</span></a></li>
@@ -66,6 +75,180 @@ steps will require “root” privileges.</p>
 <li>see how to connect a local VM to a local cluster for running large-scale workflows</li>
   <li>see how to launch a cluster on Amazon’s cloud for running large-scale workflows</li>
   <li>more to come</li>
+</ul>
+</div>
+<div class="section" id="how-to-launch">
+<h2>How to Launch</h2>
+<ul>
+<li>note for multi-users will be researched and put here</li>
+  <li>should be a parameter of some kind</li>
+</ul>
+</div>
+<div class="section" id="how-to-monitor">
+<h2>How to Monitor</h2>
+
+<div class="section" id="cron-jobs">
+<h3>Cron Jobs</h3>
+
+<p>The SeqWare VM uses two cron tasks to detect and launch scheduled workflows. Take a look at:</p>
+
+<pre><code>seqware@seqwarevm SeqWare]$ crontab -l
+1 0 * * * /home/seqware/crons/update_db.sh &gt;&gt; /home/seqware/logs/update_db.log
+* * * * * /home/seqware/crons/status.cron &gt;&gt; /home/seqware/logs/status.log
+</code></pre>
+
+<p>The first script runs at one minute past midnight every night. This runs the stored procedures which populate the “Study Report” and the “SequenceRunReport” in the SeqWare Portal. 
+The second script runs every minute. This script uses two plugins, the WorkflowLauncher plugin which is used to launch workflows that have been previously scheduled while the WorkflowStatusChecker plugin is used to check the status of launched workflows. </p>
+
+</div>
+<div class="section" id="workflow-run-reporter">
+<h3>Workflow Run Reporter</h3>
+
+<p>The Workflow Run Reporter is a command-line tool that will generated a tab-separated file containing information about one or more workflow runs. The workflow runs can either be retrieved according to time period, workflow type, or by workflow run SeqWare accession.</p>
+
+<div class="section" id="requirements">
+<h4>Requirements</h4>
+<p>In order to run the WorkflowRunReporter plugin, you must have the following available to you:</p>
+
+<ul>
+<li>SeqWare Pipeline JAR (0.12.0 or higher)</li>
+  <li>SeqWare settings file set up to contact the SeqWare Web service (contact your local SeqWare admin to get the path)</li>
+</ul>
+<p>If you are working on the SeqWare VM, these will already be setup for you. </p>
+
+</div>
+<div class="section" id="command-line-parameters">
+<h4>Command line parameters</h4>
+
+<p>There are three ways to retrieve data through this plugin</p>
+
+<ul>
+<li>Report a workflow_run by SWID - retrieves only that workflow_run</li>
+  <li>Report all workflow_runs within a certain time period - according to the workflow_run create_tstmp</li>
+  <li>Report all workflow_runs from a certain workflow, optionally by time period</li>
+</ul>
+<table>
+<thead><tr>
+<th>Command-line option</th>
+      <th>Description</th>
+    </tr></thead>
+<tbody>
+<tr>
+<td>–workflow-run-accession</td>
+      <td>the SWID of the workflow run</td>
+    </tr>
+<tr>
+<td>–time-period</td>
+      <td>Dates to check for workflow runs. Dates are in format YYYY-MM-DD. If one date is provided, from that point to the present is checked. If two, separated by hyphen YYYY-MM-DDL:YYYY-MM-DD then it checks that range</td>
+    </tr>
+<tr>
+<td>–workflow-accession</td>
+      <td>the SWID of a workflow. All the workflow runs for that workflow will be retrieved</td>
+    </tr>
+<tr>
+<td>–stdout</td>
+      <td>(0.12.5) Print the results to standard out instead of to a file</td>
+    </tr>
+<tr>
+<td>-o, –output-filename</td>
+      <td>(0.12.5) Optional: The output filename</td>
+    </tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="examples">
+<h4>Examples</h4>
+<p>Retrieves the workflow run report of workflow_run SWID 24770:</p>
+
+<pre><code>java -jar seqware-distribution/target/seqware-distribution-0.13.6-full.jar -p net.sourceforge.seqware.pipeline.plugins.WorkflowRunReporter -- --workflow-run-accession 24770
+</code></pre>
+
+<p>Retrieves the workflow run report of all workflows run between April 20 2012 and May 1 2012:</p>
+
+<pre><code>java -jar seqware-distribution/target/seqware-distribution-0.13.6-full.jar -p net.sourceforge.seqware.pipeline.plugins.WorkflowRunReporter -- --time-period 2012-04-20:2012-05-01
+</code></pre>
+
+<p>Retrieves the workflow run reports for all runs of workflow SWID 23456 since Sept 1 2011:</p>
+
+<pre><code>java -jar seqware-distribution/target/seqware-distribution-0.13.6-full.jar -p net.sourceforge.seqware.pipeline.plugins.WorkflowRunReporter -- --workflow-accession 62691 --time-period 2011-09-01
+</code></pre>
+
+<p>Retrieves the workflow run reports for all runs of workflow SWID 23456:</p>
+
+<pre><code>java -jar seqware-distribution/target/seqware-distribution-0.13.6-full.jar -p net.sourceforge.seqware.pipeline.plugins.WorkflowRunReporter -- --workflow-accession 62691
+</code></pre>
+
+</div>
+<div class="section" id="specification">
+<h4>Specification</h4>
+
+<p>Regardless of the command used to produce it, the file created by the plugin has the following information:</p>
+
+<ul>
+<li>Workflow name and version</li>
+  <li>Workflow run SWID</li>
+  <li>Workflow run status</li>
+  <li>Workflow run status command</li>
+  <li>Identity sample name and SWID (last in the sample hierarchy)</li>
+  <li>Library sample name and SWID (root of the sample hierarchy)</li>
+  <li>Input files: input files for a workflow run, with meta-type, SWID and file path</li>
+  <li>Output files for a workflow run, with meta-type, SWID and file path</li>
+  <li>Time spent on the run according to DB.</li>
+</ul>
+</div>
+<div class="section" id="web-service-resources">
+<h4>Web service resources</h4>
+<p>These are the web service URIs that provide the data for the report. Although it is not necessary to understand these URLs to use the plugin, they can be used without the seqware-pipeline-x.x.x-full.jar to retrieve the report.</p>
+
+<p>Examples:</p>
+
+<ul>
+<li>
+<a href="http://localhost:8080/SeqWareWebService/reports/workflowruns/%7BSWID%7D">http://localhost:8080/SeqWareWebService/reports/workflowruns/{SWID}</a> - retrieves one workflow run</li>
+  <li>
+<a href="http://localhost:8080/SeqWareWebService/workflowruns">http://localhost:8080/SeqWareWebService/workflowruns</a> - retrieves all workflow runs. Can be filtered using the query parameters earliestdate and latestdate with the date in the format yyyyMMdd. e.g. ?earliestdate=20120101 to retrieve all workflow runs started after January 1, 2012.</li>
+  <li>
+<a href="http://localhost:8080/SeqWareWebService/reports/workflows/%7BSWID%7D/runs">http://localhost:8080/SeqWareWebService/reports/workflows/{SWID}/runs</a> - retrieves all workflow runs from a particular workflow. Can be filtered using the query parameters earliestdate and latestdate with the date in the format yyyyMMdd. e.g. ?earliestdate=20120101 to retrieve all workflow runs started after January 1, 2012.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="how-to-recover-workflows">
+<h2>How to Recover Workflows</h2>
+
+<div class="section" id="condor-brief">
+<h3>Condor (brief)</h3>
+
+</div>
+</div>
+<div class="section" id="how-to-cancel-workflows">
+<h2>How to Cancel Workflows</h2>
+
+</div>
+<div class="section" id="how-to-clean-up">
+<h2>How to Clean-up</h2>
+
+</div>
+<div class="section" id="see-also">
+<h2>See Also</h2>
+
+<p class="warning"><strong>Note:</strong>
+Before proceeding further, it is worth noting that the SeqWare MetaDB should be regularly backed-up. 
+On our deployment, we have a cron script which calls the SymLinkFileReporter and <code>pg_dump</code> nightly to do back-up. 
+</p>
+
+<p>Take a look at the guide for <a href="../../2a-installation-from-scratch/">creating a SeqWare VM</a> which provides technical details on how to install the components of the SeqWare software stack. </p>
+
+</div>
+<div class="section" id="coming-soon">
+<h2>Coming Soon</h2>
+
+<p>We are also preparing guides which will walk administrators through</p>
+
+<ul>
+<li>Hooking up to an SGE cluster (Pegasus)</li>
+  <li>Hooking up to an Oozie cluster</li>
+  <li>Hooking up to an LSF cluster</li>
 </ul>
 </div>
 </div>
