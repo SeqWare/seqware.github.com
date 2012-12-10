@@ -69,11 +69,12 @@
 <h2>BasicDecider</h2>
 <p>net.sourceforge.seqware.pipeline.deciders.BasicDecider</p>
 
-<table><tbody>
-<tr>
-<td>Command-line option</td>
-      <td>Description</td>
-    </tr>
+<table>
+<thead><tr>
+<th>Command-line option</th>
+      <th>Description</th>
+    </tr></thead>
+<tbody>
 <tr>
 <td>–all</td>
       <td>Run everything. One of sample-name, study-name, sequencer-run-name or all is required.</td>
@@ -142,7 +143,8 @@
 <td>–wf-accession</td>
       <td>The workflow accession of the workflow</td>
     </tr>
-</tbody></table>
+</tbody>
+</table>
 </div>
 <div class="section" id="workflowplugin">
 <h2>WorkflowPlugin</h2>
@@ -150,11 +152,12 @@
 
 <p>A plugin that lets you launch workflow bundles once you have installed them via the BundleManager.</p>
 
-<table><tbody>
-<tr>
-<td>Command-line option</td>
-      <td>Description</td>
-    </tr>
+<table>
+<thead><tr>
+<th>Command-line option</th>
+      <th>Description</th>
+    </tr></thead>
+<tbody>
 <tr>
 <td>–?, –h, –help</td>
       <td>Provides this help message.</td>
@@ -231,7 +234,8 @@
 <td>–workflow-run-accession, –wra</td>
       <td>Optional: The sw_accession of an existing workflow_run that should be used. This row is pre-created when another job schedules a workflow run by partially populating a workflow_run row and setting the status to ‘scheduled’. If this is not specified then a new workflow_run row will be created. Specify this in addition to a workflow-accession.</td>
     </tr>
-</tbody></table>
+</tbody>
+</table>
 </div>
 <div class="section" id="attributeannotator">
 <h2>AttributeAnnotator</h2>
@@ -239,11 +243,12 @@
 
 <p>Experimental plugin. Allows the annotation of objects in the database with ‘skip’ values.</p>
 
-<table><tbody>
-<tr>
-<td>Command-line option</td>
-      <td>Description</td>
-    </tr>
+<table>
+<thead><tr>
+<th>Command-line option</th>
+      <th>Description</th>
+    </tr></thead>
+<tbody>
 <tr>
 <td>–e, –experiment-accession</td>
       <td>The SWID of the Experiment to annotate. One of the -accession options is required.</td>
@@ -296,7 +301,8 @@
 <td>–workflow-run-accession, –wr</td>
       <td>The SWID of the workflow run to annotate. One of the -accession options is required.</td>
     </tr>
-</tbody></table>
+</tbody>
+</table>
 </div>
 <div class="section" id="bundlemanager">
 <h2>BundleManager</h2>
@@ -304,11 +310,12 @@
 
 <p>A plugin that lets you create, test, and install workflow bundles.</p>
 
-<table><tbody>
-<tr>
-<td>Command-line option</td>
-      <td>Description</td>
-    </tr>
+<table>
+<thead><tr>
+<th>Command-line option</th>
+      <th>Description</th>
+    </tr></thead>
+<tbody>
 <tr>
 <td>–?, –h, –help</td>
       <td>Optional: Provides this help message.</td>
@@ -377,7 +384,8 @@
 <td>–wa, –workflow-accession</td>
       <td>Optional: The sw_accession of the workflow. Specify this or the workflow, version, and bundle. Currently used in conjunction with the list-workflow-params for now.</td>
     </tr>
-</tbody></table>
+</tbody>
+</table>
 </div>
 <div class="section" id="cyclechecker">
 <h2>CycleChecker</h2>
@@ -385,16 +393,16 @@
 
 <p>Checks for cycles in the sample hierarchy and processing hierarchy of a particular study and prints some information about the study</p>
 
-<table><tbody>
-<tr>
-<td>Command-line option</td>
-      <td>Description</td>
-    </tr>
-<tr>
+<table>
+<thead><tr>
+<th>Command-line option</th>
+      <th>Description</th>
+    </tr></thead>
+<tbody><tr>
 <td>–study-accession</td>
       <td>The SeqWare accession of the study you want to check</td>
-    </tr>
-</tbody></table>
+    </tr></tbody>
+</table>
 </div>
 <div class="section" id="filelinker">
 <h2>FileLinker</h2>
@@ -402,11 +410,12 @@
 
 <p>Takes a list of files and enters them into the database, linking them with the appropriate IUSes and creating workflow runs for the ‘FileImport’ workflow. For more information, see https://sourceforge.net/apps/mediawiki/seqware/index.php?title=FileLinker</p>
 
-<table><tbody>
-<tr>
-<td>Command-line option</td>
-      <td>Description</td>
-    </tr>
+<table>
+<thead><tr>
+<th>Command-line option</th>
+      <th>Description</th>
+    </tr></thead>
+<tbody>
 <tr>
 <td>–csv-separator</td>
       <td> </td>
@@ -419,7 +428,8 @@
 <td>–workflow-accession</td>
       <td>The sw_accession of the Import files workflow</td>
     </tr>
-</tbody></table>
+</tbody>
+</table>
 </div>
 <div class="section" id="helloworld">
 <h2>HelloWorld</h2>
@@ -427,16 +437,16 @@
 
 <p>A very simple HelloWorld to show how to make plugins.</p>
 
-<table><tbody>
-<tr>
-<td>Command-line option</td>
-      <td>Description</td>
-    </tr>
-<tr>
+<table>
+<thead><tr>
+<th>Command-line option</th>
+      <th>Description</th>
+    </tr></thead>
+<tbody><tr>
 <td>–?, –h, –help</td>
       <td>Provides this help message.</td>
-    </tr>
-</tbody></table>
+    </tr></tbody>
+</table>
 </div>
 <div class="section" id="markdownplugin">
 <h2>MarkdownPlugin</h2>
@@ -444,16 +454,16 @@
 
 <p>A plugin that generates markdown documentation for all plugins.</p>
 
-<table><tbody>
-<tr>
-<td>Command-line option</td>
-      <td>Description</td>
-    </tr>
-<tr>
+<table>
+<thead><tr>
+<th>Command-line option</th>
+      <th>Description</th>
+    </tr></thead>
+<tbody><tr>
 <td>–?, –h, –help</td>
       <td>Provides this help message.</td>
-    </tr>
-</tbody></table>
+    </tr></tbody>
+</table>
 </div>
 <div class="section" id="metadata">
 <h2>Metadata</h2>
@@ -461,11 +471,12 @@
 
 <p>This plugin lets you list, read, and write to a collection of tables in the underlying MetaDB. This makes it easier to automate the creation of entities in the database which can be used as parents for file uploads and triggered workflows.</p>
 
-<table><tbody>
-<tr>
-<td>Command-line option</td>
-      <td>Description</td>
-    </tr>
+<table>
+<thead><tr>
+<th>Command-line option</th>
+      <th>Description</th>
+    </tr></thead>
+<tbody>
 <tr>
 <td>–c, –create</td>
       <td>Optional: indicates you want to create a new row, must supply –table and all the required –field params.</td>
@@ -491,7 +502,8 @@
 <td>–t, –table</td>
       <td>Required: the table you are interested in reading or writing.</td>
     </tr>
-</tbody></table>
+</tbody>
+</table>
 </div>
 <div class="section" id="modulerunner">
 <h2>ModuleRunner</h2>
@@ -499,20 +511,17 @@
 
 <p>Description: A wrapper around Runner which will either list all Modules in the classpath (if no args are passed) or trigger a specific Module. Great for running Modules standalone.</p>
 
-<table><tbody><tr>
-<td>Command-line option</td>
-      <td>Description</td>
-    </tr></tbody></table>
 </div>
 <div class="section" id="processingdatastructure2dot">
 <h2>ProcessingDataStructure2Dot</h2>
 <p>net.sourceforge.seqware.pipeline.plugins.ProcessingDataStructure2Dot</p>
 
-<table><tbody>
-<tr>
-<td>Command-line option</td>
-      <td>Description</td>
-    </tr>
+<table>
+<thead><tr>
+<th>Command-line option</th>
+      <th>Description</th>
+    </tr></thead>
+<tbody>
 <tr>
 <td>–output-file</td>
       <td>Optional: file name</td>
@@ -537,7 +546,8 @@
 <td>–sw-db-user</td>
       <td>Optional: database user</td>
     </tr>
-</tbody></table>
+</tbody>
+</table>
 </div>
 <div class="section" id="sequencerrunreporter">
 <h2>SequencerRunReporter</h2>
@@ -545,16 +555,16 @@
 
 <p>Prints a tab-delimited file describing the sequencer run, lane, sample, and algorithms run on every IUS in the database. For more information, see https://sourceforge.net/apps/mediawiki/seqware/index.php?title=Sequencer_Run_Reporter</p>
 
-<table><tbody>
-<tr>
-<td>Command-line option</td>
-      <td>Description</td>
-    </tr>
-<tr>
+<table>
+<thead><tr>
+<th>Command-line option</th>
+      <th>Description</th>
+    </tr></thead>
+<tbody><tr>
 <td>–output, –output-filename</td>
       <td>Name of the output tab-delimited file.</td>
-    </tr>
-</tbody></table>
+    </tr></tbody>
+</table>
 </div>
 <div class="section" id="symlinkfilereporter">
 <h2>SymLinkFileReporter</h2>
@@ -562,11 +572,12 @@
 
 <p>Create a nested tree structure of all of the output files from a particular sample, or all of the samples in a study by using the SymLinkFileReporter plugin. This plugin also creates a CSV file with all of the accompanying information for every file. For more information, see https://sourceforge.net/apps/mediawiki/seqware/index.php?title=SymLink_Reporter</p>
 
-<table><tbody>
-<tr>
-<td>Command-line option</td>
-      <td>Description</td>
-    </tr>
+<table>
+<thead><tr>
+<th>Command-line option</th>
+      <th>Description</th>
+    </tr></thead>
+<tbody>
 <tr>
 <td>–dump-all</td>
       <td>Optional: Dumps all of the studies in the database to one file.</td>
@@ -619,7 +630,8 @@
 <td>–w, –workflow-accession</td>
       <td>Optional: List all workflow runs with this workflow accession</td>
     </tr>
-</tbody></table>
+</tbody>
+</table>
 </div>
 <div class="section" id="workflowlauncher">
 <h2>WorkflowLauncher</h2>
@@ -627,11 +639,12 @@
 
 <p>A plugin that lets you launch workflow bundles once you have installed them via the BundleManager.</p>
 
-<table><tbody>
-<tr>
-<td>Command-line option</td>
-      <td>Description</td>
-    </tr>
+<table>
+<thead><tr>
+<th>Command-line option</th>
+      <th>Description</th>
+    </tr></thead>
+<tbody>
 <tr>
 <td>–?, –h, –help</td>
       <td>Provides this help message.</td>
@@ -708,7 +721,8 @@
 <td>–workflow-run-accession, –wra</td>
       <td>Optional: The sw_accession of an existing workflow_run that should be used. This row is pre-created when another job schedules a workflow run by partially populating a workflow_run row and setting the status to ‘scheduled’. If this is not specified then a new workflow_run row will be created. Specify this in addition to a workflow-accession.</td>
     </tr>
-</tbody></table>
+</tbody>
+</table>
 </div>
 <div class="section" id="workflowrunreporter">
 <h2>WorkflowRunReporter</h2>
@@ -716,11 +730,12 @@
 
 <p>This plugin creates a tab-separated file that describes one or more workflow runs, including the identity, library samples and input and output files. For more information, see https://sourceforge.net/apps/mediawiki/seqware/index.php?title=Workflow_Run_Reporter</p>
 
-<table><tbody>
-<tr>
-<td>Command-line option</td>
-      <td>Description</td>
-    </tr>
+<table>
+<thead><tr>
+<th>Command-line option</th>
+      <th>Description</th>
+    </tr></thead>
+<tbody>
 <tr>
 <td>–o, –output-filename</td>
       <td>Optional: The output filename</td>
@@ -749,7 +764,8 @@
 <td>–wr-stdout</td>
       <td>Optional: will print the stdout of the workflow run, must specify the –workflow-run-accession</td>
     </tr>
-</tbody></table>
+</tbody>
+</table>
 </div>
 <div class="section" id="workflowstatuschecker">
 <h2>WorkflowStatusChecker</h2>
@@ -757,11 +773,12 @@
 
 <p>This plugin lets you monitor the status of running workflows and updatesthe metadata object with their status.  Keep in mind a few things: 1) if the status command is specified no data will be saved to the DB, this tool is just useful for gathering error reports, 2) status commands that are malformed or whose status directory is not present on the filesystem will be skipped and an error noted, 3) by default every running or unknown workflow_run in the database will be checked if they are owned by the username in your .seqware/settings file and the hostname is the same as ‘hostname –long’, and 4) you can force the checking of workflows with a particular host value but be careful with that.</p>
 
-<table><tbody>
-<tr>
-<td>Command-line option</td>
-      <td>Description</td>
-    </tr>
+<table>
+<thead><tr>
+<th>Command-line option</th>
+      <th>Description</th>
+    </tr></thead>
+<tbody>
 <tr>
 <td>–cf, –check-failed</td>
       <td>Optional: if specified, workflow runs that have previously failed will be re-checked.</td>
@@ -786,7 +803,8 @@
 <td>–workflow-run-accession, –wra</td>
       <td>Optional: this will cause the program to only check the status of this particular workflow run.</td>
     </tr>
-</tbody></table>
+</tbody>
+</table>
 </div>
 </div>
 </div>
