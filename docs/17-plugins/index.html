@@ -49,6 +49,7 @@
 <li><a href="#markdownplugin">MarkdownPlugin</a></li>
 <li><a href="#metadata">Metadata</a></li>
 <li><a href="#modulerunner">ModuleRunner</a></li>
+<li><a href="#ooziexml2dot">OozieXML2Dot</a></li>
 <li><a href="#processingdatastructure2dot">ProcessingDataStructure2Dot</a></li>
 <li><a href="#sequencerrunreporter">SequencerRunReporter</a></li>
 <li><a href="#symlinkfilereporter">SymLinkFileReporter</a></li>
@@ -68,6 +69,8 @@
 <div class="section" id="basicdecider">
 <h2>BasicDecider</h2>
 <p>net.sourceforge.seqware.pipeline.deciders.BasicDecider</p>
+
+<p>The decider from which all other deciders came</p>
 
 <table>
 <thead><tr>
@@ -114,6 +117,10 @@
 <tr>
 <td>–parent-wf-accessions</td>
       <td>The workflow accessions of the parent workflows, comma-separated with no spaces. May also specify the meta-type.</td>
+    </tr>
+<tr>
+<td>–rerun-max</td>
+      <td>The maximum number of times to re-launch a workflowrun if failed. Default: 5.</td>
     </tr>
 <tr>
 <td>–run</td>
@@ -487,6 +494,10 @@
 </td>
     </tr>
 <tr>
+<td>–interactive</td>
+      <td>Optional: Interactively prompt for fields during creation</td>
+    </tr>
+<tr>
 <td>–lf, –list-fields</td>
       <td>Optional: if provided along with the –table option this will list out the fields for that table and their type.</td>
     </tr>
@@ -512,9 +523,28 @@
 <p>Description: A wrapper around Runner which will either list all Modules in the classpath (if no args are passed) or trigger a specific Module. Great for running Modules standalone.</p>
 
 </div>
+<div class="section" id="ooziexml2dot">
+<h2>OozieXML2Dot</h2>
+<p>net.sourceforge.seqware.pipeline.plugins.OozieXML2Dot</p>
+
+<p>This take an input file of oozie workflow xml, and translate the relation of all actions into dot format</p>
+
+<table>
+<thead><tr>
+<th>Command-line option</th>
+      <th>Description</th>
+    </tr></thead>
+<tbody><tr>
+<td>–input</td>
+      <td> </td>
+    </tr></tbody>
+</table>
+</div>
 <div class="section" id="processingdatastructure2dot">
 <h2>ProcessingDataStructure2Dot</h2>
 <p>net.sourceforge.seqware.pipeline.plugins.ProcessingDataStructure2Dot</p>
+
+<p>This plugin will take in a sw_accession of a processing, and translate the hierarchy of the processing relationship into dot format</p>
 
 <table>
 <thead><tr>
@@ -528,23 +558,7 @@
     </tr>
 <tr>
 <td>–parent-accession</td>
-      <td>Optional: Specifies a path to prepend to every file returned by the module. Useful for dealing when staging files back.</td>
-    </tr>
-<tr>
-<td>–sw-db</td>
-      <td>Optional: database name</td>
-    </tr>
-<tr>
-<td>–sw-db-pass</td>
-      <td>Optional: password</td>
-    </tr>
-<tr>
-<td>–sw-db-server</td>
-      <td>Optional: database server.</td>
-    </tr>
-<tr>
-<td>–sw-db-user</td>
-      <td>Optional: database user</td>
+      <td>The SWID of the processing</td>
     </tr>
 </tbody>
 </table>
@@ -794,6 +808,10 @@
 <tr>
 <td>–s, –status-cmd</td>
       <td>Optional: the Pegasus status command, if you specify this option the command will be run, potentially displaying the summarized/parsed errors, but the database will not be updated.</td>
+    </tr>
+<tr>
+<td>–threads-in-thread-pool, –tp</td>
+      <td>Optional: this will determine the number of threads to run with. Default: 1</td>
     </tr>
 <tr>
 <td>–wa, –workflow-accession</td>

@@ -75,18 +75,30 @@ steps will require “root” privileges.</p>
 <ul>
 <li>see how to connect a local VM to a local cluster for running large-scale workflows</li>
   <li>see how to launch a cluster on Amazon’s cloud for running large-scale workflows</li>
-  <li>more to come</li>
 </ul>
 </div>
 <div class="section" id="how-to-launch">
 <h2>How to Launch</h2>
-<ul>
-<li>note for multi-users will be researched and put here</li>
-  <li>should be a parameter of some kind</li>
-</ul>
+
+<p>The <a href="../../17-plugins/#workflowlauncher">Workflow Launcher plugin</a> is responsible for scheduling workflow launches and launching them, both synchronously and asynchronously. In our reference SeqWare environment, we typically schedule jobs and then launch them asynchronously using the WorkflowLauncher  scheduled  via a cronjob. </p>
+
+<p>Specifically, we schedule workflow launches using a command similar to that below:</p>
+
+<pre><code>java -jar seqware-distribution-0.13.6.2-full.jar -p net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher -- --ini-files workflow.ini --workflow-accession $workflow_acc --parent-accessions 99 --host `hostname --long` 
+</code></pre>
+
+<p>Then in a cronjob we use the following command to launch scheduled jobs. </p>
+
+<pre><code>java -jar seqware-distribution-0.13.6.2-full.jar -p net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher -- --launch-scheduled
+</code></pre>
+
+<p>Note that in the first command, we allow jobs to be scheduled on a specific host. When we launch scheduled workflows, we check this value in order to determine whether a particular scheduled workflow should be launchedi on this host.  A  –force-host option can be used to force launches to occur on a particular host. Note that while we normally use a fully qualified hostname, any unique string can be used to designate a host for launching  (for example on Amazon S3). </p>
+
 </div>
 <div class="section" id="how-to-monitor">
 <h2>How to Monitor</h2>
+
+<p>A cronjob that accompanies the launch-scheduled option of the WorkflowLauncher is the <a href="../../17-plugins/#workflowstatuschecker">Workflow Status Checker plugin</a>. This uses the pegasus-status command in order to retrieve the status of a currently running workflows and updates the MetaDB with their status. </p>
 
 <div class="section" id="cron-jobs">
 <h3>Cron Jobs</h3>
