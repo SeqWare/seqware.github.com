@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="UTF-8">
 <title>SeqWare › Documentation</title>
-<meta content="nanoc 3.4.0" name="generator">
+<meta content="nanoc 3.6.2" name="generator">
 <link href="../assets/style-v17.css" media="screen" rel="stylesheet" type="text/css">
 <link href="http://feeds.feedburner.com/seqware" rel="alternate" title="The SeqWare Blog" type="application/atom+xml">
 <script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script>
@@ -28,9 +28,9 @@
 <li><a href="1-introduction/"><span>Introduction to SeqWare</span></a></li>
 <li><a href="2-installation/"><span>Installation</span></a></li>
 <li><a href="3-getting-started/"><span>Getting Started</span></a></li>
+<li><a href="6-pipeline/"><span>SeqWare Pipeline</span></a></li>
 <li><a href="4-metadb/"><span>SeqWare MetaDB</span></a></li>
 <li><a href="5-portal/"><span>SeqWare Portal</span></a></li>
-<li><a href="6-pipeline/"><span>SeqWare Pipeline</span></a></li>
 <li><a href="7-web-service/"><span>SeqWare Web Service</span></a></li>
 <li><a href="8-query-engine/"><span>SeqWare Query Engine</span></a></li>
 <li><a href="9-glossary/"><span>Glossary</span></a></li>
@@ -46,7 +46,7 @@
 <div class="header">
 <h1>Documentation</h1>
 </div>
-<p class="warning"><strong>Note:</strong> This guide is a work in progress.</p>
+<p class="warning"><strong>Note:</strong> This guide is a work in progress and was designed for release 0.13.6.x of SeqWare.</p>
 
 
 <p></p>
@@ -54,15 +54,62 @@
 <p>This is the core documentation for the SeqWare project, including all the
 various sub-projects. We wanted to create a single manual that would bring
 together all of our documentation since much of it is currently spread across a
-poorly-organized wiki.  While this guide is organized by logical sections that
-flow from one to the next you do not need to read the whole thing in order to
-get started.  Take a look at the tutorials in the &#8220;Getting Started&#8221; section
-which will walk you through the core functionality such as SeqWare Pipeline.
-Because SeqWare is a fairly complex software stack (with some
-difficult-to-configure dependencies) we assume most users will start with a VM,
-either a local VirtualBox VM or an Amazon Machine Image (AMI) on Amazon&#8217;s
-cloud.</p>
+poorly-organized wiki.  Because SeqWare is a fairly complex software stack
+(with some difficult-to-configure dependencies) we assume most users will start
+with a VM, either a local VirtualBox VM or an Amazon Machine Image (AMI) on
+Amazon&#8217;s cloud. See &#8220;Installation&#8221; for directions for getting the VM.  While
+this guide is organized by logical sections that flow from one to the next you
+do not need to read the whole thing in order to get started.  Take a look at
+the tutorials in the &#8220;Getting Started&#8221; section which will walk you through the
+core functionality such as SeqWare Pipeline.</p>
 
+<p>The tutorials are divided into User, Developer, and Admin guides.  These
+reflect the three types of users that will interact with a SeqWare install.
+Generally the User injects input data into SeqWare, runs workflows, and
+collects the results. These users also use our various command line and Portal
+reporting tools.  The second user is a Developer that is actually responsible
+for the creation and testing of new workflows.  Finally, the Admin installs
+workflows, automates the launching of workflows, and identifies failed
+workflows.  This user is responsible for the components that allow the User and
+Developer to do their work and, consequently, this role is responsible for
+setting up and maintaining the various SeqWare componenents.</p>
+
+<div class="section" id="seqware-overview">
+<h2>SeqWare Overview</h2>
+
+<p>SeqWare currently provides 5 main tools specifically designed to support the analysis necessary for massively parallel sequencing technologies. All tools can be used together or separately. The tutorials below will focus mainly on Pipeline with information about other projects provided as needed:</p>
+
+<ul>
+<li>
+<strong>MetaDB</strong>: provides a common database to store metadata used by all components.</li>
+<li>
+<strong>Portal</strong>: a LIMS-like web application to manage samples, record computational events, and present results back to end users.</li>
+<li>
+<strong>Pipeline</strong>: a workflow engine that is capable of wrapping and combining other tools (BFAST, BWA, SAMtools, etc) into complex pipelines, recording metadata about the analysis, and facilitates automation of pipelines based on metadata.</li>
+<li>
+<strong>Web Service</strong>: a programmatic API that lets people build new tools on top of the project</li>
+<li>
+<strong>Query Engine</strong>: a NoSQL database designed to store and query variants and other events inferred from sequence data.</li>
+</ul>
+<p><img width="600" src="../assets/images/seqware_arch.png"></p>
+
+</div>
+<div class="section" id="seqware-users">
+<h2>SeqWare Users</h2>
+
+<p>There are three major roles that SeqWare users can be classified into.</p>
+
+<ul>
+<li>
+<strong>User</strong>: a user of workflows, the user injects data into the system, triggers workflows, and gets the results back once finished</li>
+<li>
+<strong>Developer</strong>: a developer of workflows, the developer makes new workflows and are typically Bioinformaticians and experts in NGS analysis techniques and tools</li>
+<li>
+<strong>Admin</strong>: an admin of the system, this is typically both a sys admin that installs and configures SeqWare componenents and is also responsible for installing new workflows and setting their default configurations</li>
+</ul>
+<p>Depending on the size of the group these roles may be the same person, distinct people, or even distinct groups within a larger organization.</p>
+
+</div>
 <div class="section" id="conventions">
 <h2>Conventions</h2>
 
@@ -80,11 +127,11 @@ cloud.</p>
 </ul>
 <p>The documentation also contains quite a few blocks of code snippets. These are marked up like this:</p>
 
-<pre title="Title of the snippet"><code class="language-ruby"><span class="keyword">class</span> <span class="class">Lorem::Ipsum</span>
+<div class="CodeRay"><div class="code"><pre title="Title of the snippet"><code class="language-ruby"><span class="keyword">class</span> <span class="class">Lorem::Ipsum</span>
   <span class="keyword">def</span> <span class="function">dolor</span>
     [ <span class="symbol">:foo</span>, <span class="string"><span class="delimiter">"</span><span class="content">sit amet, consectetur adipisicing elit</span><span class="delimiter">"</span></span>, <span class="integer">123</span> ]
   <span class="keyword">end</span>
-<span class="keyword">end</span></code></pre>
+<span class="keyword">end</span></code></pre></div></div>
 
 
 <p>Bash shell input/output are marked up in a similar way. Note that the prompt is
@@ -99,7 +146,7 @@ hello
 </div>
 <!-- ***** footer ***** -->
 <div id="footer">
-<p>SeqWare © 2007–2012 Brian O&#8217;Connor. SeqWare is released under the a <a rel="license" href="http://www.gnu.org/licenses/licenses.html">GNU GPL v3</a>. This site is built using the excellent <a href="http://nanoc.stoneship.org/">nanoc</a> tool and example site along with the <a href="http://www.fonts.info/info/press/free-fonts-for-font-face-embedding.htm">Graublau</a> and <a href="http://scripts.sil.org/Gentium">Gentium</a> fonts.</p>
+<p>SeqWare © 2007–2013 Brian O&#8217;Connor. SeqWare is released under the a <a rel="license" href="http://www.gnu.org/licenses/licenses.html">GNU GPL v3</a>. This site is built using the excellent <a href="http://nanoc.stoneship.org/">nanoc</a> tool and example site along with the <a href="http://www.fonts.info/info/press/free-fonts-for-font-face-embedding.htm">Graublau</a> and <a href="http://scripts.sil.org/Gentium">Gentium</a> fonts.</p>
 </div>
 </body>
 </html>

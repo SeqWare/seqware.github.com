@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="UTF-8">
 <title>SeqWare › Installation</title>
-<meta content="nanoc 3.4.0" name="generator">
+<meta content="nanoc 3.6.2" name="generator">
 <link href="../../assets/style-v17.css" media="screen" rel="stylesheet" type="text/css">
 <link href="http://feeds.feedburner.com/seqware" rel="alternate" title="The SeqWare Blog" type="application/atom+xml">
 <script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script>
@@ -36,9 +36,9 @@
 </ol>
 </li>
 <li><a href="../3-getting-started/"><span>Getting Started</span></a></li>
+<li><a href="../6-pipeline/"><span>SeqWare Pipeline</span></a></li>
 <li><a href="../4-metadb/"><span>SeqWare MetaDB</span></a></li>
 <li><a href="../5-portal/"><span>SeqWare Portal</span></a></li>
-<li><a href="../6-pipeline/"><span>SeqWare Pipeline</span></a></li>
 <li><a href="../7-web-service/"><span>SeqWare Web Service</span></a></li>
 <li><a href="../8-query-engine/"><span>SeqWare Query Engine</span></a></li>
 <li><a href="../9-glossary/"><span>Glossary</span></a></li>
@@ -100,10 +100,11 @@ will tweet about it so consider following us on Twitter.</p>
 <li><a href="https://s3.amazonaws.com/nimbusinformatics.exchange/public/SeqWareVM_0.12.5_r5163_CentOS_6.2_20120904b.ova">SeqWareVM_0.12.5-r5163_CentOS_6.2_20120904.ova</a></li>
 </ul>
 <p>Open VirtualBox and use the &#8220;Import Appliance&#8221; tool to create a new SeqWare VM
-on your system.  You can then launch it and you will be presented with a fairly
-standard Linux desktop with links to the project&#8217;s documentation to give you an
-idea of where to begin (the &#8220;Getting Started&#8221; guide here which provides a
-walk-through of using this VM).</p>
+on your system. Make sure you set the memory to the max you can afford, I
+recommend at least 4GB of memory for the VM.  You can then launch it and you
+will be presented with a fairly standard Linux desktop with links to the
+project&#8217;s documentation to give you an idea of where to begin (the &#8220;Getting
+Started&#8221; guide here provides a walk-through of using this VM).</p>
 
 <p class="warning"><strong>Note:</strong>
 When you import the VM you need to set your memory and CPU correctly.  Do not
@@ -136,7 +137,7 @@ bundle into a production system.  Or you can even hook up this VM to a real
 local grid environment (such as an SGE cluster) for running workflows.  This is
 exactly what we did at OICR, our SeqWare hosts are all virtual machines that
 can submit workflow jobs to our physical cluster. You can find more information
-on this later in the guide.</p>
+on this in the &#8220;SeqWare Pipeline&#8221; section of our documentation.</p>
 
 <p><img src="../../assets/images/vm_screen.png" alt="SeqWare VM" width="600px"></p>
 
@@ -188,21 +189,11 @@ specifics of your workflows.</p>
 <div class="section" id="what-can-you-do-with-it">
 <h3>What Can You Do With It?</h3>
 
-<p>You can launch this public AMI which will give you a server with all the SeqWare projects pre-configured and loaded with some small examples.  You can then use the running VM to test workflows and write your own.  Since this VM runs on the fairly powerful HPC node type, you can actually use it to get real work done.  This instance is powerful enough to analyze a whole human exome in 4-8 hours and you can, of course, launch many instances simultaneously to process multiple exomes in parallel.</p>
+<p>You can launch this public AMI which will give you a server with all the SeqWare projects pre-configured and loaded with some small examples.  You can then use the running VM to test workflows and write your own.  Since this VM runs on the fairly powerful HPC node type, you can actually use it to get real work done.  This instance is powerful enough to analyze a whole human exome in 4-8 hours and you can, of course, launch many instances simultaneously to process multiple exomes in parallel. Future releases of SeqWare will include scripts to setup clusters of HPC nodes that will allow you to process whole human genomes. In the mean time we recommend investigating the excellent <a href="http://star.mit.edu/cluster/">StarCluster</a> cluster launching tool.</p>
 
 <p class="warning"><strong>Note:</strong>Keep in mind Amazon charges approximately $1.30 USD per hour to run these instances, it is your responsibility to monitor your cloud usage and turn your VMs off when not in use!</p>
 
 
-</div>
-<div class="section" id="more-to-come">
-<h3>More to Come&#8230;</h3>
-
-<p>TODO: In the near future we will document the process to:</p>
-
-<ul>
-<li>launch clusters of SeqWare instances</li>
-<li>pass configuration information to instances (like your AWS keys)</li>
-</ul>
 </div>
 </div>
 <div class="section" id="installing-from-scratch">
@@ -231,7 +222,7 @@ workflow.</p>
 </div>
 <!-- ***** footer ***** -->
 <div id="footer">
-<p>SeqWare © 2007–2012 Brian O&#8217;Connor. SeqWare is released under the a <a rel="license" href="http://www.gnu.org/licenses/licenses.html">GNU GPL v3</a>. This site is built using the excellent <a href="http://nanoc.stoneship.org/">nanoc</a> tool and example site along with the <a href="http://www.fonts.info/info/press/free-fonts-for-font-face-embedding.htm">Graublau</a> and <a href="http://scripts.sil.org/Gentium">Gentium</a> fonts.</p>
+<p>SeqWare © 2007–2013 Brian O&#8217;Connor. SeqWare is released under the a <a rel="license" href="http://www.gnu.org/licenses/licenses.html">GNU GPL v3</a>. This site is built using the excellent <a href="http://nanoc.stoneship.org/">nanoc</a> tool and example site along with the <a href="http://www.fonts.info/info/press/free-fonts-for-font-face-embedding.htm">Graublau</a> and <a href="http://scripts.sil.org/Gentium">Gentium</a> fonts.</p>
 </div>
 </body>
 </html>

@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="UTF-8">
 <title>SeqWare › Installation From Scratch</title>
-<meta content="nanoc 3.4.0" name="generator">
+<meta content="nanoc 3.6.2" name="generator">
 <link href="../../assets/style-v17.css" media="screen" rel="stylesheet" type="text/css">
 <link href="http://feeds.feedburner.com/seqware" rel="alternate" title="The SeqWare Blog" type="application/atom+xml">
 <script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script>
@@ -28,9 +28,9 @@
 <li><a href="../1-introduction/"><span>Introduction to SeqWare</span></a></li>
 <li><a href="../2-installation/"><span>Installation</span></a></li>
 <li><a href="../3-getting-started/"><span>Getting Started</span></a></li>
+<li><a href="../6-pipeline/"><span>SeqWare Pipeline</span></a></li>
 <li><a href="../4-metadb/"><span>SeqWare MetaDB</span></a></li>
 <li><a href="../5-portal/"><span>SeqWare Portal</span></a></li>
-<li><a href="../6-pipeline/"><span>SeqWare Pipeline</span></a></li>
 <li><a href="../7-web-service/"><span>SeqWare Web Service</span></a></li>
 <li><a href="../8-query-engine/"><span>SeqWare Query Engine</span></a></li>
 <li><a href="../9-glossary/"><span>Glossary</span></a></li>
@@ -1228,9 +1228,20 @@ WORKFLOW STATUS : COMPLETED | 17/17 ( 100% ) | (all jobs finished successfully)
 
 <p>The SeqWare MetaDB is the common database for tracking metadata throughout the project.  So it&#8217;s the first of the sub-projects that needs to be setup.  We&#8217;ll also pre-load it with useful examples so VM users can have something to play with upon first boot.</p>
 
+<p>We&#8217;re using an empty database to start the user tutorial off with.  This uses the two sql files:</p>
+
+<ul>
+<li>seqware_meta_db.sql</li>
+<li>seqware_meta_db_data.sql</li>
+</ul>
+<p>We then added some sample data including installing the HelloWorld bundle.</p>
+
+<pre>
+-bash-4.1$ psql -U seqware -W seqware_meta_db 
+
+
 <p>See <a href="../4-metadb/#setup">Setup SeqWare MetaDB</a> for directions on how to set this up.</p>
 
-</div>
 <div class="section" id="setup-seqware-portal">
 <h2>Setup SeqWare Portal</h2>
 
@@ -1240,14 +1251,12 @@ WORKFLOW STATUS : COMPLETED | 17/17 ( 100% ) | (all jobs finished successfully)
 
 <p>The URL to access the Portal is http://localhost:8080/SeqWarePortal</p>
 
-</div>
-<div class="section" id="setup-seqware-web-service">
+</div><div class="section" id="setup-seqware-web-service">
 <h2>Setup SeqWare Web Service</h2>
 
 <p>Much like the Portal this sub-project just needs to be build and deployed in Tomcat using the standard War file approach.  See <a href="../../7-web-service/#setup-the-web-service">Setup SeqWare WebService</a> for more information.  Once installed, you can access the web service using http://localhost:8080/SeqWareWebService.</p>
 
-</div>
-<div class="section" id="next-steps">
+</div><div class="section" id="next-steps">
 <h2>Next Steps</h2>
 
 <p>There are two main next steps:</p>
@@ -1261,7 +1270,7 @@ WORKFLOW STATUS : COMPLETED | 17/17 ( 100% ) | (all jobs finished successfully)
 <div class="section" id="connect-the-vm-to-a-real-cluster">
 <h3>Connect the VM to a Real Cluster</h3>
 
-<p>One thing to keep in mind is, if you&#8217;re using this VM that has already been setup you will still want to edit the sge.pm file since it contains paths and ports that will need to change given your environment.  If you&#8217;re using the VM as a self-contained environment you don&#8217;t need to worry about this.  But if you&#8217;re connecting to a real cluster then you need to have these setup properly.  For example you would need to customize the following section in /usr/share/perl5/vendor_perl/Globus/GRAM/JobManager/sge.pm:</p>
+<p>One thing to keep in mind is, if you're using this VM that has already been setup you will still want to edit the sge.pm file since it contains paths and ports that will need to change given your environment.  If you're using the VM as a self-contained environment you don't need to worry about this.  But if you're connecting to a real cluster then you need to have these setup properly.  For example you would need to customize the following section in /usr/share/perl5/vendor_perl/Globus/GRAM/JobManager/sge.pm:</p>
 
 <pre><code>BEGIN
 {
@@ -1299,13 +1308,14 @@ WORKFLOW STATUS : COMPLETED | 17/17 ( 100% ) | (all jobs finished successfully)
 
 <p>Also, keep in mind it&#8217;s possible to connect to a cluster type different than SGE.  You will need to install the appropriate GRAM configuration RPM and follow any configuration needed for the other cluster type (similar to the way we modified sge.pm).  But in theory you should be able to customize this VM to submit to another SGE, PBS, Condor, etc cluster fairly easily.  See the Globus Toolkit website and docs for more information.</p>
 </div>
+</div></pre>
 </div>
 </div>
 </div>
 </div>
 <!-- ***** footer ***** -->
 <div id="footer">
-<p>SeqWare © 2007–2012 Brian O&#8217;Connor. SeqWare is released under the a <a rel="license" href="http://www.gnu.org/licenses/licenses.html">GNU GPL v3</a>. This site is built using the excellent <a href="http://nanoc.stoneship.org/">nanoc</a> tool and example site along with the <a href="http://www.fonts.info/info/press/free-fonts-for-font-face-embedding.htm">Graublau</a> and <a href="http://scripts.sil.org/Gentium">Gentium</a> fonts.</p>
+<p>SeqWare © 2007–2013 Brian O&#8217;Connor. SeqWare is released under the a <a rel="license" href="http://www.gnu.org/licenses/licenses.html">GNU GPL v3</a>. This site is built using the excellent <a href="http://nanoc.stoneship.org/">nanoc</a> tool and example site along with the <a href="http://www.fonts.info/info/press/free-fonts-for-font-face-embedding.htm">Graublau</a> and <a href="http://scripts.sil.org/Gentium">Gentium</a> fonts.</p>
 </div>
 </body>
 </html>

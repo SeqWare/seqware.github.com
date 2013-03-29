@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="UTF-8">
 <title>SeqWare › Release Notes</title>
-<meta content="nanoc 3.4.0" name="generator">
+<meta content="nanoc 3.6.2" name="generator">
 <link href="../assets/style-v17.css" media="screen" rel="stylesheet" type="text/css">
 <link href="http://feeds.feedburner.com/seqware" rel="alternate" title="The SeqWare Blog" type="application/atom+xml">
 <script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script>
@@ -39,6 +39,74 @@ Procedure now is at https://wiki.oicr.on.ca/pages/viewpage.action?pageId=4453317
 -->
 
 
+<div class="section" id="0-13-6-2-2012-01-28">
+<h2>0.13.6.2 (2012-01-28)</h2>
+
+<div class="section" id="defect">
+<h3>Defect</h3>
+
+<ul>
+<li>[SEQWARE-1434] - Workflow_params and workflow_run_params are not populated when they are empty in the INI</li>
+<li>[SEQWARE-1444] - Some parameters from .ini cannot make it into MetaDB</li>
+<li>[SEQWARE-1471] - seqware installation error message confusing</li>
+</ul>
+</div>
+<div class="section" id="task">
+<h3>Task</h3>
+
+<ul>
+<li>[SEQWARE-1453] - 0.13.6.1 Release</li>
+<li>[SEQWARE-1454] - Bam-QC Decider (Basic Decider) uses excessive amounts of memory</li>
+<li>[SEQWARE-1464] - Remove tomcat from sqwprod.hpc</li>
+<li>[SEQWARE-1465] - Install web-service to sqwweb.hpc</li>
+<li>[SEQWARE-1470] - Investigate (and fix) issue with BasicDecider on prod</li>
+<li>[SEQWARE-1473] - Add input (parent) file SWIDs to the StudyIDFilesTSVResource</li>
+<li>[SEQWARE-1474] - Workflow runs are not properly linked to IUS over the web service</li>
+</ul>
+</div>
+</div>
+<div class="section" id="0-13-6-1-2013-01-09">
+<h2>0.13.6.1 (2013-01-09)</h2>
+
+<div class="section" id="improvement">
+<h3>Improvement</h3>
+
+<ul>
+<li>[SEQWARE-1297] - Make BasicDecider not re-attempt failed or processing workflows</li>
+<li>[SEQWARE-1409] - Make sure all plugins have descriptions</li>
+</ul>
+</div>
+<div class="section" id="story">
+<h3>Story</h3>
+
+<ul>
+<li>[SEQWARE-1405] - Fix the newly identified BasicDecider bugs</li>
+</ul>
+</div>
+<div class="section" id="task">
+<h3>Task</h3>
+
+<ul>
+<li>[SEQWARE-1284] - change setHeader in BasicDecider.java to something meaningful</li>
+<li>[SEQWARE-1410] - Null pointer when a directory has permission denied read access</li>
+<li>[SEQWARE-1411] - 0.13.6 Release</li>
+<li>[SEQWARE-1425] - Create unit tests for existing decider functionality</li>
+<li>[SEQWARE-1427] - Create auto-generated doc for plugins</li>
+<li>[SEQWARE-1439] - mvn clean follows the symlinks</li>
+<li>[SEQWARE-1450] - Multi-threaded WorkflowStatusChecker</li>
+<li>[SEQWARE-1451] - New WorkflowLauncher does not launch subsequent workflows if one dies while launching</li>
+</ul>
+</div>
+<div class="section" id="technical-task">
+<h3>Technical task</h3>
+
+<ul>
+<li>[SEQWARE-1447] - Update docs/spec for multi-threaded WorkflowStatusChecker</li>
+<li>[SEQWARE-1448] - Create tests for multi-threaded WorkflowStatusChecker</li>
+<li>[SEQWARE-1449] - Create multi-threaded WorkflowStatusChecker</li>
+</ul>
+</div>
+</div>
 <div class="section" id="0-13-6-2012-12-06">
 <h2>0.13.6 (2012-12-06)</h2>
 
@@ -509,7 +577,7 @@ We still have to manually delete the parent task IDs for technical tasks though.
 </div>
 <!-- ***** footer ***** -->
 <div id="footer">
-<p>SeqWare © 2007–2012 Brian O&#8217;Connor. SeqWare is released under the a <a rel="license" href="http://www.gnu.org/licenses/licenses.html">GNU GPL v3</a>. This site is built using the excellent <a href="http://nanoc.stoneship.org/">nanoc</a> tool and example site along with the <a href="http://www.fonts.info/info/press/free-fonts-for-font-face-embedding.htm">Graublau</a> and <a href="http://scripts.sil.org/Gentium">Gentium</a> fonts.</p>
+<p>SeqWare © 2007–2013 Brian O&#8217;Connor. SeqWare is released under the a <a rel="license" href="http://www.gnu.org/licenses/licenses.html">GNU GPL v3</a>. This site is built using the excellent <a href="http://nanoc.stoneship.org/">nanoc</a> tool and example site along with the <a href="http://www.fonts.info/info/press/free-fonts-for-font-face-embedding.htm">Graublau</a> and <a href="http://scripts.sil.org/Gentium">Gentium</a> fonts.</p>
 </div>
 </body>
 </html>

@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="UTF-8">
 <title>SeqWare › Developer Tutorial</title>
-<meta content="nanoc 3.4.0" name="generator">
+<meta content="nanoc 3.6.2" name="generator">
 <link href="../../../assets/style-v17.css" media="screen" rel="stylesheet" type="text/css">
 <link href="http://feeds.feedburner.com/seqware" rel="alternate" title="The SeqWare Blog" type="application/atom+xml">
 <script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script>
@@ -30,24 +30,22 @@
 <li>
 <a href="../"><span>Getting Started</span></a><ol class="toc">
 <li><a href="#by-the-end-of-this-tutorial">By the End of This Tutorial</a></li>
+<li><a href="#a-note-about-workflow-languages-engines">A Note About Workflow Languages &amp; Engines</a></li>
+<li><a href="#the-theory-beind-a-seqware-workflow-bundle">The Theory Beind a SeqWare Workflow Bundle</a></li>
 <li><a href="#first-steps">First Steps</a></li>
 <li><a href="#overview-of-workflow-development-using-the-vm">Overview of Workflow Development Using the VM</a></li>
-<li><a href="#generating-workflow-bundles">Generating Workflow Bundles</a></li>
-<li><a href="#listing-the-workflow">Listing the Workflow</a></li>
-<li><a href="#ensure-that-the-files-in-the-workflow-bin-directory-are-executable">Ensure that the files in the Workflow bin directory are executable</a></li>
-<li><a href="#test-the-myhelloworld-workflow-bundle-on-the-vm">Test the MyHelloWorld Workflow Bundle on the VM</a></li>
-<li><a href="#packaging-and-installing-the-myhelloworld-locally">Packaging and Installing the MyHelloWorld Locally</a></li>
-<li><a href="#generate-an-ini-file">Generate an ini file</a></li>
-<li><a href="#schedule-a-workflow">Schedule a workflow</a></li>
-<li><a href="#launch-a-workflow">Launch a Workflow</a></li>
-<li><a href="#monitoring-workflows">Monitoring Workflows</a></li>
-<li><a href="#final-thoughts">Final Thoughts</a></li>
+<li><a href="#creating-a-new-workflow">Creating a New Workflow</a></li>
+<li><a href="#a-tour-of-workflow-bundle-components">A Tour of Workflow Bundle Components</a></li>
+<li><a href="#modifying-the-workflow">Modifying the Workflow</a></li>
+<li><a href="#building-the-workflow">Building the Workflow</a></li>
+<li><a href="#testing-the-workflow">Testing the Workflow</a></li>
+<li><a href="#packaging-the-workflow-into-a-workflow-bundle">Packaging the Workflow into a Workflow Bundle</a></li>
 <li><a href="#next-steps">Next Steps</a></li>
 </ol>
 </li>
+<li><a href="../../6-pipeline/"><span>SeqWare Pipeline</span></a></li>
 <li><a href="../../4-metadb/"><span>SeqWare MetaDB</span></a></li>
 <li><a href="../../5-portal/"><span>SeqWare Portal</span></a></li>
-<li><a href="../../6-pipeline/"><span>SeqWare Pipeline</span></a></li>
 <li><a href="../../7-web-service/"><span>SeqWare Web Service</span></a></li>
 <li><a href="../../8-query-engine/"><span>SeqWare Query Engine</span></a></li>
 <li><a href="../../9-glossary/"><span>Glossary</span></a></li>
@@ -63,9 +61,19 @@
 <div class="header">
 <h1>Developer Tutorial</h1>
 </div>
-<p>This guide picks up where the <a href="../user-tutorial/">User Tutorial</a> left off. In that previous guide we showed you how to start up your local VM, create studies, experiments, and samples, associate an input file with a sample, and then launch a workflow to process that file.  This process is the same generic process we use at OICR to analyze samples from fastq to, eventually, annotated variants.  In this production system the workflows are fairly complex (they include branching and looping) and we string multiple worklfows together (output of one as input for the next) using <kbd>deciders</kbd>.</p>
+<p>This guide picks up where the <a href="../user-tutorial/">User
+Tutorial</a> left off. In that previous
+guide we showed you how to start up your local VM, create studies, experiments,
+and samples, associate an input file with a sample, and then launch a workflow
+to process that file.  These workflows can be complex (they include branching
+and looping) and in future tutorials you will see how to string multiple
+worklfows together (output of one as input for the next) using
+<kbd>deciders</kbd> for automation.</p>
 
-<p>The next step presented in this tutorial is to create a workflow of your own based on the HelloWorld that comes bundled with the VM.  In theory you could use either a local VM or an Amazon instance to follow the tutorial below but in our case we will base it on the local VM.</p>
+<p>In this tutorial the focus is on creating a workflow of your own based on the
+HelloWorld that comes bundled with the VM.  In theory you could use either a
+local VM or an Amazon instance to follow the tutorial below but in our case we
+will base it on the local VM.</p>
 
 <div class="section" id="by-the-end-of-this-tutorial">
 <h2>By the End of This Tutorial</h2>
@@ -74,85 +82,584 @@
 
 <ul>
 <li>create a new SeqWare Pipeline workflow bundle based on HelloWorld</li>
-  <li>package, install, schedule, and run your new workflow bundle in Pipeline and MetaDB</li>
-  <li>generate a report on the outputs of your workflows in Pipeline and Portal</li>
-  <li>be prepared to move on to more detailed documentation for each sub-project</li>
+  <li>test your workflow bundle locally</li>
+  <li>package your new workflow as a bundle for hand-off to an administrator for installation into SeqWare Pipeline </li>
 </ul>
-<p class="warning"><strong>WARNING:</strong>These directions are updated to include Maven archetypes.  The traditional maven archetypes do not mark items in the ${workflow_bundle_dir}/bin as executable.  This will cause workflows to immediatly fail and you have to &#8220;chmod&#8221; the binaries in the workflow bundles created with &#8220;mvn install&#8221;. For example &#8220;chmod -R a+x Workflow_Bundle_simple-legacy-ftl-workflow/1.0-SNAPSHOT/bin/*&#8221;.</p>
+</div>
+<div class="section" id="a-note-about-workflow-languages-engines">
+<h2>A Note About Workflow Languages &amp; Engines</h2>
+
+<p>Workflows in the SeqWarePipeline system can be written in one of three
+languages and executed in one of two cluster environments.  The most tested
+combination is <a href="http://freemarker.sourceforge.net/">FTL</a> workflows running on
+the <a href="http://pegasus.isi.edu/">Pegasus</a> workflow engine. However we have
+recently added support for workflows written in Java along with workflows
+written in a simplified FTL syntax. The latter of which is the least tested of
+the workflow languages.  Given its flexibility and power we recommend most
+users use the Java workflow language.  In addition, we have implemented a
+workflow engine for submission to Oozie (Hadoop) clusters.  This is still in
+testing so we currently recommend the Pegasus engine for the tutorials here.</p>
+
+<p><img width="600" src="../../../assets/images/seqware_hpc_oozie.png"></p>
+
+<p><strong>In this tutorial we will write a workflow using the Java Workflow Language and run it on the Pegasus Workflow Engine.</strong></p>
+
+<table>
+<thead><tr>
+<th>Workflow Language</th>
+      <th>Language Production Ready</th>
+      <th>Oozie Engine</th>
+      <th>Pegasus Engine</th>
+    </tr></thead>
+<tbody>
+<tr>
+<td>FTL</td>
+      <td>Y</td>
+      <td>N</td>
+      <td>Y</td>
+    </tr>
+<tr>
+<td>Simple Markup</td>
+      <td>N</td>
+      <td>Y</td>
+      <td>Y</td>
+    </tr>
+<tr>
+<td>Java</td>
+      <td>Y</td>
+      <td>Y</td>
+      <td><strong>Y</strong></td>
+    </tr>
+</tbody>
+</table>
+<p class="warning"><strong>Tip:</strong> 
+In the future the Oozie engine will provide a very powerful way to combine traditional
+NGS analysis tools with tools designed to run in a Hadoop environment so much of
+our current development focuses on this new engine.</p>
+
+</div>
+<div class="section" id="the-theory-beind-a-seqware-workflow-bundle">
+<h2>The Theory Beind a SeqWare Workflow Bundle</h2>
+
+<p>In many workflow environments the concept of a workflow is encoded as a simple
+XML markup file that defines a series of steps, data inputs, etc. This may be
+interpreted by a user interface of some sort, e.g. a drag-n-drop workflow
+creation tool. These workflow systems tend to treat workflows as very
+light-weigh representations of steps.  One problem with this lightweight
+approach is depdendenices for steps in the workflow, such as genome indexes for
+an aligner, are often times treated as parameters and are not managed by the
+workflow system.  SeqWare’s concept of a workflow is much more akin to a Linux
+distribution package (like RPM or DEB files) in which all necessary components
+are packaged inside a single binary file. In SeqWare we use Zip64 files to
+group the workflow definition file, workflow itself, sample settings, and data
+dependencies in a single file that can be exchanged between SeqWare users or
+archived. This allows SeqWare bundles to be much more portable that lightweigh
+workflows that reference external tools and data. Being self-contained is at
+the core of the design goals for SeqWare bundles with the expense of often
+times large workflow bundle sizes.</p>
 
 </div>
 <div class="section" id="first-steps">
 <h2>First Steps</h2>
 
-<p>Please launch your local VM in VirtualBox and login as user <kbd>seqware</kbd>, password <kbd>seqware</kbd> at this time. Click on the “SeqWare Directory” link on the desktop which will open a terminal to the location where we installed the SeqWare tools. </p>
+<p>Please launch your local VM in VirtualBox and login as user <kbd>seqware</kbd>,
+password <kbd>seqware</kbd> at this time. Click on the “SeqWare Directory” link
+on the desktop which will open a terminal to the location where we installed
+the SeqWare tools. </p>
 
 </div>
 <div class="section" id="overview-of-workflow-development-using-the-vm">
 <h2>Overview of Workflow Development Using the VM</h2>
 
-<p>You should be in the ~seqware/SeqWare directory now, this is
-the working directory.  Notice there is a jar file here and also two important
-directories: provisioned-bundles which contains unzipped workflow bundles and
-is where you will work on new bundles and released-bundles (SW_BUNDLE_REPO_DIR
-in the config) which contains zip versions of the workflows that you create
-when you package up these bundles and install them locally or on the cloud. You
-will work in provisioned-bundles, copying a template HelloWorld workflow to a
-new bundle that you can modify You will also test your bundles from there as
-well. Once you finish with the new bundle you will package and install it via
-the web service (to either the remote cloud VM or local VM). Once
-installed you can use the workflow scheduling tools you have used before to
-trigger workflows (on the cloud or the local VM), monitor them, and get data
-back.</p>
+<p>You should be in the /home/seqware/SeqWare directory now, this is the working
+directory.  Notice there is a jar file here and also two important directories:
+provisioned-bundles (SW_BUNDLE_DIR in the config) which contains unzipped
+workflow bundles and is where you will work on new bundles and released-bundles
+(SW_BUNDLE_REPO_DIR in the config) which contains zip versions of the workflows
+that you create when you package up these bundles and install them.</p>
 
-<p>Please note that the parent of this directory also contains a copy of the SeqWare source code retrieved via the procedure in <a href="../../13-code/">source code</a>.</p>
+<p>There are two ways to create a new workflow, the first is simply to copy an
+existing workflow bundle from provisioned-bundles, rename it, and modify the
+workflow to meet your needs. The second is using <a href="http://maven.apache.org/guides/introduction/introduction-to-archetypes.html">Maven
+Archetypes</a>,
+a template system which generates a workflow skeleton making it fast and easy
+to get started with workflow development. In this tutorial we will use the
+Maven Archetypes system here since it is fast and easy. We will also test the
+new bundle and, once you finish, we will package it up, ready for handoff to an
+admin that will install it in the SeqWare system so users can run it.</p>
 
-<p>First, build SeqWare and then copy the distribution jar to your home and name it somethign convenient. </p>
+<div class="section" id="common-steps">
+<h3>Common Steps</h3>
 
-<pre><code>cd ~/seqware-github-development/
-cp seqware-distribution/target/seqware-distribution-0.13.6-SNAPSHOT-full.jar ~/seqware-full.jar
+<p>Most workflow developers follow a similar series of steps when developing new workflows. Generally one goes through the following process:</p>
+
+<ul>
+<li>
+    <dl>
+<dt>Plan your workflow</dt>
+      <dd>Most developers are bioinformaticists and will spend some time exploring the tools and algorithms they want to use in this workflow and decide what problems their workflow is trying to solve.</dd>
+    </dl>
+</li>
+  <li>
+    <dl>
+<dt>Find your tools and sample data</dt>
+      <dd>Tools are collected, synthetic or real test datasets are prepared, prototyping is done</dd>
+    </dl>
+</li>
+  <li>
+    <dl>
+<dt>Make and test the workflow</dt>
+      <dd>The developer writes and test the workflow both with bundled test data and real data locally and on a cluster or cloud resource</dd>
+    </dl>
+</li>
+  <li>
+    <dl>
+<dt>Packaging and handoff</dt>
+      <dd>The developer zips up the finished workflow and hands off to an admin that installs the workflow so users can use it</dd>
+    </dl>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="creating-a-new-workflow">
+<h2>Creating a New Workflow</h2>
+
+<p>The SeqWare workflow archetype allows workflow developers to quickly create new
+workflows. The Maven archetypes generate skeletons that contain a simple
+example program that can be modified to create a new workflow. The archetypes
+also take parameters prior to skeleton generation that allow the name of the
+workflow to be specified and all configuration files to adjusted with respect
+to these parameters.</p>
+
+<p>The code generated by the archetype contains all the necessary files to
+generate a complete workflow bundle when the <tt>mvn install</tt> command is
+issued. This command will combine the workflow definition, the config file, the Java workflow file, and
+other external dependencies pulled in by Maven to create a complete
+workflow bundle. This makes the code  generated by the archetype ideal to place
+under version control. As maintenance changes are made to the Java file or any
+other aspect of the workflow, these files can be updated and a new workflow
+reflecting these changes can be generated by re-issuing the  <tt>mvn
+install</tt> command.</p>
+
+<p>The first step to get started is to generate your workflow skeleton using Maven
+archetypes. You will want to do this in a directory without pom.xml files (i.e.
+outside of the SeqWare development directories).  Here we are working in the provisioned-bundles directory:</p>
+
+<pre><code>cd /home/seqware/SeqWare
+cd provisioned-bundles 
+mvn archetype:generate
+...
+720: local -&gt; com.github.seqware:seqware-archetype-decider (SeqWare Java Decider archetype)
+721: local -&gt; com.github.seqware:seqware-archetype-java-workflow (SeqWare Java workflow archetype)
+722: local -&gt; com.github.seqware:seqware-archetype-simplified-ftl-workflow (SeqWare FTL workflow archetype)
+723: local -&gt; com.github.seqware:seqware-archetype-module (SeqWare module archetype)
+724: local -&gt; com.github.seqware:seqware-archetype-legacy-ftl-workflow (SeqWare workflow legacy ftl archetype)
+725: local -&gt; com.github.seqware:seqware-archetype-simple-legacy-ftl-workflow (A very simple SeqWare legacy ftl workflow archetype)
+# select 721 above, the "SeqWare Java workflow archetype"
+# use HelloWorld as the name of your workflow and use the default workflow version
+cd HelloWorld
+mvn install
+cd target/Workflow_Bundle_HelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.5/
 </code></pre>
 
+<p>The numbers used to identify  the archetypes (720 through 725) will vary
+depending on what you have installed, so you will need to scan through the list
+to find the SeqWare archetype you are looking for, in this case “SeqWare Java workflow archetype”.</p>
+
+<p>In this example, one would chose 721, the template for workflow using Java
+objects.  Then use “HelloWorld” as the artifactId.  You may wish to change the
+version number for your workflow but the defaults for the remaining questions
+should be fine.</p>
+
 </div>
-<div class="section" id="generating-workflow-bundles">
-<h2>Generating Workflow Bundles</h2>
+<div class="section" id="a-tour-of-workflow-bundle-components">
+<h2>A Tour of Workflow Bundle Components</h2>
 
-<p>Generate your workflow bundles using Maven archetypes. </p>
+<p>In this section we will examine the internals of the Workflow Bundle that was just generated.
+The first thing you should do is take a look at the workflow mainifest showing which workflows
+are present in this bundle (a single Workflow Bundle can contain many workflows).
+Notice in the command below that we use the SeqWare jar from <strong>inside</strong> the workflow bundle. This
+ensures we are using the version of SeqWare this bundle was built with which minimize incompatibility issues.</p>
 
-<pre><code>mvn archetype:generate
-# 690: local -&gt; com.github.seqware:seqware-archetype-simple-legacy-ftl-workflow (A very simple SeqWare legacy ftl workflow archetype)
-</code></pre>
-
-</div>
-<div class="section" id="listing-the-workflow">
-<h2>Listing the Workflow</h2>
-
-<pre><code>seqware@seqwarevm Workflow_Bundle_workflow-hello-simple-legacy-ftl-workflow]$ java -jar ~/seqware-github-development/seqware-distribution/target.jar -p net.sourceforge.seqware.pipeline.plugins.BundleManager -- -l -b `pwd`
+<pre>
+java -jar Workflow_Bundle_HelloWorld/1.0-SNAPSHOT/lib/seqware-distribution-0.13.6.5-full.jar  -p net.sourceforge.seqware.pipeline.plugins.BundleManager -- -l -b `pwd`
 
 Running Plugin: net.sourceforge.seqware.pipeline.plugins.BundleManager
-Setting Up Plugin: net.sourceforge.seqware.pipeline.plugins.BundleManager@25595f51
+Setting Up Plugin: net.sourceforge.seqware.pipeline.plugins.BundleManager@630045eb
 
 List Workflows:
 
  Workflow:
-  Name : hello
-  Version : 1.0
+  Name : HelloWorld
+  Version : 1.0-SNAPSHOT
   Description : Add a description of the workflow here.
-  Test Command: java -jar ${workflow_bundle_dir}/Workflow_Bundle_workflow-hello-simple-legacy-ftl-workflow/1.0-SNAPSHOT/lib/seqware-distribution-0.13.3-full.jar --plugin net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher -- --no-metadata --provisioned-bundle-dir ${workflow_bundle_dir} --workflow hello --version 1.0 --ini-files ${workflow_bundle_dir}/Workflow_Bundle_workflow-hello-simple-legacy-ftl-workflow/1.0-SNAPSHOT/config/workflow.ini
-  Template Path:${workflow_bundle_dir}/Workflow_Bundle_workflow-hello-simple-legacy-ftl-workflow/1.0-SNAPSHOT/workflows/workflow.ftl
-  Config Path:${workflow_bundle_dir}/Workflow_Bundle_workflow-hello-simple-legacy-ftl-workflow/1.0-SNAPSHOT/config/workflow.ini
+  Test Command: java -jar ${workflow_bundle_dir}/Workflow_Bundle_HelloWorld/1.0-SNAPSHOT/lib/seqware-distribution-0.13.6.5-full.jar --plugin net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher -- --no-metadata --provisioned-bundle-dir ${workflow_bundle_dir} --workflow HelloWorld --version 1.0-SNAPSHOT --ini-files ${workflow_bundle_dir}/Workflow_Bundle_HelloWorld/1.0-SNAPSHOT/config/workflow.ini
+  Template Path:
+  Config Path:${workflow_bundle_dir}/Workflow_Bundle_HelloWorld/1.0-SNAPSHOT/config/workflow.ini
   Requirements Compute: single Memory: 20M Network: local
-</code></pre>
+</pre>
+
+<p>This shows one workflow in the generated workflow bundle.</p>
+
+<div class="section" id="directory-organization">
+<h3>Directory Organization</h3>
+
+<p>The directory structure created by the maven archetype includes a
+<tt>pom.xml</tt> file which is our Maven build file, a <tt>src</tt> directory
+which contains the Java workflow, and a workflow directory that contains any
+bundled data, the basic workflow config file which includes all the paramters
+this workflow accepts, the metadata.xml which defines the workflows available
+in this bundle, and any scripts, binaries, or libraries your workflow needs (in
+bin and lib respectively).</p>
+
+<p>When you issue the <tt>mvn install</tt> command the target direct is created
+which contains the compiled workflow along with the various necessary files all
+correctly assembled in the proper directory structure.  You can change
+directory to the workflow target directory (in this case
+<tt>target/Workflow_Bundle_HelloWorld<em>1.0-SNAPSHOT_SeqWare</em>0.13.6.5</tt> and
+run the workflow in test mode or package up the workflow as a zip file for
+exchange with others. Both topics are covered later in this tutorial.</p>
+
+<p>The Maven archetype workflows are quite nice, too, since it is easy to check in
+everything but the target directory into source control like git or subversion.
+This makes it a lot easier to share the development of workflows between
+developers.</p>
+
+<pre>
+|-- pom.xml
+|-- src
+|   `-- main
+|       `-- java
+|           `-- com
+|               `-- github
+|                   `-- seqware
+|                       `-- WorkflowClient.java
+|-- target
+|   `-- Workflow_Bundle_HelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.5
+|       `-- Workflow_Bundle_HelloWorld
+|           `-- 1.0-SNAPSHOT
+|               |-- bin
+|               |-- classes
+|               |   `-- com
+|               |       `-- github
+|               |           `-- seqware
+|               |               `-- WorkflowClient.class
+|               |-- config
+|               |   `-- workflow.ini
+|               |-- data
+|               |   `-- input.txt
+|               |-- lib
+|               |   `-- seqware-distribution-0.13.6.5-full.jar
+|               `-- metadata.xml
+|-- workflow
+|   |-- config
+|   |   `-- workflow.ini
+|   |-- data
+|   |   `-- input.txt
+|   |-- lib
+|   |-- metadata.xml
+|   `-- workflows
+`-- workflow.properties
+</pre>
+
+<p>Here are some additional details about these files:</p>
+
+<ul>
+<li>
+    <dl>
+<dt>pom.xml</dt>
+      <dd>A maven project file. Edit this to change the version of the workflow and to add or modify workflow dependencies such as program, modules and data.</dd>
+    </dl>
+</li>
+  <li>
+    <dl>
+<dt>workflow</dt>
+      <dd>This directory contains the workflow skeleton. Look in here to modify the workflow .ini, .java files (Java workflow) or workflow.ftl(FTL workflow). The examples of Java and FTL can be found <a href="../../15-workflow-examples/">here</a>.</dd>
+    </dl>
+</li>
+  <li>
+    <dl>
+<dt>src </dt>
+      <dd>This directory contains the Java client. Look in here to modify the .java files (Java workflow). The examples of Java and FTL can be found <a href="../../15-workflow-examples/">here</a>.</dd>
+    </dl>
+</li>
+  <li>
+    <dl>
+<dt>workflow.properties</dt>
+      <dd>You can edit the description and workflow names in this file.</dd>
+    </dl>
+</li>
+</ul>
+</div>
+<div class="section" id="workflow-manifest">
+<h3>Workflow Manifest</h3>
+
+<p>The workflow manifest (<tt>metadata.xml</tt>) includes the workflow name,
+version, description, test command, and enough information so that the SeqWare
+tools can test, execute, and install the workflow. Here is an example from the
+HelloWorld workflow:</p>
+
+<div class="CodeRay"><div class="code"><pre><code class="language-xml"><span class="tag">&lt;bundle</span> <span class="attribute-name">version</span>=<span class="string"><span class="delimiter">"</span><span class="content">1.0-SNAPSHOT</span><span class="delimiter">"</span></span><span class="tag">&gt;</span>
+  <span class="tag">&lt;workflow</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">"</span><span class="content">HelloWorld</span><span class="delimiter">"</span></span> <span class="attribute-name">version</span>=<span class="string"><span class="delimiter">"</span><span class="content">1.0-SNAPSHOT</span><span class="delimiter">"</span></span> <span class="attribute-name">seqware_version</span>=<span class="string"><span class="delimiter">"</span><span class="content">0.13.6.5</span><span class="delimiter">"</span></span>
+  <span class="attribute-name">basedir</span>=<span class="string"><span class="delimiter">"</span><span class="content">${workflow_bundle_dir}/Workflow_Bundle_HelloWorld/1.0-SNAPSHOT</span><span class="delimiter">"</span></span><span class="tag">&gt;</span>
+    <span class="tag">&lt;description&gt;</span>Add a description of the workflow here.<span class="tag">&lt;/description&gt;</span>
+    <span class="tag">&lt;test</span> <span class="attribute-name">command</span>=<span class="string"><span class="delimiter">"</span><span class="content">java -jar ${workflow_bundle_dir}/Workflow_Bundle_HelloWorld/1.0-SNAPSHOT/lib/seqware-distribution-0.13.6.5-full.jar --plugin net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher -- --no-metadata --provisioned-bundle-dir ${workflow_bundle_dir} --workflow HelloWorld --version 1.0-SNAPSHOT --ini-files ${workflow_bundle_dir}/Workflow_Bundle_HelloWorld/1.0-SNAPSHOT/config/workflow.ini </span><span class="delimiter">"</span></span><span class="tag">/&gt;</span>
+    <span class="tag">&lt;workflow_command</span> <span class="attribute-name">command</span>=<span class="string"><span class="delimiter">"</span><span class="content">java -jar ${workflow_bundle_dir}/Workflow_Bundle_HelloWorld/1.0-SNAPSHOT/lib/seqware-distribution-0.13.6.5-full.jar --plugin net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher -- --bundle ${workflow_bundle_dir} --workflow HelloWorld --version 1.0-SNAPSHOT </span><span class="delimiter">"</span></span><span class="tag">/&gt;</span>
+    <span class="tag">&lt;workflow_template</span> <span class="attribute-name">path</span>=<span class="string"><span class="delimiter">"</span><span class="delimiter">"</span></span><span class="tag">/&gt;</span>
+    <span class="tag">&lt;workflow_class</span> <span class="attribute-name">path</span>=<span class="string"><span class="delimiter">"</span><span class="content">${workflow_bundle_dir}/Workflow_Bundle_HelloWorld/1.0-SNAPSHOT/classes/com/github/seqware/WorkflowClient.java</span><span class="delimiter">"</span></span><span class="tag">/&gt;</span>
+    <span class="tag">&lt;config</span> <span class="attribute-name">path</span>=<span class="string"><span class="delimiter">"</span><span class="content">${workflow_bundle_dir}/Workflow_Bundle_HelloWorld/1.0-SNAPSHOT/config/workflow.ini</span><span class="delimiter">"</span></span><span class="tag">/&gt;</span>
+    <span class="tag">&lt;build</span> <span class="attribute-name">command</span>=<span class="string"><span class="delimiter">"</span><span class="content">ant -f ${workflow_bundle_dir}/Workflow_Bundle_HelloWorld/1.0-SNAPSHOT/build.xml</span><span class="delimiter">"</span></span><span class="tag">/&gt;</span>
+    <span class="tag">&lt;requirements</span> <span class="attribute-name">compute</span>=<span class="string"><span class="delimiter">"</span><span class="content">single</span><span class="delimiter">"</span></span> <span class="attribute-name">memory</span>=<span class="string"><span class="delimiter">"</span><span class="content">20M</span><span class="delimiter">"</span></span> <span class="attribute-name">network</span>=<span class="string"><span class="delimiter">"</span><span class="content">local</span><span class="delimiter">"</span></span>  <span class="attribute-name">workflow_engine</span>=<span class="string"><span class="delimiter">"</span><span class="content">Pegasus,Oozie</span><span class="delimiter">"</span></span> <span class="attribute-name">workflow_type</span>=<span class="string"><span class="delimiter">"</span><span class="content">java</span><span class="delimiter">"</span></span><span class="tag">/&gt;</span>
+  <span class="tag">&lt;/workflow&gt;</span>
+<span class="tag">&lt;/bundle&gt;</span></code></pre></div></div>
+
+<p>As mentioned above, you can edit the description and workflow name in the workflow.properties file.</p>
 
 </div>
-<div class="section" id="ensure-that-the-files-in-the-workflow-bin-directory-are-executable">
-<h2>Ensure that the files in the Workflow bin directory are executable</h2>
+<div class="section" id="workflow-java-class">
+<h3>Workflow Java Class</h3>
 
-<pre><code>chmod -R a+x Workflow_Bundle_simple-legacy-ftl-workflow/1.0-SNAPSHOT/bin/*
-</code></pre>
+<p>You can see the full Java workflow source code by looking at <a href="../../15-workflow-examples/">Workflow
+Examples</a> or, in this case, just the
+<tt>WorkflowClient.java</tt> file produced by the Maven Archetype above.</p>
+
+<p>This Java class is pretty simple in its construction. It is used to define
+input and output files along with the individual steps in the workflow and how
+they relate to each other.  It is used to create a workflow object model which
+is then handed of to a workflow engine that knows how to turn that into a
+directed acyclic graph of jobs that can run on a cluster (local VM, an HPC
+cluster, a cloud-based cluster, etc).</p>
+
+<div class="section" id="files">
+<h4>Files</h4>
+
+<div class="CodeRay"><div class="code"><pre>
+<code class="language-java">    <span class="annotation">@Override</span>
+    <span class="directive">public</span> <span class="predefined-type">Map</span>&lt;<span class="predefined-type">String</span>, SqwFile&gt; setupFiles() {
+        SqwFile file0 = <span class="local-variable">this</span>.createFile(<span class="string"><span class="delimiter">"</span><span class="content">file_in_0</span><span class="delimiter">"</span></span>);
+        file0.setSourcePath(<span class="local-variable">this</span>.getWorkflowBaseDir()+<span class="string"><span class="delimiter">"</span><span class="content">/data/input.txt</span><span class="delimiter">"</span></span>);
+        file0.setType(<span class="string"><span class="delimiter">"</span><span class="content">text/plain</span><span class="delimiter">"</span></span>);
+        file0.setIsInput(<span class="predefined-constant">true</span>);
+
+        SqwFile file1 = <span class="local-variable">this</span>.createFile(<span class="string"><span class="delimiter">"</span><span class="content">file_out</span><span class="delimiter">"</span></span>);
+        file1.setSourcePath(<span class="string"><span class="delimiter">"</span><span class="content">dir1/output</span><span class="delimiter">"</span></span>);
+        file1.setType(<span class="string"><span class="delimiter">"</span><span class="content">text/plain</span><span class="delimiter">"</span></span>);
+        file1.setIsOutput(<span class="predefined-constant">true</span>);
+        file1.setForceCopy(<span class="predefined-constant">true</span>);
+
+        <span class="keyword">return</span> <span class="local-variable">this</span>.getFiles();
+    }</code>
+</pre></div></div>
+
+<p>This method sets up files that are inputs and/or outputs for this workflow.  In
+this example the input <tt>data/input.txt</tt> comes from the workflow bundle
+itself. The ultimate location of the output file is determined by two
+parameters passed into the WorkflowLaucher which actually runs the workflow:
+<tt>–metadata-output-file-prefix</tt> and <tt>–metadata-output-dir</tt>.</p>
 
 </div>
-<div class="section" id="test-the-myhelloworld-workflow-bundle-on-the-vm">
-<h2>Test the MyHelloWorld Workflow Bundle on the VM</h2>
+<div class="section" id="directories">
+<h4>Directories</h4>
+
+<div class="CodeRay"><div class="code"><pre>
+<code class="language-java">    <span class="annotation">@Override</span>
+    <span class="directive">public</span> <span class="type">void</span> setupDirectory() {
+        <span class="local-variable">this</span>.addDirectory(<span class="string"><span class="delimiter">"</span><span class="content">dir1</span><span class="delimiter">"</span></span>);
+    }</code>
+</pre></div></div>
+
+<p>This method sets up directories in the working directory that the workflow run in. In this case the workflow creates a directory called “dir1”.</p>
+
+</div>
+<div class="section" id="workflow-steps">
+<h4>Workflow Steps</h4>
+
+<div class="CodeRay"><div class="code"><pre>
+<code class="language-java">    <span class="annotation">@Override</span>
+    <span class="directive">public</span> <span class="type">void</span> buildWorkflow() {
+        Job job00 = <span class="local-variable">this</span>.getWorkflow().createBashJob(<span class="string"><span class="delimiter">"</span><span class="content">bash_mkdir</span><span class="delimiter">"</span></span>);
+        job00.getCommand().addArgument(<span class="string"><span class="delimiter">"</span><span class="content">mkdir test1</span><span class="delimiter">"</span></span>);
+
+        Job job10 = <span class="local-variable">this</span>.getWorkflow().createBashJob(<span class="string"><span class="delimiter">"</span><span class="content">bash_cp</span><span class="delimiter">"</span></span>);
+        job10.setCommand(<span class="string"><span class="delimiter">"</span><span class="content">cp </span><span class="delimiter">"</span></span> + <span class="local-variable">this</span>.getFiles().get(<span class="string"><span class="delimiter">"</span><span class="content">file_in_0</span><span class="delimiter">"</span></span>).getProvisionedPath() + <span class="string"><span class="delimiter">"</span><span class="content"> test1</span><span class="delimiter">"</span></span>);
+        job10.addParent(job00);
+
+        Job job11 = <span class="local-variable">this</span>.getWorkflow().createBashJob(<span class="string"><span class="delimiter">"</span><span class="content">bash_cp</span><span class="delimiter">"</span></span>);
+        job11.setCommand(<span class="string"><span class="delimiter">"</span><span class="content">cp </span><span class="delimiter">"</span></span> + <span class="local-variable">this</span>.getFiles().get(<span class="string"><span class="delimiter">"</span><span class="content">file_in_0</span><span class="delimiter">"</span></span>).getProvisionedPath() + <span class="string"><span class="delimiter">"</span><span class="content"> dir1/output</span><span class="delimiter">"</span></span>);
+        job11.addParent(job00);
+
+
+    }</code>
+</pre></div></div>
+
+<p>In this buildWorkflow() method three jobs are created.  You can see that the
+<tt>createBashJob</tt> can be used to run any arbitrary command. In the future
+we will add more job types (such as Map/Reduce for the Oozie engine).  Each
+child job is linked to its parent using the <tt>addParent</tt> method.  This
+information is enough to correctly schedule these jobs and run them in the
+correct order locally on the VM, on an HPC cluster, or on the cloud.  The more
+detailed Pipeline documentation will cover optional useful job methods
+including examples of how to control memory requirements for particular jobs.</p>
+
+<p class="warning"><strong>Tip:</strong>
+It can be confusing at first but there are two directories to think about when
+working with workflows.  The first is the ${workflow_bundle_dir} which is the
+location where the workflow bundle has been unzipped. This variable can be used
+both in the Java object (via the getWorkflowBaseDir() method) and the various
+config and metadata files (via ${workflow_bundle_dir}). You use this to access
+the location of data and other file types that you have included in the
+workflow bundle.  The second directory is the current working directory that
+your workflow steps will be executed in. This is a directory created at runtime
+by the underlying workflow engine and is shared for all steps in your workflow.
+You can use this as your temporary directory to process intermediate files.
+</p>
+
+</div>
+</div>
+<div class="section" id="configuration-file">
+<h3>Configuration File</h3>
+
+<pre>
+<code>
+# key=input_file:type=file:display=F:file_meta_type=text/plain
+input_file=${workflow_bundle_dir}/Workflow_Bundle_${workflow-directory-name}/${version}/data/input.txt
+# key=greeting:type=text:display=T:display_name=Greeting
+greeting=Testing
+# this is just a comment, the output directory is a conventions and used in many workflows to specify a relative output path
+output_dir=seqware-results
+# the output_prefix is a convension and used to specify the root of the absolute output path or an S3 bucket name 
+# you should pick a path that is available on all custer nodes and can be written by your user
+output_prefix=./
+</code>
+</pre>
+
+<p>This is the workflow.ini file and contains </p>
+
+<p>You access these variables in the Java workflow using the <tt>getProperty()</tt> method. When installing the workflow the ini file is parsed and extra metadata about each parameter is examined. This gives the system information about the type of the variable (integer, string, etc) and any default values.</p>
+
+<p>The ini file(s) follow the general pattern of:</p>
+
+<pre>
+# comment/specification
+key=value
+</pre>
+
+<p>To achieve this overloaded role for ini files you need to include hints to ensure the BundleManager that installs workflow bundles has enough information. Here is what the annotation syntax looks like:</p>
+
+<pre><code># key=&lt;name&gt;:type=[integer|float|text|pulldown|file]:display=[T|F][:display_name=&lt;name_to_display&gt;][:file_meta_type=&lt;mime_meta_type&gt;][:pulldown_items=&lt;key1&gt;|&lt;value1&gt;;&lt;key2&gt;|&lt;value2&gt;]
+key=default_value
+</code></pre>
+
+<p>The file_meta_type is only used for type=file. </p>
+
+<p>The pulldown type means that the pulldown_items should be defined as well. This looks like:</p>
+
+<pre><code>pulldown_items=&lt;key1&gt;|&lt;value1&gt;;&lt;key2&gt;|&lt;value2&gt;
+</code></pre>
+
+<p>The default value for this will refer to either value1 or value2 above.
+If you fail to include a metadata line for a particular key/value then it’s assumed to be:</p>
+
+<pre><code>key=&lt;name&gt;:type=text:display=F
+</code></pre>
+
+<p>This is convenient since many of the values in an INI file should not be displayed to the end user.</p>
+
+</div>
+<div class="section" id="common-variables">
+<h3>Common Variables</h3>
+
+<p>There are several variables that you will see in various files, including the config ini file and <tt>metadata.xml</tt> file.</p>
+
+<ul>
+<li>
+    <p>${date}: a string representing the date the DAX was created, this is always defined so consider this a reserved variable name. </p>
+  </li>
+  <li>
+    <p>${random}: a randomly generated string, this is always defined so consider this a reserved variable name. </p>
+  </li>
+  <li>
+    <p>${workflow_bundle_dir}: if this workflow is part of a workflow bundle this variable will be defined and points to the path of the root of the directory this workflow bundle has been expanded to.</p>
+  </li>
+  <li>
+    <p>${workflow_base_dir}: ${workflow_bundle_dir}/Workflow_Bundle_{workflow_name}/{workflow_version}. This is really used in a ton of places since we need a variable that points to the install location for the bundle since we cannot hard code this.</p>
+  </li>
+</ul>
+</div>
+</div>
+<div class="section" id="modifying-the-workflow">
+<h2>Modifying the Workflow</h2>
+
+<p>At this point, one would normally want to edit the workflow by modifying the WorkflowClient.java file as is appropriate for the workflow.
+In the example below I just added an extra job that does a simple shell operation (job12).</p>
+
+<div class="CodeRay"><div class="code"><pre>
+<code class="language-java">    <span class="annotation">@Override</span>
+    <span class="directive">public</span> <span class="type">void</span> buildWorkflow() {
+        Job job00 = <span class="local-variable">this</span>.getWorkflow().createBashJob(<span class="string"><span class="delimiter">"</span><span class="content">bash_mkdir</span><span class="delimiter">"</span></span>);
+        job00.getCommand().addArgument(<span class="string"><span class="delimiter">"</span><span class="content">mkdir test1</span><span class="delimiter">"</span></span>);
+
+        Job job10 = <span class="local-variable">this</span>.getWorkflow().createBashJob(<span class="string"><span class="delimiter">"</span><span class="content">bash_cp</span><span class="delimiter">"</span></span>);
+        job10.setCommand(<span class="string"><span class="delimiter">"</span><span class="content">cp </span><span class="delimiter">"</span></span> + <span class="local-variable">this</span>.getFiles().get(<span class="string"><span class="delimiter">"</span><span class="content">file_in_0</span><span class="delimiter">"</span></span>).getProvisionedPath() + <span class="string"><span class="delimiter">"</span><span class="content"> test1</span><span class="delimiter">"</span></span>);
+        job10.addParent(job00);
+
+        Job job11 = <span class="local-variable">this</span>.getWorkflow().createBashJob(<span class="string"><span class="delimiter">"</span><span class="content">bash_cp</span><span class="delimiter">"</span></span>);
+        job11.setCommand(<span class="string"><span class="delimiter">"</span><span class="content">cp </span><span class="delimiter">"</span></span> + <span class="local-variable">this</span>.getFiles().get(<span class="string"><span class="delimiter">"</span><span class="content">file_in_0</span><span class="delimiter">"</span></span>).getProvisionedPath() + <span class="string"><span class="delimiter">"</span><span class="content"> dir1/output</span><span class="delimiter">"</span></span>);
+        job11.addParent(job00);
+
+        Job job12 = <span class="local-variable">this</span>.getWorkflow().createBashJob(<span class="string"><span class="delimiter">"</span><span class="content">bash_date</span><span class="delimiter">"</span></span>);
+        job12.setCommand(<span class="string"><span class="delimiter">"</span><span class="content">date &gt; dir1/time</span><span class="delimiter">"</span></span>);
+        job12.addParent(job11);
+    }</code>
+</pre></div></div>
+
+</div>
+<div class="section" id="building-the-workflow">
+<h2>Building the Workflow</h2>
+
+<p>If you made changes to the workflow files now would be a good time to to use
+“mvn install” to refresh the workflow bundle in the target directory. For
+example:</p>
+
+<pre><code>    [seqware@seqwarevm maven-bundles]$ cd helloworld/
+    [seqware@seqwarevm helloworld]$ mvn install
+    [INFO] Scanning for projects...                                                                                       
+    [INFO] ------------------------------------------------------------------------                                       
+    [INFO] Building seqware-workflow                                                                                      
+    [INFO]    task-segment: [install]                                                                                     
+    [INFO] ------------------------------------------------------------------------                                       
+    [INFO] [properties:read-project-properties {execution: properties-maven-plugin-execution}]                            
+    [debug] execute contextualize                                                                                         
+    [INFO] [resources:copy-resources {execution: copy-resources}]                                                         
+    [INFO] Using 'UTF-8' encoding to copy filtered resources.                                                             
+    [INFO] Copying 3 resources                                                                                            
+    [debug] execute contextualize                                                                                         
+    [INFO] [resources:resources {execution: default-resources}]                                                           
+    [INFO] Using 'UTF-8' encoding to copy filtered resources.    
+    ...
+    main:
+    [INFO] Executed tasks
+    [INFO] [antrun:run {execution: chmod-perl}]
+    [INFO] Executing tasks
+
+    main:
+    [INFO] Executed tasks
+    [INFO] ------------------------------------------------------------------------
+    [INFO] BUILD SUCCESSFUL
+    [INFO] ------------------------------------------------------------------------
+    [INFO] Total time: 26 seconds
+    [INFO] Finished at: Fri Nov 23 14:48:15 EST 2012
+    [INFO] Final Memory: 67M/423M
+    [INFO] ------------------------------------------------------------------------
+</code></pre>
+
+<p>The next step is to look at examples of workflows at <a href="../../15-workflow-examples/">Workflow Examples</a>.</p>
+
+</div>
+<div class="section" id="testing-the-workflow">
+<h2>Testing the Workflow</h2>
+
+<p>SeqWare bundles have a test command built into their metadata.xml. In order to trigger this, run with the following command. Note that the workflow name and version need to match the name and version given when the workflow is listed above. </p>
 
 <pre><code>java -jar ~/seqware-full.jar -p net.sourceforge.seqware.pipeline.plugins.BundleManager -- -b `pwd` -t --workflow simple-legacy-ftl-workflow --version 1.0
 
@@ -164,169 +671,42 @@ java -jar /home/seqware/Temp/simple-legacy-ftl-workflow/target/Workflow_Bundle_s
 MONITORING PEGASUS STATUS:
 RUNNING: step 1 of 5 (20%)
 RUNNING: step 2 of 5 (40%)
+...
 </code></pre>
 
 </div>
-<div class="section" id="packaging-and-installing-the-myhelloworld-locally">
-<h2>Packaging and Installing the MyHelloWorld Locally</h2>
+<div class="section" id="packaging-the-workflow-into-a-workflow-bundle">
+<h2>Packaging the Workflow into a Workflow Bundle</h2>
 
-<p>Assuming the workflow above worked fine the next step is to install it locally,
-this means it will be inserted into the MetaDB via the locally running web
-service.  During this process it will zip up the workflow bundle and put it
-into your released-bundles directory. Once you have the zip file you can share it with
-other users and, in the future, upload it to an AppStore to make it even easier to share.</p>
+<p>Assuming the workflow above worked fine the next step is to package it.</p>
 
-<p>Here is an example showing how this
-process works on the VM and what is happening in the database and your
-released-bundles directory as you do this.  You may want to delete the zip file
-that is in the released-bundles directory before you do this step below (or back
-it up somewhere first).  To connect to the database in the example below you
-can issue the following command in the terminal:</p>
-
-<pre><code>psql -U seqware -W seqware_meta_db
-</code></pre>
-
-<p>…with password <code>seqware</code>.</p>
-
-<pre><code>seqware@seqwarevm Workflow_Bundle_hello_1.0-SNAPSHOT_SeqWare_0.13.3]$ java -jar ~/seqware-full.jar -p net.sourceforge.seqware.pipeline.plugins.BundleManager -- -b `pwd` -i
+<pre><code>[seqware@seqwarevm Workflow_Bundle_SampleJavaWorkflow_1.0-SNAPSHOT_SeqWare_0.13.6.3]$ mkdir packaged
+[seqware@seqwarevm Workflow_Bundle_SampleJavaWorkflow_1.0-SNAPSHOT_SeqWare_0.13.6.3]$  java -jar ~/Development/gitroot/seqware-github/seqware-distribution/target/seqware-distribution-0.13.6.5-full.jar -p net.sourceforge.seqware.pipeline.plugins.BundleManager -- --b packaged -p `pwd`
 Running Plugin: net.sourceforge.seqware.pipeline.plugins.BundleManager
-Setting Up Plugin: net.sourceforge.seqware.pipeline.plugins.BundleManager@2b5ac3c9
-Installing Bundle
-Bundle: /home/seqware/Temp/workflow-hello-simple-legacy-ftl-workflow/target/Workflow_Bundle_hello_1.0-SNAPSHOT_SeqWare_0.13.3
-Now packaging /home/seqware/Temp/workflow-hello-simple-legacy-ftl-workflow/target/Workflow_Bundle_hello_1.0-SNAPSHOT_SeqWare_0.13.3 to a zip file and transferring to the directory: /home/seqware/SeqWare/released-bundles Please be aware, this process can take hours if the bundle is many GB in size.
-Dec 4, 2012 7:34:44 PM org.restlet.ext.httpclient.HttpClientHelper start
-INFO: Starting the Apache HTTP client
-WORKFLOW_ACCESSION: 6730
-Bundle Has Been Installed to the MetaDB and Provisioned to /home/seqware/Temp/workflow-hello-simple-legacy-ftl-workflow/target/Workflow_Bundle_hello_1.0-SNAPSHOT_SeqWare_0.13.3!
+Setting Up Plugin: net.sourceforge.seqware.pipeline.plugins.BundleManager@20b9b538
+Packaging Bundle
+Bundle: packaged path: /tmp/testing/SampleJavaWorkflow/target/Workflow_Bundle_SampleJavaWorkflow_1.0-SNAPSHOT_SeqWare_0.13.6.3
+Bundle Has Been Packaged to packaged!
+
+cd target
+mkdir output
+java -jar ~/seqware-full.jar -p net.sourceforge.seqware.pipeline.plugins.BundleManager -- -b output -p Workflow_Bundle_helloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.5
 </code></pre>
 
-<p>What happens here is the <code>Workflow_Bundle_hello_1.0-SNAPSHOT_SeqWare_0.13.3</code> directory is zip’d up to your released-bundles directory and the metadata about the workflow is saved to the database.</p>
-
-</div>
-<div class="section" id="generate-an-ini-file">
-<h2>Generate an ini file</h2>
-<p>Make sure you clean out the cruft from the ini file here!
-Delete the lines before and after (and including) “—————————————————–”</p>
-
-<pre><code>[seqware@seqwarevm Workflow_Bundle_hello_1.0-SNAPSHOT_SeqWare_0.13.3]$ java -jar ~/seqware-full.jar -p net.sourceforge.seqware.pipeline.plugins.BundleManager -- --list-workflow-params --workflow-accession 6730 &gt; workflow.ini
-Dec 4, 2012 7:36:34 PM org.restlet.ext.httpclient.HttpClientHelper start
-INFO: Starting the Apache HTTP client
-vim workflow.ini 
-</code></pre>
-
-<p>Now, we will try to schedule the workflow to the database instead of running it directly (people running workflows in production and deciders should take this approach rather than executing directory with WorkflowLauncher and –wait)</p>
-
-</div>
-<div class="section" id="schedule-a-workflow">
-<h2>Schedule a workflow</h2>
-
-<pre><code>Note when scheduling, you need --host.  This will now correctly schedule the workflow in the database
-
-[seqware@seqwarevm Workflow_Bundle_hello_1.0-SNAPSHOT_SeqWare_0.13.3]$ java -jar ~/seqware-full.jar -p net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher -- --ini-files workflow.ini --workflow-accession 6730 --schedule --parent-accessions 839 --host `hostname --long`
-Running Plugin: net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher
-Setting Up Plugin: net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher@e80d1ff
-Dec 4, 2012 7:40:45 PM org.restlet.ext.httpclient.HttpClientHelper start
-INFO: Starting the Apache HTTP client
-WORKFLOW_RUN ACCESSION: 6731
-</code></pre>
-
-<p>Note that this doesn’t work!</p>
-
-<pre><code>[seqware@seqwarevm Workflow_Bundle_hello_1.0-SNAPSHOT_SeqWare_0.13.3]$ java -jar ~/seqware-full.jar -p net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher -- --ini-files workflow.ini --workflow-accession 6730 --schedule --parent-accessions 839
-</code></pre>
-
-</div>
-<div class="section" id="launch-a-workflow">
-<h2>Launch a Workflow</h2>
-
-<p>Launch a workflow that’s been scheduled (you can tell it which one with –workflow-run-accession, typically this command is a cron). It launched workflows scheduled by your REST username where the host field in workflow_run matches the host you run this on.</p>
-
-<pre><code>seqware@seqwarevm Workflow_Bundle_hello_1.0-SNAPSHOT_SeqWare_0.13.3]$ java -jar ~/seqware-full.jar -p net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher -- --launch-scheduled
-Running Plugin: net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher
-Setting Up Plugin: net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher@25595f51
-Dec 4, 2012 7:43:00 PM org.restlet.ext.httpclient.HttpClientHelper start
-INFO: Starting the Apache HTTP client
-Number of submitted workflows: 5
-Working Run: 6705
-Invalid run by host check: 6705
-Working Run: 6706
-Invalid run by host check: 6706
-Working Run: 6683
-Invalid run by host check: 6683
-Working Run: 6684
-Invalid run by host check: 6684
-Working Run: 6731
-Valid run by host check: 6731
-requiresNewLauncher - fall-through
-Launching via old launcher: 6731
-Workflow Run 6731
-Workflow: 6730
-TEMPLATE FILE: /home/seqware/Temp/workflow-hello-simple-legacy-ftl-workflow/target/Workflow_Bundle_hello_1.0-SNAPSHOT_SeqWare_0.13.3/Workflow_Bundle_workflow-hello-simple-legacy-ftl-workflow/1.0-SNAPSHOT/workflows/workflow.ftl
-INI FILES:
-PARENT ACCESSIONS: 839
-CREATING DAX IN: /tmp/dax695420372787314356595792546946156
-TEMPLATE FILE: /home/seqware/Temp/workflow-hello-simple-legacy-ftl-workflow/target/Workflow_Bundle_hello_1.0-SNAPSHOT_SeqWare_0.13.3/Workflow_Bundle_workflow-hello-simple-legacy-ftl-workflow/1.0-SNAPSHOT/workflows/workflow.ftl
-CREATING DAX IN: /tmp/dax695420372787314356595792546946156
-  INI FILE:
-  KEY: parent_accessions VALUE: 839
-  KEY: parent-accessions VALUE: 839
-  KEY: output_prefix VALUE: ./provisioned/
-  KEY: output_dir VALUE: seqware-results
-  KEY: workflow_run_accession VALUE: 6731
-  KEY: parent_accession VALUE: 839
-  KEY: input_file VALUE: ${workflow_bundle_dir}/Workflow_Bundle_workflow-hello-simple-legacy-ftl-workflow/1.0-SNAPSHOT/data/input.txt
-  KEY: workflow-run-accession VALUE: 6731
-  KEY: seqware_cluster VALUE: seqwarevm
-  KEY: workflow_bundle_dir VALUE: /home/seqware/Temp/workflow-hello-simple-legacy-ftl-workflow/target/Workflow_Bundle_hello_1.0-SNAPSHOT_SeqWare_0.13.3
-  KEY: metadata VALUE: metadata
-SUBMITTING TO PEGASUS: pegasus-plan -Dpegasus.user.properties=/home/seqware/.seqware/pegasus/properties --dax /tmp/dax695420372787314356595792546946156 --dir /home/seqware/SeqWare/pegasus-dax -o seqwarevm --force --submit -s seqwarevm
-PEGASUS STATUS COMMAND: pegasus-status -l /home/seqware/SeqWare/pegasus-dax/seqware/pegasus/hello/run0001
-</code></pre>
-
-</div>
-<div class="section" id="monitoring-workflows">
-<h2>Monitoring Workflows</h2>
-
-<p>Monitor the running workflows (for the ones that have metadata writeback and have entries in the workflow_run table) no params here let you monitor all running workflows.  It automatically is only monitoring ones owned by your REST username and launched as your linux user on the host you’re running this command on</p>
-
-<pre><code>java -jar ~/seqware-full.jar -p net.sourceforge.seqware.pipeline.plugins.WorkflowStatusChecker -- --workflow-run-accession 6731
-</code></pre>
-
-<p>You can also launch with –wait, this manually runs a workflow using WorkflowLauncher (not scheduled first in the DB and not using the integrated testing via BundleManager) </p>
-
-<pre><code>[seqware@seqwarevm Workflow_Bundle_hello_1.0-SNAPSHOT_SeqWare_0.13.3]$ java -jar ~/seqware-full.jar -p net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher -- --ini-files workflow.ini --workflow-accession 6730 --parent-accessions 839 --wait --host seqwarevm
-Running Plugin: net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher
-MONITORING PEGASUS STATUS:
-RUNNING: step 1 of 4 (25%)
-RUNNING: step 2 of 4 (50%)
-RUNNING: step 3 of 4 (75%)
-WORKFLOW COMPLETED SUCCESSFULLY!
-</code></pre>
-
-</div>
-<div class="section" id="final-thoughts">
-<h2>Final Thoughts</h2>
-
-<p>You can also launch async (without –wait), this manually runs the workflow using WorkflowLauncher but does not stick around for it to finish.  You can get in trouble here if you launch a workflow without metadata writeback in which case there will be no saved record this workflow is running!  Be careful!  Typically you will want to either schedule a workflow <em>or</em> you will want to use BundleManager to test (during development or if someone hands you a workflow budle) which runs it and monitors the status <em>or</em> you will directly launch the workflow with your own .ini file and use –wait so it sticks around monitors the progress.</p>
-
-<pre><code> java -jar ~/seqware-full.jar -p net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher -- --ini-files workflow.ini --workflow-accession 6730 --parent-accessions 839 --host seqwarevm
-</code></pre>
-
-<p>Note, when you do “BundleManager –test” you’re actually running the “old” WorkflowLauncher that’s bundled inside the workflow whereas the other techniques use the WorkflowLauncher inside the particular SeqWare jar you’re directly executing.  Just be aware if you get strange behavior with BundleManager and test, you always have the option if directly running the test with the WorkflowLauncher command. </p>
+<p>What happens here is the <code>Workflow_Bundle_hello_1.0-SNAPSHOT_SeqWare_0.13.3</code> directory is zip’d up to your output directory and that can be provided to an admin for install.</p>
 
 </div>
 <div class="section" id="next-steps">
 <h2>Next Steps</h2>
 
-<p>The step-by-step guide at <a href="../../14-workflow-mvn/">Creating New Workflow Bundles and Modules Using Maven Archetypes</a> gives an introduction on how to create new workflows.
-The guide <a href="http://sourceforge.net/apps/mediawiki/seqware/index.php?title=How_to_Write_a_Bundled_Workflow">How to Write a Workflow Bundle</a> on the public SeqWare project wiki goes into very detailed information about workflow bundles, how to create them, the syntax they use, and other key information. In the near future this will be migrated to this site but the directions there should still be up to date.</p>
+<p>The next step is the <a href="../admin-tutorial/">Admin Tutorial</a> which will show you how to install the workflow created above so other users can call it.</p>
 </div>
 </div>
 </div>
 </div>
 <!-- ***** footer ***** -->
 <div id="footer">
-<p>SeqWare © 2007–2012 Brian O&#8217;Connor. SeqWare is released under the a <a rel="license" href="http://www.gnu.org/licenses/licenses.html">GNU GPL v3</a>. This site is built using the excellent <a href="http://nanoc.stoneship.org/">nanoc</a> tool and example site along with the <a href="http://www.fonts.info/info/press/free-fonts-for-font-face-embedding.htm">Graublau</a> and <a href="http://scripts.sil.org/Gentium">Gentium</a> fonts.</p>
+<p>SeqWare © 2007–2013 Brian O&#8217;Connor. SeqWare is released under the a <a rel="license" href="http://www.gnu.org/licenses/licenses.html">GNU GPL v3</a>. This site is built using the excellent <a href="http://nanoc.stoneship.org/">nanoc</a> tool and example site along with the <a href="http://www.fonts.info/info/press/free-fonts-for-font-face-embedding.htm">Graublau</a> and <a href="http://scripts.sil.org/Gentium">Gentium</a> fonts.</p>
 </div>
 </body>
 </html>
