@@ -7,7 +7,7 @@
 <meta content="nanoc 3.6.2" name="generator">
 <link href="../../../assets/style-v17.css" media="screen" rel="stylesheet" type="text/css">
 <link href="http://feeds.feedburner.com/seqware" rel="alternate" title="The SeqWare Blog" type="application/atom+xml">
-<script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script>
+<script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script><script type="text/javascript">         var disqus_shortname = 'seqware';          (function() {             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);         })();     </script>
 </head>
 <body>
 <div class="wrapper">
@@ -49,6 +49,7 @@
 <li><a href="../../11-api/"><span>APIs</span></a></li>
 <li><a href="../../13-code/"><span>Source Code</span></a></li>
 <li><a href="../../17-plugins/"><span>Plugins</span></a></li>
+<li><a href="../../17a-modules/"><span>Modules</span></a></li>
 </ol>
 </div>
 <!-- ***** body ***** -->
@@ -177,7 +178,7 @@ This is a sample HelloWorld workflow. Use it as a template to build your own wor
   &lt;job id="IDPRE1" namespace="seqware" name="java" version="${java_version}"&gt;
     &lt;argument&gt;
       -Xmx1000M
-      -classpath ${workflow_bundle_dir}/${workflow_name}/classes:${workflow_bundle_dir}/${workflow_name}/lib/seqware-pipeline-${seqware_version}-full.jar
+      -classpath ${workflow_bundle_dir}/${workflow_name}/classes:${workflow_bundle_dir}/${workflow_name}/lib/seqware-distribution-${seqware_version}-full.jar
       net.sourceforge.seqware.pipeline.runner.Runner
       --no-metadata      
       --module net.sourceforge.seqware.pipeline.modules.utilities.ProvisionFiles
@@ -194,7 +195,7 @@ This is a sample HelloWorld workflow. Use it as a template to build your own wor
   &lt;job id="ID001" namespace="seqware" name="java" version="${java_version}"&gt;
     &lt;argument&gt;
       -Xmx1000M
-      -classpath ${workflow_bundle_dir}/${workflow_name}/bin:${workflow_bundle_dir}/${workflow_name}/lib/seqware-pipeline-${seqware_version}-full.jar
+      -classpath ${workflow_bundle_dir}/${workflow_name}/bin:${workflow_bundle_dir}/${workflow_name}/lib/seqware-distribution-${seqware_version}-full.jar
       net.sourceforge.seqware.pipeline.runner.Runner
       --${metadata}
       &lt;#list parentAccessions?split(",") as pa&gt;
@@ -217,7 +218,7 @@ This is a sample HelloWorld workflow. Use it as a template to build your own wor
   &lt;job id="IDPOST1" namespace="seqware" name="java" version="${java_version}"&gt;
     &lt;argument&gt;
       -Xmx1000M
-      -classpath ${workflow_bundle_dir}/${workflow_name}/classes:${workflow_bundle_dir}/${workflow_name}/lib/seqware-pipeline-${seqware_version}-full.jar
+      -classpath ${workflow_bundle_dir}/${workflow_name}/classes:${workflow_bundle_dir}/${workflow_name}/lib/seqware-distribution-${seqware_version}-full.jar
       net.sourceforge.seqware.pipeline.runner.Runner
       --no-metadata      
       --module net.sourceforge.seqware.pipeline.modules.utilities.ProvisionFiles
@@ -235,7 +236,7 @@ This is a sample HelloWorld workflow. Use it as a template to build your own wor
   &lt;job id="IDPOST2" namespace="seqware" name="java" version="${java_version}"&gt;
     &lt;argument&gt;
       -Xmx1000M
-      -classpath ${workflow_bundle_dir}/${workflow_name}/classes:${workflow_bundle_dir}/${workflow_name}/lib/seqware-pipeline-${seqware_version}-full.jar
+      -classpath ${workflow_bundle_dir}/${workflow_name}/classes:${workflow_bundle_dir}/${workflow_name}/lib/seqware-distribution-${seqware_version}-full.jar
       net.sourceforge.seqware.pipeline.runner.Runner
       --${metadata}
       &lt;#list parentAccessions?split(",") as pa&gt;
@@ -306,8 +307,8 @@ output_prefix=./provisioned/
 <pre><code>&lt;bundle version="1.0"&gt;
   &lt;workflow name="HelloWorldWorkflow" version="1.0"&gt;
     &lt;description&gt;This is just a simple HelloWorld showing you how to create a very basic workflow.&lt;/description&gt;
-    &lt;test command="java -jar ${workflow_bundle_dir}/Workflow_Bundle_helloworld/1.0/lib/seqware-pipeline-0.12.5.jar --plugin net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher -- --no-metadata --provisioned-bundle-dir ${workflow_bundle_dir} --workflow HelloWorldWorkflow --version 1.0 --ini-files ${workflow_bundle_dir}/Workflow_Bundle_helloworld/1.0/config/workflow.ini "/&gt;
-    &lt;workflow_command command="java -jar ${workflow_bundle_dir}/Workflow_Bundle_helloworld/1.0/lib/seqware-pipeline-0.12.5.jar --plugin net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher -- --bundle ${workflow_bundle_dir} --workflow HelloWorldWorkflow --version 1.0 "/&gt;
+    &lt;test command="java -jar ${workflow_bundle_dir}/Workflow_Bundle_helloworld/1.0/lib/seqware-distribution-&lt;%= seqware_release_version %&gt;.jar --plugin net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher -- --no-metadata --provisioned-bundle-dir ${workflow_bundle_dir} --workflow HelloWorldWorkflow --version 1.0 --ini-files ${workflow_bundle_dir}/Workflow_Bundle_helloworld/1.0/config/workflow.ini "/&gt;
+    &lt;workflow_command command="java -jar ${workflow_bundle_dir}/Workflow_Bundle_helloworld/1.0/lib/seqware-distribution-&lt;%= seqware_release_version %&gt;.jar --plugin net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher -- --bundle ${workflow_bundle_dir} --workflow HelloWorldWorkflow --version 1.0 "/&gt;
     &lt;workflow_template path="${workflow_bundle_dir}/Workflow_Bundle_helloworld/1.0/workflows/workflow.ftl"/&gt;
     &lt;config path="${workflow_bundle_dir}/Workflow_Bundle_helloworld/1.0/config/workflow.ini"/&gt;
     &lt;build command="ant -f ${workflow_bundle_dir}/Workflow_Bundle_helloworld/1.0/build.xml"/&gt;
@@ -335,8 +336,8 @@ cp -r Workflow_Bundle_HelloWorldWorkflow_1.0_SeqWare_0.12.5 Workflow_Bundle_MyHe
 <pre><code>&lt;bundle version="1.0"&gt;
   &lt;workflow name="MyHelloWorldWorkflow" version="1.0"&gt;
     &lt;description&gt;This is just a simple HelloWorld showing you how to create a very basic workflow.&lt;/description&gt;
-    &lt;test command="java -jar ${workflow_bundle_dir}/Workflow_Bundle_helloworld/1.0/lib/seqware-pipeline-0.12.5.jar --plugin net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher -- --no-metadata --provisioned-bundle-dir ${workflow_bundle_dir} --workflow MyHelloWorldWorkflow --version 1.0 --ini-files ${workflow_bundle_dir}/Workflow_Bundle_helloworld/1.0/config/workflow.ini "/&gt;
-    &lt;workflow_command command="java -jar ${workflow_bundle_dir}/Workflow_Bundle_helloworld/1.0/lib/seqware-pipeline-0.12.5.jar --plugin net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher -- --bundle ${workflow_bundle_dir} --workflow MyHelloWorldWorkflow --version 1.0 "/&gt;
+    &lt;test command="java -jar ${workflow_bundle_dir}/Workflow_Bundle_helloworld/1.0/lib/seqware-distribution-&lt;%= seqware_release_version %&gt;.jar --plugin net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher -- --no-metadata --provisioned-bundle-dir ${workflow_bundle_dir} --workflow MyHelloWorldWorkflow --version 1.0 --ini-files ${workflow_bundle_dir}/Workflow_Bundle_helloworld/1.0/config/workflow.ini "/&gt;
+    &lt;workflow_command command="java -jar ${workflow_bundle_dir}/Workflow_Bundle_helloworld/1.0/lib/seqware-distribution-&lt;%= seqware_release_version %&gt;.jar --plugin net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher -- --bundle ${workflow_bundle_dir} --workflow MyHelloWorldWorkflow --version 1.0 "/&gt;
     &lt;workflow_template path="${workflow_bundle_dir}/Workflow_Bundle_helloworld/1.0/workflows/workflow.ftl"/&gt;
     &lt;config path="${workflow_bundle_dir}/Workflow_Bundle_helloworld/1.0/config/workflow.ini"/&gt;
     &lt;build command="ant -f ${workflow_bundle_dir}/Workflow_Bundle_helloworld/1.0/build.xml"/&gt;
@@ -367,7 +368,7 @@ cp -r Workflow_Bundle_HelloWorldWorkflow_1.0_SeqWare_0.12.5 Workflow_Bundle_MyHe
 <p class="warning"><strong>Tip:</strong> if someone gives you a zipped workflow bundle use a command similar to the below to unzip it to your /home/seqware/SeqWare/provisioned-bundles/ directory:
 </p>
 
-<pre><code>java -jar ~/SeqWare/seqware-pipeline-0.12.5.jar -p net.sourceforge.seqware.pipeline.plugins.BundleManager -- --bundle released-bundles/Workflow_Bundle_Someone_Gave_Me.zip --list
+<pre><code>java -jar ~/SeqWare/seqware-distribution-&lt;%= seqware_release_version %&gt;.jar -p net.sourceforge.seqware.pipeline.plugins.BundleManager -- --bundle released-bundles/Workflow_Bundle_Someone_Gave_Me.zip --list
 </code></pre>
 
 <p>This automatically unzips the bundle to the provisioned-bundles directory and then lists out the contents.</p>
@@ -381,7 +382,7 @@ List Workflows:
   Name : HelloWorldWorkflow
   Version : 1.0
   Description : This is just a simple HelloWorld showing you how to create a very basic workflow.
-  Test Command: java -jar ${workflow_bundle_dir}/Workflow_Bundle_helloworld/1.0/lib/seqware-pipeline-0.12.5.jar --plugin net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher -- --no-metadata --provisioned-bundle-dir ${workflow_bundle_dir} --workflow HelloWorldWorkflow --version 1.0 --ini-files ${workflow_bundle_dir}/Workflow_Bundle_helloworld/1.0/config/workflow.ini
+  Test Command: java -jar ${workflow_bundle_dir}/Workflow_Bundle_helloworld/1.0/lib/seqware-distribution-&lt;%= seqware_release_version %&gt;.jar --plugin net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher -- --no-metadata --provisioned-bundle-dir ${workflow_bundle_dir} --workflow HelloWorldWorkflow --version 1.0 --ini-files ${workflow_bundle_dir}/Workflow_Bundle_helloworld/1.0/config/workflow.ini
   Template Path:${workflow_bundle_dir}/Workflow_Bundle_helloworld/1.0/workflows/workflow.ftl
   Config Path:${workflow_bundle_dir}/Workflow_Bundle_helloworld/1.0/config/workflow.ini
   Requirements Compute: single Memory: 20M Network: local
@@ -393,7 +394,7 @@ List Workflows:
 cd /home/seqware/SeqWare/provisioned-bundles/Workflow_Bundle_MyHelloWorldWorkflow_1.0_SeqWare_0.12.5
  
 # and launch the test
-java -jar ~/SeqWare/seqware-pipeline-0.12.5.jar -p net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher -- --no-metadata --provisioned-bundle-dir `pwd` --workflow MyHelloWorldWorkflow --version 1.0 --ini-files Workflow_Bundle_helloworld/1.0/config/workflow.ini --wait
+java -jar ~/SeqWare/seqware-distribution-&lt;%= seqware_release_version %&gt;.jar -p net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher -- --no-metadata --provisioned-bundle-dir `pwd` --workflow MyHelloWorldWorkflow --version 1.0 --ini-files Workflow_Bundle_helloworld/1.0/config/workflow.ini --wait
 </code></pre>
 
 <p>This should work just fine, it will give you status information and gradually complete the workflow.  If something goes wrong you should see status messages indicating what happened.  These will tell you the particular steps with the problem so you can look at the workflow file to debug.  Here is the sample output when I ran the command:</p>
@@ -447,7 +448,7 @@ can issue the following command in the terminal:</p>
 <p>…with password <code>seqware</code>.</p>
 
 <pre><code>cd /home/seqware/SeqWare
-java -jar ~/SeqWare/seqware-pipeline-0.12.5.jar -p net.sourceforge.seqware.pipeline.plugins.BundleManager -- --bundle /home/seqware/SeqWare/provisioned-bundles/Workflow_Bundle_MyHelloWorldWorkflow_1.0_SeqWare_0.12.5 --install
+java -jar ~/SeqWare/seqware-distribution-&lt;%= seqware_release_version %&gt;.jar -p net.sourceforge.seqware.pipeline.plugins.BundleManager -- --bundle /home/seqware/SeqWare/provisioned-bundles/Workflow_Bundle_MyHelloWorldWorkflow_1.0_SeqWare_0.12.5 --install
 </code></pre>
 
 <p>What happens here is the <code>/home/seqware/SeqWare/provisioned-bundles/Workflow_Bundle_MyHelloWorldWorkflow_1.0_SeqWare_0.12.5</code> directory is zip’d up to your released-bundles directory and the metadata about the workflow is saved to the database.</p>
@@ -474,7 +475,7 @@ version                   | 1.0
 seqware_version           |
 owner_id                  | 1
 base_ini_file             | ${workflow_bundle_dir}/Workflow_Bundle_helloworld/1.0/config/workflow.ini
-cmd                       | java -jar ${workflow_bundle_dir}/Workflow_Bundle_helloworld/1.0/lib/seqware-pipeline-0.12.5.jar --plugin net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher -- --bundle ${workflow_bundle_dir} --workflow MyHelloWorldWorkflow --version 1.0
+cmd                       | java -jar ${workflow_bundle_dir}/Workflow_Bundle_helloworld/1.0/lib/seqware-distribution-&lt;%= seqware_release_version %&gt;.jar --plugin net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher -- --bundle ${workflow_bundle_dir} --workflow MyHelloWorldWorkflow --version 1.0
 current_working_dir       | /home/seqware/SeqWare/provisioned-bundles/Workflow_Bundle_MyHelloWorldWorkflow_1.0_SeqWare_0.12.5
 host                      |
 username                  |
@@ -503,6 +504,8 @@ total 50M
 The guide <a href="http://sourceforge.net/apps/mediawiki/seqware/index.php?title=How_to_Write_a_Bundled_Workflow">How to Write a Workflow Bundle</a> on the public SeqWare project wiki goes into very detailed information about workflow bundles, how to create them, the syntax they use, and other key information. In the near future this will be migrated to this site but the directions there should still be up to date.</p>
 </div>
 </div>
+<p></p>
+<div id="disqus_thread"></div>
 </div>
 </div>
 <!-- ***** footer ***** -->

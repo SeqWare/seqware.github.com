@@ -7,7 +7,7 @@
 <meta content="nanoc 3.6.2" name="generator">
 <link href="../../assets/style-v17.css" media="screen" rel="stylesheet" type="text/css">
 <link href="http://feeds.feedburner.com/seqware" rel="alternate" title="The SeqWare Blog" type="application/atom+xml">
-<script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script>
+<script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script><script type="text/javascript">         var disqus_shortname = 'seqware';          (function() {             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);         })();     </script>
 </head>
 <body>
 <div class="wrapper">
@@ -38,6 +38,7 @@
 <li><a href="../11-api/"><span>APIs</span></a></li>
 <li><a href="../13-code/"><span>Source Code</span></a></li>
 <li><a href="../17-plugins/"><span>Plugins</span></a></li>
+<li><a href="../17a-modules/"><span>Modules</span></a></li>
 </ol>
 </div>
 <!-- ***** body ***** -->
@@ -136,22 +137,22 @@ Command-line option</th>    <th>Description</th>
 
 <p>Set the &#8216;skip&#8217; value of lane with SWID 1234 to &#8216;true&#8217;. No key-value annotations are added.</p>
 
-<pre><code>java -jar seqware-distribution/target/seqware-pipeline-0.12.1-full.jar --plugin net.sourceforge.seqware.pipeline.plugins.AttributeAnnotator -- --lane-accession 1234 --skip true
+<pre><code>java -jar seqware-distribution/target/seqware-distribution-0.13.6.x-full.jar --plugin net.sourceforge.seqware.pipeline.plugins.AttributeAnnotator -- --lane-accession 1234 --skip true
 </code></pre>
 
 <p>Set the &#8216;skip&#8217; value of sequencer run with SWID 3456 to &#8216;true&#8217; and enter a key-value pair with the key &#8220;skip&#8221; and value &#8220;Improperly entered into the LIMS&#8221;. Notice that the key is not specified but defaults to &#8216;skip&#8217;.</p>
 
-<pre><code>java -jar seqware-distribution/target/seqware-pipeline-0.12.1-full.jar --plugin net.sourceforge.seqware.pipeline.plugins.AttributeAnnotator -- --sequencer-run-accession 3456 --skip true --value "Improperly entered into the LIMS"
+<pre><code>java -jar seqware-distribution/target/seqware-distribution-0.13.6.x-full.jar --plugin net.sourceforge.seqware.pipeline.plugins.AttributeAnnotator -- --sequencer-run-accession 3456 --skip true --value "Improperly entered into the LIMS"
 </code></pre>
 
 <p>Annotate the IUS with SWID 2345 with a key-value pair of key &#8220;dual-barcodes&#8221; and value &#8220;barcode 1&#8221;. The &#8216;skip&#8217; field is not affected.</p>
 
-<pre><code>java -jar seqware-distribution/target/seqware-pipeline-0.12.1-full.jar --plugin net.sourceforge.seqware.pipeline.plugins.AttributeAnnotator -- --ius-accession 2345 --key "dual-barcodes" --value "barcode 1"
+<pre><code>java -jar seqware-distribution/target/seqware-distribution-0.13.6.x-full.jar --plugin net.sourceforge.seqware.pipeline.plugins.AttributeAnnotator -- --ius-accession 2345 --key "dual-barcodes" --value "barcode 1"
 </code></pre>
 
 <p>Bulk insert attribute annotation with file</p>
 
-<pre><code>java -jar seqware-distribution/target/seqware-pipeline-0.12.1-full.jar --plugin net.sourceforge.seqware.pipeline.plugins.AttributeAnnotator -- --file
+<pre><code>java -jar seqware-distribution/target/seqware-distribution-0.13.6.x-full.jar --plugin net.sourceforge.seqware.pipeline.plugins.AttributeAnnotator -- --file file.csv
 </code></pre>
 
 <p>The file is in CSV format</p>
@@ -164,7 +165,9 @@ s,1000,key1,value1
 st,321,key1,value1
 </code></pre>
 
-<p>View the annotated attributes</p>
+</div>
+<div class="section" id="view-the-annotated-attributes">
+<h2>View the annotated attributes</h2>
 
 <p>To check the attribute annotation, you can use the similar URI. See <a href="http://seqware.github.com/seqware/">http://seqware.github.com/seqware/</a> for more detail.</p>
 
@@ -172,6 +175,8 @@ st,321,key1,value1
 </code></pre>
 </div>
 </div>
+<p></p>
+<div id="disqus_thread"></div>
 </div>
 </div>
 <!-- ***** footer ***** -->

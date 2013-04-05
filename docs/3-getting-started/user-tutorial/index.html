@@ -7,7 +7,7 @@
 <meta content="nanoc 3.6.2" name="generator">
 <link href="../../../assets/style-v17.css" media="screen" rel="stylesheet" type="text/css">
 <link href="http://feeds.feedburner.com/seqware" rel="alternate" title="The SeqWare Blog" type="application/atom+xml">
-<script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script>
+<script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script><script type="text/javascript">         var disqus_shortname = 'seqware';          (function() {             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);         })();     </script>
 </head>
 <body>
 <div class="wrapper">
@@ -52,6 +52,7 @@
 <li><a href="../../11-api/"><span>APIs</span></a></li>
 <li><a href="../../13-code/"><span>Source Code</span></a></li>
 <li><a href="../../17-plugins/"><span>Plugins</span></a></li>
+<li><a href="../../17a-modules/"><span>Modules</span></a></li>
 </ol>
 </div>
 <!-- ***** body ***** -->
@@ -99,6 +100,8 @@
 
 <p class="warning"><strong>Tip:</strong> The VM will contain a recent version of the jar that we have validated with this tutorial.  You may want to upgrade to the latest version, though, which you can download from our <a href="http://jenkins.res.oicr.on.ca/job/seqware/">continuous build server</a>. Please choose the jar that has the -full suffix, e.g. seqware-distribution-0.13.6-full.jar. Keep in mind we make no promises that the latest version will be bug free!</p>
 
+<p>For more information about the command line tools see the <a href="../../17-plugins/">Plugin</a> and <a href="../../modules/">Modules</a> reference.</p>
+
 </div>
 <div class="section" id="the-seqware-settings-file">
 <h2>The SeqWare Settings File</h2>
@@ -107,7 +110,7 @@
 
 <p>This file contains the web address of the RESTful web service, your username and password, and you Amazon public and private keys that will allow you to push and pull data files to and from the cloud, etc. For this tutorial the config file should be ready to go, you will not need to modify it.</p>
 
-<p>For more information see the (SeqWare Pipeline)[/docs/6-pipeline/user-configuration/] documentation which covers the details on the user config file.</p>
+<p>For more information see the <a href="../../6-pipeline/user-configuration/">Settings</a> documentation which covers the details on the user config file.</p>
 
 </div>
 <div class="section" id="creating-studies-experiments-and-samples">
@@ -153,7 +156,7 @@ When you first login you will see your studies (of which you have none).  First,
 
 <p>First, you can find out what tables this tool is capable of writing to:</p>
 
-<pre><code>java -jar seqware-distribution-0.13.6.5-full.jar -p net.sourceforge.seqware.pipeline.plugins.Metadata -- --list-tables
+<pre><code>java -jar seqware-distribution-0.13.6.x-full.jar -p net.sourceforge.seqware.pipeline.plugins.Metadata -- --list-tables
 
 TableName
 
@@ -172,7 +175,7 @@ lane
 
 <p>Now, for a given table, you can find out what fields you can write back to and their type:</p>
 
-<pre><code>java -jar seqware-distribution-0.13.6.5-full.jar -p net.sourceforge.seqware.pipeline.plugins.Metadata -- --table study --list-fields
+<pre><code>java -jar seqware-distribution-0.13.6.x-full.jar -p net.sourceforge.seqware.pipeline.plugins.Metadata -- --table study --list-fields
 
 Field    Type    Possible_Values
 title    String
@@ -185,7 +188,7 @@ study_type    Integer    [1: Whole Genome Sequencing, 2: Metagenomics, 3: Transc
 
 <p>So using the information above you can create a new study:</p>
 
-<pre><code>java -jar seqware-distribution-0.13.6.5-full.jar -p net.sourceforge.seqware.pipeline.plugins.Metadata -- --table study --create --field 'title::New Test Study' --field 'description::This is a test description' --field 'accession::InternalID123' --field 'center_name::SeqWare' --field 'center_project_name::SeqWare Test Project' --field study_type::4
+<pre><code>java -jar seqware-distribution-0.13.6.x-full.jar -p net.sourceforge.seqware.pipeline.plugins.Metadata -- --table study --create --field 'title::New Test Study' --field 'description::This is a test description' --field 'accession::InternalID123' --field 'center_name::SeqWare' --field 'center_project_name::SeqWare Test Project' --field study_type::4
 
 SWID: 29830
 </code></pre>
@@ -194,14 +197,14 @@ SWID: 29830
 
 <p>The next step is to create an experiment and link it to the study you created above. You can find the platform ID using the –list-fields option shown above:</p>
 
-<pre><code>java -jar seqware-distribution-0.13.6.5-full.jar -p net.sourceforge.seqware.pipeline.plugins.Metadata -- --table experiment --create --field 'title::New Test Experiment' --field 'description::This is a test description' --field study_accession::29830 --field platform_id::26
+<pre><code>java -jar seqware-distribution-0.13.6.x-full.jar -p net.sourceforge.seqware.pipeline.plugins.Metadata -- --table experiment --create --field 'title::New Test Experiment' --field 'description::This is a test description' --field study_accession::29830 --field platform_id::26
 
 SWID: 29831
 </code></pre>
 
 <p>Again, you use the SWID from the above output in the next step to create an associated sample. You can find the platform ID using the –list-fields option shown above:</p>
 
-<pre><code>java -jar seqware-distribution-0.13.6.5-full.jar -p net.sourceforge.seqware.pipeline.plugins.Metadata -- --table sample --create --field 'title::New Test Sample' --field 'description::This is a test description' --field experiment_accession::29831 --field organism_id::26
+<pre><code>java -jar seqware-distribution-0.13.6.x-full.jar -p net.sourceforge.seqware.pipeline.plugins.Metadata -- --table sample --create --field 'title::New Test Sample' --field 'description::This is a test description' --field experiment_accession::29831 --field organism_id::26
 
 SWID: 29832
 </code></pre>
@@ -273,7 +276,7 @@ command line. Here is an example of calling the ProvisionFiles command line
 utility which will copy a file to a destination and also update the database to
 link the parent sample to the newly copied file:</p>
 
-<pre><code>java -jar seqware-distribution-0.13.6.5-full.jar -p net.sourceforge.seqware.pipeline.plugins.ModuleRunner -- --module net.sourceforge.seqware.pipeline.modules.utilities.ProvisionFiles --metadata-output-file-prefix /datastore/ --metadata-parent-accession 29832 --metadata-processing-accession-file accession.txt -- -im text::text/plain::/home/seqware/Desktop/simple.txt -o /datastore/ --force-copy
+<pre><code>java -jar seqware-distribution-0.13.6.x-full.jar -p net.sourceforge.seqware.pipeline.plugins.ModuleRunner -- --module net.sourceforge.seqware.pipeline.modules.utilities.ProvisionFiles --metadata-output-file-prefix /datastore/ --metadata-parent-accession 29832 --metadata-processing-accession-file accession.txt -- -im text::text/plain::/home/seqware/Desktop/simple.txt -o /datastore/ --force-copy
 </code></pre>
 
 <p>In this example it will copy the /home/seqware/Desktop/simple.txt text files to
@@ -292,7 +295,7 @@ should be able to download the file via the Portal just as you did before
 (assuming your destination was in /datastore as it is here).</p>
 
 <p class="warning"><strong>Tip:</strong> you can find a list of the meta types
-(like chemical/seq-na-text-gzip or text/plain above) at <a href="http://sourceforge.net/apps/mediawiki/seqware/index.php?title=Module_Conventions#Module_MIME_Types">Module
+(like chemical/seq-na-text-gzip or text/plain above) at <a href="http://seqware.github.io/docs/16-module-conventions/">Module
 Conventions - Module MIME Types</a>. This is the list we add to as needed when
 creating new workflows.  It is extremely important to be consistent with these
 since a workflow will not recognize your input unless the meta type string
@@ -311,7 +314,7 @@ files to particular samples in the database.  GenericMetadataSaver is the tool
 you can use to accomplish this, for example, if you already had simple2.txt in
 /datastore you could insert this into the MetaDB using:</p>
 
-<pre><code>java -jar seqware-distribution-0.13.6.5-full.jar -p net.sourceforge.seqware.pipeline.plugins.ModuleRunner -- --module net.sourceforge.seqware.pipeline.modules.GenericMetadataSaver --metadata-parent-accession 25192 --metadata-processing-accession-file accession.txt -- --gms-output-file text::text/plain::/datastore/simple2.txt --gms-algorithm UploadText --gms-suppress-output-file-check
+<pre><code>java -jar seqware-distribution-0.13.6.x-full.jar -p net.sourceforge.seqware.pipeline.plugins.ModuleRunner -- --module net.sourceforge.seqware.pipeline.modules.GenericMetadataSaver --metadata-parent-accession 25192 --metadata-processing-accession-file accession.txt -- --gms-output-file text::text/plain::/datastore/simple2.txt --gms-algorithm UploadText --gms-suppress-output-file-check
 </code></pre>
 
 <p>Here files are associated with the parent (SWID: 25192 which is a sample). One
@@ -329,7 +332,7 @@ configuring Tomcat.</p>
 
 <p>Once you have uploaded data the next step is to find the available workflows and their parameters.  To see the list of available workflows you can execute the following command:</p>
 
-<pre><code>java -jar seqware-distribution-0.13.6.5-full.jar -p net.sourceforge.seqware.pipeline.plugins.BundleManager -- --list-install
+<pre><code>java -jar seqware-distribution-0.13.6.x-full.jar -p net.sourceforge.seqware.pipeline.plugins.BundleManager -- --list-install
 </code></pre>
 
 <p>You will get a tab-delimited list of workflows showing their name, version, and (most importantly) their SWID.  </p>
@@ -342,7 +345,7 @@ configuring Tomcat.</p>
 
 <p>The fourth column includes the SWID for this workflow that you will use in the next command to find all the parameters (and their defaults) that this workflow takes.  Here is the command, notice I redirect the output to create a basic ini file that can later be customized and used to submit a run of this workflow:</p>
 
-<pre><code>java -jar seqware-distribution-0.13.6.5-full.jar -p net.sourceforge.seqware.pipeline.plugins.BundleManager -- --list-workflow-params --workflow-accession 7 &gt; workflow.ini
+<pre><code>java -jar seqware-distribution-0.13.6.x-full.jar -p net.sourceforge.seqware.pipeline.plugins.BundleManager -- --list-workflow-params --workflow-accession 7 &gt; workflow.ini
 </code></pre>
 
 <p>In this example the workflow “HelloWorldWorkflow” version 1.0 (SWID 7) parameters are listed.  The output conforms to the input you can use to parametrize and launch workflows.  For example:</p>
@@ -371,7 +374,7 @@ Since this is a low-level tool you may see many more parameters exposed with thi
 
 <p>At this point you know what workflow you are going to run and you have a customized ini file that contains, for example, the input files. The next step is to trigger the workflow using the ini file you prepared. Make sure you use the correct workflow accession and parent accession. Use the parent accession of the “Analysis Event” that the file is attached to not the file itself.</p>
 
-<pre><code>java -jar seqware-distribution-0.13.6.5-full.jar -p net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher -- --ini-files workflow.ini --workflow-accession 7 --schedule --parent-accessions 24
+<pre><code>java -jar seqware-distribution-0.13.6.x-full.jar -p net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher -- --ini-files workflow.ini --workflow-accession 7 --schedule --parent-accessions 24 --host seqwarevm
 </code></pre>
 
 <p class="warning"><strong>Tip:</strong> the parent-accessions is the SWID of
@@ -390,16 +393,16 @@ file and the portal displays these values.</p>
 
 <p>A better way of monitoring workflows (and getting a list of the outputs) is to use the WorkflowRunReporter plugin. This will let you script the monitoring of workflow runs.</p>
 
-<pre>java -jar ~/seqware-distribution-0.13.6.5-full.jar -p net.sourceforge.seqware.pipeline.plugins.WorkflowRunReporter -- -wa 7</pre>
+<pre><code>java -jar ~/seqware-distribution-0.13.6.x-full.jar -p net.sourceforge.seqware.pipeline.plugins.WorkflowRunReporter -- -wa 7
+</code></pre>
 
 <p>In this example all the status information for workflows with workflow accession 7 are printed out to a file in the local file system.  This includes several columns of interest including the status of the workflow, the output file types, and their locations in S3 or the file system. You can use this information to automate the checking of workflows and the retrieval of the results!</p>
 
 <p>In the output from the above command you will see accessions for each workflow run. If the status is “failed” you can download the stderr and stdout from the workflow run. This is how you might do that for a workflow_run with an accession of 6774:</p>
 
-<pre>
- java -jar ~/seqware-distribution-0.13.6.3-full.jar -p net.sourceforge.seqware.pipeline.plugins.WorkflowRunReporter -- --wra 6774 --wr-stderr
- java -jar ~/seqware-distribution-0.13.6.3-full.jar -p net.sourceforge.seqware.pipeline.plugins.WorkflowRunReporter -- --wra 6774 --wr-stdout
-</pre>
+<pre><code>java -jar ~/seqware-distribution-0.13.6.x-full.jar -p net.sourceforge.seqware.pipeline.plugins.WorkflowRunReporter -- --wra 6774 --wr-stderr
+java -jar ~/seqware-distribution-0.13.6.x-full.jar -p net.sourceforge.seqware.pipeline.plugins.WorkflowRunReporter -- --wra 6774 --wr-stdout
+</code></pre>
 
 </div>
 <div class="section" id="downloading-workflow-results">
@@ -407,27 +410,23 @@ file and the portal displays these values.</p>
 
 <p>Once a workflow has finished running you will want to list out the associated files and download the results.  While you can use the Portal for downloading files the best way to get files in bulk is to use our reporting tool. This produces a tab-delimited file that lists all the files produced for the workflows you are interested in.  You can then use the same ProvisionFiles utility above to pull files back.  Since the report produces a simple tab-delimited file you can easily automate the downloading of results by looping over the output files and calling ProvisionFiles using a script.</p>
 
-<pre>
-	java -jar seqware-distribution-0.13.6.5-full.jar -p net.sourceforge.seqware.pipeline.plugins.SymLinkFileReporter -- --no-links --output-filename study_report --workflow-accession 7 --study 'New Test Study'
-</pre>
+<pre><code>java -jar seqware-distribution-0.13.6.x-full.jar -p net.sourceforge.seqware.pipeline.plugins.SymLinkFileReporter -- --no-links --output-filename study_report --workflow-accession 7 --study 'New Test Study'
+</code></pre>
 
 <p>The output here is a study_report.csv file that contains a line for each file (both those uploaded and those produced by workflows).  You can also filter by file types, for example if you want to see report bundles (not applicable to the HelloWorld workflow but you get the idea):</p>
 
-<pre>
-	java -jar seqware-distribution-0.13.6.5-full.jar -p net.sourceforge.seqware.pipeline.plugins.SymLinkFileReporter -- --no-links --output-filename study_report --workflow-accession 13224 --study 20120403_SEQ1 --file-type application/zip-report-bundle
-</pre>
+<pre><code>java -jar seqware-distribution-0.13.6.x-full.jar -p net.sourceforge.seqware.pipeline.plugins.SymLinkFileReporter -- --no-links --output-filename study_report --workflow-accession 13224 --study 20120403_SEQ1 --file-type application/zip-report-bundle
+</code></pre>
 
 <p>Or an example filtering by sample (again, not directly applicable to the HelloWorld output):</p>
 
-<pre>
-	java -jar seqware-distribution-0.13.6.5-full.jar -p net.sourceforge.seqware.pipeline.plugins.SymLinkFileReporter -- --no-links --output-filename study_report --workflow-accession 13224  --sample 20120403_SEQ1_GAG
-</pre>
+<pre><code>java -jar seqware-distribution-0.13.6.x-full.jar -p net.sourceforge.seqware.pipeline.plugins.SymLinkFileReporter -- --no-links --output-filename study_report --workflow-accession 13224  --sample 20120403_SEQ1_GAG
+</code></pre>
 
 <p>You can use these URLs (such as s3://bucket/samplename/test_R1.text.gz) with ProvisionFiles to download results (if they were remote, in the local VM they are just local files).  Here’s an example downloading a report bundle:</p>
 
-<pre>
-	java -jar seqware-distribution-0.13.6.5-full.jar -p net.sourceforge.seqware.pipeline.plugins.ModuleRunner -- --module net.sourceforge.seqware.pipeline.modules.utilities.ProvisionFiles --no-metadata -- -i s3://bucket/results/seqware-0.10.0_ComprehensiveExomeGenomeAnalysis-0.10.5/59491657/GAG.fa.variant_quality.gatk.hg19.report.zip -o ./
-</pre>
+<pre><code>java -jar seqware-distribution-0.13.6.x-full.jar -p net.sourceforge.seqware.pipeline.plugins.ModuleRunner -- --module net.sourceforge.seqware.pipeline.modules.utilities.ProvisionFiles --no-metadata -- -i s3://bucket/results/seqware-0.10.0_ComprehensiveExomeGenomeAnalysis-0.10.5/59491657/GAG.fa.variant_quality.gatk.hg19.report.zip -o ./
+</code></pre>
 
 <p>Here the zip report bundle is downloaded to the current working directory on the computer you are working on.  In this way you can pull back the results of workflows entirely through scripts that wrap the SymLinkFileReporter and ProvisionFiles.</p>
 
@@ -435,7 +434,7 @@ file and the portal displays these values.</p>
 
 <p>In addition to the command line tools, you can also use the Portal to explore the output of workflows triggered through the command line tools.</p>
 
-<p>You can find more information on this report tool on the public SeqWare wiki: <a href="http://sourceforge.net/apps/mediawiki/seqware/index.php?title=SymLink_Reporter">Study Reporter</a>.</p>
+<p>You can find more information on this report tool on the public SeqWare wiki: <a href="../../21-study-reporter/">Study Reporter</a>.</p>
 
 <p class="warning"><strong>Note:</strong> in the example above I use &#8211;no-metadata with ProvisionFiles. This is to prevent the tool from writing back an event to the central database. Since you are just downloading a file (versus uploading a file) you do not really want to record that download event in the database.
 </p>
@@ -447,6 +446,8 @@ file and the portal displays these values.</p>
 <p>See the <a href="../developer-tutorial/">Developer Tutorial</a> for how to create a new workflow.</p>
 </div>
 </div>
+<p></p>
+<div id="disqus_thread"></div>
 </div>
 </div>
 <!-- ***** footer ***** -->

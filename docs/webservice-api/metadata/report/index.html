@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<title>SeqWare › Metadata - Report Resources</title>
+<meta content="nanoc 3.6.2" name="generator">
+<link href="../../../../assets/style-v17.css" media="screen" rel="stylesheet" type="text/css">
+<link href="http://feeds.feedburner.com/seqware" rel="alternate" title="The SeqWare Blog" type="application/atom+xml">
+<script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script><script type="text/javascript">         var disqus_shortname = 'seqware';          (function() {             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);         })();     </script>
+</head>
+<body>
+<div class="wrapper">
+<!-- ***** navigation ***** -->
+<div class="nav">
+<ol>
+<li><a href="../../../../"><span>Home</span></a></li>
+<li><a href="../../../../blog/"><span>News</span></a></li>
+<li><a href="../../../"><span>Documentation</span></a></li>
+<li><a href="../../../../community/"><span>Community</span></a></li>
+<li><a href="../../../../partners/"><span>Partners</span></a></li>
+<li><a href="../../../../about/"><span>About</span></a></li>
+</ol>
+</div>
+<!-- ***** sidebar ***** -->
+<div class="side">
+<ol>
+<li><a href="../../../1-introduction/"><span>Introduction to SeqWare</span></a></li>
+<li><a href="../../../2-installation/"><span>Installation</span></a></li>
+<li><a href="../../../3-getting-started/"><span>Getting Started</span></a></li>
+<li><a href="../../../6-pipeline/"><span>SeqWare Pipeline</span></a></li>
+<li><a href="../../../4-metadb/"><span>SeqWare MetaDB</span></a></li>
+<li><a href="../../../5-portal/"><span>SeqWare Portal</span></a></li>
+<li><a href="../../../7-web-service/"><span>SeqWare Web Service</span></a></li>
+<li><a href="../../../8-query-engine/"><span>SeqWare Query Engine</span></a></li>
+<li><a href="../../../9-glossary/"><span>Glossary</span></a></li>
+<li><a href="../../../10-faq/"><span>Frequently Asked Questions</span></a></li>
+<li><a href="../../../11-api/"><span>APIs</span></a></li>
+<li><a href="../../../13-code/"><span>Source Code</span></a></li>
+<li><a href="../../../17-plugins/"><span>Plugins</span></a></li>
+<li><a href="../../../17a-modules/"><span>Modules</span></a></li>
+</ol>
+</div>
+<!-- ***** body ***** -->
+<div class="body">
+<div class="article">
+<div class="header">
+<h1>Metadata - Report Resources</h1>
+</div>
+<div class="section" id="overview">
+<h2>Overview</h2>
+<p>Reports are exclusively GET operations that query the state of the Metadata DB and amalgamate information from multiple sources within the MetadataDB and elsewhere (e.g. Server information). They are distinguished from /metadata/db resources when:</p>
+
+<ul>
+<li>they involve multiple database joins. Populating the values of a particular row would not qualify. For example, displaying an IUS with its lane, processing events and samples would not be a report because all of the information can be acquired with single joins, but reporting all of the samples in a study would be a join of at least 3 tables so would qualify as a report.</li>
+  <li>the output format is intended to be more human readable and scriptable than JAXB’s XML, e.g. CSV, JSON, or XML with an XSD. </li>
+</ul>
+</div>
+<div class="section" id="resources">
+<h2>Resources</h2>
+<p>The Web service that this API refers to is http://localhost:8888/seqware-webservice. For more information about each resource and the correct complete URI, please follow the link to the resource-specific page.</p>
+
+<table>
+<tr>
+<th><strong>URI</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+<tr>
+<td><a href="sequencerrun_get/" alt="GET the sequencer run report">GET<br>/reports/sequencerruns</a></td>
+<td>Retrieves a tab-delimited overview of all sequencer runs, lanes, barcodes, and associated analysis events.</td>
+</tr>
+<tr>
+<td><a href="sequencerrun_files_get/" alt="GET the files associated with a sequencer run.">GET<br>/sequencerruns/{sequencerRunSWID}/files</a></td>
+<td>Retrieves the files that are associated with processing the sequencer run.</td>
+</tr>
+<tr>
+<td><a href="sample_files_get/" alt="GET the files associated with a sample.">GET<br>/samples/{sampleSWID}/files</a></td>
+<td>Retrieves the files that are associated with processing the sample.</td>
+</tr>
+<tr>
+<td><a href="study_files_get/" alt="GET the files associated with a study.">GET<br>/studies/{studySWID}/files</a></td>
+<td>Retrieves the files that are associated with processing the study.</td>
+</tr>
+<tr>
+<td><a href="workflowworkflowruns_get/" alt="GET the workflow run reports for a particular workflow.">GET<br>/reports/workflows/{workflowId}/runs</a></td>
+<td>Retrieves the workflow run reports for a particular workflow using its SeqWare accession, including input and output files.</td>
+</tr>
+<tr>
+<td><a href="workflowruns_get/" alt="GET workflow run reports for all runs">GET<br>/reports/workflowruns</a></td>
+<td>Retrieves workflow run report for all runs, including input and output files.</td>
+</tr>
+<tr>
+<td><a href="fileworkflowruns_get/" alt="GET the workflow run objects for a particular file or set of files.">GET<br>/reports/fileworkflowruns</a></td>
+<td>Retrieves the workflow runs associated with a file or a set of files using one of three search patterns.</td>
+</tr>
+<tr>
+<td><a href="workflowruntime_get/" alt="GET /experiments/(experimentSWID)">GET<br>/experiments/(experimentSWID)</a></td>
+<td>Retrieves a list of experiments.</td>
+</tr>
+<tr>
+<td><a href="workflow_get/" alt="GET a summary of all runs of a workflow">GET<br>/reports/workflows/{workflowSWID}</a></td>
+<td>Retrieves a summary of all runs of a workflow.</td>
+</tr>
+<tr>
+<td><a href="workflowrun_get/" alt="GET a workflow run report">GET<br>/reports/workflowruns/{workflowRunSWID}</a></td>
+<td>Retrieves a single workflow run report, including input and output files, using its SeqWare accession.</td>
+</tr>
+</table>
+</div>
+</div>
+<p></p>
+<div id="disqus_thread"></div>
+</div>
+</div>
+<!-- ***** footer ***** -->
+<div id="footer">
+<p>SeqWare © 2007–2013 Brian O&#8217;Connor. SeqWare is released under the a <a rel="license" href="http://www.gnu.org/licenses/licenses.html">GNU GPL v3</a>. This site is built using the excellent <a href="http://nanoc.stoneship.org/">nanoc</a> tool and example site along with the <a href="http://www.fonts.info/info/press/free-fonts-for-font-face-embedding.htm">Graublau</a> and <a href="http://scripts.sil.org/Gentium">Gentium</a> fonts.</p>
+</div>
+</body>
+</html>

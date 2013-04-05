@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<title>SeqWare › SeqWare Pipeline Custom Deciders</title>
+<meta content="nanoc 3.6.2" name="generator">
+<link href="../../../assets/style-v17.css" media="screen" rel="stylesheet" type="text/css">
+<link href="http://feeds.feedburner.com/seqware" rel="alternate" title="The SeqWare Blog" type="application/atom+xml">
+<script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script><script type="text/javascript">         var disqus_shortname = 'seqware';          (function() {             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);         })();     </script>
+</head>
+<body>
+<div class="wrapper">
+<!-- ***** navigation ***** -->
+<div class="nav">
+<ol>
+<li><a href="../../../"><span>Home</span></a></li>
+<li><a href="../../../blog/"><span>News</span></a></li>
+<li><a href="../../"><span>Documentation</span></a></li>
+<li><a href="../../../community/"><span>Community</span></a></li>
+<li><a href="../../../partners/"><span>Partners</span></a></li>
+<li><a href="../../../about/"><span>About</span></a></li>
+</ol>
+</div>
+<!-- ***** sidebar ***** -->
+<div class="side">
+<ol>
+<li><a href="../../1-introduction/"><span>Introduction to SeqWare</span></a></li>
+<li><a href="../../2-installation/"><span>Installation</span></a></li>
+<li><a href="../../3-getting-started/"><span>Getting Started</span></a></li>
+<li>
+<a href="../"><span>SeqWare Pipeline</span></a><ol class="toc">
+<li><a href="#overview">Overview</a></li>
+<li><a href="#resources-folder">Resources folder</a></li>
+<li><a href="#overridable-methods">Overridable Methods</a></li>
+</ol>
+</li>
+<li><a href="../../4-metadb/"><span>SeqWare MetaDB</span></a></li>
+<li><a href="../../5-portal/"><span>SeqWare Portal</span></a></li>
+<li><a href="../../7-web-service/"><span>SeqWare Web Service</span></a></li>
+<li><a href="../../8-query-engine/"><span>SeqWare Query Engine</span></a></li>
+<li><a href="../../9-glossary/"><span>Glossary</span></a></li>
+<li><a href="../../10-faq/"><span>Frequently Asked Questions</span></a></li>
+<li><a href="../../11-api/"><span>APIs</span></a></li>
+<li><a href="../../13-code/"><span>Source Code</span></a></li>
+<li><a href="../../17-plugins/"><span>Plugins</span></a></li>
+<li><a href="../../17a-modules/"><span>Modules</span></a></li>
+</ol>
+</div>
+<!-- ***** body ***** -->
+<div class="body">
+<div class="article">
+<div class="header">
+<h1>SeqWare Pipeline Custom Deciders</h1>
+</div>
+<div class="section" id="overview">
+<h2>Overview</h2>
+
+<p>You will want to extend the <a href="https://github.com/SeqWare/seqware/blob/master/seqware-pipeline/src/main/java/net/sourceforge/seqware/pipeline/deciders/BasicDecider.java">Basic Decider class</a>. </p>
+
+<p>You can automatically generate a decoder via our maven archetype.</p>
+
+<pre><code>mvn archetype:generate (select SeqWare Java Decider archetype)
+</code></pre>
+
+<p>There a number of methods that can be overriden in order to customize the behaviour of your decider.</p>
+
+<!-- the following content is modified from from https://wiki.oicr.on.ca/display/PIPEDEVAL/Decider+Tutorial -->
+
+<p>A decider is a very small Java Maven project. It has one Java file and two resources files as well as one pom.xml file. The relatively deep file structure is required for Maven builds.</p>
+
+<pre><code>.
+|-- pom.xml
+`-- src
+    `-- main
+	|-- java
+	|   `-- ca
+	|       `-- on
+	|           `-- oicr
+	|               `-- seqware
+	|                   `-- deciders
+	|                       `-- HelloWorldDecider.java
+	`-- resources
+	    |-- decider.properties
+	    `-- workflow.ini
+</code></pre>
+
+<p>The HelloWorldDecider.java is a Java class that extends net.sourceforge.seqware.pipeline.deciders.BasicDecider, the decider framework built into SeqWare. Most of the specific decider functionality is built into HelloWorldDecider.java in a series of methods that are extended from BasicDecider. The two resources files are properties files that change more often than the Java code. These are updated when:</p>
+
+<pre><code>Migrating to a new database install
+A new version of a workflow is released
+</code></pre>
+
+</div>
+<div class="section" id="resources-folder">
+<h2>Resources folder</h2>
+
+<p>There are two files in src/main/resources: decider.properties and workflow.ini.</p>
+
+<div class="section" id="decider-ini-file">
+<h3>Decider INI File</h3>
+
+<p>The workflow.ini file is an abbreviated version of the workflow’s default INI file. Deciders can only be run on installed workflows, and so the full parameters are pulled from the installed version. The decider only needs to update those properties that will change in the INI file. The decider INI can be very simple, with only the output_dir and output_prefix specified. These parameters specify the directory to which the results of the workflow will ultimately be written. You can try and change the output_prefix in the INI file to your home directory so that all of the results from the workflow will be written to your home directory instead of to the pegasus-working directory.</p>
+
+<table>
+<thead><tr>
+<th>Original INI file</th>
+      <th>Decider INI file</th>
+    </tr></thead>
+<tbody>
+<tr>
+<td>input_file=${workflow_bundle_dir}/Workflow_Bundle_${workflow-directory-name}/${version}/data/input.txt</td>
+      <td>output_dir=seqware-results</td>
+    </tr>
+<tr>
+<td>greeting=Testing</td>
+      <td>output_prefix=~/</td>
+    </tr>
+<tr>
+<td>output_dir=seqware-results</td>
+      <td> </td>
+    </tr>
+<tr>
+<td>output_prefix=./</td>
+      <td> </td>
+    </tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="decider-properties-file">
+<h3>Decider.properties file</h3>
+
+<p>The decider.properties file contains a number of properties that will be set by a user once and rarely updated. The intention is that the production team update these as new workflows are installed into their database.</p>
+
+<pre><code>parent-workflow-accessions=
+check-wf-accessions=
+workflow-accession=6733
+</code></pre>
+
+<p>The parent-workflow-accessions are the workflows from which the files of interest come from.</p>
+
+<p>The workflow-accession is the accession number of the current workflow from the database install. This is the WORKFLOW_ACCESSION that was printed after successfully installing to the database.</p>
+
+<!-- the following content is direct from https://wiki.oicr.on.ca/display/PIPEDEVAL/Decider+Tutorial -->
+
+</div>
+</div>
+<div class="section" id="overridable-methods">
+<h2>Overridable Methods</h2>
+
+<div class="section" id="init-method">
+<h3>Init method</h3>
+
+<p>The init method sets up any variables needed for the rest of the setup, including all of those command-line options mentioned earlier. Specifying either the meta-type or the parent-accession is required for the decider to work. Here we specify that the decider only runs on files of type “application/bam”. More than one can be specified here. For a full list of possible meta-types, please see <a href="../file-types/">Module Conventions</a>.</p>
+
+<pre><code>@Override
+public ReturnValue init() {
+this.setMetaType(Arrays.asList("application/bam"));
+
+//allows anything defined on the command line to override the 'defaults' here.
+ReturnValue val = super.init();
+return val;
+}
+</code></pre>
+
+</div>
+<div class="section" id="checkfiledetails-method">
+<h3>checkFileDetails method</h3>
+
+<p>Performs any additional checks on the file before adding it to the list of files to incorporate. This method should be extended for future deciders for custom behaviour. You can also pull any details out of the file metadata here. The boolean specifies whether or not the file is added to the list.</p>
+
+<pre><code>protected boolean checkFileDetails(ReturnValue returnValue, FileMetadata fm) {
+return super.checkFileDetails(returnValue, fm);
+}
+</code></pre>
+
+</div>
+<div class="section" id="modifyinifile-method">
+<h3>modifyIniFile method</h3>
+
+<p>Change the INI file from its defaults as specified in the workflow. The commaSeparatedFilePaths are the files that are going to be grouped together for one particular run of the decider, and the commaSeparatedParentAccessions are the accessions of the processing events that produced the file.</p>
+
+<p>In this particular case, we want to substitute the INI field ‘input_file’ to be the comma-separated list of files. The rest of the INI file is auto-generated using the decider’s INI file and the default INI file from the database.</p>
+
+<pre><code>protected Map&lt;String, String&gt; modifyIniFile(String commaSeparatedFilePaths, String commaSeparatedParentAccessions) {
+
+Map&lt;String, String&gt; iniFileMap = new TreeMap&lt;String, String&gt;();
+iniFileMap.put("input_file", commaSeparatedFilePaths);
+
+return iniFileMap;
+}
+</code></pre>
+
+<p>Ini attributes are applied in the following order:, where the greater than sign means ‘takes precedence over’: modifyIniFile method &gt; command line options &gt; Decider INI file &gt;  Default Database INI file
+handleGroupByAttribute method</p>
+
+<p>If the contents of the group-by attribute needs to be modified at all, this is where you should do it.</p>
+
+<p>For example, say that you wanted to group files based on tissue type. This information is captured in the SAMPLE_ATTRIBUTE column. However, the contents of the SAMPLE_ATTRIBUTE column include a variety of information, not all of which is relevant. Here is an example:</p>
+
+<pre><code>SAMPLE_ATTRIBUTE = sample.geo_reaction_id=6223;sample.geo_template_id=17937;sample.geo_library_source_template_type=EX;sample.geo_targeted_resequencing=Agilent SureSelect ICGC/Sanger Exon;sample.geo_tissue_type=n;sample.geo_tissue_origin=Br;
+</code></pre>
+
+<p>In the handleGroupByAttribute, you would use a regular expression to pull out the information “sample.geo_tissue_type=n”, which is used to put the file into a bucket and aggregate it with other files.</p>
+
+<pre><code>protected String handleGroupByAttribute(String attribute) {
+return attribute;
+}
+</code></pre>
+</div>
+</div>
+</div>
+<p></p>
+<div id="disqus_thread"></div>
+</div>
+</div>
+<!-- ***** footer ***** -->
+<div id="footer">
+<p>SeqWare © 2007–2013 Brian O&#8217;Connor. SeqWare is released under the a <a rel="license" href="http://www.gnu.org/licenses/licenses.html">GNU GPL v3</a>. This site is built using the excellent <a href="http://nanoc.stoneship.org/">nanoc</a> tool and example site along with the <a href="http://www.fonts.info/info/press/free-fonts-for-font-face-embedding.htm">Graublau</a> and <a href="http://scripts.sil.org/Gentium">Gentium</a> fonts.</p>
+</div>
+</body>
+</html>

@@ -7,7 +7,7 @@
 <meta content="nanoc 3.6.2" name="generator">
 <link href="../../assets/style-v17.css" media="screen" rel="stylesheet" type="text/css">
 <link href="http://feeds.feedburner.com/seqware" rel="alternate" title="The SeqWare Blog" type="application/atom+xml">
-<script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script>
+<script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script><script type="text/javascript">         var disqus_shortname = 'seqware';          (function() {             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);         })();     </script>
 </head>
 <body>
 <div class="wrapper">
@@ -38,6 +38,7 @@
 <li><a href="../11-api/"><span>APIs</span></a></li>
 <li><a href="../13-code/"><span>Source Code</span></a></li>
 <li><a href="../17-plugins/"><span>Plugins</span></a></li>
+<li><a href="../17a-modules/"><span>Modules</span></a></li>
 </ol>
 </div>
 <!-- ***** body ***** -->
@@ -175,16 +176,11 @@
 <div class="section" id="module-mime-types">
 <h2>Module MIME Types</h2>
 
-<p>SeqWare Pipeline modules consume input files and settings and output files as the result. It&#8217;s very important to agree on the mime type used to document the inputs and outputs, this way a given module &#8220;knows&#8221; if it can use a certain file as an input and/or output. This will allow us to use tools to build workflows visually because the input/output types of the modules can be known.</p>
-
-<p>In order to get this to work we need to agree on the mime types used in SeqWare modules. The following are used by one or more modules, please check this list before you write a new module to see if input/outputs can be annotated with one of these mime types.  Only add to this list if you&#8217;re certain the MIME type does not already exist below.</p>
-
-<p>For a directory of standard mime types (you should use a standard one if it exists!) see <a href="http://www.feedforall.com/mime-types.htm%20here">here</a>, <a href="http://silk.nih.gov/public/zzyzzap.@www.silk.types.html%20here">here</a> and <a href="http://www.iana.org/assignments/media-types/index.html%20here">here</a>.  Wikipedia has more to say <a href="http://en.wikipedia.org/wiki/MIME%20here">here</a>.</p>
-
-<p>For the current list of MIME types, please see the <a href="https://docs.google.com/spreadsheet/ccc?key=0An-x7dcdlF7AdGhjdjRTU0toZkJXNlNRb1NROXdfLWc">current list</a>.
-If you wish to add a new MIME type, use the form which contributes to this list <a href="https://docs.google.com/spreadsheet/viewform?formkey=dGhjdjRTU0toZkJXNlNRb1NROXdfLWc6MQ">here</a>.</p>
+<p>&lt;%= render &#8216;/includes/MIME/&#8217; %&gt;</p>
 </div>
 </div>
+<p></p>
+<div id="disqus_thread"></div>
 </div>
 </div>
 <!-- ***** footer ***** -->

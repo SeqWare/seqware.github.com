@@ -7,7 +7,7 @@
 <meta content="nanoc 3.6.2" name="generator">
 <link href="../../assets/style-v17.css" media="screen" rel="stylesheet" type="text/css">
 <link href="http://feeds.feedburner.com/seqware" rel="alternate" title="The SeqWare Blog" type="application/atom+xml">
-<script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script>
+<script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script><script type="text/javascript">         var disqus_shortname = 'seqware';          (function() {             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);         })();     </script>
 </head>
 <body>
 <div class="wrapper">
@@ -38,6 +38,7 @@
 <li><a href="../11-api/"><span>APIs</span></a></li>
 <li><a href="../13-code/"><span>Source Code</span></a></li>
 <li><a href="../17-plugins/"><span>Plugins</span></a></li>
+<li><a href="../17a-modules/"><span>Modules</span></a></li>
 </ol>
 </div>
 <!-- ***** body ***** -->
@@ -46,10 +47,11 @@
 <div class="header">
 <h1>Installation From Scratch</h1>
 </div>
-<p>This guide is useful if you want to install SeqWare from scratch on your local infrastructure. They are rather vague in sections and really are written for experienced Linux sysadmins. If you just want to get started with SeqWare quickly please see <a href="../2-installation/#installing-with-a-local-vm">Installing the SeqWare VM</a> for instructions on downloading a VM that is ready for workflow development and testing.</p>
+<p class="warning"><strong>Note:</strong> This guide is useful if you want to install SeqWare from scratch on your local infrastructure. Be warned, there are rather vague sections and this guide was really written as notes for setting up our VMs. It is geared towards experienced Linux sysadmins and we cannot guarentee this guide is always up to date. </p>
+
+<p>If you just want to get started with SeqWare quickly please see <a href="../2-installation/#installing-with-a-local-vm">Installing the SeqWare VM</a> for instructions on downloading a VM that is ready for workflow development and testing. We also recommend this approach for production installs because you can connect easily these VMs to a real cluster.</p>
 
 <!-- For the previous version of these directions please see [[Creating a SeqWare VM v1]] and [[Creating a SeqWare VM v2]] and [[Upgrade SeqWare VM to Globus 5.2]] for information about upgrading to the latest version of Globus (this guide below is up-to-date). -->
-
 
 <div class="section" id="introduction">
 <h2>Introduction</h2>
@@ -58,53 +60,53 @@
 
 <ul>
 <li>setup a VM using VirtualBox with Pegasus 3.0, Condor 7.6.x, and Globus 5.2.x</li>
-<li>take that setup and configure it to either
-<strong> submit jobs to itself (the default configuration)
-</strong> submit jobs to a real cluster e.g. deploy this VM as a &#8220;real&#8221; SeqWare install</li>
+  <li>take that setup and configure it to either
+** submit jobs to itself (the default configuration)
+** submit jobs to a real cluster e.g. deploy this VM as a “real” SeqWare install</li>
 </ul>
-<p>The installation and configuration of this software is a fairly complex process.  Even if you don&#8217;t use this VM these directions will be extremely useful for correctly installing and configuring Pegasus and it&#8217;s dependencies for use with SeqWare Pipeline.  I recommend setting up in a VM environment and validating that works before trying to setup this software on a real server. Actually, I don&#8217;t recommend setting this up on a real server, using a VM for both development and production is actually a really good idea since failed servers can quickly be replaced with VM snapshots. This alone makes running a VM across the board appealing. VirtualBox VMs can be converted easily to KVM VMs for use in a server environment. &#8221;&#8217;The recommended route for installing SeqWare is to download this VM (see <a href="../2-installation/#installing-with-a-local-vm">Installing the SeqWare VM</a>) and deploying it as a production machine, skipping the difficult dependency install all together&#8221;&#8217;.</p>
+<p>The installation and configuration of this software is a fairly complex process.  Even if you don’t use this VM these directions will be extremely useful for correctly installing and configuring Pegasus and it’s dependencies for use with SeqWare Pipeline.  I recommend setting up in a VM environment and validating that works before trying to setup this software on a real server. Actually, I don’t recommend setting this up on a real server, using a VM for both development and production is actually a really good idea since failed servers can quickly be replaced with VM snapshots. This alone makes running a VM across the board appealing. VirtualBox VMs can be converted easily to KVM VMs for use in a server environment. ‘&#8217;’The recommended route for installing SeqWare is to download this VM (see <a href="../2-installation/#installing-with-a-local-vm">Installing the SeqWare VM</a>) and deploying it as a production machine, skipping the difficult dependency install all together’’’.</p>
 
 <p>The VM currently has the following SeqWare dependencies installed (from lowest to highest-level):</p>
 
 <ul>
 <li>
-<a href="http://www.oracle.com/us/products/tools/oracle-grid-engine-075549.html%20Sun%20Grid%20Engine">SGE</a> version 6.2.x (note, this is now Oracle Grid Engine but we&#8217;ll use the existing gridengine RPM packages): this is the cluster scheduler that actually schedules jobs out to real nodes, managing memory and CPUs available. The VM has only one &#8220;slot&#8221; available.</li>
-<li>
+<a href="http://www.oracle.com/us/products/tools/oracle-grid-engine-075549.html%20Sun%20Grid%20Engine">SGE</a> version 6.2.x (note, this is now Oracle Grid Engine but we’ll use the existing gridengine RPM packages): this is the cluster scheduler that actually schedules jobs out to real nodes, managing memory and CPUs available. The VM has only one “slot” available.</li>
+  <li>
 <a href="http://www.globus.org/toolkit/">The Globus Toolkit</a> version 5.2.x: provides user authentication, transport protocol for sending jobs to a cluster in a scehduler (GRAM5), and a transfer protocol for sending data around (GridFTP)
-<strong> GRAM5
-</strong> GridFTP</li>
-<li>
+** GRAM5
+** GridFTP</li>
+  <li>
 <a href="http://www.cs.wisc.edu/condor/">Condor</a> version 7.6.x: this provides a virtual cluster that jobs can be submitted to and parsed out to one or more real clusters. It is the component that interprets the job dependencies and submits jobs in the correct order to the real cluster.</li>
-<li>
-<a href="http://pegasus.isi.edu/wms/">Pegasus WMS</a> version 3.0.x: this project provides a workflow language and various convenience configuration files that simplifies the use of the other tools in the stack. It is the only software project in the stack that SeqWare is &#8220;aware&#8221; of and directly depends on.</li>
+  <li>
+<a href="http://pegasus.isi.edu/wms/">Pegasus WMS</a> version 3.0.x: this project provides a workflow language and various convenience configuration files that simplifies the use of the other tools in the stack. It is the only software project in the stack that SeqWare is “aware” of and directly depends on.</li>
 </ul>
 <p>The VM currently has the following SeqWare subprojects installed:</p>
 
 <ul>
 <li><a href="../5-portal/">SeqWare Portal</a></li>
-<li><a href="../6-pipeline/">SeqWare Pipeline</a></li>
-<li><a href="../8-query-engine/">SeqWare Query Engine</a></li>
-<li><a href="../4-metadb/">SeqWare MetaDB</a></li>
+  <li><a href="../6-pipeline/">SeqWare Pipeline</a></li>
+  <li><a href="../8-query-engine/">SeqWare Query Engine</a></li>
+  <li><a href="../4-metadb/">SeqWare MetaDB</a></li>
 </ul>
 </div>
 <div class="section" id="create-a-centos-vm">
 <h2>Create a CentOS VM</h2>
 
-<p>The first step is to create a CentOS VM using <a href="http://www.virtualbox.org/">VirtualBox</a>  (or whatever virtualization technology your prefer). If you don&#8217;t know how to do this then you should use the pre-fab virtual machine, see <a href="../2-installation/#installing-with-a-local-vm">Using the SeqWare VM</a>.</p>
+<p>The first step is to create a CentOS VM using <a href="http://www.virtualbox.org/">VirtualBox</a>  (or whatever virtualization technology your prefer). If you don’t know how to do this then you should use the pre-fab virtual machine, see <a href="../2-installation/#installing-with-a-local-vm">Using the SeqWare VM</a>.</p>
 
 <p>The steps to creating a VM are:</p>
 
 <ul>
 <li>create a new VM using CentOS 6 64-bit ISO</li>
-<li>setup networking using a static IP address if possible</li>
-<li>create a seqware user account with seqware as the password, set the root account password to seqware</li>
-<li>set the hostname via /etc/hosts and /etc/sysconfig/network, here we will use seqwarevm</li>
-<li>create a separate datastore volume for large files, create various dirs (tmp, references, etc), add it to /etc/fstab so it automounts (optional)</li>
-<li>make sure to setup the kernel devel package (e.g. yum install kernel-devel-2.6.18-194.el6 or similar), mount the VirtualBox Guest Additions ISO and call their script to setup guest additions on this VM</li>
-<li>I turned off the firewall (/etc/init.d/iptables stop) which is fine for a local VM. But in production you will want to use the proper firewall settings and turn it back on.  Google for GRAM/GridFTP/SGE ports that need to be open.</li>
-<li>I used chkconfig to ensure the SGE, Condor, Globus, and any other desired services run on startup</li>
+  <li>setup networking using a static IP address if possible</li>
+  <li>create a seqware user account with seqware as the password, set the root account password to seqware</li>
+  <li>set the hostname via /etc/hosts and /etc/sysconfig/network, here we will use seqwarevm</li>
+  <li>create a separate datastore volume for large files, create various dirs (tmp, references, etc), add it to /etc/fstab so it automounts (optional)</li>
+  <li>make sure to setup the kernel devel package (e.g. yum install kernel-devel-2.6.18-194.el6 or similar), mount the VirtualBox Guest Additions ISO and call their script to setup guest additions on this VM</li>
+  <li>I turned off the firewall (/etc/init.d/iptables stop) which is fine for a local VM. But in production you will want to use the proper firewall settings and turn it back on.  Google for GRAM/GridFTP/SGE ports that need to be open.</li>
+  <li>I used chkconfig to ensure the SGE, Condor, Globus, and any other desired services run on startup</li>
 </ul>
-<p>Once you&#8217;ve setup the base OS take a snapshot in case you need to roll back.  &#8221;&#8217;You should take snapshots throughout the install process so if you mess up you can roll back&#8221;&#8217;. When you finish and the entire install is working make sure you take periodic snapshots for use in disaster recovery for your production systems.</p>
+<p>Once you’ve setup the base OS take a snapshot in case you need to roll back.  ‘&#8217;’You should take snapshots throughout the install process so if you mess up you can roll back’’’. When you finish and the entire install is working make sure you take periodic snapshots for use in disaster recovery for your production systems.</p>
 
 <p>The VirtualBox VMs are great for running locally for testing and development but can also be converted into KVM or another more server-oriented VM technology. These directions are outside the scope of this guide, however. Google for more information.</p>
 
@@ -112,7 +114,7 @@
 <div class="section" id="install-dependencies">
 <h2>Install Dependencies</h2>
 
-<p>Now that you have a VM you will want to log in as root, configure the yum repositories, and install some base packages.</p>
+<p>Now that you have a VM you will want to log in as root, configure the yum repositories, and install some base packages. </p>
 
 <div class="section" id="setup-repositories">
 <h3>Setup Repositories</h3>
@@ -121,14 +123,14 @@
 
 <ul>
 <li>http://fedoraproject.org/wiki/EPEL</li>
-<li>http://www.cs.wisc.edu/condor/yum/</li>
-<li>http://www.globus.org/toolkit/downloads</li>
+  <li>http://www.cs.wisc.edu/condor/yum/</li>
+  <li>http://www.globus.org/toolkit/downloads</li>
 </ul>
 </div>
 <div class="section" id="install-java">
 <h3>Install Java</h3>
 
-<p>Install the Oracle JVM from <a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk6-downloads-1637591.html">here</a>  (we test on JDK 1.6.x), install it&#8217;s RPMs, and configure using alternatives:</p>
+<p>Install the Oracle JVM from <a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk6-downloads-1637591.html">here</a>  (we test on JDK 1.6.x), install it’s RPMs, and configure using alternatives:</p>
 
 <pre><code>rpm -Uvh jdk-6u20-linux-amd64.rpm
 alternatives --install /usr/bin/java java /usr/java/latest/bin/java 20000
@@ -177,8 +179,8 @@ export PATH=$M2:$PATH
 <p>I found that when running large clusters there seemed to be a large number of failures, mainly related to files going missing on gluster/NFS and with too many file handles open. The 5.2.x release of Globus seems to have addressed a lot of these scalability issues.  Regardless, here are the guides I used for tuning Condor/Linux for large numbers of jobs:</p>
 
 <ul>
-<li><del><a href="http://www.cs.wisc.edu/condor/condorg/linux_scalability.html">http://www.cs.wisc.edu/condor/condorg/linux_scalability.html</a></del></li>
-<li><del><a href="http://www.cs.wisc.edu/condor/condorg/goldenrules.html">http://www.cs.wisc.edu/condor/condorg/goldenrules.html</a></del></li>
+<li>~~<a href="http://www.cs.wisc.edu/condor/condorg/linux_scalability.html">http://www.cs.wisc.edu/condor/condorg/linux_scalability.html</a>~~ </li>
+  <li>~~<a href="http://www.cs.wisc.edu/condor/condorg/goldenrules.html">http://www.cs.wisc.edu/condor/condorg/goldenrules.html</a>~~</li>
 </ul>
 <p>(Regretfully, these guides no longer appear active. We will post an alternative if one comes up)</p>
 
@@ -203,7 +205,7 @@ seqware hard nofile 32768
 
 <p>Services in /etc/services</p>
 
-<p>Make sure the following are defined in /etc/services:</p>
+<p>Make sure the following are defined in /etc/services: </p>
 
 <pre><code>sge_qmaster     6444/tcp
 sge_execd       6445/tcp
@@ -217,22 +219,20 @@ gsigatekeeper   2119/udp                        # GSIGATEKEEPER
 <div class="section" id="setup-hadoop-hbase-and-other-related-tools">
 <h2>Setup Hadoop, HBase, and other Related Tools</h2>
 
-<p>HBase is required for the Query Engine. These instructions are current to Cloudera&#8217;s CDH4 distribution.</p>
+<p>HBase is required for the Query Engine. These instructions are current to Cloudera’s CDH4 distribution.</p>
 
 <div class="section" id="base-hadoop">
 <h3>Base Hadoop</h3>
 
-<p>We will go through the MRv1 instructions at <a href="https://ccp.cloudera.com/display/CDH4DOC/Installing+CDH4+on+a+Single+Linux+Node+in+Pseudo-distributed+Mode">Cloudera</a></p>
+<p>We will go through the MRv1 instructions at <a href="https://ccp.cloudera.com/display/CDH4DOC/Installing+CDH4+on+a+Single+Linux+Node+in+Pseudo-distributed+Mode">Cloudera</a> </p>
 
-<p>While we have a version of Java installed that satisfies <a href="https://ccp.cloudera.com/display/CDH4DOC/Before+You+Install+CDH4+on+a+Single+Node#BeforeYouInstallCDH4onaSingleNode-InstalltheOracleJavaDevelopmentKit">the requirements</a> we need to set the JAVA_HOME for the root user (and probably the seqware user) by adding</p>
+<p>While we have a version of Java installed that satisfies <a href="https://ccp.cloudera.com/display/CDH4DOC/Before+You+Install+CDH4+on+a+Single+Node#BeforeYouInstallCDH4onaSingleNode-InstalltheOracleJavaDevelopmentKit">the requirements</a> we need to set the JAVA_HOME for the root user (and probably the seqware user) by adding </p>
 
 <pre><code>export JAVA_HOME=&lt;jdk-install-dir&gt;
-export PATH=$JAVA_HOME/bin:$PATH
+export PATH=$JAVA_HOME/bin:$PATH to both their .bashrc files.
 </code></pre>
 
-<p>to both their .bashrc files.</p>
-
-<p>We then add the &#8220;Red Hat/CentOS 6 (64-bit)&#8221; RPM and add the optional GPG key.</p>
+<p>We then add the “Red Hat/CentOS 6 (64-bit)” RPM and add the optional GPG key.</p>
 
 <p>For the record, pulling down hadoop-0.20-conf-pseudo grabs</p>
 
@@ -251,10 +251,8 @@ export PATH=$JAVA_HOME/bin:$PATH
 
 <p>There are no changes until Step 4 where I think they forgot a step, so you need to run (while logged-in as hdfs)</p>
 
-<pre><code>hadoop fs -mkdir /user
+<pre><code>hadoop fs -mkdir /user to match their structure.
 </code></pre>
-
-<p>to match their structure.</p>
 
 <p>A user directory was created for seqware (while logged-in as hdfs)</p>
 
@@ -262,7 +260,7 @@ export PATH=$JAVA_HOME/bin:$PATH
 hadoop fs -chown seqware /user/seqware
 </code></pre>
 
-<p>The rest of the instructions are followed until the end of the MRv1 section (do not install YARN).</p>
+<p>The rest of the instructions are followed until the end of the MRv1 section (do not install YARN). </p>
 
 <p>Looking through the zookeeper install instructions, it looks like that is sufficient for a standalone server, so we move onto Hive</p>
 
@@ -282,7 +280,7 @@ Installing for dependencies:
  hbase                                     noarch                          0.92.1+67-1.cdh4.0.1.p0.1.el6                             cloudera-cdh4                           34 M
 </code></pre>
 
-<p>These instructions are stopped after we test Hive but before the optimization by installing MySQL and connecting Hive to it.</p>
+<p>These instructions are stopped after we test Hive but before the optimization by installing MySQL and connecting Hive to it. </p>
 
 </div>
 <div class="section" id="pig">
@@ -316,15 +314,12 @@ Installing for dependencies:
  hue-useradmin                             x86_64                           2.0.0+59-1.cdh4.0.1.p0.1.el6                            cloudera-cdh4                            48 k
 </code></pre>
 
-<p>Follow the instructions through &#8220;Hadoop Configurations for Hue.&#8221;</p>
+<p>Follow the instructions through “Hadoop Configurations for Hue.”</p>
 
-<p>The command for &#8220;You can confirm that the plugins are running correctly by tailing the daemon logs:&#8221; is incorrect and is actually</p>
-
+<p>The command for “You can confirm that the plugins are running correctly by tailing the daemon logs:” is incorrect and is actually</p>
 <pre>tail --lines=500 /var/log/hadoop-0.20-mapreduce/hadoop*jobtracker*.log | grep ThriftPlugin</pre>
-
-
-<p> The oozie instruction that follows is skipped since I don&#8217;t think we&#8217;ve installed oozie (in the lists of packages anyways). The &#8220;HADOOP_CLASSPATH Caveat&#8221; is skipped since there doesn&#8217;t look like there is a hadoop-env.sh in /etc/hadoop/conf .
-We skipped over &#8220;Configuring Hue for SSL&#8221; and skipped to &#8220;Installing and Configuring Hue Shell&#8221;</p>
+<p>The oozie instruction that follows is skipped since I don’t think we’ve installed oozie (in the lists of packages anyways). The “HADOOP_CLASSPATH Caveat” is skipped since there doesn’t look like there is a hadoop-env.sh in /etc/hadoop/conf .
+We skipped over “Configuring Hue for SSL” and skipped to “Installing and Configuring Hue Shell”</p>
 
 <p>We login to Hue via localhost:8888 using seqware:seqware</p>
 
@@ -337,7 +332,7 @@ We skipped over &#8220;Configuring Hue for SSL&#8221; and skipped to &#8220;Inst
 <p>We follow the instructions starting from <a href="https://ccp.cloudera.com/display/CDH4DOC/HBase+Installation">here</a> and follow the pseudo-distributed sections.
 FYI, this will briefly segue into installing the zookeeper server.</p>
 
-<p>It looks like the Cloudera install doesn&#8217;t setup HBase to survive a reboot. Fixed this via</p>
+<p>It looks like the Cloudera install doesn’t setup HBase to survive a reboot. Fixed this via</p>
 
 <pre><code>chkconfig hbase-master on
 chkconfig hadoop-zookeeper-server on
@@ -354,7 +349,7 @@ chkconfig hadoop-hbase-regionserver on
      oozie-client                              noarch                              0.9.2+26-1.cdh4.0.1.p0.1.el6                               cloudera-cdh4                               55 M
 </code></pre>
 
-<p>Oozie is the an alternative to the Pegasus/Condor/Globus/SGE software stack and provides a way to run SeqWare Workflows on a Hadoop cluster. We are really excited about this workflow engine and thing it may be the default backend recommended for SeqWare workflows on our VM and Amazon&#8217;s cloud given it&#8217;s really fast scheduling performance and ease of integration with Hadoop (so you can mix traditional Bash jobs with MapReduce, Pig, Hive, etc jobs).</p>
+<p>Oozie is the an alternative to the Pegasus/Condor/Globus/SGE software stack and provides a way to run SeqWare Workflows on a Hadoop cluster. We are really excited about this workflow engine and thing it may be the default backend recommended for SeqWare workflows on our VM and Amazon’s cloud given it’s really fast scheduling performance and ease of integration with Hadoop (so you can mix traditional Bash jobs with MapReduce, Pig, Hive, etc jobs).</p>
 
 <p>Please follow the directions on Cloudera carefully, you need to make sure you initialize the Oozie database properly. By default we use the built in Derby database but you may want to setup another daemon like PostgreSQL.</p>
 
@@ -380,14 +375,14 @@ chkconfig hadoop-hbase-regionserver on
 
 <p>And follow the directions, the vast majority of settings can be left as default.</p>
 
-<p>These setup the environment. If you have questions look at the install guide on Oracle&#8217;s site.  Next, make sure the following profiles.d script is present as /etc/profile.d/sge.sh:</p>
+<p>These setup the environment. If you have questions look at the install guide on Oracle’s site.  Next, make sure the following profiles.d script is present as /etc/profile.d/sge.sh:</p>
 
 <pre><code>if [ -z "$SGE_ROOT" ] ; then
-    if [ -f /etc/sysconfig/gridengine ] ; then
-        . /etc/sysconfig/gridengine
-        export SGE_ROOT
-        export SGE_CELL
-    fi
+	if [ -f /etc/sysconfig/gridengine ] ; then
+		. /etc/sysconfig/gridengine
+		export SGE_ROOT
+		export SGE_CELL
+	fi
 fi
 
 source /usr/share/gridengine/default/common/settings.sh
@@ -398,7 +393,7 @@ source /usr/share/gridengine/default/common/settings.sh
 <pre><code>164.67.97.181   seqwarevm
 </code></pre>
 
-<p>This is what I used for my network, you will need to use an IP address that&#8217;s appropriate for your setup. You can change the seqware hostname here but the instructions assume it&#8217;s seqwarevm.</p>
+<p>This is what I used for my network, you will need to use an IP address that’s appropriate for your setup. You can change the seqware hostname here but the instructions assume it’s seqwarevm.</p>
 
 <div class="section" id="testing">
 <h3>Testing</h3>
@@ -411,13 +406,13 @@ source /usr/share/gridengine/default/common/settings.sh
 echo 'hostname' | qsub
 </code></pre>
 
-<p>If everything worked you&#8217;ll see a STDIN.o* file in the current directory that contains the hostname (seqware).</p>
+<p>If everything worked you’ll see a STDIN.o* file in the current directory that contains the hostname (seqware).</p>
 
 </div>
 <div class="section" id="load-issue">
 <h3>Load Issue</h3>
 
-<p>I noticed on VirtualBox on the Mac that the load in top doesn&#8217;t seem to be very accurate. The load is easily 4 even when the virtual machine is idle.  So, be careful since the default load threshold I think is set to 1.75, essentially no jobs will run because the machine is always beyond this.  Issue the following command to tweak this setting:</p>
+<p>I noticed on VirtualBox on the Mac that the load in top doesn’t seem to be very accurate. The load is easily 4 even when the virtual machine is idle.  So, be careful since the default load threshold I think is set to 1.75, essentially no jobs will run because the machine is always beyond this.  Issue the following command to tweak this setting:</p>
 
 <pre><code> qconf -mq all.q
 </code></pre>
@@ -443,14 +438,14 @@ echo 'hostname' | qsub
 <p>Look to change the config so reporting and joblog are true:</p>
 
 <pre><code>reporting_params             accounting=true reporting=true \
-                 flush_time=00:00:15 joblog=true sharelog=00:00:00
+			     flush_time=00:00:15 joblog=true sharelog=00:00:00
 </code></pre>
 
 </div>
 <div class="section" id="adding-parallel-environment">
 <h3>Adding Parallel Environment</h3>
 
-<p>Use the following commands to add a &#8220;serial&#8221; parallel environment, specify the number of processor cores you&#8217;ve given to the VM:</p>
+<p>Use the following commands to add a “serial” parallel environment, specify the number of processor cores you’ve given to the VM:</p>
 
 <pre><code># setup the parallel env
 qconf -ap serial
@@ -463,14 +458,14 @@ qconf -mq all.q
 <div class="section" id="setup-globus">
 <h2>Setup Globus</h2>
 
-<p>The <a href="http://www.globus.org/toolkit/about.html">Globus Toolkit</a> is a fairly large, feature rich, and complex toolkit for interacting with remote clusters.  For SeqWare, we&#8217;re primarily interested in the GridFTP component, which Pegasus uses to transfer data and binaries to and from remote clusters, GRAM5, which sends jobs off to real compute clusters, and the certificate generation/management and user authentication features.</p>
+<p>The <a href="http://www.globus.org/toolkit/about.html">Globus Toolkit</a> is a fairly large, feature rich, and complex toolkit for interacting with remote clusters.  For SeqWare, we’re primarily interested in the GridFTP component, which Pegasus uses to transfer data and binaries to and from remote clusters, GRAM5, which sends jobs off to real compute clusters, and the certificate generation/management and user authentication features.</p>
 
-<p>I followed the <a href="http://www.globus.org/toolkit/docs/5.2/5.2.0/admin/quickstart/">quickstart</a> which simplifies the install considerably since previous releases.  Keep in mind I don&#8217;t use the MyProxy server, instead I use the directions below. I was not able to get MyProxy to work with my setup (but in theory it should and it&#8217;s the recommended way of handling user certificates).</p>
+<p>I followed the <a href="http://www.globus.org/toolkit/docs/5.2/5.2.0/admin/quickstart/">quickstart</a> which simplifies the install considerably since previous releases.  Keep in mind I don’t use the MyProxy server, instead I use the directions below. I was not able to get MyProxy to work with my setup (but in theory it should and it’s the recommended way of handling user certificates).</p>
 
 <div class="section" id="install-packages">
 <h3>Install Packages</h3>
 
-<p>Word of warning: if you use &#8220;poll&#8221; rather than &#8220;seg&#8221; change the setup RPM below to &#8220;globus-gram-job-manager-sge-setup-poll&#8221;</p>
+<p>Word of warning: if you use “poll” rather than “seg” change the setup RPM below to “globus-gram-job-manager-sge-setup-poll”</p>
 
 <pre><code># all together...
 yum groupinstall globus-gridftp globus-gram5
@@ -481,12 +476,12 @@ yum install gridengine gridengine-execd gridengine-qmaster gridengine-qmon globu
 <div class="section" id="setup-certificates-for-authentication">
 <h3>Setup Certificates for Authentication</h3>
 
-<p>These steps use tools from Globus to setup both a Certificate Authority (CA) and public/private keys for the host and individual users.  If you intend to use this Pegasus setup with an existing cluster they must be recognized as a certificate authority and issue you a public/private key.  Frankly, I really don&#8217;t know what I&#8217;m talking about here so I&#8217;ll just point you to a couple websites with more info:</p>
+<p>These steps use tools from Globus to setup both a Certificate Authority (CA) and public/private keys for the host and individual users.  If you intend to use this Pegasus setup with an existing cluster they must be recognized as a certificate authority and issue you a public/private key.  Frankly, I really don’t know what I’m talking about here so I’ll just point you to a couple websites with more info:</p>
 
 <ul>
 <li><a href="https://confluence.pegasus.isi.edu/display/pegasus/Grid+Setup">Grid setup</a></li>
-<li><a href="http://www.globus.org/toolkit/docs/5.0/5.0.1/admin/install/#gtadmin-basic-host">Globus admin</a></li>
-<li><a href="http://www.globus.org/toolkit/docs/5.0/5.0.1/user/#gtuser-security">Globus user security</a></li>
+  <li><a href="http://www.globus.org/toolkit/docs/5.0/5.0.1/admin/install/#gtadmin-basic-host">Globus admin</a></li>
+  <li><a href="http://www.globus.org/toolkit/docs/5.0/5.0.1/user/#gtuser-security">Globus user security</a></li>
 </ul>
 <p>For the purposes of a self-contained testing/development environment the instructions below should work just fine.</p>
 
@@ -592,7 +587,7 @@ please enter the password for the CA key:
 The new signed certificate is at: /root/.globus/simpleCA//newcerts/01.pem
 </code></pre>
 
-<p>From the certificate, copy the Subject information, and create a mapping to the user
+<p>From the certificate, copy the Subject information, and create a mapping to the user 
 on the local cluster in (/etc/grid-security/grid-mapfile):</p>
 
 <pre><code>"/O=Grid/OU=GlobusTest/OU=simpleCA-pegasus01/CN=SeqWare" seqware
@@ -600,9 +595,9 @@ on the local cluster in (/etc/grid-security/grid-mapfile):</p>
 
 <p>As seqware copy the key to home:</p>
 
-<p> cp /tmp/usercert.pem ~/.globus/</p>
+<p>cp /tmp/usercert.pem ~/.globus/</p>
 
-<p>Copy the usercert and userkey to /opt/usercerts/seqware-cert.pem and /opt/usercerts/seqware-key.pem. These then needs to be put in the created seqware user&#8217;s homedir by the starcluster user plugin.</p>
+<p>Copy the usercert and userkey to /opt/usercerts/seqware-cert.pem and /opt/usercerts/seqware-key.pem. These then needs to be put in the created seqware user’s homedir by the starcluster user plugin.</p>
 
 <div class="section" id="issue-with-certificate-path">
 <h4>Issue with Certificate Path</h4>
@@ -629,86 +624,86 @@ ln -s grid-security.conf.3847a079 grid-security.conf.44d1fecb
  &lt;profile namespace="globus" key="count"&gt;8&lt;/profile&gt;
 </code></pre>
 
-<p>And this means that particular step needs 8 threads on the node.  I used &#8220;condor&#8221; here since this was the only jobtype value recognized by GRAM that wasn&#8217;t already being used in sge.pm.  To get this to work make sure your parallel environment &#8220;serial&#8221; is setup in SGE or, if you&#8217;ve named it something else, you modify sge.pm correctly.</p>
+<p>And this means that particular step needs 8 threads on the node.  I used “condor” here since this was the only jobtype value recognized by GRAM that wasn’t already being used in sge.pm.  To get this to work make sure your parallel environment “serial” is setup in SGE or, if you’ve named it something else, you modify sge.pm correctly.</p>
 
 <p>Now apply the following patch as root to /usr/share/perl5/vendor_perl/Globus/GRAM/JobManager/sge.pm. You may find it easier just to copy the new lines added below rather than use the patch command.</p>
 
-<pre><code>*** /usr/local/globus/default/setup/globus/sge.pm   2011-01-04 02:26:09.000000000 -0500
---- /usr/local/globus/default/setup/globus/sge.pm.dist  2011-01-04 02:21:59.000000000 -0500
-***************
-*** 47,55 ****
-      $mpi_pe      = '';
-      #
-      if(($mpirun eq "no") &amp;&amp; ($sun_mprun eq "no"))
-!       { $supported_job_types = "(single|multiple|condor)"; }
-      else
-!       { $supported_job_types = "(mpi|single|multiple|condor)"; }
-      #
-      $cat         = '/bin/cat';
-      #
---- 47,55 ----
-      $mpi_pe      = '';
-      #
-      if(($mpirun eq "no") &amp;&amp; ($sun_mprun eq "no"))
-!       { $supported_job_types = "(single|multiple)"; }
-      else
-!       { $supported_job_types = "(mpi|single|multiple)"; }
-      #
-      $cat         = '/bin/cat';
-      #
-***************
-*** 577,588 ****
-                     . $description-&gt;stdin() . "\n");
-      }
-      }
--     elsif($description-&gt;jobtype() eq "condor" &amp;&amp; $description-&gt;count() &gt; 1 ) 
--     {
--       # NOTE: you may need to change 'serial' to the parallel environment name used on your cluster
--       $sge_job_script-&gt;print("#\$ -pe serial "
--                                    . $description-&gt;count() ."\n"
--                                    . $executable . " $args &lt; ". $stdin
--                                    . "\n");
--        if (!$rc)
--        {
--            return $self-&gt;respond_with_failure_extension(
--                    "print: $sge_job_script_name: $!",
--                    Globus::GRAM::Error::TEMP_SCRIPT_FILE_FAILED());
--        }
--     }
-      elsif($description-&gt;jobtype() eq "multiple")
-      {
-      #####
---- 577,582 ----
+<pre><code>    *** /usr/local/globus/default/setup/globus/sge.pm       2011-01-04 02:26:09.000000000 -0500
+    --- /usr/local/globus/default/setup/globus/sge.pm.dist  2011-01-04 02:21:59.000000000 -0500
+    ***************
+    *** 47,55 ****
+          $mpi_pe      = '';
+          #
+          if(($mpirun eq "no") &amp;&amp; ($sun_mprun eq "no"))
+    !       { $supported_job_types = "(single|multiple|condor)"; }
+          else
+    !       { $supported_job_types = "(mpi|single|multiple|condor)"; }
+          #
+          $cat         = '/bin/cat';
+          #
+    --- 47,55 ----
+          $mpi_pe      = '';
+          #
+          if(($mpirun eq "no") &amp;&amp; ($sun_mprun eq "no"))
+    !       { $supported_job_types = "(single|multiple)"; }
+          else
+    !       { $supported_job_types = "(mpi|single|multiple)"; }
+          #
+          $cat         = '/bin/cat';
+          #
+    ***************
+    *** 577,588 ****
+                                         . $description-&gt;stdin() . "\n");
+              }
+          }
+    -     elsif($description-&gt;jobtype() eq "condor" &amp;&amp; $description-&gt;count() &gt; 1 ) 
+    -     {
+    -       # NOTE: you may need to change 'serial' to the parallel environment name used on your cluster
+    -       $sge_job_script-&gt;print("#\$ -pe serial "
+    -                                    . $description-&gt;count() ."\n"
+    -                                    . $executable . " $args &lt; ". $stdin
+    -                                    . "\n");
+    -        if (!$rc)
+    -        {
+    -            return $self-&gt;respond_with_failure_extension(
+    -                    "print: $sge_job_script_name: $!",
+    -                    Globus::GRAM::Error::TEMP_SCRIPT_FILE_FAILED());
+    -        }
+    -     }
+          elsif($description-&gt;jobtype() eq "multiple")
+          {
+              #####
+    --- 577,582 ----
 </code></pre>
 
-<p>If a particular module in one of your workflows needs to use a specific amount of memory you may also need to modify the sge.pm globus object depending on how you&#8217;ve setup memory management on your cluster.  For example, this is the change I made to work on our cluster where memory was setup as a &#8220;consumable resource&#8221; and accessed by the following in the DAX, note this number is in megabytes:</p>
+<p>If a particular module in one of your workflows needs to use a specific amount of memory you may also need to modify the sge.pm globus object depending on how you’ve setup memory management on your cluster.  For example, this is the change I made to work on our cluster where memory was setup as a “consumable resource” and accessed by the following in the DAX, note this number is in megabytes:</p>
 
 <pre><code> &lt;profile namespace="globus" key="maxmemory"&gt;100&lt;/profile&gt;
 </code></pre>
 
 <p>These are the changes to sge.pm:</p>
 
-<pre><code>*** /usr/local/globus/default/setup/globus/sge.pm   2011-01-04 03:08:17.000000000 -0500
---- /usr/local/globus/default/setup/globus/sge.pm.dist  2011-01-04 02:21:59.000000000 -0500
-*** 331,337 ****
-      if($max_memory != 0)
-      {
-      $self-&gt;log("Total max memory flag is set to $max_memory Mb");
-!         $sge_job_script-&gt;print("#\$ -l vf=$max_memory" . "M\n"); 
-      }
+<pre><code>    *** /usr/local/globus/default/setup/globus/sge.pm       2011-01-04 03:08:17.000000000 -0500
+    --- /usr/local/globus/default/setup/globus/sge.pm.dist  2011-01-04 02:21:59.000000000 -0500
+    *** 331,337 ****
+          if($max_memory != 0)
+          {
+              $self-&gt;log("Total max memory flag is set to $max_memory Mb");
+    !         $sge_job_script-&gt;print("#\$ -l vf=$max_memory" . "M\n"); 
+          }
 
 
---- 331,337 ----
-      if($max_memory != 0)
-      {
-      $self-&gt;log("Total max memory flag is set to $max_memory Mb");
-!         $sge_job_script-&gt;print("#\$ -l h_data=$max_memory" . "M\n");
-      }
+    --- 331,337 ----
+          if($max_memory != 0)
+          {
+              $self-&gt;log("Total max memory flag is set to $max_memory Mb");
+    !         $sge_job_script-&gt;print("#\$ -l h_data=$max_memory" . "M\n");
+          }
 </code></pre>
 
 <p>Think very carefully about these changes above before you make them.  Your workflows may not need multi-threading and the version of GRAM you use (if not identical to the one here) may already allow you to specify without modifying the sge.pm file.  Contact the Pegasus developers for help on this.</p>
 
-<p>After making your changes to the sge.pm make sure you use &#8220;perl -c&#8221; to check the syntax. It needs to be a valid Perl file to work!</p>
+<p>After making your changes to the sge.pm make sure you use “perl -c” to check the syntax. It needs to be a valid Perl file to work!</p>
 
 </div>
 <div class="section" id="starting-daemons">
@@ -727,7 +722,7 @@ service globus-scheduler-event-generator start
 <div class="section" id="setup-condor">
 <h2>Setup Condor</h2>
 
-<p>Pegasus submits jobs to Condor and Condor then submits to an actual cluster execution engine.  Here we&#8217;re using SGE as our cluster execution engine but Condor could be configured to submit to another cluster engine (via GRAM) such as PBS or LSF or even run jobs itself.  Pegasus doesn&#8217;t need to know about these details since it always just submits to Condor. Condor is also the layer that provides job dependency management.</p>
+<p>Pegasus submits jobs to Condor and Condor then submits to an actual cluster execution engine.  Here we’re using SGE as our cluster execution engine but Condor could be configured to submit to another cluster engine (via GRAM) such as PBS or LSF or even run jobs itself.  Pegasus doesn’t need to know about these details since it always just submits to Condor. Condor is also the layer that provides job dependency management.</p>
 
 <p>As root, you may need to download condor manually from http://www.cs.wisc.edu/condor/downloads-v2/download.pl or use <a href="http://research.cs.wisc.edu/condor/yum/">yum</a>.  For example:</p>
 
@@ -735,9 +730,9 @@ service globus-scheduler-event-generator start
 rpm -Uvh condor-7.6.0-linux-x86_64-rhel5-dynamic-1.x86_64.rpm
 </code></pre>
 
-<p>Starting with the 7.5 release of condor the project has cleaned up their RPMs to install software in the &#8220;proper&#8221; RedHat/CentOS places.  I had to use 7.6.7 and not the latest version since I experience seg faults with the latest.</p>
+<p>Starting with the 7.5 release of condor the project has cleaned up their RPMs to install software in the “proper” RedHat/CentOS places.  I had to use 7.6.7 and not the latest version since I experience seg faults with the latest.</p>
 
-<p>This is what I added/changed in /etc/condor/condor_config.local as root in previous VM setups.  In this current VM I&#8217;m using stock but you may be interested in tuning these params:</p>
+<p>This is what I added/changed in /etc/condor/condor_config.local as root in previous VM setups.  In this current VM I’m using stock but you may be interested in tuning these params:</p>
 
 <pre><code>DAEMON_LIST = COLLECTOR, MASTER, NEGOTIATOR, SCHEDD
 
@@ -781,9 +776,9 @@ ENABLE_GRID_MONITOR=FALSE
 <div class="section" id="testing-sge-globus-gram-globus-gridftp-and-condor">
 <h2>Testing SGE, Globus GRAM, Globus GridFTP, and Condor</h2>
 
-<p>The next step is to test the whole software stack you installed as user seqware. If you can get through these tests then the most complex part of the configuration and installation is behind you. If you can&#8217;t get these to work then please email the support mailing lists for the appropriate projects.  Globus and Condor both have very active lists and the Pegasus developers are extremely helpful.  Unless you can successfully do all of the following do not attempt to install SeqWare or Pegasus since they will not work!</p>
+<p>The next step is to test the whole software stack you installed as user seqware. If you can get through these tests then the most complex part of the configuration and installation is behind you. If you can’t get these to work then please email the support mailing lists for the appropriate projects.  Globus and Condor both have very active lists and the Pegasus developers are extremely helpful.  Unless you can successfully do all of the following do not attempt to install SeqWare or Pegasus since they will not work!</p>
 
-<p>Also, it&#8217;s worth pointing out that you should test that you can specify the number of &#8220;slots/threads&#8221; and the amount of memory for qsub submissions using the correct syntax that you setup for this SGE instance.</p>
+<p>Also, it’s worth pointing out that you should test that you can specify the number of “slots/threads” and the amount of memory for qsub submissions using the correct syntax that you setup for this SGE instance.</p>
 
 <pre><code># first, test if SGE is working
 [seqware@seqware ~]$ echo /bin/hostname | qsub -cwd
@@ -855,7 +850,7 @@ watch condor_q
 watch qstat -f
 </code></pre>
 
-<p>If these tests pass without errors the whole software stack SGE/Globus/Condor should be working and that&#8217;s a major hurdle to pass.  Pat yourself on the back!</p>
+<p>If these tests pass without errors the whole software stack SGE/Globus/Condor should be working and that’s a major hurdle to pass.  Pat yourself on the back!</p>
 
 </div>
 <div class="section" id="setup-pegasus">
@@ -944,20 +939,20 @@ CLUSTER_GLOBUS_LOCATION="/usr/local/globus/default"
 
 </div>
 <div class="section" id="setup-users-bash-profile-pegasus-seqware-settings">
-<h2>Setup Users&#8217; Bash Profile, Pegasus &amp; SeqWare Settings</h2>
+<h2>Setup Users’ Bash Profile, Pegasus &amp; SeqWare Settings</h2>
 
 <p>These changes should really happen after all the software is installed, to make sure the paths below are valid. Also, we should make use of /etc/profiles.d files too which will make it easier to maintain settings across user accounts.</p>
 
 <div class="section" id="bash-profile">
 <h3>Bash Profile</h3>
 
-<p>Make sure both seqware and root have their environments setup correctly. Here&#8217;s seqware&#8217;s .bash_profile for your reference:</p>
+<p>Make sure both seqware and root have their environments setup correctly. Here’s seqware’s .bash_profile for your reference:</p>
 
 <pre><code># .bash_profile
 
 # Get the aliases and functions
 if [ -f ~/.bashrc ]; then
-    . ~/.bashrc
+	. ~/.bashrc
 fi
 
 # User specific environment and startup programs
@@ -1025,52 +1020,52 @@ pegasus.dagman.projection.maxjobs 2
 
 <pre><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;sitecatalog xmlns="http://pegasus.isi.edu/schema/sitecatalog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pegasus.isi.edu/schema/sitecatalog http://pegasus.isi.edu/schema/sc-3.0.xsd" version="3.0"&gt;
-    &lt;site  handle="local" arch="x86_64" os="LINUX" osrelease="" osversion="" glibc=""&gt;
-        &lt;grid  type="gt5" contact="seqwarevm/jobmanager-fork" scheduler="Fork" jobtype="auxillary"/&gt;
-        &lt;grid  type="gt5" contact="seqwarevm/jobmanager-sge" scheduler="SGE" jobtype="compute"/&gt;
-        &lt;head-fs&gt;
-            &lt;scratch&gt;
-                &lt;shared&gt;
-                    &lt;file-server protocol="gsiftp" url="gsiftp://seqwarevm" mount-point="/home/seqware/SeqWare/pegasus-working"/&gt;
-                    &lt;internal-mount-point mount-point="/home/seqware/SeqWare/pegasus-working"/&gt;
-                &lt;/shared&gt;
-            &lt;/scratch&gt;
-            &lt;storage&gt;
-                &lt;shared&gt;
-                    &lt;file-server protocol="gsiftp" url="gsiftp://seqwarevm" mount-point="/"/&gt;
-                    &lt;internal-mount-point mount-point="/"/&gt;
-                &lt;/shared&gt;
-            &lt;/storage&gt;
-        &lt;/head-fs&gt;
-        &lt;replica-catalog  type="LRC" url="rlsn://smarty.isi.edu"/&gt;
-        &lt;profile namespace="env" key="GLOBUS_LOCATION"&gt;/usr&lt;/profile&gt;
-        &lt;profile namespace="env" key="JAVA_HOME"&gt;/usr/java/default&lt;/profile&gt;
-        &lt;!--profile namespace="env" key="LD_LIBRARY_PATH"&gt;/.mounts/labs/seqware/public/globus/default/lib&lt;/profile--&gt;
-        &lt;profile namespace="env" key="PEGASUS_HOME"&gt;/opt/pegasus/3.0&lt;/profile&gt;
-    &lt;/site&gt;
-    &lt;site  handle="seqwarevm" arch="x86_64" os="LINUX" osrelease="" osversion="" glibc=""&gt;
-        &lt;grid  type="gt5" contact="seqwarevm/jobmanager-fork" scheduler="Fork" jobtype="auxillary"/&gt;
-        &lt;grid  type="gt5" contact="seqwarevm/jobmanager-sge" scheduler="SGE" jobtype="compute"/&gt;
-        &lt;head-fs&gt;
-            &lt;scratch&gt;
-                &lt;shared&gt;
-                    &lt;file-server protocol="gsiftp" url="gsiftp://seqwarevm" mount-point="/home/seqware/SeqWare/pegasus-working"/&gt;
-                    &lt;internal-mount-point mount-point="/home/seqware/SeqWare/pegasus-working"/&gt;
-                &lt;/shared&gt;
-            &lt;/scratch&gt;
-            &lt;storage&gt;
-                &lt;shared&gt;
-                    &lt;file-server protocol="gsiftp" url="gsiftp://seqwarevm" mount-point="/"/&gt;
-                    &lt;internal-mount-point mount-point="/"/&gt;
-                &lt;/shared&gt;
-            &lt;/storage&gt;
-        &lt;/head-fs&gt;
-        &lt;replica-catalog  type="LRC" url="rlsn://smarty.isi.edu"/&gt;
-        &lt;profile namespace="env" key="GLOBUS_LOCATION"&gt;/usr&lt;/profile&gt;
-        &lt;profile namespace="env" key="JAVA_HOME"&gt;/usr/java/default&lt;/profile&gt;
-        &lt;!--profile namespace="env" key="LD_LIBRARY_PATH"&gt;/.mounts/labs/seqware/public/globus/default/lib&lt;/profile--&gt;
-        &lt;profile namespace="env" key="PEGASUS_HOME"&gt;/opt/pegasus/3.0&lt;/profile&gt;
-    &lt;/site&gt;
+	&lt;site  handle="local" arch="x86_64" os="LINUX" osrelease="" osversion="" glibc=""&gt;
+		&lt;grid  type="gt5" contact="seqwarevm/jobmanager-fork" scheduler="Fork" jobtype="auxillary"/&gt;
+		&lt;grid  type="gt5" contact="seqwarevm/jobmanager-sge" scheduler="SGE" jobtype="compute"/&gt;
+		&lt;head-fs&gt;
+			&lt;scratch&gt;
+				&lt;shared&gt;
+					&lt;file-server protocol="gsiftp" url="gsiftp://seqwarevm" mount-point="/home/seqware/SeqWare/pegasus-working"/&gt;
+					&lt;internal-mount-point mount-point="/home/seqware/SeqWare/pegasus-working"/&gt;
+				&lt;/shared&gt;
+			&lt;/scratch&gt;
+			&lt;storage&gt;
+				&lt;shared&gt;
+					&lt;file-server protocol="gsiftp" url="gsiftp://seqwarevm" mount-point="/"/&gt;
+					&lt;internal-mount-point mount-point="/"/&gt;
+				&lt;/shared&gt;
+			&lt;/storage&gt;
+		&lt;/head-fs&gt;
+		&lt;replica-catalog  type="LRC" url="rlsn://smarty.isi.edu"/&gt;
+		&lt;profile namespace="env" key="GLOBUS_LOCATION"&gt;/usr&lt;/profile&gt;
+		&lt;profile namespace="env" key="JAVA_HOME"&gt;/usr/java/default&lt;/profile&gt;
+		&lt;!--profile namespace="env" key="LD_LIBRARY_PATH"&gt;/.mounts/labs/seqware/public/globus/default/lib&lt;/profile--&gt;
+		&lt;profile namespace="env" key="PEGASUS_HOME"&gt;/opt/pegasus/3.0&lt;/profile&gt;
+	&lt;/site&gt;
+	&lt;site  handle="seqwarevm" arch="x86_64" os="LINUX" osrelease="" osversion="" glibc=""&gt;
+		&lt;grid  type="gt5" contact="seqwarevm/jobmanager-fork" scheduler="Fork" jobtype="auxillary"/&gt;
+		&lt;grid  type="gt5" contact="seqwarevm/jobmanager-sge" scheduler="SGE" jobtype="compute"/&gt;
+		&lt;head-fs&gt;
+			&lt;scratch&gt;
+				&lt;shared&gt;
+					&lt;file-server protocol="gsiftp" url="gsiftp://seqwarevm" mount-point="/home/seqware/SeqWare/pegasus-working"/&gt;
+					&lt;internal-mount-point mount-point="/home/seqware/SeqWare/pegasus-working"/&gt;
+				&lt;/shared&gt;
+			&lt;/scratch&gt;
+			&lt;storage&gt;
+				&lt;shared&gt;
+					&lt;file-server protocol="gsiftp" url="gsiftp://seqwarevm" mount-point="/"/&gt;
+					&lt;internal-mount-point mount-point="/"/&gt;
+				&lt;/shared&gt;
+			&lt;/storage&gt;
+		&lt;/head-fs&gt;
+		&lt;replica-catalog  type="LRC" url="rlsn://smarty.isi.edu"/&gt;
+		&lt;profile namespace="env" key="GLOBUS_LOCATION"&gt;/usr&lt;/profile&gt;
+		&lt;profile namespace="env" key="JAVA_HOME"&gt;/usr/java/default&lt;/profile&gt;
+		&lt;!--profile namespace="env" key="LD_LIBRARY_PATH"&gt;/.mounts/labs/seqware/public/globus/default/lib&lt;/profile--&gt;
+		&lt;profile namespace="env" key="PEGASUS_HOME"&gt;/opt/pegasus/3.0&lt;/profile&gt;
+	&lt;/site&gt;
 &lt;/sitecatalog&gt;
 </code></pre>
 
@@ -1078,13 +1073,13 @@ pegasus.dagman.projection.maxjobs 2
 <div class="section" id="rc-data">
 <h4>rc.data</h4>
 
-<p>Just touch this file, we don&#8217;t use it so it can be empty.</p>
+<p>Just touch this file, we don’t use it so it can be empty.</p>
 
 </div>
 <div class="section" id="tc-data">
 <h4>tc.data</h4>
 
-<p>Just touch this file, we don&#8217;t use it so it can be empty.</p>
+<p>Just touch this file, we don’t use it so it can be empty.</p>
 
 </div>
 </div>
@@ -1185,7 +1180,7 @@ pegasus-dax  pegasus-working  provisioned-bundles  released-bundles  trunk
 <div class="section" id="testing-seqware-pipeline">
 <h3>Testing SeqWare Pipeline</h3>
 
-<p>SeqWare Pipeline includes a &#8220;HelloWorld&#8221; module and workflow that is useful for testing if the whole stack is working.  Log into the VM as &#8220;seqware&#8221; and cd in:</p>
+<p>SeqWare Pipeline includes a “HelloWorld” module and workflow that is useful for testing if the whole stack is working.  Log into the VM as “seqware” and cd in: </p>
 
 <pre><code> /home/seqware/svnroot/seqware-complete/trunk
 </code></pre>
@@ -1202,7 +1197,7 @@ pegasus-dax  pegasus-working  provisioned-bundles  released-bundles  trunk
 <pre><code> watch pegasus-status -l /tmp/pegasus_dax/seqware/seqware/pegasus/HelloWorld/run0001
 </code></pre>
 
-<p>Where &#8220;run0001&#8221; is replaced with the run mentioned in the ./bin/pegasus-run.pl output.</p>
+<p>Where “run0001” is replaced with the run mentioned in the ./bin/pegasus-run.pl output.</p>
 
 <p>If everything worked OK you should see the job complete:</p>
 
@@ -1219,44 +1214,39 @@ WORKFLOW STATUS : COMPLETED | 17/17 ( 100% ) | (all jobs finished successfully)
 <pre><code> /tmp/pegasus_dax/seqware/seqware/pegasus/HelloWorld/run0001
 </code></pre>
 
-<p>Where &#8220;run0001&#8221; is replaced with the run mentioned in the ./bin/pegasus-run.pl output.</p>
+<p>Where “run0001” is replaced with the run mentioned in the ./bin/pegasus-run.pl output.</p>
 
 </div>
 </div>
 <div class="section" id="setup-seqware-metadb">
 <h2>Setup SeqWare MetaDB</h2>
 
-<p>The SeqWare MetaDB is the common database for tracking metadata throughout the project.  So it&#8217;s the first of the sub-projects that needs to be setup.  We&#8217;ll also pre-load it with useful examples so VM users can have something to play with upon first boot.</p>
+<p>The SeqWare MetaDB is the common database for tracking metadata throughout the project.  So it’s the first of the sub-projects that needs to be setup.  We’ll also pre-load it with useful examples so VM users can have something to play with upon first boot.</p>
 
-<p>We&#8217;re using an empty database to start the user tutorial off with.  This uses the two sql files:</p>
+<p>See <a href="../github_readme/3-metadb/">Setup SeqWare MetaDB</a> for directions on how to set this up.</p>
 
-<ul>
-<li>seqware_meta_db.sql</li>
-<li>seqware_meta_db_data.sql</li>
-</ul>
-<p>We then added some sample data including installing the HelloWorld bundle.</p>
-
-<pre>
--bash-4.1$ psql -U seqware -W seqware_meta_db 
-
-
-<p>See <a href="../4-metadb/#setup">Setup SeqWare MetaDB</a> for directions on how to set this up.</p>
-
+</div>
 <div class="section" id="setup-seqware-portal">
 <h2>Setup SeqWare Portal</h2>
 
 <p>The SeqWare Portal will be the entry point for many users of the VM to explore the sample data bundled with the VM and, ultimately, upload and launch new analysis.</p>
 
-<p>I followed the directions at <a href="../5-portal/">Setup SeqWare LIMS | Setup SeqWare Portal</a> and installed the war file into Tomcat following a fairly standard approach.</p>
+<p>The URL to access the Portal is http://localhost:8080/seqware-portal-<version></version></p>
 
-<p>The URL to access the Portal is http://localhost:8080/SeqWarePortal</p>
+<p>See <a href="../github_readme/5-portal/">Setup SeqWare Portal</a> for directions on how to set this up.</p>
 
-</div><div class="section" id="setup-seqware-web-service">
+</div>
+<div class="section" id="setup-seqware-web-service">
 <h2>Setup SeqWare Web Service</h2>
 
-<p>Much like the Portal this sub-project just needs to be build and deployed in Tomcat using the standard War file approach.  See <a href="../../7-web-service/#setup-the-web-service">Setup SeqWare WebService</a> for more information.  Once installed, you can access the web service using http://localhost:8080/SeqWareWebService.</p>
+<p>The SeqWare WebService provides data to our command-line utilities. It is installed much like the SeqWare Portal as a Tomcat web application.</p>
 
-</div><div class="section" id="next-steps">
+<p>The URL to access the Portal is http://localhost:8080/seqware-webservice-<version></version></p>
+
+<p>See <a href="../github_readme/4-webservice/">Setup SeqWare Web Service</a> for directions on how to set this up.</p>
+
+</div>
+<div class="section" id="next-steps">
 <h2>Next Steps</h2>
 
 <p>There are two main next steps:</p>
@@ -1270,7 +1260,7 @@ WORKFLOW STATUS : COMPLETED | 17/17 ( 100% ) | (all jobs finished successfully)
 <div class="section" id="connect-the-vm-to-a-real-cluster">
 <h3>Connect the VM to a Real Cluster</h3>
 
-<p>One thing to keep in mind is, if you're using this VM that has already been setup you will still want to edit the sge.pm file since it contains paths and ports that will need to change given your environment.  If you're using the VM as a self-contained environment you don't need to worry about this.  But if you're connecting to a real cluster then you need to have these setup properly.  For example you would need to customize the following section in /usr/share/perl5/vendor_perl/Globus/GRAM/JobManager/sge.pm:</p>
+<p>One thing to keep in mind is, if you’re using this VM that has already been setup you will still want to edit the sge.pm file since it contains paths and ports that will need to change given your environment.  If you’re using the VM as a self-contained environment you don’t need to worry about this.  But if you’re connecting to a real cluster then you need to have these setup properly.  For example you would need to customize the following section in /usr/share/perl5/vendor_perl/Globus/GRAM/JobManager/sge.pm:</p>
 
 <pre><code>BEGIN
 {
@@ -1304,13 +1294,14 @@ WORKFLOW STATUS : COMPLETED | 17/17 ( 100% ) | (all jobs finished successfully)
  }
 </code></pre>
 
-<p>Make sure the paths and ports are valid for the cluster you&#8217;re connecting too.  You&#8217;ll also want to take a look at the other modifications made to sge.pm to see if they are valid for the new cluster you are connecting to.  For example, what you call your parallel environment (serial) and what variable you use to define the memory consumable resource differ from SGE install to SGE install.</p>
+<p>Make sure the paths and ports are valid for the cluster you’re connecting too.  You’ll also want to take a look at the other modifications made to sge.pm to see if they are valid for the new cluster you are connecting to.  For example, what you call your parallel environment (serial) and what variable you use to define the memory consumable resource differ from SGE install to SGE install.</p>
 
-<p>Also, keep in mind it&#8217;s possible to connect to a cluster type different than SGE.  You will need to install the appropriate GRAM configuration RPM and follow any configuration needed for the other cluster type (similar to the way we modified sge.pm).  But in theory you should be able to customize this VM to submit to another SGE, PBS, Condor, etc cluster fairly easily.  See the Globus Toolkit website and docs for more information.</p>
-</div>
-</div></pre>
+<p>Also, keep in mind it’s possible to connect to a cluster type different than SGE.  You will need to install the appropriate GRAM configuration RPM and follow any configuration needed for the other cluster type (similar to the way we modified sge.pm).  But in theory you should be able to customize this VM to submit to another SGE, PBS, Condor, etc cluster fairly easily.  See the Globus Toolkit website and docs for more information.</p>
 </div>
 </div>
+</div>
+<p></p>
+<div id="disqus_thread"></div>
 </div>
 </div>
 <!-- ***** footer ***** -->

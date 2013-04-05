@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<title>SeqWare › SeqWare WebService - Install Guide</title>
+<meta content="nanoc 3.6.2" name="generator">
+<link href="../../../assets/style-v17.css" media="screen" rel="stylesheet" type="text/css">
+<link href="http://feeds.feedburner.com/seqware" rel="alternate" title="The SeqWare Blog" type="application/atom+xml">
+<script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script><script type="text/javascript">         var disqus_shortname = 'seqware';          (function() {             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);         })();     </script>
+</head>
+<body>
+<div class="wrapper">
+<!-- ***** navigation ***** -->
+<div class="nav">
+<ol>
+<li><a href="../../../"><span>Home</span></a></li>
+<li><a href="../../../blog/"><span>News</span></a></li>
+<li><a href="../../"><span>Documentation</span></a></li>
+<li><a href="../../../community/"><span>Community</span></a></li>
+<li><a href="../../../partners/"><span>Partners</span></a></li>
+<li><a href="../../../about/"><span>About</span></a></li>
+</ol>
+</div>
+<!-- ***** sidebar ***** -->
+<div class="side">
+<ol>
+<li><a href="../../1-introduction/"><span>Introduction to SeqWare</span></a></li>
+<li><a href="../../2-installation/"><span>Installation</span></a></li>
+<li><a href="../../3-getting-started/"><span>Getting Started</span></a></li>
+<li><a href="../../6-pipeline/"><span>SeqWare Pipeline</span></a></li>
+<li><a href="../../4-metadb/"><span>SeqWare MetaDB</span></a></li>
+<li><a href="../../5-portal/"><span>SeqWare Portal</span></a></li>
+<li><a href="../../7-web-service/"><span>SeqWare Web Service</span></a></li>
+<li><a href="../../8-query-engine/"><span>SeqWare Query Engine</span></a></li>
+<li><a href="../../9-glossary/"><span>Glossary</span></a></li>
+<li><a href="../../10-faq/"><span>Frequently Asked Questions</span></a></li>
+<li><a href="../../11-api/"><span>APIs</span></a></li>
+<li><a href="../../13-code/"><span>Source Code</span></a></li>
+<li><a href="../../17-plugins/"><span>Plugins</span></a></li>
+<li><a href="../../17a-modules/"><span>Modules</span></a></li>
+</ol>
+</div>
+<!-- ***** body ***** -->
+<div class="body">
+<div class="article">
+<div class="header">
+<h1>SeqWare WebService - Install Guide</h1>
+</div>
+<div class="section" id="build">
+<h2>Build</h2>
+
+<p>In order to build without running all of the tests and create the WAR file for deployment, you can run the following from the root directory of the trunk. The WS has dependencies to seqware-common, seqware-pipeline, and seqware-queryengine, so all of those need to be available to Maven for building.</p>
+
+<pre><code>mvn clean install
+</code></pre>
+
+<p>Running the above should skip all of the integration tests and create the WAR file and XML file for deployment in seqware-webservice/target. The reason for skipping the tests is because the tests attempt to create and connect to a new database (named “test_seqware_meta_db”) and they will fail if the Web service is not configured to connect to this database.</p>
+
+<div class="section" id="requirements">
+<h3>Requirements</h3>
+<p>The SeqWare Web service requires:</p>
+
+<ul>
+<li>Apache Tomcat 6.0+</li>
+  <li>Access to a Seqware MetaDB PostgreSQL database (See <a href="../../4-metadb/">SeqWare MetaDB</a>)</li>
+  <li>A locally running PostgreSQL install that has a ‘seqware’ user with CREATEDB privileges.</li>
+  <li>Maven 2.2.1+</li>
+  <li>The SeqWare WebService source code. (See <a href="../../13-code/">Source Code</a>) </li>
+</ul>
+</div>
+<div class="section" id="integration-testing">
+<h3>Integration Testing</h3>
+
+<p>The Web Service creates its own database using the seqware user, so this user must have CREATEDB privileges in PostgreSQL. This database will be called test_seqware_meta_db and is automatically dropped and re-created during our tests. You should setup the plpgsql language in the template1 database so it automatically transfers to the test database when it is created. Again, see the MetaDB setup guide for both steps.</p>
+
+<p>If you’ve setup your seqware user with createdb privileges and the plpgsql language you can actually just build and test the web service with Maven, it has a built-in Jetty server that will startup and test the web service.  You can trigger this just by doing:</p>
+
+<pre><code>mvn clean install -DskipITs=false
+</code></pre>
+
+<p>If you want to startup the Jetty server for interactive testing you can simply do:</p>
+
+<pre><code>mvn jetty:run
+</code></pre>
+
+<p>You will need to make sure that your ~/.seqware/settings file includes the line </p>
+
+<pre><code>SW_REST_URL=http://localhost:8889/seqware-webservice
+</code></pre>
+
+</div>
+<div class="section" id="configuring-the-database-connection">
+<h3>Configuring the database connection</h3>
+
+<p>If you wish to test against a remote database, in the source, two files need to be edited with database information in order to successfully build, test and run the Web service on Apache Tomcat (assuming you want to point it to your real DB rather than the test DB created above).</p>
+
+<p>These files are located at:</p>
+
+<ul>
+<li>Running: <a href="https://github.com/SeqWare/seqware/blob/master/seqware-webservice/src/main/webapp/META-INF/context.xml">seqware-webservice/src/main/webapp/META-INF/context.xml</a> - change all parameters to match your local seqware_meta_db connection.</li>
+  <li>Testing: <a href="https://github.com/SeqWare/seqware/blob/master/seqware-webservice/src/main/webapp/WEB-INF/jetty-env.xml">seqware-webservice/src/main/webapp/WEB-INF/jetty-env.xml</a> - leave the DB name as test_seqware_meta_db. This DB will be dropped and re-created at test runtime.</li>
+</ul>
+<p>Three variables need to be changed in each file to reflect your local setup:</p>
+
+<ul>
+<li>url=”jdbc:postgresql://localhost:5432/seqware_meta_db”</li>
+  <li>username=”seqware”</li>
+  <li>password=”password”</li>
+</ul>
+<p>The url, username and password need to be changed to reflect the local database. ‘‘The username and password are the PostgreSQL database username and password.’’</p>
+
+</div>
+</div>
+<div class="section" id="installation">
+<h2>Installation</h2>
+<p>In order to deploy the Web service into Tomcat, drop the WAR from seqware-webservice/target into the webapps directory, and the XML into TOMCAT_HOME/conf/Catalina/localhost (maps to /etc/tomcat6/Catalina/localhost/ on many Linux distributions). On the SeqWare VM, these directories are /var/lib/tomcat6/webapps and /etc/tomcat6/Catalina/localhost.</p>
+
+<p>SeqWare WebService consumes quite a bit of memory, so configure your Tomcat instance with the following attributes:</p>
+
+<pre><code>JAVA_OPTS= -server -Xss1024K -Xms1G -Xmx2G -XX:MaxPermSize=128M -XX:NewSize=512m
+</code></pre>
+
+<p>This environment variable should either be set on your command line or in the conf/tomcat6.conf file, depending on your setup. On our production machines, these memory values are all doubled.</p>
+
+<p>Restart Tomcat with <tt>bin/shutdown.sh;bin/startup.sh</tt> (<tt>/etc/init.d/tomcat6 restart</tt> for Tomcat 6).</p>
+
+<p>You can double-check whether this setting was successfully set by going to http://localhost:8080/manager/status/all and checking the JVM section. You may need to edit your <tt>/etc/tomcat6/tomcat-users.xml</tt> file and add/enable the following lines in order to enable access to the tomcat manager</p>
+
+<pre><code>&lt;role rolename="manager"/&gt;
+&lt;role rolename="admin"/&gt;
+&lt;user username="admin" password="admin" roles="admin,manager"/&gt;
+</code></pre>
+
+<p>In some cases, tomcat will ignore configuring the JAVA_OPTS either on command line or in the /etc/init.d/tomcat6 . In these cases, you can try adding a setenv.sh file with the single line </p>
+
+<pre><code>export JAVA_OPTS="-server -Xss1024K -Xms1G -Xmx2G -XX:MaxPermSize=128M -XX:NewSize=512m"
+</code></pre>
+
+<p>&#8216;’Note for Tomcat 6 Users’’: Tomcat may ship with an outdated postgresql-jdbc jar that will conflict with the jar in the WAR. Replace any postgresql-jdbc jar in the lib directory with the most recent version of postgresq-jdbc (We use 9.0-801.jdbc3).</p>
+
+<p>The jar will deploy at http://localhost:8080/seqware-webservice-0.11.4, or http://host.address:port/seqware-webservice-x.x.x, where your host.address is the address of the machine running the Web service, the port is the Tomcat port, and seqware-webservice-x.x.x is the appropriate version number on the seqware-webservice WAR. Navigating to this address in your browser should not show an error message (you will have to authenticate with an appropriate username and password as specified in the MetadataDB).</p>
+</div>
+</div>
+<p></p>
+<div id="disqus_thread"></div>
+</div>
+</div>
+<!-- ***** footer ***** -->
+<div id="footer">
+<p>SeqWare © 2007–2013 Brian O&#8217;Connor. SeqWare is released under the a <a rel="license" href="http://www.gnu.org/licenses/licenses.html">GNU GPL v3</a>. This site is built using the excellent <a href="http://nanoc.stoneship.org/">nanoc</a> tool and example site along with the <a href="http://www.fonts.info/info/press/free-fonts-for-font-face-embedding.htm">Graublau</a> and <a href="http://scripts.sil.org/Gentium">Gentium</a> fonts.</p>
+</div>
+</body>
+</html>
