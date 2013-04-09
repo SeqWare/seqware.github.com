@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="UTF-8">
-<title>SeqWare › </title>
+<title>SeqWare › Debugging, Troubleshooting, &amp; Restarting Workflow</title>
 <meta content="nanoc 3.6.2" name="generator">
 <link href="../../../assets/style-v17.css" media="screen" rel="stylesheet" type="text/css">
 <link href="http://feeds.feedburner.com/seqware" rel="alternate" title="The SeqWare Blog" type="application/atom+xml">
@@ -29,7 +29,11 @@
 <li><a href="../../2-installation/"><span>Installation</span></a></li>
 <li><a href="../../3-getting-started/"><span>Getting Started</span></a></li>
 <li>
-<a href="../"><span>SeqWare Pipeline</span></a><ol class="toc"></ol>
+<a href="../"><span>SeqWare Pipeline</span></a><ol class="toc">
+<li><a href="#overview">Overview</a></li>
+<li><a href="#the-pegasus-engine">The Pegasus Engine</a></li>
+<li><a href="#the-oozie-engine">The Oozie Engine</a></li>
+</ol>
 </li>
 <li><a href="../../4-metadb/"><span>SeqWare MetaDB</span></a></li>
 <li><a href="../../5-portal/"><span>SeqWare Portal</span></a></li>
@@ -47,9 +51,105 @@
 <div class="body">
 <div class="article">
 <div class="header">
-<h1></h1>
+<h1>Debugging, Troubleshooting, &amp; Restarting Workflow</h1>
 </div>
+<div class="section" id="overview">
+<h2>Overview</h2>
 
+<p>In the future we intend on completely hiding the debugging and restarting of
+workflows behind SeqWare command line tools. But for the time being debugging
+and restart directions are tied to the particular Workflow Engine used.</p>
+
+</div>
+<div class="section" id="the-pegasus-engine">
+<h2>The Pegasus Engine</h2>
+
+<p>The Pegasus Engine uses <tt>pegasus-status</tt> as the primary command for monitoring the status of workflows.</p>
+
+<div class="section" id="debugging-workflows">
+<h3>Debugging Workflows</h3>
+
+<p>WorkflowLauncher prints the <tt>pegasus-status</tt> command used to monitor the running workflow.  For example:</p>
+
+<pre><code>pegasus-status -l /home/seqware/SeqWare/pegasus-dax/seqware/pegasus/seqware-archetype-java-workflow/run0126
+</code></pre>
+
+<p>This directory shown is actually the logging directory so, if anything goes wrong with the workflow, information
+will be written here.  Look for the <tt><em>.out.00</em></tt> files which contain the stderr and stdout logs.</p>
+
+<p>Also, the WorkflowLauncher tool is capable of printing the stderr/stdout of failed jobs within the launched workflow.</p>
+
+</div>
+<div class="section" id="restarting-workflows">
+<h3>Restarting Workflows</h3>
+
+<p>If a workflow has failed due to a transient error (such as cluster downtime or a disk quota being reached), you can restart a workflow at the last failed step.</p>
+
+<pre><code>    cd /home/seqware/SeqWare/pegasus-dax/seqware/pegasus/seqware-archetype-java-workflow/run0126
+    pegasus-run -Dpegasus.user.properties=pegasus.*.properties --nodatabase `pwd`
+    Rescued /home/seqware/SeqWare/pegasus-dax/seqware/pegasus/seqware-archetype-java-workflow/run0126/seqware-archetype-java-workflow-0.log as /home/seqware/SeqWare/pegasus-dax/seqware/pegasus/seqware-archetype-java-workflow/run0126/seqware-archetype-java-workflow-0.log.000
+
+    Running rescue DAG 1
+    -----------------------------------------------------------------------
+    File for submitting this DAG to Condor           : seqware-archetype-java-workflow-0.dag.condor.sub
+    Log of DAGMan debugging messages                 : seqware-archetype-java-workflow-0.dag.dagman.out
+    Log of Condor library output                     : seqware-archetype-java-workflow-0.dag.lib.out
+    Log of Condor library error messages             : seqware-archetype-java-workflow-0.dag.lib.err
+    Log of the life of condor_dagman itself          : seqware-archetype-java-workflow-0.dag.dagman.log
+
+    -no_submit given, not submitting DAG to Condor.  You can do this with:
+    "condor_submit seqware-archetype-java-workflow-0.dag.condor.sub"
+    -----------------------------------------------------------------------
+    Submitting job(s).
+    1 job(s) submitted to cluster 2851.
+
+    Your Workflow has been started and runs in base directory given below
+
+    cd /home/seqware/SeqWare/pegasus-dax/seqware/pegasus/seqware-archetype-java-workflow/run0126
+
+    *** To monitor the workflow you can run ***
+
+    pegasus-status -l /home/seqware/SeqWare/pegasus-dax/seqware/pegasus/seqware-archetype-java-workflow/run0126
+
+    *** To remove your workflow run ***
+    pegasus-remove -d 2848.0
+    or
+    pegasus-remove /home/seqware/SeqWare/pegasus-dax/seqware/pegasus/seqware-archetype-java-workflow/run0126
+
+    [seqware@seqwarevm run0126]$ condor_q
+
+
+    -- Submitter: seqwarevm : &lt;10.0.2.15:57652&gt; : seqwarevm
+     ID      OWNER            SUBMITTED     RUN_TIME ST PRI SIZE CMD
+    2851.0   seqware         3/28 11:31   0+00:00:05 R  0   0.3  condor_dagman -f -
+1 jobs; 0 completed, 0 removed, 0 idle, 1 running, 0 held, 0 suspended
+</code></pre>
+
+</div>
+</div>
+<div class="section" id="the-oozie-engine">
+<h2>The Oozie Engine</h2>
+
+<p>The Oozie Engine has both command line tools and a web interface for interacting with workflow status information.
+The web interface is particularly helpful, you can find it typically at:</p>
+
+<pre><code>http://&lt;host&gt;:11000/oozie/
+</code></pre>
+
+<div class="section" id="debugging-workflows">
+<h3>Debugging Workflows</h3>
+
+<p>Navigate to the Oozie console at the URL above. Recent workflows and their status can be found here. Click on the 
+workflow for more information including stderr/stdout for the jobs.</p>
+
+</div>
+<div class="section" id="restarting-workflows">
+<h3>Restarting Workflows</h3>
+
+<p>While Oozie does support workflow re-submission the recommended approach for failed workflows in SeqWare is simply to 
+resubmit the workflows.</p>
+</div>
+</div>
 </div>
 <p></p>
 <div id="disqus_thread"></div>
@@ -57,7 +157,7 @@
 </div>
 <!-- ***** footer ***** -->
 <div id="footer">
-<p>SeqWare © 2007–2013 Brian O&#8217;Connor. SeqWare is released under the a <a rel="license" href="http://www.gnu.org/licenses/licenses.html">GNU GPL v3</a>. This site is built using the excellent <a href="http://nanoc.stoneship.org/">nanoc</a> tool and example site along with the <a href="http://www.fonts.info/info/press/free-fonts-for-font-face-embedding.htm">Graublau</a> and <a href="http://scripts.sil.org/Gentium">Gentium</a> fonts.</p>
+<p>SeqWare © 2007–2013 Brian O&#8217;Connor. SeqWare is released under the a <a rel="license" href="http://www.gnu.org/licenses/licenses.html">GNU GPL v3</a>. This site is built using the excellent <a href="http://nanoc.stoneship.org/">nanoc</a> tool and example site along with the <a href="http://www.fonts.info/info/press/free-fonts-for-font-face-embedding.htm">Graublau</a> and <a href="https://en.wikipedia.org/wiki/Gentium">Gentium</a> fonts.</p>
 </div>
 </body>
 </html>

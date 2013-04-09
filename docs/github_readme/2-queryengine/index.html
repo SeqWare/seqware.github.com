@@ -121,7 +121,7 @@ sudo - root (or sudo bash)
 jps
 </pre>
 </li>
-<li>When setup of Hadoop and HBase is complete, you can go into the query-engine directory, compile it, and run the tests. Note that theintegration tests will spin-up a mini-HBase cluster and perform MapReduce tasks (~10 minutes for integration tests). Please note that the web-service and legacy directories in the root have additional dependencies and may not necessarily compile following only these instructions.
+<li>When setup of Hadoop and HBase is complete, you can go into the query-engine directory, compile it, and run the tests. Note that the integration tests will spin-up a mini-HBase cluster and perform MapReduce tasks (~10 minutes for integration tests). Please note that the web-service and legacy directories in the root have additional dependencies and may not necessarily compile following only these instructions.
 <pre title="Title of the snippet">
 mvn clean install -DskipITs=false
 mvn javadoc:javadoc
@@ -136,7 +136,7 @@ This will generate javadoc documentation for both the main code and the testing 
 
 <p>By default, our integration test suite runs tests against the <a href="https://github.com/wibidata/hbase-maven-plugin">hbase-maven-plugin</a>. You can, however, run the full test suite against a real Hadoop and HBase cluster; for setup, a good start is to follow Cloudera&#8217;s <a href="https://ccp.cloudera.com/display/CDH4DOC/CDH4+Quick+Start+Guide">quick start guide</a>. You will then need to set the HBase configuration in <code>seqware-queryengine/src/main/java/com/github/seqware/queryengine/Constants.java</code> by turning on HBASE_REMOTE_TESTING and completing a family of terms for HBASE_PROPERTIES. You can also set these in an external ~/.seqware/settings file.</p>
 
-<p>Note that when you setup a real Hadoop/HBase cluster and point the query engine toward it using ~/.seqware/settings, this is essentially the installation procedure for BHase.</p>
+<p>Note that when you setup a real Hadoop/HBase cluster and point the query engine toward it using ~/.seqware/settings, this is essentially the installation procedure for HBase.</p>
 
 <p>If you run into the following error when the hbase-plugin starts up, please check for an incorrect entry in your <code>/etc/hosts</code> file.</p>
 
@@ -175,7 +175,7 @@ at org.apache.hadoop.hbase.HBaseTestingUtility.startMiniHBaseCluster(HBaseTestin
 </div>
 <!-- ***** footer ***** -->
 <div id="footer">
-<p>SeqWare © 2007–2013 Brian O&#8217;Connor. SeqWare is released under the a <a rel="license" href="http://www.gnu.org/licenses/licenses.html">GNU GPL v3</a>. This site is built using the excellent <a href="http://nanoc.stoneship.org/">nanoc</a> tool and example site along with the <a href="http://www.fonts.info/info/press/free-fonts-for-font-face-embedding.htm">Graublau</a> and <a href="http://scripts.sil.org/Gentium">Gentium</a> fonts.</p>
+<p>SeqWare © 2007–2013 Brian O&#8217;Connor. SeqWare is released under the a <a rel="license" href="http://www.gnu.org/licenses/licenses.html">GNU GPL v3</a>. This site is built using the excellent <a href="http://nanoc.stoneship.org/">nanoc</a> tool and example site along with the <a href="http://www.fonts.info/info/press/free-fonts-for-font-face-embedding.htm">Graublau</a> and <a href="https://en.wikipedia.org/wiki/Gentium">Gentium</a> fonts.</p>
 </div>
 </body>
 </html>

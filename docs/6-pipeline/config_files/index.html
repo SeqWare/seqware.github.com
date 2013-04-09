@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="UTF-8">
-<title>SeqWare › </title>
+<title>SeqWare › Workflow Config Files</title>
 <meta content="nanoc 3.6.2" name="generator">
 <link href="../../../assets/style-v17.css" media="screen" rel="stylesheet" type="text/css">
 <link href="http://feeds.feedburner.com/seqware" rel="alternate" title="The SeqWare Blog" type="application/atom+xml">
@@ -29,7 +29,7 @@
 <li><a href="../../2-installation/"><span>Installation</span></a></li>
 <li><a href="../../3-getting-started/"><span>Getting Started</span></a></li>
 <li>
-<a href="../"><span>SeqWare Pipeline</span></a><ol class="toc"></ol>
+<a href="../"><span>SeqWare Pipeline</span></a><ol class="toc"><li><a href="#overview">Overview</a></li></ol>
 </li>
 <li><a href="../../4-metadb/"><span>SeqWare MetaDB</span></a></li>
 <li><a href="../../5-portal/"><span>SeqWare Portal</span></a></li>
@@ -47,9 +47,78 @@
 <div class="body">
 <div class="article">
 <div class="header">
-<h1></h1>
+<h1>Workflow Config Files</h1>
 </div>
+<div class="section" id="overview">
+<h2>Overview</h2>
 
+<pre>
+<code>
+# key=input_file:type=file:display=F:file_meta_type=text/plain
+input_file=${workflow_bundle_dir}/Workflow_Bundle_${workflow-directory-name}/${version}/data/input.txt
+# key=greeting:type=text:display=T:display_name=Greeting
+greeting=Testing
+# this is just a comment, the output directory is a conventions and used in many workflows to specify a relative output path
+output_dir=seqware-results
+# the output_prefix is a convention and used to specify the root of the absolute output path or an S3 bucket name
+# you should pick a path that is available on all cluster nodes and can be written by your user
+output_prefix=./
+</code>
+</pre>
+
+<p>This is the workflow.ini file and contains all the parameters that a workflow accepts along with default values.</p>
+
+<p>You access these variables in the Java workflow using the <tt>getProperty()</tt> method. When installing the workflow the ini file is parsed and extra metadata about each parameter is examined. This gives the system information about the type of the variable (integer, string, etc) and any default values.</p>
+
+<p>The ini file(s) follow the general pattern of:</p>
+
+<pre>
+# comment/specification
+key=value
+</pre>
+
+<p>To achieve this overloaded role for ini files you need to include hints to ensure the BundleManager that installs workflow bundles has enough information. Here is what the annotation syntax looks like:</p>
+
+<pre><code>    # key=&lt;name&gt;:type=[integer|float|text|pulldown|file]:display=[T|F][:display_name=&lt;name_to_display&gt;][:file_meta_type=&lt;mime_meta_type&gt;][:pulldown_items=&lt;key1&gt;|&lt;value1&gt;;&lt;key2&gt;|&lt;value2&gt;]
+    key=default_value
+</code></pre>
+
+<p>The file_meta_type is only used for type=file.</p>
+
+<p>The pulldown type means that the pulldown_items should be defined as well. This looks like:</p>
+
+<pre><code>    pulldown_items=&lt;key1&gt;|&lt;value1&gt;;&lt;key2&gt;|&lt;value2&gt;
+</code></pre>
+
+<p>The default value for this will refer to either value1 or value2 above.
+If you fail to include a metadata line for a particular key/value then it’s assumed to be:</p>
+
+<pre><code>    key=&lt;name&gt;:type=text:display=F
+</code></pre>
+
+<p>This is convenient since many of the values in an INI file should not be displayed to the end user.</p>
+
+<div class="section" id="common-variables">
+<h3>Common Variables</h3>
+
+<p>There are several variables that you will see in various files, including the config ini file and <tt>metadata.xml</tt> file.</p>
+
+<ul>
+<li>
+    <p>${date}: a string representing the date the DAX was created, this is always defined so consider this a reserved variable name. </p>
+  </li>
+  <li>
+    <p>${random}: a randomly generated string, this is always defined so consider this a reserved variable name. </p>
+  </li>
+  <li>
+    <p>${workflow_bundle_dir}: if this workflow is part of a workflow bundle this variable will be defined and points to the path of the root of the directory this workflow bundle has been expanded to.</p>
+  </li>
+  <li>
+    <p>${workflow_base_dir}: ${workflow_bundle_dir}/Workflow_Bundle_{workflow_name}/{workflow_version}. This is really used in a ton of places since we need a variable that points to the install location for the bundle since we cannot hard code this.</p>
+  </li>
+</ul>
+</div>
+</div>
 </div>
 <p></p>
 <div id="disqus_thread"></div>
@@ -57,7 +126,7 @@
 </div>
 <!-- ***** footer ***** -->
 <div id="footer">
-<p>SeqWare © 2007–2013 Brian O&#8217;Connor. SeqWare is released under the a <a rel="license" href="http://www.gnu.org/licenses/licenses.html">GNU GPL v3</a>. This site is built using the excellent <a href="http://nanoc.stoneship.org/">nanoc</a> tool and example site along with the <a href="http://www.fonts.info/info/press/free-fonts-for-font-face-embedding.htm">Graublau</a> and <a href="http://scripts.sil.org/Gentium">Gentium</a> fonts.</p>
+<p>SeqWare © 2007–2013 Brian O&#8217;Connor. SeqWare is released under the a <a rel="license" href="http://www.gnu.org/licenses/licenses.html">GNU GPL v3</a>. This site is built using the excellent <a href="http://nanoc.stoneship.org/">nanoc</a> tool and example site along with the <a href="http://www.fonts.info/info/press/free-fonts-for-font-face-embedding.htm">Graublau</a> and <a href="https://en.wikipedia.org/wiki/Gentium">Gentium</a> fonts.</p>
 </div>
 </body>
 </html>

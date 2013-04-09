@@ -32,7 +32,7 @@
 <span class="active" title="You're here."><span>SeqWare Pipeline</span></span><ol class="toc">
 <li><a href="#overview">Overview</a></li>
 <li><a href="#features">Features</a></li>
-<li><a href="#installation">Installation</a></li>
+<li><a href="#building-and-installing">Building and Installing</a></li>
 <li><a href="#setup">Setup</a></li>
 <li><a href="#workflows">Workflows</a></li>
 <li><a href="#modules">Modules</a></li>
@@ -74,11 +74,11 @@ monitoring workflows.</p>
 workflow engines (Oozie and Pegasus). Our current recommended combination is
 Java workflows with the Pegasus engine.</p>
 
-<p>We assume you have already gone through the
+<p>We highly recommend you go through the
 <a href="../3-getting-started/user-tutorial/">User</a>,
 <a href="../3-getting-started/developer-tutorial/">Developer</a>, and
-<a href="../3-getting-started/admin-tutorial/">Admin</a> tutorials since the guides below
-assume you already have.</p>
+<a href="../3-getting-started/admin-tutorial/">Admin</a> tutorials since the
+documentation below assumes you already have.</p>
 
 </div>
 <div class="section" id="features">
@@ -101,8 +101,8 @@ assume you already have.</p>
 <p>See <a href="../../about/">About</a> for more information.</p>
 
 </div>
-<div class="section" id="installation">
-<h2>Installation</h2>
+<div class="section" id="building-and-installing">
+<h2>Building and Installing</h2>
 
 <ul>
 <li>
@@ -115,6 +115,12 @@ assume you already have.</p>
     <dl>
 <dt><a href="../2a-installation-from-scratch/">Installation From Scratch</a></dt>
       <dd>This guide walks you through how we built the VMs and will be of interest to anyone that needs to see the details of SeqWare setup starting with an empty Linux server. It is complicated so we highly recommend using a VM (which can be connected to a real cluster).</dd>
+    </dl>
+</li>
+  <li>
+    <dl>
+<dt><a href="../13-code/">Building from Source</a></dt>
+      <dd>These directions show you how to build the whole project, including SeqWare Pipeline, using Maven.</dd>
     </dl>
 </li>
 </ul>
@@ -132,7 +138,7 @@ assume you already have.</p>
   <li>
     <dl>
 <dt><a href="monitor_configuration/">Monitor Configuration</a></dt>
-      <dd>Setting up the SeqWare-associated tools that need to run so workflow triggering and monitoring work.</dd>
+      <dd>Setting up the SeqWare-associated tools that need to run so workflow triggering and monitoring workflows.</dd>
     </dl>
 </li>
   <li>
@@ -147,21 +153,21 @@ assume you already have.</p>
 <h2>Workflows</h2>
 
 <p>Workflows define a series of steps and how they relate to each other.
-Typcially, these encode a series of calls to command line tools that operate on
-files read from and written to a shared filesystem. Individual steps ususally
+Typically, these encode a series of calls to command line tools that operate on
+files read from and written to a shared filesystem. Individual steps usually
 run on a randomly chosen cluster node.</p>
 
 <ul>
 <li>
     <dl>
 <dt><a href="legacy-ftl-workflows/">Legacy FTL Workflows</a></dt>
-      <dd>This is our older, more verbose workflow language based on FreeMarker. This provides information on the structure of a typical workflow descripter written in this language. FTL is semi-deprecated, do not use it for new workflows.</dd>
+      <dd>This is our older, more verbose workflow language based on FreeMarker. This provides information on the structure of a typical workflow descriptor written in this language. FTL is semi-deprecated, do not use it for new workflows.</dd>
     </dl>
 </li>
   <li>
     <dl>
 <dt><a href="java-workflows/">Java Workflows</a></dt>
-      <dd>This is our newer workflow language that is much simplier than the FTL and more expressive. We recommend this for all new workflow development.</dd>
+      <dd>This is our newer workflow language that is much simpler than the FTL and more expressive. We recommend this for all new workflow development.</dd>
     </dl>
 </li>
   <li>
@@ -213,7 +219,7 @@ general workflow developers.</p>
 <ul>
 <li>
     <dl>
-<dt><a href="http://sourceforge.net/apps/mediawiki/seqware/index.php?title=Developing_New_SeqWare_Pipeline_Modules">Writing Modules</a></dt>
+<dt><a href="writing_modules/">Writing Modules</a></dt>
       <dd>How to extend SeqWare with Java tool wrappers. Can be used in workflows or as stand-alone utilities that know how to record provenance data back to SeqWare MetaDB.</dd>
     </dl>
 </li>
@@ -318,7 +324,7 @@ general workflow developers.</p>
 </div>
 <!-- ***** footer ***** -->
 <div id="footer">
-<p>SeqWare © 2007–2013 Brian O&#8217;Connor. SeqWare is released under the a <a rel="license" href="http://www.gnu.org/licenses/licenses.html">GNU GPL v3</a>. This site is built using the excellent <a href="http://nanoc.stoneship.org/">nanoc</a> tool and example site along with the <a href="http://www.fonts.info/info/press/free-fonts-for-font-face-embedding.htm">Graublau</a> and <a href="http://scripts.sil.org/Gentium">Gentium</a> fonts.</p>
+<p>SeqWare © 2007–2013 Brian O&#8217;Connor. SeqWare is released under the a <a rel="license" href="http://www.gnu.org/licenses/licenses.html">GNU GPL v3</a>. This site is built using the excellent <a href="http://nanoc.stoneship.org/">nanoc</a> tool and example site along with the <a href="http://www.fonts.info/info/press/free-fonts-for-font-face-embedding.htm">Graublau</a> and <a href="https://en.wikipedia.org/wiki/Gentium">Gentium</a> fonts.</p>
 </div>
 </body>
 </html>

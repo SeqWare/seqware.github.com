@@ -33,13 +33,7 @@
 <li>
 <span class="active" title="You're here."><span>SeqWare Portal</span></span><ol class="toc">
 <li><a href="#overview">Overview</a></li>
-<li><a href="#admin-setup">Admin Setup</a></li>
-<li><a href="#features">Features</a></li>
-<li><a href="#uploading-data">Uploading Data</a></li>
-<li><a href="#launching-workflows">Launching Workflows</a></li>
-<li><a href="#monitoring-workflows">Monitoring Workflows</a></li>
-<li><a href="#retrieving-results">Retrieving Results</a></li>
-<li><a href="#tomcat-config-file">Tomcat Config File</a></li>
+<li><a href="#building-and-installing">Building and Installing</a></li>
 </ol>
 </li>
 <li><a href="../7-web-service/"><span>SeqWare Web Service</span></a></li>
@@ -58,6 +52,11 @@
 <div class="header">
 <h1>SeqWare Portal</h1>
 </div>
+<!--
+TODO:
+* need to show cluster launching through portal
+-->
+
 <div class="section" id="overview">
 <h2>Overview</h2>
 
@@ -66,7 +65,7 @@ through the SeqWare-supplied pipeline, alignment to a reference genome, and
 report generation.</p>
 
 <p>It is part of the larger SeqWare project that looks to streamline the
-manupulation of sequence data produced by next gen sequencers.  The SeqWare
+manipulation of sequence data produced by next gen sequencers.  The SeqWare
 LIMS system is closely tied with the SeqWare Pipeline software that controls
 the actual processing, alignment, and annotation of sequence data.  SeqWare
 LIMS collects various bits of metadata related to each flowcell and lane used
@@ -79,37 +78,34 @@ in the LIMS system.  This makes it very easy for researchers to both follow the
 progress of a particular run and also get back to the reports automatically
 created based on their initial settings.</p>
 
-</div>
-<div class="section" id="admin-setup">
-<h2>Admin Setup</h2>
-
-<p>Please see the <a href="../github_readme/5-portal/">Install Guide</a></p>
+<p>See the <a href="../3-getting-started/user-tutorial/">User Guide</a> for examples of
+how to use the Portal for setting up Samples, Experiments, Studies, and
+uploading data for use by workflows.</p>
 
 </div>
-<div class="section" id="features">
-<h2>Features</h2>
+<div class="section" id="building-and-installing">
+<h2>Building and Installing</h2>
 
-</div>
-<div class="section" id="uploading-data">
-<h2>Uploading Data</h2>
+<p>Most users will want to use our pre-configured VMs, see the <a href="../2-installation/">SeqWare Install
+Guide</a> for how to get the VM.  Please see the <a href="../github_readme/5-portal/">Install
+Guide</a> for building and installing the SeqWare
+Portal.</p>
 
-</div>
-<div class="section" id="launching-workflows">
-<h2>Launching Workflows</h2>
+<!--
+## Features
 
-</div>
-<div class="section" id="monitoring-workflows">
-<h2>Monitoring Workflows</h2>
+## Uploading Data
 
-</div>
-<div class="section" id="retrieving-results">
-<h2>Retrieving Results</h2>
+## Launching Workflows
 
-</div>
-<div class="section" id="tomcat-config-file">
-<h2>Tomcat Config File</h2>
+## Monitoring Workflows
 
-<p>Document the config settings for Tomcat like email addresses, DB, etc</p>
+## Retrieving Results
+
+## Tomcat Config File
+
+Document the config settings for Tomcat like email addresses, DB, etc
+-->
 </div>
 </div>
 <p></p>
@@ -118,7 +114,7 @@ created based on their initial settings.</p>
 </div>
 <!-- ***** footer ***** -->
 <div id="footer">
-<p>SeqWare © 2007–2013 Brian O&#8217;Connor. SeqWare is released under the a <a rel="license" href="http://www.gnu.org/licenses/licenses.html">GNU GPL v3</a>. This site is built using the excellent <a href="http://nanoc.stoneship.org/">nanoc</a> tool and example site along with the <a href="http://www.fonts.info/info/press/free-fonts-for-font-face-embedding.htm">Graublau</a> and <a href="http://scripts.sil.org/Gentium">Gentium</a> fonts.</p>
+<p>SeqWare © 2007–2013 Brian O&#8217;Connor. SeqWare is released under the a <a rel="license" href="http://www.gnu.org/licenses/licenses.html">GNU GPL v3</a>. This site is built using the excellent <a href="http://nanoc.stoneship.org/">nanoc</a> tool and example site along with the <a href="http://www.fonts.info/info/press/free-fonts-for-font-face-embedding.htm">Graublau</a> and <a href="https://en.wikipedia.org/wiki/Gentium">Gentium</a> fonts.</p>
 </div>
 </body>
 </html>

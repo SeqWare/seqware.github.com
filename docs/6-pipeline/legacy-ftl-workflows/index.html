@@ -56,19 +56,23 @@
 <div class="header">
 <h1>Legacy FTL Workflows</h1>
 </div>
+<!-- TODO: 
+* add more info on variables defined like random
+-->
+
 <div class="section" id="overview">
 <h2>Overview</h2>
 
 <p class="warning"><strong>Tip:</strong> The Legacy FTL Workflow format is our
 older, more verbose workflow language based on the DAX format from the Pegasus
-project with embeded FreeMarker template code (for loops, if statements, etc).
+project with embedded FreeMarker template code (for loops, if statements, etc).
 Just to be completely clear, we highly recommend new workflow development use
 the Java Workflow syntax instead. It is far more succinct and powerful. The
-only disadvantage of the Java workflow langauge is the fact that it must be
+only disadvantage of the Java workflow language is the fact that it must be
 compiled after editing. The FTL workflow language is interpreted at runtime so
 no compilation is needed.</p>
 
-<p>This document really focuses on the format of the FLT workflow langauge. For
+<p>This document really focuses on the format of the FLT workflow language. For
 more information about the entire workflow bundle please see the <a href="../../3-getting-started/developer-tutorial/">Developer
 Tutorial</a>.  You should read this
 guide before this page.</p>
@@ -564,7 +568,7 @@ which contains your assembled workflow.</p>
 <div class="section" id="dependencies">
 <h3>Dependencies</h3>
 
-<p>The dependencies section links together all the individual jobs in the correct order so they can be executed successfully. Parent/child relationships are used to specify job pre-requisits.</p>
+<p>The dependencies section links together all the individual jobs in the correct order so they can be executed successfully. Parent/child relationships are used to specify job pre-requisites.</p>
 
 <pre><code class="language-xml"><span class="c">&lt;!-- Part 2: list of control-flow dependencies --&gt;</span>
 
@@ -626,7 +630,7 @@ RUNNING: step 2 of 5 <span class="o">(</span>40%<span class="o">)</span>
 </div>
 <!-- ***** footer ***** -->
 <div id="footer">
-<p>SeqWare © 2007–2013 Brian O&#8217;Connor. SeqWare is released under the a <a rel="license" href="http://www.gnu.org/licenses/licenses.html">GNU GPL v3</a>. This site is built using the excellent <a href="http://nanoc.stoneship.org/">nanoc</a> tool and example site along with the <a href="http://www.fonts.info/info/press/free-fonts-for-font-face-embedding.htm">Graublau</a> and <a href="http://scripts.sil.org/Gentium">Gentium</a> fonts.</p>
+<p>SeqWare © 2007–2013 Brian O&#8217;Connor. SeqWare is released under the a <a rel="license" href="http://www.gnu.org/licenses/licenses.html">GNU GPL v3</a>. This site is built using the excellent <a href="http://nanoc.stoneship.org/">nanoc</a> tool and example site along with the <a href="http://www.fonts.info/info/press/free-fonts-for-font-face-embedding.htm">Graublau</a> and <a href="https://en.wikipedia.org/wiki/Gentium">Gentium</a> fonts.</p>
 </div>
 </body>
 </html>

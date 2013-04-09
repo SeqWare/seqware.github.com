@@ -32,7 +32,7 @@
 <li>
 <span class="active" title="You're here."><span>SeqWare MetaDB</span></span><ol class="toc">
 <li><a href="#overview">Overview</a></li>
-<li><a href="#setup">Setup</a></li>
+<li><a href="#building-and-installing">Building and Installing</a></li>
 <li><a href="#tables">Tables</a></li>
 <li><a href="#sequence-data">Sequence Data</a></li>
 </ol>
@@ -57,24 +57,31 @@
 <div class="section" id="overview">
 <h2>Overview</h2>
 
-<p>A database built with PostgreSQL, the SeqWare MetaDB includes tables to model the run of the sequencer, analysis “processing” events, and the ability to trigger standard analysis through triggering the SeqWare Pipeline. Features include: </p>
+<p>The SeqWare MetaDB is a metadatabase modeled on the <a href="http://www.ncbi.nlm.nih.gov/Traces/sra">Short Read
+Archive</a> schema and built with
+<a href="http://www.postgresql.org/">PostgreSQL</a>. It includes tables to model the run
+of the sequencers, analysis “processing” events, and installed workflows. A
+common database for tracking metadata, used by the other SeqWare components.</p>
 
-<ul>
-<li>Short Read Archive-compliant schema</li>
-  <li>A “processing” table to model analytical processes and results for samples</li>
-  <li>A common database for tracking metadata, used by the other SeqWare components </li>
-</ul>
 </div>
-<div class="section" id="setup">
-<h2>Setup</h2>
+<div class="section" id="building-and-installing">
+<h2>Building and Installing</h2>
 
-<p>Please see the <a href="../github_readme/3-metadb/">Install Guide</a></p>
+<p>Most users will want to use our pre-configured VMs, see the <a href="../2-installation/">SeqWare Install
+Guide</a> for how to get the VM.  For those interested in
+installing the MetaDB from scratch please see the <a href="../github_readme/3-metadb/">Install
+Guide</a></p>
 
 </div>
 <div class="section" id="tables">
 <h2>Tables</h2>
 
-<p>The SeqWare MetaDB was built on top of the <a href="http://www.ncbi.nlm.nih.gov/Traces/sra">Short Read Archive (SRA)</a> data model.  It is not a 100% translation of the data model, there may be places where the SRA model provides greater flexibility and places where we simplified the model for our own purposes.  But we generally tried to keep with the SRA model as much as possible.  You can find out more information from the following documents:</p>
+<p>The SeqWare MetaDB was built on top of the <a href="http://www.ncbi.nlm.nih.gov/Traces/sra">Short Read Archive
+(SRA)</a> data model.  It is not a 100%
+translation of the data model, there may be places where the SRA model provides
+greater flexibility and places where we simplified the model for our own
+purposes.  But we generally tried to keep with the SRA model as much as
+possible.  You can find out more information from the following documents:</p>
 
 <ul>
 <li><a href="http://www.ncbi.nlm.nih.gov/Traces/sra/sra.cgi?cmd=show&amp;f=concepts&amp;m=doc&amp;s=concepts">SRA Concepts</a></li>
@@ -82,19 +89,37 @@
 </ul>
 <p><img src="../../assets/images/metadb/Db_simple.png" alt="Simple DB"></p>
 
-<p>Or, more complicatedly:</p>
-
-<p><img src="../../assets/images/metadb/Db_complicated.png" alt="Complicated DB"></p>
-
 </div>
 <div class="section" id="sequence-data">
 <h2>Sequence Data</h2>
 
-<p>SeqWare uses the meta-DB to track processing events and to connect samples to processed data and/or to connect one set of processed data to another. For example linking between a biological sample, a sequencing run, the generated raw sequence data, and downstream processed sequence data is possible. This is actually a complicated process that depends on the specific path through a pipeline, with details like multiple samples being pooled for sequencing, or lanes contain data from multiple samples (multiplexed or so-called bar-coded samples) arising. First, a simple example.</p>
+<p>SeqWare uses the MetaDB to track processing events and to connect samples to
+processed data and/or to connect one set of processed data to another. For
+example linking between a biological sample, a sequencing run, the generated
+raw sequence data, and downstream processed sequence data is possible. This is
+actually a complicated process that depends on the specific path through a
+pipeline, with details like multiple samples being pooled for sequencing, or
+lanes contain data from multiple samples (multiplexed or so-called bar-coded
+samples) arising. First, a simple example.</p>
 
 <p><img src="../../assets/images/metadb/Study_hierarchy.png" alt="Simple DB"></p>
 
-<p>The ‘proper’ way to traverse the database from a study or sequencer_run is to go through ius, processing_ius, and processing. So from study, you traverse through experiment, sample to sample through the sample_hierarchy table, and ius, to processing_ius, and then to all of the processings. The processing tree starts from the processing linked through processing_ius, and then through the processing_relationship table. Each new processing event has the parent of the previous processing event; for example, if WorkflowA is run on IUSA, and then WorkflowB is also run on IUSA using the results from WorkflowA, the processing tree looks like IUSA -&gt; processing_ius -&gt; Processing of step 1,2,3 of WorkflowA -&gt; Processing of step 1,2,3 of WorkflowB.  Processings are linked to workflow_runs, which have connections to IUSes through ius_workflow_runs and/or Lanes through lane_workflow_runs, as a convenience only. These links are not necessarily present (though we try to make sure they are). The safest way to find all of the processing events linked with a Study is to traverse through the IUS to the root Processing through processing_ius, not through ius_workflow_runs.</p>
+<p>The ‘proper’ way to traverse the database from a study or sequencer_run is to
+go through ius, processing_ius, and processing. So from study, you traverse
+through experiment, sample to sample through the sample_hierarchy table, and
+ius, to processing_ius, and then to all of the processings. The processing tree
+starts from the processing linked through processing_ius, and then through the
+processing_relationship table. Each new processing event has the parent of the
+previous processing event; for example, if WorkflowA is run on IUSA, and then
+WorkflowB is also run on IUSA using the results from WorkflowA, the processing
+tree looks like IUSA -&gt; processing_ius -&gt; Processing of step 1,2,3 of WorkflowA
+-&gt; Processing of step 1,2,3 of WorkflowB.  Processings are linked to
+workflow_runs, which have connections to IUSes through ius_workflow_runs and/or
+Lanes through lane_workflow_runs, as a convenience only. These links are not
+necessarily present (though we try to make sure they are). The safest way to
+find all of the processing events linked with a Study is to traverse through
+the IUS to the root Processing through processing_ius, not through
+ius_workflow_runs.</p>
 </div>
 </div>
 <p></p>
@@ -103,7 +128,7 @@
 </div>
 <!-- ***** footer ***** -->
 <div id="footer">
-<p>SeqWare © 2007–2013 Brian O&#8217;Connor. SeqWare is released under the a <a rel="license" href="http://www.gnu.org/licenses/licenses.html">GNU GPL v3</a>. This site is built using the excellent <a href="http://nanoc.stoneship.org/">nanoc</a> tool and example site along with the <a href="http://www.fonts.info/info/press/free-fonts-for-font-face-embedding.htm">Graublau</a> and <a href="http://scripts.sil.org/Gentium">Gentium</a> fonts.</p>
+<p>SeqWare © 2007–2013 Brian O&#8217;Connor. SeqWare is released under the a <a rel="license" href="http://www.gnu.org/licenses/licenses.html">GNU GPL v3</a>. This site is built using the excellent <a href="http://nanoc.stoneship.org/">nanoc</a> tool and example site along with the <a href="http://www.fonts.info/info/press/free-fonts-for-font-face-embedding.htm">Graublau</a> and <a href="https://en.wikipedia.org/wiki/Gentium">Gentium</a> fonts.</p>
 </div>
 </body>
 </html>

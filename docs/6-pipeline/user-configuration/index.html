@@ -57,7 +57,11 @@
 <h2>Overview</h2>
 
 <p>The SeqWare jar file uses a simple configuration file that has been setup for
-you already on the VM. By default the location is ~/.seqware/settings.</p>
+you already on the VM. By default the location is ~/.seqware/settings. You can
+control this location using an environment variable:</p>
+
+<pre><code>SEQWARE_SETTINGS=~/.seqware/settings
+</code></pre>
 
 <p>This file contains the web address of the RESTful web service, your username
 and password, and you Amazon public and private keys that will allow you to
@@ -216,7 +220,7 @@ filled in for every deployment of SeqWare, just those using these tools.</p>
 <span class="c1"># PEGASUS USER PROPERTIES</span>
 <span class="c1">##########################</span>
 
-<span class="c1">## SELECT THE REPLICAT CATALOG MODE AND URL</span>
+<span class="c1">## SELECT THE REPLICA CATALOG MODE AND URL</span>
 <span class="na">pegasus.catalog.replica</span> <span class="o">=</span> <span class="s">SimpleFile</span>
 <span class="na">pegasus.catalog.replica.file</span> <span class="o">=</span> <span class="s">/home/seqware/.seqware/pegasus/rc.data</span>
 
@@ -238,7 +242,7 @@ filled in for every deployment of SeqWare, just those using these tools.</p>
 <span class="c1">## CHECK JOB EXIT CODES FOR FAILURE</span>
 <span class="na">pegasus.exitcode.scope</span><span class="o">=</span><span class="s">all</span>
 
-<span class="c1">## OPTIMZE DATA &amp; EXECUTABLE TRANSFERS</span>
+<span class="c1">## OPTIMIZE DATA &amp; EXECUTABLE TRANSFERS</span>
 <span class="na">pegasus.transfer.refiner</span><span class="o">=</span><span class="s">Bundle</span>
 <span class="na">pegasus.transfer.links</span> <span class="o">=</span> <span class="s">true</span>
 
@@ -273,7 +277,7 @@ side.</p>
 </div>
 <!-- ***** footer ***** -->
 <div id="footer">
-<p>SeqWare © 2007–2013 Brian O&#8217;Connor. SeqWare is released under the a <a rel="license" href="http://www.gnu.org/licenses/licenses.html">GNU GPL v3</a>. This site is built using the excellent <a href="http://nanoc.stoneship.org/">nanoc</a> tool and example site along with the <a href="http://www.fonts.info/info/press/free-fonts-for-font-face-embedding.htm">Graublau</a> and <a href="http://scripts.sil.org/Gentium">Gentium</a> fonts.</p>
+<p>SeqWare © 2007–2013 Brian O&#8217;Connor. SeqWare is released under the a <a rel="license" href="http://www.gnu.org/licenses/licenses.html">GNU GPL v3</a>. This site is built using the excellent <a href="http://nanoc.stoneship.org/">nanoc</a> tool and example site along with the <a href="http://www.fonts.info/info/press/free-fonts-for-font-face-embedding.htm">Graublau</a> and <a href="https://en.wikipedia.org/wiki/Gentium">Gentium</a> fonts.</p>
 </div>
 </body>
 </html>

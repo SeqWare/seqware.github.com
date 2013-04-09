@@ -47,7 +47,7 @@
 <div class="header">
 <h1>SeqWare Pipeline - Install Guide</h1>
 </div>
-<p class="warning"><strong>Note:</strong> This guide is useful if you want to install SeqWare from scratch on your local infrastructure. Be warned, there are rather vague sections and this guide was really written as notes for setting up our VMs. It is geared towards experienced Linux sysadmins and we cannot guarentee this guide is always up to date. </p>
+<p class="warning"><strong>Note:</strong> This guide is useful if you want to install SeqWare from scratch on your local infrastructure. Be warned, there are rather vague sections and this guide was really written as notes for setting up our VMs. It is geared towards experienced Linux sysadmins and we cannot guarantee this guide is always up to date. </p>
 
 <p>If you just want to get started with SeqWare quickly please see <a href="../../2-installation/#installing-with-a-local-vm">Installing the SeqWare VM</a> for instructions on downloading a VM that is ready for workflow development and testing. We also recommend this approach for production installs because you can connect easily these VMs to a real cluster.</p>
 
@@ -56,7 +56,7 @@
 <div class="section" id="introduction">
 <h2>Introduction</h2>
 
-<p>The directions below are focused on creating a virtual machine using VirtualBox that uses the latest version of the various SeqWare subprojects and dependencies including Pegasus 3.0. The major goal here is to make sure I have very clear directions on how to:</p>
+<p>The directions below are focused on creating a virtual machine using VirtualBox that uses the latest version of the various SeqWare sub-projects and dependencies including Pegasus 3.0. The major goal here is to make sure I have very clear directions on how to:</p>
 
 <ul>
 <li>setup a VM using VirtualBox with Pegasus 3.0, Condor 7.6.x, and Globus 5.2.x</li>
@@ -70,9 +70,9 @@
 
 <ul>
 <li>
-<a href="http://www.oracle.com/us/products/tools/oracle-grid-engine-075549.html%20Sun%20Grid%20Engine">SGE</a> version 6.2.x (note, this is now Oracle Grid Engine but we’ll use the existing gridengine RPM packages): this is the cluster scheduler that actually schedules jobs out to real nodes, managing memory and CPUs available. The VM has only one “slot” available.</li>
+<a href="http://www.oracle.com/us/products/tools/oracle-grid-engine-075549.html">SGE</a> version 6.2.x (note, this is now Oracle Grid Engine but we’ll use the existing gridengine RPM packages): this is the cluster scheduler that actually schedules jobs out to real nodes, managing memory and CPUs available. The VM has only one “slot” available.</li>
   <li>
-<a href="http://www.globus.org/toolkit/">The Globus Toolkit</a> version 5.2.x: provides user authentication, transport protocol for sending jobs to a cluster in a scehduler (GRAM5), and a transfer protocol for sending data around (GridFTP)
+<a href="http://www.globus.org/toolkit/">The Globus Toolkit</a> version 5.2.x: provides user authentication, transport protocol for sending jobs to a cluster in a scheduler (GRAM5), and a transfer protocol for sending data around (GridFTP)
 ** GRAM5
 ** GridFTP</li>
   <li>
@@ -80,7 +80,7 @@
   <li>
 <a href="http://pegasus.isi.edu/wms/">Pegasus WMS</a> version 3.0.x: this project provides a workflow language and various convenience configuration files that simplifies the use of the other tools in the stack. It is the only software project in the stack that SeqWare is “aware” of and directly depends on.</li>
 </ul>
-<p>The VM currently has the following SeqWare subprojects installed:</p>
+<p>The VM currently has the following SeqWare sub-projects installed:</p>
 
 <ul>
 <li><a href="../../5-portal/">SeqWare Portal</a></li>
@@ -349,7 +349,7 @@ chkconfig hadoop-hbase-regionserver on
      oozie-client                              noarch                              0.9.2+26-1.cdh4.0.1.p0.1.el6                               cloudera-cdh4                               55 M
 </code></pre>
 
-<p>Oozie is the an alternative to the Pegasus/Condor/Globus/SGE software stack and provides a way to run SeqWare Workflows on a Hadoop cluster. We are really excited about this workflow engine and thing it may be the default backend recommended for SeqWare workflows on our VM and Amazon’s cloud given it’s really fast scheduling performance and ease of integration with Hadoop (so you can mix traditional Bash jobs with MapReduce, Pig, Hive, etc jobs).</p>
+<p>Oozie is the an alternative to the Pegasus/Condor/Globus/SGE software stack and provides a way to run SeqWare Workflows on a Hadoop cluster. We are really excited about this workflow engine and thing it may be the default back-end recommended for SeqWare workflows on our VM and Amazon’s cloud given it’s really fast scheduling performance and ease of integration with Hadoop (so you can mix traditional Bash jobs with MapReduce, Pig, Hive, etc jobs).</p>
 
 <p>Please follow the directions on Cloudera carefully, you need to make sure you initialize the Oozie database properly. By default we use the built in Derby database but you may want to setup another daemon like PostgreSQL.</p>
 
@@ -689,7 +689,7 @@ NEGOTIATOR_MATCHLIST_CACHING = FALSE
 GRIDMANAGER_MAX_SUBMITTED_JOBS_PER_RESOURCE = 100
 GRIDMANAGER_MAX_PENDING_SUBMITS_PER_RESOURCE = 100
 GRIDMANAGER_MAX_JOBMANAGERS_PER_RESOURCE = 50
-# Misc tuning params https://bi.offis.de/wisent/tiki-index.php?page=Condor-GT4-Admin#id625180
+# Misc tuning params http://wisent.d-grid.de/bi.offis.uni-oldenburg.de/wisent-wiki/tiki-index85b0.html?page=Condor-GT4-Admin#id464444 
 #UPDATE_INTERVAL = 30
 #JOB_START_COUNT = 10
 #JOB_START_DELAY = 2
@@ -708,7 +708,7 @@ ENABLE_GRID_MONITOR=FALSE
 
 <p>And make sure you use chkconfig to ensure condor is started on boot.</p>
 
-<p>See <a href="https://bi.offis.de/wisent/tiki-index.php?page=Condor-GT4-Admin#id625180">this</a> for more info on tuning Condor.</p>
+<p>See <a href="http://wisent.d-grid.de/bi.offis.uni-oldenburg.de/wisent-wiki/tiki-index85b0.html">this</a> for more info on tuning Condor.</p>
 
 </div>
 <div class="section" id="testing-sge-globus-gram-globus-gridftp-and-condor">
@@ -851,7 +851,7 @@ blackdiamond-0.dag succeeded
 
 WORKFLOW STATUS : COMPLETED | 14/14 ( 100% ) | (all jobs finished successfully)
 
-# watch the cluster jobs in a seperate terminal
+# watch the cluster jobs in a separate terminal
 watch qstat -f
 </code></pre>
 
@@ -918,7 +918,7 @@ export SEQWARE_SETTINGS=~/.seqware/settings
 # PEGASUS USER PROPERTIES
 ##########################
 
-## SELECT THE REPLICAT CATALOG MODE AND URL
+## SELECT THE REPLICA CATALOG MODE AND URL
 pegasus.catalog.replica = SimpleFile
 pegasus.catalog.replica.file = /home/seqware/.seqware/pegasus/rc.data
 
@@ -940,7 +940,7 @@ pegasus.catalog.transformation.mapper = All
 ## CHECK JOB EXIT CODES FOR FAILURE
 pegasus.exitcode.scope=all
 
-## OPTIMZE DATA &amp; EXECUTABLE TRANSFERS
+## OPTIMIZE DATA &amp; EXECUTABLE TRANSFERS
 pegasus.transfer.refiner=Bundle
 pegasus.transfer.links = true
 
@@ -1244,7 +1244,7 @@ WORKFLOW STATUS : COMPLETED | 17/17 ( 100% ) | (all jobs finished successfully)
 </div>
 <!-- ***** footer ***** -->
 <div id="footer">
-<p>SeqWare © 2007–2013 Brian O&#8217;Connor. SeqWare is released under the a <a rel="license" href="http://www.gnu.org/licenses/licenses.html">GNU GPL v3</a>. This site is built using the excellent <a href="http://nanoc.stoneship.org/">nanoc</a> tool and example site along with the <a href="http://www.fonts.info/info/press/free-fonts-for-font-face-embedding.htm">Graublau</a> and <a href="http://scripts.sil.org/Gentium">Gentium</a> fonts.</p>
+<p>SeqWare © 2007–2013 Brian O&#8217;Connor. SeqWare is released under the a <a rel="license" href="http://www.gnu.org/licenses/licenses.html">GNU GPL v3</a>. This site is built using the excellent <a href="http://nanoc.stoneship.org/">nanoc</a> tool and example site along with the <a href="http://www.fonts.info/info/press/free-fonts-for-font-face-embedding.htm">Graublau</a> and <a href="https://en.wikipedia.org/wiki/Gentium">Gentium</a> fonts.</p>
 </div>
 </body>
 </html>
