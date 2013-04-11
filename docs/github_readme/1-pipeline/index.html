@@ -203,6 +203,11 @@ seqware soft nofile 32768
 seqware hard nofile 32768
 </code></pre>
 
+<p>Also for Hadoop setup later, we will need</p>
+
+<p>hdfs  -       nofile  32768
+hbase -       nofile  32768</p>
+
 <p>Services in /etc/services</p>
 
 <p>Make sure the following are defined in /etc/services: </p>
@@ -232,7 +237,7 @@ gsigatekeeper   2119/udp                        # GSIGATEKEEPER
 export PATH=$JAVA_HOME/bin:$PATH to both their .bashrc files.
 </code></pre>
 
-<p>We then add the “Red Hat/CentOS 6 (64-bit)” RPM and add the optional GPG key.</p>
+<p>We then add the “Red Hat/CentOS 6 (64-bit)” RPM and add the optional GPG key. (RedHat/CentOS/Oracle 5 for CentOS 5.5)</p>
 
 <p>For the record, pulling down hadoop-0.20-conf-pseudo grabs</p>
 
@@ -247,6 +252,18 @@ export PATH=$JAVA_HOME/bin:$PATH to both their .bashrc files.
  hadoop-hdfs-namenode                                   x86_64                      2.0.0+91-1.cdh4.0.1.p0.1.el6                         cloudera-cdh4                      4.8 k
  hadoop-hdfs-secondarynamenode                          x86_64                      2.0.0+91-1.cdh4.0.1.p0.1.el6                         cloudera-cdh4                      4.8 k
  zookeeper                                              noarch                      3.4.3+15-1.cdh4.0.1.p0.1.el6                         cloudera-cdh4                      3.6 M
+</code></pre>
+
+<p>When configuring file paths we use in the hdfs-site.xml (for the Amazon ami):</p>
+
+<pre><code>  &lt;property&gt;
+     &lt;name&gt;dfs.namenode.name.dir&lt;/name&gt;
+     &lt;value&gt;/mnt/xvdc1/nn,/mnt/xvdb1/nn&lt;/value&gt;
+  &lt;/property&gt;
+  &lt;property&gt;
+     &lt;name&gt;dfs.datanode.data.dir&lt;/name&gt;
+     &lt;value&gt;/mnt/xvdc1/dn,/mnt/xvdb1/dn&lt;/value&gt;
+  &lt;/property&gt;
 </code></pre>
 
 <p>There are no changes until Step 4 where I think they forgot a step, so you need to run (while logged-in as hdfs)</p>
@@ -1238,7 +1255,8 @@ WORKFLOW STATUS : COMPLETED | 17/17 ( 100% ) | (all jobs finished successfully)
 </div>
 </div>
 </div>
-<p></p>
+<p> </p>
+<p> </p>
 <div id="disqus_thread"></div>
 </div>
 </div>

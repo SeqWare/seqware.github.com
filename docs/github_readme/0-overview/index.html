@@ -144,6 +144,9 @@ mvn clean install -DskipITs=false -P extITs # (runs all unit tests and all integ
 <p>In the last case, the extended integration tests profile is used to trigger integration tests that run our command line utilities. 
 In order to point your command-line tools at the web service brought up by the integration tests, you will need to modify your SeqWare ~/.seqware/settings to include:</p>
 
+<pre><code>SW_REST_URL=http://localhost:8889/seqware-webservice
+</code></pre>
+
 <p>You can also build individual components such as the new query engine with: </p>
 
 <pre><code>cd seqware-queryengine
@@ -197,7 +200,8 @@ GNU General Public License for more details.</p>
 along with SeqWare.  If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>
 </div>
 </div>
-<p></p>
+<p> </p>
+<p> </p>
 <div id="disqus_thread"></div>
 </div>
 </div>
