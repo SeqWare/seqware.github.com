@@ -63,6 +63,11 @@
 <div class="header">
 <h1>Developer Tutorial</h1>
 </div>
+<!-- TODO 
+* really, should be a tutorial for MyHelloWorld so it doesn't conflict with the workflow already installed
+* the adding new job step below should show how to call a user-created script! A one-step workflow!
+-->
+
 <p>This guide picks up where the <a href="../user-tutorial/">User
 Tutorial</a> left off. In that previous
 guide we showed you how to start up your local VM, create studies, experiments,
@@ -189,16 +194,43 @@ individual jobs are already in the correct location.</p>
 <div class="section" id="first-steps">
 <h2>First Steps</h2>
 
-<p>Please launch your local VM in VirtualBox and login as user <kbd>seqware</kbd>,
-password <kbd>seqware</kbd> at this time. Click on the “SeqWare Directory” link
-on the desktop which will open a terminal to the location where we installed
-the SeqWare tools. </p>
+<p>Please launch your local VM in VirtualBox or cloud AMI on Amazon now.  For the
+local VM, login as user <kbd>seqware</kbd>, password <kbd>seqware</kbd> at this
+time. Click on the “SeqWare Directory” link on the desktop which will open a
+terminal to the location where we installed the SeqWare tools.</p>
+
+<p>Alternatively, on the Amazon AMI follow the directions to log in
+<a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstancesLinux.html">here</a>.
+Make sure that you launch our VM with the “cc1.4xlarge” instance type.
+Also, please wait roughly 10 minutes for our startup scripts to run and fully setup your instance. You can verify whether the scripts have completed by looking for a touch file.</p>
+
+<pre><code>cat /tmp/seqware_setup_ran 
+date
+</code></pre>
+
+<p>The date command shows the current time, the cat command shows you when the setup script finished running.</p>
+
+<p>Once logging into the remote instance you need to “switch user” to
+<kbd>seqware</kbd>, e.g.:</p>
+
+<pre><code>    sudo su - seqware
+</code></pre>
+
+<p>Both the VirtualBox VM and Amazon AMI include a start page that links to key information
+for the VM such as the URLs for the installed Portal, Web Service, key file locations, etc.
+On the VirtualBox VM, just click the “Start Here” link on the desktop.  For the Amazon instance
+use the instance name provided by the AWS console. For example, it will look similar to:</p>
+
+<pre><code>http://ec2-54-224-22-195.compute-1.amazonaws.com
+</code></pre>
+
+<p>You fill in your instance DNS name from the Amazon console in place of ec2-54-224-22-195.compute-1.amazonaws.com above.</p>
 
 </div>
 <div class="section" id="overview-of-workflow-development-using-the-vm">
 <h2>Overview of Workflow Development Using the VM</h2>
 
-<p>You should be in the /home/seqware/SeqWare directory now, this is the working
+<p>You should be in the /home/seqware/ directory now, this is the working
 directory.  Notice there is a jar file here and also two important directories:
 provisioned-bundles (SW_BUNDLE_DIR in the config) which contains unzipped
 workflow bundles and released-bundles
@@ -275,27 +307,30 @@ outside of the SeqWare development directories).  Here we are working in the wor
 <pre><code>    cd /home/seqware/workflow-dev
     mvn archetype:generate 
     ... 
-    720: local -&gt; com.github.seqware:seqware-archetype-decider (SeqWare Java Decider archetype) 
-    721: local -&gt; com.github.seqware:seqware-archetype-java-workflow (SeqWare Java workflow archetype) 
-    722: local -&gt; com.github.seqware:seqware-archetype-simplified-ftl-workflow (SeqWare FTL workflow archetype) 
-    723: local -&gt; com.github.seqware:seqware-archetype-module (SeqWare module archetype) 
-    724: local -&gt; com.github.seqware:seqware-archetype-legacy-ftl-workflow (SeqWare workflow legacy ftl archetype) 
-    725: local -&gt; com.github.seqware:seqware-archetype-simple-legacy-ftl-workflow (A very simple SeqWare legacy ftl workflow archetype) 
-    # select 721 above, the "SeqWare Java workflow archetype" 
+752: local -&gt; com.github.seqware:seqware-archetype-decider (SeqWare Java Decider archetype)
+753: local -&gt; com.github.seqware:seqware-archetype-java-workflow (SeqWare Java workflow archetype)
+754: local -&gt; com.github.seqware:seqware-archetype-simplified-ftl-workflow (SeqWare FTL workflow archetype)
+755: local -&gt; com.github.seqware:seqware-archetype-module (SeqWare module archetype)
+756: local -&gt; com.github.seqware:seqware-archetype-legacy-ftl-workflow (SeqWare workflow legacy ftl archetype)
+757: local -&gt; com.github.seqware:seqware-archetype-simple-legacy-ftl-workflow (A very simple SeqWare legacy ftl workflow archetype)
+ 
+    # select 753 above, the "SeqWare Java workflow archetype" 
+
     # use HelloWorld as the name of your workflow and use the default workflow version 
+
     cd HelloWorld 
     mvn install 
     cd target/Workflow_Bundle_HelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.5/ 
 </code></pre>
 
-<p>The numbers used to identify  the archetypes (720 through 725) will vary 
+<p>The numbers used to identify  the archetypes (752 through 757) will vary 
 depending on what you have installed, so you will need to scan through the list 
 to find the SeqWare archetype you are looking for, in this case “SeqWare Java workflow archetype”. </p>
 
-<p>In this example, one would chose 721, the template for workflow using Java 
-objects.  Then use “HelloWorld” as the artifactId.  You may wish to change the 
-version number for your workflow but the defaults for the remaining questions 
-should be fine. </p>
+<p>In this example, one would chose 753, the template for workflow using Java 
+objects.  Then use “HelloWorld” as the artifactId and “1.0-SNAPSHOT” as the version. 
+For your own workflows outside of the tutorial you would use whatever name and version 
+you like. </p>
 
 </div>
 <div class="section" id="a-tour-of-workflow-bundle-components">
@@ -308,6 +343,8 @@ Notice in the command below that we use the SeqWare jar from <strong>inside</str
 ensures we are using the version of SeqWare this bundle was built with which minimize incompatibility issues.</p>
 
 <pre>
+cd /home/seqware/workflow-dev/HelloWorld/target/Workflow_Bundle_HelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.5/
+
 java -jar Workflow_Bundle_HelloWorld/1.0-SNAPSHOT/lib/seqware-distribution-0.13.6.5-full.jar  -p net.sourceforge.seqware.pipeline.plugins.BundleManager -- -l -b `pwd`
 
 Running Plugin: net.sourceforge.seqware.pipeline.plugins.BundleManager
@@ -459,29 +496,45 @@ cluster, a cloud-based cluster, etc).</p>
 <div class="section" id="files">
 <h4>Files</h4>
 
-<pre>
-<code class="language-java">    <span class="nd">@Override</span>
+<pre><code class="language-java">    <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">SqwFile</span><span class="o">&gt;</span> <span class="n">setupFiles</span><span class="o">()</span> <span class="o">{</span>
+
+      <span class="k">try</span> <span class="o">{</span>
+
+        <span class="c1">// register an input file</span>
         <span class="n">SqwFile</span> <span class="n">file0</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">createFile</span><span class="o">(</span><span class="s">"file_in_0"</span><span class="o">);</span>
         <span class="n">file0</span><span class="o">.</span><span class="na">setSourcePath</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">getWorkflowBaseDir</span><span class="o">()+</span><span class="s">"/data/input.txt"</span><span class="o">);</span>
         <span class="n">file0</span><span class="o">.</span><span class="na">setType</span><span class="o">(</span><span class="s">"text/plain"</span><span class="o">);</span>
         <span class="n">file0</span><span class="o">.</span><span class="na">setIsInput</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
 
+        <span class="c1">// register an output file</span>
         <span class="n">SqwFile</span> <span class="n">file1</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">createFile</span><span class="o">(</span><span class="s">"file_out"</span><span class="o">);</span>
         <span class="n">file1</span><span class="o">.</span><span class="na">setSourcePath</span><span class="o">(</span><span class="s">"dir1/output"</span><span class="o">);</span>
         <span class="n">file1</span><span class="o">.</span><span class="na">setType</span><span class="o">(</span><span class="s">"text/plain"</span><span class="o">);</span>
         <span class="n">file1</span><span class="o">.</span><span class="na">setIsOutput</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
         <span class="n">file1</span><span class="o">.</span><span class="na">setForceCopy</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
-
+        <span class="c1">// if output_file is set in the ini then use it to set the destination of this file</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">hasPropertyAndNotNull</span><span class="o">(</span><span class="s">"output_file"</span><span class="o">))</span> <span class="o">{</span> <span class="n">file1</span><span class="o">.</span><span class="na">setOutputPath</span><span class="o">(</span><span class="n">getProperty</span><span class="o">(</span><span class="s">"output_file"</span><span class="o">));</span> <span class="o">}</span>
         <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">getFiles</span><span class="o">();</span>
-    <span class="o">}</span></code>
-</pre>
+
+      <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">ex</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">Logger</span><span class="o">.</span><span class="na">getLogger</span><span class="o">(</span><span class="n">WorkflowClient</span><span class="o">.</span><span class="na">class</span><span class="o">.</span><span class="na">getName</span><span class="o">()).</span><span class="na">log</span><span class="o">(</span><span class="n">Level</span><span class="o">.</span><span class="na">SEVERE</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="n">ex</span><span class="o">);</span>
+        <span class="k">return</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
+      <span class="o">}</span>
+
+    <span class="o">}</span></code></pre>
 
 <p>This method sets up files that are inputs and/or outputs for this workflow.  In
 this example the input <tt>data/input.txt</tt> comes from the workflow bundle
 itself. The ultimate location of the output file is determined by two
 parameters passed into the WorkflowLauncher which actually runs the workflow:
-<tt>–metadata-output-file-prefix</tt> and <tt>–metadata-output-dir</tt>.</p>
+<tt>–metadata-output-file-prefix</tt> (our <tt>output_prefix</tt> in the ini
+file) and <tt>–metadata-output-dir</tt> (or <tt>output_dir</tt> in the ini
+file). Alternatively, you can actually override the output location for a file
+as is the case with the above “output_file”.  When this parameter is available
+in the ini file the automatic location of the output file
+(“output_prefix”+/+”output_dir”+/+”output”) is overridden for the value of
+“output_file”.</p>
 
 </div>
 <div class="section" id="directories">
@@ -708,7 +761,7 @@ example:</p>
 <p>SeqWare bundles have a test command built into their metadata.xml. In order to trigger this, run with the following command. Note that the workflow name and version need to match the name and version given when the workflow is listed above. </p>
 
 <pre><code>cd /home/seqware/workflow-dev/HelloWorld/target/Workflow_Bundle_HelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.5
-java -jar ~/seqware-distribution-0.13.6.5-full.jar -p net.sourceforge.seqware.pipeline.plugins.BundleManager -- -b `pwd` -t --workflow HelloWorld 1.0-SNAPSHOT
+java -jar ~/seqware-distribution-0.13.6.5-full.jar -p net.sourceforge.seqware.pipeline.plugins.BundleManager -- -b `pwd` -t --workflow HelloWorld --version 1.0-SNAPSHOT
 Running Plugin: net.sourceforge.seqware.pipeline.plugins.BundleManager
 Setting Up Plugin: net.sourceforge.seqware.pipeline.plugins.BundleManager@2fb3f8f6
 Testing Bundle
@@ -745,7 +798,7 @@ Bundle: packaged path: /home/seqware/workflow-dev/HelloWorld/target/Workflow_Bun
 Bundle Has Been Packaged to packaged!
 </code></pre>
 
-<p>What happens here is the <code>Workflow_Bundle_hello_1.0-SNAPSHOT_SeqWare_0.13.6.5</code> directory is zip’d up to your output directory and that can be provided to an admin for install.</p>
+<p>What happens here is the <code>Workflow_Bundle_hello_1.0-SNAPSHOT_SeqWare_0.13.6.5</code> directory is zip’d up to your output directory and that can be provided to an admin for install. In this VM you will find the bundled workflow written to the file /home/seqware/released-bundles/Workflow_Bundle_HelloWorld<em>1.0-SNAPSHOT_SeqWare</em>0.13.6.5.zip</p>
 
 </div>
 <div class="section" id="next-steps">

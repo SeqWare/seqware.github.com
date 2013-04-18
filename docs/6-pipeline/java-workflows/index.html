@@ -94,27 +94,30 @@ outside of the SeqWare development directories).  Here we are working in the wor
 <pre><code>    cd /home/seqware/workflow-dev
     mvn archetype:generate 
     ... 
-    720: local -&gt; com.github.seqware:seqware-archetype-decider (SeqWare Java Decider archetype) 
-    721: local -&gt; com.github.seqware:seqware-archetype-java-workflow (SeqWare Java workflow archetype) 
-    722: local -&gt; com.github.seqware:seqware-archetype-simplified-ftl-workflow (SeqWare FTL workflow archetype) 
-    723: local -&gt; com.github.seqware:seqware-archetype-module (SeqWare module archetype) 
-    724: local -&gt; com.github.seqware:seqware-archetype-legacy-ftl-workflow (SeqWare workflow legacy ftl archetype) 
-    725: local -&gt; com.github.seqware:seqware-archetype-simple-legacy-ftl-workflow (A very simple SeqWare legacy ftl workflow archetype) 
-    # select 721 above, the "SeqWare Java workflow archetype" 
+752: local -&gt; com.github.seqware:seqware-archetype-decider (SeqWare Java Decider archetype)
+753: local -&gt; com.github.seqware:seqware-archetype-java-workflow (SeqWare Java workflow archetype)
+754: local -&gt; com.github.seqware:seqware-archetype-simplified-ftl-workflow (SeqWare FTL workflow archetype)
+755: local -&gt; com.github.seqware:seqware-archetype-module (SeqWare module archetype)
+756: local -&gt; com.github.seqware:seqware-archetype-legacy-ftl-workflow (SeqWare workflow legacy ftl archetype)
+757: local -&gt; com.github.seqware:seqware-archetype-simple-legacy-ftl-workflow (A very simple SeqWare legacy ftl workflow archetype)
+ 
+    # select 753 above, the "SeqWare Java workflow archetype" 
+
     # use HelloWorld as the name of your workflow and use the default workflow version 
+
     cd HelloWorld 
     mvn install 
     cd target/Workflow_Bundle_HelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.5/ 
 </code></pre>
 
-<p>The numbers used to identify  the archetypes (720 through 725) will vary 
+<p>The numbers used to identify  the archetypes (752 through 757) will vary 
 depending on what you have installed, so you will need to scan through the list 
 to find the SeqWare archetype you are looking for, in this case “SeqWare Java workflow archetype”. </p>
 
-<p>In this example, one would chose 721, the template for workflow using Java 
-objects.  Then use “HelloWorld” as the artifactId.  You may wish to change the 
-version number for your workflow but the defaults for the remaining questions 
-should be fine. </p>
+<p>In this example, one would chose 753, the template for workflow using Java 
+objects.  Then use “HelloWorld” as the artifactId and “1.0-SNAPSHOT” as the version. 
+For your own workflows outside of the tutorial you would use whatever name and version 
+you like. </p>
 
 <p>Alternatively, enter the workflow name and version you want to use.  When complete, you can
 <tt>cd</tt> into the new workflow directory and use <tt>mvn install</tt> to
@@ -245,18 +248,30 @@ easiest way to register workflow files.</p>
 
 <pre><code class="language-java">    <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">SqwFile</span><span class="o">&gt;</span> <span class="n">setupFiles</span><span class="o">()</span> <span class="o">{</span>
+
+      <span class="k">try</span> <span class="o">{</span>
+
+        <span class="c1">// register an input file</span>
         <span class="n">SqwFile</span> <span class="n">file0</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">createFile</span><span class="o">(</span><span class="s">"file_in_0"</span><span class="o">);</span>
         <span class="n">file0</span><span class="o">.</span><span class="na">setSourcePath</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">getWorkflowBaseDir</span><span class="o">()+</span><span class="s">"/data/input.txt"</span><span class="o">);</span>
         <span class="n">file0</span><span class="o">.</span><span class="na">setType</span><span class="o">(</span><span class="s">"text/plain"</span><span class="o">);</span>
         <span class="n">file0</span><span class="o">.</span><span class="na">setIsInput</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
-                
+
+        <span class="c1">// register an output file</span>
         <span class="n">SqwFile</span> <span class="n">file1</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">createFile</span><span class="o">(</span><span class="s">"file_out"</span><span class="o">);</span>
         <span class="n">file1</span><span class="o">.</span><span class="na">setSourcePath</span><span class="o">(</span><span class="s">"dir1/output"</span><span class="o">);</span>
         <span class="n">file1</span><span class="o">.</span><span class="na">setType</span><span class="o">(</span><span class="s">"text/plain"</span><span class="o">);</span>
         <span class="n">file1</span><span class="o">.</span><span class="na">setIsOutput</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
         <span class="n">file1</span><span class="o">.</span><span class="na">setForceCopy</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
-        
+        <span class="c1">// if output_file is set in the ini then use it to set the destination of this file</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">hasPropertyAndNotNull</span><span class="o">(</span><span class="s">"output_file"</span><span class="o">))</span> <span class="o">{</span> <span class="n">file1</span><span class="o">.</span><span class="na">setOutputPath</span><span class="o">(</span><span class="n">getProperty</span><span class="o">(</span><span class="s">"output_file"</span><span class="o">));</span> <span class="o">}</span>
         <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">getFiles</span><span class="o">();</span>
+
+      <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">ex</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">Logger</span><span class="o">.</span><span class="na">getLogger</span><span class="o">(</span><span class="n">WorkflowClient</span><span class="o">.</span><span class="na">class</span><span class="o">.</span><span class="na">getName</span><span class="o">()).</span><span class="na">log</span><span class="o">(</span><span class="n">Level</span><span class="o">.</span><span class="na">SEVERE</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="n">ex</span><span class="o">);</span>
+        <span class="k">return</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
+      <span class="o">}</span>
+
     <span class="o">}</span></code></pre>
 
 <p>You can also specify directories to be created in the working directory of your workflow.</p>
