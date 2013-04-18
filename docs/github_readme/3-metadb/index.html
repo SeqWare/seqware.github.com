@@ -120,7 +120,7 @@ host    all     seqware         127.0.0.1/32    md5
 <li>Create a database user for the SeqWare MetaDB with the following command.  ‘‘seqware’’ is the username and ‘‘password’’ is the password for this user. Please change as appropriate for your site:</li>
 </ul>
 <pre>
-$ sudo -u postgres psql -c "CREATE USER seqware WITH PASSWORD 'password' CREATEDB;"
+$ sudo -u postgres psql -c "CREATE USER seqware WITH PASSWORD 'seqware' CREATEDB;"
 </pre>
 
 <ul>
@@ -403,7 +403,7 @@ psql seqware_meta_db -c "alter table workflow_run disable trigger user; alter ta
 </div>
 <!-- ***** footer ***** -->
 <div id="footer">
-<p>SeqWare © 2007–2013 Brian O&#8217;Connor. SeqWare is released under the a <a rel="license" href="http://www.gnu.org/licenses/licenses.html">GNU GPL v3</a>. This site is built using the excellent <a href="http://nanoc.stoneship.org/">nanoc</a> tool and example site along with the <a href="http://www.fonts.info/info/press/free-fonts-for-font-face-embedding.htm">Graublau</a> and <a href="https://en.wikipedia.org/wiki/Gentium">Gentium</a> fonts.</p>
+<p>SeqWare © 2007–2013 Brian O&#8217;Connor. SeqWare is released under the a <a rel="license" href="http://www.gnu.org/licenses/licenses.html">GNU GPL v3</a>. This site is built using the excellent <a href="http://nanoc.ws/">nanoc</a> tool and example site along with the <a href="http://www.fonts.info/info/press/free-fonts-for-font-face-embedding.htm">Graublau</a> and <a href="https://en.wikipedia.org/wiki/Gentium">Gentium</a> fonts.</p>
 </div>
 </body>
 </html>

@@ -49,19 +49,16 @@
 </div>
 <p class="warning"><strong>Note:</strong> This guide is a work in progress and was designed for release 0.13.6.x of SeqWare.</p>
 
-
-<p></p>
-
 <p>This is the core documentation for the SeqWare project, including all the
 various sub-projects. We wanted to create a single manual that would bring
 together all of our documentation since much of it is currently spread across a
 poorly-organized wiki.  Because SeqWare is a fairly complex software stack
 (with some difficult-to-configure dependencies) we assume most users will start
 with a VM, either a local VirtualBox VM or an Amazon Machine Image (AMI) on
-Amazon&#8217;s cloud. See &#8220;Installation&#8221; for directions for getting the VM.  While
+Amazon’s cloud. See “Installation” for directions for getting the VM.  While
 this guide is organized by logical sections that flow from one to the next you
 do not need to read the whole thing in order to get started.  Take a look at
-the tutorials in the &#8220;Getting Started&#8221; section which will walk you through the
+the tutorials in the “Getting Started” section which will walk you through the
 core functionality such as SeqWare Pipeline.</p>
 
 <p>The tutorials are divided into User, Developer, and Admin guides.  These
@@ -83,13 +80,13 @@ setting up and maintaining the various SeqWare components.</p>
 <ul>
 <li>
 <strong>MetaDB</strong>: provides a common database to store metadata used by all components.</li>
-<li>
+  <li>
 <strong>Portal</strong>: a LIMS-like web application to manage samples, record computational events, and present results back to end users.</li>
-<li>
+  <li>
 <strong>Pipeline</strong>: a workflow engine that is capable of wrapping and combining other tools (BFAST, BWA, SAMtools, etc) into complex pipelines, recording metadata about the analysis, and facilitates automation of pipelines based on metadata.</li>
-<li>
+  <li>
 <strong>Web Service</strong>: a programmatic API that lets people build new tools on top of the project</li>
-<li>
+  <li>
 <strong>Query Engine</strong>: a NoSQL database designed to store and query variants and other events inferred from sequence data.</li>
 </ul>
 <p><img width="600" src="../assets/images/seqware_arch.png"></p>
@@ -103,9 +100,9 @@ setting up and maintaining the various SeqWare components.</p>
 <ul>
 <li>
 <strong>User</strong>: a user of workflows, the user injects data into the system, triggers workflows, and gets the results back once finished</li>
-<li>
+  <li>
 <strong>Developer</strong>: a developer of workflows, the developer makes new workflows and are typically Bioinformaticians and experts in NGS analysis techniques and tools</li>
-<li>
+  <li>
 <strong>Admin</strong>: an admin of the system, this is typically both a sys admin that installs and configures SeqWare components and is also responsible for installing new workflows and setting their default configurations</li>
 </ul>
 <p>Depending on the size of the group these roles may be the same person, distinct people, or even distinct groups within a larger organization.</p>
@@ -119,11 +116,11 @@ setting up and maintaining the various SeqWare components.</p>
 <ul>
 <li>
 <i>Italic text</i> introduces new terms.</li>
-<li>
+  <li>
 <code>Monospaced text</code> is used for code snippets.</li>
-<li>
+  <li>
 <kbd>Monospaced, bold text</kbd> is used for commands that should be typed literally.</li>
-<li>
+  <li>
 <var>Monospaced, italic text</var> is used for text that should be replaced with user-supplied values.</li>
 </ul>
 <p>The documentation also contains quite a few blocks of code snippets. These are marked up like this:</p>
@@ -133,7 +130,6 @@ setting up and maintaining the various SeqWare components.</p>
     <span class="o">[</span> <span class="ss">:foo</span><span class="p">,</span> <span class="s2">"sit amet, consectetur adipisicing elit"</span><span class="p">,</span> <span class="mi">123</span> <span class="o">]</span>
   <span class="k">end</span>
 <span class="k">end</span></code></pre>
-
 
 <p>Bash shell input/output are marked up in a similar way. Note that the prompt is
 always included, but should never be typed. Here’s an example:</p>
@@ -150,7 +146,7 @@ hello
 </div>
 <!-- ***** footer ***** -->
 <div id="footer">
-<p>SeqWare © 2007–2013 Brian O&#8217;Connor. SeqWare is released under the a <a rel="license" href="http://www.gnu.org/licenses/licenses.html">GNU GPL v3</a>. This site is built using the excellent <a href="http://nanoc.stoneship.org/">nanoc</a> tool and example site along with the <a href="http://www.fonts.info/info/press/free-fonts-for-font-face-embedding.htm">Graublau</a> and <a href="https://en.wikipedia.org/wiki/Gentium">Gentium</a> fonts.</p>
+<p>SeqWare © 2007–2013 Brian O&#8217;Connor. SeqWare is released under the a <a rel="license" href="http://www.gnu.org/licenses/licenses.html">GNU GPL v3</a>. This site is built using the excellent <a href="http://nanoc.ws/">nanoc</a> tool and example site along with the <a href="http://www.fonts.info/info/press/free-fonts-for-font-face-embedding.htm">Graublau</a> and <a href="https://en.wikipedia.org/wiki/Gentium">Gentium</a> fonts.</p>
 </div>
 </body>
 </html>

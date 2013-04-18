@@ -78,7 +78,9 @@ ready to go, you will not need to modify it.</p>
 
 <p>Note that the sections for the Oozie Workflow Engine, General Hadoop, Query
 Engine, and Amazon Cloud Settings are all optional, so they do not need to be
-filled in for every deployment of SeqWare, just those using these tools.</p>
+filled in for every deployment of SeqWare, just those using these tools. Also note that the
+settings file needs to have read and write permissions for only the owner for security reasons. 
+Our tools will abort and refuse to run if this is not set. </p>
 
 <pre><code class="language-ini"><span class="c1">#</span>
 <span class="c1"># SEQWARE PIPELINE SETTINGS</span>
@@ -141,6 +143,11 @@ filled in for every deployment of SeqWare, just those using these tools.</p>
 <span class="na">HBASE.ZOOKEEPER.QUORUM</span><span class="o">=</span><span class="s">localhost</span>
 <span class="na">HBASE.ZOOKEEPER.PROPERTY.CLIENTPORT</span><span class="o">=</span><span class="s">2181</span>
 <span class="na">HBASE.MASTER</span><span class="o">=</span><span class="s">localhost:60000</span>
+<span class="na">QE_NAMESPACE</span><span class="o">=</span><span class="s">SeqWareQE</span>
+<span class="na">QE_DEVELOPMENT_DEPENDENCY</span><span class="o">=</span><span class="s">file:/home/seqware/jars/seqware-distribution-0.13.6.5-qe-full.jar</span>
+<span class="na">QE_PERSIST</span><span class="o">=</span><span class="s">true</span>
+<span class="na">QE_HBASE_REMOTE_TESTING</span><span class="o">=</span><span class="s">false</span>
+<span class="na">QE_HBASE_PROPERTIES</span><span class="o">=</span><span class="s">LOCAL</span>
 <span class="c1">#</span>
 <span class="c1"># SEQWARE GENERAL HADOOP SETTINGS</span>
 <span class="c1"># optional if not using oozie</span>
@@ -278,7 +285,7 @@ side.</p>
 </div>
 <!-- ***** footer ***** -->
 <div id="footer">
-<p>SeqWare © 2007–2013 Brian O&#8217;Connor. SeqWare is released under the a <a rel="license" href="http://www.gnu.org/licenses/licenses.html">GNU GPL v3</a>. This site is built using the excellent <a href="http://nanoc.stoneship.org/">nanoc</a> tool and example site along with the <a href="http://www.fonts.info/info/press/free-fonts-for-font-face-embedding.htm">Graublau</a> and <a href="https://en.wikipedia.org/wiki/Gentium">Gentium</a> fonts.</p>
+<p>SeqWare © 2007–2013 Brian O&#8217;Connor. SeqWare is released under the a <a rel="license" href="http://www.gnu.org/licenses/licenses.html">GNU GPL v3</a>. This site is built using the excellent <a href="http://nanoc.ws/">nanoc</a> tool and example site along with the <a href="http://www.fonts.info/info/press/free-fonts-for-font-face-embedding.htm">Graublau</a> and <a href="https://en.wikipedia.org/wiki/Gentium">Gentium</a> fonts.</p>
 </div>
 </body>
 </html>
