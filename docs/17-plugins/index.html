@@ -250,6 +250,14 @@
       <td>Downloads a workflow bundle zip from a URL to the local directory.</td>
     </tr>
 <tr>
+<td>–ha, –human-aligned</td>
+      <td>Optional: will print output in aligned human friendly format</td>
+    </tr>
+<tr>
+<td>–he, –human-expanded</td>
+      <td>Optional: will print output in expanded human friendly format</td>
+    </tr>
+<tr>
 <td>–i, –install</td>
       <td>Optional: if the –bundle param points to a .zip file then the install process will first unzip into the directory specified by the directory defined by SW_BUNDLE_DIR in the .seqware/settings file (skipping files that already exit).  It will then copy the whole zip file to the SW_BUNDLE_ARCHIVE_DIR which can be a directory or S3 prefix (the copy will be skipped if the file is already at this location). It will finish this process by installing this bundle in the database with the permanent_bundle_location pointed to the zip file location and current_working_dir pointed to the unzipped location.  If the –bundle param point to a directory then this will first create a zip of the bundle and place it in SW_BUNDLE_ARCHIVE_DIR. It will then install this bundle in the database with the permanent_bundle_location pointed to the zip file location and current_working_dir pointed to the unzipped location. The method (direct database or web service) and server location of the SeqWare  MetaDB is controlled via the .seqware/settings file.</td>
     </tr>
@@ -521,6 +529,10 @@
       <td>Optional: The file type to filter on. Only this type will be linked. Default is all files. Permissible file metatypes can found on our website under ‘Module Conventions’</td>
     </tr>
 <tr>
+<td>–human</td>
+      <td>Optional: will print output in expanded human friendly format</td>
+    </tr>
+<tr>
 <td>–l, –link</td>
       <td>Optional: make hard links (P) or symlinks (s). Default is symlinks.</td>
     </tr>
@@ -551,6 +563,10 @@
 <tr>
 <td>–show-status</td>
       <td>Show the workflow run status in the output CSV.</td>
+    </tr>
+<tr>
+<td>–stdout</td>
+      <td>Prints to standard out instead of to a file</td>
     </tr>
 <tr>
 <td>–study</td>
@@ -757,6 +773,10 @@
       <th>Description</th>
     </tr></thead>
 <tbody>
+<tr>
+<td>–human</td>
+      <td>Optional: will print output in expanded human friendly format</td>
+    </tr>
 <tr>
 <td>–o, –output-filename</td>
       <td>Optional: The output filename</td>
