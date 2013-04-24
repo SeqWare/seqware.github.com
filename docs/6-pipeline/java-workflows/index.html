@@ -94,14 +94,14 @@ outside of the SeqWare development directories).  Here we are working in the wor
 <pre><code>    cd /home/seqware/workflow-dev
     mvn archetype:generate 
     ... 
-752: local -&gt; com.github.seqware:seqware-archetype-decider (SeqWare Java Decider archetype)
-753: local -&gt; com.github.seqware:seqware-archetype-java-workflow (SeqWare Java workflow archetype)
-754: local -&gt; com.github.seqware:seqware-archetype-simplified-ftl-workflow (SeqWare FTL workflow archetype)
-755: local -&gt; com.github.seqware:seqware-archetype-module (SeqWare module archetype)
-756: local -&gt; com.github.seqware:seqware-archetype-legacy-ftl-workflow (SeqWare workflow legacy ftl archetype)
-757: local -&gt; com.github.seqware:seqware-archetype-simple-legacy-ftl-workflow (A very simple SeqWare legacy ftl workflow archetype)
+    754: local -&gt; com.github.seqware:seqware-archetype-decider (SeqWare Java Decider archetype)
+    755: local -&gt; com.github.seqware:seqware-archetype-java-workflow (SeqWare Java workflow archetype)
+    756: local -&gt; com.github.seqware:seqware-archetype-simplified-ftl-workflow (SeqWare FTL workflow archetype)
+    757: local -&gt; com.github.seqware:seqware-archetype-module (SeqWare module archetype)
+    758: local -&gt; com.github.seqware:seqware-archetype-legacy-ftl-workflow (SeqWare workflow legacy ftl archetype)
+    759: local -&gt; com.github.seqware:seqware-archetype-simple-legacy-ftl-workflow (A very simple SeqWare legacy ftl workflow archetype)
  
-    # select 753 above, the "SeqWare Java workflow archetype" 
+    # select 755 above, the "SeqWare Java workflow archetype" 
 
     # use HelloWorld as the name of your workflow and use the default workflow version 
 
@@ -124,7 +124,7 @@ you like. </p>
 build the workflow. This copies files to the correct location and pulls in
 needed dependencies.</p>
 
-<pre><code>[seqware@master workflow-dev]$ cd HelloWorld/
+<pre><code>[seqware@master workflow-dev]$ cd /home/seqware/workflow-dev/HelloWorld 
 [seqware@master HelloWorld]$ mvn clean install
     [INFO] Scanning for projects...                                                                                       
     [INFO] ------------------------------------------------------------------------                                       
@@ -133,14 +133,7 @@ needed dependencies.</p>
 [INFO] ------------------------------------------------------------------------
 [INFO] [clean:clean {execution: default-clean}]
 [INFO] Deleting /mnt/databases/workflow-dev/HelloWorld/target
-    ...
-    main:
-    [INFO] Executed tasks
-    [INFO] [antrun:run {execution: chmod-perl}]
-    [INFO] Executing tasks
-
-    main:
-    [INFO] Executed tasks
+    &lt;snip&gt; 
     [INFO] ------------------------------------------------------------------------
     [INFO] BUILD SUCCESSFUL
     [INFO] ------------------------------------------------------------------------

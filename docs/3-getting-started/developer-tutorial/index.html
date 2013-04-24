@@ -307,14 +307,14 @@ outside of the SeqWare development directories).  Here we are working in the wor
 <pre><code>    cd /home/seqware/workflow-dev
     mvn archetype:generate 
     ... 
-752: local -&gt; com.github.seqware:seqware-archetype-decider (SeqWare Java Decider archetype)
-753: local -&gt; com.github.seqware:seqware-archetype-java-workflow (SeqWare Java workflow archetype)
-754: local -&gt; com.github.seqware:seqware-archetype-simplified-ftl-workflow (SeqWare FTL workflow archetype)
-755: local -&gt; com.github.seqware:seqware-archetype-module (SeqWare module archetype)
-756: local -&gt; com.github.seqware:seqware-archetype-legacy-ftl-workflow (SeqWare workflow legacy ftl archetype)
-757: local -&gt; com.github.seqware:seqware-archetype-simple-legacy-ftl-workflow (A very simple SeqWare legacy ftl workflow archetype)
+    754: local -&gt; com.github.seqware:seqware-archetype-decider (SeqWare Java Decider archetype)
+    755: local -&gt; com.github.seqware:seqware-archetype-java-workflow (SeqWare Java workflow archetype)
+    756: local -&gt; com.github.seqware:seqware-archetype-simplified-ftl-workflow (SeqWare FTL workflow archetype)
+    757: local -&gt; com.github.seqware:seqware-archetype-module (SeqWare module archetype)
+    758: local -&gt; com.github.seqware:seqware-archetype-legacy-ftl-workflow (SeqWare workflow legacy ftl archetype)
+    759: local -&gt; com.github.seqware:seqware-archetype-simple-legacy-ftl-workflow (A very simple SeqWare legacy ftl workflow archetype)
  
-    # select 753 above, the "SeqWare Java workflow archetype" 
+    # select 755 above, the "SeqWare Java workflow archetype" 
 
     # use HelloWorld as the name of your workflow and use the default workflow version 
 
@@ -726,7 +726,7 @@ In the example below I just added an extra job that does a simple shell operatio
 “mvn clean install” to refresh the workflow bundle in the target directory. For
 example:</p>
 
-<pre><code>[seqware@master workflow-dev]$ cd HelloWorld/
+<pre><code>[seqware@master workflow-dev]$ cd /home/seqware/workflow-dev/HelloWorld 
 [seqware@master HelloWorld]$ mvn clean install
     [INFO] Scanning for projects...                                                                                       
     [INFO] ------------------------------------------------------------------------                                       
@@ -735,14 +735,7 @@ example:</p>
 [INFO] ------------------------------------------------------------------------
 [INFO] [clean:clean {execution: default-clean}]
 [INFO] Deleting /mnt/databases/workflow-dev/HelloWorld/target
-    ...
-    main:
-    [INFO] Executed tasks
-    [INFO] [antrun:run {execution: chmod-perl}]
-    [INFO] Executing tasks
-
-    main:
-    [INFO] Executed tasks
+    &lt;snip&gt; 
     [INFO] ------------------------------------------------------------------------
     [INFO] BUILD SUCCESSFUL
     [INFO] ------------------------------------------------------------------------
@@ -759,6 +752,38 @@ example:</p>
 <h2>Testing the Workflow</h2>
 
 <p>SeqWare bundles have a test command built into their metadata.xml. In order to trigger this, run with the following command. Note that the workflow name and version need to match the name and version given when the workflow is listed above. </p>
+
+<pre><code>cd /home/seqware/workflow-dev/HelloWorld
+[seqware@master HelloWorld]$ mvn clean install -DskipITs=false
+&lt;snipped&gt;
+[INFO] [exec:exec {execution: recursive_executable}]
+[INFO] [exec:exec {execution: test_bundle}]
+Running Plugin: net.sourceforge.seqware.pipeline.plugins.BundleManager
+Setting Up Plugin: net.sourceforge.seqware.pipeline.plugins.BundleManager@4229ab3e
+Testing Bundle
+  Running Test Command:
+java -jar /mnt/databases/workflow-dev/HelloWorld/target/Workflow_Bundle_HelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.5/Workflow_Bundle_HelloWorld/1.0-SNAPSHOT/lib/seqware-distribution-0.13.6.5-full.jar --plugin net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher -- --no-metadata --provisioned-bundle-dir /mnt/databases/workflow-dev/HelloWorld/target/Workflow_Bundle_HelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.5 --workflow HelloWorld --version 1.0-SNAPSHOT --ini-files /mnt/databases/workflow-dev/HelloWorld/target/Workflow_Bundle_HelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.5/Workflow_Bundle_HelloWorld/1.0-SNAPSHOT/config/workflow.ini 
+MONITORING PEGASUS STATUS:
+RUNNING: step 1 of 7 (14%)
+RUNNING: step 2 of 7 (28%)
+RUNNING: step 3 of 7 (42%)
+RUNNING: step 4 of 7 (57%)
+RUNNING: step 5 of 7 (71%)
+RUNNING: step 6 of 7 (85%)
+WORKFLOW COMPLETED SUCCESSFULLY!
+Bundle Passed Test!
+[INFO] [install:install {execution: default-install}]
+[INFO] Installing /mnt/databases/workflow-dev/HelloWorld/target/HelloWorld-1.0-SNAPSHOT.jar to /home/seqware/.m2/repository/com/github/seqware/HelloWorld/1.0-SNAPSHOT/HelloWorld-1.0-SNAPSHOT.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESSFUL
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 5 minutes 39 seconds
+[INFO] Finished at: Wed Apr 24 08:58:38 PDT 2013
+[INFO] Final Memory: 72M/489M
+[INFO] ------------------------------------------------------------------------
+</code></pre>
+
+<p>Under the hood, this is just calling the BundleManager –test option. In other words, you can do the same thing by:</p>
 
 <pre><code>cd /home/seqware/workflow-dev/HelloWorld/target/Workflow_Bundle_HelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.5
 java -jar ~/seqware-distribution-0.13.6.5-full.jar -p net.sourceforge.seqware.pipeline.plugins.BundleManager -- -b `pwd` -t --workflow HelloWorld --version 1.0-SNAPSHOT

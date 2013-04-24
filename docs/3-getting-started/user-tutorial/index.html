@@ -417,19 +417,24 @@ and their parameters.  To see the list of available workflows you can execute
 the following command:</p>
 
 <pre><code>java -jar ~/seqware-distribution-0.13.6.5-full.jar -p net.sourceforge.seqware.pipeline.plugins.BundleManager -- --list-install
+java -jar ~/seqware-distribution-0.13.6.5-full.jar -p net.sourceforge.seqware.pipeline.plugins.BundleManager -- --list-install --human-aligned
+java -jar ~/seqware-distribution-0.13.6.5-full.jar -p net.sourceforge.seqware.pipeline.plugins.BundleManager -- --list-install --human-expanded
 </code></pre>
 
-<p>You will get a tab-delimited list of workflows showing their name, version, and 
-(most importantly) their SWID.</p>
-
-<p class="warning"><strong>Tip:</strong> it may be easier for you to read the
-output by cutting and pasting into a spreadsheet, it is tab-delimited.</p>
+<p>First, you will get a tab-delimited list of workflows showing their name, version, and 
+(most importantly) their SWID that you can use in scripts. In the second and third examples
+, you will get a more user-friendly versions of the output. </p>
 
 <p>In this example we are going to use the latest (at the time of this writing)
 HelloWorld workflow bundle (SWID 1 below).  The output of the above command
-includes the line:</p>
+includes:</p>
 
-<pre><code>HelloWorldWorkflow      1.0-SNAPSHOT     Wed Aug 15 19:00:11 EDT 2012    7       /home/seqware/released-bundles/Workflow_Bundle_HelloWorldWorkflow_1.0-SNAPSHOT_SeqWare_0.13.6.5.zip
+<pre><code>-[ RECORD 0 ]----+--------------------------------------------------------------------------------------------
+Name             | HelloWorld                                                                                  
+Version          | 1.0-SNAPSHOT                                                                                
+Creation Date    | Thu Apr 18 11:30:52 PDT 2013                                                                
+SeqWare Accession| 1                                                                                           
+Bundle Location  | /home/seqware/released-bundles/Workflow_Bundle_HelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.5.zip 
 </code></pre>
 
 <p>The fourth column includes the SWID for this workflow that you will use in the
@@ -440,7 +445,7 @@ file that can later be customized and used to submit a run of this workflow:</p>
 <pre><code>java -jar ~/seqware-distribution-0.13.6.5-full.jar -p net.sourceforge.seqware.pipeline.plugins.BundleManager -- --list-workflow-params --workflow-accession 1 &gt; /home/seqware/workflow.ini
 </code></pre>
 
-<p>In this example the workflow “HelloWorldWorkflow” version 1.0 (SWID 1)
+<p>In this example the workflow “HelloWorld” version 1.0 (SWID 1)
 parameters are listed.  The output conforms to the input you can use to
 parameterize and launch workflows.  For example:</p>
 
@@ -548,15 +553,40 @@ workflow run accession which you can use to help monitor the workflow.</p>
 using the WorkflowRunReporter plugin. This will let you script the monitoring
 of workflow runs.</p>
 
-<pre><code>java -jar ~/seqware-distribution-0.13.6.5-full.jar -p net.sourceforge.seqware.pipeline.plugins.WorkflowRunReporter -- --workflow-accession 1 --stdout
+<pre><code>[seqware@master ~]$ java -jar ~/seqware-distribution-0.13.6.5-full.jar -p net.sourceforge.seqware.pipeline.plugins.WorkflowRunReporter -- --workflow-accession 1 --stdout --human
+Running Plugin: net.sourceforge.seqware.pipeline.plugins.WorkflowRunReporter
+Setting Up Plugin: net.sourceforge.seqware.pipeline.plugins.WorkflowRunReporter@744a6cbf
+Apr 24, 2013 9:12:40 AM org.restlet.ext.httpclient.HttpClientHelper start
+INFO: Starting the Apache HTTP client
+-[ RECORD 0 ]----------------+-------------------------------------------------------------------------------
+Workflow                     | HelloWorld 1.0-SNAPSHOT                                                        
+Workflow Run SWID            | 11                                                                             
+Workflow Run Status          | running                                                                        
+Workflow Run Create Timestamp| 2013-04-24 09:09:59.77                                                         
+Workflow Run Host            | master                                                                         
+Workflow Run Status Command  | pegasus-status -l /home/seqware/pegasus-dax/seqware/pegasus/HelloWorld/run0002 
+Library Sample Names         |                                                                                
+Library Sample SWIDs         |                                                                                
+Identity Sample Names        | New Test Sample                                                                
+Identity Sample SWIDs        | 4                                                                              
+Input File Meta-Types        | text/plain                                                                     
+Input File SWIDs             | 7                                                                              
+Input File Paths             | /datastore/input.txt                                                           
+Output File Meta-Types       |                                                                                
+Output File SWIDs            |                                                                                
+Output File Paths            |                                                                                
+Workflow Run Time            | 0 ms   
 </code></pre>
 
 <p>This output includes several columns of interest including the status of the
 workflow, the output file types, and their locations in S3 or the file system.
-You can use this information to automate the checking of workflows and the
+If you omit the <tt>–human</tt> option, you can get tabbed output to automate 
+the checking of workflows and the
 retrieval of the results! You can skip writing to an output
 file by just using the <tt>–stdout</tt> option which is helpful if you are scripting
-on top of this command.</p>
+on top of this command. </p>
+
+<p>After about ten minutes, the workflow should complete. </p>
 
 <p>Alternatively, you can just get the status of a particular workflow run, for
 example, the workflow run accession printed when you launched the workflow with
@@ -620,10 +650,13 @@ tab-delimited file you can easily automate the downloading of results by
 looping over the output files and calling ProvisionFiles using a script.</p>
 
 <pre><code>java -jar ~/seqware-distribution-0.13.6.5-full.jar -p net.sourceforge.seqware.pipeline.plugins.SymLinkFileReporter -- --no-links --output-filename study_report --workflow-accession 1 --study 'New Test Study'
+java -jar ~/seqware-distribution-0.13.6.5-full.jar -p net.sourceforge.seqware.pipeline.plugins.SymLinkFileReporter -- --no-links --output-filename study_report --workflow-accession 1 --study 'New Test Study' --human --stdout
 </code></pre>
 
-<p>The output here is a <tt>study_report.csv</tt> file that contains a line for
-each file output for this workflow.  You can also filter by file types, for
+<p>In the first case, the output is a <tt>study_report.csv</tt> file that contains a line for
+each file output for this workflow.
+In the second case, the output is a more user-friendly output intended for viewing on the command-line.
+  You can also filter by file types, for
 example if you want to see just plain text files:</p>
 
 <pre><code>java -jar ~/seqware-distribution-0.13.6.5-full.jar -p net.sourceforge.seqware.pipeline.plugins.SymLinkFileReporter -- --no-links --output-filename study_report --workflow-accession 1 --study 'New Test Study' --file-type 'text/plain'
