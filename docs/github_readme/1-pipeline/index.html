@@ -660,6 +660,12 @@ ln -s grid-security.conf.3847a079 grid-security.conf.44d1fecb
 
 <p>After making your changes to the sge.pm make sure you use “perl -c” to check the syntax. It needs to be a valid Perl file to work!</p>
 
+<p>Make sure your install points to the correct SGE commands, edit the following file to change the path to tools like qstat and qsub:</p>
+
+<pre><code>/etc/globus/globus-sge.conf
+/etc/sysconfig/gridengine
+</code></pre>
+
 </div>
 <div class="section" id="starting-daemons">
 <h3>Starting Daemons</h3>
