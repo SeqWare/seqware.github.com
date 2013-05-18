@@ -79,7 +79,7 @@ working with an admin since some of the steps will require “root” privileges
 <p>By the end of these tutorials you will:</p>
 
 <ul>
-<li>be prepared to install workflows</li>
+<li>install workflows</li>
   <li>monitor workflows</li>
   <li>cancel and restart workflows</li>
   <li>see how to connect a local VM to a local cluster for running large-scale workflows</li>
@@ -106,25 +106,25 @@ before you do this step below (or back it up somewhere first).</p>
 how to make the zipped workflow bundle. After the zip bundle is created, the
 bundle can be provided to the admin for install as below.</p>
 
-<pre><code>java -jar ~/seqware-distribution-0.13.6.5-full.jar -p net.sourceforge.seqware.pipeline.plugins.BundleManager -- --b packaged/Workflow_Bundle_HelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.5.zip -i
+<pre><code>java -jar ~/seqware-distribution-0.13.6.5-full.jar -p net.sourceforge.seqware.pipeline.plugins.BundleManager -- --b /home/seqware/packaged-bundles/Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.5.zip -i
 
 Running Plugin: net.sourceforge.seqware.pipeline.plugins.BundleManager
 Setting Up Plugin: net.sourceforge.seqware.pipeline.plugins.BundleManager@29e97f9f
 Installing Bundle
-Bundle: packaged/Workflow_Bundle_HelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.5.zip
-Now packaging /tmp/testing/HelloWorld/target/Workflow_Bundle_HelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.5/packaged/Workflow_Bundle_HelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.5.zip to a zip file and transferring to the directory: /home/seqware/released-bundles Please be aware, this process can take hours if the bundle is many GB in size.
-  PROCESSING INPUT: /tmp/testing/HelloWorld/target/Workflow_Bundle_HelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.5/packaged/Workflow_Bundle_HelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.5.zip OUTPUT: /home/seqware/released-bundles
+Bundle: packaged/Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.5.zip
+Now packaging /tmp/testing/MyHelloWorld/target/Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.5/packaged/Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.5.zip to a zip file and transferring to the directory: /home/seqware/released-bundles Please be aware, this process can take hours if the bundle is many GB in size.
+  PROCESSING INPUT: /tmp/testing/MyHelloWorld/target/Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.5/packaged/Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.5.zip OUTPUT: /home/seqware/released-bundles
 
 Mar 28, 2013 10:43:03 AM org.restlet.ext.httpclient.HttpClientHelper start
 INFO: Starting the Apache HTTP client
 WORKFLOW_ACCESSION: 6804
-Bundle Has Been Installed to the MetaDB and Provisioned to packaged/Workflow_Bundle_HelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.5.zip!
+Bundle Has Been Installed to the MetaDB and Provisioned to packaged/Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.5.zip!
 
-[seqware@seqwarevm Workflow_Bundle_HelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.5]$ ls -alhtr ~/released-bundles/ | tail -n1
--rw-rw-r-- 1 seqware seqware 151M Mar 28 10:42 Workflow_Bundle_HelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.5.zip
+[seqware@seqwarevm Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.5]$ ls -alhtr ~/released-bundles/ | tail -n1
+-rw-rw-r-- 1 seqware seqware 151M Mar 28 10:42 Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.5.zip
 
-[seqware@master Workflow_Bundle_HelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.5]$ ls -alhtr ~/provisioned-bundles/ | grep HelloWorld
-drwxrwxr-x 3 seqware seqware 4.0K Apr 17 12:27 Workflow_Bundle_HelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.5
+[seqware@master Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.5]$ ls -alhtr ~/provisioned-bundles/ | grep MyHelloWorld
+drwxrwxr-x 3 seqware seqware 4.0K Apr 17 12:27 Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.5
 </code></pre>
 
 <p>What happens here is the <code>Workflow_Bundle_hello_1.0-SNAPSHOT_SeqWare_0.13.6.5</code> directory is zip’d up to your released-bundles directory and the metadata about the workflow is saved to the database.</p>
@@ -175,7 +175,6 @@ updates the MetaDB with their status. </p>
 Take a look at:</p>
 
 <pre><code>seqware@seqwarevm SeqWare]$ crontab -l
-1 0 * * * /home/seqware/crons/update_db.sh &gt;&gt; /home/seqware/logs/update_db.log
 * * * * * /home/seqware/crons/status.cron &gt;&gt; /home/seqware/logs/status.log
 
 [seqware@seqwarevm SeqWare]$ cat /home/seqware/crons/status.cron
@@ -184,16 +183,13 @@ Take a look at:</p>
 
 source /home/seqware/.bash_profile
 
-java -jar /home/seqware/crons/seqware-distribution-0.13.6.3-full.jar -p net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher -- --launch-scheduled
-java -jar /home/seqware/crons/seqware-distribution-0.13.6.3-full.jar  -p net.sourceforge.seqware.pipeline.plugins.WorkflowStatusChecker -- --tp 1000
+java -jar /home/seqware/crons/seqware-distribution-0.13.6.5-full.jar -p net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher -- --launch-scheduled
+java -jar /home/seqware/crons/seqware-distribution-0.13.6.5-full.jar  -p net.sourceforge.seqware.pipeline.plugins.WorkflowStatusChecker -- --tp 1000
 </code></pre>
 
-<p>The first script runs at one minute past midnight every night. This runs the
-stored procedures which populate the “Study Report” and the “SequenceRunReport”
-in the SeqWare Portal.  The second script runs every minute. This script uses
-two plugins, the WorkflowLauncher plugin which is used to launch workflows that
-have been previously scheduled while the WorkflowStatusChecker plugin is used
-to check the status of launched workflows.</p>
+<p>This script runs every minute and uses two plugins, the WorkflowLauncher plugin
+which is used to launch workflows that have been previously scheduled while the
+WorkflowStatusChecker plugin is used to check the status of launched workflows.</p>
 
 <p>For more information see the <a href="../../6-pipeline/monitor_configuration/">Monitor Configuration</a> documentation.</p>
 
