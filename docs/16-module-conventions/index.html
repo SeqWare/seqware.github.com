@@ -47,14 +47,14 @@
 <div class="header">
 <h1>Module Conventions</h1>
 </div>
-<p>In order for SeqWare Pipeline modules to work well within complex workflows we need to agree on some naming conventions, that’s the purpose of this document.</p>
+<p>In order for SeqWare Pipeline modules to work well within complex workflows we need to agree on some naming conventions, that&#8217;s the purpose of this document.</p>
 
 <div class="section" id="background">
 <h2>Background</h2>
 
 <p>Each module in SeqWare Pipeline results in the creation of a processing table entry.  And every processing table entry is associated with 0 or more files noted in the file table.  See below.  The processing table stores the status, stderr/out, description and other fields while the file rows store file path, mime type, and URL are stored.  A module does not directly input data into these tables. Instead it populates a ReturnValue object which the module runner then uses to populate these tables.  This ReturnValue object contains an array of FileMetadata objects, each of which contain the mime type along with other information such as file path.</p>
 
-<pre><code>					       Table "public.processing"
+<pre><code>                           Table "public.processing"
        Column        |            Type             |                             Modifiers                              
 ---------------------+-----------------------------+--------------------------------------------------------------------
  processing_id       | integer                     | not null default nextval('processing_processing_id_seq'::regclass)
@@ -75,7 +75,7 @@
  create_tstmp        | timestamp without time zone | not null
  update_tstmp        | timestamp without time zone | 
 
-			       Table "public.file"
+                   Table "public.file"
     Column    |  Type   |                       Modifiers
 --------------+---------+--------------------------------------------------------
  file_id      | integer | not null default nextval('file_file_id_seq'::regclass)
@@ -96,9 +96,9 @@
 
 <ul>
 <li>ConvertBAMTranscript2Genome</li>
-  <li>AddRGTags</li>
+<li>AddRGTags</li>
 </ul>
-<p>Our convention is to simply use the module name here.  If that’s not unique, add in the package path to make it unique, separated by “-“ rather than “.” as you would do in Java. For example if there are two Foo modules (alignment.foo and utilities.foo) you could distinguish them by:</p>
+<p>Our convention is to simply use the module name here.  If that&#8217;s not unique, add in the package path to make it unique, separated by &#8220;-&#8221; rather than &#8220;.&#8221; as you would do in Java. For example if there are two Foo modules (alignment.foo and utilities.foo) you could distinguish them by:</p>
 
 <pre><code> utilities-foo
  alignment-foo
@@ -108,7 +108,7 @@
 <div class="section" id="module-status-values">
 <h2>Module Status Values</h2>
 
-<p>The processing table actually has 3 places to store status.  The “status” field should be used for a human readable status field and is actually used by SeqWare LIMS in it’s display of processing records.  The “exit_status” field is used by the modules to track their own state/error state and potential values are constants defined in the ReturnValue object. Finally the “process-exit-status” field is used </p>
+<p>The processing table actually has 3 places to store status.  The &#8220;status&#8221; field should be used for a human readable status field and is actually used by SeqWare LIMS in it&#8217;s display of processing records.  The &#8220;exit_status&#8221; field is used by the modules to track their own state/error state and potential values are constants defined in the ReturnValue object. Finally the &#8220;process-exit-status&#8221; field is used</p>
 
 <div class="section" id="status">
 <h3>Status</h3>
@@ -117,10 +117,10 @@
 
 <ul>
 <li>processing</li>
-  <li>processed </li>
-  <li>error</li>
+<li>processed</li>
+<li>error</li>
 </ul>
-<p>For this reason it’s recommended that modules follow this convention and use one of these three values.</p>
+<p>For this reason it&#8217;s recommended that modules follow this convention and use one of these three values.</p>
 
 </div>
 <div class="section" id="exit-status">
@@ -169,21 +169,14 @@
 <div class="section" id="process-exit-status">
 <h3>Process Exit Status</h3>
 
-<p>This is simply the value returned by the command line tool called by a given module.  If multiple command line tools are called it’s the job of the module to decide what int value to return here.</p>
+<p>This is simply the value returned by the command line tool called by a given module.  If multiple command line tools are called it&#8217;s the job of the module to decide what int value to return here.</p>
 
 </div>
 </div>
 <div class="section" id="module-mime-types">
 <h2>Module MIME Types</h2>
 
-<p>SeqWare Pipeline modules consume input files and settings and output files as the result. It’s very important to agree on the mime type used to document the inputs and outputs, this way a given module “knows” if it can use a certain file as an input and/or output. This will allow us to use tools to build workflows visually because the input/output types of the modules can be known.</p>
-
-<p>In order to get this to work we need to agree on the mime types used in SeqWare modules. The following are used by one or more modules, please check this list before you write a new module to see if input/outputs can be annotated with one of these mime types.  Only add to this list if you’re certain the MIME type does not already exist below.</p>
-
-<p>For a directory of standard mime types (you should use a standard one if it exists!) see <a href="http://www.feedforall.com/mime-types.htm">here</a>, <a href="http://silk.nih.gov/public/zzyzzap.@www.silk.types.html">here</a> and <a href="http://www.iana.org/assignments/media-types/index.html">here</a>.  Wikipedia has more to say <a href="http://en.wikipedia.org/wiki/MIME">here</a>.</p>
-
-<p>For the current list of MIME types, please see the <a href="https://docs.google.com/spreadsheet/ccc?key=0An-x7dcdlF7AdGhjdjRTU0toZkJXNlNRb1NROXdfLWc">current list</a>.
-If you wish to add a new MIME type, use the form which contributes to this list <a href="https://docs.google.com/spreadsheet/viewform?formkey=dGhjdjRTU0toZkJXNlNRb1NROXdfLWc6MQ">here</a>.</p>
+<p>&lt;%= render &#8216;/includes/MIME/&#8217; %&gt;</p>
 </div>
 </div>
 <p> </p>
