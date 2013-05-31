@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<title>SeqWare › Installation</title>
+<meta content="nanoc 3.6.2" name="generator">
+<link href="../../../assets/style-v17.css" media="screen" rel="stylesheet" type="text/css">
+<link href="http://feeds.feedburner.com/seqware" rel="alternate" title="The SeqWare Blog" type="application/atom+xml">
+<script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script>
+</head>
+<body>
+<div class="wrapper">
+<!-- ***** navigation ***** -->
+<div class="nav">
+<ol>
+<li><a href="../../../"><span>Home</span></a></li>
+<li><a href="../../../blog/"><span>News</span></a></li>
+<li><a href="../../../docs/"><span>Documentation</span></a></li>
+<li><a href="../../../community/"><span>Community</span></a></li>
+<li><a href="../../../partners/"><span>Partners</span></a></li>
+<li><a href="../../../about/"><span>About</span></a></li>
+</ol>
+</div>
+<!-- ***** sidebar ***** -->
+<div class="side">
+<div class="section odd">
+<script charset="utf-8" src="http://widgets.twimg.com/j/2/widget.js"></script><script> new TWTR.Widget({   version: 2,   type: 'profile',   rpp: 4,   interval: 30000,   width: 250,   height: 370,   theme: {     shell: {       background: '#daebff',       color: '#153b66'     },     tweets: {       background: '#daebff',       color: '#000000',       links: '#153b66'     }   },   features: {     scrollbar: false,     loop: false,     live: true,     behavior: 'all'   } }).render().setUser('seqware').start(); </script>
+</div>
+<div class="section even">
+<p>The current version of SeqWare is 0.13.6.6, released on May 29th, 2013. See the <a href="../../../release-notes/">release notes</a> for details.</p>
+</div>
+</div>
+<!-- ***** body ***** -->
+<div class="body">
+<div class="article">
+<div class="header">
+<h1>Installation</h1>
+</div>
+<div class="section" id="environment">
+<h2>Environment</h2>
+
+<p>SeqWare is designed to work in a 64-bit Linux environment, we do not support Windows
+or MacOS.  You can still use SeqWare on your local Mac or Windows PC through
+virtualization software.  You need to be comfortable with Linux before moving
+forward with SeqWare, specifically the Bash shell, using an editor like vim or
+emacs, and some experience programming in Java is extremely helpful.</p>
+
+<p>To learn about Linux, the Bash shell, and Java we recommend the O&#8217;Reilly series of books:</p>
+
+<ul>
+<li><a href="http://amzn.com/B0093T2G3I">Linux in a Nutshell</a></li>
+<li><a href="http://amzn.com/B0043GXMSY">Learning the bash Shell</a></li>
+<li><a href="http://amzn.com/B0043EWVDI">Learning Java</a></li>
+</ul>
+</div>
+<div class="section" id="option-1-installing-with-a-local-vm">
+<h2>Option 1 - Installing with a Local VM</h2>
+
+<p>We have created a VirtualBox VM with all SeqWare projects pre-installed along
+with some sample data.  This is the easiest way to get started with SeqWare
+since it requires no installation and configuration on your part.  While the
+download is pretty large, you will not incur per hour fees as you do when
+running on Amazon so it is a great way to get started with SeqWare, kick the
+tires, and see if this is something you want to use.</p>
+
+<div class="section" id="getting-the-vm">
+<h3>Getting the VM</h3>
+
+<p>Getting the local VM is a two-step process.  First, download (or install via
+your OS&#8217;s package management system) the VirtualBox application. This is a
+great piece of software that will let you run the SeqWare CentOS VM on whatever
+OS you currently have.</p>
+
+<ul>
+<li><a href="https://www.virtualbox.org/">Oracle Virtual Box</a></li>
+</ul>
+<p>Next, you will need to download our current VM image which is linked below.
+Please make sure you are using the latest version, when we post a new one we
+will tweet about it so consider following us on Twitter.</p>
+
+<ul>
+<li><a href="https://s3.amazonaws.com/nimbusinformatics.exchange/public/SeqWareVM_0.12.5_r5163_CentOS_6.2_20120904b.ova">SeqWareVM_0.12.5-r5163_CentOS_6.2_20120904.ova</a></li>
+</ul>
+<p>Open VirtualBox and use the &#8220;Import Appliance&#8221; tool to create a new SeqWare VM
+on your system. Make sure you set the memory to the max you can afford, I
+recommend at least 4GB of memory for the VM.  You can then launch it and you
+will be presented with a fairly standard Linux desktop with links to the
+project&#8217;s documentation to give you an idea of where to begin (the &#8220;Getting
+Started&#8221; guide here provides a walk-through of using this VM).</p>
+
+<p class="warning"><strong>Note:</strong>
+When you import the VM you need to set your memory and CPU correctly.  Do not
+over-commit resources (especially memory) since that will cause the machine to
+&#8220;swap&#8221; memory to disk and slow your computer to a crawl. This VM is intended
+for you to see SeqWare in action and then create your own workflows. If you are
+making a workflow that will take 16GB of memory then you will need a VM running
+on a machine that can afford to give 16GB of memory to VirtualBox.  Also, we
+only distribute 64-bit VMs which all modern PCs will support and VirtualBox
+makes use of various virtualization extensions which most modern PCs support
+(but you may want to check with your computer vendor).  </p>
+
+
+</div>
+<div class="section" id="logging-in">
+<h3>Logging In</h3>
+
+<p>The login username is <kbd>seqware</kbd> and the password is <kbd>seqware</kbd>. If you need to become <kbd>root</kbd> the password is the same.</p>
+
+</div>
+<div class="section" id="what-can-you-do-with-it">
+<h3>What Can You Do With It?</h3>
+
+<p>As the note above mentioned, you can use this VM to see what each of the
+SeqWare tools can do, kick the tires, explore the docs more, etc. If you decide
+to use SeqWare then this VM can also be your development and testing
+environment for workflows.  Once you have created and tested a given workflow,
+you can also use the SeqWare commands on this machine to &#8220;install&#8221; the workflow
+bundle into a production system.  Or you can even hook up this VM to a real
+local grid environment (such as an SGE cluster) for running workflows.  This is
+exactly what we did at OICR, our SeqWare hosts are all virtual machines that
+can submit workflow jobs to our physical cluster. You can find more information
+on this in the &#8220;SeqWare Pipeline&#8221; section of our documentation.</p>
+
+<p><img src="../../../assets/images/vm_screen.png" alt="SeqWare VM" width="600px"></p>
+
+</div>
+</div>
+<div class="section" id="option-2-installing-with-a-cloud-vm">
+<h2>Option 2 -Installing with a Cloud VM</h2>
+
+<p>We currently support running SeqWare on the Amazon cloud on HPC nodes. These
+are high-performance, cluster-compute nodes well suited for research, for specs
+see <a href="http://aws.amazon.com/ec2/instance-types/">Cluster Compute Quadruple Extra Large
+Instance</a>. These machines provide
+23GB of memory and 2x quad core &#8220;Nehalem&#8221; processors which is typically
+sufficient for analyzing a human exome within about 4 hours depending on the
+specifics of your workflows.</p>
+
+<div class="section" id="getting-an-amazon-cloud-account">
+<h3>Getting an Amazon Cloud Account</h3>
+
+<p>To use Amazon&#8217;s cloud (also know as Amazon Web Services or AWS) you need to sign up for an account and that requires a credit card.  Also, while launching these instances is simply point and click using Amazon&#8217;s very nice AWS console, actually using these machines requires the same level of experience as using the local VM above.  If you are looking for a completely graphical, web-based service you should consider using one of the cloud-based providers like Nimbus Informatics or DNAnexus.</p>
+
+<p>Signup for the Amazon cloud <a href="http://aws.amazon.com/">here</a></p>
+
+</div>
+<div class="section" id="running-the-vm">
+<h3>Running the VM</h3>
+
+<p>What makes Amazon&#8217;s cloud so amazingly awesome is its excellent support for both graphical UIs and programmatic APIs for controlling the cloud.  It is your choice on how you want to launch the VM, either through the console or via one of the many command line and programmatic tools available. The details are subject to change so we refer to Amazon&#8217;s thorough <a href="https://aws.amazon.com/documentation/">documentation</a>. Specifically <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts.html">this</a> guide should be very helpful in learning how to use Linux VMs on Amazon&#8217;s cloud.</p>
+
+<div class="section" id="stable-public-ami-s">
+<h4>Stable Public AMI(s):</h4>
+
+<ul>
+<li><p><strong>ami-c386e8aa</strong>
+: 20130517, SWStandaloneCentOS_v2_GenericDevBox_v17, SeqWare Version 0.13.6.5. Make sure you launch in Virginia and select the instance type &#8220;CC1 Cluster Compute (cc1.4xlarge, 23GiB)&#8221; since the AMI is designed specifically to work with this type (we use the local disks provided by this instance).</p></li>
+<li><p><del> <strong>ami-1b5d3e72</strong>
+: 20130425, SWStandaloneCentOS_v2_GenericDevBox_v16, SeqWare Version 0.13.6.5. Make sure you select the instance type &#8220;CC1 Cluster Compute (cc1.4xlarge, 23GiB)&#8221; since the AMI is designed specifically to work with this type (we use the local disks provided by this instance). </del></p></li>
+<li><p><del> <strong>ami-d097f6b9</strong>
+: 20130419, SWStandaloneCentOS_v2_GenericDevBox_v14, SeqWare Version 0.13.6.5. Make sure you select the instance type &#8220;CC1 Cluster Compute (cc1.4xlarge, 23GiB)&#8221; since the AMI is designed specifically to work with this type (we use the local disks provided by this instance). </del></p></li>
+</ul>
+</div>
+<div class="section" id="development-public-ami-s">
+<h4>Development Public AMI(s):</h4>
+
+<ul>
+<li>
+<strong>ami-01660f68</strong>
+: 20130517, SeqWare_v1.0.0rc_CentOS_GenericStandaloneDevBox_v18, SeqWare Version 1.0.0-SNAPSHOT from today (a pre-release) that includes support for running Java workflows on the Oozie workflow engine. Make sure you launch in Virginia select the instance type &#8220;CC1 Cluster Compute (cc1.4xlarge, 23GiB)&#8221; since the AMI is designed specifically to work with this type (we use the local disks provided by this instance).</li>
+</ul>
+<p>An example of the launching wizard in the Amazon AWS console can be seen below:</p>
+
+<p><img src="../../../assets/images/amazon_launcher.png" alt="SeqWare AWS Console" width="600px"></p>
+
+<p class="warning"><strong>Tip:</strong>Make sure you open port 22 for SSH, port 8080 for the SeqWare Portal and Web Service, and port 80 for our landing page that you can access at http://ec2hostname/, you fill in ec2hostname with the name of the server Amazon provisions for you.</p>
+
+
+</div>
+</div>
+<div class="section" id="logging-in">
+<h3>Logging In</h3>
+
+<p>Unlike the local VM there is no graphical desktop to log into.  Instead you will need to follow the directions on the Amazon site for using <kbd>ssh</kbd> to log into your running VM.  There you will have a command line interface to interact with the SeqWare tools. You can also view the SeqWare Portal and SeqWare Web Service remotely in your browser if you have previously opened the ports 22, 8080, and 80.</p>
+
+<p>Specifically, follow <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstancesLinux.html">this</a> Amazon guide for logging into your SeqWare instance using ssh.</p>
+
+</div>
+<div class="section" id="what-can-you-do-with-it">
+<h3>What Can You Do With It?</h3>
+
+<p>You can launch this public AMI which will give you a server with all the
+SeqWare projects pre-configured and loaded with some small examples.  You can
+then use the running VM to test workflows and write your own.  Since this VM
+runs on the fairly powerful HPC node type, you can actually use it to get real
+work done.  This instance is powerful enough to analyze a whole human exome in
+4-8 hours and you can, of course, launch many instances simultaneously to
+process multiple exomes in parallel. Future releases of SeqWare will include
+scripts to setup clusters of HPC nodes that will allow you to process whole
+human genomes. In the mean time we recommend investigating the excellent
+<a href="http://star.mit.edu/cluster/">StarCluster</a> cluster launching tool.</p>
+
+<p class="warning"><strong>Note:</strong>Keep in mind Amazon charges approximately $1.30 USD per hour to run these instances, it is your responsibility to monitor your cloud usage and turn your VMs off when not in use!  You will be billed for each hour (rounded up).</p>
+
+
+</div>
+</div>
+<div class="section" id="option-3-installing-from-scratch">
+<h2>Option 3 - Installing from Scratch</h2>
+
+<p class="warning"><strong>Note:</strong> This is not for the faint of heart.  We do not recommend you attempt to do this
+unless you a very familiar with Linux and comfortable with complex software
+configuration. We really recommend using the local VM in production and
+configure it to submit jobs to a real cluster since the
+Pegasus/Condor/Globus/SGE stack are difficult to setup correctly.</p>
+
+
+<p>This guide will be ported to this manual but for now the best instructions for
+setting up SeqWare from scratch can be found on our <a href="../../../docs/2a-installation-from-scratch/">Installing from Scratch guide</a>.</p>
+
+</div>
+<div class="section" id="next-steps">
+<h2>Next Steps</h2>
+
+<p>Now that you have seen how to launch either a local or cloud-based SeqWare instance follow the
+&#8221;<a href="../../../docs/3-getting-started/">Getting Started</a>&#8221; guide to see how to run the sample HelloWorld
+workflow.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- ***** footer ***** -->
+<div id="footer">
+<p>SeqWare © 2007–2013 Brian O&#8217;Connor. SeqWare is released under the a <a rel="license" href="http://www.gnu.org/licenses/licenses.html">GNU GPL v3</a>. This site is built using the excellent <a href="http://nanoc.ws/">nanoc</a> tool and example site along with the <a href="http://www.fonts.info/info/press/free-fonts-for-font-face-embedding.htm">Graublau</a> and <a href="https://en.wikipedia.org/wiki/Gentium">Gentium</a> fonts.</p>
+</div>
+</body>
+</html>
