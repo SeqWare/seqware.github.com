@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<title>SeqWare › File Attributes | SeqWare API</title>
+<meta content="nanoc 3.6.2" name="generator">
+<link href="../../../../../assets/style-v17.css" media="screen" rel="stylesheet" type="text/css">
+<link href="http://feeds.feedburner.com/seqware" rel="alternate" title="The SeqWare Blog" type="application/atom+xml">
+<script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script>
+</head>
+<body>
+<div class="wrapper">
+<!-- ***** navigation ***** -->
+<div class="nav">
+<ol>
+<li><a href="../../../../../"><span>Home</span></a></li>
+<li><a href="../../../../../blog/"><span>News</span></a></li>
+<li><a href="../../../../../docs/"><span>Documentation</span></a></li>
+<li><a href="../../../../../community/"><span>Community</span></a></li>
+<li><a href="../../../../../partners/"><span>Partners</span></a></li>
+<li><a href="../../../../../about/"><span>About</span></a></li>
+</ol>
+</div>
+<!-- ***** sidebar ***** -->
+<div class="side">
+<div class="section odd">
+<script charset="utf-8" src="http://widgets.twimg.com/j/2/widget.js"></script><script> new TWTR.Widget({   version: 2,   type: 'profile',   rpp: 4,   interval: 30000,   width: 250,   height: 370,   theme: {     shell: {       background: '#daebff',       color: '#153b66'     },     tweets: {       background: '#daebff',       color: '#000000',       links: '#153b66'     }   },   features: {     scrollbar: false,     loop: false,     live: true,     behavior: 'all'   } }).render().setUser('seqware').start(); </script>
+</div>
+<div class="section even">
+<p>The current version of SeqWare is 0.13.6.6, released on May 29th, 2013. See the <a href="../../../../../release-notes/">release notes</a> for details.</p>
+</div>
+</div>
+<!-- ***** body ***** -->
+<div class="body">
+<div class="article">
+<div class="header">
+<h1>File Attributes | SeqWare API</h1>
+</div>
+<div class="section" id="file-attributes-api">
+<h1>File Attributes API</h1>
+
+<p>Management of file attributes via the API requires that you are
+authenticated.</p>
+
+<div class="section" id="list-attributes-for-a-file">
+<h2>List attributes for a file</h2>
+
+<pre><code>GET /file/:swa/attributes
+</code></pre>
+
+<div class="section" id="response">
+<h3>Response</h3>
+
+<pre class="headers"><code>Status: 200 OK</code></pre>
+
+<pre><code>&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
+&lt;list&gt;
+    &lt;net.sourceforge.seqware.webservice.dto.AttributeDto&gt;
+        &lt;entityUrl&gt;http://localhost:8889/seqware-webservice/files/12056&lt;/entityUrl&gt;
+        &lt;url&gt;http://localhost:8889/seqware-webservice/file/12056/attribute/11&lt;/url&gt;
+        &lt;name&gt;mime-type&lt;/name&gt;
+        &lt;value&gt;application/json&lt;/value&gt;
+    &lt;/net.sourceforge.seqware.webservice.dto.AttributeDto&gt;
+    &lt;net.sourceforge.seqware.webservice.dto.AttributeDto&gt;
+        &lt;entityUrl&gt;http://localhost:8889/seqware-webservice/files/12056&lt;/entityUrl&gt;
+        &lt;url&gt;http://localhost:8889/seqware-webservice/file/12056/attribute/6&lt;/url&gt;
+        &lt;name&gt;region&lt;/name&gt;
+        &lt;value&gt;1&lt;/value&gt;
+    &lt;/net.sourceforge.seqware.webservice.dto.AttributeDto&gt;
+&lt;/list&gt;
+</code></pre>
+
+</div>
+</div>
+<div class="section" id="add-file-attribute">
+<h2>Add file attribute</h2>
+
+<pre><code>POST /file/:swa/attribute
+</code></pre>
+
+<div class="section" id="input">
+<h3>Input</h3>
+
+<p>You can post a single file attribute:</p>
+
+<pre class="headers"><code>Content-Type: application/xml</code></pre>
+
+<pre><code>&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
+&lt;net.sourceforge.seqware.webservice.dto.AttributeDto&gt;
+    &lt;name&gt;mime-type&lt;/name&gt;
+    &lt;value&gt;application/xml&lt;/value&gt;
+&lt;/net.sourceforge.seqware.webservice.dto.AttributeDto&gt;
+</code></pre>
+
+</div>
+<div class="section" id="response">
+<h3>Response</h3>
+
+<pre class="headers"><code>Status: 201 Created</code></pre>
+
+</div>
+</div>
+<div class="section" id="get-a-file-attribute">
+<h2>Get a file attribute</h2>
+
+<pre><code>GET /file/:swa/attribute/:id
+</code></pre>
+
+<div class="section" id="response">
+<h3>Response</h3>
+
+<pre class="headers"><code>Status: 200 OK</code></pre>
+
+<pre><code>&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
+&lt;net.sourceforge.seqware.webservice.dto.AttributeDto&gt;
+    &lt;entityUrl&gt;http://localhost:8889/seqware-webservice/files/12056&lt;/entityUrl&gt;
+    &lt;url&gt;http://localhost:8889/seqware-webservice/file/12056/attribute/1&lt;/url&gt;
+    &lt;name&gt;location&lt;/name&gt;
+    &lt;value&gt;/archives/&lt;/value&gt;
+&lt;/net.sourceforge.seqware.webservice.dto.AttributeDto&gt;
+</code></pre>
+
+</div>
+</div>
+<div class="section" id="update-a-file-attribute">
+<h2>Update a file attribute</h2>
+
+<pre><code>PUT /file/:swa/attribute/:id
+</code></pre>
+
+<div class="section" id="input">
+<h3>Input</h3>
+
+<p>You can update a single file attribute:</p>
+
+<pre class="headers"><code>Content-Type: application/xml</code></pre>
+
+<pre><code>&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
+&lt;net.sourceforge.seqware.webservice.dto.AttributeDto&gt;
+    &lt;name&gt;mime-type&lt;/name&gt;
+    &lt;value&gt;application/xml&lt;/value&gt;
+&lt;/net.sourceforge.seqware.webservice.dto.AttributeDto&gt;
+</code></pre>
+
+</div>
+<div class="section" id="response">
+<h3>Response</h3>
+
+<pre class="headers"><code>Status: 200 OK
+Location: http://localhost:8889/seqware-webservice/file/12056/attribute/8</code></pre>
+
+</div>
+</div>
+<div class="section" id="delete-a-file-attribute">
+<h2>Delete a file attribute</h2>
+
+<pre><code>DELETE /file/:swa/attribute/:id
+</code></pre>
+
+<div class="section" id="response">
+<h3>Response</h3>
+
+<pre class="headers"><code>Status: 200 OK</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- ***** footer ***** -->
+<div id="footer">
+<p>SeqWare © 2007–2013 Brian O&#8217;Connor. SeqWare is released under the a <a rel="license" href="http://www.gnu.org/licenses/licenses.html">GNU GPL v3</a>. This site is built using the excellent <a href="http://nanoc.ws/">nanoc</a> tool and example site along with the <a href="http://www.fonts.info/info/press/free-fonts-for-font-face-embedding.htm">Graublau</a> and <a href="https://en.wikipedia.org/wiki/Gentium">Gentium</a> fonts.</p>
+</div>
+</body>
+</html>

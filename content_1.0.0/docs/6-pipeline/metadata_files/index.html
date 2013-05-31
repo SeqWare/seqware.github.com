@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<title>SeqWare › Workflow Metadata File</title>
+<meta content="nanoc 3.6.2" name="generator">
+<link href="../../../../assets/style-v17.css" media="screen" rel="stylesheet" type="text/css">
+<link href="http://feeds.feedburner.com/seqware" rel="alternate" title="The SeqWare Blog" type="application/atom+xml">
+<script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script>
+</head>
+<body>
+<div class="wrapper">
+<!-- ***** navigation ***** -->
+<div class="nav">
+<ol>
+<li><a href="../../../../"><span>Home</span></a></li>
+<li><a href="../../../../blog/"><span>News</span></a></li>
+<li><a href="../../../../docs/"><span>Documentation</span></a></li>
+<li><a href="../../../../community/"><span>Community</span></a></li>
+<li><a href="../../../../partners/"><span>Partners</span></a></li>
+<li><a href="../../../../about/"><span>About</span></a></li>
+</ol>
+</div>
+<!-- ***** sidebar ***** -->
+<div class="side">
+<div class="section odd">
+<script charset="utf-8" src="http://widgets.twimg.com/j/2/widget.js"></script><script> new TWTR.Widget({   version: 2,   type: 'profile',   rpp: 4,   interval: 30000,   width: 250,   height: 370,   theme: {     shell: {       background: '#daebff',       color: '#153b66'     },     tweets: {       background: '#daebff',       color: '#000000',       links: '#153b66'     }   },   features: {     scrollbar: false,     loop: false,     live: true,     behavior: 'all'   } }).render().setUser('seqware').start(); </script>
+</div>
+<div class="section even">
+<p>The current version of SeqWare is 0.13.6.6, released on May 29th, 2013. See the <a href="../../../../release-notes/">release notes</a> for details.</p>
+</div>
+</div>
+<!-- ***** body ***** -->
+<div class="body">
+<div class="article">
+<div class="header">
+<h1>Workflow Metadata File</h1>
+</div>
+<div class="section" id="overview">
+<h2>Overview</h2>
+
+<p>The workflow manifest (<tt>metadata.xml</tt>) includes the workflow name,
+version, description, test command, and enough information so that the SeqWare
+tools can test, execute, and install the workflow. Here is an example from the
+MyHelloWorld workflow:</p>
+
+<pre><code class="language-xml"><span class="nt">&lt;bundle</span> <span class="na">version=</span><span class="s">"1.0-SNAPSHOT"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;workflow</span> <span class="na">name=</span><span class="s">"MyHelloWorld"</span> <span class="na">version=</span><span class="s">"1.0-SNAPSHOT"</span> <span class="na">seqware_version=</span><span class="s">"0.13.6.5"</span>
+  <span class="na">basedir=</span><span class="s">"${workflow_bundle_dir}/Workflow_Bundle_MyHelloWorld/1.0-SNAPSHOT"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;description&gt;</span>Add a description of the workflow here.<span class="nt">&lt;/description&gt;</span>
+    <span class="nt">&lt;test</span> <span class="na">command=</span><span class="s">"java -jar ${workflow_bundle_dir}/Workflow_Bundle_MyHelloWorld/1.0-SNAPSHOT/lib/seqware-distribution-0.13.6.5-full.jar --plugin net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher -- --no-metadata --provisioned-bundle-dir ${workflow_bundle_dir} --workflow MyHelloWorld --version 1.0-SNAPSHOT --ini-files ${workflow_bundle_dir}/Workflow_Bundle_MyHelloWorld/1.0-SNAPSHOT/config/workflow.ini "</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;workflow_command</span> <span class="na">command=</span><span class="s">"java -jar ${workflow_bundle_dir}/Workflow_Bundle_MyHelloWorld/1.0-SNAPSHOT/lib/seqware-distribution-0.13.6.5-full.jar --plugin net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher -- --bundle ${workflow_bundle_dir} --workflow MyHelloWorld --version 1.0-SNAPSHOT "</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;workflow_template</span> <span class="na">path=</span><span class="s">""</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;workflow_class</span> <span class="na">path=</span><span class="s">"${workflow_bundle_dir}/Workflow_Bundle_MyHelloWorld/1.0-SNAPSHOT/classes/com/github/seqware/WorkflowClient.java"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;config</span> <span class="na">path=</span><span class="s">"${workflow_bundle_dir}/Workflow_Bundle_MyHelloWorld/1.0-SNAPSHOT/config/workflow.ini"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;build</span> <span class="na">command=</span><span class="s">"ant -f ${workflow_bundle_dir}/Workflow_Bundle_MyHelloWorld/1.0-SNAPSHOT/build.xml"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;requirements</span> <span class="na">compute=</span><span class="s">"single"</span> <span class="na">memory=</span><span class="s">"20M"</span> <span class="na">network=</span><span class="s">"local"</span>  <span class="na">workflow_engine=</span><span class="s">"Pegasus,Oozie"</span> <span class="na">workflow_type=</span><span class="s">"java"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/workflow&gt;</span>
+<span class="nt">&lt;/bundle&gt;</span></code></pre>
+
+<p>As mentioned above, you can edit the description and workflow name in the workflow.properties file.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- ***** footer ***** -->
+<div id="footer">
+<p>SeqWare © 2007–2013 Brian O&#8217;Connor. SeqWare is released under the a <a rel="license" href="http://www.gnu.org/licenses/licenses.html">GNU GPL v3</a>. This site is built using the excellent <a href="http://nanoc.ws/">nanoc</a> tool and example site along with the <a href="http://www.fonts.info/info/press/free-fonts-for-font-face-embedding.htm">Graublau</a> and <a href="https://en.wikipedia.org/wiki/Gentium">Gentium</a> fonts.</p>
+</div>
+</body>
+</html>
