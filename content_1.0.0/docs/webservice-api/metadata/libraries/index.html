@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<title>SeqWare › Libraries API</title>
+<meta content="nanoc 3.6.2" name="generator">
+<link href="../../../../../assets/style-v17.css" media="screen" rel="stylesheet" type="text/css">
+<link href="http://feeds.feedburner.com/seqware" rel="alternate" title="The SeqWare Blog" type="application/atom+xml">
+<script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script>
+</head>
+<body>
+<div class="wrapper">
+<!-- ***** navigation ***** -->
+<div class="nav">
+<ol>
+<li><a href="../../../../../"><span>Home</span></a></li>
+<li><a href="../../../../../blog/"><span>News</span></a></li>
+<li><a href="../../../../../docs/"><span>Documentation</span></a></li>
+<li><a href="../../../../../community/"><span>Community</span></a></li>
+<li><a href="../../../../../partners/"><span>Partners</span></a></li>
+<li><a href="../../../../../about/"><span>About</span></a></li>
+</ol>
+</div>
+<!-- ***** sidebar ***** -->
+<div class="side">
+<div class="section odd">
+<script charset="utf-8" src="http://widgets.twimg.com/j/2/widget.js"></script><script> new TWTR.Widget({   version: 2,   type: 'profile',   rpp: 4,   interval: 30000,   width: 250,   height: 370,   theme: {     shell: {       background: '#daebff',       color: '#153b66'     },     tweets: {       background: '#daebff',       color: '#000000',       links: '#153b66'     }   },   features: {     scrollbar: false,     loop: false,     live: true,     behavior: 'all'   } }).render().setUser('seqware').start(); </script>
+</div>
+<div class="section even">
+<p>The current version of SeqWare is 0.13.6.6, released on May 29th, 2013. See the <a href="../../../../../release-notes/">release notes</a> for details.</p>
+</div>
+</div>
+<!-- ***** body ***** -->
+<div class="body">
+<div class="article">
+<div class="header">
+<h1>Libraries API</h1>
+</div>
+<p>Libraries are Samples that are capable of being run on an instrument.</p>
+
+<div class="section" id="get-a-single-library">
+<h2>Get a single library</h2>
+
+<pre><code>GET /x/library/:swa
+</code></pre>
+
+<p>The Library is a leaf in a tree. The ancestors of the library represent steps taken in 
+the handling and in the wet lab that led to the creation of the library. All the attributes
+from all of the libraries ancestors are collected and displayed along with the library.</p>
+
+<div class="section" id="response">
+<h3>Response</h3>
+
+<pre class="headers"><code>Status: 200 OK</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="p">{</span>
+  <span class="s2">"url"</span><span class="o">:</span> <span class="s2">"http://localhost:8888/seqware-webservice/x/library/234"</span><span class="p">,</span>
+  <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"FPS_0014_Pa_P_PE_300_EX"</span><span class="p">,</span>
+  <span class="s2">"description"</span><span class="o">:</span> <span class="s2">"Sample ID: RT-28734"</span><span class="p">,</span>
+  <span class="s2">"create_time_stamp"</span><span class="o">:</span> <span class="s2">"2010-12-07T13:18:30-05:00"</span><span class="p">,</span>
+  <span class="s2">"update_time_stamp"</span><span class="o">:</span> <span class="s2">"2011-03-18T16:56:44-04:00"</span><span class="p">,</span>
+  <span class="s2">"owner"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"email"</span><span class="o">:</span> <span class="s2">"john.hurt@oicr.on.ca"</span><span class="p">,</span>
+    <span class="s2">"first_name"</span><span class="o">:</span> <span class="s2">"John"</span><span class="p">,</span>
+    <span class="s2">"last_name"</span><span class="o">:</span> <span class="s2">"Hurt"</span><span class="p">,</span>
+    <span class="s2">"institution"</span><span class="o">:</span> <span class="s2">"Ontario Institute for Cancer Research"</span>
+  <span class="p">},</span>
+  <span class="s2">"organism"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"Homo sapiens"</span><span class="p">,</span>
+    <span class="s2">"code"</span><span class="o">:</span> <span class="s2">"Homo_sapiens"</span><span class="p">,</span>
+    <span class="s2">"ncbi_taxonomy_id"</span><span class="o">:</span> <span class="mi">9606</span>
+  <span class="p">},</span>
+  <span class="s2">"attributes"</span><span class="o">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">"entity_url"</span><span class="o">:</span> <span class="s2">"http://localhost:8888/seqware-webservice/samples/234"</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"geo_reaction_id"</span><span class="p">,</span>
+      <span class="s2">"value"</span><span class="o">:</span> <span class="s2">"3795"</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="s2">"entity_url"</span><span class="o">:</span> <span class="s2">"http://localhost:8888/seqware-webservice/samples/234"</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"geo_library_source_template_type"</span><span class="p">,</span>
+      <span class="s2">"value"</span><span class="o">:</span> <span class="s2">"EX"</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="s2">"entity_url"</span><span class="o">:</span> <span class="s2">"http://localhost:8888/seqware-webservice/samples/1547"</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"geo_template_id"</span><span class="p">,</span>
+      <span class="s2">"value"</span><span class="o">:</span> <span class="s2">"5788"</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="s2">"entity_url"</span><span class="o">:</span> <span class="s2">"http://localhost:8888/seqware-webservice/samples/1549"</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"geo_template_type"</span><span class="p">,</span>
+      <span class="s2">"value"</span><span class="o">:</span> <span class="s2">"Illumina PE Library"</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="s2">"entity_url"</span><span class="o">:</span> <span class="s2">"http://localhost:8888/seqware-webservice/samples/234"</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"geo_template_id"</span><span class="p">,</span>
+      <span class="s2">"value"</span><span class="o">:</span> <span class="s2">"6143"</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="s2">"entity_url"</span><span class="o">:</span> <span class="s2">"http://localhost:8888/seqware-webservice/samples/1547"</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"geo_template_type"</span><span class="p">,</span>
+      <span class="s2">"value"</span><span class="o">:</span> <span class="s2">"gDNA"</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="s2">"entity_url"</span><span class="o">:</span> <span class="s2">"http://localhost:8888/seqware-webservice/samples/1548"</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"geo_template_type"</span><span class="p">,</span>
+      <span class="s2">"value"</span><span class="o">:</span> <span class="s2">"Illumina PE Library"</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="s2">"entity_url"</span><span class="o">:</span> <span class="s2">"http://localhost:8888/seqware-webservice/samples/1548"</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"geo_template_id"</span><span class="p">,</span>
+      <span class="s2">"value"</span><span class="o">:</span> <span class="s2">"6141"</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="s2">"entity_url"</span><span class="o">:</span> <span class="s2">"http://localhost:8888/seqware-webservice/samples/234"</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"geo_template_type"</span><span class="p">,</span>
+      <span class="s2">"value"</span><span class="o">:</span> <span class="s2">"Illumina PE Libary Seq"</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="s2">"entity_url"</span><span class="o">:</span> <span class="s2">"http://localhost:8888/seqware-webservice/samples/234"</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"geo_tissue_type"</span><span class="p">,</span>
+      <span class="s2">"value"</span><span class="o">:</span> <span class="s2">"P"</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="s2">"entity_url"</span><span class="o">:</span> <span class="s2">"http://localhost:8888/seqware-webservice/samples/1549"</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"geo_template_id"</span><span class="p">,</span>
+      <span class="s2">"value"</span><span class="o">:</span> <span class="s2">"6142"</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="s2">"entity_url"</span><span class="o">:</span> <span class="s2">"http://localhost:8888/seqware-webservice/samples/234"</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"geo_targeted_resequencing"</span><span class="p">,</span>
+      <span class="s2">"value"</span><span class="o">:</span> <span class="s2">"Agilent SureSelect ICGC/Sanger Exon"</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="s2">"entity_url"</span><span class="o">:</span> <span class="s2">"http://localhost:8888/seqware-webservice/samples/234"</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="o">:</span> <span class="s2">"geo_tissue_origin"</span><span class="p">,</span>
+      <span class="s2">"value"</span><span class="o">:</span> <span class="s2">"Pa"</span>
+    <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="s2">"parent_urls"</span><span class="o">:</span> <span class="p">[</span>
+    <span class="s2">"http://localhost:8888/seqware-webservice/samples/1549"</span>
+  <span class="p">]</span>
+<span class="p">}</span></code></pre>
+
+</div>
+</div>
+<div class="section" id="get-a-list-of-libraries">
+<h2>Get a list of libraries</h2>
+
+<pre><code>GET /x/libraries/:swas
+</code></pre>
+
+<p>List all the libraries or a subset of libraries. Use the <code>attributes</code> parameter to list
+a set of libraries that match a specific list of attributes.</p>
+
+<div class="section" id="input">
+<h3>Input</h3>
+
+<p>You can provide a list of library swas to display.</p>
+
+<pre class="highlight"><code class="language-javascript"><span class="mi">182467</span><span class="p">,</span><span class="mi">186014</span><span class="p">,</span><span class="mi">25877</span></code></pre>
+
+<p>If no swas are provided all libraries will be displayed.</p>
+
+</div>
+<div class="section" id="parameters">
+<h3>Parameters</h3>
+
+<dl>
+<dt>attributes</dt>
+  <dd>
+<em>String</em> of comma separated attributes. Equal signs and spaces must be escaped.
+Example: attributes=geo_tissue_region%3D1,geo_tissue_preparation%3DFresh%20Frozen</dd>
+</dl>
+</div>
+<div class="section" id="response">
+<h3>Response</h3>
+
+<pre class="headers"><code>Status: 200 OK</code></pre>
+
+<pre class="highlight">
+[
+    {
+        "url":"http://localhost:8888/seqware-webservice/library/186430",
+        "name":"CPCG_0184_Pr_P_PE_309_WG",
+        "description":"CPCG_0184_P1 Lib 2",
+        "create_time_stamp":"2012-04-09T14:17:29-04:00",
+        "update_time_stamp":"2012-04-09T14:17:44-04:00",
+        "owner":
+        {
+            "email":"john.hurt@oicr.on.ca",
+            "first_name":"John",
+            "last_name":"Hurt",
+            "institution":"Ontario Institute for Cancer Research"
+        },
+        "organism":
+        {
+            "name":"Homo sapiens",
+            "code":"Homo_sapiens",
+            "ncbi_taxonomy_id": 9606
+        }
+    },
+    {
+        "url":"http://localhost:8888/seqware-webservice/library/186428",
+        "name":"CPCG_0184_Pr_P_PE_304_WG",
+        "description":"CPCG_0184_P1 Lib 1",
+        "create_time_stamp":"2012-04-09T14:15:15-04:00",
+        "update_time_stamp":"2012-04-09T14:15:28-04:00",
+        "owner":
+        {
+            "email":"veronica.cartwright@oicr.on.ca",
+            "first_name":"Veronica",
+            "last_name":"Cartwright",
+            "institution":"Ontario Institute for Cancer Research"
+        },
+        "organism":
+        {
+            "name":"Homo sapiens",
+            "code":"Homo_sapiens",
+            "ncbi_taxonomy_id": 9606
+        }
+    }
+]
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- ***** footer ***** -->
+<div id="footer">
+<p>SeqWare © 2007–2013 Brian O&#8217;Connor. SeqWare is released under the a <a rel="license" href="http://www.gnu.org/licenses/licenses.html">GNU GPL v3</a>. This site is built using the excellent <a href="http://nanoc.ws/">nanoc</a> tool and example site along with the <a href="http://www.fonts.info/info/press/free-fonts-for-font-face-embedding.htm">Graublau</a> and <a href="https://en.wikipedia.org/wiki/Gentium">Gentium</a> fonts.</p>
+</div>
+</body>
+</html>

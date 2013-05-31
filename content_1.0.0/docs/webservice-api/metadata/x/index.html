@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<title>SeqWare › Metadata - Experimental Resources</title>
+<meta content="nanoc 3.6.2" name="generator">
+<link href="../../../../../assets/style-v17.css" media="screen" rel="stylesheet" type="text/css">
+<link href="http://feeds.feedburner.com/seqware" rel="alternate" title="The SeqWare Blog" type="application/atom+xml">
+<script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script>
+</head>
+<body>
+<div class="wrapper">
+<!-- ***** navigation ***** -->
+<div class="nav">
+<ol>
+<li><a href="../../../../../"><span>Home</span></a></li>
+<li><a href="../../../../../blog/"><span>News</span></a></li>
+<li><a href="../../../../../docs/"><span>Documentation</span></a></li>
+<li><a href="../../../../../community/"><span>Community</span></a></li>
+<li><a href="../../../../../partners/"><span>Partners</span></a></li>
+<li><a href="../../../../../about/"><span>About</span></a></li>
+</ol>
+</div>
+<!-- ***** sidebar ***** -->
+<div class="side">
+<div class="section odd">
+<script charset="utf-8" src="http://widgets.twimg.com/j/2/widget.js"></script><script> new TWTR.Widget({   version: 2,   type: 'profile',   rpp: 4,   interval: 30000,   width: 250,   height: 370,   theme: {     shell: {       background: '#daebff',       color: '#153b66'     },     tweets: {       background: '#daebff',       color: '#000000',       links: '#153b66'     }   },   features: {     scrollbar: false,     loop: false,     live: true,     behavior: 'all'   } }).render().setUser('seqware').start(); </script>
+</div>
+<div class="section even">
+<p>The current version of SeqWare is 0.13.6.6, released on May 29th, 2013. See the <a href="../../../../../release-notes/">release notes</a> for details.</p>
+</div>
+</div>
+<!-- ***** body ***** -->
+<div class="body">
+<div class="article">
+<div class="header">
+<h1>Metadata - Experimental Resources</h1>
+</div>
+<div class="section" id="overview">
+<h2>Overview</h2>
+
+<p>These resources are for those under development or in a testing phase. They can be turned off at runtime to prohibit risky operations. </p>
+
+</div>
+<div class="section" id="validation-report-api">
+<h2>Validation Report API</h2>
+
+<p>A collection of reports useful when verifying that data in the SeqWare meta
+db is correct.</p>
+
+<div class="section" id="file-reverse-hierarchy-display">
+<h3>File reverse hierarchy display</h3>
+
+<pre><code>GET /x/report/reversehierarchy/{file-swa}
+</code></pre>
+
+<p>Produces a text representation of a reverse hierarchy tree starting at a
+file (indicated by the provided file-swa). The tree includes all the
+processing nodes that led to the creation of the file as well as all the
+links (sequencer_run, lane, ius, sample, experiment, study) to those
+processing nodes.</p>
+
+<p>This report is useful for answering the question: What steps led to the
+creation of this file?</p>
+
+<div class="section" id="response">
+<h4>Response</h4>
+
+<pre class="headers"><code>Status: 200 OK</code></pre>
+
+<pre class="highlight"><code class="language-javascript"><span class="nx">FILE</span> <span class="nx">SWA</span><span class="o">:</span> <span class="mi">182467</span> <span class="nx">FILE</span> <span class="nx">NAME</span><span class="o">:</span> <span class="nx">SWID_9858_PCSI_0106_Ly_R_PE_190_WG_110916_L004_R1_001</span><span class="p">.</span><span class="nx">fastq</span><span class="p">.</span><span class="nx">gz</span><span class="p">.</span><span class="nx">annotated</span><span class="p">.</span><span class="nx">bam</span> <span class="nx">Processing</span> <span class="nx">Children</span><span class="o">:</span> <span class="mi">1</span>
+   <span class="nx">PicardAddReadGroups</span> <span class="nx">SWA</span><span class="o">:</span> <span class="mi">182453</span>
+   <span class="nx">PicardSortNovoalign</span> <span class="nx">SWA</span><span class="o">:</span> <span class="mi">182409</span>
+   <span class="nx">PicardConvertNovoalign</span> <span class="nx">SWA</span><span class="o">:</span> <span class="mi">182388</span>
+   <span class="nx">Novoalign</span> <span class="nx">SWA</span><span class="o">:</span> <span class="mi">181997</span>
+   <span class="nx">WORKFLOW</span> <span class="nx">GenomicAlignmentNovoalign</span> <span class="mf">0.10</span><span class="p">.</span><span class="mi">1</span> <span class="nx">SWA</span><span class="o">:</span> <span class="mi">23341</span>
+      <span class="nx">BCLToFastq</span> <span class="nx">SWA</span><span class="o">:</span> <span class="mi">178878</span>
+         <span class="nx">LINK</span> <span class="nx">IUS</span> <span class="nx">SWA</span><span class="o">:</span> <span class="mi">9858</span>
+      <span class="nx">Bustard</span> <span class="nx">SWA</span><span class="o">:</span> <span class="mi">178810</span>
+         <span class="nx">LINK</span> <span class="nx">Lane</span> <span class="nx">SWA</span><span class="o">:</span> <span class="mi">9857</span>
+      <span class="nx">WORKFLOW</span> <span class="nx">CASAVA</span><span class="o">-</span><span class="nx">RTA</span> <span class="mf">1.8</span><span class="p">.</span><span class="mi">2</span><span class="o">-</span><span class="mi">1</span> <span class="nx">SWA</span><span class="o">:</span> <span class="mi">37743</span>
+   <span class="nx">PicardSortNovoalign</span> <span class="nx">SWA</span><span class="o">:</span> <span class="mi">182432</span>
+   <span class="nx">PicardConvertNovoalign</span> <span class="nx">SWA</span><span class="o">:</span> <span class="mi">182388</span>
+   <span class="nx">Novoalign</span> <span class="nx">SWA</span><span class="o">:</span> <span class="mi">181997</span>
+   <span class="nx">WORKFLOW</span> <span class="nx">GenomicAlignmentNovoalign</span> <span class="mf">0.10</span><span class="p">.</span><span class="mi">1</span> <span class="nx">SWA</span><span class="o">:</span> <span class="mi">23341</span>
+      <span class="nx">BCLToFastq</span> <span class="nx">SWA</span><span class="o">:</span> <span class="mi">178878</span>
+         <span class="nx">LINK</span> <span class="nx">IUS</span> <span class="nx">SWA</span><span class="o">:</span> <span class="mi">9858</span>
+      <span class="nx">Bustard</span> <span class="nx">SWA</span><span class="o">:</span> <span class="mi">178810</span>
+         <span class="nx">LINK</span> <span class="nx">Lane</span> <span class="nx">SWA</span><span class="o">:</span> <span class="mi">9857</span>
+      <span class="nx">WORKFLOW</span> <span class="nx">CASAVA</span><span class="o">-</span><span class="nx">RTA</span> <span class="mf">1.8</span><span class="p">.</span><span class="mi">2</span><span class="o">-</span><span class="mi">1</span> <span class="nx">SWA</span><span class="o">:</span> <span class="mi">37743</span></code></pre>
+
+</div>
+</div>
+<div class="section" id="file-link-report">
+<h3>File link report</h3>
+
+<pre><code>GET /x/report/filelinkreport/{file-swa}
+</code></pre>
+
+<p>Every file must be associated with at least one processing node and this
+node in turn must be linked (either directly or through a parent) to one of
+ the following: sequencer_run, lane, ius, sample, experiment or study.</p>
+
+<p>This report includes all files included in the given list of file-swas (file
+SeqWare accesssions) and notes the number of links that exist for that
+file. An orphaned files is inidicated when the total number of links for the
+file is zero (0). Most files will have 1 or 2 links. Files with more than
+2 links are not necessarily incorrectly linked, but are worthy of investigation to
+ensure they are correctness.</p>
+
+<div class="section" id="input">
+<h4>Input</h4>
+
+<p>You can provide a list of file-swas to report on.</p>
+
+<pre class="highlight"><code class="language-javascript"><span class="mi">182467</span><span class="p">,</span><span class="mi">186014</span><span class="p">,</span><span class="mi">25877</span></code></pre>
+
+<p>If no file-swa is provided the report will be generated for all the files in the seqware meta db. A report that includes all the files will take a long time to produce.</p>
+
+</div>
+<div class="section" id="response">
+<h4>Response</h4>
+
+<pre class="headers"><code>Status: 200 OK</code></pre>
+
+<pre class="highlight">
+total_links #SRL SeqRunSWAs #LL LaneSWAs #IL IusSWAs #SaL SampleSWAs #EL ExpSWAs #StL StudySWAs file_SWA          file_name 
+          1    0              0            1   15687    0              0            0              25877 s_7_2_sequence.txt
+          2    0              1    24648   1   15687    0              0            0             186014 s_5_1_sequence.txt
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- ***** footer ***** -->
+<div id="footer">
+<p>SeqWare © 2007–2013 Brian O&#8217;Connor. SeqWare is released under the a <a rel="license" href="http://www.gnu.org/licenses/licenses.html">GNU GPL v3</a>. This site is built using the excellent <a href="http://nanoc.ws/">nanoc</a> tool and example site along with the <a href="http://www.fonts.info/info/press/free-fonts-for-font-face-embedding.htm">Graublau</a> and <a href="https://en.wikipedia.org/wiki/Gentium">Gentium</a> fonts.</p>
+</div>
+</body>
+</html>

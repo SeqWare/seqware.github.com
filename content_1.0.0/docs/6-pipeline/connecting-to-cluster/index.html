@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<title>SeqWare › Connecting SeqWare Pipeline to a Real Cluster</title>
+<meta content="nanoc 3.6.2" name="generator">
+<link href="../../../../assets/style-v17.css" media="screen" rel="stylesheet" type="text/css">
+<link href="http://feeds.feedburner.com/seqware" rel="alternate" title="The SeqWare Blog" type="application/atom+xml">
+<script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script>
+</head>
+<body>
+<div class="wrapper">
+<!-- ***** navigation ***** -->
+<div class="nav">
+<ol>
+<li><a href="../../../../"><span>Home</span></a></li>
+<li><a href="../../../../blog/"><span>News</span></a></li>
+<li><a href="../../../../docs/"><span>Documentation</span></a></li>
+<li><a href="../../../../community/"><span>Community</span></a></li>
+<li><a href="../../../../partners/"><span>Partners</span></a></li>
+<li><a href="../../../../about/"><span>About</span></a></li>
+</ol>
+</div>
+<!-- ***** sidebar ***** -->
+<div class="side">
+<div class="section odd">
+<script charset="utf-8" src="http://widgets.twimg.com/j/2/widget.js"></script><script> new TWTR.Widget({   version: 2,   type: 'profile',   rpp: 4,   interval: 30000,   width: 250,   height: 370,   theme: {     shell: {       background: '#daebff',       color: '#153b66'     },     tweets: {       background: '#daebff',       color: '#000000',       links: '#153b66'     }   },   features: {     scrollbar: false,     loop: false,     live: true,     behavior: 'all'   } }).render().setUser('seqware').start(); </script>
+</div>
+<div class="section even">
+<p>The current version of SeqWare is 0.13.6.6, released on May 29th, 2013. See the <a href="../../../../release-notes/">release notes</a> for details.</p>
+</div>
+</div>
+<!-- ***** body ***** -->
+<div class="body">
+<div class="article">
+<div class="header">
+<h1>Connecting SeqWare Pipeline to a Real Cluster</h1>
+</div>
+<div class="section" id="overview">
+<h2>Overview</h2>
+
+<p>This document describes the process of connecting a VM to an actual SGE cluster
+for use with the Pegasus Workflow Engine or Hadoop cluster for use with the
+Oozie Workflow Engine. Since the Pegasus engine is more throughly tested and
+used for the longest time we will focus more on that one.</p>
+
+<p>The reason you might like to do this process is setting up SeqWare from scratch
+(see <a href="../../../../docs/2a-installation-from-scratch/">Installing from Scratch</a> is time
+consuming and difficult.  So we maintain VMs (both cloud VMs for Amazon and a
+local VM using VirtualBox) to quickly get people started with SeqWare. When it
+comes time to do “real work” with SeqWare you need a cluster. Rather than
+installing SeqWare from scratch you can simply connect the VM to an actual
+cluster. At OICR, for example, we followed this process for installing SeqWare
+at the institute (we use the Pegasus Workflow Engine):</p>
+
+<ol>
+<li>Import the SeqWare Virtual Machine from VirtualBox to KVM for use in our virtual server environment</li>
+  <li>Install the matching version of SGE used on the cluster to the VM</li>
+  <li>Configure this VM to be a “submission host” to our production SGE cluster</li>
+  <li>Modify a small set of config files on the VM to point to this new SGE</li>
+  <li>Run a workflow to verify jobs flow to the real cluster</li>
+</ol>
+</div>
+<div class="section" id="pegasus-workflow-engine">
+<h2>Pegasus Workflow Engine</h2>
+
+<p>How to connect the Pipeline’s Pegasus Workflow Engine to a real SGE cluster.</p>
+
+<div class="section" id="importing-the-vm">
+<h3>Importing the VM</h3>
+
+<p>This really depends on your organization and how they want to run a virtualized
+server.  For information on VirtualBox see their
+<a href="https://www.virtualbox.org/">website</a>.  For information on importing our
+VirtualBox image into KVM see <a href="http://cheznick.net/main/content/converting-a-virtual-machine-from-virtualbox-to-kvm">this
+link</a>.
+If you use Xen as your server virtualization see <a href="http://roymic.blogspot.ca/2012/02/how-to-convert-virtual-box-image-to-xen.html">this
+link</a>.
+You can also just use VirtualBox to run your virtual SeqWare server, in which
+case you will find the command line tools useful, see <a href="http://www.ubuntugeek.com/how-to-control-virtual-machines-virtualbox-using-vboxmanage.html">this
+link</a>.</p>
+
+</div>
+<div class="section" id="install-the-corresponding-sge-version">
+<h3>Install the Corresponding SGE Version</h3>
+
+<p>This is really up to your local sysadmin.  You will need to use a common
+version of SGE between the SeqWare VM and your real cluster. Typically this is
+a common NFS mount that includes the SGE software, config files, and logs.
+Consult the <a href="http://wiki.gridengine.info/wiki/index.php/Main_Page">GridEngine
+wiki</a> for more
+information about obtaining and configuring SGE.  </p>
+
+</div>
+<div class="section" id="configuring-gram-on-the-vm">
+<h3>Configuring GRAM on the VM</h3>
+
+<p>This is the key step in the whole process.  The GRAM layer from the Globus Toolkit
+actually handles the submission of workflow step to the cluster as a job.  This is
+done via a Perl module that knows how to talk with SGE. We need to modify that
+Perl module so it knows 1) where the SGE tools are located and 2) the settings particular
+to the cluster being connected to.</p>
+
+<div class="section" id="perl-submission-module">
+<h4>Perl Submission Module</h4>
+
+<p>On the VM, this Perl module lives in: <tt>/usr/share/perl5/vendor_perl/Globus/GRAM/JobManager/sge.pm</tt>. </p>
+
+<p>You may have seen this document mentioned in the <a href="../../../../docs/2a-installation-from-scratch/">Install from Scratch</a> guide where we patched it.  Now, you need to ensure you setup the parallel environment (<tt>-pe</tt>) and max memory (<tt>-l vf=</tt>) correctly for your new cluster.  Annoyingly, the parameters used for this are actually configurable in SGE so you will need to discuss with your cluster Sys Admin to see what is right for your environment.  See the code snippet patches below.</p>
+
+<pre><code>    *** /usr/local/globus/default/setup/globus/sge.pm       2011-01-04 02:26:09.000000000 -0500
+    --- /usr/local/globus/default/setup/globus/sge.pm.dist  2011-01-04 02:21:59.000000000 -0500
+    ***************
+    *** 47,55 ****
+          $mpi_pe      = '';
+          #
+          if(($mpirun eq "no") &amp;&amp; ($sun_mprun eq "no"))
+    !       { $supported_job_types = "(single|multiple|condor)"; }
+          else
+    !       { $supported_job_types = "(mpi|single|multiple|condor)"; }
+          #
+          $cat         = '/bin/cat';
+          #
+    --- 47,55 ----
+          $mpi_pe      = '';
+          #
+          if(($mpirun eq "no") &amp;&amp; ($sun_mprun eq "no"))
+    !       { $supported_job_types = "(single|multiple)"; }
+          else
+    !       { $supported_job_types = "(mpi|single|multiple)"; }
+          #
+          $cat         = '/bin/cat';
+          #
+    ***************
+    *** 577,588 ****
+                                         . $description-&gt;stdin() . "\n");
+              }
+          }
+    -     elsif($description-&gt;jobtype() eq "condor" &amp;&amp; $description-&gt;count() &gt; 1 ) 
+    -     {
+    -       # NOTE: you may need to change 'serial' to the parallel environment name used on your cluster
+    -       $sge_job_script-&gt;print("#\$ -pe serial "
+    -                                    . $description-&gt;count() ."\n"
+    -                                    . $executable . " $args &lt; ". $stdin
+    -                                    . "\n");
+    -        if (!$rc)
+    -        {
+    -            return $self-&gt;respond_with_failure_extension(
+    -                    "print: $sge_job_script_name: $!",
+    -                    Globus::GRAM::Error::TEMP_SCRIPT_FILE_FAILED());
+    -        }
+    -     }
+          elsif($description-&gt;jobtype() eq "multiple")
+          {
+              #####
+    --- 577,582 ----
+
+
+
+    *** /usr/local/globus/default/setup/globus/sge.pm       2011-01-04 03:08:17.000000000 -0500
+    --- /usr/local/globus/default/setup/globus/sge.pm.dist  2011-01-04 02:21:59.000000000 -0500
+    *** 331,337 ****
+          if($max_memory != 0)
+          {
+              $self-&gt;log("Total max memory flag is set to $max_memory Mb");
+    !         $sge_job_script-&gt;print("#\$ -l vf=$max_memory" . "M\n"); 
+          }
+
+
+    --- 331,337 ----
+          if($max_memory != 0)
+          {
+              $self-&gt;log("Total max memory flag is set to $max_memory Mb");
+    !         $sge_job_script-&gt;print("#\$ -l h_data=$max_memory" . "M\n");
+          }
+</code></pre>
+
+<p>You will also need to modify the following settings files:</p>
+
+<p>/etc/sysconfig/gridengine
+  /etc/globus/globus-sge.conf</p>
+
+<p>These contain file paths and cluster name parameters that you need to update to point to the correct values for the real cluster.</p>
+
+</div>
+</div>
+<div class="section" id="testing">
+<h3>Testing</h3>
+
+<p>Finally you can submit and run a workflow just as you normally do following the
+<a href="../../../../docs/3-getting-started/user-tutorial/">User Tutorial</a>. You should see jobs
+running on the cluster rather than locally using a tool like <tt>qstat</tt>.</p>
+
+</div>
+</div>
+<div class="section" id="oozie-workflow-engine">
+<h2>Oozie Workflow Engine</h2>
+
+<p>These directions cover connecting the Oozie Workflow Engine to an actual Hadoop
+cluster. This engine is an alternative to the SGE engine above.  </p>
+
+<div class="section" id="connecting-to-a-hadoop-cluster">
+<h3>Connecting to a Hadoop Cluster</h3>
+
+<p>We use the Cloudera packages on the SeqWare VM to install and configure the
+Hadoop system.  Please see the excellent documentation on <a href="http://www.cloudera.com/">Cloudera’s
+Website</a> that will walk you through the process of
+building a Hadoop cluster. You will want to match the Cloudera version on the
+SeqWare VM with that of your Hadoop cluster and you may want to turn off the
+namenode, datanode, tasktracker, jobtracker, etc on the SeqWare VM since these
+functions will use your real Hadoop cluster. Essentially you will just use the
+SeqWare VM as the Oozie host (so you will want to leave that installed on the
+VM).  See the Cloudera documentation for information on configuring Oozie on
+the VM to talk to your Hadoop cluster.</p>
+
+<p>From the SeqWare perspective you will need to tell SeqWare which HDFS/MapReduce
+cluster to talk to, see the Oozie and Hadoop sections of the <a href="../../../../docs/6-pipeline/user-configuration/">SeqWare
+Configuration Guide</a>.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- ***** footer ***** -->
+<div id="footer">
+<p>SeqWare © 2007–2013 Brian O&#8217;Connor. SeqWare is released under the a <a rel="license" href="http://www.gnu.org/licenses/licenses.html">GNU GPL v3</a>. This site is built using the excellent <a href="http://nanoc.ws/">nanoc</a> tool and example site along with the <a href="http://www.fonts.info/info/press/free-fonts-for-font-face-embedding.htm">Graublau</a> and <a href="https://en.wikipedia.org/wiki/Gentium">Gentium</a> fonts.</p>
+</div>
+</body>
+</html>
