@@ -393,6 +393,10 @@
 <td>–m, –modules</td>
       <td>Optional: if provided will list out modules instead of plugins.</td>
     </tr>
+<tr>
+<td>–s, –skip</td>
+      <td>Optional: comma separated list of module/plugin names to skip</td>
+    </tr>
 </tbody>
 </table>
 </div>
@@ -418,6 +422,11 @@
 </td>
     </tr>
 <tr>
+<td>–file</td>
+      <td>Optional: one or more –file options can be specified when you create a workflow_run. This is encoded as ‘<algorithm>::<file-meta-type>::<file-path>&#8217;, you should use single quotes when the value includes spaces.</file-path></file-meta-type></algorithm>
+</td>
+    </tr>
+<tr>
 <td>–interactive</td>
       <td>Optional: Interactively prompt for fields during creation</td>
     </tr>
@@ -432,6 +441,10 @@
 <tr>
 <td>–of, –output-file</td>
       <td>Optional: if provided along with the –list or –list-tables options this will cause the output list of rows/tables to be written to the file specified rather than stdout.</td>
+    </tr>
+<tr>
+<td>–parent-accession</td>
+      <td>Optional: one or more –parent-accession options can be specified when you create a workflow_run.</td>
     </tr>
 <tr>
 <td>–t, –table</td>

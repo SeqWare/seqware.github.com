@@ -321,7 +321,7 @@ outside of the SeqWare development directories).  Here we are working in the wor
 
     cd MyHelloWorld 
     mvn install 
-    cd target/Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.5/ 
+    cd target/Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.8/ 
 </code></pre>
 
 <p>The numbers used to identify  the archetypes (754 through 759) will vary 
@@ -344,9 +344,9 @@ Notice in the command below that we use the SeqWare jar from <strong>inside</str
 ensures we are using the version of SeqWare this bundle was built with which minimize incompatibility issues.</p>
 
 <pre>
-cd /home/seqware/workflow-dev/MyHelloWorld/target/Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.5/
+cd /home/seqware/workflow-dev/MyHelloWorld/target/Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.8/
 
-java -jar Workflow_Bundle_MyHelloWorld/1.0-SNAPSHOT/lib/seqware-distribution-0.13.6.5-full.jar  -p net.sourceforge.seqware.pipeline.plugins.BundleManager -- -l -b `pwd`
+java -jar Workflow_Bundle_MyHelloWorld/1.0-SNAPSHOT/lib/seqware-distribution-0.13.6.8-full.jar  -p net.sourceforge.seqware.pipeline.plugins.BundleManager -- -l -b `pwd`
 
 Running Plugin: net.sourceforge.seqware.pipeline.plugins.BundleManager
 Setting Up Plugin: net.sourceforge.seqware.pipeline.plugins.BundleManager@630045eb
@@ -357,7 +357,7 @@ List Workflows:
   Name : MyHelloWorld
   Version : 1.0-SNAPSHOT
   Description : Add a description of the workflow here.
-  Test Command: java -jar ${workflow_bundle_dir}/Workflow_Bundle_MyHelloWorld/1.0-SNAPSHOT/lib/seqware-distribution-0.13.6.5-full.jar --plugin net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher -- --no-metadata --provisioned-bundle-dir ${workflow_bundle_dir} --workflow MyHelloWorld --version 1.0-SNAPSHOT --ini-files ${workflow_bundle_dir}/Workflow_Bundle_MyHelloWorld/1.0-SNAPSHOT/config/workflow.ini
+  Test Command: java -jar ${workflow_bundle_dir}/Workflow_Bundle_MyHelloWorld/1.0-SNAPSHOT/lib/seqware-distribution-0.13.6.8-full.jar --plugin net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher -- --no-metadata --provisioned-bundle-dir ${workflow_bundle_dir} --workflow MyHelloWorld --version 1.0-SNAPSHOT --ini-files ${workflow_bundle_dir}/Workflow_Bundle_MyHelloWorld/1.0-SNAPSHOT/config/workflow.ini
   Template Path:
   Config Path:${workflow_bundle_dir}/Workflow_Bundle_MyHelloWorld/1.0-SNAPSHOT/config/workflow.ini
   Requirements Compute: single Memory: 20M Network: local
@@ -380,7 +380,7 @@ bin and lib respectively).</p>
 which contains the compiled workflow along with the various necessary files all
 correctly assembled in the proper directory structure.  You can change
 directory to the workflow target directory (in this case
-<tt>target/Workflow_Bundle_HelloWorld<em>1.0-SNAPSHOT_SeqWare</em>0.13.6.5</tt> and
+<tt>target/Workflow_Bundle_HelloWorld<em>1.0-SNAPSHOT_SeqWare</em>0.13.6.8</tt> and
 run the workflow in test mode or package up the workflow as a zip file for
 exchange with others. Both topics are covered later in this tutorial.</p>
 
@@ -399,7 +399,7 @@ developers.</p>
 |                   `-- seqware
 |                       `-- WorkflowClient.java
 |-- target
-|   `-- Workflow_Bundle_HelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.5
+|   `-- Workflow_Bundle_HelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.8
 |       `-- Workflow_Bundle_HelloWorld
 |           `-- 1.0-SNAPSHOT
 |               |-- bin
@@ -413,7 +413,7 @@ developers.</p>
 |               |-- data
 |               |   `-- input.txt
 |               |-- lib
-|               |   `-- seqware-distribution-0.13.6.5-full.jar
+|               |   `-- seqware-distribution-0.13.6.8-full.jar
 |               `-- metadata.xml
 |-- workflow
 |   |-- config
@@ -464,11 +464,11 @@ tools can test, execute, and install the workflow. Here is an example from the
 MyHelloWorld workflow:</p>
 
 <pre><code class="language-xml"><span class="nt">&lt;bundle</span> <span class="na">version=</span><span class="s">"1.0-SNAPSHOT"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;workflow</span> <span class="na">name=</span><span class="s">"MyHelloWorld"</span> <span class="na">version=</span><span class="s">"1.0-SNAPSHOT"</span> <span class="na">seqware_version=</span><span class="s">"0.13.6.5"</span>
+  <span class="nt">&lt;workflow</span> <span class="na">name=</span><span class="s">"MyHelloWorld"</span> <span class="na">version=</span><span class="s">"1.0-SNAPSHOT"</span> <span class="na">seqware_version=</span><span class="s">"0.13.6.8"</span>
   <span class="na">basedir=</span><span class="s">"${workflow_bundle_dir}/Workflow_Bundle_MyHelloWorld/1.0-SNAPSHOT"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;description&gt;</span>Add a description of the workflow here.<span class="nt">&lt;/description&gt;</span>
-    <span class="nt">&lt;test</span> <span class="na">command=</span><span class="s">"java -jar ${workflow_bundle_dir}/Workflow_Bundle_MyHelloWorld/1.0-SNAPSHOT/lib/seqware-distribution-0.13.6.5-full.jar --plugin net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher -- --no-metadata --provisioned-bundle-dir ${workflow_bundle_dir} --workflow MyHelloWorld --version 1.0-SNAPSHOT --ini-files ${workflow_bundle_dir}/Workflow_Bundle_MyHelloWorld/1.0-SNAPSHOT/config/workflow.ini "</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;workflow_command</span> <span class="na">command=</span><span class="s">"java -jar ${workflow_bundle_dir}/Workflow_Bundle_MyHelloWorld/1.0-SNAPSHOT/lib/seqware-distribution-0.13.6.5-full.jar --plugin net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher -- --bundle ${workflow_bundle_dir} --workflow MyHelloWorld --version 1.0-SNAPSHOT "</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;test</span> <span class="na">command=</span><span class="s">"java -jar ${workflow_bundle_dir}/Workflow_Bundle_MyHelloWorld/1.0-SNAPSHOT/lib/seqware-distribution-0.13.6.8-full.jar --plugin net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher -- --no-metadata --provisioned-bundle-dir ${workflow_bundle_dir} --workflow MyHelloWorld --version 1.0-SNAPSHOT --ini-files ${workflow_bundle_dir}/Workflow_Bundle_MyHelloWorld/1.0-SNAPSHOT/config/workflow.ini "</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;workflow_command</span> <span class="na">command=</span><span class="s">"java -jar ${workflow_bundle_dir}/Workflow_Bundle_MyHelloWorld/1.0-SNAPSHOT/lib/seqware-distribution-0.13.6.8-full.jar --plugin net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher -- --bundle ${workflow_bundle_dir} --workflow MyHelloWorld --version 1.0-SNAPSHOT "</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;workflow_template</span> <span class="na">path=</span><span class="s">""</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;workflow_class</span> <span class="na">path=</span><span class="s">"${workflow_bundle_dir}/Workflow_Bundle_MyHelloWorld/1.0-SNAPSHOT/classes/com/github/seqware/WorkflowClient.java"</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;config</span> <span class="na">path=</span><span class="s">"${workflow_bundle_dir}/Workflow_Bundle_MyHelloWorld/1.0-SNAPSHOT/config/workflow.ini"</span><span class="nt">/&gt;</span>
@@ -791,13 +791,13 @@ Bundle Passed Test!
 
 <p>Under the hood, this is just calling the BundleManager –test option. In other words, you can do the same thing by:</p>
 
-<pre><code>cd /home/seqware/workflow-dev/MyHelloWorld/target/Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.5
-java -jar ~/seqware-distribution-0.13.6.5-full.jar -p net.sourceforge.seqware.pipeline.plugins.BundleManager -- -b `pwd` -t --workflow MyHelloWorld --version 1.0-SNAPSHOT
+<pre><code>cd /home/seqware/workflow-dev/MyHelloWorld/target/Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.8
+java -jar ~/seqware-distribution-0.13.6.8-full.jar -p net.sourceforge.seqware.pipeline.plugins.BundleManager -- -b `pwd` -t --workflow MyHelloWorld --version 1.0-SNAPSHOT
 Running Plugin: net.sourceforge.seqware.pipeline.plugins.BundleManager
 Setting Up Plugin: net.sourceforge.seqware.pipeline.plugins.BundleManager@2fb3f8f6
 Testing Bundle
   Running Test Command:
-java -jar /home/seqware/workflow-dev/MyHelloWorld/target/Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.5/Workflow_Bundle_MyHelloWorld/1.0-SNAPSHOT/lib/seqware-distribution-0.13.6.5-full.jar --plugin net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher -- --no-metadata --provisioned-bundle-dir /home/seqware/workflow-dev/MyHelloWorld/target/Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.5 --workflow MyHelloWorld --version 1.0-SNAPSHOT --ini-files /home/seqware/workflow-dev/MyHelloWorld/target/Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.5/Workflow_Bundle_MyHelloWorld/1.0-SNAPSHOT/config/workflow.ini 
+java -jar /home/seqware/workflow-dev/MyHelloWorld/target/Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.8/Workflow_Bundle_MyHelloWorld/1.0-SNAPSHOT/lib/seqware-distribution-0.13.6.8-full.jar --plugin net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher -- --no-metadata --provisioned-bundle-dir /home/seqware/workflow-dev/MyHelloWorld/target/Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.8 --workflow MyHelloWorld --version 1.0-SNAPSHOT --ini-files /home/seqware/workflow-dev/MyHelloWorld/target/Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.8/Workflow_Bundle_MyHelloWorld/1.0-SNAPSHOT/config/workflow.ini 
 MONITORING PEGASUS STATUS:
 RUNNING: step 1 of 8 (12%)
 RUNNING: step 2 of 8 (25%)
@@ -869,16 +869,16 @@ workflow engine in the 1.x series.</p>
 
 <p>Assuming the workflow above worked fine the next step is to package it.</p>
 
-<pre><code>[seqware@seqwarevm Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.5]$ mkdir ~/packaged-bundles
-[seqware@seqwarevm Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.5]$ java -jar ~/seqware-distribution-0.13.6.5-full.jar -p net.sourceforge.seqware.pipeline.plugins.BundleManager -- --b ~/packaged-bundles -p `pwd`
+<pre><code>[seqware@seqwarevm Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.8]$ mkdir ~/packaged-bundles
+[seqware@seqwarevm Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.8]$ java -jar ~/seqware-distribution-0.13.6.8-full.jar -p net.sourceforge.seqware.pipeline.plugins.BundleManager -- --b ~/packaged-bundles -p `pwd`
 Running Plugin: net.sourceforge.seqware.pipeline.plugins.BundleManager
 Setting Up Plugin: net.sourceforge.seqware.pipeline.plugins.BundleManager@20b9b538
 Packaging Bundle
-Bundle: packaged path: /home/seqware/workflow-dev/MyHelloWorld/target/Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.5
+Bundle: packaged path: /home/seqware/workflow-dev/MyHelloWorld/target/Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.8
 Bundle Has Been Packaged to /home/seqware/packaged-bundles!
 </code></pre>
 
-<p>What happens here is the <code>Workflow_Bundle_hello_1.0-SNAPSHOT_SeqWare_0.13.6.5</code> directory is zip’d up to your output directory and that can be provided to an admin for install. In this VM you will find the bundled workflow written to the file /home/seqware/packaged-bundles/Workflow_Bundle_MyHelloWorld<em>1.0-SNAPSHOT_SeqWare</em>0.13.6.5.zip</p>
+<p>What happens here is the <code>Workflow_Bundle_hello_1.0-SNAPSHOT_SeqWare_0.13.6.8</code> directory is zip’d up to your output directory and that can be provided to an admin for install. In this VM you will find the bundled workflow written to the file /home/seqware/packaged-bundles/Workflow_Bundle_MyHelloWorld<em>1.0-SNAPSHOT_SeqWare</em>0.13.6.8.zip</p>
 
 </div>
 <div class="section" id="next-steps">

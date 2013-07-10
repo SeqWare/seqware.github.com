@@ -107,7 +107,7 @@ outside of the SeqWare development directories).  Here we are working in the wor
 
     cd MyHelloWorld 
     mvn install 
-    cd target/Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.5/ 
+    cd target/Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.8/ 
 </code></pre>
 
 <p>The numbers used to identify  the archetypes (754 through 759) will vary 
@@ -279,9 +279,10 @@ easiest way to register workflow files.</p>
 <h3>Jobs &amp; Dependencies</h3>
 
 <p>The jobs need to have distinct IDs and you can generate these using a for loop
-in FTL if need be. You can put any command in the <tt>argument</tt> section
+in FTL if need be. You can put any command in the <tt><argument>&lt;/tt&gt; section
 but mostly this is used to call GenericCommandRunner which runs the command
-provided in a Bash shell. </p>
+provided in a Bash shell. Notice the use of <tt><profile>&lt;/tt&gt; to specify the
+job thread and memory count.</profile></tt></argument></tt></p>
 
 <pre><code class="language-java">    <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">buildWorkflow</span><span class="o">()</span> <span class="o">{</span>
@@ -310,72 +311,6 @@ to specify job pre-requisites.</p>
 <p>TODO: discuss the JobTypes, namely Bash</p>
 
 </div>
-<div class="section" id="symbolic-links-to-local-dependencies">
-<h3>Symbolic Links to Local Dependencies</h3>
-
-<p>This type of dependency is not generally recommended. In most cases you will want to check a dependency into a maven repository or add it into the binary or data directories of a workflow. </p>
-
-<p>However, in the following cases, you will need to rely on symbolic links:</p>
-
-<ul>
-<li>The dependency is too large to go into a maven repository </li>
-  <li>The dependency is proprietary or cannot be redistributed </li>
-</ul>
-<p>By convention, the symlinks go into a directory in the root of the workflow called links. They should link to a directory, not to a single file (for the purposes of copying the dependencies to the final bundle. Maven doesn’t accept single files for copying upon install.</p>
-
-<p>First, create the link:</p>
-
-<pre><code>[seqware@seqwarevm HelloWorld]$ cd links
-[seqware@seqwarevm links]$ rm -Rf *
-[seqware@seqwarevm links]$ ln -s ../workflow/data/
-[seqware@seqwarevm links]$ ls -alhtr
-total 8.0K
-drwxrwxr-x 5 seqware seqware 4.0K May 31 17:39 ..
-lrwxrwxrwx 1 seqware seqware   17 May 31 17:41 data -&gt; ../workflow/data/
-drwxrwxr-x 2 seqware seqware 4.0K May 31 17:41 .
-</code></pre>
-
-<p>Second, modify your bundle’s pom.xml to create a link when compiling your bundle:</p>
-
-<pre><code>&lt;build&gt;
-   ...
-    &lt;plugins&gt;
-   ...
-        &lt;plugin&gt;
-            &lt;groupId&gt;com.pyx4j&lt;/groupId&gt;
-            &lt;artifactId&gt;maven-junction-plugin&lt;/artifactId&gt;
-            &lt;executions&gt;
-                    &lt;execution&gt;
-                    &lt;phase&gt;package&lt;/phase&gt;
-                    &lt;goals&gt;
-                            &lt;goal&gt;link&lt;/goal&gt;
-                    &lt;/goals&gt;
-            &lt;/execution&gt;
-            &lt;execution&gt;
-                    &lt;id&gt;unlink&lt;/id&gt;
-                    &lt;phase&gt;clean&lt;/phase&gt;
-                    &lt;goals&gt;
-                            &lt;goal&gt;unlink&lt;/goal&gt;
-                    &lt;/goals&gt;
-          &lt;/execution&gt;
-        &lt;/executions&gt;
-        &lt;configuration&gt;
-          &lt;links&gt;
-           &lt;link&gt;
-              &lt;dst&gt;${project.build.directory}/Workflow_Bundle_${workflow-name}_${project.version}_SeqWare_${seqware-version}/Workflow_Bundle_${workflow-directory-name}/${project.version}/data/data&lt;/dst&gt;
-              &lt;src&gt;${basedir}/links/data&lt;/src&gt;
-            &lt;/link&gt;
-          &lt;/links&gt;
-        &lt;/configuration&gt;
-     &lt;/plugin&gt;
-    &lt;/plugins&gt;
-&lt;/build&gt;
-&lt;/project&gt;
-</code></pre>
-
-<p>Your bundles will now contain a symbolic link to your dependency after “mvn clean install” in the data directory and this will only be included in the bundle when the bundle is packaged (and/or installed). </p>
-
-</div>
 </div>
 <div class="section" id="running-the-workflow">
 <h2>Running the Workflow</h2>
@@ -398,8 +333,10 @@ RUNNING: step 2 of 5 <span class="o">(</span>40%<span class="o">)</span>
 <h2>For More Information</h2>
 
 <p>See the  <a href="../../3-getting-started/developer-tutorial/">Developer Tutorial</a>
-document for more information. For Java API documentation consult the <a href="../../11-api/">SeqWare
-Javadocs</a>.</p>
+document for more information. For Java API documentation consult the <a href="../../../javadoc/git_0.13.6.2/apidocs/index.html">SeqWare
+Javadocs</a>. Specifically look at the
+<a href="../../../javadoc/git_0.13.6.2/apidocs/net/sourceforge/seqware/pipeline/workflowV2/AbstractWorkflowDataModel.html">AbstractWorkflowDataModel</a>
+object documentation.</p>
 </div>
 </div>
 <p> </p>

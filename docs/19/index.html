@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<title>SeqWare › Batch Metadata Injection</title>
+<meta content="nanoc 3.6.2" name="generator">
+<link href="../../assets/style-v17.css" media="screen" rel="stylesheet" type="text/css">
+<link href="http://feeds.feedburner.com/seqware" rel="alternate" title="The SeqWare Blog" type="application/atom+xml">
+<script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script><script type="text/javascript">         var disqus_shortname = 'seqware';          (function() {             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);         })();     </script>
+</head>
+<body>
+<div class="wrapper">
+<!-- ***** navigation ***** -->
+<div class="nav">
+<ol>
+<li><a href="../../"><span>Home</span></a></li>
+<li><a href="../../blog/"><span>News</span></a></li>
+<li><a href="../"><span>Documentation</span></a></li>
+<li><a href="../../community/"><span>Community</span></a></li>
+<li><a href="../../partners/"><span>Partners</span></a></li>
+<li><a href="../../about/"><span>About</span></a></li>
+</ol>
+</div>
+<!-- ***** sidebar ***** -->
+<div class="side">
+<ol>
+<li><a href="../1-introduction/"><span>Introduction to SeqWare</span></a></li>
+<li><a href="../2-installation/"><span>Installation</span></a></li>
+<li><a href="../3-getting-started/"><span>Getting Started</span></a></li>
+<li><a href="../6-pipeline/"><span>SeqWare Pipeline</span></a></li>
+<li><a href="../4-metadb/"><span>SeqWare MetaDB</span></a></li>
+<li><a href="../5-portal/"><span>SeqWare Portal</span></a></li>
+<li><a href="../7-web-service/"><span>SeqWare Web Service</span></a></li>
+<li><a href="../8-query-engine/"><span>SeqWare Query Engine</span></a></li>
+<li><a href="../9-glossary/"><span>Glossary</span></a></li>
+<li><a href="../10-faq/"><span>Frequently Asked Questions</span></a></li>
+<li><a href="../11-api/"><span>APIs</span></a></li>
+<li><a href="../13-code/"><span>Source Code</span></a></li>
+<li><a href="../17-plugins/"><span>Plugins</span></a></li>
+<li><a href="../17a-modules/"><span>Modules</span></a></li>
+</ol>
+</div>
+<!-- ***** body ***** -->
+<div class="body">
+<div class="article">
+<div class="header">
+<h1>Batch Metadata Injection</h1>
+</div>
+<p>Batch Metadata Injection is a SeqWare plugin that allow you to inject basic metadata for a sequencer run, study, and other associated information. It has several mechanisms available to insert these data. In the default mode, fields specified on the command line and other information provided in a file allow you to create the metadata without prompting. Alternatively, you can use interactive mode to be prompted for each step in creating the metadata, which may occur with or without an input file..</p>
+
+<div class="section" id="description">
+<h2>Description</h2>
+
+<p>The plugin was originally developed to import metadata needed to process data that originated outside of, or could not be entered into, the LIMs system at OICR. Therefore, it mimics the process of a sequencer run being entered into the LIMs and the import process necessary in the SeqWare MetaDB. The system uses the name as a unique identifier for Study and Experiment, allowing you to add additional samples to a pre-existing Study. Every sequencer run is considered to be unique though.</p>
+
+<p>Information is collected first and stored in-memory before attempting to create the objects in the database, so you may exit the process at any time prior to database insertion without causing any database corruption.</p>
+
+<ul>
+<li>Sequencer Run - this element descibes the flowcell or single run of a sequencer.
+<strong> run name - a descriptive name of the flowcell
+</strong> run directory - the absolute path to the directory where the data from the flowcell or run resides
+** run description - any other identifying information</li>
+<li>Lane - this element describes a lane of sequencing in the flowcell. It may contain one or more samples or barcoded samples in the form of IUSes (below). It is unique to a Sequencer Run.
+<strong> lane number - usually a number between 1 and 8
+</strong> library strategy - XXXX
+<strong> library selection - XXXX
+</strong> library source - XXXX
+** study type</li>
+<li>IUS - short for Individual Unit of Sequencing, this element describes a sample loaded in a lane, or a barcoded sample in a lane. It is unique to a Lane and Sequencer Run.
+<strong> barcode - a short series of characters that is the identity of the barcode.
+</strong> name - a descriptive name (optional)
+** description - any other information (optional)</li>
+<li>Study - this element contains the information about the project that the samples belong to. This element can contain many samples from different lanes of sequencing.
+<strong> title - the title of the project
+</strong> description - any other information about the project
+<strong> center name - the name of the coordinating center
+</strong> center project - the name of the project at the coordinating center</li>
+<li>Experiment - this element can be used to distinguish different types of experiments within a project, for example samples that relate to WG or exome sequencing.
+<strong> name
+</strong> description</li>
+<li>Sample - this element describes a particular library used for sequencing. The exact name of the sample is created with the attributes specified at run time.
+<strong> project code - a short string of characters used to distinguish samples from a particular project, e.g. PCSI or AOE
+</strong> individual number - an integer or other short string that is used in combination with the project code to distinguish all samples with a single origin (e.g. donor)
+<strong> tissue type - the type of tissue that it originated from
+</strong> tissue origin - XXXX
+<strong> library size code - the fragment size of the library
+</strong> organism - the species of the organism
+<strong> library source template type - XXXX
+</strong> library type - XXXX
+<strong> paired end - whether or not it was sequenced with paired end sequencing
+</strong> tissue preparation -XXXX
+** targeted resequencing - if the sample is being resequenced, the kit that was used</li>
+</ul>
+</div>
+<div class="section" id="requirements">
+<h2>Requirements</h2>
+
+<p>In order to run the WorkflowRunReporter plugin, you must have the following available to you:</p>
+
+<ul>
+<li>SeqWare distribution jar (1.0+)</li>
+<li>SeqWare settings file with connection to SeqWare Web service (contact your local SeqWare admin to get the path) and write privileges.</li>
+<li>The local path to a sequencer run directory and all of the important information about the samples contained therein</li>
+<li>Optionally: a sample sheet describing the samples</li>
+</ul>
+</div>
+<div class="section" id="command-line-parameters">
+<h2>Command line parameters</h2>
+
+<table>
+<tr>
+<th>
+Command-line option</th>    <th>Description</th>
+</tr>
+<tr>
+<td>
+&#8211;miseq-sample-sheet</td>   <td>Optional: The absolute or relative path to the sample sheet. Use instead of &#8211;new</td>
+</tr>
+<tr>
+<td>
+&#8211;interactive</td>
+<td>Enable interactive mode</td>
+</tr>
+<tr>
+<td>
+&#8211;new</td>  <td>Optional: Create a new sequencer run and study. Use instead of &#8211;miseq-sample-sheet</td>
+</tr>
+</table>
+</div>
+<div class="section" id="examples">
+<h2>Examples</h2>
+
+<p>Here a number of examples of how to use the plugin.</p>
+
+<div class="section" id="creating-new-metadata-in-interactive-mode">
+<h3>Creating new metadata in interactive mode</h3>
+
+<pre><code>java -jar $SEQWARE_HOME/seqware-distribution-1.0.0-full.jar --plugin net.sourceforge.seqware.pipeline.plugins.BatchMetadataInjection -- --new --interactive
+</code></pre>
+</div>
+</div>
+</div>
+<p> </p>
+<p> </p>
+<div id="disqus_thread"></div>
+</div>
+</div>
+<!-- ***** footer ***** -->
+<div id="footer">
+<p>SeqWare © 2007–2013 Brian O&#8217;Connor. SeqWare is released under the a <a rel="license" href="http://www.gnu.org/licenses/licenses.html">GNU GPL v3</a>. This site is built using the excellent <a href="http://nanoc.ws/">nanoc</a> tool and example site along with the <a href="http://www.fonts.info/info/press/free-fonts-for-font-face-embedding.htm">Graublau</a> and <a href="https://en.wikipedia.org/wiki/Gentium">Gentium</a> fonts.</p>
+</div>
+</body>
+</html>

@@ -25,7 +25,7 @@
 <!-- ***** sidebar ***** -->
 <div class="side">
 <div class="section odd">
-<script charset="utf-8" src="http://widgets.twimg.com/j/2/widget.js"></script><script> new TWTR.Widget({   version: 2,   type: 'profile',   rpp: 4,   interval: 30000,   width: 250,   height: 370,   theme: {     shell: {       background: '#daebff',       color: '#153b66'     },     tweets: {       background: '#daebff',       color: '#000000',       links: '#153b66'     }   },   features: {     scrollbar: false,     loop: false,     live: true,     behavior: 'all'   } }).render().setUser('seqware').start(); </script>
+<a class="twitter-timeline" href="https://twitter.com/SeqWare" data-widget-id="346665526510096385">Tweets by @SeqWare</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 </div>
 </div>
 <!-- ***** body ***** -->
@@ -39,6 +39,69 @@ Procedure now is at https://wiki.oicr.on.ca/pages/viewpage.action?pageId=4453317
 -->
 
 
+<div class="section" id="0-13-6-8-2013-07-10">
+<h2>0.13.6.8 (2013-07-10)</h2>
+
+<ul>
+<li>Implementation of new tools for wrapping external scripts with SeqWare metadata write-back</li>
+<li>Database indexing scripts optimizing against common queries and our various utilities</li>
+</ul>
+<!-- pending fix for oozie-sge -->
+</div>
+<div class="section" id="1-0-1-2013-07-10">
+<h2>1.0.1 (2013-07-10)</h2>
+
+<div class="section" id="defect">
+<h3>Defect</h3>
+
+<ul>
+<li>[SEQWARE-1516] - NullPointer when trying to test installed workflows</li>
+</ul>
+</div>
+<div class="section" id="improvement">
+<h3>Improvement</h3>
+
+<ul>
+<li>[SEQWARE-1632] - &#8211;install-dir-only and &#8211;install should be exclusive options</li>
+</ul>
+</div>
+<div class="section" id="task">
+<h3>Task</h3>
+
+<ul>
+<li>[SEQWARE-1621] - Get oozie working on the AMI</li>
+<li>[SEQWARE-1660] - Support for external user : BD</li>
+<li>[SEQWARE-1674] - The workflowrun report can throw a null pointer exception on valid params</li>
+</ul>
+</div>
+<div class="section" id="sub-task">
+<h3>Sub-task</h3>
+
+<ul>
+<li>[SEQWARE-1637] - Document pom.xml file links for workflow bundles</li>
+</ul>
+</div>
+<div class="section" id="technical-task">
+<h3>Technical task</h3>
+
+<ul>
+<li>[SEQWARE-547] - Comments and javadoc coverage statistics</li>
+<li>[SEQWARE-548] - JUnit coverage</li>
+<li>[SEQWARE-585] - Run through Chef, Puppet, Whirr or other tools for provisioning cloud instances</li>
+<li>[SEQWARE-1225] - The build test suite should both create and remove the test metadb</li>
+<li>[SEQWARE-1460] - Integrate either GetSatisfaction or Disqus into GitHub website</li>
+<li>[SEQWARE-1488] - Handle build busy-work automatically</li>
+<li>[SEQWARE-1506] - Create and release source jars that can automatically be pulled down by IDEs</li>
+<li>[SEQWARE-1560] - Configurations - make sure we consistently handle magic variables like ${workflow_bundle_dir}</li>
+<li>[SEQWARE-1614] - ext-testing against arbitrary host</li>
+<li>[SEQWARE-1677] - AttributeAnnotator does not reject skipping unskippable tables</li>
+<li>[SEQWARE-1678] - AttributeAnnotator claims success with invalid parameters</li>
+<li>[SEQWARE-1679] - AttributeAnnotator unable to annotate Processing</li>
+<li>[SEQWARE-1680] - AttributeAnnotator cannot re-annotate Sample and Lane</li>
+<li>[SEQWARE-1685] - Implement annotation of File records</li>
+</ul>
+</div>
+</div>
 <div class="section" id="0-13-6-6-2013-05-29">
 <h2>0.13.6.6 (2013-05-29)</h2>
 

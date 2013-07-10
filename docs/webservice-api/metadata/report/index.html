@@ -66,28 +66,36 @@
 <th><strong>Description</strong></th>
 </tr>
 <tr>
-<td><a href="sequencerrun_get/" alt="GET the sequencer run report">GET<br>/reports/sequencerruns</a></td>
-<td>Retrieves a tab-delimited overview of all sequencer runs, lanes, barcodes, and associated analysis events.</td>
-</tr>
-<tr>
-<td><a href="sequencerrun_files_get/" alt="GET the files associated with a sequencer run.">GET<br>/sequencerruns/{sequencerRunSWID}/files</a></td>
-<td>Retrieves the files that are associated with processing the sequencer run.</td>
-</tr>
-<tr>
-<td><a href="sample_files_get/" alt="GET the files associated with a sample.">GET<br>/samples/{sampleSWID}/files</a></td>
-<td>Retrieves the files that are associated with processing the sample.</td>
+<td><a href="workflowruns_get/" alt="GET workflow run reports for all runs">GET<br>/reports/workflowruns</a></td>
+<td>Retrieves workflow run report for all runs, including input and output files.</td>
 </tr>
 <tr>
 <td><a href="study_files_get/" alt="GET the files associated with a study.">GET<br>/studies/{studySWID}/files</a></td>
 <td>Retrieves the files that are associated with processing the study.</td>
 </tr>
 <tr>
+<td><a href="sample_files_get/" alt="GET the files associated with a sample.">GET<br>/samples/{sampleSWID}/files</a></td>
+<td>Retrieves the files that are associated with processing the sample.</td>
+</tr>
+<tr>
+<td><a href="workflowrun_get/" alt="GET a workflow run report">GET<br>/reports/workflowruns/{workflowRunSWID}</a></td>
+<td>Retrieves a single workflow run report, including input and output files, using its SeqWare accession.</td>
+</tr>
+<tr>
+<td><a href="sequencerrun_get/" alt="GET the sequencer run report">GET<br>/reports/sequencerruns</a></td>
+<td>Retrieves a tab-delimited overview of all sequencer runs, lanes, barcodes, and associated analysis events.</td>
+</tr>
+<tr>
 <td><a href="workflowworkflowruns_get/" alt="GET the workflow run reports for a particular workflow.">GET<br>/reports/workflows/{workflowId}/runs</a></td>
 <td>Retrieves the workflow run reports for a particular workflow using its SeqWare accession, including input and output files.</td>
 </tr>
 <tr>
-<td><a href="workflowruns_get/" alt="GET workflow run reports for all runs">GET<br>/reports/workflowruns</a></td>
-<td>Retrieves workflow run report for all runs, including input and output files.</td>
+<td><a href="sequencerrun_files_get/" alt="GET the files associated with a sequencer run.">GET<br>/sequencerruns/{sequencerRunSWID}/files</a></td>
+<td>Retrieves the files that are associated with processing the sequencer run.</td>
+</tr>
+<tr>
+<td><a href="workflow_get/" alt="GET a summary of all runs of a workflow">GET<br>/reports/workflows/{workflowSWID}</a></td>
+<td>Retrieves a summary of all runs of a workflow.</td>
 </tr>
 <tr>
 <td><a href="fileworkflowruns_get/" alt="GET the workflow run objects for a particular file or set of files.">GET<br>/reports/fileworkflowruns</a></td>
@@ -96,14 +104,6 @@
 <tr>
 <td><a href="workflowruntime_get/" alt="GET /experiments/(experimentSWID)">GET<br>/experiments/(experimentSWID)</a></td>
 <td>Retrieves a list of experiments.</td>
-</tr>
-<tr>
-<td><a href="workflow_get/" alt="GET a summary of all runs of a workflow">GET<br>/reports/workflows/{workflowSWID}</a></td>
-<td>Retrieves a summary of all runs of a workflow.</td>
-</tr>
-<tr>
-<td><a href="workflowrun_get/" alt="GET a workflow run report">GET<br>/reports/workflowruns/{workflowRunSWID}</a></td>
-<td>Retrieves a single workflow run report, including input and output files, using its SeqWare accession.</td>
 </tr>
 </table>
 </div>

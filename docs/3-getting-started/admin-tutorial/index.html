@@ -106,28 +106,28 @@ before you do this step below (or back it up somewhere first).</p>
 how to make the zipped workflow bundle. After the zip bundle is created, the
 bundle can be provided to the admin for install as below.</p>
 
-<pre><code>java -jar ~/seqware-distribution-0.13.6.5-full.jar -p net.sourceforge.seqware.pipeline.plugins.BundleManager -- --b /home/seqware/packaged-bundles/Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.5.zip -i
+<pre><code>java -jar ~/seqware-distribution-0.13.6.8-full.jar -p net.sourceforge.seqware.pipeline.plugins.BundleManager -- --b /home/seqware/packaged-bundles/Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.8.zip -i
 
 Running Plugin: net.sourceforge.seqware.pipeline.plugins.BundleManager
 Setting Up Plugin: net.sourceforge.seqware.pipeline.plugins.BundleManager@29e97f9f
 Installing Bundle
-Bundle: packaged/Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.5.zip
-Now packaging /tmp/testing/MyHelloWorld/target/Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.5/packaged/Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.5.zip to a zip file and transferring to the directory: /home/seqware/released-bundles Please be aware, this process can take hours if the bundle is many GB in size.
-  PROCESSING INPUT: /tmp/testing/MyHelloWorld/target/Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.5/packaged/Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.5.zip OUTPUT: /home/seqware/released-bundles
+Bundle: packaged/Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.8.zip
+Now packaging /tmp/testing/MyHelloWorld/target/Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.8/packaged/Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.8.zip to a zip file and transferring to the directory: /home/seqware/released-bundles Please be aware, this process can take hours if the bundle is many GB in size.
+  PROCESSING INPUT: /tmp/testing/MyHelloWorld/target/Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.8/packaged/Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.8.zip OUTPUT: /home/seqware/released-bundles
 
 Mar 28, 2013 10:43:03 AM org.restlet.ext.httpclient.HttpClientHelper start
 INFO: Starting the Apache HTTP client
 WORKFLOW_ACCESSION: 6804
-Bundle Has Been Installed to the MetaDB and Provisioned to packaged/Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.5.zip!
+Bundle Has Been Installed to the MetaDB and Provisioned to packaged/Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.8.zip!
 
-[seqware@seqwarevm Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.5]$ ls -alhtr ~/released-bundles/ | tail -n1
--rw-rw-r-- 1 seqware seqware 151M Mar 28 10:42 Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.5.zip
+[seqware@seqwarevm Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.8]$ ls -alhtr ~/released-bundles/ | tail -n1
+-rw-rw-r-- 1 seqware seqware 151M Mar 28 10:42 Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.8.zip
 
 [seqware@master Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.5]$ ls -alhtr ~/provisioned-bundles/ | grep MyHelloWorld
-drwxrwxr-x 3 seqware seqware 4.0K Apr 17 12:27 Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.5
+drwxrwxr-x 3 seqware seqware 4.0K Apr 17 12:27 Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.8
 </code></pre>
 
-<p>What happens here is the <code>Workflow_Bundle_hello_1.0-SNAPSHOT_SeqWare_0.13.6.5</code> directory is zip’d up to your released-bundles directory and the metadata about the workflow is saved to the database.</p>
+<p>What happens here is the <code>Workflow_Bundle_hello_1.0-SNAPSHOT_SeqWare_0.13.6.8</code> directory is zip’d up to your released-bundles directory and the metadata about the workflow is saved to the database.</p>
 
 </div>
 <div class="section" id="how-to-launch">
@@ -142,12 +142,12 @@ WorkflowLauncher  scheduled  via a cronjob. </p>
 <p>Specifically, a user will schedule workflow launches using a command similar to
 that below:</p>
 
-<pre><code>java -jar seqware-distribution-0.13.6.5-full.jar -p net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher -- --ini-files workflow.ini --workflow-accession $workflow_acc --parent-accessions 99 --host `hostname --long` 
+<pre><code>java -jar seqware-distribution-0.13.6.8-full.jar -p net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher -- --ini-files workflow.ini --workflow-accession $workflow_acc --parent-accessions 99 --host `hostname --long` 
 </code></pre>
 
 <p>Then in a cronjob we use the following command to launch scheduled jobs. </p>
 
-<pre><code>java -jar seqware-distribution-0.13.6.5-full.jar -p net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher -- --launch-scheduled
+<pre><code>java -jar seqware-distribution-0.13.6.8-full.jar -p net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher -- --launch-scheduled
 </code></pre>
 
 <p>Note that in the first command, we allow jobs to be scheduled on a specific
@@ -183,8 +183,8 @@ Take a look at:</p>
 
 source /home/seqware/.bash_profile
 
-java -jar /home/seqware/crons/seqware-distribution-0.13.6.5-full.jar -p net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher -- --launch-scheduled
-java -jar /home/seqware/crons/seqware-distribution-0.13.6.5-full.jar  -p net.sourceforge.seqware.pipeline.plugins.WorkflowStatusChecker -- --tp 1000
+java -jar /home/seqware/crons/seqware-distribution-0.13.6.8-full.jar -p net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher -- --launch-scheduled
+java -jar /home/seqware/crons/seqware-distribution-0.13.6.8-full.jar  -p net.sourceforge.seqware.pipeline.plugins.WorkflowStatusChecker -- --tp 1000
 </code></pre>
 
 <p>This script runs every minute and uses two plugins, the WorkflowLauncher plugin
@@ -200,14 +200,14 @@ WorkflowStatusChecker plugin is used to check the status of launched workflows.<
 
 <p>After launching a workflow, you can cancel it in order to stop further execution. This will set the status of the workflow run to ‘failed’.</p>
 
-<pre><code>java -jar ~/seqware-distribution-0.13.6.5-full.jar -p net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher -- --ini-files workflow.ini --workflow-accession 6730  --parent-accessions 839 --host `hostname --long`                      
+<pre><code>java -jar ~/seqware-distribution-0.13.6.8-full.jar -p net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher -- --ini-files workflow.ini --workflow-accession 6730  --parent-accessions 839 --host `hostname --long`                      
 
 Running Plugin: net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher                                            
 Setting Up Plugin: net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher@288051                                  
 Mar 28, 2013 11:29:56 AM org.restlet.ext.httpclient.HttpClientHelper start                                           
 INFO: Starting the Apache HTTP client                                                                                
 requiresNewLauncher - byClass ${workflow_bundle_dir}/Workflow_Bundle_seqware-archetype-java-workflow/1.0-SNAPSHOT/classes/com/seqware/github/WorkflowClient.java                                                                                              
-Attempting to instantiate /tmp/1364426207469-0/seqware-archetype-java-workflow/target/Workflow_Bundle_seqware-archetype-java-workflow_1.0-SNAPSHOT_SeqWare_0.13.6.5/Workflow_Bundle_seqware-archetype-java-workflow/1.0-SNAPSHOT/classes/com/seqware/github/WorkflowClient.java                                                                                                              
+Attempting to instantiate /tmp/1364426207469-0/seqware-archetype-java-workflow/target/Workflow_Bundle_seqware-archetype-java-workflow_1.0-SNAPSHOT_SeqWare_0.13.6.8/Workflow_Bundle_seqware-archetype-java-workflow/1.0-SNAPSHOT/classes/com/seqware/github/WorkflowClient.java                                                                                                              
   INI FILE: workflow.ini                                                                                                       
 CREATING DAX IN: /tmp/dax71095297362814544976755889839517                                                                      
 SUBMITTING TO PEGASUS: pegasus-plan -Dpegasus.user.properties=/home/seqware/.seqware/pegasus/properties --dax /tmp/dax71095297362814544976755889839517 --dir /home/seqware/pegasus-dax -o seqwarevm --force --submit -s seqwarevm                     
@@ -287,7 +287,7 @@ Job 2848.0 marked for removal
 
 <p>You will also need to have the workflow status checker reset the status of the workflow_run via a command like:</p>
 
-<pre><code>java -jar ~/seqware-distribution-0.13.6.5-full.jar -p net.sourceforge.seqware.pipeline.plugins.WorkflowStatusChecker -- --wra 525814 --check-failed
+<pre><code>java -jar ~/seqware-distribution-0.13.6.8-full.jar -p net.sourceforge.seqware.pipeline.plugins.WorkflowStatusChecker -- --wra 525814 --check-failed
 </code></pre>
 
 </div>

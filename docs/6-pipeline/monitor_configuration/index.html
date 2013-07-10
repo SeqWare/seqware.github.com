@@ -157,12 +157,12 @@ WorkflowLauncher  scheduled  via a cronjob. </p>
 <p>Specifically, a user will schedule workflow launches using a command similar to
 that below:</p>
 
-<pre><code>java -jar seqware-distribution-0.13.6.5-full.jar -p net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher -- --ini-files workflow.ini --workflow-accession $workflow_acc --parent-accessions 99 --host `hostname --long` 
+<pre><code>java -jar seqware-distribution-0.13.6.8-full.jar -p net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher -- --ini-files workflow.ini --workflow-accession $workflow_acc --parent-accessions 99 --host `hostname --long` 
 </code></pre>
 
 <p>Then in a cronjob we use the following command to launch scheduled jobs. </p>
 
-<pre><code>java -jar seqware-distribution-0.13.6.5-full.jar -p net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher -- --launch-scheduled
+<pre><code>java -jar seqware-distribution-0.13.6.8-full.jar -p net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher -- --launch-scheduled
 </code></pre>
 
 <p>Note that in the first command, we allow jobs to be scheduled on a specific
@@ -198,8 +198,8 @@ Take a look at:</p>
 
 source /home/seqware/.bash_profile
 
-java -jar /home/seqware/crons/seqware-distribution-0.13.6.5-full.jar -p net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher -- --launch-scheduled
-java -jar /home/seqware/crons/seqware-distribution-0.13.6.5-full.jar  -p net.sourceforge.seqware.pipeline.plugins.WorkflowStatusChecker -- --tp 1000
+java -jar /home/seqware/crons/seqware-distribution-0.13.6.8-full.jar -p net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher -- --launch-scheduled
+java -jar /home/seqware/crons/seqware-distribution-0.13.6.8-full.jar  -p net.sourceforge.seqware.pipeline.plugins.WorkflowStatusChecker -- --tp 1000
 </code></pre>
 
 <p>This script runs every minute and uses two plugins, the WorkflowLauncher plugin
