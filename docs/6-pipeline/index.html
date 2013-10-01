@@ -4,10 +4,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="UTF-8">
 <title>SeqWare › SeqWare Pipeline</title>
-<meta content="nanoc 3.6.2" name="generator">
+<meta content="nanoc 3.6.5" name="generator">
 <link href="../../assets/style-v17.css" media="screen" rel="stylesheet" type="text/css">
 <link href="http://feeds.feedburner.com/seqware" rel="alternate" title="The SeqWare Blog" type="application/atom+xml">
-<script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script><script type="text/javascript">         var disqus_shortname = 'seqware';          (function() {             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);         })();     </script>
+<script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script>
+<script type="text/javascript">         var disqus_shortname = 'seqware';          (function() {             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);         })();     </script>
 </head>
 <body>
 <div class="wrapper">
@@ -87,7 +88,7 @@ documentation below assumes you already have.</p>
 <p>SeqWare Pipeline has several key features that distinguish it from other open source and private workflow solutions. These include:</p>
 
 <ul>
-<li>tool-agnostic</li>
+  <li>tool-agnostic</li>
   <li>developer framework focused</li>
   <li>focused on automated analysis</li>
   <li>includes cluster abstraction</li>
@@ -98,6 +99,7 @@ documentation below assumes you already have.</p>
   <li>focuses on meeting workflow needs of big projects (thousands of samples)</li>
   <li>is open source</li>
 </ul>
+
 <p>See <a href="../../about/">About</a> for more information.</p>
 
 </div>
@@ -105,49 +107,51 @@ documentation below assumes you already have.</p>
 <h2>Building and Installing</h2>
 
 <ul>
-<li>
+  <li>
     <dl>
-<dt><a href="../2-installation/">Installation</a></dt>
+      <dt><a href="../2-installation/">Installation</a></dt>
       <dd>This is our installation guide based on VMs that we recommend for most users. You will be left with a functioning SeqWare install including SeqWare Pipeline.</dd>
     </dl>
-</li>
+  </li>
   <li>
     <dl>
-<dt><a href="../2a-installation-from-scratch/">Installation From Scratch</a></dt>
+      <dt><a href="../2a-installation-from-scratch/">Installation From Scratch</a></dt>
       <dd>This guide walks you through how we built the VMs and will be of interest to anyone that needs to see the details of SeqWare setup starting with an empty Linux server. It is complicated so we highly recommend using a VM (which can be connected to a real cluster).</dd>
     </dl>
-</li>
+  </li>
   <li>
     <dl>
-<dt><a href="../13-code/">Building from Source</a></dt>
+      <dt><a href="../13-code/">Building from Source</a></dt>
       <dd>These directions show you how to build the whole project, including SeqWare Pipeline, using Maven.</dd>
     </dl>
-</li>
+  </li>
 </ul>
+
 </div>
 <div class="section" id="setup">
 <h2>Setup</h2>
 
 <ul>
-<li>
+  <li>
     <dl>
-<dt><a href="user-configuration/">User Settings</a></dt>
+      <dt><a href="user-configuration/">User Settings</a></dt>
       <dd>Information about configuring user settings files.</dd>
     </dl>
-</li>
+  </li>
   <li>
     <dl>
-<dt><a href="monitor_configuration/">Monitor Configuration</a></dt>
+      <dt><a href="monitor_configuration/">Monitor Configuration</a></dt>
       <dd>Setting up the SeqWare-associated tools that need to run so workflow triggering and monitoring workflows.</dd>
     </dl>
-</li>
+  </li>
   <li>
     <dl>
-<dt><a href="connecting-to-cluster/">Connecting to a Real Cluster</a></dt>
+      <dt><a href="connecting-to-cluster/">Connecting to a Real Cluster</a></dt>
       <dd>Once you are happy with writing, installing, and running workflows on a stand-alone VM you will want to connect to a “real” cluster. This guide walks you through the process of connecting a VM to a cluster (HPC &amp; Hadoop, depending on your workflow engine of choice).</dd>
     </dl>
-</li>
+  </li>
 </ul>
+
 </div>
 <div class="section" id="workflows">
 <h2>Workflows</h2>
@@ -158,50 +162,51 @@ files read from and written to a shared filesystem. Individual steps usually
 run on a randomly chosen cluster node.</p>
 
 <ul>
-<li>
-    <dl>
-<dt><a href="legacy-ftl-workflows/">Legacy FTL Workflows</a></dt>
-      <dd>This is our older, more verbose workflow language based on FreeMarker. This provides information on the structure of a typical workflow descriptor written in this language. FTL is semi-deprecated, do not use it for new workflows.</dd>
-    </dl>
-</li>
   <li>
     <dl>
-<dt><a href="java-workflows/">Java Workflows</a></dt>
+      <dt><a href="java-workflows/">Java Workflows</a></dt>
       <dd>This is our newer workflow language that is much simpler than the FTL and more expressive. We recommend this for all new workflow development.</dd>
     </dl>
-</li>
+  </li>
   <li>
     <dl>
-<dt><a href="workflow_bundles/">Workflow Bundle Conventions</a></dt>
+      <dt><a href="legacy-ftl-workflows/">Deprecated FTL Workflows</a></dt>
+      <dd>This is our older, more verbose workflow language based on FreeMarker. This provides information on the structure of a typical workflow descriptor written in this language. FTL is deprecated, do not use it for new workflows.</dd>
+    </dl>
+  </li>
+  <li>
+    <dl>
+      <dt><a href="workflow_bundles/">Workflow Bundle Conventions</a></dt>
       <dd>We rely on a bundle format for packaging up and exchanging workflows. This document describes the format and directory structure.</dd>
     </dl>
-</li>
+  </li>
   <li>
     <dl>
-<dt><a href="config_files/">Workflow Config Files</a></dt>
+      <dt><a href="config_files/">Workflow Config Files</a></dt>
       <dd>This document describes the ini configuration file used to describe (and type) workflow parameters.</dd>
     </dl>
-</li>
+  </li>
   <li>
     <dl>
-<dt><a href="metadata_files/">Workflow Metadata File</a></dt>
+      <dt><a href="metadata_files/">Workflow Metadata File</a></dt>
       <dd>This document describes the metadata XML file used to describe workflows. It provides workflow names, versions, descriptions, and information for running and testing the workflow.</dd>
     </dl>
-</li>
+  </li>
   <li>
     <dl>
-<dt>
+      <dt>
 <a href="file-types/">File Type Conventions</a> </dt>
       <dd>This document describes the standardized file meta types (MIME-like types) we use in the project and how to add files to a community-writable file type registration.</dd>
     </dl>
-</li>
+  </li>
   <li>
     <dl>
-<dt><a href="debug-workflows/">Debugging, Troubleshooting, &amp; Restarting Workflow</a></dt>
+      <dt><a href="debug-workflows/">Debugging, Troubleshooting, &amp; Restarting Workflow</a></dt>
       <dd>A guide to debugging, troubleshooting, and restarting failed workflows for both workflow engines (Pegasus and Oozie).</dd>
     </dl>
-</li>
+  </li>
 </ul>
+
 </div>
 <div class="section" id="modules">
 <h2>Modules</h2>
@@ -217,13 +222,14 @@ execution). Again, Modules are mainly targeted at core SeqWare developers not
 general workflow developers.</p>
 
 <ul>
-<li>
+  <li>
     <dl>
-<dt><a href="writing_modules/">Writing Modules</a></dt>
+      <dt><a href="writing_modules/">Writing Modules</a></dt>
       <dd>How to extend SeqWare with Java tool wrappers. Can be used in workflows or as stand-alone utilities that know how to record provenance data back to SeqWare MetaDB.</dd>
     </dl>
-</li>
+  </li>
 </ul>
+
 </div>
 <div class="section" id="deciders">
 <h2>Deciders</h2>
@@ -231,19 +237,20 @@ general workflow developers.</p>
 <p>The Deciders framework allows for the automatic parameterization and calling of workflows in SeqWare Pipeline. It allows you to easily encode the parent workflow and file types that, when present, enable a subsequent workflow to be launched.</p>
 
 <ul>
-<li>
-    <dl>
-<dt><a href="basic_deciders/">Basic Deciders</a></dt>
-      <dd>A generic Decider that can be used to launch a workflow using simple criteria like parent workflow and input file type.</dd>
-    </dl>
-</li>
   <li>
     <dl>
-<dt><a href="custom_deciders/">Making a Custom Decider</a></dt>
+      <dt><a href="basic_deciders/">Basic Deciders</a></dt>
+      <dd>A generic Decider that can be used to launch a workflow using simple criteria like parent workflow and input file type.</dd>
+    </dl>
+  </li>
+  <li>
+    <dl>
+      <dt><a href="custom_deciders/">Making a Custom Decider</a></dt>
       <dd>How to create a custom decider for your workflow, useful if your logic for running your workflow is more complicated than simple parent workflow + input file requirements.</dd>
     </dl>
-</li>
+  </li>
 </ul>
+
 </div>
 <div class="section" id="reporting">
 <h2>Reporting</h2>
@@ -251,25 +258,26 @@ general workflow developers.</p>
 <p>A major focus of the SeqWare Web Service is providing reporting resources. These are command line tools that are particularly useful for generating reports for SeqWare entities such as workflow runs and their outputs.</p>
 
 <ul>
-<li>
+  <li>
     <dl>
-<dt><a href="../21-study-reporter/">Study Reporter</a></dt>
+      <dt><a href="../21-study-reporter/">Study Reporter</a></dt>
       <dd>Create a nested tree structure of all of the output files from a particular sample, or all of the samples in a study</dd>
     </dl>
-</li>
+  </li>
   <li>
     <dl>
-<dt><a href="../20-sequencer-run-reporter/">Sequencer Run Reporter</a></dt>
+      <dt><a href="../20-sequencer-run-reporter/">Sequencer Run Reporter</a></dt>
       <dd>Gives you a view of all the sequencer runs/lanes/barcodes and the associated analysis processing events.</dd>
     </dl>
-</li>
+  </li>
   <li>
     <dl>
-<dt><a href="../19-workflow-run-reporter/">Workflow Run Reporter</a></dt>
+      <dt><a href="../19-workflow-run-reporter/">Workflow Run Reporter</a></dt>
       <dd>Find the identity and library samples and input and output files from one or more workflow runs.</dd>
     </dl>
-</li>
+  </li>
 </ul>
+
 </div>
 <div class="section" id="other-tools">
 <h2>Other Tools</h2>
@@ -277,44 +285,82 @@ general workflow developers.</p>
 <p>Other useful tools used for import, export, and annotation of results.</p>
 
 <ul>
-<li>
+  <li>
     <dl>
-<dt><a href="../22-filelinker/">File Import</a></dt>
+      <dt><a href="../22-filelinker/">File Import</a></dt>
       <dd>Import files into the SeqWare MetaDB so they can be used as inputs to workflows.</dd>
     </dl>
-</li>
+  </li>
   <li>
     <dl>
-<dt><a href="file_export/">File Export</a></dt>
+      <dt><a href="file_export/">File Export</a></dt>
       <dd>Export files that are the outputs from SeqWare workflows.</dd>
     </dl>
-</li>
+  </li>
   <li>
     <dl>
-<dt><a href="../12-attribute-annotator/">Attribute Annotator</a></dt>
+      <dt><a href="../12-attribute-annotator/">Attribute Annotator</a></dt>
       <dd>The underlying SeqWare MetaDB supports the annotation of entities in the system using flexible key/value pairs. This guide shows you how to annotate entities in the underlying data model using this approach.</dd>
     </dl>
-</li>
+  </li>
 </ul>
+
 </div>
 <div class="section" id="command-line-reference">
 <h2>Command Line Reference</h2>
 
-<p>This documentation is auto-generated and covers our Plugins (which are utility tools used outside of workflows) and our Modules (which model custom steps in workflows and know how to integrate with the SeqWare MetaDB for metadata writeback).</p>
+<p>We have provided a new, simplified command line interface.  The best way to learn its features is to simply add <code>--help</code>.</p>
+
+<pre><code>$ seqware --help
+
+Usage: seqware [&lt;flag&gt;]
+       seqware &lt;command&gt; [--help]
+
+Commands:
+  annotate      Add arbitrary key/value pairs to seqware objects
+  bundle        Interact with a workflow bundle
+  copy          Copy files between local and remote file systems
+  create        Create new seqware objects (e.g., study)
+  files         Extract information about workflow output files
+  workflow      Interact with workflows
+  workflow-run  Interact with workflow runs
+
+Flags:
+  --help        Print help out
+  --version     Print Seqware's version
+
+$ seqware workflow --help
+
+Usage: seqware workflow [--help]
+       seqware workflow &lt;sub-command&gt; [--help]
+
+Description:
+  Interact with workflows.
+
+Sub-commands:
+  ini           Generate an ini file for a workflow
+  list          List all installed workflows
+  report        List the details of all runs of a given workflow
+  schedule      Schedule a workflow to be run
+</code></pre>
+
+<p>Most commands will print the help if no arguments are provided.</p>
+
+<p>The old command line still exists, and its documentation is auto-generated and covers the Plugins (which are utility tools used outside of workflows) and Modules (which model custom steps in workflows and know how to integrate with the SeqWare MetaDB for metadata writeback).</p>
 
 <ul>
-<li>
-    <dl>
-<dt><a href="../17-plugins/">Plugins</a></dt>
-      <dd>The command line utilities of SeqWare.</dd>
-    </dl>
-</li>
   <li>
     <dl>
-<dt><a href="../17a-modules/">Modules</a></dt>
+      <dt><a href="../17-plugins/">Plugins</a></dt>
+      <dd>The command line utilities of SeqWare.</dd>
+    </dl>
+  </li>
+  <li>
+    <dl>
+      <dt><a href="../17a-modules/">Modules</a></dt>
       <dd>Can be used as custom steps in workflows or on the command line. The most important modules are the GenericCommandRunner and the ProvisionFiles modules. These are used to call individual Bash steps in workflows and to move input/outputs around respectively.</dd>
     </dl>
-</li>
+  </li>
 </ul>
 </div>
 </div>

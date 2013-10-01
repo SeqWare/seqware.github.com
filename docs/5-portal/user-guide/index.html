@@ -4,10 +4,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="UTF-8">
 <title>SeqWare › SeqWare Portal User Guide</title>
-<meta content="nanoc 3.6.2" name="generator">
+<meta content="nanoc 3.6.5" name="generator">
 <link href="../../../assets/style-v17.css" media="screen" rel="stylesheet" type="text/css">
 <link href="http://feeds.feedburner.com/seqware" rel="alternate" title="The SeqWare Blog" type="application/atom+xml">
-<script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script><script type="text/javascript">         var disqus_shortname = 'seqware';          (function() {             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);         })();     </script>
+<script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script>
+<script type="text/javascript">         var disqus_shortname = 'seqware';          (function() {             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);         })();     </script>
 </head>
 <body>
 <div class="wrapper">
@@ -68,7 +69,7 @@ TODO:
 with the SeqWare MetaDB and Pipeline systems.  Using the Portal a user can:</p>
 
 <ul>
-<li>create studies, experiments, and samples in the MetaDB</li>
+  <li>create studies, experiments, and samples in the MetaDB</li>
   <li>upload data such as fastq files to the VM and associate that data with particular samples in the MetaDB</li>
   <li>find the list of available workflows and the parameters they accept</li>
   <li>schedule a HelloWorld workflow and monitor its progress</li>
@@ -76,6 +77,7 @@ with the SeqWare MetaDB and Pipeline systems.  Using the Portal a user can:</p>
   <li>download files produced by a workflow</li>
   <li>debug workflows by downloading stdout and stderr for your workflows</li>
 </ul>
+
 <p class="warning"><strong>Note:</strong>These goals are very similar to the
 command line-powered [User Tutorial](/docs/3-getting-started/user-tutorial/)
 and that is on purpose.  We designed the Portal to provide the same
@@ -162,7 +164,7 @@ The default <kbd>/datastore</kbd> will work fine on both the VM and AMI.</p>
 
 <p>Once you have these two pieces of information (destination path “/datastore/”
 and the SWID) you can then use either the Portal or the command line utilities
-(ProvisionFiles or GenericMetadataSaver) to put your files into the right place
+to put your files into the right place
 and associate them with the correct sample.</p>
 
 <p>First, create your text document that you want to associate with a sample (we

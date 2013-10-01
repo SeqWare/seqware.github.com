@@ -4,10 +4,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="UTF-8">
 <title>SeqWare › Getting Started</title>
-<meta content="nanoc 3.6.2" name="generator">
+<meta content="nanoc 3.6.5" name="generator">
 <link href="../../assets/style-v17.css" media="screen" rel="stylesheet" type="text/css">
 <link href="http://feeds.feedburner.com/seqware" rel="alternate" title="The SeqWare Blog" type="application/atom+xml">
-<script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script><script type="text/javascript">         var disqus_shortname = 'seqware';          (function() {             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);         })();     </script>
+<script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script>
+<script type="text/javascript">         var disqus_shortname = 'seqware';          (function() {             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);         })();     </script>
 </head>
 <body>
 <div class="wrapper">
@@ -66,7 +67,7 @@ Take a look at the "Workflow Development Tutorials" on the internal wiki to make
 <p>By the end of these tutorials you will:</p>
 
 <ul>
-<li>create studies, experiments, and samples in the MetaDB</li>
+  <li>create studies, experiments, and samples in the MetaDB</li>
   <li>run a HelloWorld workflow in Pipeline</li>
   <li>create a new workflow bundle in Pipeline</li>
   <li>install and schedule your new workflow bundle in Pipeline and MetaDB</li>
@@ -74,6 +75,7 @@ Take a look at the "Workflow Development Tutorials" on the internal wiki to make
   <li>get an overview of the administration process for SeqWare</li>
   <li>be prepared to move on to more detailed documentation for each sub-project</li>
 </ul>
+
 <p>Please launch your local VM and log in as <kbd>seqware</kbd> at this time. If
 you do not have a local VM or Amazon instance currently running please see the
 <a href="../2-installation/">Installation Guide</a> before following these tutorials.
@@ -96,23 +98,6 @@ use the SeqWare system to launch workflows and analyze data.</p>
 where the User Tutorial left off and shows you how to create new workflow
 bundles and make those available to other users of the system.</p>
 
-<div class="section" id="1-0-x-preview">
-<h3>1.0.x Preview</h3>
-
-<p>We have also included a preview section on release 1.0.x in the Developer
-Guide, see <a href="developer-tutorial/#running-with-the-oozie-workflow-engine">Running with the Oozie Workflow
-Engine</a>.
-The big new feature in this release is the support for a new workflow engine
-using <a href="http://oozie.apache.org/">Oozie</a> (in addition to the existing Pegasus
-workflow engine).  Each engine supports Java workflows so the same workflows
-written using the 0.13.x series can be used with the Oozie engine simply using
-a runtime parameter.</p>
-
-<p>You will need to use a development AMI to try 1.0.x, see our <a href="../2-installation/#option-2-installing-with-a-cloud-vm">Installation
-Guide</a> for more
-information.</p>
-
-</div>
 </div>
 <div class="section" id="administrator-tutorial">
 <h2>Administrator Tutorial</h2>

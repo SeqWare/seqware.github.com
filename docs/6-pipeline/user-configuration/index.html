@@ -4,10 +4,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="UTF-8">
 <title>SeqWare › SeqWare Settings</title>
-<meta content="nanoc 3.6.2" name="generator">
+<meta content="nanoc 3.6.5" name="generator">
 <link href="../../../assets/style-v17.css" media="screen" rel="stylesheet" type="text/css">
 <link href="http://feeds.feedburner.com/seqware" rel="alternate" title="The SeqWare Blog" type="application/atom+xml">
-<script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script><script type="text/javascript">         var disqus_shortname = 'seqware';          (function() {             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);         })();     </script>
+<script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script>
+<script type="text/javascript">         var disqus_shortname = 'seqware';          (function() {             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);         })();     </script>
 </head>
 <body>
 <div class="wrapper">
@@ -82,31 +83,62 @@ filled in for every deployment of SeqWare, just those using these tools. Also no
 settings file needs to have read and write permissions for only the owner for security reasons. 
 Our tools will abort and refuse to run if this is not set. </p>
 
-<pre><code class="language-ini"><span class="c1">#</span>
-<span class="c1"># SEQWARE PIPELINE SETTINGS</span>
-<span class="c1"># GENERAL SETTINGS</span>
+<pre><code class="language-ini"><span class="c1"># SEQWARE PIPELINE SETTINGS</span>
+
+<span class="c1"># The settings in this file are tagged by when they are used.</span>
+<span class="c1"># COMMON: Used by all components</span>
+<span class="c1"># INSTALL: Used when installing a workflow bundle</span>
+<span class="c1"># SCHEDULE: Used when a user wants to schedule a workflow run</span>
+<span class="c1"># LAUNCH: Used when a workflow run is to be launched</span>
 <span class="c1">#</span>
-<span class="c1"># SeqWare MetaDB communication method, can be "database" or "webservice" or "none"</span>
+<span class="c1"># Remote users need COMMON and SCHEDULE.</span>
+<span class="c1"># Workflow developers need COMMON and LAUNCH for testing.</span>
+<span class="c1"># Administrators need COMMON and INSTALL.</span>
+<span class="c1"># Cronjobs/daemon processes will need COMMON and LAUNCH.</span>
+
+
+<span class="c1"># COMMON</span>
+
+<span class="c1"># SeqWare MetaDB communication method, can be 'database' or 'webservice' or 'none'</span>
 <span class="na">SW_METADATA_METHOD</span><span class="o">=</span><span class="s">webservice</span>
-<span class="c1"># a directory to copy bundles to for archiving/installing</span>
+
+<span class="c1"># SeqWare webservice settings. Only used if SW_METADATA_METHOD=webservice</span>
+<span class="na">SW_REST_URL</span><span class="o">=</span><span class="s">http://localhost:8080/SeqWareWebService</span>
+<span class="na">SW_REST_USER</span><span class="o">=</span><span class="s">admin@admin.com</span>
+<span class="na">SW_REST_PASS</span><span class="o">=</span><span class="s">admin</span>
+
+<span class="c1"># SeqWare database settings. Only used if SW_METADATA_METHOD=database</span>
+<span class="na">SW_DB_USER</span><span class="o">=</span><span class="s">seqware</span>
+<span class="na">SW_DB_PASS</span><span class="o">=</span><span class="s">seqware</span>
+<span class="na">SW_DB_SERVER</span><span class="o">=</span><span class="s">localhost</span>
+<span class="na">SW_DB</span><span class="o">=</span><span class="s">seqware_meta_db</span>
+
+<span class="c1"># Amazon cloud settings. Only used if reading and writing to S3 buckets.</span>
+<span class="na">AWS_ACCESS_KEY</span><span class="o">=</span><span class="s">FILLMEIN</span>
+<span class="na">AWS_SECRET_KEY</span><span class="o">=</span><span class="s">FILLMEIN</span>
+
+
+<span class="c1"># SCHEDULE, LAUNCH</span>
+
+<span class="c1"># the default engine to use if otherwise unspecified (one of: oozie, oozie-sge, pegasus)</span>
+<span class="na">SW_DEFAULT_WORKFLOW_ENGINE</span><span class="o">=</span><span class="s">oozie</span>
+
+
+<span class="c1"># INSTALL, LAUNCH</span>
+
+<span class="c1"># The directory containing bundle directories (into which bundle archives are unzipped)</span>
 <span class="na">SW_BUNDLE_DIR</span><span class="o">=</span><span class="s">/home/seqware/SeqWare/provisioned-bundles</span>
-<span class="c1"># the central repository for installed bundles</span>
+
+
+<span class="c1"># INSTALL</span>
+
+<span class="c1"># The directory containing bundle archives (into which a bundle archive is first copied during install)</span>
 <span class="na">SW_BUNDLE_REPO_DIR</span><span class="o">=</span><span class="s">/home/seqware/SeqWare/released-bundles</span>
-<span class="c1">#</span>
-<span class="c1"># SEQWARE PIPELINE SETTINGS</span>
-<span class="c1"># PEGASUS WORKFLOW ENGINE SETTINGS</span>
-<span class="c1">#</span>
-<span class="c1"># the name of the cluster as defined in the Pegasus sites.xml config file</span>
-<span class="na">SW_CLUSTER</span><span class="o">=</span><span class="s">seqwarevm</span>
-<span class="c1"># the directory used to store the generated DAX workflow documents before submission to the cluster</span>
-<span class="na">SW_DAX_DIR</span><span class="o">=</span><span class="s">/home/seqware/SeqWare/pegasus-dax</span>
-<span class="c1"># the directory containing all the Pegasus config files this instance of SeqWare should use</span>
-<span class="na">SW_PEGASUS_CONFIG_DIR</span><span class="o">=</span><span class="s">/home/seqware/.seqware/pegasus</span>
-<span class="c1">#</span>
-<span class="c1"># SEQWARE PIPELINE</span>
-<span class="c1"># OOZIE WORKFLOW ENGINE SETTINGS</span>
-<span class="c1"># only used if you specify "-–workflow-engine Oozie" to WorkflowLauncher</span>
-<span class="c1">#</span>
+
+
+<span class="c1"># LAUNCH</span>
+
+<span class="c1"># Oozie engine settings. Only used for both 'oozie' and 'oozie-sge' engines.</span>
 <span class="na">OOZIE_URL</span><span class="o">=</span><span class="s">http://localhost:11000/oozie</span>
 <span class="na">OOZIE_APP_ROOT</span><span class="o">=</span><span class="s">seqware_workflow</span>
 <span class="na">OOZIE_APP_PATH</span><span class="o">=</span><span class="s">hdfs://localhost:8020/user/seqware/</span>
@@ -114,48 +146,25 @@ Our tools will abort and refuse to run if this is not set. </p>
 <span class="na">OOZIE_NAMENODE</span><span class="o">=</span><span class="s">hdfs://localhost:8020</span>
 <span class="na">OOZIE_QUEUENAME</span><span class="o">=</span><span class="s">default</span>
 <span class="na">OOZIE_WORK_DIR</span><span class="o">=</span><span class="s">/usr/tmp/seqware-oozie</span>
-<span class="c1">#</span>
-<span class="c1"># SEQWARE WEBSERVICE SETTINGS</span>
-<span class="c1"># these settings are only used if the SW_METADATA_METHOD=webservice</span>
-<span class="c1">#</span>
-<span class="c1"># the base URL for the RESTful SeqWare API</span>
-<span class="na">SW_REST_URL</span><span class="o">=</span><span class="s">http://localhost:8080/SeqWareWebService</span>
-<span class="c1"># the username and password to connect to the REST API, this is used by SeqWare Pipeline to write back processing info to the DB</span>
-<span class="na">SW_REST_USER</span><span class="o">=</span><span class="s">admin@admin.com</span>
-<span class="na">SW_REST_PASS</span><span class="o">=</span><span class="s">admin</span>
-<span class="c1">#</span>
-<span class="c1"># SEQWARE DATABASE SETTINGS</span>
-<span class="c1"># these settings are only used if the SW_METADATA_METHOD=database</span>
-<span class="c1">#</span>
-<span class="na">SW_DB_USER</span><span class="o">=</span><span class="s">seqware</span>
-<span class="na">SW_DB_PASS</span><span class="o">=</span><span class="s">seqware</span>
-<span class="na">SW_DB_SERVER</span><span class="o">=</span><span class="s">localhost</span>
-<span class="na">SW_DB</span><span class="o">=</span><span class="s">test_seqware_meta_db</span>
-<span class="c1">#</span>
-<span class="c1"># AMAZON CLOUD SETTINGS (OPTIONAL)</span>
-<span class="c1"># used by tools reading and writing to S3 buckets (dependency data/software bundles, inputs, outputs, etc)</span>
-<span class="c1">#</span>
-<span class="na">AWS_ACCESS_KEY</span><span class="o">=</span><span class="s">FILLMEIN</span>
-<span class="na">AWS_SECRET_KEY</span><span class="o">=</span><span class="s">FILLMEIN</span>
-<span class="c1">#</span>
-<span class="c1"># SEQWARE QUERY ENGINE (OPTIONAL)</span>
-<span class="c1">#</span>
-<span class="na">HBASE.ZOOKEEPER.QUORUM</span><span class="o">=</span><span class="s">localhost</span>
-<span class="na">HBASE.ZOOKEEPER.PROPERTY.CLIENTPORT</span><span class="o">=</span><span class="s">2181</span>
-<span class="na">HBASE.MASTER</span><span class="o">=</span><span class="s">localhost:60000</span>
-<span class="na">QE_NAMESPACE</span><span class="o">=</span><span class="s">SeqWareQE</span>
-<span class="na">QE_DEVELOPMENT_DEPENDENCY</span><span class="o">=</span><span class="s">file:/home/seqware/jars/seqware-distribution-0.13.6.5-qe-full.jar</span>
-<span class="na">QE_PERSIST</span><span class="o">=</span><span class="s">true</span>
-<span class="na">QE_HBASE_REMOTE_TESTING</span><span class="o">=</span><span class="s">false</span>
-<span class="na">QE_HBASE_PROPERTIES</span><span class="o">=</span><span class="s">LOCAL</span>
-<span class="c1">#</span>
-<span class="c1"># SEQWARE GENERAL HADOOP SETTINGS</span>
-<span class="c1"># optional if not using oozie</span>
-<span class="c1">#</span>
 <span class="na">MAPRED.JOB.TRACKER</span><span class="o">=</span><span class="s">localhost:8021</span>
-<span class="na">FS.DEFAULT.NAME</span><span class="o">=</span><span class="s">hdfs://localhost:8020</span>
 <span class="na">FS.DEFAULTFS</span><span class="o">=</span><span class="s">hdfs://localhost:8020</span>
-<span class="na">FS.HDFS.IMPL</span><span class="o">=</span><span class="s">org.apache.hadoop.hdfs.DistributedFileSystem</span></code></pre>
+<span class="na">FS.HDFS.IMPL</span><span class="o">=</span><span class="s">org.apache.hadoop.hdfs.DistributedFileSystem</span>
+
+<span class="c1"># Oozie-SGE engine settings. Only used for 'oozie-sge' engine.</span>
+<span class="c1">## Format of qsub flag for specifying number of threads.</span>
+<span class="c1">## If present, ${threads} will be replaced with the job-specific value.</span>
+<span class="na">OOZIE_SGE_THREADS_PARAM_FORMAT</span><span class="o">=</span><span class="s">-pe serial ${threads}</span>
+<span class="c1">## Format of qsub flag for specifying the max memory.</span>
+<span class="c1">## If present, ${maxMemory} will be replaced with the job-specific value.</span>
+<span class="na">OOZIE_SGE_MAX_MEMORY_PARAM_FORMAT</span><span class="o">=</span><span class="s">-l h_vmem=${maxMemory}M</span>
+
+<span class="c1"># Pegasus engine settings.  Only used for 'pegasus' engine.</span>
+<span class="c1">## the name of the cluster as defined in the Pegasus sites.xml config file</span>
+<span class="na">SW_CLUSTER</span><span class="o">=</span><span class="s">seqwarevm</span>
+<span class="c1">## the directory used to store the generated DAX workflow documents before submission to the cluster</span>
+<span class="na">SW_DAX_DIR</span><span class="o">=</span><span class="s">/home/seqware/SeqWare/pegasus-dax</span>
+<span class="c1">## the directory containing all the Pegasus config files this instance of SeqWare should use</span>
+<span class="na">SW_PEGASUS_CONFIG_DIR</span><span class="o">=</span><span class="s">/home/seqware/.seqware/pegasus</span></code></pre>
 
 </div>
 <div class="section" id="pegasus-workflow-engine-configuration">

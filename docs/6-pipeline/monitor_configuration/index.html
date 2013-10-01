@@ -4,10 +4,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="UTF-8">
 <title>SeqWare › SeqWare Pipeline Monitor Configuration</title>
-<meta content="nanoc 3.6.2" name="generator">
+<meta content="nanoc 3.6.5" name="generator">
 <link href="../../../assets/style-v17.css" media="screen" rel="stylesheet" type="text/css">
 <link href="http://feeds.feedburner.com/seqware" rel="alternate" title="The SeqWare Blog" type="application/atom+xml">
-<script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script><script type="text/javascript">         var disqus_shortname = 'seqware';          (function() {             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);         })();     </script>
+<script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script>
+<script type="text/javascript">         var disqus_shortname = 'seqware';          (function() {             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);         })();     </script>
 </head>
 <body>
 <div class="wrapper">
@@ -117,59 +118,58 @@ run on the cluster connected to server2 as user “seqware-bob”, resulting in
 files associated with this workflow being owned by the user “seqware-bob”.</p>
 
 <table>
-<thead><tr>
-<th>Host - server1</th>
+  <thead>
+    <tr>
+      <th>Host - server1</th>
       <th> </th>
       <th> </th>
       <th>Network</th>
       <th>Host - server2</th>
       <th> </th>
-    </tr></thead>
-<tbody>
-<tr>
-<td>User Scheduling</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>User Scheduling</td>
       <td>Web Service Account</td>
       <td>Host param</td>
       <td>-&gt;</td>
       <td>User Running</td>
       <td>Web Service Account</td>
     </tr>
-<tr>
-<td>Bob</td>
+    <tr>
+      <td>Bob</td>
       <td>bob@lab.net</td>
       <td>server2</td>
       <td>-&gt;</td>
       <td>seqware-bob</td>
       <td>bob@lab.net</td>
     </tr>
-</tbody>
+  </tbody>
 </table>
+
 </div>
 <div class="section" id="how-to-launch">
 <h2>How to Launch</h2>
 
-<p>The <a href="../../17-plugins/#workflowlauncher">Workflow Launcher plugin</a> is
-responsible for scheduling workflow launches and launching them, both
-synchronously and asynchronously. In our reference SeqWare environment, we
-typically schedule jobs and then launch them asynchronously using the
-WorkflowLauncher  scheduled  via a cronjob. </p>
+<p>In our reference SeqWare environment, we
+typically schedule jobs and then launch them asynchronously via a cronjob. </p>
 
-<p>Specifically, a user will schedule workflow launches using a command similar to
+<p>A user will schedule workflow launches using a command similar to
 that below:</p>
 
-<pre><code>java -jar seqware-distribution-0.13.6.8-full.jar -p net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher -- --ini-files workflow.ini --workflow-accession $workflow_acc --parent-accessions 99 --host `hostname --long` 
+<pre><code>$ seqware workflow schedule --accession 1 --parent-accession 99  --ini workflow.ini --host `hostname --long` 
 </code></pre>
 
-<p>Then in a cronjob we use the following command to launch scheduled jobs. </p>
+<p>Then in a cronjob we use the following command to launch scheduled jobs: </p>
 
-<pre><code>java -jar seqware-distribution-0.13.6.8-full.jar -p net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher -- --launch-scheduled
+<pre><code>$ seqware workflow-run launch-scheduled
 </code></pre>
 
 <p>Note that in the first command, we allow jobs to be scheduled on a specific
 host. When we launch scheduled workflows, we check this value in order to
 determine whether a particular scheduled workflow should be launched on this
-host.  A  –force-host option can be used to force launches to occur on a
-particular host. Note that while we normally use a fully qualified hostname,
+host.  Note that while we normally use a fully qualified hostname,
 any unique string can be used to designate a host for launching  (for example
 on Amazon S3). </p>
 
@@ -177,34 +177,33 @@ on Amazon S3). </p>
 <div class="section" id="how-to-monitor">
 <h2>How to Monitor</h2>
 
-<p>A cronjob that accompanies the launch-scheduled option of the WorkflowLauncher
-is the <a href="../../17-plugins/#workflowstatuschecker">Workflow Status Checker
-plugin</a>. This uses the pegasus-status
-command in order to retrieve the status of a currently running workflows and
-updates the MetaDB with their status. </p>
+<p>Since the engine that executes the workflow is separate from the SeqWare MetaDB, a separate process is used to propagate statuses between the workflow engine and MetaDB:</p>
+
+<pre><code>$ seqware workflow-run propagate-statuses
+</code></pre>
+
+<p>Once this is executed, workflow-run reports will reflect the updated status.</p>
 
 <div class="section" id="cron-jobs">
 <h3>Cron Jobs</h3>
 
-<p>The SeqWare VM uses two cron tasks to detect and launch scheduled workflows.
-Take a look at:</p>
+<p>The SeqWare VM performs both of the above functions via a cronjob:</p>
 
-<pre><code>seqware@seqwarevm SeqWare]$ crontab -l
+<pre><code>$ crontab -l
 * * * * * /home/seqware/crons/status.cron &gt;&gt; /home/seqware/logs/status.log
 
-[seqware@seqwarevm SeqWare]$ cat /home/seqware/crons/status.cron
+$ cat /home/seqware/crons/status.cron
 
 #!/bin/bash
 
 source /home/seqware/.bash_profile
 
-java -jar /home/seqware/crons/seqware-distribution-0.13.6.8-full.jar -p net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher -- --launch-scheduled
-java -jar /home/seqware/crons/seqware-distribution-0.13.6.8-full.jar  -p net.sourceforge.seqware.pipeline.plugins.WorkflowStatusChecker -- --tp 1000
+seqware workflow-run launch-scheduled
+seqware workflow-run propagate-statuses --threads 10
 </code></pre>
 
-<p>This script runs every minute and uses two plugins, the WorkflowLauncher plugin
-which is used to launch workflows that have been previously scheduled while the
-WorkflowStatusChecker plugin is used to check the status of launched workflows.</p>
+<p>This script runs every minute and uses the first command to launch workflows that have been previously scheduled while the
+second command is used to check the status of launched workflows.</p>
 </div>
 </div>
 </div>

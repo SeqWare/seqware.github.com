@@ -4,10 +4,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="UTF-8">
 <title>SeqWare › Writing Modules</title>
-<meta content="nanoc 3.6.2" name="generator">
+<meta content="nanoc 3.6.5" name="generator">
 <link href="../../../assets/style-v17.css" media="screen" rel="stylesheet" type="text/css">
 <link href="http://feeds.feedburner.com/seqware" rel="alternate" title="The SeqWare Blog" type="application/atom+xml">
-<script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script><script type="text/javascript">         var disqus_shortname = 'seqware';          (function() {             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);         })();     </script>
+<script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script>
+<script type="text/javascript">         var disqus_shortname = 'seqware';          (function() {             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);         })();     </script>
 </head>
 <body>
 <div class="wrapper">
@@ -85,22 +86,29 @@ this below.</p>
 <p>The key for designing modules is keep them simple, self-contained, and reusable.  For example, it would be an error to:</p>
 
 <ul>
-<li>wrap dozens of system calls in one module</li>
+  <li>wrap dozens of system calls in one module</li>
   <li>hard-code paths to any executables e.g. /usr/bin/bfast, instead pass these as arguments</li>
   <li>code modules for one particular task, in one particular workflow, instead you should focus on well defined steps that can be used over-and-over again by many different workflows</li>
 </ul>
+
 <p>Good module design attempts to do the following:</p>
 
 <ul>
-<li>module just one particular reusable task, you should just call one or a few tools in each module</li>
+  <li>module just one particular reusable task, you should just call one or a few tools in each module</li>
   <li>all options, inputs, outputs, executable programs should be passed as arguments</li>
   <li>be reusable, new workflows should be able to use any module, leave out logic specific to one workflow</li>
   <li>use standard input and output files, modules can create many temp files but converge on standards for input/output</li>
 </ul>
-<table><tbody><tr>
-<td>Modules can now be developed simply and quickly by using the [[Creating_Workflow_Bundles_and_Modules_Using_Maven_Archetypes#SeqWare_Module_Archetype</td>
+
+<table>
+  <tbody>
+    <tr>
+      <td>Modules can now be developed simply and quickly by using the [[Creating_Workflow_Bundles_and_Modules_Using_Maven_Archetypes#SeqWare_Module_Archetype</td>
       <td>Maven module archetype.]]</td>
-    </tr></tbody></table>
+    </tr>
+  </tbody>
+</table>
+
 </div>
 <div class="section" id="why-wrappers">
 <h2>Why Wrappers</h2>
@@ -118,7 +126,7 @@ this below.</p>
 <p>The module API includes the following methods:</p>
 
 <ul>
-<li>’&#8217;’init()’’’: initialization goes here; db setup, temp file creation, etc</li>
+  <li>’&#8217;’init()’’’: initialization goes here; db setup, temp file creation, etc</li>
   <li>’&#8217;’do_verify_parameters()’’’: make sure all needed parameters are passed in</li>
   <li>’&#8217;’do_verify_input()’’’: ensure needed input files exist, output directories are writable, etc </li>
   <li>’&#8217;’do_test()’’’: perform any testing here; make sure a DB is only, make sure command line tools function, you can even write a test suite here to run the program you’re wrapping on a known good and then verify the output</li>
@@ -126,6 +134,7 @@ this below.</p>
   <li>’&#8217;’do_verify_output()’’’: check that the expected output has been created</li>
   <li>’&#8217;’clean_up()’’’: cleanup any temp files and directories</li>
 </ul>
+
 <p>These methods give you well-defined places to implement the running of a given command line utility (or anything else really) in a robust way. In the background the runner, which calls your modules, handles logging information (e.g. success or failure messages) back to the meta database.  As a developer, all you have to do is implement these methods however you choose in order to make a new module available.</p>
 
 </div>
@@ -261,7 +270,7 @@ seqware_meta_db=&gt; select * from processing_files;
 <p>Here is a non-programmer’s step-by-step direction for editing, testing, &amp; committing new modules…</p>
 
 <ol>
-<li>Open your module in Eclipse.<br>
+  <li>Open your module in Eclipse.<br>
 </li>
   <li>Edit your module in Eclipse.<br>
 </li>
@@ -274,16 +283,18 @@ seqware_meta_db=&gt; select * from processing_files;
   <li>Test your module.<br>
 </li>
 </ol>
+
 <p>Repeat steps 2-6 (although you can skip step 4 on subsequent cycles) until your module works like you want it to.<br></p>
 
 <ol>
-<li>Now you are ready to check in your code, but it is very important be to absolutely sure that it compiles. If you’re not certain, repeat step 5 to be sure that it reports “BUILD SUCCESSFUL”.<br>
+  <li>Now you are ready to check in your code, but it is very important be to absolutely sure that it compiles. If you’re not certain, repeat step 5 to be sure that it reports “BUILD SUCCESSFUL”.<br>
 </li>
   <li>Go to ~/svnroot/seqware-complete/trunk/seqware-pipeline. Type ‘svn ci -m “text here”’.  (Obviously, the ‘text here’ should be replaced by a brief description of changes or updates you are making).<br>
 </li>
   <li>Details of available module help are documented on SourceForge wiki [[SeqWare modules help overview]]<br>
 </li>
 </ol>
+
 </div>
 <div class="section" id="standards-documentation">
 <h2>Standards Documentation</h2>

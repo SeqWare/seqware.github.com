@@ -4,10 +4,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="UTF-8">
 <title>SeqWare › Installation</title>
-<meta content="nanoc 3.6.2" name="generator">
+<meta content="nanoc 3.6.5" name="generator">
 <link href="../../assets/style-v17.css" media="screen" rel="stylesheet" type="text/css">
 <link href="http://feeds.feedburner.com/seqware" rel="alternate" title="The SeqWare Blog" type="application/atom+xml">
-<script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script><script type="text/javascript">         var disqus_shortname = 'seqware';          (function() {             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);         })();     </script>
+<script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script>
+<script type="text/javascript">         var disqus_shortname = 'seqware';          (function() {             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);         })();     </script>
 </head>
 <body>
 <div class="wrapper">
@@ -71,6 +72,8 @@ emacs, and some experience programming in Java is extremely helpful.</p>
 <li><a href="http://amzn.com/B0043GXMSY">Learning the bash Shell</a></li>
 <li><a href="http://amzn.com/B0043EWVDI">Learning Java</a></li>
 </ul>
+
+
 </div>
 <div class="section" id="option-1-installing-with-a-local-vm">
 <h2>Option 1 - Installing with a Local VM</h2>
@@ -93,6 +96,8 @@ OS you currently have.</p>
 <ul>
 <li><a href="https://www.virtualbox.org/">Oracle Virtual Box</a></li>
 </ul>
+
+
 <p>Next, you will need to download our current VM image which is linked below.
 Please make sure you are using the latest version, when we post a new one we
 will tweet about it so consider following us on Twitter.</p>
@@ -100,6 +105,8 @@ will tweet about it so consider following us on Twitter.</p>
 <ul>
 <li><a href="https://s3.amazonaws.com/nimbusinformatics.exchange/public/SeqWareVM_0.12.5_r5163_CentOS_6.2_20120904b.ova">SeqWareVM_0.12.5-r5163_CentOS_6.2_20120904.ova</a></li>
 </ul>
+
+
 <p>Open VirtualBox and use the &#8220;Import Appliance&#8221; tool to create a new SeqWare VM
 on your system. Make sure you set the memory to the max you can afford, I
 recommend at least 4GB of memory for the VM.  You can then launch it and you
@@ -173,21 +180,28 @@ specifics of your workflows.</p>
 
 <ul>
 <li><p><strong>ami-c386e8aa</strong>
-: 20130517, SWStandaloneCentOS_v2_GenericDevBox_v17, SeqWare Version 0.13.6.5. Make sure you launch in Virginia and select the instance type &#8220;CC1 Cluster Compute (cc1.4xlarge, 23GiB)&#8221; since the AMI is designed specifically to work with this type (we use the local disks provided by this instance).</p></li>
+: 20130531, SeqWare_v0.13.6.7rc_CentOS_GenericDevBox_v18, SeqWare Version 0.13.6.7. Make sure you launch in Virginia and select the instance type &#8220;CC1 Cluster Compute (cc1.4xlarge, 23GiB)&#8221; since the AMI is designed specifically to work with this type (we use the local disks provided by this instance).</p></li>
+<li><p><del> <strong>ami-c386e8aa</strong>
+: 20130517, SWStandaloneCentOS_v2_GenericDevBox_v17, SeqWare Version 0.13.6.5. Make sure you launch in Virginia and select the instance type &#8220;CC1 Cluster Compute (cc1.4xlarge, 23GiB)&#8221; since the AMI is designed specifically to work with this type (we use the local disks provided by this instance). </del></p></li>
 <li><p><del> <strong>ami-1b5d3e72</strong>
 : 20130425, SWStandaloneCentOS_v2_GenericDevBox_v16, SeqWare Version 0.13.6.5. Make sure you select the instance type &#8220;CC1 Cluster Compute (cc1.4xlarge, 23GiB)&#8221; since the AMI is designed specifically to work with this type (we use the local disks provided by this instance). </del></p></li>
 <li><p><del> <strong>ami-d097f6b9</strong>
 : 20130419, SWStandaloneCentOS_v2_GenericDevBox_v14, SeqWare Version 0.13.6.5. Make sure you select the instance type &#8220;CC1 Cluster Compute (cc1.4xlarge, 23GiB)&#8221; since the AMI is designed specifically to work with this type (we use the local disks provided by this instance). </del></p></li>
 </ul>
+
+
 </div>
 <div class="section" id="development-public-ami-s">
 <h4>Development Public AMI(s):</h4>
 
 <ul>
-<li>
-<strong>ami-01660f68</strong>
-: 20130517, SeqWare_v1.0.0rc_CentOS_GenericStandaloneDevBox_v18, SeqWare Version 1.0.0-SNAPSHOT from today (a pre-release) that includes support for running Java workflows on the Oozie workflow engine. Make sure you launch in Virginia select the instance type &#8220;CC1 Cluster Compute (cc1.4xlarge, 23GiB)&#8221; since the AMI is designed specifically to work with this type (we use the local disks provided by this instance).</li>
+<li><p><strong>ami-7be48e12</strong>
+: 20130531, SeqWare_v1.0.1-SNAPSHOT_CentOS_GenericDevBox_v19, SeqWare Version 1.0.1-SNAPSHOT that includes support for running Java workflows on the Oozie workflow engine. Make sure you launch in Virginia select the instance type &#8220;CC1 Cluster Compute (cc1.4xlarge, 23GiB)&#8221; since the AMI is designed specifically to work with this type (we use the local disks provided by this instance).</p></li>
+<li><p><del> <strong>ami-01660f68</strong>
+: 20130517, SeqWare_v1.0.0rc_CentOS_GenericStandaloneDevBox_v18, SeqWare Version 1.0.0-SNAPSHOT from today (a pre-release) that includes support for running Java workflows on the Oozie workflow engine. Make sure you launch in Virginia select the instance type &#8220;CC1 Cluster Compute (cc1.4xlarge, 23GiB)&#8221; since the AMI is designed specifically to work with this type (we use the local disks provided by this instance). </del></p></li>
 </ul>
+
+
 <p>An example of the launching wizard in the Amazon AWS console can be seen below:</p>
 
 <p><img src="../../assets/images/amazon_launcher.png" alt="SeqWare AWS Console" width="600px"></p>

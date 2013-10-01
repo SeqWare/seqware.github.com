@@ -4,10 +4,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="UTF-8">
 <title>SeqWare › Java Workflows</title>
-<meta content="nanoc 3.6.2" name="generator">
+<meta content="nanoc 3.6.5" name="generator">
 <link href="../../../assets/style-v17.css" media="screen" rel="stylesheet" type="text/css">
 <link href="http://feeds.feedburner.com/seqware" rel="alternate" title="The SeqWare Blog" type="application/atom+xml">
-<script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script><script type="text/javascript">         var disqus_shortname = 'seqware';          (function() {             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);         })();     </script>
+<script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script>
+<script type="text/javascript">         var disqus_shortname = 'seqware';          (function() {             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);         })();     </script>
 </head>
 <body>
 <div class="wrapper">
@@ -88,58 +89,50 @@ Hadoop is only present for the Oozie Workflow Engine).</p>
 saw how to create a HelloWorld Java workflow using archetype.</p>
 
 <p>The first step to get started is to generate your workflow skeleton using Maven 
-archetypes. You will want to do this in a directory without pom.xml files (i.e. 
+archetypes. You will want to do this in a directory without <code>pom.xml</code> files (i.e. 
 outside of the SeqWare development directories).  Here we are working in the workflow-dev directory: </p>
 
-<pre><code>    cd /home/seqware/workflow-dev
-    mvn archetype:generate 
-    ... 
-    754: local -&gt; com.github.seqware:seqware-archetype-decider (SeqWare Java Decider archetype)
-    755: local -&gt; com.github.seqware:seqware-archetype-java-workflow (SeqWare Java workflow archetype)
-    756: local -&gt; com.github.seqware:seqware-archetype-simplified-ftl-workflow (SeqWare FTL workflow archetype)
-    757: local -&gt; com.github.seqware:seqware-archetype-module (SeqWare module archetype)
-    758: local -&gt; com.github.seqware:seqware-archetype-legacy-ftl-workflow (SeqWare workflow legacy ftl archetype)
-    759: local -&gt; com.github.seqware:seqware-archetype-simple-legacy-ftl-workflow (A very simple SeqWare legacy ftl workflow archetype)
- 
-    # select 755 above, the "SeqWare Java workflow archetype" 
-
-    # use MyHelloWorld as the name of your workflow and use the default workflow version 
-
-    cd MyHelloWorld 
-    mvn install 
-    cd target/Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.8/ 
+<pre><code>$ cd ~/workflow-dev
+$ mvn archetype:generate
+...
+829: local -&gt; com.github.seqware:seqware-archetype-decider (SeqWare Java Decider archetype)
+830: local -&gt; com.github.seqware:seqware-archetype-java-workflow (SeqWare Java workflow archetype)
+831: local -&gt; com.github.seqware:seqware-archetype-module (SeqWare module archetype)
+Choose a number or apply filter (format: [groupId:]artifactId, case sensitive contains): 294: 
 </code></pre>
 
-<p>The numbers used to identify  the archetypes (754 through 759) will vary 
-depending on what you have installed, so you will need to scan through the list 
-to find the SeqWare archetype you are looking for, in this case “SeqWare Java workflow archetype”. </p>
+<p class="warning"><strong>Note:</strong>You can inform Maven about the archetypes by downloading the latest <a href="https://github.com/SeqWare/seqware/releases/download/0.13.6.8/archetype-catalog.xml">archetype-catalog.xml</a> file and placing it in <code>~/.m2/</code>.</p>
 
-<p>In this example, one would chose 755, the template for workflow using Java 
-objects.  Then use “MyHelloWorld” as the artifactId and “1.0-SNAPSHOT” as the version. 
-For your own workflows outside of the tutorial you would use whatever name and version 
-you like. </p>
+<p>The numbers used to identify  the archetypes will vary 
+depending on what you have installed, so you will need to scan through the list 
+to find the SeqWare archetype you are looking for, in this case “SeqWare Java workflow archetype”.  Following the prompts, use “MyHelloWorld” as the artifactId and accept the defaults for the remaining by just pressing return.</p>
+
+<p>Alternately, the archetype can be generated without any interaction:</p>
+
+<pre><code>$ mvn archetype:generate \
+  -DinteractiveMode=false \
+  -DarchetypeCatalog=local \
+  -DarchetypeGroupId=com.github.seqware \
+  -DarchetypeArtifactId=seqware-archetype-java-workflow \
+  -DgroupId=com.example \
+  -DartifactId=MyHelloWorld
+</code></pre>
 
 <p>Alternatively, enter the workflow name and version you want to use.  When complete, you can
 <tt>cd</tt> into the new workflow directory and use <tt>mvn install</tt> to
 build the workflow. This copies files to the correct location and pulls in
 needed dependencies.</p>
 
-<pre><code>[seqware@master workflow-dev]$ cd /home/seqware/workflow-dev/MyHelloWorld 
-[seqware@master MyHelloWorld]$ mvn clean install
-    [INFO] Scanning for projects...                                                                                       
-    [INFO] ------------------------------------------------------------------------                                       
-    [INFO] Building seqware-workflow                                                                                      
-[INFO]    task-segment: [clean, install]
-[INFO] ------------------------------------------------------------------------
-[INFO] [clean:clean {execution: default-clean}]
-[INFO] Deleting /mnt/databases/workflow-dev/MyHelloWorld/target
-    &lt;snip&gt; 
+<pre><code>    $ cd ~/workflow-dev/MyHelloWorld/
+    $ mvn clean install
+    [INFO] Scanning for projects...
+    ...
     [INFO] ------------------------------------------------------------------------
-    [INFO] BUILD SUCCESSFUL
+    [INFO] BUILD SUCCESS
     [INFO] ------------------------------------------------------------------------
-    [INFO] Total time: 26 seconds
-    [INFO] Finished at: Fri Nov 23 14:48:15 EST 2012
-    [INFO] Final Memory: 67M/423M
+    [INFO] Total time: 40.100s
+    [INFO] Finished at: Thu Aug 15 19:59:22 UTC 2013
+    [INFO] Final Memory: 28M/67M
     [INFO] ------------------------------------------------------------------------
 </code></pre>
 
@@ -279,10 +272,9 @@ easiest way to register workflow files.</p>
 <h3>Jobs &amp; Dependencies</h3>
 
 <p>The jobs need to have distinct IDs and you can generate these using a for loop
-in FTL if need be. You can put any command in the <tt><argument>&lt;/tt&gt; section
+in FTL if need be. You can put any command in the <tt>argument</tt> section
 but mostly this is used to call GenericCommandRunner which runs the command
-provided in a Bash shell. Notice the use of <tt><profile>&lt;/tt&gt; to specify the
-job thread and memory count.</profile></tt></argument></tt></p>
+provided in a Bash shell. </p>
 
 <pre><code class="language-java">    <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">buildWorkflow</span><span class="o">()</span> <span class="o">{</span>
@@ -311,6 +303,73 @@ to specify job pre-requisites.</p>
 <p>TODO: discuss the JobTypes, namely Bash</p>
 
 </div>
+<div class="section" id="symbolic-links-to-local-dependencies">
+<h3>Symbolic Links to Local Dependencies</h3>
+
+<p>This type of dependency is not generally recommended. In most cases you will want to check a dependency into a maven repository or add it into the binary or data directories of a workflow. </p>
+
+<p>However, in the following cases, you will need to rely on symbolic links:</p>
+
+<ul>
+  <li>The dependency is too large to go into a maven repository </li>
+  <li>The dependency is proprietary or cannot be redistributed </li>
+</ul>
+
+<p>By convention, the symlinks go into a directory in the root of the workflow called links. They should link to a directory, not to a single file (for the purposes of copying the dependencies to the final bundle. Maven doesn’t accept single files for copying upon install.</p>
+
+<p>First, create the link:</p>
+
+<pre><code>[seqware@seqwarevm HelloWorld]$ cd links
+[seqware@seqwarevm links]$ rm -Rf *
+[seqware@seqwarevm links]$ ln -s ../workflow/data/
+[seqware@seqwarevm links]$ ls -alhtr
+total 8.0K
+drwxrwxr-x 5 seqware seqware 4.0K May 31 17:39 ..
+lrwxrwxrwx 1 seqware seqware   17 May 31 17:41 data -&gt; ../workflow/data/
+drwxrwxr-x 2 seqware seqware 4.0K May 31 17:41 .
+</code></pre>
+
+<p>Second, modify your bundle’s pom.xml to create a link when compiling your bundle:</p>
+
+<pre><code>&lt;build&gt;
+   ...
+    &lt;plugins&gt;
+   ...
+        &lt;plugin&gt;
+            &lt;groupId&gt;com.pyx4j&lt;/groupId&gt;
+            &lt;artifactId&gt;maven-junction-plugin&lt;/artifactId&gt;
+            &lt;executions&gt;
+                    &lt;execution&gt;
+                    &lt;phase&gt;package&lt;/phase&gt;
+                    &lt;goals&gt;
+                            &lt;goal&gt;link&lt;/goal&gt;
+                    &lt;/goals&gt;
+            &lt;/execution&gt;
+            &lt;execution&gt;
+                    &lt;id&gt;unlink&lt;/id&gt;
+                    &lt;phase&gt;clean&lt;/phase&gt;
+                    &lt;goals&gt;
+                            &lt;goal&gt;unlink&lt;/goal&gt;
+                    &lt;/goals&gt;
+          &lt;/execution&gt;
+        &lt;/executions&gt;
+        &lt;configuration&gt;
+          &lt;links&gt;
+           &lt;link&gt;
+              &lt;dst&gt;${project.build.directory}/Workflow_Bundle_${workflow-name}_${project.version}_SeqWare_${seqware-version}/Workflow_Bundle_${workflow-directory-name}/${project.version}/data/data&lt;/dst&gt;
+              &lt;src&gt;${basedir}/links/data&lt;/src&gt;
+            &lt;/link&gt;
+          &lt;/links&gt;
+        &lt;/configuration&gt;
+     &lt;/plugin&gt;
+    &lt;/plugins&gt;
+&lt;/build&gt;
+&lt;/project&gt;
+</code></pre>
+
+<p>Your bundles will now contain a symbolic link to your dependency after “mvn clean install” in the data directory and this will only be included in the bundle when the bundle is packaged (and/or installed). </p>
+
+</div>
 </div>
 <div class="section" id="running-the-workflow">
 <h2>Running the Workflow</h2>
@@ -333,10 +392,8 @@ RUNNING: step 2 of 5 <span class="o">(</span>40%<span class="o">)</span>
 <h2>For More Information</h2>
 
 <p>See the  <a href="../../3-getting-started/developer-tutorial/">Developer Tutorial</a>
-document for more information. For Java API documentation consult the <a href="../../../javadoc/git_0.13.6.2/apidocs/index.html">SeqWare
-Javadocs</a>. Specifically look at the
-<a href="../../../javadoc/git_0.13.6.2/apidocs/net/sourceforge/seqware/pipeline/workflowV2/AbstractWorkflowDataModel.html">AbstractWorkflowDataModel</a>
-object documentation.</p>
+document for more information. For Java API documentation consult the <a href="../../11-api/">SeqWare
+Javadocs</a>.</p>
 </div>
 </div>
 <p> </p>

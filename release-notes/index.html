@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="UTF-8">
 <title>SeqWare › Release Notes</title>
-<meta content="nanoc 3.6.2" name="generator">
+<meta content="nanoc 3.6.5" name="generator">
 <link href="../assets/style-v17.css" media="screen" rel="stylesheet" type="text/css">
 <link href="http://feeds.feedburner.com/seqware" rel="alternate" title="The SeqWare Blog" type="application/atom+xml">
 <script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script>
@@ -39,6 +39,285 @@ Procedure now is at https://wiki.oicr.on.ca/pages/viewpage.action?pageId=4453317
 -->
 
 
+<div class="section" id="1-0-5-2013-10-01">
+<h2>1.0.5 (2013-10-01)</h2>
+
+<div class="section" id="improvement">
+<h3>Improvement</h3>
+
+<ul>
+<li>[SEQWARE-1647] - Java workflows: provisioned files are not written to directories with random numbers</li>
+</ul>
+
+
+</div>
+<div class="section" id="technical-task">
+<h3>Technical task</h3>
+
+<ul>
+<li>[SEQWARE-1588] - Add output checking to WorkflowRunReporter and SymLinkReporter steps of user tutorial ITs</li>
+<li>[SEQWARE-1760] - Orphan Checking Plugin</li>
+<li>[SEQWARE-1761] - WorkflowRun Conventions</li>
+</ul>
+
+
+</div>
+</div>
+<div class="section" id="0-13-6-11-2013-09-27">
+<h2>0.13.6.11 (2013-09-27)</h2>
+
+<ul>
+<li>[SEQWARE-1748] - Calling WorkflowLauncher with multiple parent-accession results in error</li>
+</ul>
+
+
+</div>
+<div class="section" id="1-0-4-2013-09-20">
+<h2>1.0.4 (2013-09-20)</h2>
+
+<div class="section" id="defect">
+<h3>Defect</h3>
+
+<ul>
+<li>[SEQWARE-1574] - WebService - Clear up the connection pool mess</li>
+<li>[SEQWARE-1699] - NullPointerException when launching a scheduled workflow</li>
+<li>[SEQWARE-1722] - Oozie engine does not emit all GCR flags</li>
+<li>[SEQWARE-1750] - Workflow run relaunches indefinently</li>
+</ul>
+
+
+</div>
+<div class="section" id="improvement">
+<h3>Improvement</h3>
+
+<ul>
+<li>[SEQWARE-1622] - Have BasicDecider check to see if the files exist before launching</li>
+<li>[SEQWARE-1726] - SeqWare MetaDB - Generate docs for the schema and upload to our seqware.io site</li>
+</ul>
+
+
+</div>
+<div class="section" id="story">
+<h3>Story</h3>
+
+<ul>
+<li>[SEQWARE-137] - need to add workflow to X tables in the db for study, experiment, sample, etc and allow for linking via the WorfklowLauncher</li>
+<li>[SEQWARE-1625] - BasicDecider improvements</li>
+<li>[SEQWARE-1733] - Clean-up metadata tools</li>
+</ul>
+
+
+</div>
+<div class="section" id="task">
+<h3>Task</h3>
+
+<ul>
+<li>[SEQWARE-1433] - WorkflowLauncher needs to set the host regardless of the launching method</li>
+<li>[SEQWARE-1512] - Cleanup DBAccess</li>
+<li>[SEQWARE-1513] - Modify the Maven archetype for decider jars to follow the PDE syntax (matches the workflow)</li>
+<li>[SEQWARE-1580] - WorkflowStatusChecker can short-circuit evaluation</li>
+<li>[SEQWARE-1593] - WorkflowStatusChecker can only run for single workflow-run-accession</li>
+<li>[SEQWARE-1605] - Pipeline - Create a generic methods HTML report for each workflow_run</li>
+<li>[SEQWARE-1706] - Add skip attribute to Old StudyReporter</li>
+<li>[SEQWARE-1731] - Work with HelpDesk to create Jenkins back-up procedure</li>
+<li>[SEQWARE-1744] - FileLinker plugin</li>
+</ul>
+
+
+</div>
+<div class="section" id="technical-task">
+<h3>Technical task</h3>
+
+<ul>
+<li>[SEQWARE-473] - Pipeline JAR should know what version of the webservice it is compatible with</li>
+<li>[SEQWARE-616] - Decide which File Injection Tools should exist</li>
+<li>[SEQWARE-1241] - Figure out a way to use archetypes without having to checkout and install the SeqWare git repo</li>
+<li>[SEQWARE-1547] - Check if ID is an integer to avoid NumberFormatException</li>
+<li>[SEQWARE-1548] - Check for potential NullPointers</li>
+<li>[SEQWARE-1549] - Check that JaxbObject handles nulls properly</li>
+<li>[SEQWARE-1616] - Code review of workflow engines and action executors with Alex</li>
+<li>[SEQWARE-1626] - Have the BasicDecider print out the defaults for each command-line option</li>
+<li>[SEQWARE-1655] - Add an option for running in reverse chronological order</li>
+<li>[SEQWARE-1712] - Implement system monitoring tools in Portal or other location</li>
+<li>[SEQWARE-1734] - Update FileLinker to use WS</li>
+<li>[SEQWARE-1736] - Create tests for FileLinker</li>
+<li>[SEQWARE-1737] - Deprecate GenericMetadataSaver</li>
+<li>[SEQWARE-1738] - Delete BulkProvisionFiles and ProcessingTaskGroup</li>
+</ul>
+
+
+</div>
+</div>
+<div class="section" id="0-13-6-10-2013-08-21">
+<h2>0.13.6.10 (2013-08-21)</h2>
+
+<ul>
+<li>Reduce the amount of temporary file space used by the basic decider</li>
+</ul>
+
+
+</div>
+<div class="section" id="1-0-3-2013-08-21">
+<h2>1.0.3 (2013-08-21)</h2>
+
+<div class="section" id="defect">
+<h3>Defect</h3>
+
+<ul>
+<li>[SEQWARE-1287] - WorkflowLauncher should mark finished workflows as &#8220;completed&#8221; and not &#8220;success&#8221;</li>
+<li>[SEQWARE-1374] - Metadata does not check for valid id links</li>
+<li>[SEQWARE-1690] - SeqWare Pipeline: does the PegasusEngine not include random in the workflow name for Java workflows? Without this Pegasus can overwrite working directories when run concurrently!</li>
+<li>[SEQWARE-1693] - BasicDecider incorrectly skips launching of workflow runs when input files share a common workflow run id</li>
+</ul>
+
+
+</div>
+<div class="section" id="improvement">
+<h3>Improvement</h3>
+
+<ul>
+<li>[SEQWARE-851] - improvement of workflow run report</li>
+<li>[SEQWARE-1328] - Remove accession from the Metadata object for the study table</li>
+</ul>
+
+
+</div>
+<div class="section" id="story">
+<h3>Story</h3>
+
+<ul>
+<li>[SEQWARE-1400] - Oozie engines need to be supported transparently by all our command line utils (status checker, workflow launcher, etc)</li>
+<li>[SEQWARE-1564] - Cmd Line Tools - rework command line interface to work more like the hadoop command; easier, better docs, less typing</li>
+<li>[SEQWARE-1586] - ProvisionFiles - support HTTP, SFTP, SCP, etc to allow for easy pulling and pushing of data between systems</li>
+</ul>
+
+
+</div>
+<div class="section" id="task">
+<h3>Task</h3>
+
+<ul>
+<li>[SEQWARE-1489] - Number of SequencerRuns retrieved by the WS is doubled.</li>
+<li>[SEQWARE-1544] - Create integration tests for SeqWare generic decider from archetype</li>
+<li>[SEQWARE-1561] - Library selection, library source and library strategy are not inserted when a lane is created</li>
+<li>[SEQWARE-1695] - Test BioNimbus</li>
+<li>[SEQWARE-1697] - BundleManager does not test properly (passes test without waiting)</li>
+<li>[SEQWARE-1700] - BundleManager list params fails on FileImport (possibly workflows with no parameters)</li>
+<li>[SEQWARE-1705] - AttributeAnnotator file skip default value should be false</li>
+<li>[SEQWARE-1727] - Investigate discovered potential issue with processing links</li>
+</ul>
+
+
+</div>
+<div class="section" id="sub-task">
+<h3>Sub-task</h3>
+
+<ul>
+<li>[SEQWARE-1639] - Review the documentation comments and re-work our docs accordingly</li>
+</ul>
+
+
+</div>
+<div class="section" id="technical-task">
+<h3>Technical task</h3>
+
+<ul>
+<li>[SEQWARE-595] - populate workflow_run_param table when use command line tools</li>
+<li>[SEQWARE-1138] - WorkflowLauncher: when template parsing fails, workflowlauncher &#8211;launch-scheduled does not set the run to failed</li>
+<li>[SEQWARE-1490] - BUG - issue with multiple workflow output files and Oozie backend</li>
+<li>[SEQWARE-1554] - Pipeline - Need command line, web service, and StatusChecker support for cancelling workflows</li>
+<li>[SEQWARE-1563] - Pipeline - some sort of metadata/workflow report tool to generate methods documents &amp; record of metadata</li>
+<li>[SEQWARE-1570] - Investigate how to use plugin with &#8211;new without &#8211;interactive.</li>
+<li>[SEQWARE-1579] - Fix the way the sample hierarchy injection works.</li>
+<li>[SEQWARE-1584] - SeqWare command line Metadata plugin needs full lifecycle&#8230; e.g. query, create, and (possibly) update/delete.</li>
+<li>[SEQWARE-1624] - Update the integration tests to match tutorials</li>
+<li>[SEQWARE-1628] - Implement and test an Oozie -&gt; SGE bridge in the Oozie workflow engine</li>
+<li>[SEQWARE-1682] - Add integration tests for retrieval of annotations from new report</li>
+<li>[SEQWARE-1688] - AttributeAnnotator should output list of attribute changes</li>
+<li>[SEQWARE-1701] - Job default thread/memory in seqware settings</li>
+<li>[SEQWARE-1702] - Stderr/Stdout propagation in the Oozie-Hadoop engine (Alex will work on the Oozie-SGE engine)</li>
+<li>[SEQWARE-1703] - Workflow cancel/restart state propagation</li>
+<li>[SEQWARE-1708] - Improve vagrant launcher with software profiles support</li>
+<li>[SEQWARE-1709] - Improve vagrant launcher to include cluster support</li>
+<li>[SEQWARE-1710] - Adapt the integration tests for our tutorials to use the CLI</li>
+<li>[SEQWARE-1713] - MetadataWS experiment spot_design_id and library_design_id support</li>
+<li>[SEQWARE-1714] - MetadataWS sequencer_run status support</li>
+<li>[SEQWARE-1717] - Create integration tests for the Metadata plugin</li>
+<li>[SEQWARE-1723] - Database build scripts should populate extra tables needed for setting experiment fields</li>
+<li>[SEQWARE-1724] - Multiple root/parent nodes inserted into sample_heirarchy</li>
+</ul>
+
+
+</div>
+</div>
+<div class="section" id="0-13-6-9-2013-08-10">
+<h2>0.13.6.9 (2013-08-10)</h2>
+
+<ul>
+<li>Fixes to the logic of the BasicDecider</li>
+</ul>
+
+
+</div>
+<div class="section" id="1-0-2-2013-08-10">
+<h2>1.0.2 (2013-08-10)</h2>
+
+<div class="section" id="defect">
+<h3>Defect</h3>
+
+<ul>
+<li>[SEQWARE-1668] - GenericCommandRunner - Morgan reported broken &#8211;stdout and &#8211;stderr redirects in this tool</li>
+</ul>
+
+
+</div>
+<div class="section" id="improvement">
+<h3>Improvement</h3>
+
+<ul>
+<li>[SEQWARE-1508] - Alarming Not Found message in decider output</li>
+<li>[SEQWARE-1675] - BasicDecider is very slow</li>
+<li>[SEQWARE-1683] - We need a SW_DEFAULT_WORKFLOW_ENGINE parameter that can be set in the .seqware/settinngs file</li>
+</ul>
+
+
+</div>
+<div class="section" id="task">
+<h3>Task</h3>
+
+<ul>
+<li>[SEQWARE-1527] - WorkflowRunReporter needs to print stdout and stderr in separate commands</li>
+<li>[SEQWARE-1612] - Seqware BasicDecider Testing mode</li>
+<li>[SEQWARE-1642] - Refine the BasicDecider &#8211;test output</li>
+<li>[SEQWARE-1666] - BasicDecider &#8211;launch-max</li>
+<li>[SEQWARE-1669] - Generic Command Runner only produces output when it fails</li>
+<li>[SEQWARE-1673] - The twitter feed in our docs is broken</li>
+<li>[SEQWARE-1691] - Update .seqware/settings file with new params</li>
+<li>[SEQWARE-1692] - New basic workflow creation tools (bugs)</li>
+</ul>
+
+
+</div>
+<div class="section" id="technical-task">
+<h3>Technical task</h3>
+
+<ul>
+<li>[SEQWARE-1269] - generic command runner should optionally take commands from a file</li>
+<li>[SEQWARE-1304] - Add documentation for new Web Service resources (sequencer run, ius, lane)</li>
+<li>[SEQWARE-1340] - Assorted ideas for plugin integration testing</li>
+<li>[SEQWARE-1415] - Document AttributeAnnotator for nanoc</li>
+<li>[SEQWARE-1418] - Create nanoc documentation for the WorkflowRunReporter</li>
+<li>[SEQWARE-1420] - Create integration tests for the AttributeAnnotator</li>
+<li>[SEQWARE-1423] - Create integration tests for the WorkflowRunReporter</li>
+<li>[SEQWARE-1606] - Change VM startup script to auto-create &#8220;emphemeral drives&#8221; if they aren&#8217;t available</li>
+<li>[SEQWARE-1633] - Specification for Oozie SGE Submitter and associated components</li>
+<li>[SEQWARE-1664] - Setup our query integration tests to work against the HBase installed by Vagrant</li>
+<li>[SEQWARE-1698] - Successfully run extended integration tests on Vagrant VM</li>
+</ul>
+
+
+</div>
+</div>
 <div class="section" id="0-13-6-8-2013-07-10">
 <h2>0.13.6.8 (2013-07-10)</h2>
 
@@ -46,7 +325,8 @@ Procedure now is at https://wiki.oicr.on.ca/pages/viewpage.action?pageId=4453317
 <li>Implementation of new tools for wrapping external scripts with SeqWare metadata write-back</li>
 <li>Database indexing scripts optimizing against common queries and our various utilities</li>
 </ul>
-<!-- pending fix for oozie-sge -->
+
+
 </div>
 <div class="section" id="1-0-1-2013-07-10">
 <h2>1.0.1 (2013-07-10)</h2>
@@ -57,6 +337,8 @@ Procedure now is at https://wiki.oicr.on.ca/pages/viewpage.action?pageId=4453317
 <ul>
 <li>[SEQWARE-1516] - NullPointer when trying to test installed workflows</li>
 </ul>
+
+
 </div>
 <div class="section" id="improvement">
 <h3>Improvement</h3>
@@ -64,6 +346,8 @@ Procedure now is at https://wiki.oicr.on.ca/pages/viewpage.action?pageId=4453317
 <ul>
 <li>[SEQWARE-1632] - &#8211;install-dir-only and &#8211;install should be exclusive options</li>
 </ul>
+
+
 </div>
 <div class="section" id="task">
 <h3>Task</h3>
@@ -73,6 +357,8 @@ Procedure now is at https://wiki.oicr.on.ca/pages/viewpage.action?pageId=4453317
 <li>[SEQWARE-1660] - Support for external user : BD</li>
 <li>[SEQWARE-1674] - The workflowrun report can throw a null pointer exception on valid params</li>
 </ul>
+
+
 </div>
 <div class="section" id="sub-task">
 <h3>Sub-task</h3>
@@ -80,6 +366,8 @@ Procedure now is at https://wiki.oicr.on.ca/pages/viewpage.action?pageId=4453317
 <ul>
 <li>[SEQWARE-1637] - Document pom.xml file links for workflow bundles</li>
 </ul>
+
+
 </div>
 <div class="section" id="technical-task">
 <h3>Technical task</h3>
@@ -100,6 +388,8 @@ Procedure now is at https://wiki.oicr.on.ca/pages/viewpage.action?pageId=4453317
 <li>[SEQWARE-1680] - AttributeAnnotator cannot re-annotate Sample and Lane</li>
 <li>[SEQWARE-1685] - Implement annotation of File records</li>
 </ul>
+
+
 </div>
 </div>
 <div class="section" id="0-13-6-6-2013-05-29">
@@ -112,13 +402,39 @@ Procedure now is at https://wiki.oicr.on.ca/pages/viewpage.action?pageId=4453317
 <li>[SEQWARE-1644] - Multiple workflow output files and Pegasus</li>
 <li>[SEQWARE-1638] - Seems like setQueue not implemented</li>
 </ul>
+
+
+</div>
+<div class="section" id="improvement">
+<h3>Improvement</h3>
+
+<ul>
+<li>[SEQWARE-1521] - Pipeline - We should add a Java API method that allows output files to specify their output path, this allows for overriding of output file locations.</li>
+<li>[SEQWARE-1648] - Specific order of chmod &#8220;commandlineArgs&#8221; required for OSX</li>
+</ul>
+
+
+</div>
+<div class="section" id="story">
+<h3>Story</h3>
+
+<ul>
+<li>[SEQWARE-1479] - Repurpose our sqwdev.res environment so it&#8217;s useful to SoftEng and PDE</li>
+</ul>
+
+
 </div>
 <div class="section" id="task">
 <h3>Task</h3>
 
 <ul>
+<li>[SEQWARE-1457] - Distribution - Create 0.13.6.3 VM/AMI</li>
+<li>[SEQWARE-1573] - Verify STS logs</li>
 <li>[SEQWARE-1609] - Key command line tools should have terminal mode similar to \x in postgres</li>
+<li>[SEQWARE-1634] - Basic Decider needs a function to check workflow run before launching</li>
 </ul>
+
+
 </div>
 <div class="section" id="technical-task">
 <h3>Technical task</h3>
@@ -135,6 +451,8 @@ Procedure now is at https://wiki.oicr.on.ca/pages/viewpage.action?pageId=4453317
 <li>[SEQWARE-1611] - Assorted user-friendly features</li>
 <li>[SEQWARE-1620] - Create clean-up script</li>
 </ul>
+
+
 </div>
 </div>
 <div class="section" id="0-13-6-5-2013-04-25">
@@ -150,6 +468,8 @@ Procedure now is at https://wiki.oicr.on.ca/pages/viewpage.action?pageId=4453317
 <li>[SEQWARE-1577] - AttributeAnnotator cascades deletes when annotating</li>
 <li>[SEQWARE-1595] - Race condition with .seqware/settings permissions &#8220;fix&#8221;</li>
 </ul>
+
+
 </div>
 <div class="section" id="improvement">
 <h3>Improvement</h3>
@@ -157,6 +477,8 @@ Procedure now is at https://wiki.oicr.on.ca/pages/viewpage.action?pageId=4453317
 <ul>
 <li>[SEQWARE-1452] - Add &#8216;workflows&#8217; column to mime types page</li>
 </ul>
+
+
 </div>
 <div class="section" id="task">
 <h3>Task</h3>
@@ -172,6 +494,8 @@ Procedure now is at https://wiki.oicr.on.ca/pages/viewpage.action?pageId=4453317
 <li>[SEQWARE-1491] - Workflow Launcher relaunches Java and Simplified FTL</li>
 <li>[SEQWARE-1500] - Setup dedicated SeqWare reference server</li>
 </ul>
+
+
 </div>
 <div class="section" id="technical-task">
 <h3>Technical task</h3>
@@ -194,6 +518,8 @@ Procedure now is at https://wiki.oicr.on.ca/pages/viewpage.action?pageId=4453317
 <li>[SEQWARE-1461] - Convert Perl integration test script into JUnit maven framework</li>
 <li>[SEQWARE-1496] - Create a test database for deciders and workflows</li>
 </ul>
+
+
 </div>
 </div>
 <div class="section" id="0-13-6-2-2012-01-28">
@@ -207,6 +533,8 @@ Procedure now is at https://wiki.oicr.on.ca/pages/viewpage.action?pageId=4453317
 <li>[SEQWARE-1444] - Some parameters from .ini cannot make it into MetaDB</li>
 <li>[SEQWARE-1471] - seqware installation error message confusing</li>
 </ul>
+
+
 </div>
 <div class="section" id="task">
 <h3>Task</h3>
@@ -220,6 +548,8 @@ Procedure now is at https://wiki.oicr.on.ca/pages/viewpage.action?pageId=4453317
 <li>[SEQWARE-1473] - Add input (parent) file SWIDs to the StudyIDFilesTSVResource</li>
 <li>[SEQWARE-1474] - Workflow runs are not properly linked to IUS over the web service</li>
 </ul>
+
+
 </div>
 </div>
 <div class="section" id="0-13-6-1-2013-01-09">
@@ -232,6 +562,8 @@ Procedure now is at https://wiki.oicr.on.ca/pages/viewpage.action?pageId=4453317
 <li>[SEQWARE-1297] - Make BasicDecider not re-attempt failed or processing workflows</li>
 <li>[SEQWARE-1409] - Make sure all plugins have descriptions</li>
 </ul>
+
+
 </div>
 <div class="section" id="story">
 <h3>Story</h3>
@@ -239,6 +571,8 @@ Procedure now is at https://wiki.oicr.on.ca/pages/viewpage.action?pageId=4453317
 <ul>
 <li>[SEQWARE-1405] - Fix the newly identified BasicDecider bugs</li>
 </ul>
+
+
 </div>
 <div class="section" id="task">
 <h3>Task</h3>
@@ -253,6 +587,8 @@ Procedure now is at https://wiki.oicr.on.ca/pages/viewpage.action?pageId=4453317
 <li>[SEQWARE-1450] - Multi-threaded WorkflowStatusChecker</li>
 <li>[SEQWARE-1451] - New WorkflowLauncher does not launch subsequent workflows if one dies while launching</li>
 </ul>
+
+
 </div>
 <div class="section" id="technical-task">
 <h3>Technical task</h3>
@@ -262,6 +598,8 @@ Procedure now is at https://wiki.oicr.on.ca/pages/viewpage.action?pageId=4453317
 <li>[SEQWARE-1448] - Create tests for multi-threaded WorkflowStatusChecker</li>
 <li>[SEQWARE-1449] - Create multi-threaded WorkflowStatusChecker</li>
 </ul>
+
+
 </div>
 </div>
 <div class="section" id="0-13-6-2012-12-06">
@@ -275,6 +613,8 @@ Procedure now is at https://wiki.oicr.on.ca/pages/viewpage.action?pageId=4453317
 <li>[SEQWARE-1331] - Metadata allows you to add objects with incorrect accessions</li>
 <li>[SEQWARE-1333] - Metadata plugin does not write out files</li>
 </ul>
+
+
 </div>
 <div class="section" id="improvement">
 <h3>Improvement</h3>
@@ -286,6 +626,8 @@ Procedure now is at https://wiki.oicr.on.ca/pages/viewpage.action?pageId=4453317
 <li>[SEQWARE-1298] - Request feature to give user last chance to cancel the workflow run (in modifyIniFile)</li>
 <li>[SEQWARE-1329] - ProcessingDataStructure2Dot improvements</li>
 </ul>
+
+
 </div>
 <div class="section" id="story">
 <h3>Story</h3>
@@ -296,6 +638,8 @@ Procedure now is at https://wiki.oicr.on.ca/pages/viewpage.action?pageId=4453317
 <li>[SEQWARE-1325] - Web Service Access to Sample Hierarchy</li>
 <li>[SEQWARE-1341] - Fix the workflow archetype so that the metadata is correct</li>
 </ul>
+
+
 </div>
 <div class="section" id="task">
 <h3>Task</h3>
@@ -310,6 +654,8 @@ Procedure now is at https://wiki.oicr.on.ca/pages/viewpage.action?pageId=4453317
 <li>[SEQWARE-1402] - Implementation of Improved WorkflowLauncher and Checker</li>
 <li>[SEQWARE-1404] - make a plugin to translate oozie workflow.xml to dot</li>
 </ul>
+
+
 </div>
 <div class="section" id="technical-task">
 <h3>Technical task</h3>
@@ -329,6 +675,8 @@ Procedure now is at https://wiki.oicr.on.ca/pages/viewpage.action?pageId=4453317
 <li>[SEQWARE-1399] - Simplify archetype parameter versions</li>
 <li>[SEQWARE-1403] - hostname and user file ownership utilities</li>
 </ul>
+
+
 </div>
 </div>
 <div class="section" id="0-13-5-2012-11-13">
@@ -342,6 +690,8 @@ Procedure now is at https://wiki.oicr.on.ca/pages/viewpage.action?pageId=4453317
 <li>[SEQWARE-1330] - Metadata add sequencer run error, possibly test db related</li>
 <li>[SEQWARE-1344] - NullPointer in webservice while marshalling XML</li>
 </ul>
+
+
 </div>
 <div class="section" id="improvement">
 <h3>Improvement</h3>
@@ -350,6 +700,8 @@ Procedure now is at https://wiki.oicr.on.ca/pages/viewpage.action?pageId=4453317
 <li>[SEQWARE-1267] - Prepare TorBUG talk for 10/31</li>
 <li>[SEQWARE-1283] - non-informative error message, seqware crashes with NullPointerException</li>
 </ul>
+
+
 </div>
 <div class="section" id="task">
 <h3>Task</h3>
@@ -364,6 +716,8 @@ Procedure now is at https://wiki.oicr.on.ca/pages/viewpage.action?pageId=4453317
 <li>[SEQWARE-1338] - Write-up six month plan for Query Engine/SeqWare as a whole</li>
 <li>[SEQWARE-1339] - Create one-page high quality specifications</li>
 </ul>
+
+
 </div>
 <div class="section" id="technical-task">
 <h3>Technical task</h3>
@@ -384,6 +738,8 @@ Procedure now is at https://wiki.oicr.on.ca/pages/viewpage.action?pageId=4453317
 <li>[SEQWARE-1314] - read the oozie doc</li>
 <li>[SEQWARE-1315] - generate oozie xml from object model</li>
 </ul>
+
+
 </div>
 </div>
 <div class="section" id="0-13-4-2012-10-22">
@@ -395,6 +751,8 @@ Procedure now is at https://wiki.oicr.on.ca/pages/viewpage.action?pageId=4453317
 <ul>
 <li>[SEQWARE-1294] - Portal Fails when creating a Sequencer Run</li>
 </ul>
+
+
 </div>
 <div class="section" id="improvement">
 <h3>Improvement</h3>
@@ -403,6 +761,8 @@ Procedure now is at https://wiki.oicr.on.ca/pages/viewpage.action?pageId=4453317
 <li>[SEQWARE-1264] - 0.12.5.1 Release</li>
 <li>[SEQWARE-1265] - 0.13.3 Release</li>
 </ul>
+
+
 </div>
 <div class="section" id="story">
 <h3>Story</h3>
@@ -415,6 +775,8 @@ Procedure now is at https://wiki.oicr.on.ca/pages/viewpage.action?pageId=4453317
 <li>[SEQWARE-1250] - Make sure that attribute writeback works perfectly from the commandline and within workflows</li>
 <li>[SEQWARE-1251] - SOP for documentation release</li>
 </ul>
+
+
 </div>
 <div class="section" id="task">
 <h3>Task</h3>
@@ -423,6 +785,8 @@ Procedure now is at https://wiki.oicr.on.ca/pages/viewpage.action?pageId=4453317
 <li>[SEQWARE-1291] - Announce 0.12.5.1 and 0.13.3 releases on twitter and group page after once-over as a group</li>
 <li>[SEQWARE-1292] - Complete release to pipedev.hpc</li>
 </ul>
+
+
 </div>
 <div class="section" id="technical-task">
 <h3>Technical task</h3>
@@ -450,6 +814,8 @@ Procedure now is at https://wiki.oicr.on.ca/pages/viewpage.action?pageId=4453317
 <li>[SEQWARE-1306] - write a plugin to generate dot file from processing table</li>
 <li>[SEQWARE-1307] - Test Oozie to see if SeqWare Runner Bash tasks can be run via this workflow system on a Hadoop Cluster</li>
 </ul>
+
+
 </div>
 </div>
 <div class="section" id="0-13-3-2012-10-09">
@@ -461,6 +827,8 @@ Procedure now is at https://wiki.oicr.on.ca/pages/viewpage.action?pageId=4453317
 <ul>
 <li>[SEQWARE-1204] - MetaDB procedure seems broken.</li>
 </ul>
+
+
 </div>
 <div class="section" id="improvement">
 <h3>Improvement</h3>
@@ -468,6 +836,8 @@ Procedure now is at https://wiki.oicr.on.ca/pages/viewpage.action?pageId=4453317
 <ul>
 <li>[SEQWARE-1191] - Put a link to github on the SeqWare website</li>
 </ul>
+
+
 </div>
 <div class="section" id="technical-task">
 <h3>Technical task</h3>
@@ -512,6 +882,8 @@ Procedure now is at https://wiki.oicr.on.ca/pages/viewpage.action?pageId=4453317
 <li>[SEQWARE-1235] - move sw_cluster out of configs</li>
 <li>[SEQWARE-1238] - modify the code for simplified FTL-&gt;simplified XML-&gt;WorkflowDataModel based on the latest WorkflowDataModel</li>
 </ul>
+
+
 </div>
 </div>
 <div class="section" id="0-13-2-2012-09-20">
@@ -523,6 +895,8 @@ Procedure now is at https://wiki.oicr.on.ca/pages/viewpage.action?pageId=4453317
 <ul>
 <li>[SEQWARE-1164] - simplified workflow - auto dependencies</li>
 </ul>
+
+
 </div>
 <div class="section" id="technical-task">
 <h3>Technical task</h3>
@@ -544,10 +918,14 @@ Procedure now is at https://wiki.oicr.on.ca/pages/viewpage.action?pageId=4453317
 <li>[SEQWARE-1160] - Upgrade VCFDumper with poster code for M/R</li>
 <li>[SEQWARE-1174] - Identifying and testing out parser/lexer</li>
 </ul>
+
+
 <!---
 I did this via exporting to Excel from JIRA and then copying the appropriate columns, after removing OICR employee specific-tasks
 We still have to manually delete the parent task IDs for technical tasks though. There should be a cleaner way.
 -->
+
+
 </div>
 </div>
 <div class="section" id="0-13-1-2012-09-03">
@@ -559,6 +937,8 @@ We still have to manually delete the parent task IDs for technical tasks though.
 <ul>
 <li>SEQWARE-1140 - WorkflowLauncher doesn&#8217;t use command line arguments when scheduling workflows</li>
 </ul>
+
+
 </div>
 <div class="section" id="improvement">
 <h3>Improvement</h3>
@@ -566,6 +946,8 @@ We still have to manually delete the parent task IDs for technical tasks though.
 <ul>
 <li>SEQWARE-1141 - Allow WorkflowRunReporter to print to a user-specified file name or to stdout</li>
 </ul>
+
+
 </div>
 <div class="section" id="story">
 <h3>Story</h3>
@@ -574,6 +956,8 @@ We still have to manually delete the parent task IDs for technical tasks though.
 <li>SEQWARE-414 - Empty entries in ini files for workflows should still go into workflow_param table</li>
 <li>SEQWARE-1121 - Poster for Genome Informatics</li>
 </ul>
+
+
 </div>
 <div class="section" id="task">
 <h3>Task</h3>
@@ -582,6 +966,8 @@ We still have to manually delete the parent task IDs for technical tasks though.
 <li>SEQWARE-1127 - install nanoc in seqware dev</li>
 <li>SEQWARE-1142 - move sqwprod postgres data to NFS</li>
 </ul>
+
+
 </div>
 <div class="section" id="technical-task">
 <h3>Technical Task</h3>
@@ -612,6 +998,8 @@ We still have to manually delete the parent task IDs for technical tasks though.
 <li>SEQWARE-1125 - Map/Reduce statistics collection with in-memory comparison</li>
 <li>SEQWARE-1126 - Programmatic Access and Acknowledgements</li>
 </ul>
+
+
 </div>
 </div>
 <div class="section" id="0-13-0-2012-08-20">
@@ -624,6 +1012,8 @@ We still have to manually delete the parent task IDs for technical tasks though.
 <li>SEQWARE-97 - Add plugin architecture for deciders, move from Perl to Java</li>
 <li>SEQWARE-1037 - Get the cluster and hboot talking</li>
 </ul>
+
+
 </div>
 <div class="section" id="task">
 <h3>Task</h3>
@@ -632,6 +1022,8 @@ We still have to manually delete the parent task IDs for technical tasks though.
 <li>SEQWARE-1015 - Web service users need access to a report showing status information from both LIMS and SeqWare</li>
 <li>SEQWARE-1077 - Webservice issues</li>
 </ul>
+
+
 </div>
 <div class="section" id="technical-task">
 <h3>Technical task</h3>
@@ -673,6 +1065,8 @@ We still have to manually delete the parent task IDs for technical tasks though.
 <li>SEQWARE-1045 - WoW: create bundle and import into git</li>
 <li>SEQWARE-1048 - WoW: implement the jobs (get the hint from Brian about how to execute processes locally)</li>
 </ul>
+
+
 </div>
 </div>
 <div class="section" id="0-12-5-2012-08-06">
@@ -687,6 +1081,8 @@ We still have to manually delete the parent task IDs for technical tasks though.
 <li>SEQWARE-975 - Create and Tag Release</li>
 <li>SEQWARE-1004 - Add guava dependencies to our artifactory</li>
 </ul>
+
+
 </div>
 <div class="section" id="story">
 <h3>Story</h3>
@@ -696,6 +1092,8 @@ We still have to manually delete the parent task IDs for technical tasks though.
 <li>SEQWARE-804 - VM for SeqWare (Virtual Box)</li>
 <li>SEQWARE-985 - ProvisionFiles needs better error checking</li>
 </ul>
+
+
 </div>
 <div class="section" id="task">
 <h3>Task</h3>
@@ -703,6 +1101,8 @@ We still have to manually delete the parent task IDs for technical tasks though.
 <ul>
 <li>SEQWARE-1014 - workflow installation error</li>
 </ul>
+
+
 </div>
 <div class="section" id="technical-task">
 <h3>Technical task</h3>
@@ -727,6 +1127,7 @@ We still have to manually delete the parent task IDs for technical tasks though.
 <li>SEQWARE-1002 - Improve encrypt/decryption</li>
 <li>SEQWARE-1003 - Improvements to ln -s error checking</li>
 </ul>
+
 </div>
 </div>
 </div>

@@ -3,7 +3,7 @@
 <head>
 <meta charset='UTF-8'>
 <title>SeqWare &rsaquo; Page Not Found</title>
-<meta content='nanoc 3.6.2' name='generator'>
+<meta content='nanoc 3.6.5' name='generator'>
 <link href='/assets/style-v17.css' media='screen' rel='stylesheet' type='text/css'>
 <link href='http://feeds.feedburner.com/seqware' rel='alternate' title='The SeqWare Blog' type='application/atom+xml'>
 <script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script>
@@ -27,7 +27,7 @@
 <a class="twitter-timeline" href="https://twitter.com/SeqWare" data-widget-id="346665526510096385">Tweets by @SeqWare</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 </div>
 <div class='section even'>
-<p>The current version of SeqWare is 0.13.6.8, released on July 10th, 2013. See the <a href="/release-notes/">release notes</a> for details.</p>
+<p>The current version of SeqWare is 1.0.5, released on October 1st, 2013. See the <a href="/release-notes/">release notes</a> for details.</p>
 </div>
 </div>
 <!-- ***** body ***** -->

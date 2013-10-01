@@ -4,10 +4,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="UTF-8">
 <title>SeqWare › Admin Tutorial</title>
-<meta content="nanoc 3.6.2" name="generator">
+<meta content="nanoc 3.6.5" name="generator">
 <link href="../../../assets/style-v17.css" media="screen" rel="stylesheet" type="text/css">
 <link href="http://feeds.feedburner.com/seqware" rel="alternate" title="The SeqWare Blog" type="application/atom+xml">
-<script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script><script type="text/javascript">         var disqus_shortname = 'seqware';          (function() {             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);         })();     </script>
+<script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script>
+<script type="text/javascript">         var disqus_shortname = 'seqware';          (function() {             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);         })();     </script>
 </head>
 <body>
 <div class="wrapper">
@@ -33,8 +34,6 @@
 <li><a href="#how-to-install-a-workflow">How to Install a Workflow</a></li>
 <li><a href="#how-to-launch">How to Launch</a></li>
 <li><a href="#how-to-monitor">How to Monitor</a></li>
-<li><a href="#how-to-cancel-workflows">How to Cancel Workflows</a></li>
-<li><a href="#how-to-rescue-failed-workflows">How to Rescue Failed Workflows</a></li>
 <li><a href="#see-also">See Also</a></li>
 </ol>
 </li>
@@ -79,82 +78,64 @@ working with an admin since some of the steps will require “root” privileges
 <p>By the end of these tutorials you will:</p>
 
 <ul>
-<li>install workflows</li>
+  <li>install workflows</li>
   <li>monitor workflows</li>
   <li>cancel and restart workflows</li>
   <li>see how to connect a local VM to a local cluster for running large-scale workflows</li>
   <li>see how to launch a cluster on Amazon’s cloud for running large-scale workflows</li>
 </ul>
+
 </div>
 <div class="section" id="how-to-install-a-workflow">
 <h2>How to Install a Workflow</h2>
 
 <!-- make this install from a zip for the admin guide -->
-<p>When provided with a tested workflow from a workflow developer, the next step
+<p>When provided with a tested workflow bundle from a workflow developer, the next step
 is to install it, this means it will be inserted into the MetaDB via a running
-web service.  During this process it will copy the bundle and put it into your
-released-bundles directory and provision it into your provisioned bundles
+web service.  During this process it will copy the bundle into your
+released-bundles directory and provision it into your provisioned-bundles
 directory. The provisioned bundles directory is where running workflows will
 access their files.</p>
 
 <p>Here is an example showing how this process works on the VM and what is
-happening in the database and your released-bundles directory as you do this.
-You may want to delete the zip file that is in the released-bundles directory
-before you do this step below (or back it up somewhere first).</p>
+happening in the database and your released-bundles directory as you do this.</p>
 
 <p>See the <a href="../developer-tutorial/">Developer Tutorial</a> for
 how to make the zipped workflow bundle. After the zip bundle is created, the
 bundle can be provided to the admin for install as below.</p>
 
-<pre><code>java -jar ~/seqware-distribution-0.13.6.8-full.jar -p net.sourceforge.seqware.pipeline.plugins.BundleManager -- --b /home/seqware/packaged-bundles/Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.8.zip -i
-
-Running Plugin: net.sourceforge.seqware.pipeline.plugins.BundleManager
-Setting Up Plugin: net.sourceforge.seqware.pipeline.plugins.BundleManager@29e97f9f
-Installing Bundle
-Bundle: packaged/Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.8.zip
-Now packaging /tmp/testing/MyHelloWorld/target/Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.8/packaged/Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.8.zip to a zip file and transferring to the directory: /home/seqware/released-bundles Please be aware, this process can take hours if the bundle is many GB in size.
-  PROCESSING INPUT: /tmp/testing/MyHelloWorld/target/Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.8/packaged/Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.8.zip OUTPUT: /home/seqware/released-bundles
-
-Mar 28, 2013 10:43:03 AM org.restlet.ext.httpclient.HttpClientHelper start
-INFO: Starting the Apache HTTP client
-WORKFLOW_ACCESSION: 6804
-Bundle Has Been Installed to the MetaDB and Provisioned to packaged/Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.8.zip!
-
-[seqware@seqwarevm Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.8]$ ls -alhtr ~/released-bundles/ | tail -n1
--rw-rw-r-- 1 seqware seqware 151M Mar 28 10:42 Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.8.zip
-
-[seqware@master Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.5]$ ls -alhtr ~/provisioned-bundles/ | grep MyHelloWorld
-drwxrwxr-x 3 seqware seqware 4.0K Apr 17 12:27 Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.8
+<pre><code>$ seqware bundle install --zip ~/packaged-bundles/Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.8.zip 
+Now transferring /home/seqware/packaged-bundles/Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.8.zip to the directory: /home/seqware/released-bundles Please be aware, this process can take hours if the bundle is many GB in size. Processing input: /home/seqware/packaged-bundles/Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.8.zip
+  output-dir: /home/seqware/released-bundles
 </code></pre>
 
-<p>What happens here is the <code>Workflow_Bundle_hello_1.0-SNAPSHOT_SeqWare_0.13.6.8</code> directory is zip’d up to your released-bundles directory and the metadata about the workflow is saved to the database.</p>
+<p>WORKFLOW_ACCESSION: 16
+Bundle Has Been Installed to the MetaDB and Provisioned to /home/seqware/packaged-bundles/Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.8.zip!</p>
+
+<p>What happens here is the <code>Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_0.13.6.8.zip</code> copied to your released-bundles directory and unzip’d into your provisioned-bundles directory. The metadata about the workflow is then saved to the database.</p>
 
 </div>
 <div class="section" id="how-to-launch">
 <h2>How to Launch</h2>
 
-<p>The <a href="../../17-plugins/#workflowlauncher">Workflow Launcher plugin</a> is
-responsible for scheduling workflow launches and launching them, both
-synchronously and asynchronously. In our reference SeqWare environment, we
-typically schedule jobs and then launch them asynchronously using the
-WorkflowLauncher  scheduled  via a cronjob. </p>
+<p>In our reference SeqWare environment, we
+typically schedule jobs and then launch them asynchronously via a cronjob. </p>
 
-<p>Specifically, a user will schedule workflow launches using a command similar to
+<p>A user will schedule workflow launches using a command similar to
 that below:</p>
 
-<pre><code>java -jar seqware-distribution-0.13.6.8-full.jar -p net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher -- --ini-files workflow.ini --workflow-accession $workflow_acc --parent-accessions 99 --host `hostname --long` 
+<pre><code>$ seqware workflow schedule --accession 1 --parent-accession 99  --ini workflow.ini --host `hostname --long` 
 </code></pre>
 
-<p>Then in a cronjob we use the following command to launch scheduled jobs. </p>
+<p>Then in a cronjob we use the following command to launch scheduled jobs: </p>
 
-<pre><code>java -jar seqware-distribution-0.13.6.8-full.jar -p net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher -- --launch-scheduled
+<pre><code>$ seqware workflow-run launch-scheduled
 </code></pre>
 
 <p>Note that in the first command, we allow jobs to be scheduled on a specific
 host. When we launch scheduled workflows, we check this value in order to
 determine whether a particular scheduled workflow should be launched on this
-host.  A  –force-host option can be used to force launches to occur on a
-particular host. Note that while we normally use a fully qualified hostname,
+host.  Note that while we normally use a fully qualified hostname,
 any unique string can be used to designate a host for launching  (for example
 on Amazon S3). </p>
 
@@ -162,134 +143,37 @@ on Amazon S3). </p>
 <div class="section" id="how-to-monitor">
 <h2>How to Monitor</h2>
 
-<p>A cronjob that accompanies the launch-scheduled option of the WorkflowLauncher
-is the <a href="../../17-plugins/#workflowstatuschecker">Workflow Status Checker
-plugin</a>. This uses the pegasus-status
-command in order to retrieve the status of a currently running workflows and
-updates the MetaDB with their status. </p>
+<p>Since the engine that executes the workflow is separate from the SeqWare MetaDB, a separate process is used to propagate statuses between the workflow engine and MetaDB:</p>
+
+<pre><code>$ seqware workflow-run propagate-statuses
+</code></pre>
+
+<p>Once this is executed, workflow-run reports will reflect the updated status.</p>
 
 <div class="section" id="cron-jobs">
 <h3>Cron Jobs</h3>
 
-<p>The SeqWare VM uses two cron tasks to detect and launch scheduled workflows.
-Take a look at:</p>
+<p>The SeqWare VM performs both of the above functions via a cronjob:</p>
 
-<pre><code>seqware@seqwarevm SeqWare]$ crontab -l
+<pre><code>$ crontab -l
 * * * * * /home/seqware/crons/status.cron &gt;&gt; /home/seqware/logs/status.log
 
-[seqware@seqwarevm SeqWare]$ cat /home/seqware/crons/status.cron
+$ cat /home/seqware/crons/status.cron
 
 #!/bin/bash
 
 source /home/seqware/.bash_profile
 
-java -jar /home/seqware/crons/seqware-distribution-0.13.6.8-full.jar -p net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher -- --launch-scheduled
-java -jar /home/seqware/crons/seqware-distribution-0.13.6.8-full.jar  -p net.sourceforge.seqware.pipeline.plugins.WorkflowStatusChecker -- --tp 1000
+seqware workflow-run launch-scheduled
+seqware workflow-run propagate-statuses --threads 10
 </code></pre>
 
-<p>This script runs every minute and uses two plugins, the WorkflowLauncher plugin
-which is used to launch workflows that have been previously scheduled while the
-WorkflowStatusChecker plugin is used to check the status of launched workflows.</p>
+<p>This script runs every minute and uses the first command to launch workflows that have been previously scheduled while the
+second command is used to check the status of launched workflows.</p>
 
 <p>For more information see the <a href="../../6-pipeline/monitor_configuration/">Monitor Configuration</a> documentation.</p>
 
 </div>
-</div>
-<div class="section" id="how-to-cancel-workflows">
-<h2>How to Cancel Workflows</h2>
-
-<p>After launching a workflow, you can cancel it in order to stop further execution. This will set the status of the workflow run to ‘failed’.</p>
-
-<pre><code>java -jar ~/seqware-distribution-0.13.6.8-full.jar -p net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher -- --ini-files workflow.ini --workflow-accession 6730  --parent-accessions 839 --host `hostname --long`                      
-
-Running Plugin: net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher                                            
-Setting Up Plugin: net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher@288051                                  
-Mar 28, 2013 11:29:56 AM org.restlet.ext.httpclient.HttpClientHelper start                                           
-INFO: Starting the Apache HTTP client                                                                                
-requiresNewLauncher - byClass ${workflow_bundle_dir}/Workflow_Bundle_seqware-archetype-java-workflow/1.0-SNAPSHOT/classes/com/seqware/github/WorkflowClient.java                                                                                              
-Attempting to instantiate /tmp/1364426207469-0/seqware-archetype-java-workflow/target/Workflow_Bundle_seqware-archetype-java-workflow_1.0-SNAPSHOT_SeqWare_0.13.6.8/Workflow_Bundle_seqware-archetype-java-workflow/1.0-SNAPSHOT/classes/com/seqware/github/WorkflowClient.java                                                                                                              
-  INI FILE: workflow.ini                                                                                                       
-CREATING DAX IN: /tmp/dax71095297362814544976755889839517                                                                      
-SUBMITTING TO PEGASUS: pegasus-plan -Dpegasus.user.properties=/home/seqware/.seqware/pegasus/properties --dax /tmp/dax71095297362814544976755889839517 --dir /home/seqware/pegasus-dax -o seqwarevm --force --submit -s seqwarevm                     
-PEGASUS STATUS COMMAND: pegasus-status -l /home/seqware/pegasus-dax/seqware/pegasus/seqware-archetype-java-workflow/run0126                                                                                                                           
-[seqware@seqwarevm testing]$ condor_q                                                                                          
-
-
--- Submitter: seqwarevm : &lt;10.0.2.15:57652&gt; : seqwarevm
- ID      OWNER            SUBMITTED     RUN_TIME ST PRI SIZE CMD               
-2848.0   seqware         3/28 11:30   0+00:00:12 R  0   0.3  condor_dagman -f -
-
-1 jobs; 0 completed, 0 removed, 0 idle, 1 running, 0 held, 0 suspended
-[seqware@seqwarevm testing]$ condor_rm 2848.0
-Job 2848.0 marked for removal
-[seqware@seqwarevm testing]$ condor_q
-
-
--- Submitter: seqwarevm : &lt;10.0.2.15:57652&gt; : seqwarevm
- ID      OWNER            SUBMITTED     RUN_TIME ST PRI SIZE CMD
-2850.0   seqware         3/28 11:30   0+00:00:00 X  10  0.1  kickstart -n seqwa
-
-1 jobs; 0 completed, 1 removed, 0 idle, 0 running, 0 held, 0 suspended
-[seqware@seqwarevm testing]$ condor_q
-
-
--- Submitter: seqwarevm : &lt;10.0.2.15:57652&gt; : seqwarevm
- ID      OWNER            SUBMITTED     RUN_TIME ST PRI SIZE CMD
-
-0 jobs; 0 completed, 0 removed, 0 idle, 0 running, 0 held, 0 suspended
-</code></pre>
-
-</div>
-<div class="section" id="how-to-rescue-failed-workflows">
-<h2>How to Rescue Failed Workflows</h2>
-
-<p>If a workflow has failed due to a transient error (such as cluster downtime or a disk quota being reached), you can restart a workflow at the last failed step.</p>
-
-<pre><code>    cd /home/seqware/pegasus-dax/seqware/pegasus/seqware-archetype-java-workflow/run0126
-    pegasus-run -Dpegasus.user.properties=pegasus.*.properties --nodatabase `pwd`
-    Rescued /home/seqware/pegasus-dax/seqware/pegasus/seqware-archetype-java-workflow/run0126/seqware-archetype-java-workflow-0.log as /home/seqware/pegasus-dax/seqware/pegasus/seqware-archetype-java-workflow/run0126/seqware-archetype-java-workflow-0.log.000
-
-    Running rescue DAG 1
-    -----------------------------------------------------------------------
-    File for submitting this DAG to Condor           : seqware-archetype-java-workflow-0.dag.condor.sub
-    Log of DAGMan debugging messages                 : seqware-archetype-java-workflow-0.dag.dagman.out
-    Log of Condor library output                     : seqware-archetype-java-workflow-0.dag.lib.out
-    Log of Condor library error messages             : seqware-archetype-java-workflow-0.dag.lib.err
-    Log of the life of condor_dagman itself          : seqware-archetype-java-workflow-0.dag.dagman.log
-
-    -no_submit given, not submitting DAG to Condor.  You can do this with:
-    "condor_submit seqware-archetype-java-workflow-0.dag.condor.sub"
-    -----------------------------------------------------------------------
-    Submitting job(s).
-    1 job(s) submitted to cluster 2851.
-
-    Your Workflow has been started and runs in base directory given below
-
-    cd /home/seqware/pegasus-dax/seqware/pegasus/seqware-archetype-java-workflow/run0126
-
-    *** To monitor the workflow you can run ***
-
-    pegasus-status -l /home/seqware/pegasus-dax/seqware/pegasus/seqware-archetype-java-workflow/run0126
-
-    *** To remove your workflow run ***
-    pegasus-remove -d 2848.0
-    or
-    pegasus-remove /home/seqware/pegasus-dax/seqware/pegasus/seqware-archetype-java-workflow/run0126
-
-    [seqware@seqwarevm run0126]$ condor_q
-
-
-    -- Submitter: seqwarevm : &lt;10.0.2.15:57652&gt; : seqwarevm
-     ID      OWNER            SUBMITTED     RUN_TIME ST PRI SIZE CMD
-    2851.0   seqware         3/28 11:31   0+00:00:05 R  0   0.3  condor_dagman -f -
-1 jobs; 0 completed, 0 removed, 0 idle, 1 running, 0 held, 0 suspended
-</code></pre>
-
-<p>You will also need to have the workflow status checker reset the status of the workflow_run via a command like:</p>
-
-<pre><code>java -jar ~/seqware-distribution-0.13.6.8-full.jar -p net.sourceforge.seqware.pipeline.plugins.WorkflowStatusChecker -- --wra 525814 --check-failed
-</code></pre>
-
 </div>
 <div class="section" id="see-also">
 <h2>See Also</h2>

@@ -4,10 +4,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="UTF-8">
 <title>SeqWare › Documentation</title>
-<meta content="nanoc 3.6.2" name="generator">
+<meta content="nanoc 3.6.5" name="generator">
 <link href="../assets/style-v17.css" media="screen" rel="stylesheet" type="text/css">
 <link href="http://feeds.feedburner.com/seqware" rel="alternate" title="The SeqWare Blog" type="application/atom+xml">
-<script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script><script type="text/javascript">         var disqus_shortname = 'seqware';          (function() {             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);         })();     </script>
+<script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script>
+<script type="text/javascript">         var disqus_shortname = 'seqware';          (function() {             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);         })();     </script>
 </head>
 <body>
 <div class="wrapper">
@@ -47,7 +48,7 @@
 <div class="header">
 <h1>Documentation</h1>
 </div>
-<p class="warning"><strong>Note:</strong> This guide is a work in progress and was designed for release 0.13.6.x of SeqWare.</p>
+<p class="warning"><strong>Note:</strong> This guide is a work in progress and was designed for release 0.13.6.x of SeqWare. In addition, we also included information on the 1.0.x developers release which supports workflow execution on the Oozie engine. See the &#8220;Developers Tutorial&#8221; under &#8220;Getting Started&#8221; for more information.</p>
 
 <p>This is the core documentation for the SeqWare project, including all the
 various sub-projects. We wanted to create a single manual that would bring
@@ -78,7 +79,7 @@ setting up and maintaining the various SeqWare components.</p>
 <p>SeqWare currently provides 5 main tools specifically designed to support the analysis necessary for massively parallel sequencing technologies. All tools can be used together or separately. The tutorials below will focus mainly on Pipeline with information about other projects provided as needed:</p>
 
 <ul>
-<li>
+  <li>
 <strong>MetaDB</strong>: provides a common database to store metadata used by all components.</li>
   <li>
 <strong>Portal</strong>: a LIMS-like web application to manage samples, record computational events, and present results back to end users.</li>
@@ -89,6 +90,7 @@ setting up and maintaining the various SeqWare components.</p>
   <li>
 <strong>Query Engine</strong>: a NoSQL database designed to store and query variants and other events inferred from sequence data.</li>
 </ul>
+
 <p><img width="600" src="../assets/images/seqware_arch.png"></p>
 
 </div>
@@ -98,13 +100,14 @@ setting up and maintaining the various SeqWare components.</p>
 <p>There are three major roles that SeqWare users can be classified into.</p>
 
 <ul>
-<li>
+  <li>
 <strong>User</strong>: a user of workflows, the user injects data into the system, triggers workflows, and gets the results back once finished</li>
   <li>
 <strong>Developer</strong>: a developer of workflows, the developer makes new workflows and are typically Bioinformaticians and experts in NGS analysis techniques and tools</li>
   <li>
 <strong>Admin</strong>: an admin of the system, this is typically both a sys admin that installs and configures SeqWare components and is also responsible for installing new workflows and setting their default configurations</li>
 </ul>
+
 <p>Depending on the size of the group these roles may be the same person, distinct people, or even distinct groups within a larger organization.</p>
 
 </div>
@@ -114,7 +117,7 @@ setting up and maintaining the various SeqWare components.</p>
 <p>The SeqWare documentation uses a few conventions for markup:</p>
 
 <ul>
-<li>
+  <li>
 <i>Italic text</i> introduces new terms.</li>
   <li>
 <code>Monospaced text</code> is used for code snippets.</li>
@@ -123,6 +126,7 @@ setting up and maintaining the various SeqWare components.</p>
   <li>
 <var>Monospaced, italic text</var> is used for text that should be replaced with user-supplied values.</li>
 </ul>
+
 <p>The documentation also contains quite a few blocks of code snippets. These are marked up like this:</p>
 
 <pre title="Title of the snippet"><code class="language-ruby"><span class="k">class</span> <span class="nc">Lorem</span><span class="o">::</span><span class="no">Ipsum</span>

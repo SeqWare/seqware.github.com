@@ -4,10 +4,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="UTF-8">
 <title>SeqWare › Connecting SeqWare Pipeline to a Real Cluster</title>
-<meta content="nanoc 3.6.2" name="generator">
+<meta content="nanoc 3.6.5" name="generator">
 <link href="../../../assets/style-v17.css" media="screen" rel="stylesheet" type="text/css">
 <link href="http://feeds.feedburner.com/seqware" rel="alternate" title="The SeqWare Blog" type="application/atom+xml">
-<script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script><script type="text/javascript">         var disqus_shortname = 'seqware';          (function() {             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);         })();     </script>
+<script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script>
+<script type="text/javascript">         var disqus_shortname = 'seqware';          (function() {             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);         })();     </script>
 </head>
 <body>
 <div class="wrapper">
@@ -31,8 +32,8 @@
 <li>
 <a href="../"><span>SeqWare Pipeline</span></a><ol class="toc">
 <li><a href="#overview">Overview</a></li>
-<li><a href="#pegasus-workflow-engine">Pegasus Workflow Engine</a></li>
 <li><a href="#oozie-workflow-engine">Oozie Workflow Engine</a></li>
+<li><a href="#pegasus-workflow-engine">Pegasus Workflow Engine</a></li>
 </ol>
 </li>
 <li><a href="../../4-metadb/"><span>SeqWare MetaDB</span></a></li>
@@ -71,12 +72,39 @@ cluster. At OICR, for example, we followed this process for installing SeqWare
 at the institute (we use the Pegasus Workflow Engine):</p>
 
 <ol>
-<li>Import the SeqWare Virtual Machine from VirtualBox to KVM for use in our virtual server environment</li>
+  <li>Import the SeqWare Virtual Machine from VirtualBox to KVM for use in our virtual server environment</li>
   <li>Install the matching version of SGE used on the cluster to the VM</li>
   <li>Configure this VM to be a “submission host” to our production SGE cluster</li>
   <li>Modify a small set of config files on the VM to point to this new SGE</li>
   <li>Run a workflow to verify jobs flow to the real cluster</li>
 </ol>
+
+</div>
+<div class="section" id="oozie-workflow-engine">
+<h2>Oozie Workflow Engine</h2>
+
+<p>These directions cover connecting the Oozie Workflow Engine to an actual Hadoop
+cluster. This engine is an alternative to the SGE engine above.  </p>
+
+<div class="section" id="connecting-to-a-hadoop-cluster">
+<h3>Connecting to a Hadoop Cluster</h3>
+
+<p>We use the Cloudera packages on the SeqWare VM to install and configure the
+Hadoop system.  Please see the excellent documentation on <a href="http://www.cloudera.com/">Cloudera’s
+Website</a> that will walk you through the process of
+building a Hadoop cluster. You will want to match the Cloudera version on the
+SeqWare VM with that of your Hadoop cluster and you may want to turn off the
+namenode, datanode, tasktracker, jobtracker, etc on the SeqWare VM since these
+functions will use your real Hadoop cluster. Essentially you will just use the
+SeqWare VM as the Oozie host (so you will want to leave that installed on the
+VM).  See the Cloudera documentation for information on configuring Oozie on
+the VM to talk to your Hadoop cluster.</p>
+
+<p>From the SeqWare perspective you will need to tell SeqWare which HDFS/MapReduce
+cluster to talk to, see the Oozie and Hadoop sections of the <a href="../user-configuration/">SeqWare
+Configuration Guide</a>.  </p>
+
+</div>
 </div>
 <div class="section" id="pegasus-workflow-engine">
 <h2>Pegasus Workflow Engine</h2>
@@ -207,32 +235,6 @@ to the cluster being connected to.</p>
 <p>Finally you can submit and run a workflow just as you normally do following the
 <a href="../../3-getting-started/user-tutorial/">User Tutorial</a>. You should see jobs
 running on the cluster rather than locally using a tool like <tt>qstat</tt>.</p>
-
-</div>
-</div>
-<div class="section" id="oozie-workflow-engine">
-<h2>Oozie Workflow Engine</h2>
-
-<p>These directions cover connecting the Oozie Workflow Engine to an actual Hadoop
-cluster. This engine is an alternative to the SGE engine above.  </p>
-
-<div class="section" id="connecting-to-a-hadoop-cluster">
-<h3>Connecting to a Hadoop Cluster</h3>
-
-<p>We use the Cloudera packages on the SeqWare VM to install and configure the
-Hadoop system.  Please see the excellent documentation on <a href="http://www.cloudera.com/">Cloudera’s
-Website</a> that will walk you through the process of
-building a Hadoop cluster. You will want to match the Cloudera version on the
-SeqWare VM with that of your Hadoop cluster and you may want to turn off the
-namenode, datanode, tasktracker, jobtracker, etc on the SeqWare VM since these
-functions will use your real Hadoop cluster. Essentially you will just use the
-SeqWare VM as the Oozie host (so you will want to leave that installed on the
-VM).  See the Cloudera documentation for information on configuring Oozie on
-the VM to talk to your Hadoop cluster.</p>
-
-<p>From the SeqWare perspective you will need to tell SeqWare which HDFS/MapReduce
-cluster to talk to, see the Oozie and Hadoop sections of the <a href="../user-configuration/">SeqWare
-Configuration Guide</a>.</p>
 </div>
 </div>
 </div>

@@ -4,10 +4,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="UTF-8">
 <title>SeqWare › SeqWare Pipeline Custom Deciders</title>
-<meta content="nanoc 3.6.2" name="generator">
+<meta content="nanoc 3.6.5" name="generator">
 <link href="../../../assets/style-v17.css" media="screen" rel="stylesheet" type="text/css">
 <link href="http://feeds.feedburner.com/seqware" rel="alternate" title="The SeqWare Blog" type="application/atom+xml">
-<script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script><script type="text/javascript">         var disqus_shortname = 'seqware';          (function() {             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);         })();     </script>
+<script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script>
+<script type="text/javascript">         var disqus_shortname = 'seqware';          (function() {             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);         })();     </script>
 </head>
 <body>
 <div class="wrapper">
@@ -103,29 +104,32 @@ A new version of a workflow is released
 <p>The workflow.ini file is an abbreviated version of the workflow’s default INI file. Deciders can only be run on installed workflows, and so the full parameters are pulled from the installed version. The decider only needs to update those properties that will change in the INI file. The decider INI can be very simple, with only the output_dir and output_prefix specified. These parameters specify the directory to which the results of the workflow will ultimately be written. You can try and change the output_prefix in the INI file to your home directory so that all of the results from the workflow will be written to your home directory instead of to the pegasus-working directory.</p>
 
 <table>
-<thead><tr>
-<th>Original INI file</th>
+  <thead>
+    <tr>
+      <th>Original INI file</th>
       <th>Decider INI file</th>
-    </tr></thead>
-<tbody>
-<tr>
-<td>input_file=${workflow_bundle_dir}/Workflow_Bundle_${workflow-directory-name}/${version}/data/input.txt</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>input_file=${workflow_bundle_dir}/Workflow_Bundle_${workflow-directory-name}/${version}/data/input.txt</td>
       <td>output_dir=seqware-results</td>
     </tr>
-<tr>
-<td>greeting=Testing</td>
+    <tr>
+      <td>greeting=Testing</td>
       <td>output_prefix=~/</td>
     </tr>
-<tr>
-<td>output_dir=seqware-results</td>
+    <tr>
+      <td>output_dir=seqware-results</td>
       <td> </td>
     </tr>
-<tr>
-<td>output_prefix=./</td>
+    <tr>
+      <td>output_prefix=./</td>
       <td> </td>
     </tr>
-</tbody>
+  </tbody>
 </table>
+
 </div>
 <div class="section" id="decider-properties-file">
 <h3>Decider.properties file</h3>

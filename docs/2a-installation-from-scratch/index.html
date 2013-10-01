@@ -4,10 +4,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="UTF-8">
 <title>SeqWare › Installation From Scratch</title>
-<meta content="nanoc 3.6.2" name="generator">
+<meta content="nanoc 3.6.5" name="generator">
 <link href="../../assets/style-v17.css" media="screen" rel="stylesheet" type="text/css">
 <link href="http://feeds.feedburner.com/seqware" rel="alternate" title="The SeqWare Blog" type="application/atom+xml">
-<script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script><script type="text/javascript">         var disqus_shortname = 'seqware';          (function() {             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);         })();     </script>
+<script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script>
+<script type="text/javascript">         var disqus_shortname = 'seqware';          (function() {             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);         })();     </script>
 </head>
 <body>
 <div class="wrapper">
@@ -59,17 +60,18 @@
 <p>The directions below are focused on creating a virtual machine using VirtualBox that uses the latest version of the various SeqWare sub-projects and dependencies including Pegasus 3.0. The major goal here is to make sure I have very clear directions on how to:</p>
 
 <ul>
-<li>setup a VM using VirtualBox with Pegasus 3.0, Condor 7.6.x, and Globus 5.2.x</li>
+  <li>setup a VM using VirtualBox with Pegasus 3.0, Condor 7.6.x, and Globus 5.2.x</li>
   <li>take that setup and configure it to either
 ** submit jobs to itself (the default configuration)
 ** submit jobs to a real cluster e.g. deploy this VM as a “real” SeqWare install</li>
 </ul>
+
 <p>The installation and configuration of this software is a fairly complex process.  Even if you don’t use this VM these directions will be extremely useful for correctly installing and configuring Pegasus and it’s dependencies for use with SeqWare Pipeline.  I recommend setting up in a VM environment and validating that works before trying to setup this software on a real server. Actually, I don’t recommend setting this up on a real server, using a VM for both development and production is actually a really good idea since failed servers can quickly be replaced with VM snapshots. This alone makes running a VM across the board appealing. VirtualBox VMs can be converted easily to KVM VMs for use in a server environment. ‘&#8217;’The recommended route for installing SeqWare is to download this VM (see <a href="../2-installation/#installing-with-a-local-vm">Installing the SeqWare VM</a>) and deploying it as a production machine, skipping the difficult dependency install all together’’’.</p>
 
 <p>The VM currently has the following SeqWare dependencies installed (from lowest to highest-level):</p>
 
 <ul>
-<li>
+  <li>
 <a href="http://www.oracle.com/us/products/tools/oracle-grid-engine-075549.html">SGE</a> version 6.2.x (note, this is now Oracle Grid Engine but we’ll use the existing gridengine RPM packages): this is the cluster scheduler that actually schedules jobs out to real nodes, managing memory and CPUs available. The VM has only one “slot” available.</li>
   <li>
 <a href="http://www.globus.org/toolkit/">The Globus Toolkit</a> version 5.2.x: provides user authentication, transport protocol for sending jobs to a cluster in a scheduler (GRAM5), and a transfer protocol for sending data around (GridFTP)
@@ -80,14 +82,16 @@
   <li>
 <a href="http://pegasus.isi.edu/wms/">Pegasus WMS</a> version 3.0.x: this project provides a workflow language and various convenience configuration files that simplifies the use of the other tools in the stack. It is the only software project in the stack that SeqWare is “aware” of and directly depends on.</li>
 </ul>
+
 <p>The VM currently has the following SeqWare sub-projects installed:</p>
 
 <ul>
-<li><a href="../5-portal/">SeqWare Portal</a></li>
+  <li><a href="../5-portal/">SeqWare Portal</a></li>
   <li><a href="../6-pipeline/">SeqWare Pipeline</a></li>
   <li><a href="../8-query-engine/">SeqWare Query Engine</a></li>
   <li><a href="../4-metadb/">SeqWare MetaDB</a></li>
 </ul>
+
 </div>
 <div class="section" id="create-a-centos-vm">
 <h2>Create a CentOS VM</h2>
@@ -97,7 +101,7 @@
 <p>The steps to creating a VM are:</p>
 
 <ul>
-<li>create a new VM using CentOS 6 64-bit ISO</li>
+  <li>create a new VM using CentOS 6 64-bit ISO</li>
   <li>setup networking using a static IP address if possible</li>
   <li>create a seqware user account with seqware as the password, set the root account password to seqware</li>
   <li>set the hostname via /etc/hosts and /etc/sysconfig/network, here we will use seqwarevm</li>
@@ -106,6 +110,7 @@
   <li>I turned off the firewall (/etc/init.d/iptables stop) which is fine for a local VM. But in production you will want to use the proper firewall settings and turn it back on.  Google for GRAM/GridFTP/SGE ports that need to be open.</li>
   <li>I used chkconfig to ensure the SGE, Condor, Globus, and any other desired services run on startup</li>
 </ul>
+
 <p>Once you’ve setup the base OS take a snapshot in case you need to roll back.  ‘&#8217;’You should take snapshots throughout the install process so if you mess up you can roll back’’’. When you finish and the entire install is working make sure you take periodic snapshots for use in disaster recovery for your production systems.</p>
 
 <p>The VirtualBox VMs are great for running locally for testing and development but can also be converted into KVM or another more server-oriented VM technology. These directions are outside the scope of this guide, however. Google for more information.</p>
@@ -122,10 +127,11 @@
 <p>See the following sites for info on setting up 3rd party yum repositories, you will want to have these repos installed before you continue.</p>
 
 <ul>
-<li>http://fedoraproject.org/wiki/EPEL</li>
+  <li>http://fedoraproject.org/wiki/EPEL</li>
   <li>http://www.cs.wisc.edu/condor/yum/</li>
   <li>http://www.globus.org/toolkit/downloads</li>
 </ul>
+
 </div>
 <div class="section" id="install-java">
 <h3>Install Java</h3>
@@ -179,9 +185,10 @@ export PATH=$M2:$PATH
 <p>I found that when running large clusters there seemed to be a large number of failures, mainly related to files going missing on gluster/NFS and with too many file handles open. The 5.2.x release of Globus seems to have addressed a lot of these scalability issues.  Regardless, here are the guides I used for tuning Condor/Linux for large numbers of jobs:</p>
 
 <ul>
-<li>~~<a href="http://www.cs.wisc.edu/condor/condorg/linux_scalability.html">http://www.cs.wisc.edu/condor/condorg/linux_scalability.html</a>~~ </li>
+  <li>~~<a href="http://www.cs.wisc.edu/condor/condorg/linux_scalability.html">http://www.cs.wisc.edu/condor/condorg/linux_scalability.html</a>~~ </li>
   <li>~~<a href="http://www.cs.wisc.edu/condor/condorg/goldenrules.html">http://www.cs.wisc.edu/condor/condorg/goldenrules.html</a>~~</li>
 </ul>
+
 <p>(Regretfully, these guides no longer appear active. We will post an alternative if one comes up)</p>
 
 <p>Changes to /etc/sysctl.conf:</p>
@@ -372,6 +379,258 @@ chkconfig hadoop-hbase-regionserver on
 
 <p>You also will probably want to enable the web console for Oozie, in which case you will need to follow the directions to install ExtJS. This will give you a nice interface at http://<oozie_hostname>:11000/oozie where you can browse the running workflows.</oozie_hostname></p>
 
+<div class="section" id="oozie-memory-based-scheduling">
+<h4>Oozie Memory-based Scheduling</h4>
+
+<p>Out of the box Oozie (or MapReduce for that matter) doesn’t attempt to monitor or enforce memory limitations on any jobs.  For many users this might be fine but often time in bioinformatics we need to carefully manage job memory requirements.  Alignment and assembly tools, for example, are extremely memory hungry and can use dozens of GB of RAM.  If two of these jobs are scheduled to the same node there is a good chance the job will die or even kill the machine.</p>
+
+<p>To get around this we use the Capacity Scheduler which allows you to schedule MapReduce jobs based on memory requirements (it also lets you organize M/R clusters into different queues and was originally intended to help groups share M/R clusters).</p>
+
+<p class="warning"><strong>Note:</strong> The Capacity Scheduler is intended for the Oozie engine. If you are using the Oozie-SGE engine the memory management happens on the SGE side, SeqWare workflows will pass along the memory request with the SGE-bound jobs but that&#8217;s it.  Also, the Capacity Scheduler will not work with the Pegasus engine since that engine in no way uses Hadoop.</p>
+
+</div>
+<div class="section" id="install-the-capacity-scheduler">
+<h4>Install the Capacity Scheduler</h4>
+
+<p>Just copy this to the right place:</p>
+
+<pre><code>cp /usr/lib/hadoop-0.20-mapreduce/contrib/capacity-scheduler/hadoop-capacity-scheduler-2.0.0-mr1-cdh4.1.2.jar /usr/lib/hadoop/lib/
+</code></pre>
+
+</div>
+<div class="section" id="setup-capacity-scheduler">
+<h4>Setup Capacity Scheduler</h4>
+<p>Now setup the number of map slots you want to have, the number of reducer slots (which doesn’t get used for Oozie so matters less, typically you do 1 per node), and memory footprint for your mapper slots. </p>
+
+<p>You should have n - 1 map slots where n = number of cores in your VM. For mapred.cluster.map.memory.mb take the system memory and divide by map slots. For the mapred.cluster.max.map.memory.mb use the system memory total.  I think this is the right algorithm but the documentation for this is very poor.</p>
+
+<pre>
+# /etc/hadoop/conf/mapred-site.xml
+<configuration>
+  <property>
+    <name>mapred.job.tracker</name>
+    <value>localhost:8021</value>
+  </property>
+  <property>
+    <name>mapred.jobtracker.taskScheduler</name>
+    <value>org.apache.hadoop.mapred.CapacityTaskScheduler</value>
+  </property>
+  <property>
+    <name>mapred.queue.names</name>
+    <value>default</value>
+  </property>
+  <property>
+    <name>mapred.cluster.map.memory.mb</name>
+    <value>4024</value>
+  </property>
+  <property>
+    <name>mapred.cluster.reduce.memory.mb</name>
+    <value>4024</value>
+  </property>
+  <property>
+    <name>mapred.cluster.max.map.memory.mb</name>
+    <value>8024</value>
+  </property>
+  <property>
+    <name>mapred.cluster.max.reduce.memory.mb</name>
+    <value>8024</value>
+  </property>
+  <property>
+    <name>mapreduce.tasktracker.reserved.physicalmemory.mb</name>
+    <value>512</value>
+  </property>
+  <property>
+    <name>mapred.job.map.memory.mb</name>
+    <value>1024</value>
+  </property>
+  <property>
+    <name>mapred.job.reduce.memory.mb</name>
+    <value>1024</value>
+  </property>
+  <property>
+    <name>mapred.tasktracker.map.tasks.maximum</name>
+    <value>2</value>
+  </property>
+  <property>
+    <name>mapred.tasktracker.reduce.tasks.maximum</name>
+    <value>1</value>
+  </property>
+</configuration>
+</pre>
+
+<p>Now create a config for the capacity scheduler.</p>
+
+<pre>
+# /etc/hadoop/conf/capacity-scheduler.xml
+<configuration>
+  <property>
+    <name>mapred.capacity-scheduler.queue.default.minimum-user-limit-percent</name>
+    <value>100</value>
+  </property>
+  <property>
+    <name>mapred.capacity-scheduler.queue.default.capacity</name>
+    <value>100</value>
+  </property>
+</configuration>
+</pre>
+
+<p>Make sure core-sites.xml has these oozie proxy settings in it:</p>
+
+<pre>
+<configuration>
+  <property>
+    <name>fs.default.name</name>
+    <value>hdfs://localhost:8020</value>
+  </property>
+  <!-- OOZIE proxy user setting -->
+  <property>
+    <name>hadoop.proxyuser.oozie.hosts</name>
+    <value>*</value>
+  </property>
+  <property>
+    <name>hadoop.proxyuser.oozie.groups</name>
+    <value>*</value>
+  </property>
+  <property>
+    <name>hadoop.proxyuser.mapred.hosts</name>
+    <value>*</value>
+  </property>
+  <property>
+    <name>hadoop.proxyuser.mapred.groups</name>
+    <value>*</value>
+  </property>
+  <property>
+    <name>hadoop.proxyuser.hdfs.hosts</name>
+    <value>*</value>
+  </property>
+  <property>
+    <name>hadoop.proxyuser.hdfs.groups</name>
+    <value>*</value>
+  </property>
+  <!-- HTTPFS proxy user setting -->
+  <property>
+    <name>hadoop.proxyuser.httpfs.hosts</name>
+    <value>*</value>
+  </property>
+  <property>
+    <name>hadoop.proxyuser.httpfs.groups</name>
+    <value>*</value>
+  </property>
+</configuration>
+</pre>
+
+</div>
+<div class="section" id="making-sure-capacity-scheduler-is-configured-correctly">
+<h4>Making Sure Capacity Scheduler is Configured Correctly</h4>
+
+<p>If you don’t setup the capacity scheduler then the TaskTracker log will look like this:</p>
+
+<pre>
+2013-03-21 13:12:58,990 INFO org.apache.hadoop.mapred.TaskTracker:  Using ResourceCalculatorPlugin : org.apache.hadoop.util.LinuxResourceCalculatorPlugin@52f235bf
+2013-03-21 13:12:58,995 INFO org.apache.hadoop.mapred.TaskMemoryManagerThread: Physical memory monitoring enabled. System total: 8306794496. Reserved: 536870912. Maximum: 7769923584.
+2013-03-21 13:12:58,995 INFO org.apache.hadoop.mapred.TaskMemoryManagerThread: Starting thread: class org.apache.hadoop.mapred.TaskMemoryManagerThread
+</pre>
+
+<p>If you do then you should see something like the following:</p>
+
+<pre>
+2013-03-21 13:06:35,675 INFO org.apache.hadoop.mapred.TaskTracker:  Using ResourceCalculatorPlugin : org.apache.hadoop.util.LinuxResourceCalculatorPlugin@52c635bd
+2013-03-21 13:06:35,678 WARN org.apache.hadoop.mapred.TaskTracker: TaskTracker's totalMemoryAllottedForTasks is -1 and reserved physical memory is not configured. TaskMemoryManager is disabled.
+</pre>
+
+<p>Also, keep in mind this needs to be setup for all nodes not just the head node!  All nodes that run the TaskTracker that is.</p>
+
+<p>You should see information in the JobTracker web console that tells you CapacityScheduler is working. Specifically you should see the “default” queue along with Scheduling Information. If you don’t see this then the system is not configured properly.</p>
+
+</div>
+<div class="section" id="affects-of-capacityscheduler-on-m-r-jobs">
+<h4>Affects of CapacityScheduler on M/R Jobs</h4>
+
+<p>If you don’t specify the correct memory requirements on M/R jobs once capacity scheduler is setup then the jobs will fail (I think).  You’ll see something similar to:</p>
+
+<pre>
+TaskTree [pid=1122691,tipID=attempt_201303211420_0001_m_000000_1] is running beyond physical memory-limits. Current usage : 113065984bytes. Limit : -1bytes. Killing task. TaskTree [pid=1122691,tipID=attempt_201303211420_0001_m_000000_1] is running beyond physical memory-limits. Current usage : 113065984bytes. Limit : -1bytes. Killing task. 
+Dump of the process-tree for attempt_201303211420_0001_m_000000_1 : 
+    |- PID PPID PGRPID SESSID CMD_NAME USER_MODE_TIME(MILLIS) SYSTEM_TIME(MILLIS) VMEM_USAGE(BYTES) RSSMEM_USAGE(PAGES) FULL_CMD_LINE
+    |- 1122691 1120967 1122691 1122691 (java) 501 36 589066240 27604 /nfs/seqware/java/jdk1.7.0_04/jre/bin/java -Djava.library.path=/usr/lib/hadoop-0.20-mapreduce/lib/native/Linux-amd64-64:/.mounts/labs/seqware/exchange/sqwdev_dfs/mapred/local/taskTracker/boconnor/jobcache/job_201303211420_0001/attempt_201303211420_0001_m_000000_1/work -Xmx200m -Djava.io.tmpdir=/.mounts/labs/seqware/exchange/sqwdev_dfs/mapred/local/taskTracker/boconnor/jobcache/job_201303211420_0001/attempt_20130
+</pre>
+
+<p>You can see this in the Hadoop web console.  This means you need to specify params for the M/R job. In Oozie this looks like the following:</p>
+
+<pre>
+<workflow-app xmlns="uri:oozie:workflow:0.2" name="java-main-wf">
+    <start to="java-node"></start>
+    <action name="java-node">
+        <java>
+            <job-tracker>${jobTracker}</job-tracker>
+            <name-node>${nameNode}</name-node>
+            <configuration>
+                <property>
+                    <name>mapred.job.queue.name</name>
+                    <value>${queueName}</value>
+                </property>
+        <property>
+          <name>oozie.launcher.mapred.job.map.memory.mb</name>
+          <value>2048</value>
+        </property>
+        <property>
+          <name>oozie.launcher.mapred.job.reduce.memory.mb</name>
+          <value>2048</value>
+        </property>
+        <property>
+          <name>oozie.launcher.mapreduce.map.memory.physical.mb</name>
+          <value>2048</value>
+        </property>
+        <property>
+          <name>oozie.launcher.mapreduce.reduce.memory.physical.mb</name>
+          <value>2048</value>
+        </property>
+            </configuration>
+            <main-class>org.apache.oozie.example.DemoJavaMain</main-class>
+            <arg>Hello</arg>
+            <arg>Oozie!</arg>
+        </java>
+        <ok to="end"></ok>
+        <error to="fail"></error>
+    </action>
+    <kill name="fail">
+        <message>Java failed, error message[${wf:errorMessage(wf:lastErrorNode())}]</message>
+    </kill>
+    <end name="end"></end>
+</workflow-app>
+</pre>
+
+<p>Notice the various memory params.  A SeqWare workflow automatically takes care of this but if you’re on a shared cluster the other users will need to specify the params for their M/R jobs.</p>
+
+</div>
+<div class="section" id="user-and-groups-setup">
+<h4>User and Groups Setup</h4>
+
+<p>All jobs run as the mapred user so if you refer to files in your user home dir in an Oozie workflow you will run into permissions problems like:</p>
+
+<pre>
+Cannot find input file: /home/seqware/Temp/HelloWorld23/target/Workflow_Bundle_HelloWorld23_1.0_SeqWare_1.0.0-SNAPSHOT/Workflow_Bundle_HelloWorld23/1.0/data/input.txt
+</pre>
+
+<p>To fix this you need to make sure you add mapred, oozie, and hdfs to the “seqware” or other user groups.  Also, make sure the seqware group can read /home/seqware.</p>
+
+</div>
+<div class="section" id="shared-filesystem">
+<h4>Shared Filesystem</h4>
+
+<p>You need a shared filesystem to act as the working directory when workflows run and to host the workflow bundle.  On the sqwdev.res cluster the home directory is an NFS share and this is sufficient.  It’s a good idea to have /home shared since SeqWare jobs will look for a ~/.seqware/settings file and it’s useful to have this be consistent across the cluster.</p>
+
+</div>
+<div class="section" id="restart-oozie-hadoop">
+<h4>Restart Oozie/Hadoop</h4>
+
+<p>Restart the daemons to ensure the settings are flushed out.</p>
+
+<pre><code>for i in /etc/init.d/hadoop-* /etc/init.d/oozie; do $i stop; done;
+for i in /etc/init.d/hadoop-* /etc/init.d/oozie; do $i start; done;
+</code></pre>
+
+</div>
 </div>
 </div>
 <div class="section" id="setup-sge">
@@ -496,10 +755,11 @@ yum install gridengine gridengine-execd gridengine-qmaster gridengine-qmon globu
 <p>These steps use tools from Globus to setup both a Certificate Authority (CA) and public/private keys for the host and individual users.  If you intend to use this Pegasus setup with an existing cluster they must be recognized as a certificate authority and issue you a public/private key.  Frankly, I really don’t know what I’m talking about here so I’ll just point you to a couple websites with more info:</p>
 
 <ul>
-<li><a href="https://confluence.pegasus.isi.edu/display/pegasus/Grid+Setup">Grid setup</a></li>
+  <li><a href="https://confluence.pegasus.isi.edu/display/pegasus/Grid+Setup">Grid setup</a></li>
   <li><a href="http://www.globus.org/toolkit/docs/5.0/5.0.1/admin/install/#gtadmin-basic-host">Globus admin</a></li>
   <li><a href="http://www.globus.org/toolkit/docs/5.0/5.0.1/user/#gtuser-security">Globus user security</a></li>
 </ul>
+
 <p>For the purposes of a self-contained testing/development environment the instructions below should work just fine.</p>
 
 <p>As root:</p>
@@ -1320,6 +1580,7 @@ WORKFLOW STATUS : COMPLETED | 17/17 ( 100% ) | (all jobs finished successfully)
 <p>Make sure the paths and ports are valid for the cluster you’re connecting too.  You’ll also want to take a look at the other modifications made to sge.pm to see if they are valid for the new cluster you are connecting to.  For example, what you call your parallel environment (serial) and what variable you use to define the memory consumable resource differ from SGE install to SGE install.</p>
 
 <p>Also, keep in mind it’s possible to connect to a cluster type different than SGE.  You will need to install the appropriate GRAM configuration RPM and follow any configuration needed for the other cluster type (similar to the way we modified sge.pm).  But in theory you should be able to customize this VM to submit to another SGE, PBS, Condor, etc cluster fairly easily.  See the Globus Toolkit website and docs for more information.</p>
+
 </div>
 </div>
 </div>
