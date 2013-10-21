@@ -532,7 +532,7 @@ You can use this as your temporary directory to process intermediate files.
 their types, and default values.  For example:</p>
 
 <pre><code class="language-ini"><span class="c1"># key=input_file:type=file:display=F:file_meta_type=text/plain</span>
-<span class="na">input_file</span><span class="o">=</span><span class="s">${workflow_bundle_dir}/Workflow_Bundle_${workflow-directory-name}/${version}/data/input.txt</span>
+<span class="na">input_file</span><span class="o">=</span><span class="s">${workflow_bundle_dir}/Workflow_Bundle_MyHelloWorld/1.0-SNAPSHOT/data/input.txt</span>
 <span class="c1"># key=greeting:type=text:display=T:display_name=Greeting</span>
 <span class="na">greeting</span><span class="o">=</span><span class="s">Testing</span>
 <span class="c1"># this is just a comment, the output directory is a conventions and used in many workflows to specify a relative output path</span>
@@ -601,7 +601,7 @@ for this file using the following:</p>
 
 <p>You can use <tt>s3://bucketname/</tt> or a local path as the prefix.</p>
 
-<p class="warning"><strong>Note:</strong> While the above entries are required, it is STRONGLY suggested that workflow developers no longer rely on them to decide the output path of a provisioned file.  Instead we recommend explicitly providing in the ini file whatever paths you may require, possibly using the variables described below, and then assigning that path to the output file via `SqwFile.setOutputPath(String path)`.</p>
+<p class="warning"><strong>Note:</strong> While the above entries are required, it is STRONGLY suggested that workflow developers no longer rely on them to decide the output path of a provisioned file.  Instead we recommend explicitly providing in the ini file whatever paths you may require, possibly using the variables described below, and then assigning that path to the output file via <code>SqwFile.setOutputPath(String path)</code>.</p>
 
 </div>
 <div class="section" id="ini-variables">
