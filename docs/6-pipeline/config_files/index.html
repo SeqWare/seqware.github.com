@@ -83,32 +83,32 @@ key=value
 ensure the BundleManager that installs workflow bundles has enough information.
 Here is what the annotation syntax looks like:</p>
 
-<pre><code>    # key=&lt;name&gt;:type=[integer|float|text|pulldown|file]:display=[T|F][:display_name=&lt;name_to_display&gt;][:file_meta_type=&lt;mime_meta_type&gt;][:pulldown_items=&lt;key1&gt;|&lt;value1&gt;;&lt;key2&gt;|&lt;value2&gt;]
-    key=default_value
+<pre><code># key=&lt;name&gt;:type=[integer|float|text|pulldown|file]:display=[T|F][:display_name=&lt;name_to_display&gt;][:file_meta_type=&lt;mime_meta_type&gt;][:pulldown_items=&lt;key1&gt;|&lt;value1&gt;;&lt;key2&gt;|&lt;value2&gt;]
+key=default_value
 </code></pre>
 
 <p>The file_meta_type is only used for type=file.</p>
 
 <p>The pulldown type means that the pulldown_items should be defined as well. This looks like:</p>
 
-<pre><code>    pulldown_items=&lt;key1&gt;|&lt;value1&gt;;&lt;key2&gt;|&lt;value2&gt;
+<pre><code>pulldown_items=&lt;key1&gt;|&lt;value1&gt;;&lt;key2&gt;|&lt;value2&gt;
 </code></pre>
 
 <p>The default value for this will refer to either value1 or value2 above.
 If you fail to include a metadata line for a particular key/value then it is assumed to be:</p>
 
-<pre><code>    key=&lt;name&gt;:type=text:display=F
+<pre><code>key=&lt;name&gt;:type=text:display=F
 </code></pre>
 
 <p>This is convenient since many of the values in an INI file should not be displayed to the end user.</p>
 
-<div class="section" id="required-variables">
-<h3>Required Variables</h3>
+<div class="section" id="required-ini-entries">
+<h3>Required INI Entries</h3>
 
-<p>There are (currently) two required variables that all workflows should define
-in their ini files. These are related to file provisioning. In your workflow,
+<p>There are (currently) two required entries that all workflows should define
+in their ini files. These are related to output file provisioning. In your workflow,
 if you produce output files and use the file provisioning mechanism built into
-workflows these two variables are used to construct the output location for the
+workflows these two entries are used to construct the output location for the
 output file.</p>
 
 <ul>
@@ -125,26 +125,37 @@ for this file using the following:</p>
 
 <p>You can use <tt>s3://bucketname/</tt> or a local path as the prefix.</p>
 
-</div>
-<div class="section" id="magic-variables">
-<h3>“Magic” Variables</h3>
+<p class="warning"><strong>Note:</strong> While the above entries are required, it is STRONGLY suggested that workflow developers no longer rely on them to decide the output path of a provisioned file.  Instead we recommend explicitly providing in the ini file whatever paths you may require, possibly using the variables described below, and then assigning that path to the output file via `SqwFile.setOutputPath(String path)`.</p>
 
-<p>There are several variables that you will see in various files, including the config ini file and <tt>metadata.xml</tt> file that are automatically defined by the system. These include:</p>
+</div>
+<div class="section" id="ini-variables">
+<h3>INI Variables</h3>
+
+<p>The ini files support variables, in the format <code>$(variable-name}</code>, that will be replaced when the workflow run is launched. The variable name can refer to another entry in the ini file, or can refer to the following SeqWare generated values:</p>
 
 <ul>
   <li>
-    <p>${date}: a string representing the date the DAX was created, this is always defined so consider this a reserved variable name. </p>
-  </li>
+<code>sqw.bundle-dir</code>: the path to the directory of this workflow’s bundle. Support for the legacy version of this variable, <code>workflow_bundle_dir</code>, may be removed in a future version.</li>
   <li>
-    <p>${random}: a randomly generated string, this is always defined so consider this a reserved variable name. </p>
-  </li>
+<code>sqw.date</code>: the current date in ISO 8601 format, e.g., 2013-10-31.</li>
   <li>
-    <p>${workflow_bundle_dir}: if this workflow is part of a workflow bundle this variable will be defined and points to the path of the root of the directory this workflow bundle has been expanded to.</p>
-  </li>
+<code>sqw.datetime</code>: the current datetime in ISO 8601 format, e.g., 2013-10-31T16:45:30.  Support for the legacy version of this variable, <code>date</code>, may be removed in a future version.</li>
   <li>
-    <p>${workflow_base_dir}: ${workflow_bundle_dir}/Workflow_Bundle_{workflow_name}/{workflow_version}. This is really used in a ton of places since we need a variable that points to the install location for the bundle since we cannot hard code this.</p>
-  </li>
+<code>sqw.random</code>: a randomly generated integer from 0 to 2147483647.  Support for the legacy version of this variable, <code>random</code>, may be removed in a future version.</li>
+  <li>
+<code>sqw.timestamp</code>: the current number of milliseconds since January 1, 1970.</li>
+  <li>
+<code>sqw.uuid</code>: a randomly generated <a href="http://en.wikipedia.org/wiki/Universally_unique_identifier#Version_4_.28random.29">universally unique identifier</a>.</li>
 </ul>
+
+<p>Each instance of the above <code>sqw.*</code> variables in an ini file will be replaced with a separately resolved value, e.g., multiple instances of <code>${sqw.uuid}</code> will each resolve to different values. If you desire to reuse the same generated value, do somthing akin to the following:</p>
+
+<pre><code class="language-ini"><span class="na">dirname</span><span class="o">=</span><span class="s">output</span>
+<span class="na">filename</span><span class="o">=</span><span class="s">${sqw.random}</span>
+<span class="na">text_file</span><span class="o">=</span><span class="s">${dirname}/${filename}.txt</span>
+<span class="na">json_file</span><span class="o">=</span><span class="s">${dirname}/${filename}.json</span></code></pre>
+
+<p>Thus if <code>filename</code> resolved to a value of <code>12345</code>, then <code>text_file</code> will have a value of <code>output/12345.txt</code> and <code>json_file</code> will have a value of <code>output/12345.json</code>.</p>
 
 </div>
 </div>
