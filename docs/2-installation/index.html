@@ -168,6 +168,8 @@ Instance</a>. These machines provide
 sufficient for analyzing a human exome within about 4 hours depending on the
 specifics of your workflows.</p>
 
+<p>For development purposes, we have also have had success with m1.xlarge instances. For noninteractive build and integration tests, we have also had success with the m1.medium instance type. However, note that these instance types are not recommended for production use.</p>
+
 <div class="section" id="getting-an-amazon-cloud-account">
 <h3>Getting an Amazon Cloud Account</h3>
 
@@ -186,27 +188,9 @@ specifics of your workflows.</p>
 
 <ul>
 <li><p><strong>ami-f54e1f9c</strong>
-: 20131007, SeqWare-1.0.6 (use m1.xlarge)</p></li>
+: 20131007, SeqWare-1.0.6</p></li>
 <li><p><del> <strong>ami-c386e8aa</strong>
 : 20130531, SeqWare_v0.13.6.7rc_CentOS_GenericDevBox_v18, SeqWare Version 0.13.6.7. Make sure you launch in Virginia and select the instance type &#8220;CC1 Cluster Compute (cc1.4xlarge, 23GiB)&#8221; since the AMI is designed specifically to work with this type (we use the local disks provided by this instance). </del></p></li>
-<li><p><del> <strong>ami-c386e8aa</strong>
-: 20130517, SWStandaloneCentOS_v2_GenericDevBox_v17, SeqWare Version 0.13.6.5. Make sure you launch in Virginia and select the instance type &#8220;CC1 Cluster Compute (cc1.4xlarge, 23GiB)&#8221; since the AMI is designed specifically to work with this type (we use the local disks provided by this instance). </del></p></li>
-<li><p><del> <strong>ami-1b5d3e72</strong>
-: 20130425, SWStandaloneCentOS_v2_GenericDevBox_v16, SeqWare Version 0.13.6.5. Make sure you select the instance type &#8220;CC1 Cluster Compute (cc1.4xlarge, 23GiB)&#8221; since the AMI is designed specifically to work with this type (we use the local disks provided by this instance). </del></p></li>
-<li><p><del> <strong>ami-d097f6b9</strong>
-: 20130419, SWStandaloneCentOS_v2_GenericDevBox_v14, SeqWare Version 0.13.6.5. Make sure you select the instance type &#8220;CC1 Cluster Compute (cc1.4xlarge, 23GiB)&#8221; since the AMI is designed specifically to work with this type (we use the local disks provided by this instance). </del></p></li>
-</ul>
-
-
-</div>
-<div class="section" id="development-public-ami-s">
-<h4>Development Public AMI(s):</h4>
-
-<ul>
-<li><p><del> <strong>ami-7be48e12</strong>
-: 20130531, SeqWare_v1.0.1-SNAPSHOT_CentOS_GenericDevBox_v19, SeqWare Version 1.0.1-SNAPSHOT that includes support for running Java workflows on the Oozie workflow engine. Make sure you launch in Virginia select the instance type &#8220;CC1 Cluster Compute (cc1.4xlarge, 23GiB)&#8221; since the AMI is designed specifically to work with this type (we use the local disks provided by this instance). </del></p></li>
-<li><p><del> <strong>ami-01660f68</strong>
-: 20130517, SeqWare_v1.0.0rc_CentOS_GenericStandaloneDevBox_v18, SeqWare Version 1.0.0-SNAPSHOT from today (a pre-release) that includes support for running Java workflows on the Oozie workflow engine. Make sure you launch in Virginia select the instance type &#8220;CC1 Cluster Compute (cc1.4xlarge, 23GiB)&#8221; since the AMI is designed specifically to work with this type (we use the local disks provided by this instance). </del></p></li>
 </ul>
 
 

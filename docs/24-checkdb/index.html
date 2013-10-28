@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<title>SeqWare › Check Database Plugin</title>
+<meta content="nanoc 3.6.5" name="generator">
+<link href="../../assets/style-v17.css" media="screen" rel="stylesheet" type="text/css">
+<link href="http://feeds.feedburner.com/seqware" rel="alternate" title="The SeqWare Blog" type="application/atom+xml">
+<script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script>
+<script type="text/javascript">         var disqus_shortname = 'seqware';          (function() {             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);         })();     </script>
+</head>
+<body>
+<div class="wrapper">
+<!-- ***** navigation ***** -->
+<div class="nav">
+<ol>
+<li><a href="../../"><span>Home</span></a></li>
+<li><a href="../../blog/"><span>News</span></a></li>
+<li><a href="../"><span>Documentation</span></a></li>
+<li><a href="../../community/"><span>Community</span></a></li>
+<li><a href="../../partners/"><span>Partners</span></a></li>
+<li><a href="../../about/"><span>About</span></a></li>
+</ol>
+</div>
+<!-- ***** sidebar ***** -->
+<div class="side">
+<ol>
+<li><a href="../1-introduction/"><span>Introduction to SeqWare</span></a></li>
+<li><a href="../2-installation/"><span>Installation</span></a></li>
+<li><a href="../3-getting-started/"><span>Getting Started</span></a></li>
+<li><a href="../6-pipeline/"><span>SeqWare Pipeline</span></a></li>
+<li><a href="../4-metadb/"><span>SeqWare MetaDB</span></a></li>
+<li><a href="../5-portal/"><span>SeqWare Portal</span></a></li>
+<li><a href="../7-web-service/"><span>SeqWare Web Service</span></a></li>
+<li><a href="../8-query-engine/"><span>SeqWare Query Engine</span></a></li>
+<li><a href="../9-glossary/"><span>Glossary</span></a></li>
+<li><a href="../10-faq/"><span>Frequently Asked Questions</span></a></li>
+<li><a href="../11-api/"><span>APIs</span></a></li>
+<li><a href="../13-code/"><span>Source Code</span></a></li>
+<li><a href="../17-plugins/"><span>Plugins</span></a></li>
+<li><a href="../17a-modules/"><span>Modules</span></a></li>
+</ol>
+</div>
+<!-- ***** body ***** -->
+<div class="body">
+<div class="article">
+<div class="header">
+<h1>Check Database Plugin</h1>
+</div>
+<p>The Check Database plugin validates that the content of the seqware meta db follows certain recommended conventions. You can also write additional checks in order to check that conventions for your particular install of SeqWare are being properly followed.</p>
+
+<div class="section" id="requirements">
+<h2>Requirements</h2>
+
+<p>In order to run the plugin, you must have the following available to you:</p>
+
+<ul>
+  <li>SeqWare script (1.0.7 or higher)</li>
+  <li>SeqWare settings file set up to contact the SeqWare meta db (contact your local SeqWare admin to get the path)</li>
+</ul>
+
+</div>
+<div class="section" id="usage">
+<h2>Usage</h2>
+
+<p>The base plugin is accessible via the CLI. </p>
+
+<pre><code>seqware checkdb --help
+
+Usage: seqware checkdb --help
+   	       seqware checkdb
+
+Description:
+  	  Using a direct database connection, check whether the meta db contains any content that deviates from recommended conventions.
+</code></pre>
+
+</div>
+<div class="section" id="included-checks">
+<h2>Included Checks</h2>
+
+<p>The following checks are built-in:</p>
+
+<ul>
+  <li>attributes are stored with one value for each key (i.e. attributes can be considered a map of key-values)</li>
+  <li>Orphan checks (note that a few of these can be expected, for example, if workflows have not run yet on new data)
+    <ul>
+      <li>Experiments contain samples</li>
+      <li>IUSes contain processing events </li>
+      <li>Files are hooked up to processing events</li>
+      <li>Workflows have been run at least once</li>
+      <li>All samples and lanes are associated with experiments and sequencer runs respectively</li>
+      <li>All processings are attached to workflow runs</li>
+    </ul>
+  </li>
+  <li>Samples contain one parent (i.e. the sample hierarchy is a tree)</li>
+  <li>Workflow run checks
+    <ul>
+      <li>All ‘Completed’ workflow runs are eventually connected to at least one study</li>
+      <li>All ‘Completed’ workflow runs reachable by ius_workflow_runs are reachable via the processing hierarchy</li>
+      <li>Workflow runs that contain input files via workflow_run_input_files should also contain (a superset of them) via the processing hierarchy</li>
+    </ul>
+  </li>
+</ul>
+
+<p>In addition, we also list the following information for debug purposes</p>
+
+<ul>
+  <li>The number of ‘Completed’ workflow runs connected to multiple studies (a possible error)</li>
+  <li>Workflow runs with input files via the processing hierarchy but not via workflow_run_input_files (this is expected since input files via the direct table are a subset of those in the processing hierarchy) </li>
+</ul>
+
+</div>
+<div class="section" id="additional-checks">
+<h2>Additional Checks</h2>
+
+<p>Certain checks are inherent to every install of SeqWare, these are currently provided with the base checkdb plugin as the SampleHierarchyPlugin, the OrphanCheckerPlugin, the AttributePlugin, and the WorkflowRunConventionsPlugin. You can use these as models for new checks that are specific to your particular institution by implementing the CheckDBPluginInterface.</p>
+
+</div>
+<div class="section" id="tutorial">
+<h2>Tutorial</h2>
+
+<p>As a silly example, here is an example of a new plugin that reports every SWID of every workflow as an error.</p>
+
+<pre><code>import java.sql.SQLException;
+import java.util.List;
+import java.util.Set;
+import java.util.SortedMap;
+import net.sourceforge.seqware.pipeline.plugins.checkdb.CheckDB;
+import net.sourceforge.seqware.pipeline.plugins.checkdb.CheckDBPluginInterface;
+import net.sourceforge.seqware.pipeline.plugins.checkdb.SelectQueryRunner;
+import org.apache.commons.dbutils.handlers.ColumnListHandler;
+import org.openide.util.lookup.ServiceProvider;
+
+/**
+ * Does a silly check 
+ * @author dyuen
+ */
+@ServiceProvider(service = CheckDBPluginInterface.class)
+public class TestPlugin implements CheckDBPluginInterface {
+
+    @Override
+    public void check(SelectQueryRunner qRunner, SortedMap&lt;Level, Set&lt;String&gt;&gt; result) throws SQLException {
+	String query = "select sw_accession from workflow";
+	List&lt;Integer&gt; executeQuery = qRunner.executeQuery(query, new ColumnListHandler&lt;Integer&gt;());
+	CheckDB.processOutput(result, Level.SEVERE,  "Silly workflows that we want to report: " , executeQuery);
+    }
+    
+}
+</code></pre>
+
+<p>Note that the CheckDB.processOutput is merely a static convenience method that generates warning messages based on a list of integers. All you really are required to do is to run queries using qRunner and insert them into the result map by level. Each level maps to a set of arbitrary warnings. After creating a new plugin, you can use the following procedure to run it alongside the pre-created plugins. </p>
+
+<pre><code>~/seqware$ javac -cp seqware-distribution/target/seqware-distribution-1.0.7-SNAPSHOT-full.jar TestPlugin.java
+Note: TestPlugin to be registered as a net.sourceforge.seqware.pipeline.plugins.checkdb.CheckDBPluginInterface
+~/seqware$ mkdir -p META-INF/services
+~/seqware$ mv net.sourceforge.seqware.pipeline.plugins.checkdb.CheckDBPluginInterface META-INF/services/
+~/seqware$ jar cf test.jar  TestPlugin.class META-INF
+~/seqware$ java -cp seqware-distribution/target/seqware-distribution-1.0.7-SNAPSHOT-full.jar:test.jar net.sourceforge.seqware.pipeline.runner.PluginRunner -p net.sourceforge.seqware.pipeline.plugins.checkdb.CheckDB
+Printed report to /tmp/report1568888261692505189.html
+~/seqware$ chromium-browser /tmp/report1568888261692505189.html
+</code></pre>
+
+<p>The above procedure compiles the plugin, packages it into a jar along with a ServiceProvider registration, runs the check utility along with your new plugin, and opens the resulting report.</p>
+</div>
+</div>
+<p> </p>
+<p> </p>
+<div id="disqus_thread"></div>
+</div>
+</div>
+<!-- ***** footer ***** -->
+<div id="footer">
+<p>SeqWare © 2007–2013 Brian O&#8217;Connor. SeqWare is released under the a <a rel="license" href="http://www.gnu.org/licenses/licenses.html">GNU GPL v3</a>. This site is built using the excellent <a href="http://nanoc.ws/">nanoc</a> tool and example site along with the <a href="http://www.fonts.info/info/press/free-fonts-for-font-face-embedding.htm">Graublau</a> and <a href="https://en.wikipedia.org/wiki/Gentium">Gentium</a> fonts.</p>
+</div>
+</body>
+</html>

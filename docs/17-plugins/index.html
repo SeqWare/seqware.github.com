@@ -44,7 +44,9 @@
 <li><a href="#basicdecider">BasicDecider</a></li>
 <li><a href="#batchmetadatainjection">BatchMetadataInjection</a></li>
 <li><a href="#bundlemanager">BundleManager</a></li>
+<li><a href="#checkdb">CheckDB</a></li>
 <li><a href="#cyclechecker">CycleChecker</a></li>
+<li><a href="#deletiondb">DeletionDB</a></li>
 <li><a href="#filelinker">FileLinker</a></li>
 <li><a href="#helloworld">HelloWorld</a></li>
 <li><a href="#markdownplugin">MarkdownPlugin</a></li>
@@ -397,6 +399,31 @@ A plugin that lets you create, test, and install workflow bundles.</p>
 </table>
 
 </div>
+<div class="section" id="checkdb">
+<h2>CheckDB</h2>
+<p>net.sourceforge.seqware.pipeline.plugins.checkdb.CheckDB
+A database validation tool for your SeqWare metadb.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Command-line option</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>–?, –h, –help</td>
+      <td>Provides this help message.</td>
+    </tr>
+    <tr>
+      <td>–j, –jar</td>
+      <td>Jar files containing additional checks that will be run</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
 <div class="section" id="cyclechecker">
 <h2>CycleChecker</h2>
 <p>net.sourceforge.seqware.pipeline.plugins.CycleChecker
@@ -413,6 +440,35 @@ Checks for cycles in the sample hierarchy and processing hierarchy of a particul
     <tr>
       <td>–study-accession</td>
       <td>The SeqWare accession of the study you want to check</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+<div class="section" id="deletiondb">
+<h2>DeletionDB</h2>
+<p>net.sourceforge.seqware.pipeline.plugins.deletion.DeletionDB
+A database deletion tool for your SeqWare metadb.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Command-line option</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>–?, –h, –help</td>
+      <td>Provides this help message.</td>
+    </tr>
+    <tr>
+      <td>–k, –key</td>
+      <td>An existing key file will be used to guide an actual deletion process</td>
+    </tr>
+    <tr>
+      <td>–r, –workflowrun</td>
+      <td>Give a sequencer run, lane, or workflow run SWID in order to determine which workflow runs (processings,files) should be deleted.</td>
     </tr>
   </tbody>
 </table>
