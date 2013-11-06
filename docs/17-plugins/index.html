@@ -55,7 +55,6 @@
 <li><a href="#ooziexml2dot">OozieXML2Dot</a></li>
 <li><a href="#processingdatastructure2dot">ProcessingDataStructure2Dot</a></li>
 <li><a href="#sequencerrunreporter">SequencerRunReporter</a></li>
-<li><a href="#studyreporter">StudyReporter</a></li>
 <li><a href="#symlinkfilereporter">SymLinkFileReporter</a></li>
 <li><a href="#workflowlauncher">WorkflowLauncher</a></li>
 <li><a href="#workflowplugin">WorkflowPlugin</a></li>
@@ -416,10 +415,6 @@ A database validation tool for your SeqWare metadb.</p>
       <td>–?, –h, –help</td>
       <td>Provides this help message.</td>
     </tr>
-    <tr>
-      <td>–j, –jar</td>
-      <td>Jar files containing additional checks that will be run</td>
-    </tr>
   </tbody>
 </table>
 
@@ -465,6 +460,10 @@ A database deletion tool for your SeqWare metadb.</p>
     <tr>
       <td>–k, –key</td>
       <td>An existing key file will be used to guide an actual deletion process</td>
+    </tr>
+    <tr>
+      <td>–o, –out</td>
+      <td>The filename of the output key file</td>
     </tr>
     <tr>
       <td>–r, –workflowrun</td>
@@ -676,35 +675,6 @@ Prints a tab-delimited file describing the sequencer run, lane, sample, and algo
     <tr>
       <td>–output, –output-filename</td>
       <td>Name of the output tab-delimited file.</td>
-    </tr>
-  </tbody>
-</table>
-
-</div>
-<div class="section" id="studyreporter">
-<h2>StudyReporter</h2>
-<p>net.sourceforge.seqware.pipeline.plugins.StudyReporter
-Generates a tab-delimited report of all output files (and their relationships and metadata) from a specified study or from all studies.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Command-line option</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>–all</td>
-      <td>Generate a report of all studies. Or use ‘–title’.</td>
-    </tr>
-    <tr>
-      <td>–out</td>
-      <td>The file into which the report will be written.</td>
-    </tr>
-    <tr>
-      <td>–title</td>
-      <td>The title of the study whose report will be generated. Or use ‘–all’.</td>
     </tr>
   </tbody>
 </table>
