@@ -48,16 +48,14 @@
 <div class="header">
 <h1>File Linker</h1>
 </div>
-<p>The FileLinker plugin was designed to import files from the LIMS into the SeqWare MetaDB for processing, but can be used to attach any file paths to any IUS or Lane. <strong>This tool is only available over a direct database connection as of SeqWare version 0.12.2 (June 2012), not over the Web service.</strong></p>
+<p>The FileLinker plugin was designed to import files from the LIMS into the SeqWare MetaDB for processing, but can be used to attach any file paths to any IUS or Lane.</p>
 
 <div class="section" id="add-the-workflow">
 <h2>Add the Workflow</h2>
 
-<p>The &#8220;FileImport&#8221; workflow is already added into the MetadataDB, but this method can be used to create new workflows to link to.</p>
+<p>The “FileImport” workflow is already added into the MetadataDB, but this method can be used to create new workflows to link to. </p>
 
-<pre><code>INSERT INTO workflow (name, description, version, seqware_version, create_tstmp) VALUES ('FileImport', 'Imports files into the database, \
-     links them to IUSs or Lanes and creates intermediate Processings. Initially used to import files from the LIMS and attach them to IUSes.', \
-     '0.1.1', '0.13.6', '2012-12-07 15:30:00');
+<pre><code>java -jar ~/.seqware/self-installs/seqware-distribution-&lt;%= seqware_release_version %&gt;-full.jar  -p net.sourceforge.seqwe.pipeline.plugins.Metadata -- --create --table workflow --field name::FileImport --field version::1.0 --field description::'Imports files into the database, links them to IUSs or Lanes and creates intermediate Processings. Initially used to import files from the LIMS and attach them to IUSes'
 </code></pre>
 
 </div>
@@ -97,19 +95,19 @@
 111214_h1068_0067_AD0EJ0ACXX,AOE_0001_nn_P_PE_270_WG,2,24633,OK,chemical/seq-na-fastq-gzip,14493953643,50c25186dfe3fc5bb3a7f60e0696012b,/oicr/data/002.fastq.gz,
 </code></pre>
 
-<p>The fields &#8221;&#8217;size&#8221;&#8217; and &#8221;&#8217;md5sum&#8221;&#8217; are optional, but if include the information will be saved into the SeqWare database.</p>
+<p>The fields ‘&#8217;’size’’’ and ‘&#8217;’md5sum’’’ are optional, but if include the information will be saved into the SeqWare database.</p>
 
 </div>
 <div class="section" id="run-the-tool">
 <h2>Run the tool</h2>
 
-<p>You can get the workflow accession using the &#8211;list-install option in BundleManager.</p>
+<p>You can get the workflow accession using the –list-install option in BundleManager. </p>
 
 <pre><code>java -jar seqware-distribution-&lt;%= seqware_release_version %&gt;-SNAPSHOT-full.jar --plugin net.sourceforge.seqware.pipeline.plugins.FileLinker -- \
      --file-list-file /home/mtaschuk/Downloads/link_files_report.txt --workflow-accession 375894 --csv-separator ,
 </code></pre>
 
-<p>By default error messages will be written to standard out. To see more information, such as successfully linked entries create a &#8221;&#8217;log4j.properties&#8221;&#8217; file similar to the one below.</p>
+<p>By default error messages will be written to standard out. To see more information, such as successfully linked entries create a ‘&#8217;’log4j.properties’’’ file similar to the one below.</p>
 
 <pre><code>log4j.logger.net.sourceforge.seqware.pipeline.plugins=DEBUG, console
 
@@ -118,7 +116,7 @@ log4j.appender.console.layout=org.apache.log4j.PatternLayout
 log4j.appender.console.layout.ConversionPattern=%p %t %c - %m%n
 </code></pre>
 
-<p>Use &#8221;&#8217;-Dlog4j.configuration=file:./log4j.properties&#8221;&#8217; to specify the properties file when running the FileLinker command.</p>
+<p>Use ‘’‘-Dlog4j.configuration=file:./log4j.properties’’’ to specify the properties file when running the FileLinker command.</p>
 
 <pre><code>java -Dlog4j.configuration=file:./log4j.properties -jar -jar seqware-distribution-&lt;%= seqware_release_version %&gt;-SNAPSHOT-full.jar \
      --plugin net.sourceforge.seqware.pipeline.plugins.FileLinker -- \
