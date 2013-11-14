@@ -36,6 +36,7 @@
 <li><a href="#building-and-installing">Building and Installing</a></li>
 <li><a href="#tables">Tables</a></li>
 <li><a href="#sequence-data">Sequence Data</a></li>
+<li><a href="#upgrading-from-0-13-6-x-to-1-0-x">Upgrading From 0.13.6.X to 1.0.X</a></li>
 </ol>
 </li>
 <li><a href="../5-portal/"><span>SeqWare Portal</span></a></li>
@@ -122,6 +123,37 @@ necessarily present (though we try to make sure they are). The safest way to
 find all of the processing events linked with a Study is to traverse through
 the IUS to the root Processing through processing_ius, not through
 ius_workflow_runs.</p>
+
+</div>
+<div class="section" id="upgrading-from-0-13-6-x-to-1-0-x">
+<h2>Upgrading From 0.13.6.X to 1.0.X</h2>
+
+<p>First, let’s review which tools depend on what. </p>
+
+<p><img src="../../assets/images/metadb/database_paths.png" alt="Required Infrastructure"></p>
+
+<p>All currently supported command-line utilities from 0.13.6.X use the SeqWare web service and in their 1.0.X incarnation, will rely upon a 1.0.X web service. The new deletion utility relies upon the 1.0.X admin web service (to be documented). The checkDB and migration plugin (used to copy input file paths from the old workflow run reports) rely upon a direct database connection as well. Please refer to 
+<a href="../github_readme/6-pipeline/user-configuration">User Configuration</a> for additional information on setting these up. </p>
+
+<p>You will need both your SeqWare webservice and SeqWare database settings configured before attempting to update your database. The procedure is as follows:</p>
+
+<p>First, run the various update scripts:</p>
+
+<pre><code>psql -U seqware seqware_meta_db &lt; 0.13.6.x_to_1.0.1.sql
+psql -U seqware seqware_meta_db &lt; 1.0.1_to_1.0.3.sql
+psql -U seqware seqware_meta_db &lt; 1.0.2_to_1.0.3.sql
+psql -U seqware seqware_meta_db &lt; 1.0.4_to_1.0.5.sql
+</code></pre>
+
+<p>Second, run the migration plugin:</p>
+
+<pre><code>java -jar seqware-distribution/target/seqware-distribution-1.0.6-full.jar -p net.sourceforge.seqware.pipeline.plugins.WorkflowRunFilesInitialPopulationPlugin
+</code></pre>
+
+<p>Third, you’ll probably want to create the initial file-provenance-report (note, you’ll probably want this to run on a schedule for updates)</p>
+
+<pre><code>seqware files refresh
+</code></pre>
 </div>
 </div>
 <p> </p>
