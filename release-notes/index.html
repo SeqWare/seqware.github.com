@@ -39,6 +39,61 @@ Procedure now is at https://wiki.oicr.on.ca/pages/viewpage.action?pageId=4453317
 -->
 
 
+<div class="section" id="1-0-8-2013-12-12">
+<h2>1.0.8 (2013-12-12)</h2>
+
+<div class="section" id="defect">
+<h3>Defect</h3>
+
+<ul>
+<li>[SEQWARE-1783] - SeqWare Admin WS does not create SeqWare Accessions</li>
+<li>[SEQWARE-1804] - SqwFile parent accessions do not get passed to Command Runner</li>
+</ul>
+
+
+</div>
+<div class="section" id="task">
+<h3>Task</h3>
+
+<ul>
+<li>[SEQWARE-1766] - CLI: State where stdout and stderr are saved to</li>
+<li>[SEQWARE-1788] - SymlinkReporter does not report correct infomation for files provisioned out with setParentAccessions</li>
+<li>[SEQWARE-1790] - Migrate the Oozie-SGE code to SeqWare</li>
+<li>[SEQWARE-1791] - Get vagrant provisioning of multiple SGE nodes working</li>
+<li>[SEQWARE-1793] - Implement a replacement for the symlinkreporter based on the file-provenance-report</li>
+<li>[SEQWARE-1802] - File records missing in file provenance report</li>
+<li>[SEQWARE-1805] - BasicDecider adding support for filtering by barcode (IUS) and lane</li>
+<li>[SEQWARE-1808] - Ensure that BasicDecider only uses input from completed workflow runs</li>
+</ul>
+
+
+</div>
+<div class="section" id="technical-task">
+<h3>Technical task</h3>
+
+<ul>
+<li>[SEQWARE-1670] - SymLinker doesn&#8217;t report all connections to GATK runs</li>
+<li>[SEQWARE-1704] - seqware pipeline: symlinkreporter should error out if any ws requests fail in dump all mode</li>
+<li>[SEQWARE-1762] - skipped sequencer runs are still shown in the symlink reporter</li>
+<li>[SEQWARE-1763] - missing links between workflow run and IUS for GATKAnnotateAndSort and SomaticClassifier workflow</li>
+<li>[SEQWARE-1779] - Missing CLI functionality in seqware files report</li>
+<li>[SEQWARE-1795] - Plugin to run through CLI and pre-CLI tutorials</li>
+<li>[SEQWARE-1796] - Create tool to verify that db settings (if present) match web service</li>
+</ul>
+
+
+</div>
+</div>
+<div class="section" id="0-13-6-14-2013-12-12">
+<h2>0.13.6.14 (2013-12-12)</h2>
+
+<ul>
+<li>BasicDecider now uses only input files from completed workflow runs</li>
+<li>Disabled linking behaviour between provision out steps which caused large numbers of provision out steps to operate in series rather than in parallel</li>
+</ul>
+
+
+</div>
 <div class="section" id="1-0-7-2013-11-13">
 <h2>1.0.7 (2013-11-13)</h2>
 

@@ -48,6 +48,7 @@
 <li><a href="#cyclechecker">CycleChecker</a></li>
 <li><a href="#deletiondb">DeletionDB</a></li>
 <li><a href="#filelinker">FileLinker</a></li>
+<li><a href="#fileprovenancereporter">FileProvenanceReporter</a></li>
 <li><a href="#helloworld">HelloWorld</a></li>
 <li><a href="#markdownplugin">MarkdownPlugin</a></li>
 <li><a href="#metadata">Metadata</a></li>
@@ -160,7 +161,7 @@ The decider from which all other deciders came</p>
   <tbody>
     <tr>
       <td>–all</td>
-      <td>Run everything. One of sample-name, study-name, sequencer-run-name or all is required.</td>
+      <td>Operate across everything. At least one of sample-name, study-name, sequencer-run-name, lane-swa, ius-swa or all is required.</td>
     </tr>
     <tr>
       <td>–cf, –check-file-exists</td>
@@ -185,6 +186,14 @@ The decider from which all other deciders came</p>
     <tr>
       <td>–ignore-skip-flag</td>
       <td>Ignores any ‘skip’ flags on lanes, IUSes, sequencer runs, samples, etc. Use caution.</td>
+    </tr>
+    <tr>
+      <td>–ius-SWID</td>
+      <td>IUS sw_accession. At least one of sample-name, study-name, sequencer-run-name, lane-swa, ius-swa or all is required.  Specify multiple swas by repeating –ius-swa</td>
+    </tr>
+    <tr>
+      <td>–lane-SWID</td>
+      <td>Lane sw_accession. At least one of sample-name, study-name, sequencer-run-name, lane-swa, ius-swa or all is required.  Specify multiple swas by repeating –lane-swa</td>
     </tr>
     <tr>
       <td>–launch-max</td>
@@ -212,7 +221,7 @@ The decider from which all other deciders came</p>
     </tr>
     <tr>
       <td>–sample-name</td>
-      <td>Full sample name. One of sample-name, study-name, sequencer-run-name or all is required.</td>
+      <td>Full sample name. At least one of sample-name, study-name, sequencer-run-name, lane-swa, ius-swa or all is required.  Specify multiple names by repeating –sample-name</td>
     </tr>
     <tr>
       <td>–schedule</td>
@@ -220,11 +229,11 @@ The decider from which all other deciders came</p>
     </tr>
     <tr>
       <td>–sequencer-run-name</td>
-      <td>Full sequencer run name. One of sample-name, study-name, sequencer-run-name or all is required.</td>
+      <td>Full sequencer run name. At least one of sample-name, study-name, sequencer-run-name, lane-swa, ius-swa or all is required.  Specify multiple names by repeating –sequencer-run-name</td>
     </tr>
     <tr>
       <td>–study-name</td>
-      <td>Full study name. One of sample-name, study-name, sequencer-run-name or all is required.</td>
+      <td>Full study name. At least one of sample-name, study-name, sequencer-run-name, lane-swa, ius-swa or all is required. Specify multiple names by repeating –study-name</td>
     </tr>
     <tr>
       <td>–test</td>
@@ -497,6 +506,51 @@ Takes a list of files and enters them into the database, linking them with the a
     <tr>
       <td>–workflow-accession</td>
       <td>The sw_accession of the Import files workflow</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+<div class="section" id="fileprovenancereporter">
+<h2>FileProvenanceReporter</h2>
+<p>net.sourceforge.seqware.pipeline.plugins.fileprovenance.FileProvenanceReporter
+Generates a tab-delimited report of all output files (and their relationships and metadata) from a specified study or from all studies.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Command-line option</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>–all</td>
+      <td>Operate across everything. At least one of sample-name, study-name, sequencer-run-name, lane-swa, ius-swa or all is required.</td>
+    </tr>
+    <tr>
+      <td>–ius-SWID</td>
+      <td>IUS sw_accession. At least one of sample-name, study-name, sequencer-run-name, lane-swa, ius-swa or all is required.  Specify multiple swas by repeating –ius-swa</td>
+    </tr>
+    <tr>
+      <td>–lane-SWID</td>
+      <td>Lane sw_accession. At least one of sample-name, study-name, sequencer-run-name, lane-swa, ius-swa or all is required.  Specify multiple swas by repeating –lane-swa</td>
+    </tr>
+    <tr>
+      <td>–out</td>
+      <td>The file into which the report will be written.</td>
+    </tr>
+    <tr>
+      <td>–sample-name</td>
+      <td>Full sample name. At least one of sample-name, study-name, sequencer-run-name, lane-swa, ius-swa or all is required.  Specify multiple names by repeating –sample-name</td>
+    </tr>
+    <tr>
+      <td>–sequencer-run-name</td>
+      <td>Full sequencer run name. At least one of sample-name, study-name, sequencer-run-name, lane-swa, ius-swa or all is required.  Specify multiple names by repeating –sequencer-run-name</td>
+    </tr>
+    <tr>
+      <td>–study-name</td>
+      <td>Full study name. At least one of sample-name, study-name, sequencer-run-name, lane-swa, ius-swa or all is required. Specify multiple names by repeating –study-name</td>
     </tr>
   </tbody>
 </table>
