@@ -37,11 +37,6 @@
 <li><a href="#overview-of-workflow-development-using-the-vm">Overview of Workflow Development Using the VM</a></li>
 <li><a href="#creating-a-new-workflow">Creating a New Workflow</a></li>
 <li><a href="#a-tour-of-workflow-bundle-components">A Tour of Workflow Bundle Components</a></li>
-<li><a href="#modifying-the-workflow">Modifying the Workflow</a></li>
-<li><a href="#building-the-workflow">Building the Workflow</a></li>
-<li><a href="#testing-the-workflow">Testing the Workflow</a></li>
-<li><a href="#packaging-the-workflow-into-a-workflow-bundle">Packaging the Workflow into a Workflow Bundle</a></li>
-<li><a href="#next-steps">Next Steps</a></li>
 </ol>
 </li>
 <li><a href="../../6-pipeline/"><span>SeqWare Pipeline</span></a></li>
@@ -256,7 +251,7 @@ $ mvn archetype:generate
 Choose a number or apply filter (format: [groupId:]artifactId, case sensitive contains): 294: 
 </code></pre>
 
-<p class="warning"><strong>Note:</strong>You can inform Maven about the archetypes by downloading the latest <a href="https://github.com/SeqWare/seqware/releases/download/1.0.6/archetype-catalog.xml">archetype-catalog.xml</a> file and placing it in <code>~/.m2/</code>.</p>
+<p class="warning"><strong>Note:</strong>You can inform Maven about the archetypes by downloading the latest <a href="https://github.com/SeqWare/seqware/releases/download/1.0.9/archetype-catalog.xml">archetype-catalog.xml</a> file and placing it in <code>~/.m2/</code>.</p>
 
 <p>The numbers used to identify  the archetypes will vary 
 depending on what you have installed, so you will need to scan through the list 
@@ -269,8 +264,9 @@ to find the SeqWare archetype you are looking for, in this case “SeqWare Java 
   -DarchetypeCatalog=local \
   -DarchetypeGroupId=com.github.seqware \
   -DarchetypeArtifactId=seqware-archetype-java-workflow \
-  -DgroupId=com.example \
-  -DartifactId=MyHelloWorld
+  -DgroupId=com.github.seqware \
+  -DartifactId=workflow-MyHelloWorld \
+  -Dworkflow-name=MyHelloWorld
 </code></pre>
 
 </div>
@@ -281,7 +277,7 @@ to find the SeqWare archetype you are looking for, in this case “SeqWare Java 
 The first thing you should do is take a look at the workflow manifest showing which workflows
 are present in this bundle (a single Workflow Bundle can contain many workflows).</p>
 
-<pre><code>$ cd MyHelloWorld
+<pre><code>$ cd workflow-MyHelloWorld
 $ mvn install
 ...
 $ seqware bundle list --dir target/Workflow*
@@ -290,10 +286,10 @@ List Workflows:
 
  Workflow:
   Name: MyHelloWorld
-  Version: 1.0-SNAPSHOT
+  Version: 1.0
   Description: Add a description of the workflow here.
-  Workflow Class: ${workflow_bundle_dir}/Workflow_Bundle_MyHelloWorld/1.0-SNAPSHOT/classes/com/github/seqware/WorkflowClient.java
-  Config Path: ${workflow_bundle_dir}/Workflow_Bundle_MyHelloWorld/1.0-SNAPSHOT/config/workflow.ini
+  Workflow Class: ${workflow_bundle_dir}/Workflow_Bundle_MyHelloWorld/1.0/classes/com/github/seqware/MyHelloWorldWorkflow.java
+  Config Path: ${workflow_bundle_dir}/Workflow_Bundle_MyHelloWorld/1.0/config/MyHelloWorldWorkflow.ini
   Requirements Compute: single Memory: 20M Network: local
 </code></pre>
 
@@ -329,27 +325,27 @@ developers.</p>
 |           `-- com
 |               `-- github
 |                   `-- seqware
-|                       `-- WorkflowClient.java
+|                       `-- MyHelloWorldWorkflow.java
 |-- target
-|   `-- Workflow_Bundle_HelloWorld_1.0-SNAPSHOT_SeqWare_1.0.6
-|       `-- Workflow_Bundle_HelloWorld
-|           `-- 1.0-SNAPSHOT
+|   `-- Workflow_Bundle_MyHelloWorld_1.0_SeqWare_1.0.9
+|       `-- Workflow_Bundle_MyHelloWorld
+|           `-- 1.0
 |               |-- bin
 |               |-- classes
 |               |   `-- com
 |               |       `-- github
 |               |           `-- seqware
-|               |               `-- WorkflowClient.class
+|               |               `-- MyHelloWorldWorkflow.class
 |               |-- config
-|               |   `-- workflow.ini
+|               |   `-- MyHelloWorldWorkflow.ini
 |               |-- data
 |               |   `-- input.txt
 |               |-- lib
-|               |   `-- seqware-distribution-1.0.6-full.jar
+|               |   `-- seqware-distribution-1.0.9-full.jar
 |               `-- metadata.xml
 |-- workflow
 |   |-- config
-|   |   `-- workflow.ini
+|   |   `-- MyHelloWorldWorkflow.ini
 |   |-- data
 |   |   `-- input.txt
 |   |-- lib
@@ -396,12 +392,12 @@ version, description, test command, and enough information so that the SeqWare
 tools can test, execute, and install the workflow. Here is an example from the
 MyHelloWorld workflow:</p>
 
-<pre><code class="language-xml"><span class="nt">&lt;bundle</span> <span class="na">version=</span><span class="s">"1.0-SNAPSHOT"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;workflow</span> <span class="na">name=</span><span class="s">"MyHelloWorld"</span> <span class="na">version=</span><span class="s">"1.0-SNAPSHOT"</span> <span class="na">seqware_version=</span><span class="s">"1.0.6"</span>
-  <span class="na">basedir=</span><span class="s">"${workflow_bundle_dir}/Workflow_Bundle_MyHelloWorld/1.0-SNAPSHOT"</span><span class="nt">&gt;</span>
+<pre><code class="language-xml"><span class="nt">&lt;bundle</span> <span class="na">version=</span><span class="s">"1.0"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;workflow</span> <span class="na">name=</span><span class="s">"MyHelloWorld"</span> <span class="na">version=</span><span class="s">"1.0"</span> <span class="na">seqware_version=</span><span class="s">"1.0.9"</span>
+  <span class="na">basedir=</span><span class="s">"${workflow_bundle_dir}/Workflow_Bundle_MyHelloWorld/1.0"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;description&gt;</span>Add a description of the workflow here.<span class="nt">&lt;/description&gt;</span>
-    <span class="nt">&lt;workflow_class</span> <span class="na">path=</span><span class="s">"${workflow_bundle_dir}/Workflow_Bundle_MyHelloWorld/1.0-SNAPSHOT/classes/com/github/seqware/WorkflowClient.java"</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;config</span> <span class="na">path=</span><span class="s">"${workflow_bundle_dir}/Workflow_Bundle_MyHelloWorld/1.0-SNAPSHOT/config/workflow.ini"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;workflow_class</span> <span class="na">path=</span><span class="s">"${workflow_bundle_dir}/Workflow_Bundle_MyHelloWorld/1.0/classes/com/github/seqware/MyHelloWorldWorkflow.java"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;config</span> <span class="na">path=</span><span class="s">"${workflow_bundle_dir}/Workflow_Bundle_MyHelloWorld/1.0/config/MyHelloWorldWorkflow.ini"</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;requirements</span> <span class="na">compute=</span><span class="s">"single"</span> <span class="na">memory=</span><span class="s">"20M"</span> <span class="na">network=</span><span class="s">"local"</span>  <span class="na">workflow_engine=</span><span class="s">"Pegasus,Oozie"</span> <span class="na">workflow_type=</span><span class="s">"java"</span><span class="nt">/&gt;</span>
   <span class="nt">&lt;/workflow&gt;</span>
 <span class="nt">&lt;/bundle&gt;</span></code></pre>
@@ -414,7 +410,7 @@ MyHelloWorld workflow:</p>
 
 <p>You can see the full Java workflow source code by looking at <a href="../../15-workflow-examples/">Workflow
 Examples</a> or, in this case, just the
-<tt>src/main/java/com/github/seqware/WorkflowClient.java</tt> file produced by the Maven Archetype above.</p>
+<tt>src/main/java/com/github/seqware/MyHelloWorldWorkflow.java</tt> file produced by the Maven Archetype above.</p>
 
 <p>This Java class is pretty simple in its construction. It is used to define
 input and output files along with the individual steps in the workflow and how
@@ -428,54 +424,75 @@ cluster, a cloud-based cluster, etc).</p>
 
 <pre><code class="language-java">    <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">SqwFile</span><span class="o">&gt;</span> <span class="n">setupFiles</span><span class="o">()</span> <span class="o">{</span>
-
       <span class="k">try</span> <span class="o">{</span>
-
-        <span class="c1">// register an input file</span>
+        <span class="c1">// register an plaintext input file using the information from the INI</span>
+        <span class="c1">// provisioning this file to the working directory will be the first step in the workflow</span>
         <span class="n">SqwFile</span> <span class="n">file0</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">createFile</span><span class="o">(</span><span class="s">"file_in_0"</span><span class="o">);</span>
-        <span class="n">file0</span><span class="o">.</span><span class="na">setSourcePath</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">getWorkflowBaseDir</span><span class="o">()+</span><span class="s">"/data/input.txt"</span><span class="o">);</span>
+        <span class="n">file0</span><span class="o">.</span><span class="na">setSourcePath</span><span class="o">(</span><span class="n">getProperty</span><span class="o">(</span><span class="s">"input_file"</span><span class="o">));</span>
         <span class="n">file0</span><span class="o">.</span><span class="na">setType</span><span class="o">(</span><span class="s">"text/plain"</span><span class="o">);</span>
         <span class="n">file0</span><span class="o">.</span><span class="na">setIsInput</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
 
-        <span class="c1">// register an output file</span>
-        <span class="n">SqwFile</span> <span class="n">file1</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">createFile</span><span class="o">(</span><span class="s">"file_out"</span><span class="o">);</span>
-        <span class="n">file1</span><span class="o">.</span><span class="na">setSourcePath</span><span class="o">(</span><span class="s">"dir1/output"</span><span class="o">);</span>
-        <span class="n">file1</span><span class="o">.</span><span class="na">setType</span><span class="o">(</span><span class="s">"text/plain"</span><span class="o">);</span>
-        <span class="n">file1</span><span class="o">.</span><span class="na">setIsOutput</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
-        <span class="n">file1</span><span class="o">.</span><span class="na">setForceCopy</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
-        <span class="c1">// if output_file is set in the ini then use it to set the destination of this file</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">hasPropertyAndNotNull</span><span class="o">(</span><span class="s">"output_file"</span><span class="o">))</span> <span class="o">{</span> <span class="n">file1</span><span class="o">.</span><span class="na">setOutputPath</span><span class="o">(</span><span class="n">getProperty</span><span class="o">(</span><span class="s">"output_file"</span><span class="o">));</span> <span class="o">}</span>
-        <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">getFiles</span><span class="o">();</span>
-
       <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">ex</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">Logger</span><span class="o">.</span><span class="na">getLogger</span><span class="o">(</span><span class="n">WorkflowClient</span><span class="o">.</span><span class="na">class</span><span class="o">.</span><span class="na">getName</span><span class="o">()).</span><span class="na">log</span><span class="o">(</span><span class="n">Level</span><span class="o">.</span><span class="na">SEVERE</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="n">ex</span><span class="o">);</span>
-        <span class="k">return</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
+        <span class="n">ex</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">exit</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
       <span class="o">}</span>
-
+      <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">getFiles</span><span class="o">();</span>
     <span class="o">}</span></code></pre>
 
-<p>This method sets up files that are inputs and/or outputs for this workflow.  In
+<p>This method sets up files that are inputs for this workflow.  In
 this example the input <tt>data/input.txt</tt> comes from the workflow bundle
-itself. The ultimate location of the output file is determined by two
+itself. Here we pull in the information from the INI file using getProperty.</p>
+
+<p>Output files are defined differently.</p>
+
+<pre><code class="language-java">    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">buildWorkflow</span><span class="o">()</span> <span class="o">{</span>
+	<span class="o">...</span>
+
+	<span class="n">Job</span> <span class="n">copyJob2</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">getWorkflow</span><span class="o">().</span><span class="na">createBashJob</span><span class="o">(</span><span class="s">"bash_cp"</span><span class="o">);</span>
+	<span class="o">...</span>
+        <span class="n">copyJob2</span><span class="o">.</span><span class="na">addFile</span><span class="o">(</span><span class="n">createOutputFile</span><span class="o">(</span><span class="s">"dir1/output"</span><span class="o">,</span> <span class="s">"txt/plain"</span><span class="o">,</span> <span class="n">manualOutput</span><span class="o">));</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="n">SqwFile</span> <span class="nf">createOutputFile</span><span class="o">(</span><span class="n">String</span> <span class="n">workingPath</span><span class="o">,</span> <span class="n">String</span> <span class="n">metatype</span><span class="o">,</span> <span class="kt">boolean</span> <span class="n">manualOutput</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// register an output file</span>
+        <span class="n">SqwFile</span> <span class="n">file1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SqwFile</span><span class="o">();</span>
+        <span class="n">file1</span><span class="o">.</span><span class="na">setSourcePath</span><span class="o">(</span><span class="n">workingPath</span><span class="o">);</span>
+        <span class="n">file1</span><span class="o">.</span><span class="na">setType</span><span class="o">(</span><span class="n">metatype</span><span class="o">);</span>
+        <span class="n">file1</span><span class="o">.</span><span class="na">setIsOutput</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+        <span class="n">file1</span><span class="o">.</span><span class="na">setForceCopy</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+
+        <span class="c1">// if manual_output is set in the ini then use it to set the destination of this file</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">manualOutput</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">file1</span><span class="o">.</span><span class="na">setOutputPath</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">getMetadata_output_file_prefix</span><span class="o">()</span> <span class="o">+</span> <span class="n">getMetadata_output_dir</span><span class="o">()</span> <span class="o">+</span> <span class="s">"/"</span> <span class="o">+</span> <span class="n">workingPath</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="n">file1</span><span class="o">.</span><span class="na">setOutputPath</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">getMetadata_output_file_prefix</span><span class="o">()</span> <span class="o">+</span> <span class="n">getMetadata_output_dir</span><span class="o">()</span> <span class="o">+</span> <span class="s">"/"</span>
+                <span class="o">+</span> <span class="k">this</span><span class="o">.</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">"_"</span> <span class="o">+</span> <span class="k">this</span><span class="o">.</span><span class="na">getVersion</span><span class="o">()</span> <span class="o">+</span> <span class="s">"/"</span> <span class="o">+</span> <span class="k">this</span><span class="o">.</span><span class="na">getRandom</span><span class="o">()</span> <span class="o">+</span> <span class="s">"/"</span> <span class="o">+</span> <span class="n">workingPath</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">file1</span><span class="o">;</span>
+    <span class="o">}</span></code></pre>
+
+<p>The ultimate location of the output file is determined by two
 parameters passed into the WorkflowLauncher which actually runs the workflow:
 <tt>–metadata-output-file-prefix</tt> (our <tt>output_prefix</tt> in the ini
 file) and <tt>–metadata-output-dir</tt> (or <tt>output_dir</tt> in the ini
 file). Alternatively, you can actually override the output location for a file
-as is the case with the above “output_file”.  When this parameter is available
+as is the case with the above “manual_output”.  When this parameter is available
 in the ini file the automatic location of the output file
-(“output_prefix”+/+”output_dir”+/+”output”) is overridden for the value of
-“output_file”.</p>
+(“output_prefix”+/+”output_dir”+/+”output”) is overridden to ensure the final output
+path is unique.</p>
+
+<p>The job that produces the output file is linked to that file by using job.addFile(SqwFile).</p>
 
 </div>
 <div class="section" id="directories">
 <h4>Directories</h4>
 
-<pre>
-<code class="language-java">    <span class="nd">@Override</span>
+<pre><code class="language-java">    <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setupDirectory</span><span class="o">()</span> <span class="o">{</span>
+	<span class="c1">// creates a dir1 directory in the current working directory where the workflow runs</span>
         <span class="k">this</span><span class="o">.</span><span class="na">addDirectory</span><span class="o">(</span><span class="s">"dir1"</span><span class="o">);</span>
-    <span class="o">}</span></code>
-</pre>
+    <span class="o">}</span></code></pre>
 
 <p>This method sets up directories in the working directory that the workflow run in. In this case the workflow creates a directory called “dir1”.</p>
 
@@ -483,23 +500,32 @@ in the ini file the automatic location of the output file
 <div class="section" id="workflow-steps">
 <h4>Workflow Steps</h4>
 
-<pre>
-<code class="language-java">    <span class="nd">@Override</span>
+<pre><code class="language-java">    <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">buildWorkflow</span><span class="o">()</span> <span class="o">{</span>
-        <span class="n">Job</span> <span class="n">job00</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">getWorkflow</span><span class="o">().</span><span class="na">createBashJob</span><span class="o">(</span><span class="s">"bash_mkdir"</span><span class="o">);</span>
-        <span class="n">job00</span><span class="o">.</span><span class="na">getCommand</span><span class="o">().</span><span class="na">addArgument</span><span class="o">(</span><span class="s">"mkdir test1"</span><span class="o">);</span>
 
-        <span class="n">Job</span> <span class="n">job10</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">getWorkflow</span><span class="o">().</span><span class="na">createBashJob</span><span class="o">(</span><span class="s">"bash_cp"</span><span class="o">);</span>
-        <span class="n">job10</span><span class="o">.</span><span class="na">setCommand</span><span class="o">(</span><span class="s">"cp "</span> <span class="o">+</span> <span class="k">this</span><span class="o">.</span><span class="na">getFiles</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="s">"file_in_0"</span><span class="o">).</span><span class="na">getProvisionedPath</span><span class="o">()</span> <span class="o">+</span> <span class="s">" test1"</span><span class="o">);</span>
-        <span class="n">job10</span><span class="o">.</span><span class="na">addParent</span><span class="o">(</span><span class="n">job00</span><span class="o">);</span>
+        <span class="c1">// a simple bash job to call mkdir</span>
+        <span class="c1">// note that this job uses the system's mkdir (which depends on the system being *nix)</span>
+        <span class="n">Job</span> <span class="n">mkdirJob</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">getWorkflow</span><span class="o">().</span><span class="na">createBashJob</span><span class="o">(</span><span class="s">"bash_mkdir"</span><span class="o">);</span>
+        <span class="n">mkdirJob</span><span class="o">.</span><span class="na">getCommand</span><span class="o">().</span><span class="na">addArgument</span><span class="o">(</span><span class="s">"mkdir test1"</span><span class="o">);</span>
 
-        <span class="n">Job</span> <span class="n">job11</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">getWorkflow</span><span class="o">().</span><span class="na">createBashJob</span><span class="o">(</span><span class="s">"bash_cp"</span><span class="o">);</span>
-        <span class="n">job11</span><span class="o">.</span><span class="na">setCommand</span><span class="o">(</span><span class="s">"cp "</span> <span class="o">+</span> <span class="k">this</span><span class="o">.</span><span class="na">getFiles</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="s">"file_in_0"</span><span class="o">).</span><span class="na">getProvisionedPath</span><span class="o">()</span> <span class="o">+</span> <span class="s">" dir1/output"</span><span class="o">);</span>
-        <span class="n">job11</span><span class="o">.</span><span class="na">addParent</span><span class="o">(</span><span class="n">job00</span><span class="o">);</span>
+        <span class="n">String</span> <span class="n">inputFilePath</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">getFiles</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="s">"file_in_0"</span><span class="o">).</span><span class="na">getProvisionedPath</span><span class="o">();</span>
 
+        <span class="c1">// a simple bash job to cat a file into a test file</span>
+        <span class="c1">// the file is not saved to the metadata database</span>
+        <span class="n">Job</span> <span class="n">copyJob1</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">getWorkflow</span><span class="o">().</span><span class="na">createBashJob</span><span class="o">(</span><span class="s">"bash_cp"</span><span class="o">);</span>
+        <span class="n">copyJob1</span><span class="o">.</span><span class="na">setCommand</span><span class="o">(</span><span class="n">catPath</span> <span class="o">+</span> <span class="s">" "</span> <span class="o">+</span> <span class="n">inputFilePath</span> <span class="o">+</span> <span class="s">"&gt; test1"</span><span class="o">);</span>
+        <span class="n">copyJob1</span><span class="o">.</span><span class="na">addParent</span><span class="o">(</span><span class="n">mkdirJob</span><span class="o">);</span>
 
-    <span class="o">}</span></code>
-</pre>
+        <span class="c1">// a simple bash job to echo to an output file and concat an input file</span>
+        <span class="c1">// the file IS saved to the metadata database</span>
+        <span class="n">Job</span> <span class="n">copyJob2</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">getWorkflow</span><span class="o">().</span><span class="na">createBashJob</span><span class="o">(</span><span class="s">"bash_cp"</span><span class="o">);</span>
+        <span class="n">copyJob2</span><span class="o">.</span><span class="na">getCommand</span><span class="o">().</span><span class="na">addArgument</span><span class="o">(</span><span class="n">echoPath</span><span class="o">).</span><span class="na">addArgument</span><span class="o">(</span><span class="n">greeting</span><span class="o">).</span><span class="na">addArgument</span><span class="o">(</span><span class="s">" &gt; "</span><span class="o">).</span><span class="na">addArgument</span><span class="o">(</span><span class="s">"dir1/output"</span><span class="o">);</span>
+        <span class="n">copyJob2</span><span class="o">.</span><span class="na">getCommand</span><span class="o">().</span><span class="na">addArgument</span><span class="o">(</span><span class="s">";"</span><span class="o">);</span>
+        <span class="n">copyJob2</span><span class="o">.</span><span class="na">getCommand</span><span class="o">().</span><span class="na">addArgument</span><span class="o">(</span><span class="n">catPath</span> <span class="o">+</span> <span class="s">" "</span> <span class="o">+</span><span class="n">inputFilePath</span><span class="o">+</span> <span class="s">" &gt;&gt; dir1/output"</span><span class="o">);</span>
+        <span class="n">copyJob2</span><span class="o">.</span><span class="na">addParent</span><span class="o">(</span><span class="n">mkdirJob</span><span class="o">);</span>
+        <span class="n">copyJob2</span><span class="o">.</span><span class="na">addFile</span><span class="o">(</span><span class="n">createOutputFile</span><span class="o">(</span><span class="s">"dir1/output"</span><span class="o">,</span> <span class="s">"txt/plain"</span><span class="o">,</span> <span class="n">manualOutput</span><span class="o">));</span>
+
+    <span class="o">}</span></code></pre>
 
 <p>In this buildWorkflow() method three jobs are created.  You can see that the
 <tt>createBashJob</tt> can be used to run any arbitrary command. In the future
@@ -532,258 +558,258 @@ You can use this as your temporary directory to process intermediate files.
 their types, and default values.  For example:</p>
 
 <pre><code class="language-ini"><span class="c1"># key=input_file:type=file:display=F:file_meta_type=text/plain</span>
-<span class="na">input_file</span><span class="o">=</span><span class="s">${workflow_bundle_dir}/Workflow_Bundle_MyHelloWorld/1.0-SNAPSHOT/data/input.txt</span>
+<span class="na">input_file</span><span class="o">=</span><span class="s">${workflow_bundle_dir}/Workflow_Bundle_MyHelloWorld/${workflow-version}/data/input.txt</span>
 <span class="c1"># key=greeting:type=text:display=T:display_name=Greeting</span>
 <span class="na">greeting</span><span class="o">=</span><span class="s">Testing</span>
-<span class="c1"># this is just a comment, the output directory is a conventions and used in many workflows to specify a relative output path</span>
+
+<span class="na">cat</span><span class="o">=</span><span class="s">${workflow_bundle_dir}/Workflow_Bundle_MyHelloWorld/${workflow-version}/bin/gnu-coreutils-5.67/cat</span>
+<span class="na">echo</span><span class="o">=</span><span class="s">${workflow_bundle_dir}/Workflow_Bundle_MyHelloWorld/${workflow-version}/bin/gnu-coreutils-5.67/echo</span>
+
+<span class="c1"># the output directory is a convention used in many workflows to specify a relative output path</span>
 <span class="na">output_dir</span><span class="o">=</span><span class="s">seqware-results</span>
-<span class="c1"># the output_prefix is a convention and used to specify the root of the absolute output path or an S3 bucket name</span>
+<span class="c1"># the output_prefix is a convention used to specify the root of the absolute output path or an S3 bucket name </span>
 <span class="c1"># you should pick a path that is available on all cluster nodes and can be written by your user</span>
-<span class="na">output_prefix</span><span class="o">=</span><span class="s">./</span></code></pre>
+<span class="na">output_prefix</span><span class="o">=</span><span class="s">./</span>
+<span class="c1"># manual output determines whether or not SeqWare should enforce the uniqueness of the final directory or not. </span>
+<span class="c1"># If false, SeqWare places files in a directory specified by output_prefix/output_dir/workflowname_version/RANDOM/</span>
+<span class="c1"># where RANDOM is an integer. If true, SeqWare places the files at output_prefix/output_dir and may overwrite existing</span>
+<span class="c1"># files</span>
+<span class="na">manual_output</span><span class="o">=</span><span class="s">false</span>
 
-<p>You access these variables in the Java workflow using the
-<tt>getProperty()</tt> method. When installing the workflow the ini file is
-parsed and extra metadata about each parameter is examined. This gives the
-system information about the type of the variable (integer, string, etc) and
-any default values.</p>
 
-<p>The ini file(s) follow the general pattern of:</p>
+<span class="err">You</span> <span class="err">access</span> <span class="err">these</span> <span class="err">variables</span> <span class="err">in</span> <span class="err">the</span> <span class="err">Java</span> <span class="err">workflow</span> <span class="err">using</span> <span class="err">the</span>
+<span class="err">getProperty()</span> <span class="err">method.</span> <span class="err">When</span> <span class="err">installing</span> <span class="err">the</span> <span class="err">workflow</span> <span class="err">the</span> <span class="err">ini</span> <span class="err">file</span> <span class="err">is</span>
+<span class="err">parsed</span> <span class="err">and</span> <span class="err">extra</span> <span class="err">metadata</span> <span class="err">about</span> <span class="err">each</span> <span class="err">parameter</span> <span class="err">is</span> <span class="err">examined.</span> <span class="err">This</span> <span class="err">gives</span> <span class="err">the</span>
+<span class="err">system</span> <span class="err">information</span> <span class="err">about</span> <span class="err">the</span> <span class="err">type</span> <span class="err">of</span> <span class="err">the</span> <span class="err">variable</span> <span class="err">(integer,</span> <span class="err">string,</span> <span class="err">etc)</span> <span class="err">and</span>
+<span class="err">any</span> <span class="err">default</span> <span class="err">values.</span>
 
-<pre>
-# comment/specification
-key=value
-</pre>
+<span class="err">The</span> <span class="err">ini</span> <span class="err">file(s)</span> <span class="err">follow</span> <span class="err">the</span> <span class="err">general</span> <span class="err">pattern</span> <span class="err">of:</span>
 
-<p>To achieve this overloaded role for ini files you need to include hints to
-ensure the BundleManager that installs workflow bundles has enough information.
-Here is what the annotation syntax looks like:</p>
 
-<pre><code># key=&lt;name&gt;:type=[integer|float|text|pulldown|file]:display=[T|F][:display_name=&lt;name_to_display&gt;][:file_meta_type=&lt;mime_meta_type&gt;][:pulldown_items=&lt;key1&gt;|&lt;value1&gt;;&lt;key2&gt;|&lt;value2&gt;]
-key=default_value
-</code></pre>
+<span class="c1"># comment/specification</span>
+<span class="na">key</span><span class="o">=</span><span class="s">value</span>
 
-<p>The file_meta_type is only used for type=file.</p>
 
-<p>The pulldown type means that the pulldown_items should be defined as well. This looks like:</p>
+<span class="err">To</span> <span class="err">achieve</span> <span class="err">this</span> <span class="err">overloaded</span> <span class="err">role</span> <span class="err">for</span> <span class="err">ini</span> <span class="err">files</span> <span class="err">you</span> <span class="err">need</span> <span class="err">to</span> <span class="err">include</span> <span class="err">hints</span> <span class="err">to</span>
+<span class="err">ensure</span> <span class="err">the</span> <span class="err">BundleManager</span> <span class="err">that</span> <span class="err">installs</span> <span class="err">workflow</span> <span class="err">bundles</span> <span class="err">has</span> <span class="err">enough</span> <span class="err">information.</span>
+<span class="err">Here</span> <span class="err">is</span> <span class="err">what</span> <span class="err">the</span> <span class="err">annotation</span> <span class="err">syntax</span> <span class="err">looks</span> <span class="err">like:</span>
 
-<pre><code>pulldown_items=&lt;key1&gt;|&lt;value1&gt;;&lt;key2&gt;|&lt;value2&gt;
-</code></pre>
+    <span class="c1"># key=:type=[integer|float|text|pulldown|file]:display=[T|F][:display_name=][:file_meta_type=][:pulldown_items=|;|]</span>
+    <span class="na">key</span><span class="o">=</span><span class="s">default_value</span>
 
-<p>The default value for this will refer to either value1 or value2 above.
-If you fail to include a metadata line for a particular key/value then it is assumed to be:</p>
+<span class="na">The file_meta_type is only used for type</span><span class="o">=</span><span class="s">file.</span>
 
-<pre><code>key=&lt;name&gt;:type=text:display=F
-</code></pre>
+<span class="err">The</span> <span class="err">pulldown</span> <span class="err">type</span> <span class="err">means</span> <span class="err">that</span> <span class="err">the</span> <span class="err">pulldown_items</span> <span class="err">should</span> <span class="err">be</span> <span class="err">defined</span> <span class="err">as</span> <span class="err">well.</span> <span class="err">This</span> <span class="err">looks</span> <span class="err">like:</span>
 
-<p>This is convenient since many of the values in an INI file should not be displayed to the end user.</p>
+    <span class="na">pulldown_items</span><span class="o">=</span><span class="s">|;|</span>
 
-</div>
-<div class="section" id="required-ini-entries">
-<h3>Required INI Entries</h3>
+<span class="err">The</span> <span class="err">default</span> <span class="err">value</span> <span class="err">for</span> <span class="err">this</span> <span class="err">will</span> <span class="err">refer</span> <span class="err">to</span> <span class="err">either</span> <span class="err">value1</span> <span class="err">or</span> <span class="err">value2</span> <span class="err">above.</span>
+<span class="err">If</span> <span class="err">you</span> <span class="err">fail</span> <span class="err">to</span> <span class="err">include</span> <span class="err">a</span> <span class="err">metadata</span> <span class="err">line</span> <span class="err">for</span> <span class="err">a</span> <span class="err">particular</span> <span class="err">key/value</span> <span class="err">then</span> <span class="err">it</span> <span class="err">is</span> <span class="err">assumed</span> <span class="err">to</span> <span class="err">be:</span>
 
-<p>There are (currently) two required entries that all workflows should define
-in their ini files. These are related to output file provisioning. In your workflow,
-if you produce output files and use the file provisioning mechanism built into
-workflows these two entries are used to construct the output location for the
-output file.</p>
+    <span class="na">key</span><span class="o">=</span><span class="s">:type=text:display=F</span>
 
-<ul>
-  <li>output_dir</li>
-  <li>output_prefix</li>
-</ul>
+<span class="err">This</span> <span class="err">is</span> <span class="err">convenient</span> <span class="err">since</span> <span class="err">many</span> <span class="err">of</span> <span class="err">the</span> <span class="err">values</span> <span class="err">in</span> <span class="err">an</span> <span class="err">INI</span> <span class="err">file</span> <span class="err">should</span> <span class="err">not</span> <span class="err">be</span> <span class="err">displayed</span> <span class="err">to</span> <span class="err">the</span> <span class="err">end</span> <span class="err">user.</span>
 
-<p>For example, if you have a <tt>SqwFile</tt> object can call
-<tt>file.setIsOutput(true);</tt> the workflow engine constructs an output path
-for this file using the following:</p>
+<span class="c1">### Required INI Entries</span>
 
-<pre><code>&lt;output_prefix&gt;/&lt;output_dir&gt;/&lt;file_name&gt;
-</code></pre>
+<span class="err">There</span> <span class="err">are</span> <span class="err">(currently)</span> <span class="err">two</span> <span class="err">required</span> <span class="err">entries</span> <span class="err">that</span> <span class="err">all</span> <span class="err">workflows</span> <span class="err">should</span> <span class="err">define</span>
+<span class="err">in</span> <span class="err">their</span> <span class="err">ini</span> <span class="err">files.</span> <span class="err">These</span> <span class="err">are</span> <span class="err">related</span> <span class="err">to</span> <span class="err">output</span> <span class="err">file</span> <span class="err">provisioning.</span> <span class="err">In</span> <span class="err">your</span> <span class="err">workflow,</span>
+<span class="err">if</span> <span class="err">you</span> <span class="err">produce</span> <span class="err">output</span> <span class="err">files</span> <span class="err">and</span> <span class="err">use</span> <span class="err">the</span> <span class="err">file</span> <span class="err">provisioning</span> <span class="err">mechanism</span> <span class="err">built</span> <span class="err">into</span>
+<span class="err">workflows</span> <span class="err">these</span> <span class="err">two</span> <span class="err">entries</span> <span class="err">are</span> <span class="err">used</span> <span class="err">to</span> <span class="err">construct</span> <span class="err">the</span> <span class="err">output</span> <span class="err">location</span> <span class="err">for</span> <span class="err">the</span>
+<span class="err">output</span> <span class="err">file.</span>
 
-<p>You can use <tt>s3://bucketname/</tt> or a local path as the prefix.</p>
+<span class="err">*</span> <span class="err">output_dir</span>
+<span class="err">*</span> <span class="err">output_prefix</span>
 
-<p class="warning"><strong>Note:</strong> While the above entries are required, it is STRONGLY suggested that workflow developers no longer rely on them to decide the output path of a provisioned file.  Instead we recommend explicitly providing in the ini file whatever paths you may require, possibly using the variables described below, and then assigning that path to the output file via <code>SqwFile.setOutputPath(String path)</code>.</p>
+<span class="err">For</span> <span class="err">example,</span> <span class="err">if</span> <span class="err">you</span> <span class="err">have</span> <span class="err">a</span> <span class="err">SqwFile</span> <span class="err">object</span> <span class="err">can</span> <span class="err">call</span>
+<span class="err">file.setIsOutput(true)</span><span class="c1">; the workflow engine constructs an output path</span>
+<span class="err">for</span> <span class="err">this</span> <span class="err">file</span> <span class="err">using</span> <span class="err">the</span> <span class="err">following:</span>
 
-</div>
-<div class="section" id="ini-variables">
-<h3>INI Variables</h3>
+	<span class="err">//</span>
 
-<p>The ini files support variables, in the format <code>$(variable-name}</code>, that will be replaced when the workflow run is launched. The variable name can refer to another entry in the ini file, or can refer to the following SeqWare generated values:</p>
+<span class="err">You</span> <span class="err">can</span> <span class="err">use</span> <span class="err">s3://bucketname/</span> <span class="err">or</span> <span class="err">a</span> <span class="err">local</span> <span class="err">path</span> <span class="err">as</span> <span class="err">the</span> <span class="err">prefix.</span>
 
-<ul>
-  <li>
-<code>sqw.bundle-dir</code>: the path to the directory of this workflow’s bundle. Support for the legacy version of this variable, <code>workflow_bundle_dir</code>, may be removed in a future version.</li>
-  <li>
-<code>sqw.date</code>: the current date in ISO 8601 format, e.g., 2013-10-31.  Support for the legacy version of this variable, <code>date</code>, may be removed in a future version.</li>
-  <li>
-<code>sqw.datetime</code>: the current datetime in ISO 8601 format, e.g., 2013-10-31T16:45:30.</li>
-  <li>
-<code>sqw.random</code>: a randomly generated integer from 0 to 2147483647.  Support for the legacy version of this variable, <code>random</code>, may be removed in a future version.</li>
-  <li>
-<code>sqw.timestamp</code>: the current number of milliseconds since January 1, 1970.</li>
-  <li>
-<code>sqw.uuid</code>: a randomly generated <a href="http://en.wikipedia.org/wiki/Universally_unique_identifier#Version_4_.28random.29">universally unique identifier</a>.</li>
-</ul>
 
-<p>Each instance of the above <code>sqw.*</code> variables in an ini file will be replaced with a separately resolved value, e.g., multiple instances of <code>${sqw.uuid}</code> will each resolve to different values. If you desire to reuse the same generated value, do somthing akin to the following:</p>
+<span class="err">Note:</span> <span class="err">While</span> <span class="err">the</span> <span class="err">above</span> <span class="err">entries</span> <span class="err">are</span> <span class="err">required,</span> <span class="err">it</span> <span class="err">is</span> <span class="err">STRONGLY</span> <span class="err">suggested</span> <span class="err">that</span> <span class="err">workflow</span> <span class="err">developers</span> <span class="err">no</span> <span class="err">longer</span> <span class="err">rely</span> <span class="err">on</span> <span class="err">them</span> <span class="err">to</span> <span class="err">decide</span> <span class="err">the</span> <span class="err">output</span> <span class="err">path</span> <span class="err">of</span> <span class="err">a</span> <span class="err">provisioned</span> <span class="err">file.</span>  <span class="err">Instead</span> <span class="err">we</span> <span class="err">recommend</span> <span class="err">explicitly</span> <span class="err">providing</span> <span class="err">in</span> <span class="err">the</span> <span class="err">ini</span> <span class="err">file</span> <span class="err">whatever</span> <span class="err">paths</span> <span class="err">you</span> <span class="err">may</span> <span class="err">require,</span> <span class="err">possibly</span> <span class="err">using</span> <span class="err">the</span> <span class="err">variables</span> <span class="err">described</span> <span class="err">below,</span> <span class="err">and</span> <span class="err">then</span> <span class="err">assigning</span> <span class="err">that</span> <span class="err">path</span> <span class="err">to</span> <span class="err">the</span> <span class="err">output</span> <span class="err">file</span> <span class="err">via</span> <span class="err">SqwFile.setOutputPath(String</span> <span class="err">path).</span>
 
-<pre><code class="language-ini"><span class="na">dirname</span><span class="o">=</span><span class="s">output</span>
+
+<span class="c1">### INI Variables</span>
+
+<span class="err">The</span> <span class="err">ini</span> <span class="err">files</span> <span class="err">support</span> <span class="err">variables,</span> <span class="err">in</span> <span class="err">the</span> <span class="err">format</span> <span class="err">`$(variable-name}`,</span> <span class="err">that</span> <span class="err">will</span> <span class="err">be</span> <span class="err">replaced</span> <span class="err">when</span> <span class="err">the</span> <span class="err">workflow</span> <span class="err">run</span> <span class="err">is</span> <span class="err">launched.</span> <span class="err">The</span> <span class="err">variable</span> <span class="err">name</span> <span class="err">can</span> <span class="err">refer</span> <span class="err">to</span> <span class="err">another</span> <span class="err">entry</span> <span class="err">in</span> <span class="err">the</span> <span class="err">ini</span> <span class="err">file,</span> <span class="err">or</span> <span class="err">can</span> <span class="err">refer</span> <span class="err">to</span> <span class="err">the</span> <span class="err">following</span> <span class="err">SeqWare</span> <span class="err">generated</span> <span class="err">values:</span>
+
+<span class="err">*</span> <span class="err">`sqw.bundle-dir`:</span> <span class="err">the</span> <span class="err">path</span> <span class="err">to</span> <span class="err">the</span> <span class="err">directory</span> <span class="err">of</span> <span class="err">this</span> <span class="err">workflow's</span> <span class="err">bundle.</span> <span class="err">Support</span> <span class="err">for</span> <span class="err">the</span> <span class="err">legacy</span> <span class="err">version</span> <span class="err">of</span> <span class="err">this</span> <span class="err">variable,</span> <span class="err">`workflow_bundle_dir`,</span> <span class="err">may</span> <span class="err">be</span> <span class="err">removed</span> <span class="err">in</span> <span class="err">a</span> <span class="err">future</span> <span class="err">version.</span>
+<span class="err">*</span> <span class="err">`sqw.date`:</span> <span class="err">the</span> <span class="err">current</span> <span class="err">date</span> <span class="err">in</span> <span class="err">ISO</span> <span class="err">8601</span> <span class="err">format,</span> <span class="err">e.g.,</span> <span class="err">2013-10-31.</span>  <span class="err">Support</span> <span class="err">for</span> <span class="err">the</span> <span class="err">legacy</span> <span class="err">version</span> <span class="err">of</span> <span class="err">this</span> <span class="err">variable,</span> <span class="err">`date`,</span> <span class="err">may</span> <span class="err">be</span> <span class="err">removed</span> <span class="err">in</span> <span class="err">a</span> <span class="err">future</span> <span class="err">version.</span>
+<span class="err">*</span> <span class="err">`sqw.datetime`:</span> <span class="err">the</span> <span class="err">current</span> <span class="err">datetime</span> <span class="err">in</span> <span class="err">ISO</span> <span class="err">8601</span> <span class="err">format,</span> <span class="err">e.g.,</span> <span class="err">2013-10-31T16:45:30.</span>
+<span class="err">*</span> <span class="err">`sqw.random`:</span> <span class="err">a</span> <span class="err">randomly</span> <span class="err">generated</span> <span class="err">integer</span> <span class="err">from</span> <span class="err">0</span> <span class="err">to</span> <span class="err">2147483647.</span>  <span class="err">Support</span> <span class="err">for</span> <span class="err">the</span> <span class="err">legacy</span> <span class="err">version</span> <span class="err">of</span> <span class="err">this</span> <span class="err">variable,</span> <span class="err">`random`,</span> <span class="err">may</span> <span class="err">be</span> <span class="err">removed</span> <span class="err">in</span> <span class="err">a</span> <span class="err">future</span> <span class="err">version.</span>
+<span class="err">*</span> <span class="err">`sqw.timestamp`:</span> <span class="err">the</span> <span class="err">current</span> <span class="err">number</span> <span class="err">of</span> <span class="err">milliseconds</span> <span class="err">since</span> <span class="err">January</span> <span class="err">1,</span> <span class="err">1970.</span>
+<span class="err">*</span> <span class="err">`sqw.uuid`:</span> <span class="err">a</span> <span class="err">randomly</span> <span class="err">generated</span> <span class="err">universally</span> <span class="err">unique</span> <span class="err">identifier.</span>
+
+<span class="err">Each</span> <span class="err">instance</span> <span class="err">of</span> <span class="err">the</span> <span class="err">above</span> <span class="err">`sqw.*`</span> <span class="err">variables</span> <span class="err">in</span> <span class="err">an</span> <span class="err">ini</span> <span class="err">file</span> <span class="err">will</span> <span class="err">be</span> <span class="err">replaced</span> <span class="err">with</span> <span class="err">a</span> <span class="err">separately</span> <span class="err">resolved</span> <span class="err">value,</span> <span class="err">e.g.,</span> <span class="err">multiple</span> <span class="err">instances</span> <span class="err">of</span> <span class="err">`${sqw.uuid}`</span> <span class="err">will</span> <span class="err">each</span> <span class="err">resolve</span> <span class="err">to</span> <span class="err">different</span> <span class="err">values.</span> <span class="err">If</span> <span class="err">you</span> <span class="err">desire</span> <span class="err">to</span> <span class="err">reuse</span> <span class="err">the</span> <span class="err">same</span> <span class="err">generated</span> <span class="err">value,</span> <span class="err">do</span> <span class="err">somthing</span> <span class="err">akin</span> <span class="err">to</span> <span class="err">the</span> <span class="err">following:</span>
+
+<span class="c1">#!ini</span>
+<span class="na">dirname</span><span class="o">=</span><span class="s">output</span>
 <span class="na">filename</span><span class="o">=</span><span class="s">${sqw.random}</span>
 <span class="na">text_file</span><span class="o">=</span><span class="s">${dirname}/${filename}.txt</span>
-<span class="na">json_file</span><span class="o">=</span><span class="s">${dirname}/${filename}.json</span></code></pre>
+<span class="na">json_file</span><span class="o">=</span><span class="s">${dirname}/${filename}.json</span>
 
-<p>Thus if <code>filename</code> resolved to a value of <code>12345</code>, then <code>text_file</code> will have a value of <code>output/12345.txt</code> and <code>json_file</code> will have a value of <code>output/12345.json</code>.</p>
 
+<span class="err">Thus</span> <span class="err">if</span> <span class="err">`filename`</span> <span class="err">resolved</span> <span class="err">to</span> <span class="err">a</span> <span class="err">value</span> <span class="err">of</span> <span class="err">`12345`,</span> <span class="err">then</span> <span class="err">`text_file`</span> <span class="err">will</span> <span class="err">have</span> <span class="err">a</span> <span class="err">value</span> <span class="err">of</span> <span class="err">`output/12345.txt`</span> <span class="err">and</span> <span class="err">`json_file`</span> <span class="err">will</span> <span class="err">have</span> <span class="err">a</span> <span class="err">value</span> <span class="err">of</span> <span class="err">`output/12345.json`.</span>
+
+
+
+<span class="c1">## Modifying the Workflow</span>
+
+<span class="err">At</span> <span class="err">this</span> <span class="err">point,</span> <span class="err">one</span> <span class="err">would</span> <span class="err">normally</span> <span class="err">want</span> <span class="err">to</span> <span class="err">edit</span> <span class="err">the</span> <span class="err">workflow</span> <span class="err">by</span> <span class="err">modifying</span> <span class="err">the</span> <span class="err">MyHelloWorldWorkflow.java</span> <span class="err">file</span> <span class="err">as</span> <span class="err">is</span> <span class="err">appropriate</span> <span class="err">for</span> <span class="err">the</span> <span class="err">workflow.</span>
+<span class="err">In</span> <span class="err">the</span> <span class="err">example</span> <span class="err">below</span> <span class="err">I</span> <span class="err">just</span> <span class="err">added</span> <span class="err">an</span> <span class="err">extra</span> <span class="err">job</span> <span class="err">that</span> <span class="err">does</span> <span class="err">a</span> <span class="err">simple</span> <span class="err">shell</span> <span class="err">operation</span> <span class="err">(dateJob).</span> <span class="err">I</span> <span class="err">also</span> <span class="err">moved</span> <span class="err">the</span> <span class="err">addFile</span> <span class="err">method</span> <span class="err">appropriately</span> <span class="err">since</span>
+<span class="err">dateJob</span> <span class="err">is</span> <span class="err">now</span> <span class="err">the</span> <span class="err">final</span> <span class="err">job</span> <span class="err">that</span> <span class="err">manipulates</span> <span class="err">the</span> <span class="err">dir1/output</span> <span class="err">file.</span>
+
+
+<span class="c1">#!java</span>
+    <span class="err">@Override</span>
+    <span class="err">public</span> <span class="err">void</span> <span class="err">buildWorkflow()</span> <span class="err">{</span>
+
+        <span class="err">//</span> <span class="err">a</span> <span class="err">simple</span> <span class="err">bash</span> <span class="err">job</span> <span class="err">to</span> <span class="err">call</span> <span class="err">mkdir</span>
+        <span class="err">//</span> <span class="err">note</span> <span class="err">that</span> <span class="err">this</span> <span class="err">job</span> <span class="err">uses</span> <span class="err">the</span> <span class="err">system's</span> <span class="err">mkdir</span> <span class="err">(which</span> <span class="err">depends</span> <span class="err">on</span> <span class="err">the</span> <span class="err">system</span> <span class="err">being</span> <span class="err">*nix)</span>
+        <span class="na">Job mkdirJob</span> <span class="o">=</span> <span class="s">this.getWorkflow().createBashJob("bash_mkdir");</span>
+<span class="s">        mkdirJob.getCommand().addArgument("mkdir test1");</span>
+
+        <span class="na">String inputFilePath</span> <span class="o">=</span> <span class="s">this.getFiles().get("file_in_0").getProvisionedPath();</span>
+
+        <span class="err">//</span> <span class="err">a</span> <span class="err">simple</span> <span class="err">bash</span> <span class="err">job</span> <span class="err">to</span> <span class="err">cat</span> <span class="err">a</span> <span class="err">file</span> <span class="err">into</span> <span class="err">a</span> <span class="err">test</span> <span class="err">file</span>
+        <span class="err">//</span> <span class="err">the</span> <span class="err">file</span> <span class="err">is</span> <span class="err">not</span> <span class="err">saved</span> <span class="err">to</span> <span class="err">the</span> <span class="err">metadata</span> <span class="err">database</span>
+        <span class="na">Job copyJob1</span> <span class="o">=</span> <span class="s">this.getWorkflow().createBashJob("bash_cp");</span>
+<span class="s">        copyJob1.setCommand(catPath + " " + inputFilePath + "&gt; test1");</span>
+<span class="s">        copyJob1.addParent(mkdirJob);</span>
+
+        <span class="err">//</span> <span class="err">a</span> <span class="err">simple</span> <span class="err">bash</span> <span class="err">job</span> <span class="err">to</span> <span class="err">echo</span> <span class="err">to</span> <span class="err">an</span> <span class="err">output</span> <span class="err">file</span> <span class="err">and</span> <span class="err">concat</span> <span class="err">an</span> <span class="err">input</span> <span class="err">file</span>
+        <span class="err">//</span> <span class="err">the</span> <span class="err">file</span> <span class="err">IS</span> <span class="err">saved</span> <span class="err">to</span> <span class="err">the</span> <span class="err">metadata</span> <span class="err">database</span>
+        <span class="na">Job copyJob2</span> <span class="o">=</span> <span class="s">this.getWorkflow().createBashJob("bash_cp");</span>
+<span class="s">        copyJob2.getCommand().addArgument(echoPath).addArgument(greeting).addArgument(" &gt; ").addArgument("dir1/output");</span>
+<span class="s">        copyJob2.getCommand().addArgument(";");</span>
+<span class="s">        copyJob2.getCommand().addArgument(catPath + " " +inputFilePath+ " &gt;&gt; dir1/output");</span>
+<span class="s">        copyJob2.addParent(mkdirJob);</span>
+
+	<span class="na">Job dateJob</span> <span class="o">=</span> <span class="s">this.getWorkflow().createBashJob("date");</span>
+<span class="s">	dateJob.setCommand("date &gt;&gt; dir1/output");</span>
+<span class="s">	dateJob.addParent(copyJob2);</span>
+<span class="s">        dateJob.addFile(createOutputFile("dir1/output", "txt/plain", manualOutput));</span>
+<span class="s">    }</span>
+
+
+
+
+
+
+<span class="c1">## Building the Workflow</span>
+
+<span class="err">If</span> <span class="err">you</span> <span class="err">made</span> <span class="err">changes</span> <span class="err">to</span> <span class="err">the</span> <span class="err">workflow</span> <span class="err">files</span> <span class="err">now</span> <span class="err">would</span> <span class="err">be</span> <span class="err">a</span> <span class="err">good</span> <span class="err">time</span> <span class="err">to</span> <span class="err">to</span> <span class="err">use</span>
+<span class="err">"mvn</span> <span class="err">clean</span> <span class="err">install"</span> <span class="err">to</span> <span class="err">refresh</span> <span class="err">the</span> <span class="err">workflow</span> <span class="err">bundle</span> <span class="err">in</span> <span class="err">the</span> <span class="err">target</span> <span class="err">directory.</span> <span class="err">For</span>
+<span class="err">example:</span>
+
+        <span class="err">$</span> <span class="err">cd</span> <span class="err">~/workflow-dev/workflow-MyHelloWorld/</span>
+        <span class="err">$</span> <span class="err">mvn</span> <span class="err">clean</span> <span class="err">install</span>
+        <span class="err">[INFO]</span> <span class="err">Scanning</span> <span class="err">for</span> <span class="err">projects...</span>
+        <span class="err">...</span>
+        <span class="err">[INFO]</span> <span class="err">------------------------------------------------------------------------</span>
+        <span class="err">[INFO]</span> <span class="err">BUILD</span> <span class="err">SUCCESS</span>
+        <span class="err">[INFO]</span> <span class="err">------------------------------------------------------------------------</span>
+        <span class="err">[INFO]</span> <span class="err">Total</span> <span class="err">time:</span> <span class="err">40.100s</span>
+        <span class="err">[INFO]</span> <span class="err">Finished</span> <span class="err">at:</span> <span class="err">Thu</span> <span class="err">Aug</span> <span class="err">15</span> <span class="err">19:59:22</span> <span class="err">UTC</span> <span class="err">2013</span>
+        <span class="err">[INFO]</span> <span class="err">Final</span> <span class="err">Memory:</span> <span class="err">28M/67M</span>
+        <span class="err">[INFO]</span> <span class="err">------------------------------------------------------------------------</span>
+
+
+<span class="c1">## Testing the Workflow</span>
+
+<span class="err">During</span> <span class="err">the</span> <span class="err">launch</span> <span class="err">process,</span> <span class="err">a</span> <span class="err">number</span> <span class="err">of</span> <span class="err">files</span> <span class="err">are</span> <span class="err">generated</span> <span class="err">into</span> <span class="err">the</span> <span class="err">`generated-scripts`</span> <span class="err">directory</span> <span class="err">inside</span> <span class="err">the</span> <span class="err">run's</span> <span class="err">working</span> <span class="err">directory.</span>  <span class="err">For</span> <span class="err">each</span> <span class="err">job</span> <span class="err">in</span> <span class="err">a</span> <span class="err">workflow,</span> <span class="err">a</span> <span class="err">`.sh`</span> <span class="err">script</span> <span class="err">contains</span> <span class="err">the</span> <span class="err">content</span> <span class="err">of</span> <span class="err">the</span> <span class="err">associated</span> <span class="err">`BashJob`</span> <span class="err">defined</span> <span class="err">by</span> <span class="err">the</span> <span class="err">developer.</span>
+
+<span class="err">When</span> <span class="err">using</span> <span class="err">the</span> <span class="err">Oozie-SGE</span> <span class="err">engine,</span> <span class="err">some</span> <span class="err">additional</span> <span class="err">files</span> <span class="err">are</span> <span class="err">included:</span>
+<span class="err">*</span> <span class="err">`-runner.sh`:</span> <span class="err">The</span> <span class="err">script</span> <span class="err">invoked</span> <span class="err">by</span> <span class="err">SGE,</span> <span class="err">which</span> <span class="err">will</span> <span class="err">either</span> <span class="err">perform</span> <span class="err">a</span> <span class="err">file</span> <span class="err">provisioning</span> <span class="err">(copying</span> <span class="err">files</span> <span class="err">into/out</span> <span class="err">of</span> <span class="err">the</span> <span class="err">working</span> <span class="err">directory),</span> <span class="err">or</span> <span class="err">invoke</span> <span class="err">`.sh`</span>
+<span class="err">*</span> <span class="err">`-qsub.opts`:</span> <span class="err">The</span> <span class="err">options</span> <span class="err">to</span> <span class="err">be</span> <span class="err">provided</span> <span class="err">to</span> <span class="err">the</span> <span class="err">`qsub`</span> <span class="err">command,</span> <span class="err">e.g.</span> <span class="err">setting</span> <span class="err">max</span> <span class="err">memory.</span>
+
+<span class="err">Prior</span> <span class="err">to</span> <span class="err">testing</span> <span class="err">your</span> <span class="err">bundle,</span> <span class="err">it</span> <span class="err">will</span> <span class="err">be</span> <span class="err">worthwhile</span> <span class="err">to</span> <span class="err">ensure</span> <span class="err">that</span> <span class="err">the</span> <span class="err">files</span> <span class="err">generated</span> <span class="err">are</span> <span class="err">what</span> <span class="err">you</span> <span class="err">expect.</span>  <span class="err">You</span> <span class="err">can</span> <span class="err">accomplish</span> <span class="err">this</span> <span class="err">with</span> <span class="err">the</span> <span class="err">`dry-run`</span> <span class="err">command:</span>
+
+    <span class="err">$</span> <span class="err">seqware</span> <span class="err">bundle</span> <span class="err">dry-run</span> <span class="err">--dir</span> <span class="err">target/Workflow_Bundle_*</span>
+    <span class="err">Performing</span> <span class="err">dry-run</span> <span class="err">of</span> <span class="err">workflow</span> <span class="err">'MyHelloWorld'</span> <span class="err">version</span> <span class="err">'1.0'</span>
+    <span class="err">Using</span> <span class="err">working</span> <span class="err">directory:</span> <span class="err">/usr/tmp/seqware-oozie/oozie-3d971491-ca43-48fb-a5d8-a73e18e7db44</span>
+    <span class="err">Files</span> <span class="err">copied</span> <span class="err">to</span> <span class="err">hdfs://master:8020/user/seqware/seqware_workflow/oozie-3d971491-ca43-48fb-a5d8-a73e18e7db44</span>
+
+    <span class="err">$</span> <span class="err">ls</span> <span class="err">/usr/tmp/seqware-oozie/oozie-3d971491-ca43-48fb-a5d8-a73e18e7db44</span>
+    <span class="err">bash_cp_4.sh</span>  <span class="err">bash_cp_5.sh</span>  <span class="err">bash_mkdir_3.sh</span>  <span class="err">start_0.sh</span>
+
+<span class="err">In</span> <span class="err">the</span> <span class="err">above,</span> <span class="err">`/usr/tmp/seqware-oozie`</span> <span class="err">is</span> <span class="err">the</span> <span class="err">configured</span> <span class="err">location</span> <span class="err">of</span> <span class="err">`OOZIE_WORK_DIR`.</span> <span class="err">Each</span> <span class="err">of</span> <span class="err">the</span> <span class="err">scripts</span> <span class="err">represents</span> <span class="err">a</span> <span class="err">bash</span> <span class="err">job</span> <span class="err">specified</span> <span class="err">by</span> <span class="err">the</span> <span class="err">developer,</span> <span class="err">with</span> <span class="err">the</span> <span class="err">exception</span> <span class="err">of</span> <span class="err">`start_0.sh`</span> <span class="err">which</span> <span class="err">creates</span> <span class="err">the</span> <span class="err">directories</span> <span class="err">specified</span> <span class="err">in</span> <span class="err">the</span> <span class="err">workflow's</span> <span class="err">`setupDirectory()`</span> <span class="err">method.</span>
+
+<span class="err">At</span> <span class="err">this</span> <span class="err">point,</span> <span class="err">the</span> <span class="err">individual</span> <span class="err">scripts</span> <span class="err">can</span> <span class="err">be</span> <span class="err">executed</span> <span class="err">to</span> <span class="err">ensure</span> <span class="err">they</span> <span class="err">do</span> <span class="err">what</span> <span class="err">you</span> <span class="err">expect.</span>
+
+<span class="err">The</span> <span class="err">next</span> <span class="err">step</span> <span class="err">after</span> <span class="err">authoring</span> <span class="err">your</span> <span class="err">workflows</span> <span class="err">in</span> <span class="err">the</span> <span class="err">Java</span> <span class="err">workflow</span> <span class="err">language,</span> <span class="err">and</span> <span class="err">verifying</span> <span class="err">the</span> <span class="err">generated</span> <span class="err">scripts,</span> <span class="err">is</span> <span class="err">to</span> <span class="err">run</span> <span class="err">them:</span>
+
+    <span class="err">$</span> <span class="err">seqware</span> <span class="err">bundle</span> <span class="err">launch</span> <span class="err">--dir</span> <span class="err">target/Workflow_Bundle_*</span>
+    <span class="err">Performing</span> <span class="err">launch</span> <span class="err">of</span> <span class="err">workflow</span> <span class="err">'MyHelloWorld'</span> <span class="err">version</span> <span class="err">'1.0'</span>
+    <span class="err">Using</span> <span class="err">working</span> <span class="err">directory:</span> <span class="err">/usr/tmp/seqware-oozie/oozie-eccfb3b6-cda5-46c3-89ce-7839d4210531</span>
+    <span class="err">Files</span> <span class="err">copied</span> <span class="err">to</span> <span class="err">hdfs://master:8020/user/seqware/seqware_workflow/oozie-eccfb3b6-cda5-46c3-89ce-7839d4210531</span>
+    <span class="err">Submitted</span> <span class="err">Oozie</span> <span class="err">job:</span> <span class="err">0000001-130930203123321-oozie-oozi-W</span>
+
+    <span class="err">Polling</span> <span class="err">workflow</span> <span class="err">run</span> <span class="err">status</span> <span class="err">every</span> <span class="err">10</span> <span class="err">seconds.</span>
+    <span class="err">Terminating</span> <span class="err">this</span> <span class="err">program</span> <span class="err">will</span> <span class="err">NOT</span> <span class="err">affect</span> <span class="err">the</span> <span class="err">running</span> <span class="err">workflow.</span>
+
+    <span class="err">Workflow</span> <span class="err">job</span> <span class="err">running</span> <span class="err">...</span>
+    <span class="err">Application</span> <span class="err">Path</span>   <span class="err">:</span> <span class="err">hdfs://master:8020/user/seqware/seqware_workflow/oozie-eccfb3b6-cda5-46c3-89ce-7839d4210531</span>
+    <span class="err">Application</span> <span class="err">Name</span>   <span class="err">:</span> <span class="err">MyHelloWorld</span>
+    <span class="err">Application</span> <span class="err">Status</span> <span class="err">:</span> <span class="err">RUNNING</span>
+    <span class="err">Application</span> <span class="err">Actions:</span>
+       <span class="err">Name:</span> <span class="err">:start:</span> <span class="err">Type:</span> <span class="err">:START:</span> <span class="err">Status:</span> <span class="err">OK</span>
+       <span class="err">Name:</span> <span class="err">start_0</span> <span class="err">Type:</span> <span class="err">java</span> <span class="err">Status:</span> <span class="err">RUNNING</span>
+    <span class="err">...</span>
+
+
+<span class="err">The</span> <span class="err">above</span> <span class="err">will</span> <span class="err">bypass</span> <span class="err">the</span> <span class="err">whole</span> <span class="err">workflow</span> <span class="err">scheduling</span> <span class="err">and</span> <span class="err">asynchronous</span> <span class="err">launching</span> <span class="err">process</span> <span class="err">that</span> <span class="err">you</span> <span class="err">saw</span> <span class="err">in</span> <span class="err">the</span> <span class="err">User</span> <span class="err">Tutorial.</span> <span class="err">What</span> <span class="err">you</span> <span class="err">lose</span> <span class="err">is</span> <span class="err">the</span> <span class="err">metadata</span> <span class="err">tracking</span> <span class="err">functionality.</span> <span class="err">The</span> <span class="err">command</span> <span class="err">runs</span> <span class="err">the</span> <span class="err">workflow</span> <span class="err">which</span> <span class="err">produces</span> <span class="err">file</span> <span class="err">outputs</span> <span class="err">but</span> <span class="err">that</span> <span class="err">is</span> <span class="err">all,</span> <span class="err">no</span> <span class="err">record</span> <span class="err">of</span> <span class="err">the</span> <span class="err">run</span> <span class="err">will</span> <span class="err">be</span> <span class="err">recorded</span> <span class="err">in</span> <span class="err">the</span> <span class="err">MetaDB.</span>
+
+<span class="c1">### Running with the Oozie-SGE Workflow Engine</span>
+
+<span class="err">By</span> <span class="err">default</span> <span class="err">workflows</span> <span class="err">are</span> <span class="err">executed</span> <span class="err">on</span> <span class="err">the</span> <span class="err">[Oozie](http://oozie.apache.org/)</span> <span class="err">workflow</span> <span class="err">engine,</span> <span class="err">with</span> <span class="err">each</span> <span class="err">step</span> <span class="err">treated</span> <span class="err">as</span> <span class="err">a</span> <span class="err">MapReduce</span> <span class="err">job.</span>
+<span class="err">In</span> <span class="err">the</span> <span class="err">future,</span> <span class="err">using</span> <span class="err">this</span> <span class="err">workflow</span> <span class="err">engine</span> <span class="err">will</span> <span class="err">allow</span> <span class="err">for</span> <span class="err">mixed</span> <span class="err">workflows</span> <span class="err">that</span>
+<span class="err">include</span> <span class="err">traditional</span> <span class="err">scripts</span> <span class="err">along</span> <span class="err">with</span> <span class="err">steps</span> <span class="err">using</span> <span class="err">MapReduce,</span> <span class="err">Pig,</span> <span class="err">Hive,</span> <span class="err">and</span>
+<span class="err">other</span> <span class="err">Hadoop-associated</span> <span class="err">technologies.</span>
+
+<span class="err">There</span> <span class="err">are</span> <span class="err">a</span> <span class="err">few</span> <span class="err">caveats</span> <span class="err">for</span> <span class="err">the</span> <span class="err">Oozie</span> <span class="err">workflow</span> <span class="err">engine</span> <span class="err">in</span> <span class="err">SeqWare.</span>  <span class="err">For</span> <span class="err">example,</span>
+<span class="err">to</span> <span class="err">run</span> <span class="err">the</span> <span class="err">workflow</span> <span class="err">above</span> <span class="err">you</span> <span class="err">will</span> <span class="err">need</span> <span class="err">to</span> <span class="err">do</span> <span class="err">the</span> <span class="err">following:</span>
+
+<span class="err">*</span> <span class="err">Ensure</span> <span class="err">your</span> <span class="err">.seqware/settings</span> <span class="err">file</span> <span class="err">includes</span> <span class="err">the</span> <span class="err">correct</span> <span class="err">parameters.</span> <span class="err">If</span> <span class="err">you</span> <span class="err">are</span> <span class="err">using</span> <span class="err">our</span> <span class="err">VM</span> <span class="err">this</span> <span class="err">will</span> <span class="err">be</span> <span class="err">true.</span>
+<span class="err">*</span> <span class="err">Jobs</span> <span class="err">are</span> <span class="err">run</span> <span class="err">by</span> <span class="err">the</span> <span class="err">'mapred'</span> <span class="err">user</span> <span class="err">not</span> <span class="err">the</span> <span class="err">seqware</span> <span class="err">user</span> <span class="err">(this</span> <span class="err">is</span> <span class="err">not</span> <span class="err">the</span> <span class="err">case</span> <span class="err">with</span> <span class="err">oozie-sge,</span> <span class="err">mentioned</span> <span class="err">below).</span> <span class="err">So</span> <span class="err">when</span> <span class="err">you</span> <span class="err">author</span> <span class="err">and</span> <span class="err">run</span> <span class="err">workflows</span> <span class="err">make</span> <span class="err">sure</span> <span class="err">the</span> <span class="err">output</span> <span class="err">destination</span> <span class="err">can</span> <span class="err">be</span> <span class="err">written</span> <span class="err">to</span> <span class="err">by</span> <span class="err">mapred.</span> <span class="err">In</span> <span class="err">the</span> <span class="err">future</span> <span class="err">we</span> <span class="err">will</span> <span class="err">eliminate</span> <span class="err">this</span> <span class="err">constraint.</span>
+<span class="err">*</span> <span class="err">Workflows</span> <span class="err">include</span> <span class="err">bash</span> <span class="err">jobs</span> <span class="err">but</span> <span class="err">in</span> <span class="err">the</span> <span class="err">future</span> <span class="err">we</span> <span class="err">will</span> <span class="err">add</span> <span class="err">other</span> <span class="err">Hadoop-specific</span> <span class="err">types</span> <span class="err">(e.g.</span> <span class="err">MapReduce).</span> <span class="err">For</span> <span class="err">now</span> <span class="err">these</span> <span class="err">are</span> <span class="err">not</span> <span class="err">implemented.</span>
+<span class="err">*</span> <span class="err">The</span> <span class="err">monitoring</span> <span class="err">tools</span> <span class="err">for</span> <span class="err">Oozie</span> <span class="err">are</span> <span class="err">good,</span> <span class="err">but</span> <span class="err">check</span> <span class="err">out</span> <span class="err">Hue</span> <span class="err">for</span> <span class="err">even</span> <span class="err">better</span> <span class="err">interaction</span> <span class="err">(it</span> <span class="err">should</span> <span class="err">already</span> <span class="err">be</span> <span class="err">running</span> <span class="err">on</span> <span class="err">port</span> <span class="err">8888</span> <span class="err">on</span> <span class="err">the</span> <span class="err">VM).</span> <span class="err">You</span> <span class="err">can</span> <span class="err">monitor</span> <span class="err">and</span> <span class="err">debug</span> <span class="err">workflows</span> <span class="err">through</span> <span class="err">this</span> <span class="err">very</span> <span class="err">nice</span> <span class="err">web</span> <span class="err">interface.</span>
+<span class="err">*</span> <span class="err">This</span> <span class="err">engine</span> <span class="err">will</span> <span class="err">only</span> <span class="err">work</span> <span class="err">on</span> <span class="err">the</span> <span class="err">1.0.0</span> <span class="err">release</span> <span class="err">of</span> <span class="err">SeqWare</span> <span class="err">or</span> <span class="err">newer.</span> <span class="err">The</span> <span class="err">0.13.6.x</span> <span class="err">and</span> <span class="err">earlier</span> <span class="err">releases</span> <span class="err">will</span> <span class="err">only</span> <span class="err">work</span> <span class="err">with</span> <span class="err">the</span> <span class="err">Pegasus</span> <span class="err">workflow</span> <span class="err">engine.</span>
+
+<span class="err">We</span> <span class="err">also</span> <span class="err">provide</span> <span class="err">an</span> <span class="err">alternate</span> <span class="err">"engine"</span> <span class="err">that</span> <span class="err">will</span> <span class="err">allow</span> <span class="err">jobs</span> <span class="err">to</span> <span class="err">be</span> <span class="err">managed</span> <span class="err">and</span> <span class="err">scheduled</span> <span class="err">by</span> <span class="err">Oozie</span> <span class="err">but</span>
+<span class="na">run on a traditional Sun Grid Engine (SGE) cluster.  For workflows that execute on SGE, either change the SeqWare settings file to specify `SW_DEFAULT_ENGINE</span><span class="o">=</span><span class="s">oozie-sge`, or add `--engine oozie-sge` to the command line.  Unlike the oozie engine, the oozie-sge engine will execute jobs as the submitting user.</span>
+
+<span class="err">In</span> <span class="err">this</span> <span class="err">following</span> <span class="err">example</span> <span class="err">the</span> <span class="err">same</span> <span class="err">workflow</span> <span class="err">as</span> <span class="err">above</span> <span class="err">is</span> <span class="err">executed</span> <span class="err">with</span> <span class="err">the</span> <span class="err">oozie-sge</span> <span class="err">engine:</span>
+
+    <span class="err">$</span> <span class="err">cd</span> <span class="err">/home/seqware/workflow-dev/workflow-MyHelloWorld</span>
+    <span class="err">$</span> <span class="err">seqware</span> <span class="err">bundle</span> <span class="err">launch</span> <span class="err">--dir</span> <span class="err">target/Workflow_Bundle_*</span> <span class="err">--engine</span> <span class="err">oozie-sge</span>
+
+<span class="err">This</span> <span class="err">will</span> <span class="err">cause</span> <span class="err">the</span> <span class="err">workflow</span> <span class="err">to</span> <span class="err">run</span> <span class="err">and</span> <span class="err">not</span> <span class="err">exit</span> <span class="err">until</span> <span class="err">it</span> <span class="err">finishes.</span>  <span class="err">You</span> <span class="err">can</span> <span class="err">also</span> <span class="err">monitor</span> <span class="err">the</span> <span class="err">workflow</span> <span class="err">using</span> <span class="err">the</span> <span class="err">Hue</span> <span class="err">web</span>
+<span class="err">application</span> <span class="err">installed</span> <span class="err">at</span> <span class="err">http://hostname:8888/oozie/.</span> <span class="err">For</span> <span class="err">our</span> <span class="err">VMs</span> <span class="err">the</span> <span class="err">username</span>
+<span class="err">and</span> <span class="err">password</span> <span class="err">are</span> <span class="err">"seqware".</span> <span class="err">This</span> <span class="err">is</span> <span class="err">a</span> <span class="err">great</span> <span class="err">way</span> <span class="err">to</span> <span class="err">monitor</span> <span class="err">and</span> <span class="err">debug</span> <span class="err">workflows,</span>
+<span class="err">you</span> <span class="err">can</span> <span class="err">very</span> <span class="err">easily</span> <span class="err">get</span> <span class="err">to</span> <span class="err">the</span> <span class="err">logs</span> <span class="err">for</span> <span class="err">each</span> <span class="err">step,</span> <span class="err">for</span> <span class="err">example.</span>
+
+
+<span class="c1">## Packaging the Workflow into a Workflow Bundle</span>
+
+<span class="err">Assuming</span> <span class="err">the</span> <span class="err">workflow</span> <span class="err">above</span> <span class="err">worked</span> <span class="err">fine</span> <span class="err">the</span> <span class="err">next</span> <span class="err">step</span> <span class="err">is</span> <span class="err">to</span> <span class="err">package</span> <span class="err">it.</span>
+
+    <span class="err">$</span> <span class="err">mkdir</span> <span class="err">~/packaged-bundles</span>
+    <span class="err">$</span> <span class="err">seqware</span> <span class="err">bundle</span> <span class="err">package</span> <span class="err">--dir</span> <span class="err">target/Workflow_Bundle_*</span> <span class="err">--to</span> <span class="err">~/packaged-bundles/</span>
+    <span class="err">Validating</span> <span class="err">Bundle</span> <span class="err">structure</span>
+    <span class="err">Packaging</span> <span class="err">Bundle</span>
+    <span class="err">Bundle</span> <span class="err">has</span> <span class="err">been</span> <span class="err">packaged</span> <span class="err">to</span> <span class="err">/home/seqware/packaged-bundles</span>
+
+<span class="err">What</span> <span class="err">happens</span> <span class="err">here</span> <span class="err">is</span> <span class="err">the</span> <span class="err">Workflow_Bundle_MyHelloWorld_1.0_SeqWare_1.0.9</span> <span class="err">directory</span> <span class="err">is</span> <span class="err">zip'd</span> <span class="err">up</span> <span class="err">to</span> <span class="err">your</span> <span class="err">output</span> <span class="err">directory</span> <span class="err">(`~/packaged-bundles`)</span> <span class="err">and</span> <span class="err">that</span> <span class="err">can</span> <span class="err">be</span> <span class="err">provided</span> <span class="err">to</span> <span class="err">an</span> <span class="err">admin</span> <span class="err">for</span> <span class="err">installation.</span>
+
+<span class="c1">## Next Steps</span>
+
+<span class="err">The</span> <span class="err">next</span> <span class="err">step</span> <span class="err">is</span> <span class="err">the</span> <span class="err">[Admin</span> <span class="err">Tutorial](/docs/3-getting-started/admin-tutorial/)</span> <span class="err">which</span> <span class="err">will</span> <span class="err">show</span> <span class="err">you</span> <span class="err">how</span> <span class="err">to</span> <span class="err">install</span> <span class="err">the</span> <span class="err">workflow</span> <span class="err">created</span> <span class="err">above</span> <span class="err">so</span> <span class="err">other</span> <span class="err">users</span> <span class="err">can</span> <span class="err">call</span> <span class="err">it.</span></code></pre>
 </div>
-</div>
-<div class="section" id="modifying-the-workflow">
-<h2>Modifying the Workflow</h2>
-
-<p>At this point, one would normally want to edit the workflow by modifying the WorkflowClient.java file as is appropriate for the workflow.
-In the example below I just added an extra job that does a simple shell operation (job12).</p>
-
-<pre>
-<code class="language-java">    <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">buildWorkflow</span><span class="o">()</span> <span class="o">{</span>
-        <span class="n">Job</span> <span class="n">job00</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">getWorkflow</span><span class="o">().</span><span class="na">createBashJob</span><span class="o">(</span><span class="s">"bash_mkdir"</span><span class="o">);</span>
-        <span class="n">job00</span><span class="o">.</span><span class="na">getCommand</span><span class="o">().</span><span class="na">addArgument</span><span class="o">(</span><span class="s">"mkdir test1"</span><span class="o">);</span>
-
-        <span class="n">Job</span> <span class="n">job10</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">getWorkflow</span><span class="o">().</span><span class="na">createBashJob</span><span class="o">(</span><span class="s">"bash_cp"</span><span class="o">);</span>
-        <span class="n">job10</span><span class="o">.</span><span class="na">setCommand</span><span class="o">(</span><span class="s">"cp "</span> <span class="o">+</span> <span class="k">this</span><span class="o">.</span><span class="na">getFiles</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="s">"file_in_0"</span><span class="o">).</span><span class="na">getProvisionedPath</span><span class="o">()</span> <span class="o">+</span> <span class="s">" test1"</span><span class="o">);</span>
-        <span class="n">job10</span><span class="o">.</span><span class="na">addParent</span><span class="o">(</span><span class="n">job00</span><span class="o">);</span>
-
-        <span class="n">Job</span> <span class="n">job11</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">getWorkflow</span><span class="o">().</span><span class="na">createBashJob</span><span class="o">(</span><span class="s">"bash_cp"</span><span class="o">);</span>
-        <span class="n">job11</span><span class="o">.</span><span class="na">setCommand</span><span class="o">(</span><span class="s">"cp "</span> <span class="o">+</span> <span class="k">this</span><span class="o">.</span><span class="na">getFiles</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="s">"file_in_0"</span><span class="o">).</span><span class="na">getProvisionedPath</span><span class="o">()</span> <span class="o">+</span> <span class="s">" dir1/output"</span><span class="o">);</span>
-        <span class="n">job11</span><span class="o">.</span><span class="na">addParent</span><span class="o">(</span><span class="n">job00</span><span class="o">);</span>
-
-        <span class="n">Job</span> <span class="n">job12</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">getWorkflow</span><span class="o">().</span><span class="na">createBashJob</span><span class="o">(</span><span class="s">"bash_date"</span><span class="o">);</span>
-        <span class="n">job12</span><span class="o">.</span><span class="na">setCommand</span><span class="o">(</span><span class="s">"date &gt; dir1/time"</span><span class="o">);</span>
-        <span class="n">job12</span><span class="o">.</span><span class="na">addParent</span><span class="o">(</span><span class="n">job11</span><span class="o">);</span>
-    <span class="o">}</span></code>
-</pre>
-
-</div>
-<div class="section" id="building-the-workflow">
-<h2>Building the Workflow</h2>
-
-<p>If you made changes to the workflow files now would be a good time to to use
-“mvn clean install” to refresh the workflow bundle in the target directory. For
-example:</p>
-
-<pre><code>    $ cd ~/workflow-dev/MyHelloWorld/
-    $ mvn clean install
-    [INFO] Scanning for projects...
-    ...
-    [INFO] ------------------------------------------------------------------------
-    [INFO] BUILD SUCCESS
-    [INFO] ------------------------------------------------------------------------
-    [INFO] Total time: 40.100s
-    [INFO] Finished at: Thu Aug 15 19:59:22 UTC 2013
-    [INFO] Final Memory: 28M/67M
-    [INFO] ------------------------------------------------------------------------
-</code></pre>
-
-</div>
-<div class="section" id="testing-the-workflow">
-<h2>Testing the Workflow</h2>
-
-<p>During the launch process, a number of files are generated into the <code>generated-scripts</code> directory inside the run’s working directory.  For each job in a workflow, a <code>&lt;job-name&gt;.sh</code> script contains the content of the associated <code>BashJob</code> defined by the developer.</p>
-
-<p>When using the Oozie-SGE engine, some additional files are included:
-* <code>&lt;job-name&gt;-runner.sh</code>: The script invoked by SGE, which will either perform a file provisioning (copying files into/out of the working directory), or invoke <code>&lt;job-name&gt;.sh</code>
-* <code>&lt;job-name&gt;-qsub.opts</code>: The options to be provided to the <code>qsub</code> command, e.g. setting max memory.</p>
-
-<p>Prior to testing your bundle, it will be worthwhile to ensure that the files generated are what you expect.  You can accomplish this with the <code>dry-run</code> command:</p>
-
-<pre><code>$ seqware bundle dry-run --dir target/Workflow_Bundle_*
-Performing dry-run of workflow 'MyHelloWorld' version '1.0-SNAPSHOT'
-Using working directory: /usr/tmp/seqware-oozie/oozie-3d971491-ca43-48fb-a5d8-a73e18e7db44
-Files copied to hdfs://master:8020/user/seqware/seqware_workflow/oozie-3d971491-ca43-48fb-a5d8-a73e18e7db44
-
-$ ls /usr/tmp/seqware-oozie/oozie-3d971491-ca43-48fb-a5d8-a73e18e7db44
-bash_cp_4.sh  bash_cp_5.sh  bash_mkdir_3.sh  start_0.sh
-</code></pre>
-
-<p>In the above, <code>/usr/tmp/seqware-oozie</code> is the configured location of <code>OOZIE_WORK_DIR</code>. Each of the scripts represents a bash job specified by the developer, with the exception of <code>start_0.sh</code> which creates the directories specified in the workflow’s <code>setupDirectory()</code> method.</p>
-
-<p>At this point, the individual scripts can be executed to ensure they do what you expect.</p>
-
-<p>The next step after authoring your workflows in the Java workflow language, and verifying the generated scripts, is to run them:</p>
-
-<pre><code>$ seqware bundle launch --dir target/Workflow_Bundle_*
-Performing launch of workflow 'MyHelloWorld' version '1.0-SNAPSHOT'
-Using working directory: /usr/tmp/seqware-oozie/oozie-eccfb3b6-cda5-46c3-89ce-7839d4210531
-Files copied to hdfs://master:8020/user/seqware/seqware_workflow/oozie-eccfb3b6-cda5-46c3-89ce-7839d4210531
-Submitted Oozie job: 0000001-130930203123321-oozie-oozi-W
-
-Polling workflow run status every 10 seconds.
-Terminating this program will NOT affect the running workflow.
-
-Workflow job running ...
-Application Path   : hdfs://master:8020/user/seqware/seqware_workflow/oozie-eccfb3b6-cda5-46c3-89ce-7839d4210531
-Application Name   : MyHelloWorld
-Application Status : RUNNING
-Application Actions:
-   Name: :start: Type: :START: Status: OK
-   Name: start_0 Type: java Status: RUNNING
-...
-</code></pre>
-
-<p>The above will bypass the whole workflow scheduling and asynchronous launching process that you saw in the User Tutorial. What you lose is the metadata tracking functionality. The command runs the workflow which produces file outputs but that is all, no record of the run will be recorded in the MetaDB.</p>
-
-<div class="section" id="running-with-the-oozie-sge-workflow-engine">
-<h3>Running with the Oozie-SGE Workflow Engine</h3>
-
-<p>By default workflows are executed on the <a href="http://oozie.apache.org/">Oozie</a> workflow engine, with each step treated as a MapReduce job.
-In the future, using this workflow engine will allow for mixed workflows that
-include traditional scripts along with steps using MapReduce, Pig, Hive, and
-other Hadoop-associated technologies.</p>
-
-<p>There are a few caveats for the Oozie workflow engine in SeqWare.  For example,
-to run the workflow above you will need to do the following:</p>
-
-<ul>
-  <li>Ensure your .seqware/settings file includes the correct parameters. If you are using our VM this will be true.</li>
-  <li>Jobs are run by the ‘mapred’ user not the seqware user (this is not the case with oozie-sge, mentioned below). So when you author and run workflows make sure the output destination can be written to by mapred. In the future we will eliminate this constraint.</li>
-  <li>Workflows include bash jobs but in the future we will add other Hadoop-specific types (e.g. MapReduce). For now these are not implemented.</li>
-  <li>The monitoring tools for Oozie are good, but check out Hue for even better interaction (it should already be running on port 8888 on the VM). You can monitor and debug workflows through this very nice web interface.</li>
-  <li>This engine will only work on the 1.0.0 release of SeqWare or newer. The 0.13.6.x and earlier releases will only work with the Pegasus workflow engine.</li>
-</ul>
-
-<p>We also provide an alternate “engine” that will allow jobs to be managed and scheduled by Oozie but
-run on a traditional Sun Grid Engine (SGE) cluster.  For workflows that execute on SGE, either change the SeqWare settings file to specify <code>SW_DEFAULT_ENGINE=oozie-sge</code>, or add <code>--engine oozie-sge</code> to the command line.  Unlike the oozie engine, the oozie-sge engine will execute jobs as the submitting user.</p>
-
-<p>In this following example the same workflow as above is executed with the oozie-sge engine:</p>
-
-<pre><code>$ cd /home/seqware/workflow-dev/MyHelloWorld
-$ seqware bundle launch --dir target/Workflow_Bundle_* --engine oozie-sge
-</code></pre>
-
-<p>This will cause the workflow to run and not exit until it finishes.  You can also monitor the workflow using the Hue web
-application installed at http://hostname:8888/oozie/. For our VMs the username
-and password are “seqware”. This is a great way to monitor and debug workflows,
-you can very easily get to the logs for each step, for example.</p>
-
-</div>
-</div>
-<div class="section" id="packaging-the-workflow-into-a-workflow-bundle">
-<h2>Packaging the Workflow into a Workflow Bundle</h2>
-
-<p>Assuming the workflow above worked fine the next step is to package it.</p>
-
-<pre><code>$ mkdir ~/packaged-bundles
-$ seqware bundle package --dir target/Workflow_Bundle_* --to ~/packaged-bundles/
-Validating Bundle structure
-Packaging Bundle
-Bundle has been packaged to /home/seqware/packaged-bundles
-</code></pre>
-
-<p>What happens here is the <code>Workflow_Bundle_MyHelloWorld_1.0-SNAPSHOT_SeqWare_1.0.6</code> directory is zip’d up to your output directory (<code>~/packaged-bundles</code>) and that can be provided to an admin for installation.</p>
-
-</div>
-<div class="section" id="next-steps">
-<h2>Next Steps</h2>
-
-<p>The next step is the <a href="../admin-tutorial/">Admin Tutorial</a> which will show you how to install the workflow created above so other users can call it.</p>
 </div>
 </div>
 <p> </p>

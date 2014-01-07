@@ -196,12 +196,12 @@ Created IUS with SWID: 10
 
 <p>Next, you need to inject a file that will be used as input for the workflows that you are about to create. When using the decider framework, the starting point for your deciders is a root workflow run. So we create a “root” workflow and create a workflow run that has as its output the input file from the tutorial. </p>
 
-<pre><code>$ java -jar ~/.seqware/self-installs/seqware-distribution-1.0.6-full.jar  -p net.sourceforge.seqware.pipeline.plugins.Metadata -- --create --table workflow --field name::FileImport --field version::1.0 --field description::description
+<pre><code>$ java -jar ~/.seqware/self-installs/seqware-distribution-1.0.9-full.jar  -p net.sourceforge.seqware.pipeline.plugins.Metadata -- --create --table workflow --field name::FileImport --field version::1.0 --field description::description
 
 Added 'FileImport' (SWID: 11)
 Created workflow 'FileImport' version 1.0 with SWID: 11
 
-$ java -jar ~/.seqware/self-installs/seqware-distribution-1.0.6-full.jar  -p net.sourceforge.seqware.pipeline.plugins.Metadata -- --create --table workflow_run --field workflow_accession::11 --field status::completed --file imported_file::text/plain::/datastore/input.txt --parent-accession 9 --parent-accession 10
+$ java -jar ~/.seqware/self-installs/seqware-distribution-1.0.9-full.jar  -p net.sourceforge.seqware.pipeline.plugins.Metadata -- --create --table workflow_run --field workflow_accession::11 --field status::completed --file imported_file::text/plain::/datastore/input.txt --parent-accession 9 --parent-accession 10
 
 Created workflow run with SWID: 12
 </code></pre>
@@ -322,32 +322,32 @@ $ cd GZWorkflow/
 $ mvn clean install 
 (output snipped)
 $ cd ..
-$ seqware bundle package --dir GZWorkflow/target/Workflow_Bundle_GZWorkflow_1.0-SNAPSHOT_SeqWare_1.0.6/
+$ seqware bundle package --dir GZWorkflow/target/Workflow_Bundle_GZWorkflow_1.0-SNAPSHOT_SeqWare_1.0.9/
 Validating Bundle structure
 Packaging Bundle
 Bundle has been packaged to /home/seqware/workflow-dev
-$ seqware bundle package --dir TarWorkflow/target/Workflow_Bundle_TarWorkflow_1.0-SNAPSHOT_SeqWare_1.0.6/
+$ seqware bundle package --dir TarWorkflow/target/Workflow_Bundle_TarWorkflow_1.0-SNAPSHOT_SeqWare_1.0.9/
 Validating Bundle structure
 Packaging Bundle
 Bundle has been packaged to /home/seqware/workflow-dev
-$ seqware bundle install --zip Workflow_Bundle_TarWorkflow_1.0-SNAPSHOT_SeqWare_1.0.6.zip 
+$ seqware bundle install --zip Workflow_Bundle_TarWorkflow_1.0-SNAPSHOT_SeqWare_1.0.9.zip 
 Installing Bundle
-Bundle: Workflow_Bundle_TarWorkflow_1.0-SNAPSHOT_SeqWare_1.0.6.zip
-Now transferring /home/seqware/workflow-dev/Workflow_Bundle_TarWorkflow_1.0-SNAPSHOT_SeqWare_1.0.6.zip to the directory: /home/seqware/released-bundles Please be aware, this process can take hours if the bundle is many GB in size.
-Processing input: /home/seqware/workflow-dev/Workflow_Bundle_TarWorkflow_1.0-SNAPSHOT_SeqWare_1.0.6.zip
+Bundle: Workflow_Bundle_TarWorkflow_1.0-SNAPSHOT_SeqWare_1.0.9.zip
+Now transferring /home/seqware/workflow-dev/Workflow_Bundle_TarWorkflow_1.0-SNAPSHOT_SeqWare_1.0.9.zip to the directory: /home/seqware/released-bundles Please be aware, this process can take hours if the bundle is many GB in size.
+Processing input: /home/seqware/workflow-dev/Workflow_Bundle_TarWorkflow_1.0-SNAPSHOT_SeqWare_1.0.9.zip
       output-dir: /home/seqware/released-bundles
 
 Added 'TarWorkflow' (SWID: 15)
-Bundle Has Been Installed to the MetaDB and Provisioned to Workflow_Bundle_TarWorkflow_1.0-SNAPSHOT_SeqWare_1.0.6.zip!
-$ seqware bundle install --zip Workflow_Bundle_GZWorkflow_1.0-SNAPSHOT_SeqWare_1.0.6.zip 
+Bundle Has Been Installed to the MetaDB and Provisioned to Workflow_Bundle_TarWorkflow_1.0-SNAPSHOT_SeqWare_1.0.9.zip!
+$ seqware bundle install --zip Workflow_Bundle_GZWorkflow_1.0-SNAPSHOT_SeqWare_1.0.9.zip 
 Installing Bundle
-Bundle: Workflow_Bundle_GZWorkflow_1.0-SNAPSHOT_SeqWare_1.0.6.zip
-Now transferring /home/seqware/workflow-dev/Workflow_Bundle_GZWorkflow_1.0-SNAPSHOT_SeqWare_1.0.6.zip to the directory: /home/seqware/released-bundles Please be aware, this process can take hours if the bundle is many GB in size.
-Processing input: /home/seqware/workflow-dev/Workflow_Bundle_GZWorkflow_1.0-SNAPSHOT_SeqWare_1.0.6.zip
+Bundle: Workflow_Bundle_GZWorkflow_1.0-SNAPSHOT_SeqWare_1.0.9.zip
+Now transferring /home/seqware/workflow-dev/Workflow_Bundle_GZWorkflow_1.0-SNAPSHOT_SeqWare_1.0.9.zip to the directory: /home/seqware/released-bundles Please be aware, this process can take hours if the bundle is many GB in size.
+Processing input: /home/seqware/workflow-dev/Workflow_Bundle_GZWorkflow_1.0-SNAPSHOT_SeqWare_1.0.9.zip
       output-dir: /home/seqware/released-bundles
 
 Added 'GZWorkflow' (SWID: 16)
-Bundle Has Been Installed to the MetaDB and Provisioned to Workflow_Bundle_GZWorkflow_1.0-SNAPSHOT_SeqWare_1.0.6.zip!
+Bundle Has Been Installed to the MetaDB and Provisioned to Workflow_Bundle_GZWorkflow_1.0-SNAPSHOT_SeqWare_1.0.9.zip!
 </code></pre>
 
 <p>Next, deciders rely upon an up-to-date files report. Refresh this with the following command (this should probably be in a cron on a production system):</p>
@@ -357,23 +357,23 @@ Bundle Has Been Installed to the MetaDB and Provisioned to Workflow_Bundle_GZWor
 
 <p>Now, you are ready to use the basic decider to configure and schedule your workflows. The following command lets the BasicDecider run across the entire database, looking for plain text files that have been imported, in order to schedule TarWorkflows. </p>
 
-<pre><code>$ java -jar ~/.seqware/self-installs/seqware-distribution-1.0.6-full.jar -p net.sourceforge.seqware.pipeline.deciders.BasicDecider -- --all --meta-types text/plain --wf-accession 15 --schedule 
+<pre><code>$ java -jar ~/.seqware/self-installs/seqware-distribution-1.0.9-full.jar -p net.sourceforge.seqware.pipeline.deciders.BasicDecider -- --all --meta-types text/plain --wf-accession 15 --schedule 
 
 Created workflow run with SWID: 22
 Launching.
 
-java -jar seqware-distribution-1.0.6-full.jar --plugin net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher -- --workflow-accession 15 --ini-files /tmp/-12647202434325314875216080169.ini --input-files 14 --parent-accessions 18 --link-workflow-run-to-parents 10 --schedule --host master --
+java -jar seqware-distribution-1.0.9-full.jar --plugin net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher -- --workflow-accession 15 --ini-files /tmp/-12647202434325314875216080169.ini --input-files 14 --parent-accessions 18 --link-workflow-run-to-parents 10 --schedule --host master --
 </code></pre>
 
 <p>Next, wait for the workflow to run to completion, you can use either the ‘seqware workflow-run report’ or refresh the files report in order to determine when the workflow is complete, but it should take roughly 2 minutes. </p>
 
 <pre><code>$ seqware files refresh
-$ java -jar ~/.seqware/self-installs/seqware-distribution-1.0.6-full.jar -p net.sourceforge.seqware.pipeline.deciders.BasicDecider -- --all --meta-types application/x-tar --wf-accession 16 --schedule
+$ java -jar ~/.seqware/self-installs/seqware-distribution-1.0.9-full.jar -p net.sourceforge.seqware.pipeline.deciders.BasicDecider -- --all --meta-types application/x-tar --wf-accession 16 --schedule
 
 Created workflow run with SWID: 28
 Launching.
 
-java -jar seqware-distribution-1.0.6-full.jar --plugin net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher -- --workflow-accession 16 --ini-files /tmp/10127174104580126102339614094.ini --input-files 27 --parent-accessions 26 --link-workflow-run-to-parents 10 --host master --
+java -jar seqware-distribution-1.0.9-full.jar --plugin net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher -- --workflow-accession 16 --ini-files /tmp/10127174104580126102339614094.ini --input-files 27 --parent-accessions 26 --link-workflow-run-to-parents 10 --host master --
 </code></pre>
 
 <p>Now, you have a functional chain of two toy workflows and a command to import files that can kick-off the whole process.

@@ -82,55 +82,22 @@
 	|                   `-- deciders
 	|                       `-- HelloWorldDecider.java
 	`-- resources
-	    |-- decider.properties
-	    `-- workflow.ini
+	    `-- decider.properties
 </code></pre>
 
 <p>The HelloWorldDecider.java is a Java class that extends net.sourceforge.seqware.pipeline.deciders.BasicDecider, the decider framework built into SeqWare. Most of the specific decider functionality is built into HelloWorldDecider.java in a series of methods that are extended from BasicDecider. The two resources files are properties files that change more often than the Java code. These are updated when:</p>
 
-<pre><code>Migrating to a new database install
-A new version of a workflow is released
-</code></pre>
+<ul>
+  <li>Migrating to a new database install</li>
+  <li>A new version of a workflow is released</li>
+</ul>
 
 </div>
 <div class="section" id="resources-folder">
 <h2>Resources folder</h2>
 
-<p>There are two files in src/main/resources: decider.properties and workflow.ini.</p>
+<p>There is one file in src/main/resources: decider.properties. </p>
 
-<div class="section" id="decider-ini-file">
-<h3>Decider INI File</h3>
-
-<p>The workflow.ini file is an abbreviated version of the workflow’s default INI file. Deciders can only be run on installed workflows, and so the full parameters are pulled from the installed version. The decider only needs to update those properties that will change in the INI file. The decider INI can be very simple, with only the output_dir and output_prefix specified. These parameters specify the directory to which the results of the workflow will ultimately be written. You can try and change the output_prefix in the INI file to your home directory so that all of the results from the workflow will be written to your home directory instead of to the pegasus-working directory.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Original INI file</th>
-      <th>Decider INI file</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>input_file=${workflow_bundle_dir}/Workflow_Bundle_${workflow-directory-name}/${version}/data/input.txt</td>
-      <td>output_dir=seqware-results</td>
-    </tr>
-    <tr>
-      <td>greeting=Testing</td>
-      <td>output_prefix=~/</td>
-    </tr>
-    <tr>
-      <td>output_dir=seqware-results</td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>output_prefix=./</td>
-      <td> </td>
-    </tr>
-  </tbody>
-</table>
-
-</div>
 <div class="section" id="decider-properties-file">
 <h3>Decider.properties file</h3>
 
@@ -138,7 +105,7 @@ A new version of a workflow is released
 
 <pre><code>parent-workflow-accessions=
 check-wf-accessions=
-workflow-accession=6733
+workflow-accession=
 </code></pre>
 
 <p>The parent-workflow-accessions are the workflows from which the files of interest come from.</p>
@@ -159,11 +126,17 @@ workflow-accession=6733
 
 <pre><code>@Override
 public ReturnValue init() {
-this.setMetaType(Arrays.asList("application/bam"));
+        Log.debug("INIT");
+        //By default, the decider runs on a per-file basis (one file -&gt; one workflow run)
+        //this.setHeader(Header.IUS_SWA);
 
-//allows anything defined on the command line to override the 'defaults' here.
-ReturnValue val = super.init();
-return val;
+        //Launches only on BAM files
+        this.setMetaType(Arrays.asList("application/bam"));
+
+        //By calling super.init() last, anything defined on the command line at run-time 
+        //overrides the defaults set here.
+        ReturnValue val = super.init();
+        return val;
 }
 </code></pre>
 
@@ -174,7 +147,14 @@ return val;
 <p>Performs any additional checks on the file before adding it to the list of files to incorporate. This method should be extended for future deciders for custom behavior. You can also pull any details out of the file metadata here. The boolean specifies whether or not the file is added to the list.</p>
 
 <pre><code>protected boolean checkFileDetails(ReturnValue returnValue, FileMetadata fm) {
-return super.checkFileDetails(returnValue, fm);
+        Log.debug("CHECK FILE DETAILS:" + fm);
+        boolean isValid = super.checkFileDetails(returnValue, fm);
+        if (isValid) {
+            //If you need access to the information stored in the ReturnValue for each file, uncomment
+            //the next line and the line that instantiates the pathToAttributes map before the constructor
+            //pathToAttributes.put(fm.getFilePath(), returnValue);
+        }
+	return isValid;
 }
 </code></pre>
 
@@ -187,16 +167,20 @@ return super.checkFileDetails(returnValue, fm);
 <p>In this particular case, we want to substitute the INI field ‘input_file’ to be the comma-separated list of files. The rest of the INI file is auto-generated using the decider’s INI file and the default INI file from the database.</p>
 
 <pre><code>protected Map&lt;String, String&gt; modifyIniFile(String commaSeparatedFilePaths, String commaSeparatedParentAccessions) {
+        Log.debug("INI FILE:" + commaSeparatedFilePaths);
+        Map&lt;String, String&gt; iniFileMap = super.modifyIniFile(commaSeparatedFilePaths, commaSeparatedParentAccessions);
 
-Map&lt;String, String&gt; iniFileMap = new TreeMap&lt;String, String&gt;();
-iniFileMap.put("input_file", commaSeparatedFilePaths);
+    	iniFileMap.put("input_file", commaSeparatedFilePaths);
 
-return iniFileMap;
+	return iniFileMap;
 }
 </code></pre>
 
-<p>Ini attributes are applied in the following order:, where the greater than sign means ‘takes precedence over’: modifyIniFile method &gt; command line options &gt; Decider INI file &gt;  Default Database INI file
-handleGroupByAttribute method</p>
+<p>Ini attributes are applied in the following order:, where the greater than sign means ‘takes precedence over’: modifyIniFile method &gt; command line options &gt; Decider INI file &gt;  Default Database INI file</p>
+
+</div>
+<div class="section" id="handlegroupbyattribute-method">
+<h3>handleGroupByAttribute method</h3>
 
 <p>If the contents of the group-by attribute needs to be modified at all, this is where you should do it.</p>
 
