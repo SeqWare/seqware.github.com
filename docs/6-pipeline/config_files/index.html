@@ -70,89 +70,103 @@ their types, and default values.  For example:</p>
 <span class="c1"># you should pick a path that is available on all cluster nodes and can be written by your user</span>
 <span class="na">output_prefix</span><span class="o">=</span><span class="s">./</span>
 <span class="c1"># manual output determines whether or not SeqWare should enforce the uniqueness of the final directory or not. </span>
-<span class="c1"># If false, SeqWare places files in a directory specified by output_prefix/output_dir/workflowname_version/RANDOM/</span>
+<span class="c1"># If false, SeqWare places files in a directory specified by output_prefix/output_dir/workflowname_version/RANDOM/&lt;files&gt;</span>
 <span class="c1"># where RANDOM is an integer. If true, SeqWare places the files at output_prefix/output_dir and may overwrite existing</span>
 <span class="c1"># files</span>
-<span class="na">manual_output</span><span class="o">=</span><span class="s">false</span>
+<span class="na">manual_output</span><span class="o">=</span><span class="s">false</span></code></pre>
 
+<p>You access these variables in the Java workflow using the
+<tt>getProperty()</tt> method. When installing the workflow the ini file is
+parsed and extra metadata about each parameter is examined. This gives the
+system information about the type of the variable (integer, string, etc) and
+any default values.</p>
 
-<span class="err">You</span> <span class="err">access</span> <span class="err">these</span> <span class="err">variables</span> <span class="err">in</span> <span class="err">the</span> <span class="err">Java</span> <span class="err">workflow</span> <span class="err">using</span> <span class="err">the</span>
-<span class="err">getProperty()</span> <span class="err">method.</span> <span class="err">When</span> <span class="err">installing</span> <span class="err">the</span> <span class="err">workflow</span> <span class="err">the</span> <span class="err">ini</span> <span class="err">file</span> <span class="err">is</span>
-<span class="err">parsed</span> <span class="err">and</span> <span class="err">extra</span> <span class="err">metadata</span> <span class="err">about</span> <span class="err">each</span> <span class="err">parameter</span> <span class="err">is</span> <span class="err">examined.</span> <span class="err">This</span> <span class="err">gives</span> <span class="err">the</span>
-<span class="err">system</span> <span class="err">information</span> <span class="err">about</span> <span class="err">the</span> <span class="err">type</span> <span class="err">of</span> <span class="err">the</span> <span class="err">variable</span> <span class="err">(integer,</span> <span class="err">string,</span> <span class="err">etc)</span> <span class="err">and</span>
-<span class="err">any</span> <span class="err">default</span> <span class="err">values.</span>
+<p>The ini file(s) follow the general pattern of:</p>
 
-<span class="err">The</span> <span class="err">ini</span> <span class="err">file(s)</span> <span class="err">follow</span> <span class="err">the</span> <span class="err">general</span> <span class="err">pattern</span> <span class="err">of:</span>
+<pre>
+# comment/specification
+key=value
+</pre>
 
+<p>To achieve this overloaded role for ini files you need to include hints to
+ensure the BundleManager that installs workflow bundles has enough information.
+Here is what the annotation syntax looks like:</p>
 
-<span class="c1"># comment/specification</span>
-<span class="na">key</span><span class="o">=</span><span class="s">value</span>
+<pre><code># key=&lt;name&gt;:type=[integer|float|text|pulldown|file]:display=[T|F][:display_name=&lt;name_to_display&gt;][:file_meta_type=&lt;mime_meta_type&gt;][:pulldown_items=&lt;key1&gt;|&lt;value1&gt;;&lt;key2&gt;|&lt;value2&gt;]
+key=default_value
+</code></pre>
 
+<p>The file_meta_type is only used for type=file.</p>
 
-<span class="err">To</span> <span class="err">achieve</span> <span class="err">this</span> <span class="err">overloaded</span> <span class="err">role</span> <span class="err">for</span> <span class="err">ini</span> <span class="err">files</span> <span class="err">you</span> <span class="err">need</span> <span class="err">to</span> <span class="err">include</span> <span class="err">hints</span> <span class="err">to</span>
-<span class="err">ensure</span> <span class="err">the</span> <span class="err">BundleManager</span> <span class="err">that</span> <span class="err">installs</span> <span class="err">workflow</span> <span class="err">bundles</span> <span class="err">has</span> <span class="err">enough</span> <span class="err">information.</span>
-<span class="err">Here</span> <span class="err">is</span> <span class="err">what</span> <span class="err">the</span> <span class="err">annotation</span> <span class="err">syntax</span> <span class="err">looks</span> <span class="err">like:</span>
+<p>The pulldown type means that the pulldown_items should be defined as well. This looks like:</p>
 
-    <span class="c1"># key=:type=[integer|float|text|pulldown|file]:display=[T|F][:display_name=][:file_meta_type=][:pulldown_items=|;|]</span>
-    <span class="na">key</span><span class="o">=</span><span class="s">default_value</span>
+<pre><code>pulldown_items=&lt;key1&gt;|&lt;value1&gt;;&lt;key2&gt;|&lt;value2&gt;
+</code></pre>
 
-<span class="na">The file_meta_type is only used for type</span><span class="o">=</span><span class="s">file.</span>
+<p>The default value for this will refer to either value1 or value2 above.
+If you fail to include a metadata line for a particular key/value then it is assumed to be:</p>
 
-<span class="err">The</span> <span class="err">pulldown</span> <span class="err">type</span> <span class="err">means</span> <span class="err">that</span> <span class="err">the</span> <span class="err">pulldown_items</span> <span class="err">should</span> <span class="err">be</span> <span class="err">defined</span> <span class="err">as</span> <span class="err">well.</span> <span class="err">This</span> <span class="err">looks</span> <span class="err">like:</span>
+<pre><code>key=&lt;name&gt;:type=text:display=F
+</code></pre>
 
-    <span class="na">pulldown_items</span><span class="o">=</span><span class="s">|;|</span>
+<p>This is convenient since many of the values in an INI file should not be displayed to the end user.</p>
 
-<span class="err">The</span> <span class="err">default</span> <span class="err">value</span> <span class="err">for</span> <span class="err">this</span> <span class="err">will</span> <span class="err">refer</span> <span class="err">to</span> <span class="err">either</span> <span class="err">value1</span> <span class="err">or</span> <span class="err">value2</span> <span class="err">above.</span>
-<span class="err">If</span> <span class="err">you</span> <span class="err">fail</span> <span class="err">to</span> <span class="err">include</span> <span class="err">a</span> <span class="err">metadata</span> <span class="err">line</span> <span class="err">for</span> <span class="err">a</span> <span class="err">particular</span> <span class="err">key/value</span> <span class="err">then</span> <span class="err">it</span> <span class="err">is</span> <span class="err">assumed</span> <span class="err">to</span> <span class="err">be:</span>
+<div class="section" id="required-ini-entries">
+<h3>Required INI Entries</h3>
 
-    <span class="na">key</span><span class="o">=</span><span class="s">:type=text:display=F</span>
+<p>There are (currently) two required entries that all workflows should define
+in their ini files. These are related to output file provisioning. In your workflow,
+if you produce output files and use the file provisioning mechanism built into
+workflows these two entries are used to construct the output location for the
+output file.</p>
 
-<span class="err">This</span> <span class="err">is</span> <span class="err">convenient</span> <span class="err">since</span> <span class="err">many</span> <span class="err">of</span> <span class="err">the</span> <span class="err">values</span> <span class="err">in</span> <span class="err">an</span> <span class="err">INI</span> <span class="err">file</span> <span class="err">should</span> <span class="err">not</span> <span class="err">be</span> <span class="err">displayed</span> <span class="err">to</span> <span class="err">the</span> <span class="err">end</span> <span class="err">user.</span>
+<ul>
+  <li>output_dir</li>
+  <li>output_prefix</li>
+</ul>
 
-<span class="c1">### Required INI Entries</span>
+<p>For example, if you have a <tt>SqwFile</tt> object can call
+<tt>file.setIsOutput(true);</tt> the workflow engine constructs an output path
+for this file using the following:</p>
 
-<span class="err">There</span> <span class="err">are</span> <span class="err">(currently)</span> <span class="err">two</span> <span class="err">required</span> <span class="err">entries</span> <span class="err">that</span> <span class="err">all</span> <span class="err">workflows</span> <span class="err">should</span> <span class="err">define</span>
-<span class="err">in</span> <span class="err">their</span> <span class="err">ini</span> <span class="err">files.</span> <span class="err">These</span> <span class="err">are</span> <span class="err">related</span> <span class="err">to</span> <span class="err">output</span> <span class="err">file</span> <span class="err">provisioning.</span> <span class="err">In</span> <span class="err">your</span> <span class="err">workflow,</span>
-<span class="err">if</span> <span class="err">you</span> <span class="err">produce</span> <span class="err">output</span> <span class="err">files</span> <span class="err">and</span> <span class="err">use</span> <span class="err">the</span> <span class="err">file</span> <span class="err">provisioning</span> <span class="err">mechanism</span> <span class="err">built</span> <span class="err">into</span>
-<span class="err">workflows</span> <span class="err">these</span> <span class="err">two</span> <span class="err">entries</span> <span class="err">are</span> <span class="err">used</span> <span class="err">to</span> <span class="err">construct</span> <span class="err">the</span> <span class="err">output</span> <span class="err">location</span> <span class="err">for</span> <span class="err">the</span>
-<span class="err">output</span> <span class="err">file.</span>
+<pre><code>&lt;output_prefix&gt;/&lt;output_dir&gt;/&lt;file_name&gt;
+</code></pre>
 
-<span class="err">*</span> <span class="err">output_dir</span>
-<span class="err">*</span> <span class="err">output_prefix</span>
+<p>You can use <tt>s3://bucketname/</tt> or a local path as the prefix.</p>
 
-<span class="err">For</span> <span class="err">example,</span> <span class="err">if</span> <span class="err">you</span> <span class="err">have</span> <span class="err">a</span> <span class="err">SqwFile</span> <span class="err">object</span> <span class="err">can</span> <span class="err">call</span>
-<span class="err">file.setIsOutput(true)</span><span class="c1">; the workflow engine constructs an output path</span>
-<span class="err">for</span> <span class="err">this</span> <span class="err">file</span> <span class="err">using</span> <span class="err">the</span> <span class="err">following:</span>
+<p class="warning"><strong>Note:</strong> While the above entries are required, it is STRONGLY suggested that workflow developers no longer rely on them to decide the output path of a provisioned file.  Instead we recommend explicitly providing in the ini file whatever paths you may require, possibly using the variables described below, and then assigning that path to the output file via <code>SqwFile.setOutputPath(String path)</code>.</p>
 
-	<span class="err">//</span>
+</div>
+<div class="section" id="ini-variables">
+<h3>INI Variables</h3>
 
-<span class="err">You</span> <span class="err">can</span> <span class="err">use</span> <span class="err">s3://bucketname/</span> <span class="err">or</span> <span class="err">a</span> <span class="err">local</span> <span class="err">path</span> <span class="err">as</span> <span class="err">the</span> <span class="err">prefix.</span>
+<p>The ini files support variables, in the format <code>$(variable-name}</code>, that will be replaced when the workflow run is launched. The variable name can refer to another entry in the ini file, or can refer to the following SeqWare generated values:</p>
 
+<ul>
+  <li>
+<code>sqw.bundle-dir</code>: the path to the directory of this workflow’s bundle. Support for the legacy version of this variable, <code>workflow_bundle_dir</code>, may be removed in a future version.</li>
+  <li>
+<code>sqw.date</code>: the current date in ISO 8601 format, e.g., 2013-10-31.  Support for the legacy version of this variable, <code>date</code>, may be removed in a future version.</li>
+  <li>
+<code>sqw.datetime</code>: the current datetime in ISO 8601 format, e.g., 2013-10-31T16:45:30.</li>
+  <li>
+<code>sqw.random</code>: a randomly generated integer from 0 to 2147483647.  Support for the legacy version of this variable, <code>random</code>, may be removed in a future version.</li>
+  <li>
+<code>sqw.timestamp</code>: the current number of milliseconds since January 1, 1970.</li>
+  <li>
+<code>sqw.uuid</code>: a randomly generated <a href="http://en.wikipedia.org/wiki/Universally_unique_identifier#Version_4_.28random.29">universally unique identifier</a>.</li>
+</ul>
 
-<span class="err">Note:</span> <span class="err">While</span> <span class="err">the</span> <span class="err">above</span> <span class="err">entries</span> <span class="err">are</span> <span class="err">required,</span> <span class="err">it</span> <span class="err">is</span> <span class="err">STRONGLY</span> <span class="err">suggested</span> <span class="err">that</span> <span class="err">workflow</span> <span class="err">developers</span> <span class="err">no</span> <span class="err">longer</span> <span class="err">rely</span> <span class="err">on</span> <span class="err">them</span> <span class="err">to</span> <span class="err">decide</span> <span class="err">the</span> <span class="err">output</span> <span class="err">path</span> <span class="err">of</span> <span class="err">a</span> <span class="err">provisioned</span> <span class="err">file.</span>  <span class="err">Instead</span> <span class="err">we</span> <span class="err">recommend</span> <span class="err">explicitly</span> <span class="err">providing</span> <span class="err">in</span> <span class="err">the</span> <span class="err">ini</span> <span class="err">file</span> <span class="err">whatever</span> <span class="err">paths</span> <span class="err">you</span> <span class="err">may</span> <span class="err">require,</span> <span class="err">possibly</span> <span class="err">using</span> <span class="err">the</span> <span class="err">variables</span> <span class="err">described</span> <span class="err">below,</span> <span class="err">and</span> <span class="err">then</span> <span class="err">assigning</span> <span class="err">that</span> <span class="err">path</span> <span class="err">to</span> <span class="err">the</span> <span class="err">output</span> <span class="err">file</span> <span class="err">via</span> <span class="err">SqwFile.setOutputPath(String</span> <span class="err">path).</span>
+<p>Each instance of the above <code>sqw.*</code> variables in an ini file will be replaced with a separately resolved value, e.g., multiple instances of <code>${sqw.uuid}</code> will each resolve to different values. If you desire to reuse the same generated value, do somthing akin to the following:</p>
 
-
-<span class="c1">### INI Variables</span>
-
-<span class="err">The</span> <span class="err">ini</span> <span class="err">files</span> <span class="err">support</span> <span class="err">variables,</span> <span class="err">in</span> <span class="err">the</span> <span class="err">format</span> <span class="err">`$(variable-name}`,</span> <span class="err">that</span> <span class="err">will</span> <span class="err">be</span> <span class="err">replaced</span> <span class="err">when</span> <span class="err">the</span> <span class="err">workflow</span> <span class="err">run</span> <span class="err">is</span> <span class="err">launched.</span> <span class="err">The</span> <span class="err">variable</span> <span class="err">name</span> <span class="err">can</span> <span class="err">refer</span> <span class="err">to</span> <span class="err">another</span> <span class="err">entry</span> <span class="err">in</span> <span class="err">the</span> <span class="err">ini</span> <span class="err">file,</span> <span class="err">or</span> <span class="err">can</span> <span class="err">refer</span> <span class="err">to</span> <span class="err">the</span> <span class="err">following</span> <span class="err">SeqWare</span> <span class="err">generated</span> <span class="err">values:</span>
-
-<span class="err">*</span> <span class="err">`sqw.bundle-dir`:</span> <span class="err">the</span> <span class="err">path</span> <span class="err">to</span> <span class="err">the</span> <span class="err">directory</span> <span class="err">of</span> <span class="err">this</span> <span class="err">workflow's</span> <span class="err">bundle.</span> <span class="err">Support</span> <span class="err">for</span> <span class="err">the</span> <span class="err">legacy</span> <span class="err">version</span> <span class="err">of</span> <span class="err">this</span> <span class="err">variable,</span> <span class="err">`workflow_bundle_dir`,</span> <span class="err">may</span> <span class="err">be</span> <span class="err">removed</span> <span class="err">in</span> <span class="err">a</span> <span class="err">future</span> <span class="err">version.</span>
-<span class="err">*</span> <span class="err">`sqw.date`:</span> <span class="err">the</span> <span class="err">current</span> <span class="err">date</span> <span class="err">in</span> <span class="err">ISO</span> <span class="err">8601</span> <span class="err">format,</span> <span class="err">e.g.,</span> <span class="err">2013-10-31.</span>  <span class="err">Support</span> <span class="err">for</span> <span class="err">the</span> <span class="err">legacy</span> <span class="err">version</span> <span class="err">of</span> <span class="err">this</span> <span class="err">variable,</span> <span class="err">`date`,</span> <span class="err">may</span> <span class="err">be</span> <span class="err">removed</span> <span class="err">in</span> <span class="err">a</span> <span class="err">future</span> <span class="err">version.</span>
-<span class="err">*</span> <span class="err">`sqw.datetime`:</span> <span class="err">the</span> <span class="err">current</span> <span class="err">datetime</span> <span class="err">in</span> <span class="err">ISO</span> <span class="err">8601</span> <span class="err">format,</span> <span class="err">e.g.,</span> <span class="err">2013-10-31T16:45:30.</span>
-<span class="err">*</span> <span class="err">`sqw.random`:</span> <span class="err">a</span> <span class="err">randomly</span> <span class="err">generated</span> <span class="err">integer</span> <span class="err">from</span> <span class="err">0</span> <span class="err">to</span> <span class="err">2147483647.</span>  <span class="err">Support</span> <span class="err">for</span> <span class="err">the</span> <span class="err">legacy</span> <span class="err">version</span> <span class="err">of</span> <span class="err">this</span> <span class="err">variable,</span> <span class="err">`random`,</span> <span class="err">may</span> <span class="err">be</span> <span class="err">removed</span> <span class="err">in</span> <span class="err">a</span> <span class="err">future</span> <span class="err">version.</span>
-<span class="err">*</span> <span class="err">`sqw.timestamp`:</span> <span class="err">the</span> <span class="err">current</span> <span class="err">number</span> <span class="err">of</span> <span class="err">milliseconds</span> <span class="err">since</span> <span class="err">January</span> <span class="err">1,</span> <span class="err">1970.</span>
-<span class="err">*</span> <span class="err">`sqw.uuid`:</span> <span class="err">a</span> <span class="err">randomly</span> <span class="err">generated</span> <span class="err">universally</span> <span class="err">unique</span> <span class="err">identifier.</span>
-
-<span class="err">Each</span> <span class="err">instance</span> <span class="err">of</span> <span class="err">the</span> <span class="err">above</span> <span class="err">`sqw.*`</span> <span class="err">variables</span> <span class="err">in</span> <span class="err">an</span> <span class="err">ini</span> <span class="err">file</span> <span class="err">will</span> <span class="err">be</span> <span class="err">replaced</span> <span class="err">with</span> <span class="err">a</span> <span class="err">separately</span> <span class="err">resolved</span> <span class="err">value,</span> <span class="err">e.g.,</span> <span class="err">multiple</span> <span class="err">instances</span> <span class="err">of</span> <span class="err">`${sqw.uuid}`</span> <span class="err">will</span> <span class="err">each</span> <span class="err">resolve</span> <span class="err">to</span> <span class="err">different</span> <span class="err">values.</span> <span class="err">If</span> <span class="err">you</span> <span class="err">desire</span> <span class="err">to</span> <span class="err">reuse</span> <span class="err">the</span> <span class="err">same</span> <span class="err">generated</span> <span class="err">value,</span> <span class="err">do</span> <span class="err">somthing</span> <span class="err">akin</span> <span class="err">to</span> <span class="err">the</span> <span class="err">following:</span>
-
-<span class="c1">#!ini</span>
-<span class="na">dirname</span><span class="o">=</span><span class="s">output</span>
+<pre><code class="language-ini"><span class="na">dirname</span><span class="o">=</span><span class="s">output</span>
 <span class="na">filename</span><span class="o">=</span><span class="s">${sqw.random}</span>
 <span class="na">text_file</span><span class="o">=</span><span class="s">${dirname}/${filename}.txt</span>
-<span class="na">json_file</span><span class="o">=</span><span class="s">${dirname}/${filename}.json</span>
+<span class="na">json_file</span><span class="o">=</span><span class="s">${dirname}/${filename}.json</span></code></pre>
 
+<p>Thus if <code>filename</code> resolved to a value of <code>12345</code>, then <code>text_file</code> will have a value of <code>output/12345.txt</code> and <code>json_file</code> will have a value of <code>output/12345.json</code>.</p>
 
-<span class="err">Thus</span> <span class="err">if</span> <span class="err">`filename`</span> <span class="err">resolved</span> <span class="err">to</span> <span class="err">a</span> <span class="err">value</span> <span class="err">of</span> <span class="err">`12345`,</span> <span class="err">then</span> <span class="err">`text_file`</span> <span class="err">will</span> <span class="err">have</span> <span class="err">a</span> <span class="err">value</span> <span class="err">of</span> <span class="err">`output/12345.txt`</span> <span class="err">and</span> <span class="err">`json_file`</span> <span class="err">will</span> <span class="err">have</span> <span class="err">a</span> <span class="err">value</span> <span class="err">of</span> <span class="err">`output/12345.json`.</span></code></pre>
+</div>
 </div>
 </div>
 <p> </p>
