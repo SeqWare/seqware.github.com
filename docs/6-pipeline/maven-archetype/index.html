@@ -4,11 +4,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="UTF-8">
 <title>SeqWare › Maven Archetype</title>
-<meta content="nanoc 3.6.5" name="generator">
+<meta content="nanoc 3.6.7" name="generator">
 <link href="../../../assets/style-v17.css" media="screen" rel="stylesheet" type="text/css">
 <link href="http://feeds.feedburner.com/seqware" rel="alternate" title="The SeqWare Blog" type="application/atom+xml">
-<script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script>
-<script type="text/javascript">         var disqus_shortname = 'seqware';          (function() {             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);         })();     </script>
+<script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script><script type="text/javascript">         var disqus_shortname = 'seqware';          (function() {             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);         })();     </script>
 </head>
 <body>
 <div class="wrapper">
@@ -98,80 +97,77 @@ package: net.sf.seqware
 <p>Note the following conventions:</p>
 
 <ul>
-  <li>
+<li>
     <dl>
-      <dt>package</dt>
+<dt>package</dt>
       <dd>The Java package to place the workflow. Usually, we use the reversed domain of the primary project, e.g. net.github.seqware or ca.on.oicr.pde</dd>
     </dl>
-  </li>
+</li>
   <li>
     <dl>
-      <dt>groupId</dt>
+<dt>groupId</dt>
       <dd>Usually identical to the package. The workflow belongs to this group. This group id is part of the workflow’s unique Maven identity.</dd>
     </dl>
-  </li>
+</li>
   <li>
     <dl>
-      <dt>workflowName</dt>
+<dt>workflowName</dt>
       <dd>A unique camel case workflow name. This will also be used as the name of the directory containing all the files associated with this workflow.</dd>
     </dl>
-  </li>
+</li>
   <li>
     <dl>
-      <dt>artifactId</dt>
+<dt>artifactId</dt>
       <dd>The specific name of the workflow. Also part of the workflow’s unique Maven identity. The archetype defaults to workflow${workflowName}</dd>
     </dl>
-  </li>
+</li>
   <li>
     <dl>
-      <dt>version</dt>
+<dt>version</dt>
       <dd>The version of this workflow. Again, part of the workflow’s unique identity. When maintaining the code in the future it will be possible to update this value.</dd>
     </dl>
-  </li>
+</li>
 </ul>
-
 <!-- this explicit pre tag should be avoided, but the automatic nanoc formatting does not 
-seem to work here -->
-<pre>
+seem to work here --><pre>
         $ cd workflow-MyHelloWorld
         $ ls
         pom.xml src workflow  workflow.properties
 </pre>
 
 <ul>
-  <li>
+<li>
     <dl>
-      <dt>pom.xml</dt>
+<dt>pom.xml</dt>
       <dd>A Maven project file. Edit this to change the version of the workflow and to add or modify workflow dependencies such as program, modules and data.</dd>
     </dl>
-  </li>
+</li>
   <li>
     <dl>
-      <dt>workflow</dt>
+<dt>workflow</dt>
       <dd>This directory contains the workflow skeleton. Look in here to modify the workflow .ini, .java files (Java workflow) or workflow.ftl(FTL workflow). The examples of Java and FTL can be found <a href="../../15-workflow-examples/">here</a>.</dd>
     </dl>
-  </li>
+</li>
   <li>
     <dl>
-      <dt>src </dt>
+<dt>src </dt>
       <dd>This directory contains the Java client. Look in here to modify the .java files (Java workflow). The examples of Java and FTL can be found <a href="../../15-workflow-examples/">here</a>.</dd>
     </dl>
-  </li>
+</li>
   <li>
     <dl>
-      <dt>workflow.properties</dt>
+<dt>workflow.properties</dt>
       <dd>You can edit the description and workflow names in this file.</dd>
     </dl>
-  </li>
+</li>
 </ul>
-
 <div class="section" id="variables">
 <h4>Variables</h4>
 
 <p>Automatically Defined</p>
 
 <ul>
-  <li>
+<li>
     <p>${date}: a string representing the date the DAX was created, this is always defined so consider this a reserved variable name. </p>
   </li>
   <li>

@@ -4,11 +4,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="UTF-8">
 <title>SeqWare › SeqWare MetaDB</title>
-<meta content="nanoc 3.6.5" name="generator">
+<meta content="nanoc 3.6.7" name="generator">
 <link href="../../assets/style-v17.css" media="screen" rel="stylesheet" type="text/css">
 <link href="http://feeds.feedburner.com/seqware" rel="alternate" title="The SeqWare Blog" type="application/atom+xml">
-<script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script>
-<script type="text/javascript">         var disqus_shortname = 'seqware';          (function() {             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);         })();     </script>
+<script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script><script type="text/javascript">         var disqus_shortname = 'seqware';          (function() {             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);         })();     </script>
 </head>
 <body>
 <div class="wrapper">
@@ -86,10 +85,9 @@ purposes.  But we generally tried to keep with the SRA model as much as
 possible.  You can find out more information from the following documents:</p>
 
 <ul>
-  <li><a href="http://www.ncbi.nlm.nih.gov/Traces/sra/sra.cgi?cmd=show&amp;f=concepts&amp;m=doc&amp;s=concepts">SRA Concepts</a></li>
+<li><a href="http://www.ncbi.nlm.nih.gov/Traces/sra/sra.cgi?cmd=show&amp;f=concepts&amp;m=doc&amp;s=concepts">SRA Concepts</a></li>
   <li><a href="http://www.ncbi.nlm.nih.gov/Traces/sra/sra.cgi?cmd=show&amp;f=rfc&amp;m=doc&amp;s=rfc%20SRA%20Schema">Documentation</a></li>
 </ul>
-
 <p><img src="../../assets/images/metadb/Db_simple.png" alt="Simple DB"></p>
 
 </div>
@@ -141,13 +139,12 @@ ius_workflow_runs.</p>
 
 <pre><code>psql -U seqware seqware_meta_db &lt; 0.13.6.x_to_1.0.1.sql
 psql -U seqware seqware_meta_db &lt; 1.0.1_to_1.0.3.sql
-psql -U seqware seqware_meta_db &lt; 1.0.2_to_1.0.3.sql
 psql -U seqware seqware_meta_db &lt; 1.0.4_to_1.0.5.sql
 </code></pre>
 
 <p>Second, run the migration plugin:</p>
 
-<pre><code>java -jar seqware-distribution/target/seqware-distribution-1.0.9-full.jar -p net.sourceforge.seqware.pipeline.plugins.WorkflowRunFilesInitialPopulationPlugin
+<pre><code>java -jar seqware-distribution/target/seqware-distribution-1.0.11-full.jar -p net.sourceforge.seqware.pipeline.plugins.WorkflowRunFilesInitialPopulationPlugin
 </code></pre>
 
 <p>Third, you’ll probably want to create the initial file-provenance-report (note, you’ll probably want this to run on a schedule for updates)</p>

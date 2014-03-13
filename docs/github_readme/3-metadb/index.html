@@ -4,11 +4,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="UTF-8">
 <title>SeqWare › SeqWare MetaDB - Install Guide</title>
-<meta content="nanoc 3.6.5" name="generator">
+<meta content="nanoc 3.6.7" name="generator">
 <link href="../../../assets/style-v17.css" media="screen" rel="stylesheet" type="text/css">
 <link href="http://feeds.feedburner.com/seqware" rel="alternate" title="The SeqWare Blog" type="application/atom+xml">
-<script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script>
-<script type="text/javascript">         var disqus_shortname = 'seqware';          (function() {             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);         })();     </script>
+<script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script><script type="text/javascript">         var disqus_shortname = 'seqware';          (function() {             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);         })();     </script>
 </head>
 <body>
 <div class="wrapper">
@@ -90,9 +89,8 @@ repository.</p>
 <p>You can find the database schema in the seqware-meta-db directory in subversion.</p>
 
 <ul>
-  <li>Make sure PostgreSQL is configured to accept TCP/IP connections, look in file /var/lib/pgsql/data/postgresql.conf (/etc/postgresql/8.4/main/postgresql.conf on Ubuntu) for the following and uncomment listen_address and port:</li>
+<li>Make sure PostgreSQL is configured to accept TCP/IP connections, look in file /var/lib/pgsql/data/postgresql.conf (/etc/postgresql/8.4/main/postgresql.conf on Ubuntu) for the following and uncomment listen_address and port:</li>
 </ul>
-
 <pre>
 # - Connection Settings -
 
@@ -103,9 +101,8 @@ port = 5432
 </pre>
 
 <ul>
-  <li>Make sure /var/lib/pgsql/data/pg_hba.conf (/etc/postgresql/8.4/main/pg_hba.conf on Ubuntu) has an appropriate authentication line for your user. Keep in mind you need to put the more specific rules first, for example your md5 auth for seqware should be the first line and then you can have another line for all other databases/user after it. Take a look at the [http://www.postgresql.org/docs/ PostgreSQL docs] for more info about this file, it’s a little tricky.  Make sure to restart postgres after changing this file. You may want something like:</li>
+<li>Make sure /var/lib/pgsql/data/pg_hba.conf (/etc/postgresql/8.4/main/pg_hba.conf on Ubuntu) has an appropriate authentication line for your user. Keep in mind you need to put the more specific rules first, for example your md5 auth for seqware should be the first line and then you can have another line for all other databases/user after it. Take a look at the [http://www.postgresql.org/docs/ PostgreSQL docs] for more info about this file, it’s a little tricky.  Make sure to restart postgres after changing this file. You may want something like:</li>
 </ul>
-
 <pre>
 # Database administrative login by Unix domain socket
 local   all             postgres                                ident
@@ -120,17 +117,15 @@ host    all     seqware         127.0.0.1/32    md5
 <p>One tip, by default PostgreSQL uses “ident” to ensure that the user logging in via psql is the same as the user logged into the shell. I typically turn this off for the seqware user so I can log in as seqware under any users account. Note that the seqware user needs to be able to log on both to ‘seqware_meta_db’ and ‘test_seqware_meta_db’ (if you would like to run the tests).</p>
 
 <ul>
-  <li>Create a database user for the SeqWare MetaDB with the following command.  ‘‘seqware’’ is the username and ‘‘password’’ is the password for this user. Please change as appropriate for your site:</li>
+<li>Create a database user for the SeqWare MetaDB with the following command.  ‘‘seqware’’ is the username and ‘‘password’’ is the password for this user. Please change as appropriate for your site:</li>
 </ul>
-
 <pre>
 $ sudo -u postgres psql -c "CREATE USER seqware WITH PASSWORD 'seqware' CREATEDB;"
 </pre>
 
 <ul>
-  <li>Create a database using the following command where seqware_meta_db is the name of your new database and seqware is the name of your database user:</li>
+<li>Create a database using the following command where seqware_meta_db is the name of your new database and seqware is the name of your database user:</li>
 </ul>
-
 <pre>
 $ sudo -u postgres psql --command "CREATE DATABASE seqware_meta_db WITH OWNER = seqware;"
 </pre>
@@ -158,11 +153,10 @@ $ sudo -u postgres psql --command "CREATE DATABASE seqware_meta_db WITH OWNER = 
 <p>There are three files in Subversion that are used for building and populating the database.</p>
 
 <ul>
-  <li>seqware_meta_db.sql – this is the schema for the database without any data</li>
+<li>seqware_meta_db.sql – this is the schema for the database without any data</li>
   <li>seqware_meta_db_data.sql – this contains the basic data for the database, including organisms, admin registrations, etc.</li>
   <li>seqware_meta_db_testdata.sql – this contains the testing data for the database, including sequencer_runs, lanes, studies, and processing events.</li>
 </ul>
-
 <p>Production databases should not have any testing data in them so that the test data does not interfere with real data. Accordingly, production databases are built using seqware_meta_db.sql and then applying seqware_meta_db_data.sql.</p>
 
 <p>Testing databases are built using all three SQL files in sequence. The test data SQL file contains only testing data - none of the basic data from the second SQL file should be contained within it at all. There should not be any overlap between the two data files (data and testdata) in order to prevent errors and duplicated rows.</p>
@@ -349,52 +343,49 @@ psql seqware_meta_db -c "alter table workflow_run disable trigger user; alter ta
 <p>The numeric sql scripts, including 0.7.5_to_0.8.0.sql, 0.8.0_to_0.9.0.sql, 0.9.0_to_0.9.1.sql and 0.9.1_to_0.10.0.sql, contain the statements required to update the database schema between revisions. If you are not certain what version of the database you have, check the table below for the changes that were applied to each version:</p>
 
 <table>
-  <thead>
-    <tr>
-      <th style="text-align: left">Version</th>
+<thead><tr>
+<th style="text-align: left">Version</th>
       <th style="text-align: left">Change from previous version</th>
       <th style="text-align: left">Check</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: left">0.8.0</td>
+    </tr></thead>
+<tbody>
+<tr>
+<td style="text-align: left">0.8.0</td>
       <td style="text-align: left">Added <tt>sample_hierarchy</tt>, <tt>processing_experiments</tt> tables. Added foreign keys and key constraints to a number of tables. Inserted rows into <tt>library_strategy</tt>, <tt>library_source</tt> and <tt>library_selection</tt>.</td>
       <td style="text-align: left">Look for presence of <tt>sample_hierarchy</tt> and <tt>processing_experiments</tt> tables.</td>
     </tr>
-    <tr>
-      <td style="text-align: left">0.9.0</td>
+<tr>
+<td style="text-align: left">0.9.0</td>
       <td style="text-align: left">Added new organisms (NCBI and OICR-specific), added new platforms, set the ‘code’ column in <tt>organism</tt> to be not null and the ‘ncbi_taxid’ column to be unique.</td>
       <td style="text-align: left">Check for the presence of an <tt>organism</tt> with the ‘name’ of “OICR Vaccinia JX-594”</td>
     </tr>
-    <tr>
-      <td style="text-align: left">0.9.1</td>
+<tr>
+<td style="text-align: left">0.9.1</td>
       <td style="text-align: left">Added primary keys and foreign keys.</td>
       <td style="text-align: left">Check to see if <tt>workflow_param_value</tt> has a primary key and a foreign key to <tt>workflow</tt>, i.e. running <tt>\d workflow_param_value</tt> in psql should show one index (pk_workflow_param_value) and one foreign key constraint (fk_workflow_param_value_workflow_param_id).</td>
     </tr>
-    <tr>
-      <td style="text-align: left">0.10.0</td>
+<tr>
+<td style="text-align: left">0.10.0</td>
       <td style="text-align: left">Inserted the BAM file type into the <tt>file_type</tt> table.</td>
       <td style="text-align: left">Check if <tt>file_type</tt> has a row with the ‘display_name’ of “bam file”.</td>
     </tr>
-    <tr>
-      <td style="text-align: left">0.10.1</td>
+<tr>
+<td style="text-align: left">0.10.1</td>
       <td style="text-align: left">Added the permanent_bundle_location to workflow table; added the default FileImport workflow (version 0.10.0)</td>
       <td style="text-align: left">Check if the FileImport workflow exists in the workflow table</td>
     </tr>
-    <tr>
-      <td style="text-align: left">0.10.2</td>
+<tr>
+<td style="text-align: left">0.10.2</td>
       <td style="text-align: left">Fixed a constraint on the sequencer_run_attribute table to point to sequencer_run instead of sample</td>
       <td style="text-align: left">Check that the foreign key sample_id references sequencer_run (sequencer_run_id)</td>
     </tr>
-    <tr>
-      <td style="text-align: left">0.11.2</td>
+<tr>
+<td style="text-align: left">0.11.2</td>
       <td style="text-align: left">Added the file_report and sample_report tables and created triggers to populate them when data is added to the database</td>
       <td style="text-align: left">Check for the presence of the file_report and sample_report tables.</td>
     </tr>
-  </tbody>
+</tbody>
 </table>
-
 <p>After you have determined the version of your database, you must apply each of the successive patches ‘‘in order’’. So, in order to upgrade a database that is version 0.7.5 or earlier, you must apply these files in this order.</p>
 
 <p>The files can be applied simply by using the script as an input to the psql call. For example:</p>
@@ -403,7 +394,6 @@ psql seqware_meta_db -c "alter table workflow_run disable trigger user; alter ta
 </code></pre>
 
 <p>We have done our best to avoid potential errors during upgrades. If you run into any problems, please contact the developers.</p>
-
 </div>
 </div>
 <p> </p>

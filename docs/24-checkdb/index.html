@@ -4,11 +4,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="UTF-8">
 <title>SeqWare › Check Database Plugin</title>
-<meta content="nanoc 3.6.5" name="generator">
+<meta content="nanoc 3.6.7" name="generator">
 <link href="../../assets/style-v17.css" media="screen" rel="stylesheet" type="text/css">
 <link href="http://feeds.feedburner.com/seqware" rel="alternate" title="The SeqWare Blog" type="application/atom+xml">
-<script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script>
-<script type="text/javascript">         var disqus_shortname = 'seqware';          (function() {             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);         })();     </script>
+<script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script><script type="text/javascript">         var disqus_shortname = 'seqware';          (function() {             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);         })();     </script>
 </head>
 <body>
 <div class="wrapper">
@@ -56,10 +55,9 @@
 <p>In order to run the plugin, you must have the following available to you:</p>
 
 <ul>
-  <li>SeqWare script (1.0.7 or higher)</li>
+<li>SeqWare script (1.0.7 or higher)</li>
   <li>SeqWare settings file set up to contact the SeqWare meta db (contact your local SeqWare admin to get the path)</li>
 </ul>
-
 </div>
 <div class="section" id="usage">
 <h2>Usage</h2>
@@ -82,34 +80,32 @@ Description:
 <p>The following checks are built-in:</p>
 
 <ul>
-  <li>attributes are stored with one value for each key (i.e. attributes can be considered a map of key-values)</li>
+<li>attributes are stored with one value for each key (i.e. attributes can be considered a map of key-values)</li>
   <li>Orphan checks (note that a few of these can be expected, for example, if workflows have not run yet on new data)
     <ul>
-      <li>Experiments contain samples</li>
+<li>Experiments contain samples</li>
       <li>IUSes contain processing events </li>
       <li>Files are hooked up to processing events</li>
       <li>Workflows have been run at least once</li>
       <li>All samples and lanes are associated with experiments and sequencer runs respectively</li>
       <li>All processings are attached to workflow runs</li>
     </ul>
-  </li>
+</li>
   <li>Samples contain one parent (i.e. the sample hierarchy is a tree)</li>
   <li>Workflow run checks
     <ul>
-      <li>All ‘Completed’ workflow runs are eventually connected to at least one study</li>
+<li>All ‘Completed’ workflow runs are eventually connected to at least one study</li>
       <li>All ‘Completed’ workflow runs reachable by ius_workflow_runs are reachable via the processing hierarchy</li>
       <li>Workflow runs that contain input files via workflow_run_input_files should also contain (a superset of them) via the processing hierarchy</li>
     </ul>
-  </li>
+</li>
 </ul>
-
 <p>In addition, we also list the following information for debug purposes</p>
 
 <ul>
-  <li>The number of ‘Completed’ workflow runs connected to multiple studies (a possible error)</li>
+<li>The number of ‘Completed’ workflow runs connected to multiple studies (a possible error)</li>
   <li>Workflow runs with input files via the processing hierarchy but not via workflow_run_input_files (this is expected since input files via the direct table are a subset of those in the processing hierarchy) </li>
 </ul>
-
 </div>
 <div class="section" id="additional-checks">
 <h2>Additional Checks</h2>

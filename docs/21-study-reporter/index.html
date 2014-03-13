@@ -4,11 +4,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="UTF-8">
 <title>SeqWare › Symlink (Study) Reporter</title>
-<meta content="nanoc 3.6.5" name="generator">
+<meta content="nanoc 3.6.7" name="generator">
 <link href="../../assets/style-v17.css" media="screen" rel="stylesheet" type="text/css">
 <link href="http://feeds.feedburner.com/seqware" rel="alternate" title="The SeqWare Blog" type="application/atom+xml">
-<script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script>
-<script type="text/javascript">         var disqus_shortname = 'seqware';          (function() {             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);         })();     </script>
+<script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script><script type="text/javascript">         var disqus_shortname = 'seqware';          (function() {             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);         })();     </script>
 </head>
 <body>
 <div class="wrapper">
@@ -68,8 +67,6 @@
 <li>SeqWare Pipeline JAR (0.10.0 or higher)</li>
 <li>SeqWare settings file set up to contact the SeqWare Web service (contact your local SeqWare admin to get the path)</li>
 </ul>
-
-
 <p>If you are working on the SeqWare VM, these will already be setup for you.</p>
 
 </div>
@@ -118,8 +115,6 @@
 <li>sampleSWA: 24257</li>
 <li>filename: SWID_37528_CPCG_0042_Pr_P_PE_287_WG_120113_h203_0139_AC0C3JACXX_NoIndex_L004_R2_001.fastq.gz</li>
 </ul>
-
-
 <div class="section" id="parent-samples">
 <h4>Parent Samples</h4>
 
@@ -190,36 +185,33 @@ PCSI_0006                          4831
 <li>File SWID</li>
 <li>File Path</li>
 </ol>
-
-
 </div>
 <div class="section" id="examples">
 <h2>Examples</h2>
 
 <p>Here are several examples of how to use the program:</p>
 
-<pre><code>java -jar seqware-distribution-1.0.9-full.jar --plugin net.sourceforge.seqware.pipeline.plugins.SymLinkFileReporter -- --study PCSI --no-links --output-filename PCSI
+<pre><code>java -jar seqware-distribution-1.0.11-full.jar --plugin net.sourceforge.seqware.pipeline.plugins.SymLinkFileReporter -- --study PCSI --no-links --output-filename PCSI
 </code></pre>
 
 <p>In this example the tool creates only a CSV file named &#8220;PCSI.csv&#8221; that includes all the associated files for that study.  No symlinks are created on the filesystem.</p>
 
-<pre><code>java -jar seqware-distribution-1.0.9-full.jar --plugin net.sourceforge.seqware.pipeline.plugins.SymLinkFileReporter -- --study PCSI
+<pre><code>java -jar seqware-distribution-1.0.11-full.jar --plugin net.sourceforge.seqware.pipeline.plugins.SymLinkFileReporter -- --study PCSI
 </code></pre>
 
 <p>Creates a directory for the study with the title &#8220;PCSI&#8221; with all filetypes linked inside. Also creates a CSV file in the current directory with all of the file information</p>
 
-<pre><code>java -jar seqware-distribution-1.0.9-full.jar --plugin net.sourceforge.seqware.pipeline.plugins.SymLinkFileReporter -- --dump-all --no-links --output-filename DumpAllTheStudies
+<pre><code>java -jar seqware-distribution-1.0.11-full.jar --plugin net.sourceforge.seqware.pipeline.plugins.SymLinkFileReporter -- --dump-all --no-links --output-filename DumpAllTheStudies
 </code></pre>
 
 <p>Creates only a CSV file named &#8220;DumpAllTheStudies.csv&#8221; with all of the files from all of the studies in the database.</p>
 
-<pre><code>java -jar seqware-distribution-1.0.9-full.jar --plugin  net.sourceforge.seqware.pipeline.plugins.SymLinkFileReporter -- --sample PCSI_0119_Sp_R_PE_428_EX --prod-format
+<pre><code>java -jar seqware-distribution-1.0.11-full.jar --plugin  net.sourceforge.seqware.pipeline.plugins.SymLinkFileReporter -- --sample PCSI_0119_Sp_R_PE_428_EX --prod-format
 </code></pre>
 
 <p>Creates a directory and CSV file for the files from the sample named &#8220;PCSI_0119_Sp_R_PE_428_EX&#8221;. The directory will be output in production format (see below).</p>
 
 <p class="warning"><strong>Tip:</strong>There are many more possible options for the SymLinkFileReporter that let you filter on, for example, sample name, file type, workflow runs, etc.</p>
-
 </div>
 </div>
 <p> </p>
