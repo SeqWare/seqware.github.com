@@ -56,41 +56,57 @@
 
 <p>Information is collected first and stored in-memory before attempting to create the objects in the database, so you may exit the process at any time prior to database insertion without causing any database corruption.</p>
 
+<p>Sequencer Run - this element descibes the flowcell or single run of a sequencer.</p>
+
 <ul>
-<li>Sequencer Run - this element descibes the flowcell or single run of a sequencer.
-<strong> run name - a descriptive name of the flowcell
-</strong> run directory - the absolute path to the directory where the data from the flowcell or run resides
-** run description - any other identifying information</li>
-<li>Lane - this element describes a lane of sequencing in the flowcell. It may contain one or more samples or barcoded samples in the form of IUSes (below). It is unique to a Sequencer Run.
-<strong> lane number - usually a number between 1 and 8
-</strong> library strategy - XXXX
-<strong> library selection - XXXX
-</strong> library source - XXXX
-** study type</li>
-<li>IUS - short for Individual Unit of Sequencing, this element describes a sample loaded in a lane, or a barcoded sample in a lane. It is unique to a Lane and Sequencer Run.
-<strong> barcode - a short series of characters that is the identity of the barcode.
-</strong> name - a descriptive name (optional)
-** description - any other information (optional)</li>
-<li>Study - this element contains the information about the project that the samples belong to. This element can contain many samples from different lanes of sequencing.
-<strong> title - the title of the project
-</strong> description - any other information about the project
-<strong> center name - the name of the coordinating center
-</strong> center project - the name of the project at the coordinating center</li>
-<li>Experiment - this element can be used to distinguish different types of experiments within a project, for example samples that relate to WG or exome sequencing.
-<strong> name
-</strong> description</li>
-<li>Sample - this element describes a particular library used for sequencing. The exact name of the sample is created with the attributes specified at run time.
-<strong> project code - a short string of characters used to distinguish samples from a particular project, e.g. PCSI or AOE
-</strong> individual number - an integer or other short string that is used in combination with the project code to distinguish all samples with a single origin (e.g. donor)
-<strong> tissue type - the type of tissue that it originated from
-</strong> tissue origin - XXXX
-<strong> library size code - the fragment size of the library
-</strong> organism - the species of the organism
-<strong> library source template type - XXXX
-</strong> library type - XXXX
-<strong> paired end - whether or not it was sequenced with paired end sequencing
-</strong> tissue preparation -XXXX
-** targeted resequencing - if the sample is being resequenced, the kit that was used</li>
+<li>run name - a descriptive name of the flowcell</li>
+<li>run directory - the absolute path to the directory where the data from the flowcell or run resides</li>
+<li>run description - any other identifying information</li>
+</ul>
+<p>Lane - this element describes a lane of sequencing in the flowcell. It may contain one or more samples or barcoded samples in the form of IUSes (below). It is unique to a Sequencer Run.</p>
+
+<ul>
+<li>lane number - usually a number between 1 and 8</li>
+<li>library strategy - XXXX</li>
+<li>library selection - XXXX</li>
+<li>library source - XXXX</li>
+<li>study type</li>
+</ul>
+<p>IUS - short for Individual Unit of Sequencing, this element describes a sample loaded in a lane, or a barcoded sample in a lane. It is unique to a Lane and Sequencer Run.</p>
+
+<ul>
+<li>barcode - a short series of characters that is the identity of the barcode.</li>
+<li>name - a descriptive name (optional)</li>
+<li>description - any other information (optional)</li>
+</ul>
+<p>Study - this element contains the information about the project that the samples belong to. This element can contain many samples from different lanes of sequencing.</p>
+
+<ul>
+<li>title - the title of the project</li>
+<li>description - any other information about the project</li>
+<li>center name - the name of the coordinating center</li>
+<li>center project - the name of the project at the coordinating center</li>
+</ul>
+<p>Experiment - this element can be used to distinguish different types of experiments within a project, for example samples that relate to WG or exome sequencing.</p>
+
+<ul>
+<li>name</li>
+<li>description</li>
+</ul>
+<p>Sample - this element describes a particular library used for sequencing. The exact name of the sample is created with the attributes specified at run time.</p>
+
+<ul>
+<li>project code - a short string of characters used to distinguish samples from a particular project, e.g. PCSI or AOE</li>
+<li>individual number - an integer or other short string that is used in combination with the project code to distinguish all samples with a single origin (e.g. donor)</li>
+<li>tissue type - the type of tissue that it originated from</li>
+<li>tissue origin - XXXX</li>
+<li>library size code - the fragment size of the library</li>
+<li>organism - the species of the organism</li>
+<li>library source template type - XXXX</li>
+<li>library type - XXXX</li>
+<li>paired end - whether or not it was sequenced with paired end sequencing</li>
+<li>tissue preparation -XXXX</li>
+<li>targeted resequencing - if the sample is being resequenced, the kit that was used</li>
 </ul>
 </div>
 <div class="section" id="requirements">
