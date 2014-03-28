@@ -122,6 +122,25 @@ find all of the processing events linked with a Study is to traverse through
 the IUS to the root Processing through processing_ius, not through
 ius_workflow_runs.</p>
 
+<p>The following is a more complicated database diagram that includes tables used for 
+linking metadata to workflow runs and all attribute tables. This should be more 
+useful for developers rather than users. </p>
+
+<p><img src="../../assets/images/metadb/Db_complicated.png" alt="Complicated DB"></p>
+
+<p>There is one large division between the tables at the “top” of the database (sequencer_run, 
+lane, sample, ius, experiment, and study) which have physical counterparts
+and are typically created by migration by the LIMS and the tables at the “bottom” of 
+the database (workflow, workflow_run, processing, and file) which are actually used
+by SeqWare to maintain details on what workflows have been installed and run. </p>
+
+<p>Note there are also attribute tables for each of the above tables (of the form X_attribute) 
+which maintain arbitrary key value information that can be used to guide custom 
+behaviour at your particular SeqWare site. </p>
+
+<p>Finally, there are a host of linking tables (of the form processing_X) which maintain 
+information on which steps in your workflow are attributable to what physical entities. </p>
+
 </div>
 <div class="section" id="upgrading-from-0-13-6-x-to-1-0-x">
 <h2>Upgrading From 0.13.6.X to 1.0.X</h2>
