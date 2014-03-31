@@ -1,4 +1,4 @@
-// dot 2.32.0 on Mac OS X 10.8.3
+// dot 2.26.3 on Linux 3.5.0-47-generic
 // SchemaSpy rev 590
 digraph "oneDegreeRelationshipsDiagram" {
   graph [
@@ -30,7 +30,7 @@ digraph "oneDegreeRelationshipsDiagram" {
       <TR><TD PORT="read_spec" COLSPAN="3" ALIGN="LEFT">read_spec</TD></TR>
       <TR><TD PORT="tag_spec" COLSPAN="3" ALIGN="LEFT">tag_spec</TD></TR>
       <TR><TD PORT="adapter_spec" COLSPAN="3" ALIGN="LEFT">adapter_spec</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">  </TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">19 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">2 &gt;</TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">  </TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">24 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">2 &gt;</TD></TR>
     </TABLE>>
     URL="experiment_spot_design.html"
     tooltip="experiment_spot_design"
@@ -49,7 +49,7 @@ digraph "oneDegreeRelationshipsDiagram" {
       <TR><TD PORT="cycle_coord" COLSPAN="2" ALIGN="LEFT">cycle_coord</TD><TD PORT="cycle_coord.type" ALIGN="LEFT">int4[10]</TD></TR>
       <TR><TD PORT="length" COLSPAN="2" ALIGN="LEFT">length</TD><TD PORT="length.type" ALIGN="LEFT">int4[10]</TD></TR>
       <TR><TD PORT="expected_basecall" COLSPAN="2" ALIGN="LEFT">expected_basecall</TD><TD PORT="expected_basecall.type" ALIGN="LEFT">text[2147483647]</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 1</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">32 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">0 &gt;</TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 1</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">41 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">0 &gt;</TD></TR>
     </TABLE>>
     URL="experiment_spot_design_read_spec.html"
     tooltip="experiment_spot_design_read_spec"
