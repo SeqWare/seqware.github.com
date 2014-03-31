@@ -19,8 +19,8 @@ sample
 workflow_run
 lane
 processing
-ius
 file
+ius
 expense
 sample_search
 workflow_param
@@ -65,4 +65,6 @@ share_processing
 share_sample
 share_study
 share_workflow_run
+workflow_run_input_files
+file_provenance_report
 version
