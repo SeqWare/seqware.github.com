@@ -1,4 +1,6 @@
 version
+file_provenance_report
+workflow_run_input_files
 share_workflow_run
 share_study
 share_sample
@@ -43,8 +45,8 @@ expense_attribute
 workflow_param
 sample_search
 expense
-file
 ius
+file
 processing
 lane
 workflow_run

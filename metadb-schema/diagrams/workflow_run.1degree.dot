@@ -1,4 +1,4 @@
-// dot 2.32.0 on Mac OS X 10.8.3
+// dot 2.26.3 on Linux 3.5.0-47-generic
 // SchemaSpy rev 590
 digraph "oneDegreeRelationshipsDiagram" {
   graph [
@@ -30,6 +30,7 @@ digraph "oneDegreeRelationshipsDiagram" {
   "workflow_run":"owner_id":w -> "registration":"registration_id":e [arrowhead=none dir=back arrowtail=crowodot];
   "workflow_run":"workflow_id":w -> "workflow":"workflow_id":e [arrowhead=none dir=back arrowtail=crowodot];
   "workflow_run_attribute":"workflow_run_id":w -> "workflow_run":"workflow_run_id.type":e [arrowhead=none dir=back arrowtail=crowodot];
+  "workflow_run_input_files":"workflow_run_id":w -> "workflow_run":"workflow_run_id.type":e [arrowhead=none dir=back arrowtail=crowodot];
   "workflow_run_param":"workflow_run_id":w -> "workflow_run":"workflow_run_id.type":e [arrowhead=none dir=back arrowtail=crowodot];
   "ius_workflow_runs" [
     label=<
@@ -38,7 +39,7 @@ digraph "oneDegreeRelationshipsDiagram" {
       <TR><TD PORT="ius_workflow_runs_id" COLSPAN="3" BGCOLOR="#bed1b8" ALIGN="LEFT">ius_workflow_runs_id</TD></TR>
       <TR><TD PORT="ius_id" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">ius_id</TD></TR>
       <TR><TD PORT="workflow_run_id" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">workflow_run_id</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 2</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">7,085 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 2</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">54,986 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
     </TABLE>>
     URL="ius_workflow_runs.html"
     tooltip="ius_workflow_runs"
@@ -50,7 +51,7 @@ digraph "oneDegreeRelationshipsDiagram" {
       <TR><TD PORT="lane_workflow_runs_id" COLSPAN="3" BGCOLOR="#bed1b8" ALIGN="LEFT">lane_workflow_runs_id</TD></TR>
       <TR><TD PORT="lane_id" COLSPAN="3" ALIGN="LEFT">lane_id</TD></TR>
       <TR><TD PORT="workflow_run_id" COLSPAN="3" ALIGN="LEFT">workflow_run_id</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 2</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">1,115 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 2</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">4,875 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
     </TABLE>>
     URL="lane_workflow_runs.html"
     tooltip="lane_workflow_runs"
@@ -80,7 +81,7 @@ digraph "oneDegreeRelationshipsDiagram" {
       <TR><TD PORT="run_stop_tstmp" COLSPAN="3" ALIGN="LEFT">run_stop_tstmp</TD></TR>
       <TR><TD PORT="create_tstmp" COLSPAN="3" ALIGN="LEFT">create_tstmp</TD></TR>
       <TR><TD PORT="update_tstmp" COLSPAN="3" ALIGN="LEFT">update_tstmp</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 3</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">151,875 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">11 &gt;</TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 3</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">518,682 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">11 &gt;</TD></TR>
     </TABLE>>
     URL="processing.html"
     tooltip="processing"
@@ -103,7 +104,7 @@ digraph "oneDegreeRelationshipsDiagram" {
       <TR><TD PORT="developer_ml" COLSPAN="3" ALIGN="LEFT">developer_ml</TD></TR>
       <TR><TD PORT="user_ml" COLSPAN="3" ALIGN="LEFT">user_ml</TD></TR>
       <TR><TD PORT="payee" COLSPAN="3" ALIGN="LEFT">payee</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">  </TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">57 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">18 &gt;</TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">  </TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">82 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">18 &gt;</TD></TR>
     </TABLE>>
     URL="registration.html"
     tooltip="registration"
@@ -149,7 +150,7 @@ digraph "oneDegreeRelationshipsDiagram" {
       <TR><TD PORT="workflow_class" COLSPAN="3" ALIGN="LEFT">workflow_class</TD></TR>
       <TR><TD PORT="workflow_type" COLSPAN="3" ALIGN="LEFT">workflow_type</TD></TR>
       <TR><TD PORT="workflow_engine" COLSPAN="3" ALIGN="LEFT">workflow_engine</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 1</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">28 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">3 &gt;</TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 1</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">68 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">3 &gt;</TD></TR>
     </TABLE>>
     URL="workflow.html"
     tooltip="workflow"
@@ -178,7 +179,7 @@ digraph "oneDegreeRelationshipsDiagram" {
       <TR><TD PORT="stderr" COLSPAN="2" ALIGN="LEFT">stderr</TD><TD PORT="stderr.type" ALIGN="LEFT">text[2147483647]</TD></TR>
       <TR><TD PORT="stdout" COLSPAN="2" ALIGN="LEFT">stdout</TD><TD PORT="stdout.type" ALIGN="LEFT">text[2147483647]</TD></TR>
       <TR><TD PORT="workflow_engine" COLSPAN="2" ALIGN="LEFT">workflow_engine</TD><TD PORT="workflow_engine.type" ALIGN="LEFT">text[2147483647]</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 2</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">1,828 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">7 &gt;</TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 2</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">38,550 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">8 &gt;</TD></TR>
     </TABLE>>
     URL="workflow_run.html"
     tooltip="workflow_run"
@@ -192,10 +193,21 @@ digraph "oneDegreeRelationshipsDiagram" {
       <TR><TD PORT="tag" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">tag</TD></TR>
       <TR><TD PORT="value" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">value</TD></TR>
       <TR><TD PORT="unit" COLSPAN="3" ALIGN="LEFT">unit</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 1</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">0 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 1</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">1 row</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
     </TABLE>>
     URL="workflow_run_attribute.html"
     tooltip="workflow_run_attribute"
+  ];
+  "workflow_run_input_files" [
+    label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" BGCOLOR="#ffffff">
+      <TR><TD COLSPAN="3" BGCOLOR="#9bab96" ALIGN="CENTER">workflow_run_input_files</TD></TR>
+      <TR><TD PORT="workflow_run_id" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">workflow_run_id</TD></TR>
+      <TR><TD PORT="file_id" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">file_id</TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 2</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">0 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
+    </TABLE>>
+    URL="workflow_run_input_files.html"
+    tooltip="workflow_run_input_files"
   ];
   "workflow_run_param" [
     label=<

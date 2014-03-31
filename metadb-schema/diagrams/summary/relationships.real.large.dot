@@ -1,4 +1,4 @@
-// dot 2.32.0 on Mac OS X 10.8.3
+// dot 2.26.3 on Linux 3.5.0-47-generic
 // SchemaSpy rev 590
 digraph "largeRelationshipsDiagram" {
   graph [
@@ -83,7 +83,7 @@ digraph "largeRelationshipsDiagram" {
       <TR><TD PORT="sw_accession" COLSPAN="3" ALIGN="LEFT">sw_accession</TD></TR>
       <TR><TD PORT="create_tstmp" COLSPAN="3" ALIGN="LEFT">create_tstmp</TD></TR>
       <TR><TD PORT="update_tstmp" COLSPAN="3" ALIGN="LEFT">update_tstmp</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 5</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">149 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">5 &gt;</TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 5</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">423 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">5 &gt;</TD></TR>
     </TABLE>>
     URL="tables/experiment.html"
     tooltip="experiment"
@@ -117,7 +117,7 @@ digraph "largeRelationshipsDiagram" {
       <TR><TD PORT="paired_orientation" COLSPAN="3" ALIGN="LEFT">paired_orientation</TD></TR>
       <TR><TD PORT="nominal_length" COLSPAN="3" ALIGN="LEFT">nominal_length</TD></TR>
       <TR><TD PORT="nominal_sdev" COLSPAN="3" ALIGN="LEFT">nominal_sdev</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 3</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">6 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">1 &gt;</TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 3</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">8 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">1 &gt;</TD></TR>
     </TABLE>>
     URL="tables/experiment_library_design.html"
     tooltip="experiment_library_design"
@@ -147,7 +147,7 @@ digraph "largeRelationshipsDiagram" {
       <TR><TD PORT="read_spec" COLSPAN="3" ALIGN="LEFT">read_spec</TD></TR>
       <TR><TD PORT="tag_spec" COLSPAN="3" ALIGN="LEFT">tag_spec</TD></TR>
       <TR><TD PORT="adapter_spec" COLSPAN="3" ALIGN="LEFT">adapter_spec</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">  </TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">19 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">2 &gt;</TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">  </TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">24 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">2 &gt;</TD></TR>
     </TABLE>>
     URL="tables/experiment_spot_design.html"
     tooltip="experiment_spot_design"
@@ -166,7 +166,7 @@ digraph "largeRelationshipsDiagram" {
       <TR><TD PORT="cycle_coord" COLSPAN="3" ALIGN="LEFT">cycle_coord</TD></TR>
       <TR><TD PORT="length" COLSPAN="3" ALIGN="LEFT">length</TD></TR>
       <TR><TD PORT="expected_basecall" COLSPAN="3" ALIGN="LEFT">expected_basecall</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 1</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">32 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 1</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">41 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
     </TABLE>>
     URL="tables/experiment_spot_design_read_spec.html"
     tooltip="experiment_spot_design_read_spec"
@@ -188,7 +188,7 @@ digraph "largeRelationshipsDiagram" {
       <TR><TD PORT="file_type_id" COLSPAN="3" ALIGN="LEFT">file_type_id</TD></TR>
       <TR><TD PORT="size" COLSPAN="3" ALIGN="LEFT">size</TD></TR>
       <TR><TD PORT="skip" COLSPAN="3" ALIGN="LEFT">skip</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 2</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">8,615 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">3 &gt;</TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 2</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">70,986 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">4 &gt;</TD></TR>
     </TABLE>>
     URL="tables/file.html"
     tooltip="file"
@@ -202,7 +202,7 @@ digraph "largeRelationshipsDiagram" {
       <TR><TD PORT="tag" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">tag</TD></TR>
       <TR><TD PORT="value" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">value</TD></TR>
       <TR><TD PORT="unit" COLSPAN="3" ALIGN="LEFT">unit</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 1</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">0 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 1</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">23 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
     </TABLE>>
     URL="tables/file_attribute.html"
     tooltip="file_attribute"
@@ -273,7 +273,7 @@ digraph "largeRelationshipsDiagram" {
       <TR><TD PORT="create_tstmp" COLSPAN="3" ALIGN="LEFT">create_tstmp</TD></TR>
       <TR><TD PORT="update_tstmp" COLSPAN="3" ALIGN="LEFT">update_tstmp</TD></TR>
       <TR><TD PORT="skip" COLSPAN="3" ALIGN="LEFT">skip</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 3</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">4,796 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">4 &gt;</TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 3</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">18,586 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">4 &gt;</TD></TR>
     </TABLE>>
     URL="tables/ius.html"
     tooltip="ius"
@@ -287,7 +287,7 @@ digraph "largeRelationshipsDiagram" {
       <TR><TD PORT="tag" COLSPAN="3" ALIGN="LEFT">tag</TD></TR>
       <TR><TD PORT="value" COLSPAN="3" ALIGN="LEFT">value</TD></TR>
       <TR><TD PORT="units" COLSPAN="3" ALIGN="LEFT">units</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 1</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">0 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 1</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">67 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
     </TABLE>>
     URL="tables/ius_attribute.html"
     tooltip="ius_attribute"
@@ -314,7 +314,7 @@ digraph "largeRelationshipsDiagram" {
       <TR><TD PORT="ius_workflow_runs_id" COLSPAN="3" BGCOLOR="#bed1b8" ALIGN="LEFT">ius_workflow_runs_id</TD></TR>
       <TR><TD PORT="ius_id" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">ius_id</TD></TR>
       <TR><TD PORT="workflow_run_id" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">workflow_run_id</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 2</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">7,085 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 2</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">54,986 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
     </TABLE>>
     URL="tables/ius_workflow_runs.html"
     tooltip="ius_workflow_runs"
@@ -346,7 +346,7 @@ digraph "largeRelationshipsDiagram" {
       <TR><TD PORT="owner_id" COLSPAN="3" ALIGN="LEFT">owner_id</TD></TR>
       <TR><TD PORT="create_tstmp" COLSPAN="3" ALIGN="LEFT">create_tstmp</TD></TR>
       <TR><TD PORT="update_tstmp" COLSPAN="3" ALIGN="LEFT">update_tstmp</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 9</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">3,172 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">6 &gt;</TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 9</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">7,387 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">6 &gt;</TD></TR>
     </TABLE>>
     URL="tables/lane.html"
     tooltip="lane"
@@ -360,7 +360,7 @@ digraph "largeRelationshipsDiagram" {
       <TR><TD PORT="tag" COLSPAN="3" ALIGN="LEFT">tag</TD></TR>
       <TR><TD PORT="value" COLSPAN="3" ALIGN="LEFT">value</TD></TR>
       <TR><TD PORT="units" COLSPAN="3" ALIGN="LEFT">units</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 1</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">3,175 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 1</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">7,396 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
     </TABLE>>
     URL="tables/lane_attribute.html"
     tooltip="lane_attribute"
@@ -399,7 +399,7 @@ digraph "largeRelationshipsDiagram" {
       <TR><TD PORT="lane_workflow_runs_id" COLSPAN="3" BGCOLOR="#bed1b8" ALIGN="LEFT">lane_workflow_runs_id</TD></TR>
       <TR><TD PORT="lane_id" COLSPAN="3" ALIGN="LEFT">lane_id</TD></TR>
       <TR><TD PORT="workflow_run_id" COLSPAN="3" ALIGN="LEFT">workflow_run_id</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 2</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">1,115 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 2</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">4,875 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
     </TABLE>>
     URL="tables/lane_workflow_runs.html"
     tooltip="lane_workflow_runs"
@@ -492,7 +492,7 @@ digraph "largeRelationshipsDiagram" {
       <TR><TD PORT="run_stop_tstmp" COLSPAN="3" ALIGN="LEFT">run_stop_tstmp</TD></TR>
       <TR><TD PORT="create_tstmp" COLSPAN="3" ALIGN="LEFT">create_tstmp</TD></TR>
       <TR><TD PORT="update_tstmp" COLSPAN="3" ALIGN="LEFT">update_tstmp</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 3</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">151,875 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">11 &gt;</TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 3</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">518,682 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">11 &gt;</TD></TR>
     </TABLE>>
     URL="tables/processing.html"
     tooltip="processing"
@@ -506,7 +506,7 @@ digraph "largeRelationshipsDiagram" {
       <TR><TD PORT="tag" COLSPAN="3" ALIGN="LEFT">tag</TD></TR>
       <TR><TD PORT="value" COLSPAN="3" ALIGN="LEFT">value</TD></TR>
       <TR><TD PORT="units" COLSPAN="3" ALIGN="LEFT">units</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 1</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">0 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 1</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">1 row</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
     </TABLE>>
     URL="tables/processing_attribute.html"
     tooltip="processing_attribute"
@@ -534,7 +534,7 @@ digraph "largeRelationshipsDiagram" {
       <TR><TD PORT="processing_files_id" COLSPAN="3" BGCOLOR="#bed1b8" ALIGN="LEFT">processing_files_id</TD></TR>
       <TR><TD PORT="processing_id" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">processing_id</TD></TR>
       <TR><TD PORT="file_id" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">file_id</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 2</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">8,589 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 2</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">70,831 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
     </TABLE>>
     URL="tables/processing_files.html"
     tooltip="processing_files"
@@ -550,7 +550,7 @@ digraph "largeRelationshipsDiagram" {
       <TR><TD PORT="label" COLSPAN="3" ALIGN="LEFT">label</TD></TR>
       <TR><TD PORT="url" COLSPAN="3" ALIGN="LEFT">url</TD></TR>
       <TR><TD PORT="sw_accession" COLSPAN="3" ALIGN="LEFT">sw_accession</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 2</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">5,047 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 2</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">14,115 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
     </TABLE>>
     URL="tables/processing_ius.html"
     tooltip="processing_ius"
@@ -566,7 +566,7 @@ digraph "largeRelationshipsDiagram" {
       <TR><TD PORT="label" COLSPAN="3" ALIGN="LEFT">label</TD></TR>
       <TR><TD PORT="url" COLSPAN="3" ALIGN="LEFT">url</TD></TR>
       <TR><TD PORT="sw_accession" COLSPAN="3" ALIGN="LEFT">sw_accession</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 2</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">1,744 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 2</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">6,110 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
     </TABLE>>
     URL="tables/processing_lanes.html"
     tooltip="processing_lanes"
@@ -579,7 +579,7 @@ digraph "largeRelationshipsDiagram" {
       <TR><TD PORT="parent_id" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">parent_id</TD></TR>
       <TR><TD PORT="child_id" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">child_id</TD></TR>
       <TR><TD PORT="relationship" COLSPAN="3" ALIGN="LEFT">relationship</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 2</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">96,301 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 2</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">629,430 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
     </TABLE>>
     URL="tables/processing_relationship.html"
     tooltip="processing_relationship"
@@ -650,7 +650,7 @@ digraph "largeRelationshipsDiagram" {
       <TR><TD PORT="developer_ml" COLSPAN="3" ALIGN="LEFT">developer_ml</TD></TR>
       <TR><TD PORT="user_ml" COLSPAN="3" ALIGN="LEFT">user_ml</TD></TR>
       <TR><TD PORT="payee" COLSPAN="3" ALIGN="LEFT">payee</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">  </TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">57 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">18 &gt;</TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">  </TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">82 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">18 &gt;</TD></TR>
     </TABLE>>
     URL="tables/registration.html"
     tooltip="registration"
@@ -684,7 +684,7 @@ digraph "largeRelationshipsDiagram" {
       <TR><TD PORT="sw_accession" COLSPAN="3" ALIGN="LEFT">sw_accession</TD></TR>
       <TR><TD PORT="create_tstmp" COLSPAN="3" ALIGN="LEFT">create_tstmp</TD></TR>
       <TR><TD PORT="update_tstmp" COLSPAN="3" ALIGN="LEFT">update_tstmp</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 3</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">32,459 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">11 &gt;</TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 3</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">121,340 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">11 &gt;</TD></TR>
     </TABLE>>
     URL="tables/sample.html"
     tooltip="sample"
@@ -698,7 +698,7 @@ digraph "largeRelationshipsDiagram" {
       <TR><TD PORT="tag" COLSPAN="3" ALIGN="LEFT">tag</TD></TR>
       <TR><TD PORT="value" COLSPAN="3" ALIGN="LEFT">value</TD></TR>
       <TR><TD PORT="units" COLSPAN="3" ALIGN="LEFT">units</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 1</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">80,867 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 1</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">431,728 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
     </TABLE>>
     URL="tables/sample_attribute.html"
     tooltip="sample_attribute"
@@ -709,7 +709,7 @@ digraph "largeRelationshipsDiagram" {
       <TR><TD COLSPAN="3" BGCOLOR="#9bab96" ALIGN="CENTER">sample_hierarchy</TD></TR>
       <TR><TD PORT="sample_id" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">sample_id</TD></TR>
       <TR><TD PORT="parent_id" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">parent_id</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 2</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">32,493 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 2</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">120,260 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
     </TABLE>>
     URL="tables/sample_hierarchy.html"
     tooltip="sample_hierarchy"
@@ -803,7 +803,7 @@ digraph "largeRelationshipsDiagram" {
       <TR><TD PORT="create_tstmp" COLSPAN="3" ALIGN="LEFT">create_tstmp</TD></TR>
       <TR><TD PORT="update_tstmp" COLSPAN="3" ALIGN="LEFT">update_tstmp</TD></TR>
       <TR><TD PORT="skip" COLSPAN="3" ALIGN="LEFT">skip</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 2</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">477 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">3 &gt;</TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 2</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">1,130 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">3 &gt;</TD></TR>
     </TABLE>>
     URL="tables/sequencer_run.html"
     tooltip="sequencer_run"
@@ -817,7 +817,7 @@ digraph "largeRelationshipsDiagram" {
       <TR><TD PORT="tag" COLSPAN="3" ALIGN="LEFT">tag</TD></TR>
       <TR><TD PORT="value" COLSPAN="3" ALIGN="LEFT">value</TD></TR>
       <TR><TD PORT="units" COLSPAN="3" ALIGN="LEFT">units</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 1</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">477 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 1</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">1,213 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
     </TABLE>>
     URL="tables/sequencer_run_attribute.html"
     tooltip="sequencer_run_attribute"
@@ -956,7 +956,7 @@ digraph "largeRelationshipsDiagram" {
       <TR><TD PORT="sw_accession" COLSPAN="3" ALIGN="LEFT">sw_accession</TD></TR>
       <TR><TD PORT="create_tstmp" COLSPAN="3" ALIGN="LEFT">create_tstmp</TD></TR>
       <TR><TD PORT="update_tstmp" COLSPAN="3" ALIGN="LEFT">update_tstmp</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 2</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">110 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">5 &gt;</TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 2</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">155 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">5 &gt;</TD></TR>
     </TABLE>>
     URL="tables/study.html"
     tooltip="study"
@@ -970,7 +970,7 @@ digraph "largeRelationshipsDiagram" {
       <TR><TD PORT="tag" COLSPAN="3" ALIGN="LEFT">tag</TD></TR>
       <TR><TD PORT="value" COLSPAN="3" ALIGN="LEFT">value</TD></TR>
       <TR><TD PORT="units" COLSPAN="3" ALIGN="LEFT">units</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 1</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">110 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 1</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">155 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
     </TABLE>>
     URL="tables/study_attribute.html"
     tooltip="study_attribute"
@@ -1026,7 +1026,7 @@ digraph "largeRelationshipsDiagram" {
       <TR><TD PORT="workflow_class" COLSPAN="3" ALIGN="LEFT">workflow_class</TD></TR>
       <TR><TD PORT="workflow_type" COLSPAN="3" ALIGN="LEFT">workflow_type</TD></TR>
       <TR><TD PORT="workflow_engine" COLSPAN="3" ALIGN="LEFT">workflow_engine</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 1</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">28 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">3 &gt;</TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 1</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">68 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">3 &gt;</TD></TR>
     </TABLE>>
     URL="tables/workflow.html"
     tooltip="workflow"
@@ -1057,7 +1057,7 @@ digraph "largeRelationshipsDiagram" {
       <TR><TD PORT="display_name" COLSPAN="3" ALIGN="LEFT">display_name</TD></TR>
       <TR><TD PORT="file_meta_type" COLSPAN="3" ALIGN="LEFT">file_meta_type</TD></TR>
       <TR><TD PORT="default_value" COLSPAN="3" ALIGN="LEFT">default_value</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 1</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">809 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">1 &gt;</TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 1</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">1,561 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">1 &gt;</TD></TR>
     </TABLE>>
     URL="tables/workflow_param.html"
     tooltip="workflow_param"
@@ -1070,7 +1070,7 @@ digraph "largeRelationshipsDiagram" {
       <TR><TD PORT="workflow_param_id" COLSPAN="3" ALIGN="LEFT">workflow_param_id</TD></TR>
       <TR><TD PORT="display_name" COLSPAN="3" ALIGN="LEFT">display_name</TD></TR>
       <TR><TD PORT="value" COLSPAN="3" ALIGN="LEFT">value</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 1</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">47 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 1</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">88 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
     </TABLE>>
     URL="tables/workflow_param_value.html"
     tooltip="workflow_param_value"
@@ -1099,7 +1099,7 @@ digraph "largeRelationshipsDiagram" {
       <TR><TD PORT="stderr" COLSPAN="3" ALIGN="LEFT">stderr</TD></TR>
       <TR><TD PORT="stdout" COLSPAN="3" ALIGN="LEFT">stdout</TD></TR>
       <TR><TD PORT="workflow_engine" COLSPAN="3" ALIGN="LEFT">workflow_engine</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 2</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">1,828 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">7 &gt;</TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 2</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">38,550 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">8 &gt;</TD></TR>
     </TABLE>>
     URL="tables/workflow_run.html"
     tooltip="workflow_run"
@@ -1113,10 +1113,21 @@ digraph "largeRelationshipsDiagram" {
       <TR><TD PORT="tag" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">tag</TD></TR>
       <TR><TD PORT="value" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">value</TD></TR>
       <TR><TD PORT="unit" COLSPAN="3" ALIGN="LEFT">unit</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 1</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">0 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 1</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">1 row</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
     </TABLE>>
     URL="tables/workflow_run_attribute.html"
     tooltip="workflow_run_attribute"
+  ];
+  "workflow_run_input_files" [
+    label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" BGCOLOR="#ffffff">
+      <TR><TD COLSPAN="3" BGCOLOR="#9bab96" ALIGN="CENTER">workflow_run_input_files</TD></TR>
+      <TR><TD PORT="workflow_run_id" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">workflow_run_id</TD></TR>
+      <TR><TD PORT="file_id" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">file_id</TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 2</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">0 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
+    </TABLE>>
+    URL="tables/workflow_run_input_files.html"
+    tooltip="workflow_run_input_files"
   ];
   "workflow_run_param" [
     label=<
@@ -1196,7 +1207,7 @@ digraph "largeRelationshipsDiagram" {
   "sample":"owner_id":w -> "registration":"registration_id":e [arrowhead=none dir=back arrowtail=crowodot];
   "sample_attribute":"sample_id":w -> "sample":"sample_id":e [arrowhead=none dir=back arrowtail=crowodot];
   "sample_hierarchy":"parent_id":w -> "sample":"sample_id":e [arrowhead=none dir=back arrowtail=crowodot];
-  "sample_hierarchy":"sample_id":w -> "sample":"sample_id":e [arrowhead=none dir=back arrowtail=crowodot];
+  "sample_hierarchy":"sample_id":w -> "sample":"sample_id":e [arrowhead=none dir=back arrowtail=teeodot];
   "sample_link":"sample_id":w -> "sample":"sample_id":e [arrowhead=none dir=back arrowtail=crowodot];
   "sample_relationship":"child_id":w -> "sample":"sample_id":e [arrowhead=none dir=back arrowtail=crowodot];
   "sample_relationship":"parent_id":w -> "sample":"sample_id":e [arrowhead=none dir=back arrowtail=crowodot];
@@ -1230,5 +1241,7 @@ digraph "largeRelationshipsDiagram" {
   "workflow_run":"owner_id":w -> "registration":"registration_id":e [arrowhead=none dir=back arrowtail=crowodot];
   "workflow_run":"workflow_id":w -> "workflow":"workflow_id":e [arrowhead=none dir=back arrowtail=crowodot];
   "workflow_run_attribute":"workflow_run_id":w -> "workflow_run":"workflow_run_id":e [arrowhead=none dir=back arrowtail=crowodot];
+  "workflow_run_input_files":"file_id":w -> "file":"file_id":e [arrowhead=none dir=back arrowtail=crowodot];
+  "workflow_run_input_files":"workflow_run_id":w -> "workflow_run":"workflow_run_id":e [arrowhead=none dir=back arrowtail=crowodot];
   "workflow_run_param":"workflow_run_id":w -> "workflow_run":"workflow_run_id":e [arrowhead=none dir=back arrowtail=crowodot];
 }
