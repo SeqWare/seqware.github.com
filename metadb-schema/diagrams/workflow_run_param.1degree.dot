@@ -1,4 +1,4 @@
-// dot 2.26.3 on Linux 3.5.0-47-generic
+// dot 2.32.0 on Mac OS X 10.8.3
 // SchemaSpy rev 590
 digraph "oneDegreeRelationshipsDiagram" {
   graph [
@@ -44,7 +44,7 @@ digraph "oneDegreeRelationshipsDiagram" {
       <TR><TD PORT="stderr" COLSPAN="3" ALIGN="LEFT">stderr</TD></TR>
       <TR><TD PORT="stdout" COLSPAN="3" ALIGN="LEFT">stdout</TD></TR>
       <TR><TD PORT="workflow_engine" COLSPAN="3" ALIGN="LEFT">workflow_engine</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 2</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">38,550 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">8 &gt;</TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 2</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">1,828 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">7 &gt;</TD></TR>
     </TABLE>>
     URL="workflow_run.html"
     tooltip="workflow_run"
