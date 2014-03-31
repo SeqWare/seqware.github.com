@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="UTF-8">
-<title>SeqWare › </title>
+<title>SeqWare › Modules</title>
 <meta content="nanoc 3.6.7" name="generator">
 <link href="../../assets/style-v17.css" media="screen" rel="stylesheet" type="text/css">
 <link href="http://feeds.feedburner.com/seqware" rel="alternate" title="The SeqWare Blog" type="application/atom+xml">
@@ -37,17 +37,322 @@
 <li><a href="../10-faq/"><span>Frequently Asked Questions</span></a></li>
 <li><a href="../11-api/"><span>APIs</span></a></li>
 <li><a href="../13-code/"><span>Source Code</span></a></li>
-<li><a href="../17-plugins/"><span>SeqWare</span></a></li>
-<li><span class="active" title="You're here."><span>SeqWare</span></span></li>
+<li><a href="../17-plugins/"><span>Plugins</span></a></li>
+<li>
+<span class="active" title="You're here."><span>Modules</span></span><ol class="toc">
+<li><a href="#genericcommandrunner">GenericCommandRunner</a></li>
+<li><a href="#genericmetadatasaver">GenericMetadataSaver</a></li>
+<li><a href="#provisiondependenciesbundle">ProvisionDependenciesBundle</a></li>
+<li><a href="#provisionfiles">ProvisionFiles</a></li>
+<li><a href="#s3createfileurls">S3CreateFileURLs</a></li>
+<li><a href="#s3deletefiles">S3DeleteFiles</a></li>
+<li><a href="#s3listfiles">S3ListFiles</a></li>
+<li><a href="#s3uploaddirectory">S3UploadDirectory</a></li>
+</ol>
+</li>
 </ol>
 </div>
 <!-- ***** body ***** -->
 <div class="body">
 <div class="article">
 <div class="header">
-<h1></h1>
+<h1>Modules</h1>
 </div>
+<div class="section" id="genericcommandrunner">
+<h2>GenericCommandRunner</h2>
+<p>net.sourceforge.seqware.pipeline.modules.GenericCommandRunner
+This is a simple command runner.</p>
 
+<table>
+<thead><tr>
+<th>Command-line option</th>
+      <th>Description</th>
+    </tr></thead>
+<tbody>
+<tr>
+<td>–gcr-algorithm</td>
+      <td>You can pass in an algorithm name that will be recorded in the metadb if you are writing back to the metadb, otherwise GenericCommandRunner is used.</td>
+    </tr>
+<tr>
+<td>–gcr-check-output-file</td>
+      <td>Specify the path to the file.</td>
+    </tr>
+<tr>
+<td>–gcr-command</td>
+      <td>The command being executed (quote as needed).</td>
+    </tr>
+<tr>
+<td>–gcr-output-file</td>
+      <td>Specify this option one or more times for each output file created by the command called by this module. The argument is a ‘::’ delimited list of type, meta_type, and file_path.</td>
+    </tr>
+<tr>
+<td>–gcr-skip-if-missing</td>
+      <td>If the registered output files don’t exist don’t worry about it. Useful for workflows that can produce variable file outputs but also potentially dangerous.</td>
+    </tr>
+<tr>
+<td>–gcr-skip-if-output-exists</td>
+      <td>If the registered output files exist then this step won’t be run again. This only works if gcr-output-file is defined too since we need to be able to check the output files to see if they exist. If this step produces no output files then it’s hard to say if it was run successfully before.</td>
+    </tr>
+<tr>
+<td>–gcr-stderr</td>
+      <td>Optional: Returns stderr (stderr of the command called is normally suppressed, except in case of failure)</td>
+    </tr>
+<tr>
+<td>–gcr-stdout</td>
+      <td>Optional: Reports stdout (stdout of the command called is normally suppressed, except in case of failure)</td>
+    </tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="genericmetadatasaver">
+<h2>GenericMetadataSaver</h2>
+<p>net.sourceforge.seqware.pipeline.modules.GenericMetadataSaver
+This is a simple metadata saver.</p>
+
+<table>
+<thead><tr>
+<th>Command-line option</th>
+      <th>Description</th>
+    </tr></thead>
+<tbody>
+<tr>
+<td>–gms-algorithm</td>
+      <td>You can pass in an algorithm name that will be recorded in the metadb if you are writing back to the metadb.</td>
+    </tr>
+<tr>
+<td>–gms-output-file</td>
+      <td>Specify this option one or more times for each output file created by the command called by this module. The argument is a ‘::’ delimited list of type, meta_type, and file_path.</td>
+    </tr>
+<tr>
+<td>–gms-suppress-output-file-check</td>
+      <td>If provided, this will suppress checking that the gms-output-file options contain valid file paths. Useful if these are remote resources like HTTP or S3 file URLs.</td>
+    </tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="provisiondependenciesbundle">
+<h2>ProvisionDependenciesBundle</h2>
+<p>net.sourceforge.seqware.pipeline.modules.utilities.ProvisionDependenciesBundle</p>
+
+<table>
+<thead><tr>
+<th>Command-line option</th>
+      <th>Description</th>
+    </tr></thead>
+<tbody>
+<tr>
+<td>–i, –input-file</td>
+      <td>Required: input file, multiple should be specified seperately</td>
+    </tr>
+<tr>
+<td>–o, –output-dir</td>
+      <td>Required: output file location</td>
+    </tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="provisionfiles">
+<h2>ProvisionFiles</h2>
+<p>net.sourceforge.seqware.pipeline.modules.utilities.ProvisionFiles</p>
+
+<table>
+<thead><tr>
+<th>Command-line option</th>
+      <th>Description</th>
+    </tr></thead>
+<tbody>
+<tr>
+<td>–a, –algorithm</td>
+      <td>Optional: by default the algorithm is ‘ProvisionFiles’ but you can override here if you like.</td>
+    </tr>
+<tr>
+<td>–d, –decrypt-key</td>
+      <td>Optional: if specified this key will be used to decrypt data when reading from its source.</td>
+    </tr>
+<tr>
+<td>–decrypt-key-from-settings, –dkfs</td>
+      <td>Optional: if flag is specified then the key will be read from the SW_DECRYPT_KEY field in your SeqWare settings file and used to decrypt data as its pulled from the source.  If this option is specified along with –decrypt-key the key provided by the latter will be used.</td>
+    </tr>
+<tr>
+<td>–e, –encrypt-key</td>
+      <td>Optional: if specified this key will be used to encrypt data before writing to its destination.</td>
+    </tr>
+<tr>
+<td>–ekfs, –encrypt-key-from-settings</td>
+      <td>Optional: if flag is specified then the key will be read from the SW_ENCRYPT_KEY field in your SeqWare settings file and used to encrypt data before writing to its destination.  If this option is specified along with –encrypt-key the key provided by the latter will be used.</td>
+    </tr>
+<tr>
+<td>–force-copy</td>
+      <td>Optional: if this is specified local to local file transfers are done with a copy rather than symlink. This is useful if you’re writing to a temp area that will be deleted so you have to move the file essentially.</td>
+    </tr>
+<tr>
+<td>–i, –input-file</td>
+      <td>Required: use this or –input-file-metadata, this is the input file, multiple should be specified seperately</td>
+    </tr>
+<tr>
+<td>–im, –input-file-metadata</td>
+      <td>Required: use this or –input-file, this is the input file, multiple should be specified seperately</td>
+    </tr>
+<tr>
+<td>–o, –output-dir</td>
+      <td>Required: output file location</td>
+    </tr>
+<tr>
+<td>–of, –output-file</td>
+      <td>Optional: output file path, if this is provided than the program accepts exactly one –input-file and one –output file. If an –output-dir is also specified an error will be thrown.</td>
+    </tr>
+<tr>
+<td>–r, –recursive</td>
+      <td>Optional: if the input-file points to a local directory then this option will cause the program to recursively copy the directory and its contents to the destination. An actual copy will be done for local to local copies rather than symlinks.</td>
+    </tr>
+<tr>
+<td>–s3-connection-timeout</td>
+      <td>Optional: Sets the amount of time to wait (in milliseconds) when initially establishing a connection before giving up and timing out. Default is 50000</td>
+    </tr>
+<tr>
+<td>–s3-max-connections</td>
+      <td>Optional: Sets the maximum number of allowed open HTTPS connections. Default is 50</td>
+    </tr>
+<tr>
+<td>–s3-max-error-retries</td>
+      <td>Optional: Sets the maximum number of retry attempts for failed retryable requests (ex: 5xx error responses from services). Default is 3</td>
+    </tr>
+<tr>
+<td>–s3-max-socket-timeout</td>
+      <td>Optional: Sets the amount of time to wait (in milliseconds) for data to be transfered over an established, open connection before the connection times out and is closed. A value of 0 means infinity, and isn’t recommended. Default is 50000</td>
+    </tr>
+<tr>
+<td>–s3-no-server-side-encryption</td>
+      <td>Optional: If specified, do not use S3 server-side encryption. Default is to use S3 server-side encryption for S3 destinations.</td>
+    </tr>
+<tr>
+<td>–skip-if-missing</td>
+      <td>Optional: useful for workflows with variable output files, this will silently skip any missing inputs (this is a little dangerous).</td>
+    </tr>
+<tr>
+<td>–skip-record-file</td>
+      <td>Optional: If specified, do not record new entries in the file table.</td>
+    </tr>
+<tr>
+<td>–v, –verbose</td>
+      <td>Optional: verbose causes the S3 transfer status to display.</td>
+    </tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="s3createfileurls">
+<h2>S3CreateFileURLs</h2>
+<p>net.sourceforge.seqware.pipeline.modules.utilities.S3CreateFileURLs</p>
+
+<table>
+<thead><tr>
+<th>Command-line option</th>
+      <th>Description</th>
+    </tr></thead>
+<tbody>
+<tr>
+<td>–a, –all-files</td>
+      <td>Optional: if specified, the –s3-url should take the form s3://<bucket>. This option indicates all files in that bucket should have URLs created.</bucket>
+</td>
+    </tr>
+<tr>
+<td>–l, –lifetime</td>
+      <td>How long (in minutes) should this URL be valid for (129600 = 90 days, 86400 = 60 days, 43200 = 30 days, 10080 = 7 days, 1440 = 1 day).</td>
+    </tr>
+<tr>
+<td>–u, –s3-url</td>
+      <td>A URL of the form s3://<bucket>/<path>/<file> or s3://<bucket> if using the &#8211;all-files option</bucket></file></path></bucket>
+</td>
+    </tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="s3deletefiles">
+<h2>S3DeleteFiles</h2>
+<p>net.sourceforge.seqware.pipeline.modules.utilities.S3DeleteFiles</p>
+
+<table>
+<thead><tr>
+<th>Command-line option</th>
+      <th>Description</th>
+    </tr></thead>
+<tbody>
+<tr>
+<td>–f, –s3-url-file</td>
+      <td>Optional: a file containing one URL per line of the form s3://<bucket>/<path>/<file></file></path></bucket>
+</td>
+    </tr>
+<tr>
+<td>–u, –s3-url</td>
+      <td>Optional: a URL of the form s3://<bucket>/<path>/<file></file></path></bucket>
+</td>
+    </tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="s3listfiles">
+<h2>S3ListFiles</h2>
+<p>net.sourceforge.seqware.pipeline.modules.utilities.S3ListFiles</p>
+
+<table>
+<thead><tr>
+<th>Command-line option</th>
+      <th>Description</th>
+    </tr></thead>
+<tbody>
+<tr>
+<td>–in-bytes</td>
+      <td>Optional: flag, if set values print in bytes rather than human friendsly</td>
+    </tr>
+<tr>
+<td>–l, –list-buckets</td>
+      <td>Optional: list all the buckets you own.</td>
+    </tr>
+<tr>
+<td>–reset-owner-permissions</td>
+      <td>Optional: this will give the bucket owner full read/write permissions, useful if many different people have been writing to the same bucket.</td>
+    </tr>
+<tr>
+<td>–s, –search-local-dir</td>
+      <td>Optional: attempt to match files in S3 with files in this local directory.</td>
+    </tr>
+<tr>
+<td>–u, –s3-url</td>
+      <td>Optional: a URL of the form s3://<bucket>/<path>/<file></file></path></bucket>
+</td>
+    </tr>
+<tr>
+<td>–t, –tab-output-file</td>
+      <td>Optional: tab-formated output file.</td>
+    </tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="s3uploaddirectory">
+<h2>S3UploadDirectory</h2>
+<p>net.sourceforge.seqware.pipeline.modules.utilities.S3UploadDirectory</p>
+
+<table>
+<thead><tr>
+<th>Command-line option</th>
+      <th>Description</th>
+    </tr></thead>
+<tbody>
+<tr>
+<td>–b, –output-bucket</td>
+      <td>Required: the output bucket name in S3</td>
+    </tr>
+<tr>
+<td>–i, –input-dir</td>
+      <td>Required: the directory to copy recursively</td>
+    </tr>
+<tr>
+<td>–p, –output-prefix</td>
+      <td>Required: the prefix to add after the bucket name.</td>
+    </tr>
+</tbody>
+</table>
+</div>
 </div>
 <p> </p>
 <p> </p>

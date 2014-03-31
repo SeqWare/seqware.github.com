@@ -1,0 +1,74 @@
+// dot 2.26.3 on Linux 3.5.0-47-generic
+// SchemaSpy rev 590
+digraph "file_provenance_report" {
+  graph [
+    rankdir="RL"
+    bgcolor="#f7f7f7"
+    nodesep="0.18"
+    ranksep="0.46"
+    fontname="Helvetica"
+    fontsize="11"
+  ];
+  node [
+    fontname="Helvetica"
+    fontsize="11"
+    shape="plaintext"
+  ];
+  edge [
+    arrowsize="0.8"
+  ];
+  "file_provenance_report" [
+    label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" BGCOLOR="#ffffff">
+      <TR><TD COLSPAN="3" BGCOLOR="#9bab96" ALIGN="CENTER">file_provenance_report</TD></TR>
+      <TR><TD PORT="last_modified" COLSPAN="3" ALIGN="LEFT">last_modified</TD></TR>
+      <TR><TD PORT="study_title" COLSPAN="3" ALIGN="LEFT">study_title</TD></TR>
+      <TR><TD PORT="study_swa" COLSPAN="3" ALIGN="LEFT">study_swa</TD></TR>
+      <TR><TD PORT="study_attrs" COLSPAN="3" ALIGN="LEFT">study_attrs</TD></TR>
+      <TR><TD PORT="experiment_name" COLSPAN="3" ALIGN="LEFT">experiment_name</TD></TR>
+      <TR><TD PORT="experiment_swa" COLSPAN="3" ALIGN="LEFT">experiment_swa</TD></TR>
+      <TR><TD PORT="experiment_attrs" COLSPAN="3" ALIGN="LEFT">experiment_attrs</TD></TR>
+      <TR><TD PORT="sample_parent_names" COLSPAN="3" ALIGN="LEFT">sample_parent_names</TD></TR>
+      <TR><TD PORT="sample_parent_swas" COLSPAN="3" ALIGN="LEFT">sample_parent_swas</TD></TR>
+      <TR><TD PORT="parent_organism_ids" COLSPAN="3" ALIGN="LEFT">parent_organism_ids</TD></TR>
+      <TR><TD PORT="sample_parent_attrs" COLSPAN="3" ALIGN="LEFT">sample_parent_attrs</TD></TR>
+      <TR><TD PORT="sample_name" COLSPAN="3" ALIGN="LEFT">sample_name</TD></TR>
+      <TR><TD PORT="sample_swa" COLSPAN="3" ALIGN="LEFT">sample_swa</TD></TR>
+      <TR><TD PORT="organism_id" COLSPAN="3" ALIGN="LEFT">organism_id</TD></TR>
+      <TR><TD PORT="organism_code" COLSPAN="3" ALIGN="LEFT">organism_code</TD></TR>
+      <TR><TD PORT="sample_attrs" COLSPAN="3" ALIGN="LEFT">sample_attrs</TD></TR>
+      <TR><TD PORT="sequencer_run_name" COLSPAN="3" ALIGN="LEFT">sequencer_run_name</TD></TR>
+      <TR><TD PORT="sequencer_run_swa" COLSPAN="3" ALIGN="LEFT">sequencer_run_swa</TD></TR>
+      <TR><TD PORT="sequencer_run_attrs" COLSPAN="3" ALIGN="LEFT">sequencer_run_attrs</TD></TR>
+      <TR><TD PORT="platform_id" COLSPAN="3" ALIGN="LEFT">platform_id</TD></TR>
+      <TR><TD PORT="platform_name" COLSPAN="3" ALIGN="LEFT">platform_name</TD></TR>
+      <TR><TD PORT="lane_name" COLSPAN="3" ALIGN="LEFT">lane_name</TD></TR>
+      <TR><TD PORT="lane_number" COLSPAN="3" ALIGN="LEFT">lane_number</TD></TR>
+      <TR><TD PORT="lane_swa" COLSPAN="3" ALIGN="LEFT">lane_swa</TD></TR>
+      <TR><TD PORT="lane_attrs" COLSPAN="3" ALIGN="LEFT">lane_attrs</TD></TR>
+      <TR><TD PORT="ius_tag" COLSPAN="3" ALIGN="LEFT">ius_tag</TD></TR>
+      <TR><TD PORT="ius_swa" COLSPAN="3" ALIGN="LEFT">ius_swa</TD></TR>
+      <TR><TD PORT="ius_attrs" COLSPAN="3" ALIGN="LEFT">ius_attrs</TD></TR>
+      <TR><TD PORT="workflow_name" COLSPAN="3" ALIGN="LEFT">workflow_name</TD></TR>
+      <TR><TD PORT="workflow_version" COLSPAN="3" ALIGN="LEFT">workflow_version</TD></TR>
+      <TR><TD PORT="workflow_swa" COLSPAN="3" ALIGN="LEFT">workflow_swa</TD></TR>
+      <TR><TD PORT="workflow_run_name" COLSPAN="3" ALIGN="LEFT">workflow_run_name</TD></TR>
+      <TR><TD PORT="workflow_run_status" COLSPAN="3" ALIGN="LEFT">workflow_run_status</TD></TR>
+      <TR><TD PORT="workflow_run_swa" COLSPAN="3" ALIGN="LEFT">workflow_run_swa</TD></TR>
+      <TR><TD PORT="processing_algorithm" COLSPAN="3" ALIGN="LEFT">processing_algorithm</TD></TR>
+      <TR><TD PORT="processing_swa" COLSPAN="3" ALIGN="LEFT">processing_swa</TD></TR>
+      <TR><TD PORT="processing_attrs" COLSPAN="3" ALIGN="LEFT">processing_attrs</TD></TR>
+      <TR><TD PORT="file_meta_type" COLSPAN="3" ALIGN="LEFT">file_meta_type</TD></TR>
+      <TR><TD PORT="file_swa" COLSPAN="3" ALIGN="LEFT">file_swa</TD></TR>
+      <TR><TD PORT="file_attrs" COLSPAN="3" ALIGN="LEFT">file_attrs</TD></TR>
+      <TR><TD PORT="file_path" COLSPAN="3" ALIGN="LEFT">file_path</TD></TR>
+      <TR><TD PORT="file_md5sum" COLSPAN="3" ALIGN="LEFT">file_md5sum</TD></TR>
+      <TR><TD PORT="file_size" COLSPAN="3" ALIGN="LEFT">file_size</TD></TR>
+      <TR><TD PORT="file_description" COLSPAN="3" ALIGN="LEFT">file_description</TD></TR>
+      <TR><TD PORT="skip" COLSPAN="3" ALIGN="LEFT">skip</TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">  </TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">81,301 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
+    </TABLE>>
+    URL="tables/file_provenance_report.html"
+    tooltip="file_provenance_report"
+  ];
+}
