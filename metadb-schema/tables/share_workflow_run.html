@@ -84,7 +84,7 @@
 </tr>
 </thead>
 <tbody valign='top'>
-<tr class='even'>
+<tr class='odd'>
  <td class='primaryKey' title='Primary Key'>share_workflow_run_id</td>
  <td class='detail'>serial</td>
  <td class='detail' align='right'>10</td>
@@ -95,7 +95,7 @@
  <td class='detail'> </td>
  <td class='comment detail'></td>
 </tr>
-<tr class='odd'>
+<tr class='even'>
  <td class='detail'>workflow_run_id</td>
  <td class='detail'>int4</td>
  <td class='detail' align='right'>10</td>
@@ -105,7 +105,7 @@
  <td class='detail'></td>
  <td class='detail'>
   <table border='0' width='100%' cellspacing='0' cellpadding='0'>
-   <tr class='relative odd' valign='top'>
+   <tr class='relative even' valign='top'>
     <td class='relatedTable detail' title="share_workflow_run.workflow_run_id refs workflow_run.workflow_run_id via fk_share_workflow_run_workflow_run_id"><a href='workflow_run.html'>workflow_run</a><span class='relatedKey'>.workflow_run_id</span>
     </td>
     <td class='constraint detail'>fk_share_workflow_run_workflow_run_id<span title='Restrict delete:
@@ -115,7 +115,7 @@
  </td>
  <td class='comment detail'></td>
 </tr>
-<tr class='even'>
+<tr class='odd'>
  <td class='detail'>registration_id</td>
  <td class='detail'>int4</td>
  <td class='detail' align='right'>10</td>
@@ -125,7 +125,7 @@
  <td class='detail'></td>
  <td class='detail'>
   <table border='0' width='100%' cellspacing='0' cellpadding='0'>
-   <tr class='relative even' valign='top'>
+   <tr class='relative odd' valign='top'>
     <td class='relatedTable detail' title="share_workflow_run.registration_id refs registration.registration_id via fk_share_workflow_run_registration_id"><a href='registration.html'>registration</a><span class='relatedKey'>.registration_id</span>
     </td>
     <td class='constraint detail'>fk_share_workflow_run_registration_id<span title='Restrict delete:
@@ -135,7 +135,7 @@
  </td>
  <td class='comment detail'></td>
 </tr>
-<tr class='odd'>
+<tr class='even'>
  <td class='detail'>active</td>
  <td class='detail'>bool</td>
  <td class='detail' align='right'>1</td>
@@ -146,7 +146,7 @@
  <td class='detail'> </td>
  <td class='comment detail'></td>
 </tr>
-<tr class='even'>
+<tr class='odd'>
  <td class='detail'>email</td>
  <td class='detail'>text</td>
  <td class='detail' align='right'>2147483647</td>
@@ -157,7 +157,7 @@
  <td class='detail'> </td>
  <td class='comment detail'></td>
 </tr>
-<tr class='odd'>
+<tr class='even'>
  <td class='detail'>sw_accession</td>
  <td class='detail'>serial</td>
  <td class='detail' align='right'>10</td>
@@ -168,7 +168,7 @@
  <td class='detail'> </td>
  <td class='comment detail'></td>
 </tr>
-<tr class='even'>
+<tr class='odd'>
  <td class='detail'>create_tstmp</td>
  <td class='detail'>timestamp</td>
  <td class='detail' align='right'>29,6</td>
@@ -179,7 +179,7 @@
  <td class='detail'> </td>
  <td class='comment detail'></td>
 </tr>
-<tr class='odd'>
+<tr class='even'>
  <td class='detail'>update_tstmp</td>
  <td class='detail'>timestamp</td>
  <td class='detail' align='right'>29,6</td>
@@ -191,7 +191,7 @@
  <td class='comment detail'></td>
 </tr>
 </table>
-<p title='8 columns'>Table contained 0 rows at Mon Mar 31 11:39 EDT 2014<p/>
+<p title='8 columns'>Table contained 0 rows at Mon Mar 31 13:20 EDT 2014<p/>
 </td></tr></table>
 <div class='indent'>
 <b>Indexes:</b>
@@ -223,29 +223,30 @@
 </map>
   <a name='diagram'><img id='oneDegreeImg' src='../diagrams/share_workflow_run.1degree.png' usemap='#oneDegreeRelationshipsDiagram' class='diagram' border='0' alt='' align='left'></a>
 <map id="twoDegreesRelationshipsDiagram" name="twoDegreesRelationshipsDiagram">
-<area shape="rect" id="node1" href="experiment.html" title="experiment" alt="" coords="459,371,608,451">
-<area shape="rect" id="node3" href="registration.html" title="registration" alt="" coords="5,469,173,844">
-<area shape="rect" id="node5" href="study.html" title="study" alt="" coords="228,349,377,429">
-<area shape="rect" id="node6" href="file.html" title="file" alt="" coords="219,46,387,126">
-<area shape="rect" id="node8" href="invoice.html" title="invoice" alt="" coords="236,215,369,295">
-<area shape="rect" id="node10" href="ius.html" title="ius" alt="" coords="1251,475,1419,555">
-<area shape="rect" id="node12" href="lane.html" title="lane" alt="" coords="1031,558,1191,638">
-<area shape="rect" id="node15" href="sample.html" title="sample" alt="" coords="740,310,924,390">
-<area shape="rect" id="node23" href="sequencer_run.html" title="sequencer_run" alt="" coords="447,541,620,621">
-<area shape="rect" id="node16" href="ius_workflow_runs.html" title="ius_workflow_runs" alt="" coords="1479,611,1673,691">
-<area shape="rect" id="node19" href="workflow_run.html" title="workflow_run" alt="" coords="433,673,633,1184">
-<area shape="rect" id="node56" href="workflow.html" title="workflow" alt="" coords="232,674,373,754">
-<area shape="rect" id="node24" href="lane_workflow_runs.html" title="lane_workflow_runs" alt="" coords="1237,579,1432,659">
-<area shape="rect" id="node27" href="processing.html" title="processing" alt="" coords="740,913,924,993">
-<area shape="rect" id="node34" href="share_experiment.html" title="share_experiment" alt="" coords="753,407,911,487">
-<area shape="rect" id="node37" href="share_file.html" title="share_file" alt="" coords="469,11,597,91">
-<area shape="rect" id="node40" href="share_lane.html" title="share_lane" alt="" coords="1269,679,1400,759">
-<area shape="rect" id="node43" href="share_processing.html" title="share_processing" alt="" coords="1032,1062,1189,1142">
-<area shape="rect" id="node46" href="share_sample.html" title="share_sample" alt="" coords="1040,262,1181,342">
-<area shape="rect" id="node49" href="share_study.html" title="share_study" alt="" coords="467,274,600,354">
-<area shape="rect" id="node52" href="share_workflow_run.html" title="share_workflow_run" alt="" coords="680,1011,984,1255">
-<area shape="rect" id="node60" href="workflow_run_attribute.html" title="workflow_run_attribute" alt="" coords="743,814,921,894">
-<area shape="rect" id="node62" href="workflow_run_param.html" title="workflow_run_param" alt="" coords="747,645,917,725">
+<area shape="rect" id="node1" href="experiment.html" title="experiment" alt="" coords="459,213,608,293">
+<area shape="rect" id="node3" href="registration.html" title="registration" alt="" coords="5,431,173,806">
+<area shape="rect" id="node5" href="study.html" title="study" alt="" coords="228,181,377,261">
+<area shape="rect" id="node6" href="file.html" title="file" alt="" coords="219,552,387,632">
+<area shape="rect" id="node8" href="invoice.html" title="invoice" alt="" coords="236,1248,369,1328">
+<area shape="rect" id="node10" href="ius.html" title="ius" alt="" coords="1251,272,1419,352">
+<area shape="rect" id="node12" href="lane.html" title="lane" alt="" coords="1031,373,1191,453">
+<area shape="rect" id="node15" href="sample.html" title="sample" alt="" coords="740,181,924,261">
+<area shape="rect" id="node23" href="sequencer_run.html" title="sequencer_run" alt="" coords="447,346,620,426">
+<area shape="rect" id="node16" href="ius_workflow_runs.html" title="ius_workflow_runs" alt="" coords="1479,542,1673,622">
+<area shape="rect" id="node19" href="workflow_run.html" title="workflow_run" alt="" coords="433,648,633,1159">
+<area shape="rect" id="node56" href="workflow.html" title="workflow" alt="" coords="232,649,373,729">
+<area shape="rect" id="node24" href="lane_workflow_runs.html" title="lane_workflow_runs" alt="" coords="1237,593,1432,673">
+<area shape="rect" id="node27" href="processing.html" title="processing" alt="" coords="740,906,924,986">
+<area shape="rect" id="node34" href="share_experiment.html" title="share_experiment" alt="" coords="753,278,911,358">
+<area shape="rect" id="node37" href="share_file.html" title="share_file" alt="" coords="469,516,597,596">
+<area shape="rect" id="node40" href="share_lane.html" title="share_lane" alt="" coords="1269,410,1400,490">
+<area shape="rect" id="node43" href="share_processing.html" title="share_processing" alt="" coords="1032,906,1189,986">
+<area shape="rect" id="node46" href="share_sample.html" title="share_sample" alt="" coords="1040,134,1181,214">
+<area shape="rect" id="node49" href="share_study.html" title="share_study" alt="" coords="467,116,600,196">
+<area shape="rect" id="node52" href="share_workflow_run.html" title="share_workflow_run" alt="" coords="680,1031,984,1275">
+<area shape="rect" id="node60" href="workflow_run_attribute.html" title="workflow_run_attribute" alt="" coords="743,613,921,693">
+<area shape="rect" id="node62" href="workflow_run_input_files.html" title="workflow_run_input_files" alt="" coords="737,516,927,596">
+<area shape="rect" id="node65" href="workflow_run_param.html" title="workflow_run_param" alt="" coords="747,746,917,826">
 </map>
 
   <a name='diagram'><img id='twoDegreesImg' src='../diagrams/share_workflow_run.2degrees.png' usemap='#twoDegreesRelationshipsDiagram' class='diagram' border='0' alt='' align='left'></a>

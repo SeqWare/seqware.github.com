@@ -32,7 +32,7 @@ digraph "twoDegreesRelationshipsDiagram" {
   "sample":"owner_id":w -> "registration":"elipses":e [arrowhead=none dir=back arrowtail=crowodot];
   "sample_attribute":"elipses":w -> "sample":"sample_id":e [arrowhead=none dir=back arrowtail=crowodot];
   "sample_hierarchy":"elipses":w -> "sample":"sample_id":e [arrowhead=none dir=back arrowtail=crowodot];
-  "sample_hierarchy":"elipses":w -> "sample":"sample_id":e [arrowhead=none dir=back arrowtail=crowodot];
+  "sample_hierarchy":"elipses":w -> "sample":"sample_id":e [arrowhead=none dir=back arrowtail=teeodot];
   "sample_link":"elipses":w -> "sample":"sample_id":e [arrowhead=none dir=back arrowtail=crowodot];
   "sample_relationship":"child_id":w -> "sample":"sample_id":e [arrowhead=none dir=back arrowtail=crowodot];
   "sample_relationship":"parent_id":w -> "sample":"sample_id":e [arrowhead=none dir=back arrowtail=crowodot];

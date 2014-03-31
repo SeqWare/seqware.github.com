@@ -20,7 +20,7 @@ digraph "oneDegreeRelationshipsDiagram" {
     arrowsize="0.8"
   ];
   "sample_hierarchy":"parent_id":w -> "sample":"sample_id":e [arrowhead=none dir=back arrowtail=crowodot];
-  "sample_hierarchy":"sample_id":w -> "sample":"sample_id":e [arrowhead=none dir=back arrowtail=crowodot];
+  "sample_hierarchy":"sample_id":w -> "sample":"sample_id":e [arrowhead=none dir=back arrowtail=teeodot];
   "sample" [
     label=<
     <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" BGCOLOR="#ffffff">

@@ -80,7 +80,7 @@ digraph "twoDegreesRelationshipsDiagram" {
   "sample":"owner_id":w -> "registration":"registration_id.type":e [arrowhead=none dir=back arrowtail=crowodot];
   "sample_attribute":"elipses":w -> "sample":"sample_id":e [arrowhead=none dir=back arrowtail=crowodot];
   "sample_hierarchy":"elipses":w -> "sample":"sample_id":e [arrowhead=none dir=back arrowtail=crowodot];
-  "sample_hierarchy":"elipses":w -> "sample":"sample_id":e [arrowhead=none dir=back arrowtail=crowodot];
+  "sample_hierarchy":"elipses":w -> "sample":"sample_id":e [arrowhead=none dir=back arrowtail=teeodot];
   "sample_link":"elipses":w -> "sample":"sample_id":e [arrowhead=none dir=back arrowtail=crowodot];
   "sample_relationship":"elipses":w -> "sample":"sample_id":e [arrowhead=none dir=back arrowtail=crowodot];
   "sample_relationship":"elipses":w -> "sample":"sample_id":e [arrowhead=none dir=back arrowtail=crowodot];
@@ -112,6 +112,8 @@ digraph "twoDegreesRelationshipsDiagram" {
   "workflow_run":"owner_id":w -> "registration":"registration_id.type":e [arrowhead=none dir=back arrowtail=crowodot];
   "workflow_run":"workflow_id":w -> "workflow":"workflow_id":e [arrowhead=none dir=back arrowtail=crowodot];
   "workflow_run_attribute":"elipses":w -> "workflow_run":"workflow_run_id":e [arrowhead=none dir=back arrowtail=crowodot];
+  "workflow_run_input_files":"elipses":w -> "file":"file_id":e [arrowhead=none dir=back arrowtail=crowodot];
+  "workflow_run_input_files":"elipses":w -> "workflow_run":"workflow_run_id":e [arrowhead=none dir=back arrowtail=crowodot];
   "workflow_run_param":"elipses":w -> "workflow_run":"workflow_run_id":e [arrowhead=none dir=back arrowtail=crowodot];
   "expense" [
     label=<
@@ -213,7 +215,8 @@ digraph "twoDegreesRelationshipsDiagram" {
       <TR><TD PORT="sw_accession" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">sw_accession</TD></TR>
       <TR><TD PORT="file_type_id" COLSPAN="3" ALIGN="LEFT">file_type_id</TD></TR>
       <TR><TD PORT="size" COLSPAN="3" ALIGN="LEFT">size</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 2</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">70,986 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">3 &gt;</TD></TR>
+      <TR><TD PORT="skip" COLSPAN="3" ALIGN="LEFT">skip</TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 2</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">70,986 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">4 &gt;</TD></TR>
     </TABLE>>
     URL="file.html"
     tooltip="file"
@@ -964,7 +967,7 @@ digraph "twoDegreesRelationshipsDiagram" {
       <TR><TD PORT="stderr" COLSPAN="3" ALIGN="LEFT">stderr</TD></TR>
       <TR><TD PORT="stdout" COLSPAN="3" ALIGN="LEFT">stdout</TD></TR>
       <TR><TD PORT="workflow_engine" COLSPAN="3" ALIGN="LEFT">workflow_engine</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 2</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">38,550 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">7 &gt;</TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 2</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">38,550 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">8 &gt;</TD></TR>
     </TABLE>>
     URL="workflow_run.html"
     tooltip="workflow_run"
@@ -978,6 +981,16 @@ digraph "twoDegreesRelationshipsDiagram" {
     </TABLE>>
     URL="workflow_run_attribute.html"
     tooltip="workflow_run_attribute"
+  ];
+  "workflow_run_input_files" [
+    label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" BGCOLOR="#ffffff">
+      <TR><TD COLSPAN="3" BGCOLOR="#9bab96" ALIGN="CENTER">workflow_run_input_files</TD></TR>
+      <TR><TD PORT="elipses" COLSPAN="3" ALIGN="LEFT">...</TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 2</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">0 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
+    </TABLE>>
+    URL="workflow_run_input_files.html"
+    tooltip="workflow_run_input_files"
   ];
   "workflow_run_param" [
     label=<

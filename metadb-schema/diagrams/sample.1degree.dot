@@ -32,7 +32,7 @@ digraph "oneDegreeRelationshipsDiagram" {
   "sample":"owner_id":w -> "registration":"registration_id":e [arrowhead=none dir=back arrowtail=crowodot];
   "sample_attribute":"sample_id":w -> "sample":"sample_id.type":e [arrowhead=none dir=back arrowtail=crowodot];
   "sample_hierarchy":"parent_id":w -> "sample":"sample_id.type":e [arrowhead=none dir=back arrowtail=crowodot];
-  "sample_hierarchy":"sample_id":w -> "sample":"sample_id.type":e [arrowhead=none dir=back arrowtail=crowodot];
+  "sample_hierarchy":"sample_id":w -> "sample":"sample_id.type":e [arrowhead=none dir=back arrowtail=teeodot];
   "sample_link":"sample_id":w -> "sample":"sample_id.type":e [arrowhead=none dir=back arrowtail=crowodot];
   "sample_relationship":"child_id":w -> "sample":"sample_id.type":e [arrowhead=none dir=back arrowtail=crowodot];
   "sample_relationship":"parent_id":w -> "sample":"sample_id.type":e [arrowhead=none dir=back arrowtail=crowodot];

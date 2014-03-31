@@ -84,7 +84,7 @@
 </tr>
 </thead>
 <tbody valign='top'>
-<tr class='odd'>
+<tr class='even'>
  <td class='primaryKey' title='Primary Key'>file_id</td>
  <td class='detail'>serial</td>
  <td class='detail' align='right'>10</td>
@@ -93,22 +93,28 @@
  <td class='detail' align='right'>nextval('file_file_id_seq'::regclass)</td>
  <td class='detail'>
   <table border='0' width='100%' cellspacing='0' cellpadding='0'>
-   <tr class='relative odd' valign='top'>
+   <tr class='relative even' valign='top'>
     <td class='relatedTable detail' title="file_attribute.file_id refs file.file_id via fk7750ef99bb4f9efd"><a href='file_attribute.html'>file_attribute</a><span class='relatedKey'>.file_id</span>
     </td>
     <td class='constraint detail'>fk7750ef99bb4f9efd<span title='Restrict delete:
  Parent cannot be deleted if children exist'>&nbsp;R</span></td>
    </tr>
-   <tr class='relative odd' valign='top'>
+   <tr class='relative even' valign='top'>
     <td class='relatedTable detail' title="processing_files.file_id refs file.file_id via processing_files_file_id_fkey"><a href='processing_files.html'>processing_files</a><span class='relatedKey'>.file_id</span>
     </td>
     <td class='constraint detail'>processing_files_file_id_fkey<span title='Restrict delete:
  Parent cannot be deleted if children exist'>&nbsp;R</span></td>
    </tr>
-   <tr class='relative odd' valign='top'>
+   <tr class='relative even' valign='top'>
     <td class='relatedTable detail' title="share_file.file_id refs file.file_id via fk_share_file_file_id"><a href='share_file.html'>share_file</a><span class='relatedKey'>.file_id</span>
     </td>
     <td class='constraint detail'>fk_share_file_file_id<span title='Restrict delete:
+ Parent cannot be deleted if children exist'>&nbsp;R</span></td>
+   </tr>
+   <tr class='relative even' valign='top'>
+    <td class='relatedTable detail' title="workflow_run_input_files.file_id refs file.file_id via file_id"><a href='workflow_run_input_files.html'>workflow_run_input_files</a><span class='relatedKey'>.file_id</span>
+    </td>
+    <td class='constraint detail'>file_id<span title='Restrict delete:
  Parent cannot be deleted if children exist'>&nbsp;R</span></td>
    </tr>
   </table>
@@ -116,7 +122,7 @@
  <td class='detail'> </td>
  <td class='comment detail'></td>
 </tr>
-<tr class='even'>
+<tr class='odd'>
  <td class='detail'>file_path</td>
  <td class='detail'>text</td>
  <td class='detail' align='right'>2147483647</td>
@@ -127,7 +133,7 @@
  <td class='detail'> </td>
  <td class='comment detail'></td>
 </tr>
-<tr class='odd'>
+<tr class='even'>
  <td class='detail'>md5sum</td>
  <td class='detail'>text</td>
  <td class='detail' align='right'>2147483647</td>
@@ -138,7 +144,7 @@
  <td class='detail'> </td>
  <td class='comment detail'></td>
 </tr>
-<tr class='even'>
+<tr class='odd'>
  <td class='detail'>url</td>
  <td class='detail'>text</td>
  <td class='detail' align='right'>2147483647</td>
@@ -149,7 +155,7 @@
  <td class='detail'> </td>
  <td class='comment detail'></td>
 </tr>
-<tr class='odd'>
+<tr class='even'>
  <td class='detail'>url_label</td>
  <td class='detail'>text</td>
  <td class='detail' align='right'>2147483647</td>
@@ -160,7 +166,7 @@
  <td class='detail'> </td>
  <td class='comment detail'></td>
 </tr>
-<tr class='even'>
+<tr class='odd'>
  <td class='detail'>type</td>
  <td class='detail'>text</td>
  <td class='detail' align='right'>2147483647</td>
@@ -171,7 +177,7 @@
  <td class='detail'> </td>
  <td class='comment detail'></td>
 </tr>
-<tr class='odd'>
+<tr class='even'>
  <td class='detail'>meta_type</td>
  <td class='detail'>text</td>
  <td class='detail' align='right'>2147483647</td>
@@ -182,7 +188,7 @@
  <td class='detail'> </td>
  <td class='comment detail'></td>
 </tr>
-<tr class='even'>
+<tr class='odd'>
  <td class='detail'>description</td>
  <td class='detail'>text</td>
  <td class='detail' align='right'>2147483647</td>
@@ -193,7 +199,7 @@
  <td class='detail'> </td>
  <td class='comment detail'></td>
 </tr>
-<tr class='odd'>
+<tr class='even'>
  <td class='detail'>owner_id</td>
  <td class='detail'>int4</td>
  <td class='detail' align='right'>10</td>
@@ -203,7 +209,7 @@
  <td class='detail'></td>
  <td class='detail'>
   <table border='0' width='100%' cellspacing='0' cellpadding='0'>
-   <tr class='relative odd' valign='top'>
+   <tr class='relative even' valign='top'>
     <td class='relatedTable detail' title="file.owner_id refs registration.registration_id via fk_file_owner_id"><a href='registration.html'>registration</a><span class='relatedKey'>.registration_id</span>
     </td>
     <td class='constraint detail'>fk_file_owner_id<span title='Restrict delete:
@@ -213,7 +219,7 @@
  </td>
  <td class='comment detail'></td>
 </tr>
-<tr class='even'>
+<tr class='odd'>
  <td class='indexedColumn' title='Indexed'>sw_accession</td>
  <td class='detail'>serial</td>
  <td class='detail' align='right'>10</td>
@@ -224,7 +230,7 @@
  <td class='detail'> </td>
  <td class='comment detail'></td>
 </tr>
-<tr class='odd'>
+<tr class='even'>
  <td class='detail'>file_type_id</td>
  <td class='detail'>int4</td>
  <td class='detail' align='right'>10</td>
@@ -234,7 +240,7 @@
  <td class='detail'></td>
  <td class='detail'>
   <table border='0' width='100%' cellspacing='0' cellpadding='0'>
-   <tr class='relative odd' valign='top'>
+   <tr class='relative even' valign='top'>
     <td class='relatedTable detail' title="file.file_type_id refs file_type.file_type_id via fk_file_file_type_id"><a href='file_type.html'>file_type</a><span class='relatedKey'>.file_type_id</span>
     </td>
     <td class='constraint detail'>fk_file_file_type_id<span title='Restrict delete:
@@ -244,7 +250,7 @@
  </td>
  <td class='comment detail'></td>
 </tr>
-<tr class='even'>
+<tr class='odd'>
  <td class='detail'>size</td>
  <td class='detail'>int8</td>
  <td class='detail' align='right'>19</td>
@@ -255,8 +261,19 @@
  <td class='detail'> </td>
  <td class='comment detail'></td>
 </tr>
+<tr class='even'>
+ <td class='detail'>skip</td>
+ <td class='detail'>bool</td>
+ <td class='detail' align='right'>1</td>
+ <td class='detail' align='center' title='nullable'>&nbsp;&radic;&nbsp;</td>
+ <td class='detail' align='center'></td>
+ <td class='detail' align='right'>false</td>
+ <td class='detail'></td>
+ <td class='detail'> </td>
+ <td class='comment detail'></td>
+</tr>
 </table>
-<p title='12 columns'>Table contained 70,986 rows at Mon Mar 31 11:39 EDT 2014<p/>
+<p title='13 columns'>Table contained 70,986 rows at Mon Mar 31 13:20 EDT 2014<p/>
 </td></tr></table>
 <div class='indent'>
 <b>Indexes:</b>
@@ -288,37 +305,39 @@
 <br><form action='get'><b>Close relationships</b><span class='degrees' id='degrees' title='Detail diminishes with increased separation from file'>
 &nbsp;within <label for='oneDegree'><input type='radio' name='degrees' id='oneDegree' checked>one</label>  <label for='twoDegrees'><input type='radio' name='degrees' id='twoDegrees'>two degrees</label> of separation</span><b>:</b></form>
 <map id="oneDegreeRelationshipsDiagram" name="oneDegreeRelationshipsDiagram">
-<area shape="rect" id="node1" href="file.html" title="file" alt="" coords="217,235,503,570">
-<area shape="rect" id="node3" href="file_type.html" title="file_type" alt="" coords="19,466,160,614">
-<area shape="rect" id="node5" href="registration.html" title="registration" alt="" coords="5,63,173,438">
-<area shape="rect" id="node6" href="file_attribute.html" title="file_attribute" alt="" coords="569,381,724,552">
-<area shape="rect" id="node8" href="processing_files.html" title="processing_files" alt="" coords="548,239,745,364">
+<area shape="rect" id="node1" href="file.html" title="file" alt="" coords="217,259,503,616">
+<area shape="rect" id="node3" href="file_type.html" title="file_type" alt="" coords="19,489,160,637">
+<area shape="rect" id="node5" href="registration.html" title="registration" alt="" coords="5,81,173,455">
+<area shape="rect" id="node6" href="file_attribute.html" title="file_attribute" alt="" coords="569,239,724,409">
+<area shape="rect" id="node8" href="processing_files.html" title="processing_files" alt="" coords="548,427,745,552">
 <area shape="rect" id="node10" href="share_file.html" title="share_file" alt="" coords="576,5,717,221">
+<area shape="rect" id="node13" href="workflow_run_input_files.html" title="workflow_run_input_files" alt="" coords="552,569,741,671">
 </map>
   <a name='diagram'><img id='oneDegreeImg' src='../diagrams/file.1degree.png' usemap='#oneDegreeRelationshipsDiagram' class='diagram' border='0' alt='' align='left'></a>
 <map id="twoDegreesRelationshipsDiagram" name="twoDegreesRelationshipsDiagram">
-<area shape="rect" id="node1" href="experiment.html" title="experiment" alt="" coords="560,1052,709,1132">
-<area shape="rect" id="node3" href="registration.html" title="registration" alt="" coords="5,734,173,1109">
-<area shape="rect" id="node5" href="study.html" title="study" alt="" coords="285,936,435,1016">
-<area shape="rect" id="node6" href="file.html" title="file" alt="" coords="217,102,503,437">
-<area shape="rect" id="node8" href="file_type.html" title="file_type" alt="" coords="19,333,160,481">
-<area shape="rect" id="node10" href="file_attribute.html" title="file_attribute" alt="" coords="557,32,712,203">
-<area shape="rect" id="node12" href="invoice.html" title="invoice" alt="" coords="293,1034,427,1114">
-<area shape="rect" id="node14" href="ius.html" title="ius" alt="" coords="1243,1058,1411,1138">
-<area shape="rect" id="node16" href="lane.html" title="lane" alt="" coords="1017,767,1177,847">
-<area shape="rect" id="node19" href="sample.html" title="sample" alt="" coords="768,1058,952,1138">
-<area shape="rect" id="node23" href="sequencer_run.html" title="sequencer_run" alt="" coords="273,767,447,847">
-<area shape="rect" id="node24" href="processing.html" title="processing" alt="" coords="768,500,952,580">
-<area shape="rect" id="node26" href="workflow_run.html" title="workflow_run" alt="" coords="548,526,721,606">
-<area shape="rect" id="node57" href="workflow.html" title="workflow" alt="" coords="289,562,431,642">
-<area shape="rect" id="node29" href="processing_files.html" title="processing_files" alt="" coords="999,407,1196,532">
-<area shape="rect" id="node35" href="share_experiment.html" title="share_experiment" alt="" coords="781,890,939,970">
-<area shape="rect" id="node38" href="share_file.html" title="share_file" alt="" coords="564,256,705,472">
-<area shape="rect" id="node41" href="share_lane.html" title="share_lane" alt="" coords="1261,366,1392,446">
-<area shape="rect" id="node44" href="share_processing.html" title="share_processing" alt="" coords="1019,571,1176,651">
-<area shape="rect" id="node47" href="share_sample.html" title="share_sample" alt="" coords="1027,1131,1168,1211">
-<area shape="rect" id="node50" href="share_study.html" title="share_study" alt="" coords="568,919,701,999">
-<area shape="rect" id="node53" href="share_workflow_run.html" title="share_workflow_run" alt="" coords="776,598,944,678">
+<area shape="rect" id="node1" href="experiment.html" title="experiment" alt="" coords="479,983,628,1063">
+<area shape="rect" id="node3" href="registration.html" title="registration" alt="" coords="5,813,173,1187">
+<area shape="rect" id="node5" href="study.html" title="study" alt="" coords="217,969,367,1049">
+<area shape="rect" id="node6" href="file.html" title="file" alt="" coords="411,131,696,488">
+<area shape="rect" id="node8" href="file_type.html" title="file_type" alt="" coords="221,371,363,519">
+<area shape="rect" id="node10" href="file_attribute.html" title="file_attribute" alt="" coords="759,68,913,239">
+<area shape="rect" id="node12" href="invoice.html" title="invoice" alt="" coords="225,1067,359,1147">
+<area shape="rect" id="node14" href="ius.html" title="ius" alt="" coords="1221,965,1389,1045">
+<area shape="rect" id="node16" href="lane.html" title="lane" alt="" coords="996,879,1156,959">
+<area shape="rect" id="node19" href="sample.html" title="sample" alt="" coords="744,965,928,1045">
+<area shape="rect" id="node23" href="sequencer_run.html" title="sequencer_run" alt="" coords="467,813,640,893">
+<area shape="rect" id="node24" href="processing.html" title="processing" alt="" coords="744,608,928,688">
+<area shape="rect" id="node26" href="workflow_run.html" title="workflow_run" alt="" coords="467,608,640,688">
+<area shape="rect" id="node57" href="workflow.html" title="workflow" alt="" coords="221,644,363,724">
+<area shape="rect" id="node29" href="processing_files.html" title="processing_files" alt="" coords="977,309,1175,435">
+<area shape="rect" id="node35" href="share_experiment.html" title="share_experiment" alt="" coords="757,1092,915,1172">
+<area shape="rect" id="node38" href="share_file.html" title="share_file" alt="" coords="765,256,907,472">
+<area shape="rect" id="node41" href="share_lane.html" title="share_lane" alt="" coords="1240,421,1371,501">
+<area shape="rect" id="node44" href="share_processing.html" title="share_processing" alt="" coords="997,689,1155,769">
+<area shape="rect" id="node47" href="share_sample.html" title="share_sample" alt="" coords="1005,1113,1147,1193">
+<area shape="rect" id="node50" href="share_study.html" title="share_study" alt="" coords="487,1085,620,1165">
+<area shape="rect" id="node53" href="share_workflow_run.html" title="share_workflow_run" alt="" coords="752,705,920,785">
+<area shape="rect" id="node61" href="workflow_run_input_files.html" title="workflow_run_input_files" alt="" coords="741,489,931,591">
 </map>
 
   <a name='diagram'><img id='twoDegreesImg' src='../diagrams/file.2degrees.png' usemap='#twoDegreesRelationshipsDiagram' class='diagram' border='0' alt='' align='left'></a>

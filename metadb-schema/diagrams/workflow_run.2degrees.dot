@@ -77,6 +77,8 @@ digraph "twoDegreesRelationshipsDiagram" {
   "workflow_run":"owner_id":w -> "registration":"registration_id":e [arrowhead=none dir=back arrowtail=crowodot];
   "workflow_run":"workflow_id":w -> "workflow":"workflow_id":e [arrowhead=none dir=back arrowtail=crowodot];
   "workflow_run_attribute":"workflow_run_id":w -> "workflow_run":"workflow_run_id.type":e [arrowhead=none dir=back arrowtail=crowodot];
+  "workflow_run_input_files":"file_id":w -> "file":"elipses":e [arrowhead=none dir=back arrowtail=crowodot];
+  "workflow_run_input_files":"workflow_run_id":w -> "workflow_run":"workflow_run_id.type":e [arrowhead=none dir=back arrowtail=crowodot];
   "workflow_run_param":"workflow_run_id":w -> "workflow_run":"workflow_run_id.type":e [arrowhead=none dir=back arrowtail=crowodot];
   "experiment" [
     label=<
@@ -93,7 +95,7 @@ digraph "twoDegreesRelationshipsDiagram" {
     <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" BGCOLOR="#ffffff">
       <TR><TD COLSPAN="3" BGCOLOR="#9bab96" ALIGN="CENTER">file</TD></TR>
       <TR><TD PORT="elipses" COLSPAN="3" ALIGN="LEFT">...</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 2</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">70,986 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">3 &gt;</TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 2</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">70,986 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">4 &gt;</TD></TR>
     </TABLE>>
     URL="file.html"
     tooltip="file"
@@ -475,7 +477,7 @@ digraph "twoDegreesRelationshipsDiagram" {
       <TR><TD PORT="stderr" COLSPAN="2" ALIGN="LEFT">stderr</TD><TD PORT="stderr.type" ALIGN="LEFT">text[2147483647]</TD></TR>
       <TR><TD PORT="stdout" COLSPAN="2" ALIGN="LEFT">stdout</TD><TD PORT="stdout.type" ALIGN="LEFT">text[2147483647]</TD></TR>
       <TR><TD PORT="workflow_engine" COLSPAN="2" ALIGN="LEFT">workflow_engine</TD><TD PORT="workflow_engine.type" ALIGN="LEFT">text[2147483647]</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 2</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">38,550 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">7 &gt;</TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 2</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">38,550 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">8 &gt;</TD></TR>
     </TABLE>>
     URL="workflow_run.html"
     tooltip="workflow_run"
@@ -493,6 +495,17 @@ digraph "twoDegreesRelationshipsDiagram" {
     </TABLE>>
     URL="workflow_run_attribute.html"
     tooltip="workflow_run_attribute"
+  ];
+  "workflow_run_input_files" [
+    label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" BGCOLOR="#ffffff">
+      <TR><TD COLSPAN="3" BGCOLOR="#9bab96" ALIGN="CENTER">workflow_run_input_files</TD></TR>
+      <TR><TD PORT="workflow_run_id" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">workflow_run_id</TD></TR>
+      <TR><TD PORT="file_id" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">file_id</TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 2</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">0 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
+    </TABLE>>
+    URL="workflow_run_input_files.html"
+    tooltip="workflow_run_input_files"
   ];
   "workflow_run_param" [
     label=<

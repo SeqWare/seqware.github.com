@@ -84,7 +84,7 @@
 </tr>
 </thead>
 <tbody valign='top'>
-<tr class='even'>
+<tr class='odd'>
  <td class='primaryKey' title='Primary Key'>processing_id</td>
  <td class='detail'>serial</td>
  <td class='detail' align='right'>10</td>
@@ -93,67 +93,67 @@
  <td class='detail' align='right'>nextval('processing_processing_id_seq'::regclass)</td>
  <td class='detail'>
   <table border='0' width='100%' cellspacing='0' cellpadding='0'>
-   <tr class='relative even' valign='top'>
+   <tr class='relative odd' valign='top'>
     <td class='relatedTable detail' title="processing_attribute.processing_id refs processing.processing_id via processing_attribute_processing_id_fkey"><a href='processing_attribute.html'>processing_attribute</a><span class='relatedKey'>.processing_id</span>
     </td>
     <td class='constraint detail'>processing_attribute_processing_id_fkey<span title='Restrict delete:
  Parent cannot be deleted if children exist'>&nbsp;R</span></td>
    </tr>
-   <tr class='relative even' valign='top'>
+   <tr class='relative odd' valign='top'>
     <td class='relatedTable detail' title="processing_experiments.processing_id refs processing.processing_id via processing_experiments_processing_id_fkey"><a href='processing_experiments.html'>processing_experiments</a><span class='relatedKey'>.processing_id</span>
     </td>
     <td class='constraint detail'>processing_experiments_processing_id_fkey<span title='Restrict delete:
  Parent cannot be deleted if children exist'>&nbsp;R</span></td>
    </tr>
-   <tr class='relative even' valign='top'>
+   <tr class='relative odd' valign='top'>
     <td class='relatedTable detail' title="processing_files.processing_id refs processing.processing_id via processing_files_processing_id_fkey"><a href='processing_files.html'>processing_files</a><span class='relatedKey'>.processing_id</span>
     </td>
     <td class='constraint detail'>processing_files_processing_id_fkey<span title='Restrict delete:
  Parent cannot be deleted if children exist'>&nbsp;R</span></td>
    </tr>
-   <tr class='relative even' valign='top'>
+   <tr class='relative odd' valign='top'>
     <td class='relatedTable detail' title="processing_ius.processing_id refs processing.processing_id via processing_ius_processing_id_fkey"><a href='processing_ius.html'>processing_ius</a><span class='relatedKey'>.processing_id</span>
     </td>
     <td class='constraint detail'>processing_ius_processing_id_fkey<span title='Restrict delete:
  Parent cannot be deleted if children exist'>&nbsp;R</span></td>
    </tr>
-   <tr class='relative even' valign='top'>
+   <tr class='relative odd' valign='top'>
     <td class='relatedTable detail' title="processing_lanes.processing_id refs processing.processing_id via processing_lanes_processing_id_fkey"><a href='processing_lanes.html'>processing_lanes</a><span class='relatedKey'>.processing_id</span>
     </td>
     <td class='constraint detail'>processing_lanes_processing_id_fkey<span title='Restrict delete:
  Parent cannot be deleted if children exist'>&nbsp;R</span></td>
    </tr>
-   <tr class='relative even' valign='top'>
+   <tr class='relative odd' valign='top'>
     <td class='relatedTable detail' title="processing_relationship.child_id refs processing.processing_id via processing_relationship_child_id_fkey"><a href='processing_relationship.html'>processing_relationship</a><span class='relatedKey'>.child_id</span>
     </td>
     <td class='constraint detail'>processing_relationship_child_id_fkey<span title='Cascade on delete:
  Deletion of parent deletes child'>&nbsp;C</span></td>
    </tr>
-   <tr class='relative even' valign='top'>
+   <tr class='relative odd' valign='top'>
     <td class='relatedTable detail' title="processing_relationship.parent_id refs processing.processing_id via processing_relationship_parent_id_fkey"><a href='processing_relationship.html'>processing_relationship</a><span class='relatedKey'>.parent_id</span>
     </td>
     <td class='constraint detail'>processing_relationship_parent_id_fkey<span title='Restrict delete:
  Parent cannot be deleted if children exist'>&nbsp;R</span></td>
    </tr>
-   <tr class='relative even' valign='top'>
+   <tr class='relative odd' valign='top'>
     <td class='relatedTable detail' title="processing_samples.processing_id refs processing.processing_id via processing_samples_processing_id_fkey"><a href='processing_samples.html'>processing_samples</a><span class='relatedKey'>.processing_id</span>
     </td>
     <td class='constraint detail'>processing_samples_processing_id_fkey<span title='Restrict delete:
  Parent cannot be deleted if children exist'>&nbsp;R</span></td>
    </tr>
-   <tr class='relative even' valign='top'>
+   <tr class='relative odd' valign='top'>
     <td class='relatedTable detail' title="processing_sequencer_runs.processing_id refs processing.processing_id via processing_sequencer_runs_processing_id_fkey"><a href='processing_sequencer_runs.html'>processing_sequencer_runs</a><span class='relatedKey'>.processing_id</span>
     </td>
     <td class='constraint detail'>processing_sequencer_runs_processing_id_fkey<span title='Restrict delete:
  Parent cannot be deleted if children exist'>&nbsp;R</span></td>
    </tr>
-   <tr class='relative even' valign='top'>
+   <tr class='relative odd' valign='top'>
     <td class='relatedTable detail' title="processing_studies.processing_id refs processing.processing_id via processing_studies_processing_id_fkey"><a href='processing_studies.html'>processing_studies</a><span class='relatedKey'>.processing_id</span>
     </td>
     <td class='constraint detail'>processing_studies_processing_id_fkey<span title='Restrict delete:
  Parent cannot be deleted if children exist'>&nbsp;R</span></td>
    </tr>
-   <tr class='relative even' valign='top'>
+   <tr class='relative odd' valign='top'>
     <td class='relatedTable detail' title="share_processing.processing_id refs processing.processing_id via fk_share_processing_processing_id"><a href='share_processing.html'>share_processing</a><span class='relatedKey'>.processing_id</span>
     </td>
     <td class='constraint detail'>fk_share_processing_processing_id<span title='Restrict delete:
@@ -164,7 +164,7 @@
  <td class='detail'> </td>
  <td class='comment detail'></td>
 </tr>
-<tr class='odd'>
+<tr class='even'>
  <td class='indexedColumn' title='Indexed'>workflow_run_id</td>
  <td class='detail'>int4</td>
  <td class='detail' align='right'>10</td>
@@ -174,7 +174,7 @@
  <td class='detail'></td>
  <td class='detail'>
   <table border='0' width='100%' cellspacing='0' cellpadding='0'>
-   <tr class='relative odd' valign='top'>
+   <tr class='relative even' valign='top'>
     <td class='relatedTable detail' title="processing.workflow_run_id refs workflow_run.workflow_run_id via processing_workflow_run_id_fkey"><a href='workflow_run.html'>workflow_run</a><span class='relatedKey'>.workflow_run_id</span>
     </td>
     <td class='constraint detail'>processing_workflow_run_id_fkey<span title='Restrict delete:
@@ -184,7 +184,7 @@
  </td>
  <td class='comment detail'></td>
 </tr>
-<tr class='even'>
+<tr class='odd'>
  <td class='indexedColumn' title='Indexed'>ancestor_workflow_run_id</td>
  <td class='detail'>int4</td>
  <td class='detail' align='right'>10</td>
@@ -194,7 +194,7 @@
  <td class='detail'></td>
  <td class='detail'>
   <table border='0' width='100%' cellspacing='0' cellpadding='0'>
-   <tr class='relative even' valign='top'>
+   <tr class='relative odd' valign='top'>
     <td class='relatedTable detail' title="processing.ancestor_workflow_run_id refs workflow_run.workflow_run_id via processing_ancestor_workflow_run_id_fkey"><a href='workflow_run.html'>workflow_run</a><span class='relatedKey'>.workflow_run_id</span>
     </td>
     <td class='constraint detail'>processing_ancestor_workflow_run_id_fkey<span title='Restrict delete:
@@ -204,7 +204,7 @@
  </td>
  <td class='comment detail'></td>
 </tr>
-<tr class='odd'>
+<tr class='even'>
  <td class='detail'>algorithm</td>
  <td class='detail'>text</td>
  <td class='detail' align='right'>2147483647</td>
@@ -215,7 +215,7 @@
  <td class='detail'> </td>
  <td class='comment detail'></td>
 </tr>
-<tr class='even'>
+<tr class='odd'>
  <td class='detail'>status</td>
  <td class='detail'>text</td>
  <td class='detail' align='right'>2147483647</td>
@@ -226,7 +226,7 @@
  <td class='detail'> </td>
  <td class='comment detail'></td>
 </tr>
-<tr class='odd'>
+<tr class='even'>
  <td class='detail'>description</td>
  <td class='detail'>text</td>
  <td class='detail' align='right'>2147483647</td>
@@ -237,7 +237,7 @@
  <td class='detail'> </td>
  <td class='comment detail'></td>
 </tr>
-<tr class='even'>
+<tr class='odd'>
  <td class='detail'>url</td>
  <td class='detail'>text</td>
  <td class='detail' align='right'>2147483647</td>
@@ -248,7 +248,7 @@
  <td class='detail'> </td>
  <td class='comment detail'></td>
 </tr>
-<tr class='odd'>
+<tr class='even'>
  <td class='detail'>url_label</td>
  <td class='detail'>text</td>
  <td class='detail' align='right'>2147483647</td>
@@ -259,7 +259,7 @@
  <td class='detail'> </td>
  <td class='comment detail'></td>
 </tr>
-<tr class='even'>
+<tr class='odd'>
  <td class='detail'>version</td>
  <td class='detail'>text</td>
  <td class='detail' align='right'>2147483647</td>
@@ -270,7 +270,7 @@
  <td class='detail'> </td>
  <td class='comment detail'></td>
 </tr>
-<tr class='odd'>
+<tr class='even'>
  <td class='detail'>parameters</td>
  <td class='detail'>text</td>
  <td class='detail' align='right'>2147483647</td>
@@ -281,7 +281,7 @@
  <td class='detail'> </td>
  <td class='comment detail'></td>
 </tr>
-<tr class='even'>
+<tr class='odd'>
  <td class='detail'>stdout</td>
  <td class='detail'>text</td>
  <td class='detail' align='right'>2147483647</td>
@@ -292,7 +292,7 @@
  <td class='detail'> </td>
  <td class='comment detail'></td>
 </tr>
-<tr class='odd'>
+<tr class='even'>
  <td class='detail'>stderr</td>
  <td class='detail'>text</td>
  <td class='detail' align='right'>2147483647</td>
@@ -303,7 +303,7 @@
  <td class='detail'> </td>
  <td class='comment detail'></td>
 </tr>
-<tr class='even'>
+<tr class='odd'>
  <td class='detail'>exit_status</td>
  <td class='detail'>int4</td>
  <td class='detail' align='right'>10</td>
@@ -314,7 +314,7 @@
  <td class='detail'> </td>
  <td class='comment detail'></td>
 </tr>
-<tr class='odd'>
+<tr class='even'>
  <td class='detail'>process_exit_status</td>
  <td class='detail'>int4</td>
  <td class='detail' align='right'>10</td>
@@ -325,7 +325,7 @@
  <td class='detail'> </td>
  <td class='comment detail'></td>
 </tr>
-<tr class='even'>
+<tr class='odd'>
  <td class='detail'>task_group</td>
  <td class='detail'>bool</td>
  <td class='detail' align='right'>1</td>
@@ -336,7 +336,7 @@
  <td class='detail'> </td>
  <td class='comment detail'></td>
 </tr>
-<tr class='odd'>
+<tr class='even'>
  <td class='detail'>owner_id</td>
  <td class='detail'>int4</td>
  <td class='detail' align='right'>10</td>
@@ -346,7 +346,7 @@
  <td class='detail'></td>
  <td class='detail'>
   <table border='0' width='100%' cellspacing='0' cellpadding='0'>
-   <tr class='relative odd' valign='top'>
+   <tr class='relative even' valign='top'>
     <td class='relatedTable detail' title="processing.owner_id refs registration.registration_id via fk_processing_owner_id"><a href='registration.html'>registration</a><span class='relatedKey'>.registration_id</span>
     </td>
     <td class='constraint detail'>fk_processing_owner_id<span title='Restrict delete:
@@ -356,7 +356,7 @@
  </td>
  <td class='comment detail'></td>
 </tr>
-<tr class='even'>
+<tr class='odd'>
  <td class='indexedColumn' title='Indexed'>sw_accession</td>
  <td class='detail'>serial</td>
  <td class='detail' align='right'>10</td>
@@ -367,7 +367,7 @@
  <td class='detail'> </td>
  <td class='comment detail'></td>
 </tr>
-<tr class='odd'>
+<tr class='even'>
  <td class='detail'>run_start_tstmp</td>
  <td class='detail'>timestamp</td>
  <td class='detail' align='right'>29,6</td>
@@ -378,7 +378,7 @@
  <td class='detail'> </td>
  <td class='comment detail'></td>
 </tr>
-<tr class='even'>
+<tr class='odd'>
  <td class='detail'>run_stop_tstmp</td>
  <td class='detail'>timestamp</td>
  <td class='detail' align='right'>29,6</td>
@@ -389,7 +389,7 @@
  <td class='detail'> </td>
  <td class='comment detail'></td>
 </tr>
-<tr class='odd'>
+<tr class='even'>
  <td class='detail'>create_tstmp</td>
  <td class='detail'>timestamp</td>
  <td class='detail' align='right'>29,6</td>
@@ -400,7 +400,7 @@
  <td class='detail'> </td>
  <td class='comment detail'></td>
 </tr>
-<tr class='even'>
+<tr class='odd'>
  <td class='detail'>update_tstmp</td>
  <td class='detail'>timestamp</td>
  <td class='detail' align='right'>29,6</td>
@@ -412,7 +412,7 @@
  <td class='comment detail'></td>
 </tr>
 </table>
-<p title='21 columns'>Table contained 518,682 rows at Mon Mar 31 11:39 EDT 2014<p/>
+<p title='21 columns'>Table contained 518,682 rows at Mon Mar 31 13:20 EDT 2014<p/>
 </td></tr></table>
 <div class='indent'>
 <b>Indexes:</b>
@@ -477,38 +477,39 @@
 </map>
   <a name='diagram'><img id='oneDegreeImg' src='../diagrams/processing.1degree.png' usemap='#oneDegreeRelationshipsDiagram' class='diagram' border='0' alt='' align='left'></a>
 <map id="twoDegreesRelationshipsDiagram" name="twoDegreesRelationshipsDiagram">
-<area shape="rect" id="node1" href="experiment.html" title="experiment" alt="" coords="459,424,608,504">
-<area shape="rect" id="node3" href="registration.html" title="registration" alt="" coords="5,678,173,1053">
-<area shape="rect" id="node5" href="study.html" title="study" alt="" coords="228,424,377,504">
-<area shape="rect" id="node6" href="file.html" title="file" alt="" coords="219,557,387,637">
-<area shape="rect" id="node8" href="invoice.html" title="invoice" alt="" coords="236,327,369,407">
-<area shape="rect" id="node10" href="ius.html" title="ius" alt="" coords="1355,408,1523,488">
-<area shape="rect" id="node12" href="lane.html" title="lane" alt="" coords="1096,408,1256,488">
-<area shape="rect" id="node15" href="sample.html" title="sample" alt="" coords="753,408,937,488">
-<area shape="rect" id="node23" href="sequencer_run.html" title="sequencer_run" alt="" coords="759,799,932,879">
-<area shape="rect" id="node16" href="ius_workflow_runs.html" title="ius_workflow_runs" alt="" coords="1583,1428,1777,1508">
-<area shape="rect" id="node19" href="workflow_run.html" title="workflow_run" alt="" coords="433,1349,633,1859">
-<area shape="rect" id="node82" href="workflow.html" title="workflow" alt="" coords="232,1213,373,1293">
-<area shape="rect" id="node24" href="lane_workflow_runs.html" title="lane_workflow_runs" alt="" coords="1341,1149,1536,1229">
-<area shape="rect" id="node27" href="processing.html" title="processing" alt="" coords="679,1021,1012,1560">
-<area shape="rect" id="node31" href="processing_attribute.html" title="processing_attribute" alt="" coords="1085,1420,1267,1591">
-<area shape="rect" id="node33" href="processing_experiments.html" title="processing_experiments" alt="" coords="1073,739,1279,955">
-<area shape="rect" id="node36" href="processing_files.html" title="processing_files" alt="" coords="1077,972,1275,1097">
-<area shape="rect" id="node39" href="processing_ius.html" title="processing_ius" alt="" coords="1584,848,1776,1064">
-<area shape="rect" id="node42" href="processing_lanes.html" title="processing_lanes" alt="" coords="1341,643,1536,859">
-<area shape="rect" id="node45" href="processing_relationship.html" title="processing_relationship" alt="" coords="1057,1607,1295,1755">
-<area shape="rect" id="node48" href="processing_samples.html" title="processing_samples" alt="" coords="1081,505,1271,721">
-<area shape="rect" id="node51" href="processing_sequencer_runs.html" title="processing_sequencer_runs" alt="" coords="1061,1115,1291,1331">
-<area shape="rect" id="node54" href="processing_studies.html" title="processing_studies" alt="" coords="1088,139,1264,355">
-<area shape="rect" id="node60" href="share_experiment.html" title="share_experiment" alt="" coords="767,232,924,312">
-<area shape="rect" id="node63" href="share_file.html" title="share_file" alt="" coords="469,593,597,673">
-<area shape="rect" id="node66" href="share_lane.html" title="share_lane" alt="" coords="1373,1944,1504,2024">
-<area shape="rect" id="node69" href="share_processing.html" title="share_processing" alt="" coords="1091,1844,1261,2060">
-<area shape="rect" id="node72" href="share_sample.html" title="share_sample" alt="" coords="1105,5,1247,85">
-<area shape="rect" id="node75" href="share_study.html" title="share_study" alt="" coords="467,275,600,355">
-<area shape="rect" id="node78" href="share_workflow_run.html" title="share_workflow_run" alt="" coords="761,1844,929,1924">
-<area shape="rect" id="node86" href="workflow_run_attribute.html" title="workflow_run_attribute" alt="" coords="756,1577,935,1657">
-<area shape="rect" id="node88" href="workflow_run_param.html" title="workflow_run_param" alt="" coords="760,1675,931,1755">
+<area shape="rect" id="node1" href="experiment.html" title="experiment" alt="" coords="437,1743,587,1823">
+<area shape="rect" id="node3" href="registration.html" title="registration" alt="" coords="5,1521,173,1895">
+<area shape="rect" id="node5" href="study.html" title="study" alt="" coords="217,1876,367,1956">
+<area shape="rect" id="node6" href="file.html" title="file" alt="" coords="428,1588,596,1668">
+<area shape="rect" id="node8" href="invoice.html" title="invoice" alt="" coords="225,2096,359,2176">
+<area shape="rect" id="node10" href="ius.html" title="ius" alt="" coords="1333,623,1501,703">
+<area shape="rect" id="node12" href="lane.html" title="lane" alt="" coords="1075,227,1235,307">
+<area shape="rect" id="node15" href="sample.html" title="sample" alt="" coords="732,696,916,776">
+<area shape="rect" id="node23" href="sequencer_run.html" title="sequencer_run" alt="" coords="737,345,911,425">
+<area shape="rect" id="node16" href="ius_workflow_runs.html" title="ius_workflow_runs" alt="" coords="1561,325,1756,405">
+<area shape="rect" id="node19" href="workflow_run.html" title="workflow_run" alt="" coords="412,927,612,1438">
+<area shape="rect" id="node82" href="workflow.html" title="workflow" alt="" coords="221,1144,363,1224">
+<area shape="rect" id="node24" href="lane_workflow_runs.html" title="lane_workflow_runs" alt="" coords="1320,252,1515,332">
+<area shape="rect" id="node27" href="processing.html" title="processing" alt="" coords="657,891,991,1429">
+<area shape="rect" id="node31" href="processing_attribute.html" title="processing_attribute" alt="" coords="1064,1124,1245,1295">
+<area shape="rect" id="node33" href="processing_experiments.html" title="processing_experiments" alt="" coords="1052,1491,1257,1707">
+<area shape="rect" id="node36" href="processing_files.html" title="processing_files" alt="" coords="1056,1348,1253,1473">
+<area shape="rect" id="node39" href="processing_ius.html" title="processing_ius" alt="" coords="1563,660,1755,876">
+<area shape="rect" id="node42" href="processing_lanes.html" title="processing_lanes" alt="" coords="1320,369,1515,585">
+<area shape="rect" id="node45" href="processing_relationship.html" title="processing_relationship" alt="" coords="1036,959,1273,1107">
+<area shape="rect" id="node48" href="processing_samples.html" title="processing_samples" alt="" coords="1060,691,1249,907">
+<area shape="rect" id="node51" href="processing_sequencer_runs.html" title="processing_sequencer_runs" alt="" coords="1040,324,1269,540">
+<area shape="rect" id="node54" href="processing_studies.html" title="processing_studies" alt="" coords="1067,1724,1243,1940">
+<area shape="rect" id="node60" href="share_experiment.html" title="share_experiment" alt="" coords="745,1811,903,1891">
+<area shape="rect" id="node63" href="share_file.html" title="share_file" alt="" coords="760,1677,888,1757">
+<area shape="rect" id="node66" href="share_lane.html" title="share_lane" alt="" coords="1352,155,1483,235">
+<area shape="rect" id="node69" href="share_processing.html" title="share_processing" alt="" coords="1069,1957,1240,2173">
+<area shape="rect" id="node72" href="share_sample.html" title="share_sample" alt="" coords="1084,557,1225,637">
+<area shape="rect" id="node75" href="share_study.html" title="share_study" alt="" coords="445,1944,579,2024">
+<area shape="rect" id="node78" href="share_workflow_run.html" title="share_workflow_run" alt="" coords="740,1447,908,1527">
+<area shape="rect" id="node86" href="workflow_run_attribute.html" title="workflow_run_attribute" alt="" coords="735,793,913,873">
+<area shape="rect" id="node88" href="workflow_run_input_files.html" title="workflow_run_input_files" alt="" coords="729,1544,919,1624">
+<area shape="rect" id="node91" href="workflow_run_param.html" title="workflow_run_param" alt="" coords="739,599,909,679">
 </map>
 
   <a name='diagram'><img id='twoDegreesImg' src='../diagrams/processing.2degrees.png' usemap='#twoDegreesRelationshipsDiagram' class='diagram' border='0' alt='' align='left'></a>

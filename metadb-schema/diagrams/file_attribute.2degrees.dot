@@ -25,6 +25,7 @@ digraph "twoDegreesRelationshipsDiagram" {
   "processing_files":"elipses":w -> "file":"file_id":e [arrowhead=none dir=back arrowtail=crowodot];
   "share_file":"elipses":w -> "file":"file_id":e [arrowhead=none dir=back arrowtail=crowodot];
   "share_file":"elipses":w -> "registration":"elipses":e [arrowhead=none dir=back arrowtail=crowodot];
+  "workflow_run_input_files":"elipses":w -> "file":"file_id":e [arrowhead=none dir=back arrowtail=crowodot];
   "file" [
     label=<
     <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" BGCOLOR="#ffffff">
@@ -41,7 +42,8 @@ digraph "twoDegreesRelationshipsDiagram" {
       <TR><TD PORT="sw_accession" COLSPAN="3" BGCOLOR="#f4f7da" ALIGN="LEFT">sw_accession</TD></TR>
       <TR><TD PORT="file_type_id" COLSPAN="3" ALIGN="LEFT">file_type_id</TD></TR>
       <TR><TD PORT="size" COLSPAN="3" ALIGN="LEFT">size</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 2</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">70,986 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">3 &gt;</TD></TR>
+      <TR><TD PORT="skip" COLSPAN="3" ALIGN="LEFT">skip</TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 2</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">70,986 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">4 &gt;</TD></TR>
     </TABLE>>
     URL="file.html"
     tooltip="file"
@@ -99,5 +101,15 @@ digraph "twoDegreesRelationshipsDiagram" {
     </TABLE>>
     URL="share_file.html"
     tooltip="share_file"
+  ];
+  "workflow_run_input_files" [
+    label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" BGCOLOR="#ffffff">
+      <TR><TD COLSPAN="3" BGCOLOR="#9bab96" ALIGN="CENTER">workflow_run_input_files</TD></TR>
+      <TR><TD PORT="elipses" COLSPAN="3" ALIGN="LEFT">...</TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">&lt; 2</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">0 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
+    </TABLE>>
+    URL="workflow_run_input_files.html"
+    tooltip="workflow_run_input_files"
   ];
 }
