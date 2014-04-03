@@ -147,8 +147,14 @@ Our tools will abort and refuse to run if this is not set. </p>
 <span class="na">OOZIE_QUEUENAME</span><span class="o">=</span><span class="s">default</span>
 <span class="na">OOZIE_WORK_DIR</span><span class="o">=</span><span class="s">/usr/tmp/seqware-oozie</span>
 
+<span class="c1"># Number of times that Oozie will retry user steps in workflows</span>
 <span class="na">OOZIE_RETRY_MAX</span><span class="o">=</span><span class="s">5</span>
+<span class="c1"># Minutes to wait before retry for user steps in workflows</span>
 <span class="na">OOZIE_RETRY_INTERVAL</span><span class="o">=</span><span class="s">5</span>
+<span class="c1"># Above this threshold, provision file events on the same job/workflow will be batched together  </span>
+<span class="na">OOZIE_BATCH_THRESHOLD</span><span class="o">=</span><span class="s">10</span>
+<span class="c1"># Number of provision file events that should be batched together</span>
+<span class="na">OOZIE_BATCH_SIZE</span><span class="o">=</span><span class="s">100</span>
 
 <span class="na">MAPRED.JOB.TRACKER</span><span class="o">=</span><span class="s">localhost:8021</span>
 <span class="na">FS.DEFAULTFS</span><span class="o">=</span><span class="s">hdfs://localhost:8020</span>
