@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<title>SeqWare › Sanity Check</title>
+<meta content="nanoc 3.6.7" name="generator">
+<link href="../../assets/style-v17.css" media="screen" rel="stylesheet" type="text/css">
+<link href="http://feeds.feedburner.com/seqware" rel="alternate" title="The SeqWare Blog" type="application/atom+xml">
+<script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script><script type="text/javascript">         var disqus_shortname = 'seqware';          (function() {             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);         })();     </script>
+</head>
+<body>
+<div class="wrapper">
+<!-- ***** navigation ***** -->
+<div class="nav">
+<ol>
+<li><a href="../../"><span>Home</span></a></li>
+<li><a href="../../blog/"><span>News</span></a></li>
+<li><a href="../"><span>Documentation</span></a></li>
+<li><a href="../../community/"><span>Community</span></a></li>
+<li><a href="../../partners/"><span>Partners</span></a></li>
+<li><a href="../../about/"><span>About</span></a></li>
+</ol>
+</div>
+<!-- ***** sidebar ***** -->
+<div class="side">
+<ol>
+<li><a href="../1-introduction/"><span>Introduction to SeqWare</span></a></li>
+<li><a href="../2-installation/"><span>Installation</span></a></li>
+<li><a href="../3-getting-started/"><span>Getting Started</span></a></li>
+<li><a href="../6-pipeline/"><span>SeqWare Pipeline</span></a></li>
+<li><a href="../4-metadb/"><span>SeqWare MetaDB</span></a></li>
+<li><a href="../5-portal/"><span>SeqWare Portal</span></a></li>
+<li><a href="../7-web-service/"><span>SeqWare Web Service</span></a></li>
+<li><a href="../8-query-engine/"><span>SeqWare Query Engine</span></a></li>
+<li><a href="../9-glossary/"><span>Glossary</span></a></li>
+<li><a href="../10-faq/"><span>Frequently Asked Questions</span></a></li>
+<li><a href="../11-api/"><span>APIs</span></a></li>
+<li><a href="../13-code/"><span>Source Code</span></a></li>
+<li><a href="../17-plugins/"><span>Plugins</span></a></li>
+<li><a href="../17a-modules/"><span>Modules</span></a></li>
+</ol>
+</div>
+<!-- ***** body ***** -->
+<div class="body">
+<div class="article">
+<div class="header">
+<h1>Sanity Check</h1>
+</div>
+<p>Seqware Sanity Check is a tool developed in order to see if the seqware environment is set up correctly in a given system. It runs preliminary checks and will return an exit code of 0 if all the checks have passed. The tool also contains different parameters in order to specify certain tests to be included or not.</p>
+
+<div class="section" id="requirements">
+<h2>Requirements</h2>
+
+<p>In order to run the Sanity Check tool, you must have the following available to you:</p>
+
+<ul>
+<li>SeqWare Distribution JAR (1.0.14 or higher)</li>
+<li>Seqware Sanity Check JAR (1.0.14 or higher)</li>
+<li>SeqWare settings file set up to contact the SeqWare Web service (contact your local SeqWare admin to get the path)</li>
+</ul>
+</div>
+<div class="section" id="command-line-parameters">
+<h2>Command line parameters</h2>
+
+<p>You can annotate the following attributes:</p>
+
+<table>
+<tr>
+<th>
+Command-line option</th>    <th>Description</th>
+</tr>
+<tr>
+<td>
+&#8211;master, -m</td>   <td>Master mode. Use this if you are running on a master node. Will do more admin testing if included.</td>
+</tr>
+<tr>
+<td>
+&#8211;tutorial, -t</td>
+<td>Runs through the seqware tutorial as well.</td>
+</tr>
+<tr>
+<td>
+&#8211;help, -h  </td>   <td>Displays this list of parameters.</td>
+</tr>
+</table>
+</div>
+<div class="section" id="examples">
+<h2>Examples</h2>
+
+<p>Running the sanity tool on a user node.</p>
+
+<pre><code>java -jar seqware-sanity-check/target/seqware-sanity-check-1.0.14-SNAPSHOT-jar-with-dependencies.jar
+</code></pre>
+
+<p>Running the tool on a master node.</p>
+
+<pre><code>java -jar seqware-sanity-check/target/seqware-sanity-check-1.0.14-SNAPSHOT-jar-with-dependencies.jar --master
+</code></pre>
+
+<p>Running the tutorial as well</p>
+
+<pre><code>java -jar seqware-sanity-check/target/seqware-sanity-check-1.0.14-SNAPSHOT-jar-with-dependencies.jar --master --tutorial
+</code></pre>
+
+<p>Help</p>
+
+<pre><code>java -jar seqware-sanity-check/target/seqware-sanity-check-1.0.14-SNAPSHOT-jar-with-dependencies.jar --help
+</code></pre>
+
+</div>
+<div class="section" id="results">
+<h2>Results</h2>
+
+<p>Once all the tests are completed, an exit code will be returned. If the exit code is non-zero, then one of the checks specified has failed. The stacktrace will also be displayed if an error occurs while running the checks.</p>
+</div>
+</div>
+<p> </p>
+<p> </p>
+<div id="disqus_thread"></div>
+</div>
+</div>
+<!-- ***** footer ***** -->
+<div id="footer">
+<p>SeqWare © 2007–2013 Brian O&#8217;Connor. SeqWare is released under the a <a rel="license" href="http://www.gnu.org/licenses/licenses.html">GNU GPL v3</a>. This site is built using the excellent <a href="http://nanoc.ws/">nanoc</a> tool and example site along with the <a href="http://www.fonts.info/info/press/free-fonts-for-font-face-embedding.htm">Graublau</a> and <a href="https://en.wikipedia.org/wiki/Gentium">Gentium</a> fonts.</p>
+</div>
+</body>
+</html>
