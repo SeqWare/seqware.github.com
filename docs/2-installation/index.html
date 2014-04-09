@@ -98,11 +98,11 @@ Please make sure you are using the latest version, when we post a new one we
 will tweet about it so consider following us on Twitter.</p>
 
 <ul>
-<li><a href="https://s3.amazonaws.com/oicr.vm/public/SeqWare-1.0.6.ova">SeqWare-1.0.6.ova</a></li>
+<li><a href="https://s3.amazonaws.com/oicr.vm/public/Seqware_1.0.13_Bindle_1.2_pre-release.ova">SeqWare-1.0.13.ova</a></li>
 </ul>
 <p>Open VirtualBox and use the &#8220;Import Appliance&#8221; tool to create a new SeqWare VM
 on your system. Make sure you set the memory to the max you can afford, I
-recommend at least 4GB of memory for the VM.  You can then launch it and you
+recommend at least 12GB of memory for the VM.  You can then launch it and you
 will be presented with a fairly standard Linux desktop with links to the
 project&#8217;s documentation to give you an idea of where to begin (the &#8220;Getting
 Started&#8221; guide here provides a walk-through of using this VM).</p>
@@ -129,9 +129,14 @@ makes use of various virtualization extensions which most modern PCs support
 <div class="section" id="logging-in">
 <h3>Logging In</h3>
 
-<p>The login username is <kbd>seqware</kbd> and the password is <kbd>seqware</kbd>. If you need to become <kbd>root</kbd> the password is the same.</p>
+<p>The login username is <kbd>vagrant</kbd> and the password is <kbd>vagrant</kbd>. If you need to become <kbd>root</kbd> use <kbd>sudo bash</kbd>.</p>
 
-<p>By default the VM will open port 2222 for ssh. You can connect to the running VM from an external console using the following command: <code>ssh -p 2222 root@127.0.0.1</code></p>
+<p>By default the VM will open port 2222 for ssh. You can connect to the running VM from an external console using the following command: <kbd>sshpass -p 'vagrant' ssh -p 2222 vagrant@localhost</kbd></p>
+
+<p class="warning"><strong>Note:</strong>
+Obviously, you will not want to run this VM anywhere that is network-accessible. If you do, make sure to disable the above login and use SSH keys.
+</p>
+
 
 </div>
 <div class="section" id="what-can-you-do-with-it">
