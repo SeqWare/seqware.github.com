@@ -155,7 +155,7 @@ The decider from which all other deciders came</p>
 <tbody>
 <tr>
 <td>–all</td>
-      <td>Operate across everything. At least one of sample-name, study-name, sequencer-run-name, lane-swa, ius-swa or all is required.</td>
+      <td>Operate across everything. At least one of [lane-SWID, ius-SWID, study-name, sample-name, root-sample-name, sequencer-run-name, organism, processing-SWID]  or all is required.</td>
     </tr>
 <tr>
 <td>–cf, –check-file-exists</td>
@@ -183,11 +183,11 @@ The decider from which all other deciders came</p>
     </tr>
 <tr>
 <td>–ius-SWID</td>
-      <td>IUS sw_accession. At least one of sample-name, study-name, sequencer-run-name, lane-swa, ius-swa or all is required.  Specify multiple swas by repeating –ius-swa</td>
+      <td>ius-SWID. At least one of [lane-SWID, ius-SWID, study-name, sample-name, root-sample-name, sequencer-run-name, organism, processing-SWID]  or all is required. Specify multiple names by repeating –ius-SWID</td>
     </tr>
 <tr>
 <td>–lane-SWID</td>
-      <td>Lane sw_accession. At least one of sample-name, study-name, sequencer-run-name, lane-swa, ius-swa or all is required.  Specify multiple swas by repeating –lane-swa</td>
+      <td>lane-SWID. At least one of [lane-SWID, ius-SWID, study-name, sample-name, root-sample-name, sequencer-run-name, organism, processing-SWID]  or all is required. Specify multiple names by repeating –lane-SWID</td>
     </tr>
 <tr>
 <td>–launch-max</td>
@@ -202,12 +202,24 @@ The decider from which all other deciders came</p>
       <td>Optional: a flag that prevents metadata writeback (which is done by default) by the Decider and that is subsequently passed to the called workflow which can use it to determine if they should write metadata at runtime on the cluster.</td>
     </tr>
 <tr>
+<td>–organism</td>
+      <td>organism. At least one of [lane-SWID, ius-SWID, study-name, sample-name, root-sample-name, sequencer-run-name, organism, processing-SWID]  or all is required. Specify multiple names by repeating –organism</td>
+    </tr>
+<tr>
 <td>–parent-wf-accessions</td>
       <td>The workflow accessions of the parent workflows, comma-separated with no spaces. May also specify the meta-type.</td>
     </tr>
 <tr>
+<td>–processing-SWID</td>
+      <td>processing-SWID. At least one of [lane-SWID, ius-SWID, study-name, sample-name, root-sample-name, sequencer-run-name, organism, processing-SWID]  or all is required. Specify multiple names by repeating –processing-SWID</td>
+    </tr>
+<tr>
 <td>–rerun-max</td>
       <td>The maximum number of times to re-launch a workflowrun if failed.</td>
+    </tr>
+<tr>
+<td>–root-sample-name</td>
+      <td>root-sample-name. At least one of [lane-SWID, ius-SWID, study-name, sample-name, root-sample-name, sequencer-run-name, organism, processing-SWID]  or all is required. Specify multiple names by repeating –root-sample-name</td>
     </tr>
 <tr>
 <td>–run</td>
@@ -215,7 +227,7 @@ The decider from which all other deciders came</p>
     </tr>
 <tr>
 <td>–sample-name</td>
-      <td>Full sample name. At least one of sample-name, study-name, sequencer-run-name, lane-swa, ius-swa or all is required.  Specify multiple names by repeating –sample-name</td>
+      <td>sample-name. At least one of [lane-SWID, ius-SWID, study-name, sample-name, root-sample-name, sequencer-run-name, organism, processing-SWID]  or all is required. Specify multiple names by repeating –sample-name</td>
     </tr>
 <tr>
 <td>–schedule</td>
@@ -223,11 +235,11 @@ The decider from which all other deciders came</p>
     </tr>
 <tr>
 <td>–sequencer-run-name</td>
-      <td>Full sequencer run name. At least one of sample-name, study-name, sequencer-run-name, lane-swa, ius-swa or all is required.  Specify multiple names by repeating –sequencer-run-name</td>
+      <td>sequencer-run-name. At least one of [lane-SWID, ius-SWID, study-name, sample-name, root-sample-name, sequencer-run-name, organism, processing-SWID]  or all is required. Specify multiple names by repeating –sequencer-run-name</td>
     </tr>
 <tr>
 <td>–study-name</td>
-      <td>Full study name. At least one of sample-name, study-name, sequencer-run-name, lane-swa, ius-swa or all is required. Specify multiple names by repeating –study-name</td>
+      <td>study-name. At least one of [lane-SWID, ius-SWID, study-name, sample-name, root-sample-name, sequencer-run-name, organism, processing-SWID]  or all is required. Specify multiple names by repeating –study-name</td>
     </tr>
 <tr>
 <td>–test</td>
@@ -507,31 +519,43 @@ Generates a tab-delimited report of all output files (and their relationships an
 <tbody>
 <tr>
 <td>–all</td>
-      <td>Operate across everything. At least one of sample-name, study-name, sequencer-run-name, lane-swa, ius-swa or all is required.</td>
+      <td>Operate across everything. At least one of [lane-SWID, ius-SWID, study-name, sample-name, root-sample-name, sequencer-run-name, organism, processing-SWID]  or all is required.</td>
     </tr>
 <tr>
 <td>–ius-SWID</td>
-      <td>IUS sw_accession. At least one of sample-name, study-name, sequencer-run-name, lane-swa, ius-swa or all is required.  Specify multiple swas by repeating –ius-swa</td>
+      <td>ius-SWID. At least one of [lane-SWID, ius-SWID, study-name, sample-name, root-sample-name, sequencer-run-name, organism, processing-SWID]  or all is required. Specify multiple names by repeating –ius-SWID</td>
     </tr>
 <tr>
 <td>–lane-SWID</td>
-      <td>Lane sw_accession. At least one of sample-name, study-name, sequencer-run-name, lane-swa, ius-swa or all is required.  Specify multiple swas by repeating –lane-swa</td>
+      <td>lane-SWID. At least one of [lane-SWID, ius-SWID, study-name, sample-name, root-sample-name, sequencer-run-name, organism, processing-SWID]  or all is required. Specify multiple names by repeating –lane-SWID</td>
+    </tr>
+<tr>
+<td>–organism</td>
+      <td>organism. At least one of [lane-SWID, ius-SWID, study-name, sample-name, root-sample-name, sequencer-run-name, organism, processing-SWID]  or all is required. Specify multiple names by repeating –organism</td>
     </tr>
 <tr>
 <td>–out</td>
       <td>The file into which the report will be written.</td>
     </tr>
 <tr>
+<td>–processing-SWID</td>
+      <td>processing-SWID. At least one of [lane-SWID, ius-SWID, study-name, sample-name, root-sample-name, sequencer-run-name, organism, processing-SWID]  or all is required. Specify multiple names by repeating –processing-SWID</td>
+    </tr>
+<tr>
+<td>–root-sample-name</td>
+      <td>root-sample-name. At least one of [lane-SWID, ius-SWID, study-name, sample-name, root-sample-name, sequencer-run-name, organism, processing-SWID]  or all is required. Specify multiple names by repeating –root-sample-name</td>
+    </tr>
+<tr>
 <td>–sample-name</td>
-      <td>Full sample name. At least one of sample-name, study-name, sequencer-run-name, lane-swa, ius-swa or all is required.  Specify multiple names by repeating –sample-name</td>
+      <td>sample-name. At least one of [lane-SWID, ius-SWID, study-name, sample-name, root-sample-name, sequencer-run-name, organism, processing-SWID]  or all is required. Specify multiple names by repeating –sample-name</td>
     </tr>
 <tr>
 <td>–sequencer-run-name</td>
-      <td>Full sequencer run name. At least one of sample-name, study-name, sequencer-run-name, lane-swa, ius-swa or all is required.  Specify multiple names by repeating –sequencer-run-name</td>
+      <td>sequencer-run-name. At least one of [lane-SWID, ius-SWID, study-name, sample-name, root-sample-name, sequencer-run-name, organism, processing-SWID]  or all is required. Specify multiple names by repeating –sequencer-run-name</td>
     </tr>
 <tr>
 <td>–study-name</td>
-      <td>Full study name. At least one of sample-name, study-name, sequencer-run-name, lane-swa, ius-swa or all is required. Specify multiple names by repeating –study-name</td>
+      <td>study-name. At least one of [lane-SWID, ius-SWID, study-name, sample-name, root-sample-name, sequencer-run-name, organism, processing-SWID]  or all is required. Specify multiple names by repeating –study-name</td>
     </tr>
 </tbody>
 </table>
