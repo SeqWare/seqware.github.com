@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<title>SeqWare › Coding Standards</title>
+<meta content="nanoc 3.6.7" name="generator">
+<link href="../../assets/style-v17.css" media="screen" rel="stylesheet" type="text/css">
+<link href="http://feeds.feedburner.com/seqware" rel="alternate" title="The SeqWare Blog" type="application/atom+xml">
+<script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script><script type="text/javascript">         var disqus_shortname = 'seqware';          (function() {             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);         })();     </script>
+</head>
+<body>
+<div class="wrapper">
+<!-- ***** navigation ***** -->
+<div class="nav">
+<ol>
+<li><a href="../../"><span>Home</span></a></li>
+<li><a href="../../blog/"><span>News</span></a></li>
+<li><a href="../"><span>Documentation</span></a></li>
+<li><a href="../../community/"><span>Community</span></a></li>
+<li><a href="../../partners/"><span>Partners</span></a></li>
+<li><a href="../../about/"><span>About</span></a></li>
+</ol>
+</div>
+<!-- ***** sidebar ***** -->
+<div class="side">
+<ol>
+<li><a href="../1-introduction/"><span>Introduction to SeqWare</span></a></li>
+<li><a href="../2-installation/"><span>Installation</span></a></li>
+<li><a href="../3-getting-started/"><span>Getting Started</span></a></li>
+<li><a href="../6-pipeline/"><span>SeqWare Pipeline</span></a></li>
+<li><a href="../4-metadb/"><span>SeqWare MetaDB</span></a></li>
+<li><a href="../5-portal/"><span>SeqWare Portal</span></a></li>
+<li><a href="../7-web-service/"><span>SeqWare Web Service</span></a></li>
+<li><a href="../8-query-engine/"><span>SeqWare Query Engine</span></a></li>
+<li><a href="../9-glossary/"><span>Glossary</span></a></li>
+<li><a href="../10-faq/"><span>Frequently Asked Questions</span></a></li>
+<li><a href="../11-api/"><span>APIs</span></a></li>
+<li><a href="../13-code/"><span>Source Code</span></a></li>
+<li><a href="../17-plugins/"><span>Plugins</span></a></li>
+<li><a href="../17a-modules/"><span>Modules</span></a></li>
+</ol>
+</div>
+<!-- ***** body ***** -->
+<div class="body">
+<div class="article">
+<div class="header">
+<h1>Coding Standards</h1>
+</div>
+<p>For developers on the actual SeqWare project, these are the proposed standards for code committed for development toward 1.1.X. </p>
+
+<p>First, an <a href="https://raw.githubusercontent.com/SeqWare/seqware/feature/checkstyle_experiment/seqware-eclipse-code-style.xml">Eclipse code formatting file</a> is provided for users of the Eclipse IDE. Please look in the develop branch for updates. In addition, for users of the NetBeans IDE, the <a href="http://plugins.netbeans.org/plugin/50877/eclipse-code-formatter-for-java">Eclipse Code Formatter plugin</a> must be configured with the same file. </p>
+
+<p>Second, a <a href="https://raw.githubusercontent.com/SeqWare/seqware/feature/checkstyle_experiment/checkstyle.xml">Checkstyle configuration file</a> is available. This will be tightened during the run-up toward 1.1.X but currently it will do some light validation on your code and will reject a build if your issues are particularly egregious.</p>
+
+<!-- Checkstyle cannot currently enforce identation, the plugin is not configurable enough to match our coding standards. See https://stackoverflow.com/questions/18308208/indentation-check-not-working-properly-for-statement-label for an example -->
+
+<div class="section" id="checkstyle-configuration">
+<h2>Checkstyle Configuration</h2>
+
+<p>In some edge cases CheckStyle will incorrectly report an error. In these cases, you may choose to temporarily disable Checkstyle from your source code. Thanks to <a href="https://wikis.forgerock.org/confluence/display/devcom/Coding+Style+and+Guidelines#CodingStyleandGuidelines-UsingCheckstyletoenforcethecodingstyle">ForgeRock</a> </p>
+
+<p>In order to toggle Checkstyle on and off</p>
+
+<pre><code>// @Checkstyle:off
+... ignored
+// @Checkstyle:on
+</code></pre>
+
+<p>In order to ignore the next line</p>
+
+<pre><code>// @Checkstyle:ignore
+... ignored
+... checked
+</code></pre>
+
+<p>In order to ignore the next N lines (-ve means previous lines)</p>
+
+<pre><code>// @Checkstyle:ignoreFor 2
+... ignored
+... ignored
+... checked
+</code></pre>
+
+</div>
+<div class="section" id="eclipse-code-formatter">
+<h2>Eclipse Code Formatter</h2>
+
+<p>Using the above eclipse code formatting file, open preferences in Eclipse and search for “format”.</p>
+
+<p>Click on “Formatter” under Java -&gt; Code Style. </p>
+
+<p>Click Import and and import the seqware-eclipse-code-style.xml file.</p>
+
+<p><img src="../../assets/images/eclipse_format_1.png"></p>
+
+<p>After the import is complete the SPB Java Convention will be the active profile.</p>
+
+<p>Next Click on Editor -&gt; Save Actions</p>
+
+<p><img src="../../assets/images/eclipse_format_2.png"></p>
+
+<p>Update the Save Actions preferences to look like the screenshot below.</p>
+
+<p><img src="../../assets/images/eclipse_format_3.png"></p>
+
+<p>Next Click on XML Files -&gt; Editor and make the changes shown below.
+<img src="../../assets/images/eclipse_format_4.png"></p>
+
+<p>Next search for “line” and click on Editors -&gt; Text Editor.</p>
+
+<p>Make the changes specified in the screen shot below.</p>
+
+<p><img src="../../assets/images/eclipse_format_5.png"></p>
+
+</div>
+<div class="section" id="netbeans-code-formatting-with-the-eclipse-code-formatter-plugin">
+<h2>NetBeans Code Formatting (with the Eclipse Code Formatter plugin)</h2>
+
+<p>Follow the instructions available at <a href="https://blogs.oracle.com/geertjan/entry/eclipse_java_code_formatter_in">Eclipse Java Code Formatter in NetBeans Plugin Manager</a></p>
+</div>
+</div>
+<p> </p>
+<p> </p>
+<div id="disqus_thread"></div>
+</div>
+</div>
+<!-- ***** footer ***** -->
+<div id="footer">
+<p>SeqWare © 2007–2013 Brian O&#8217;Connor. SeqWare is released under the a <a rel="license" href="http://www.gnu.org/licenses/licenses.html">GNU GPL v3</a>. This site is built using the excellent <a href="http://nanoc.ws/">nanoc</a> tool and example site along with the <a href="http://www.fonts.info/info/press/free-fonts-for-font-face-embedding.htm">Graublau</a> and <a href="https://en.wikipedia.org/wiki/Gentium">Gentium</a> fonts.</p>
+</div>
+</body>
+</html>

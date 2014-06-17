@@ -95,11 +95,19 @@ This is a simple command runner.</p>
     </tr>
 <tr>
 <td>–gcr-stderr</td>
-      <td>Optional: Returns stderr (stderr of the command called is normally suppressed, except in case of failure)</td>
+      <td>Optional: Returns the full stderr (stderr of the command called is normally trimmed to gcr-stderr-buffer-size lines</td>
+    </tr>
+<tr>
+<td>–gcr-stderr-buffer-size</td>
+      <td>Used if gcr-stderr is not set. This sets the number of lines of stderr to report (Default is 10).</td>
     </tr>
 <tr>
 <td>–gcr-stdout</td>
-      <td>Optional: Reports stdout (stdout of the command called is normally suppressed, except in case of failure)</td>
+      <td>Optional: Reports the full stdout (stdout of the command called is normally trimmed to gcr-stdout-buffer-size lines</td>
+    </tr>
+<tr>
+<td>–gcr-stdout-buffer-size</td>
+      <td>Used if gcr-stdout is not set. This sets the number of lines of stdout to report (Default is 10).</td>
     </tr>
 </tbody>
 </table>

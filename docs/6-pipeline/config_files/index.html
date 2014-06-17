@@ -72,7 +72,11 @@ their types, and default values.  For example:</p>
 <span class="c1"># If false, SeqWare places files in a directory specified by output_prefix/output_dir/workflowname_version/RANDOM/&lt;files&gt;</span>
 <span class="c1"># where RANDOM is an integer. If true, SeqWare places the files at output_prefix/output_dir and may overwrite existing</span>
 <span class="c1"># files</span>
-<span class="na">manual_output</span><span class="o">=</span><span class="s">false</span></code></pre>
+<span class="na">manual_output</span><span class="o">=</span><span class="s">false</span>
+
+<span class="c1"># Optional: This controls the default number of lines of stdout and stderr that jobs in a workflow will report as metadata</span>
+<span class="c1"># Otherwise, the default in GenericCommandRunner will be used (currently, 10)</span>
+<span class="na">seqware-output-lines-number</span><span class="o">=</span><span class="s">20</span></code></pre>
 
 <p>You access these variables in the Java workflow using the
 <tt>getProperty()</tt> method. When installing the workflow the ini file is
@@ -134,6 +138,21 @@ for this file using the following:</p>
 
 <p class="warning"><strong>Note:</strong> While the above entries are required, it is STRONGLY suggested that workflow developers no longer rely on them to decide the output path of a provisioned file.  Instead we recommend explicitly providing in the ini file whatever paths you may require, possibly using the variables described below, and then assigning that path to the output file via <code>SqwFile.setOutputPath(String path)</code>.</p>
 
+<div class="section" id="reserved-ini-entries">
+<h4>Reserved INI Entries</h4>
+
+<p>There are a number of entries that are used by SeqWare and should be avoided in your own workflows. They are:</p>
+
+<ul>
+<li>parent_accessions</li>
+  <li>parent-accessions</li>
+  <li>parent_accession</li>
+  <li>workflow-run-accession</li>
+  <li>workflow_run_accession</li>
+  <li>metadata</li>
+  <li>workflow_bundle_dir</li>
+</ul>
+</div>
 </div>
 <div class="section" id="ini-variables">
 <h3>INI Variables</h3>
