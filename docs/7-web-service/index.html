@@ -118,10 +118,8 @@ these are the options:</p>
 <strong>Use SeqWare Pipeline with the Web service enabled:</strong> The only configuration necessary is to change your .seqware/settings file to point to the Web service. The seqware-distribution jar will use the Web service instead of a direct database connection with no further changes. This is how you access the command line-based reporting tools.</li>
   <li>
 <strong>Use the Java API</strong>: When writing SeqWare plugins or workflow modules, you can access the Webservice through the Metadata object. This object gives you more direct control while hiding the business logic. For example, you can install a new workflow, create processing events, and schedule workflow runs programmatically through this system.</li>
-  <li>
-<strong>Script to the Web service directly</strong>: Which would involve sending HTTP requests to the RESTful URLs and processing the response. Simple queries can also be entered directly into your browser, which will return XML describing the object. For example, you can get an XML representation of all of the studies in the database by going to http://localhost:8080/seqware-webservice-1.0.11/studies. Very little business logic is built into the Web service directly. The exception to this is <a href="../23-running-workflows-via-web-service/">Running workflows through the Web service</a> for more details.</li>
 </ul>
-<p>The .seqware/settings file needs to be configured to use the Web service for the first two options. In the third option, you must provide the URL, username and password yourself.</p>
+<p>The .seqware/settings file needs to be configured to use the Web service for these two options.</p>
 
 </div>
 <div class="section" id="building-and-installing">
@@ -222,7 +220,7 @@ See the [Admin Guide](/docs/3-getting-started/admin-tutorial/)
 </div>
 <!-- ***** footer ***** -->
 <div id="footer">
-<p>SeqWare © 2007–2013 Brian O&#8217;Connor. SeqWare is released under the a <a rel="license" href="http://www.gnu.org/licenses/licenses.html">GNU GPL v3</a>. This site is built using the excellent <a href="http://nanoc.ws/">nanoc</a> tool and example site along with the <a href="http://www.fonts.info/info/press/free-fonts-for-font-face-embedding.htm">Graublau</a> and <a href="https://en.wikipedia.org/wiki/Gentium">Gentium</a> fonts.</p>
+<p>SeqWare © 2007–2014 Brian O&#8217;Connor. SeqWare is released under the a <a rel="license" href="http://www.gnu.org/licenses/licenses.html">GNU GPL v3</a>. This site is built using the excellent <a href="http://nanoc.ws/">nanoc</a> tool and example site along with the <a href="http://www.fonts.info/info/press/free-fonts-for-font-face-embedding.htm">Graublau</a> and <a href="https://en.wikipedia.org/wiki/Gentium">Gentium</a> fonts.</p>
 </div>
 </body>
 </html>

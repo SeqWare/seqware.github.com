@@ -29,9 +29,10 @@
 <li>
 <span class="active" title="You're here."><span>Installation</span></span><ol class="toc">
 <li><a href="#environment">Environment</a></li>
-<li><a href="#option-1-installing-with-a-local-vm">Option 1 - Installing with a Local VM</a></li>
-<li><a href="#option-2-installing-with-a-cloud-vm">Option 2 -Installing with a Cloud VM</a></li>
-<li><a href="#option-3-installing-from-scratch">Option 3 - Installing from Scratch</a></li>
+<li><a href="#option-1-client-only">Option 1 - Client Only</a></li>
+<li><a href="#option-2-installing-with-a-local-vm">Option 2 - Installing with a Local VM</a></li>
+<li><a href="#option-3-installing-with-a-cloud-vm">Option 3 -Installing with a Cloud VM</a></li>
+<li><a href="#option-4-installing-from-scratch">Option 4 - Installing from Scratch</a></li>
 <li><a href="#next-steps">Next Steps</a></li>
 </ol>
 </li>
@@ -72,8 +73,31 @@ emacs, and some experience programming in Java is extremely helpful.</p>
 <li><a href="http://amzn.com/B0043EWVDI">Learning Java</a></li>
 </ul>
 </div>
-<div class="section" id="option-1-installing-with-a-local-vm">
-<h2>Option 1 - Installing with a Local VM</h2>
+<div class="section" id="option-1-client-only">
+<h2>Option 1 - Client Only</h2>
+
+<p>This is the option for you if your environment already has a SeqWare
+installation and you just want to download the client tool for interacting with
+the system.  It lets you generate reports, write new workflows, install those
+workflows on the remote SeqWare system, schedule workflows remotely, etc.  Keep
+in mind most sites do not have SeqWare already configured and you will typically
+always want to use Options 1 or 2 below instead.</p>
+
+<p>To install the client only, first download the command line SeqWare tool to a
+location in your path (make sure you mark it as executable).  Next, copy the
+archetype-catalog.xml file to you ~/.m2 directory.  This assumes you have Maven
+3.x installed and are running in a Linux environment.  The SeqWare command line
+will automatically download the latest SeqWare release and create a basic
+~/.seqware/settings file when you first run it.  Keep in mind you will need to
+get various settings for your ~/.seqware/settings file from the person who set
+it up your SeqWare install.</p>
+
+<p>You can find the SeqWare command line tool and the archetype-catalog.xml on our
+<a href="https://github.com/SeqWare/seqware/releases">releases</a> GitHub page.</p>
+
+</div>
+<div class="section" id="option-2-installing-with-a-local-vm">
+<h2>Option 2 - Installing with a Local VM</h2>
 
 <p>We have created a VirtualBox VM with all SeqWare projects pre-installed along
 with some sample data.  This is the easiest way to get started with SeqWare
@@ -99,6 +123,7 @@ will tweet about it so consider following us on Twitter.</p>
 
 <ul>
 <li><a href="https://s3.amazonaws.com/oicr.vm/public/Seqware_1.0.13_Bindle_1.2_pre-release.ova">SeqWare-1.0.13.ova</a></li>
+<li><a href="https://s3.amazonaws.com/oicr.vm/public/Seqware_1.0.13_Bindle_1.2.1.ova">SeqWare-1.0.13.ova (this is the VM we recommend for the ICGC PanCancer project for data train 2.0)</a></li>
 </ul>
 <p>Open VirtualBox and use the &#8220;Import Appliance&#8221; tool to create a new SeqWare VM
 on your system. Make sure you set the memory to the max you can afford, I
@@ -158,8 +183,8 @@ on this in the &#8220;SeqWare Pipeline&#8221; section of our documentation.</p>
 
 </div>
 </div>
-<div class="section" id="option-2-installing-with-a-cloud-vm">
-<h2>Option 2 -Installing with a Cloud VM</h2>
+<div class="section" id="option-3-installing-with-a-cloud-vm">
+<h2>Option 3 -Installing with a Cloud VM</h2>
 
 <p>We currently support running SeqWare on the Amazon cloud on HPC nodes. These
 are high-performance, cluster-compute nodes well suited for research, for specs
@@ -169,12 +194,27 @@ Instance</a>. These machines provide
 sufficient for analyzing a human exome within about 4 hours depending on the
 specifics of your workflows.</p>
 
-<p>For development purposes, we have also have had success with m1.xlarge instances. For noninteractive build and integration tests, we have also had success with the m1.medium instance type. However, note that these instance types are not recommended for production use.</p>
+<p>For development purposes, we have also have had success with m1.xlarge
+instances. For noninteractive build and integration tests, we have also had
+success with the m1.medium instance type. However, note that these instance
+types are not recommended for production use.</p>
+
+<p>If you are interested in building complete clusters on the Amazon cloud please
+see Option 4 below. Even for single-node SeqWare deployments Option 4 provides
+more control and a greater diversity of instance types for running.  However,
+just launching an AMI as described in this option is extremely fast and easy,
+it is really the best way to explore SeqWare with the least amount of work.</p>
 
 <div class="section" id="getting-an-amazon-cloud-account">
 <h3>Getting an Amazon Cloud Account</h3>
 
-<p>To use Amazon&#8217;s cloud (also know as Amazon Web Services or AWS) you need to sign up for an account and that requires a credit card.  Also, while launching these instances is simply point and click using Amazon&#8217;s very nice AWS console, actually using these machines requires the same level of experience as using the local VM above.  If you are looking for a completely graphical, web-based service you should consider using one of the cloud-based providers like Nimbus Informatics or DNAnexus.</p>
+<p>To use Amazon&#8217;s cloud (also know as Amazon Web Services or AWS) you need to
+sign up for an account and that requires a credit card.  Also, while launching
+these instances is simply point and click using Amazon&#8217;s very nice AWS console,
+actually using these machines requires the same level of experience as using
+the local VM above.  If you are looking for a completely graphical, web-based
+service you should consider using one of the cloud-based providers like Nimbus
+Informatics or DNAnexus.</p>
 
 <p>Signup for the Amazon cloud <a href="http://aws.amazon.com/">here</a></p>
 
@@ -182,7 +222,14 @@ specifics of your workflows.</p>
 <div class="section" id="running-the-vm">
 <h3>Running the VM</h3>
 
-<p>What makes Amazon&#8217;s cloud so amazingly awesome is its excellent support for both graphical UIs and programmatic APIs for controlling the cloud.  It is your choice on how you want to launch the VM, either through the console or via one of the many command line and programmatic tools available. The details are subject to change so we refer to Amazon&#8217;s thorough <a href="https://aws.amazon.com/documentation/">documentation</a>. Specifically <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts.html">this</a> guide should be very helpful in learning how to use Linux VMs on Amazon&#8217;s cloud.</p>
+<p>What makes Amazon&#8217;s cloud so amazingly awesome is its excellent support for
+both graphical UIs and programmatic APIs for controlling the cloud.  It is your
+choice on how you want to launch the VM, either through the console or via one
+of the many command line and programmatic tools available. The details are
+subject to change so we refer to Amazon&#8217;s thorough
+<a href="https://aws.amazon.com/documentation/">documentation</a>. Specifically
+<a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts.html">this</a> guide
+should be very helpful in learning how to use Linux VMs on Amazon&#8217;s cloud.</p>
 
 <div class="section" id="stable-public-ami-s">
 <h4>Stable Public AMI(s):</h4>
@@ -207,9 +254,11 @@ specifics of your workflows.</p>
 <div class="section" id="logging-in">
 <h3>Logging In</h3>
 
-<p>Unlike the local VM there is no graphical desktop to log into.  Instead you will need to follow the directions on the Amazon site for using <kbd>ssh</kbd> to log into your running VM.  There you will have a command line interface to interact with the SeqWare tools. You can also view the SeqWare Portal and SeqWare Web Service remotely in your browser if you have previously opened the ports 22, 8080, and 80.</p>
+<p>There is no graphical desktop to log into.  Instead you will need to follow the directions on the Amazon site for using <kbd>ssh</kbd> to log into your running VM.  There you will have a command line interface to interact with the SeqWare tools. You can also view the SeqWare Portal and SeqWare Web Service remotely in your browser if you have previously opened the ports 22, 8080, and 80.</p>
 
 <p>Specifically, follow <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstancesLinux.html">this</a> Amazon guide for logging into your SeqWare instance using ssh.</p>
+
+<p>You will want to login as the &#8220;ubuntu&#8221; user and then use &#8220;sudo su - seqware&#8221; to become the SeqWare user and walk through the steps of the tutorials.</p>
 
 </div>
 <div class="section" id="what-can-you-do-with-it">
@@ -231,18 +280,16 @@ human genomes. In the mean time we recommend investigating the excellent
 
 </div>
 </div>
-<div class="section" id="option-3-installing-from-scratch">
-<h2>Option 3 - Installing from Scratch</h2>
+<div class="section" id="option-4-installing-from-scratch">
+<h2>Option 4 - Installing from Scratch</h2>
 
-<p class="warning"><strong>Note:</strong> This is not for the faint of heart.  We do not recommend you attempt to do this
-unless you a very familiar with Linux and comfortable with complex software
-configuration. We really recommend using the local VM in production and
-configure it to submit jobs to a real cluster since the
-Pegasus/Condor/Globus/SGE stack are difficult to setup correctly.</p>
+<p class="warning"><strong>Note:</strong>We do not recommend you attempt to do
+this unless you a familiar with Linux and a cloud/virtualization
+technology such as VirtualBox, OpenStack, Google Compute Engine, or Amazon Web
+Services.</p>
 
 
-<p>This guide will be ported to this manual but for now the best instructions for
-setting up SeqWare from scratch can be found on our <a href="../2a-installation-from-scratch/">Installing from Scratch guide</a>.</p>
+<p>This option leverages the excellent <a href="http://www.vagrantup.com/">Vagrant</a></p>
 
 </div>
 <div class="section" id="next-steps">
@@ -260,7 +307,7 @@ workflow.</p>
 </div>
 <!-- ***** footer ***** -->
 <div id="footer">
-<p>SeqWare © 2007–2013 Brian O&#8217;Connor. SeqWare is released under the a <a rel="license" href="http://www.gnu.org/licenses/licenses.html">GNU GPL v3</a>. This site is built using the excellent <a href="http://nanoc.ws/">nanoc</a> tool and example site along with the <a href="http://www.fonts.info/info/press/free-fonts-for-font-face-embedding.htm">Graublau</a> and <a href="https://en.wikipedia.org/wiki/Gentium">Gentium</a> fonts.</p>
+<p>SeqWare © 2007–2014 Brian O&#8217;Connor. SeqWare is released under the a <a rel="license" href="http://www.gnu.org/licenses/licenses.html">GNU GPL v3</a>. This site is built using the excellent <a href="http://nanoc.ws/">nanoc</a> tool and example site along with the <a href="http://www.fonts.info/info/press/free-fonts-for-font-face-embedding.htm">Graublau</a> and <a href="https://en.wikipedia.org/wiki/Gentium">Gentium</a> fonts.</p>
 </div>
 </body>
 </html>
