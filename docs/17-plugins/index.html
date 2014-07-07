@@ -54,8 +54,6 @@
 <li><a href="#modulerunner">ModuleRunner</a></li>
 <li><a href="#ooziexml2dot">OozieXML2Dot</a></li>
 <li><a href="#processingdatastructure2dot">ProcessingDataStructure2Dot</a></li>
-<li><a href="#sequencerrunreporter">SequencerRunReporter</a></li>
-<li><a href="#symlinkfilereporter">SymLinkFileReporter</a></li>
 <li><a href="#workflowlauncher">WorkflowLauncher</a></li>
 <li><a href="#workflowplugin">WorkflowPlugin</a></li>
 <li><a href="#workflowrunfilesinitialpopulationplugin">WorkflowRunFilesInitialPopulationPlugin</a></li>
@@ -155,7 +153,7 @@ The decider from which all other deciders came</p>
 <tbody>
 <tr>
 <td>–all</td>
-      <td>Operate across everything. At least one of [lane-SWID, ius-SWID, study-name, sample-name, root-sample-name, sequencer-run-name, organism, processing-SWID]  or all is required.</td>
+      <td>Operate across everything. At least one of [lane-SWID, ius-SWID, study-name, sample-name, root-sample-name, sequencer-run-name, organism, workflow-run-status, processing-status, processing-SWID]  or all is required.</td>
     </tr>
 <tr>
 <td>–cf, –check-file-exists</td>
@@ -166,6 +164,10 @@ The decider from which all other deciders came</p>
       <td>The comma-separated, no spaces, workflow accessions of the workflow that perform the same function (e.g. older versions). Any files that have been processed with these workflows will be skipped.</td>
     </tr>
 <tr>
+<td>–force-run-all</td>
+      <td>Forces the decider to run all matches regardless of whether they’ve been run before or not</td>
+    </tr>
+<tr>
 <td>–group-by</td>
       <td>Optional: Group by one of the headings in FindAllTheFiles. Default: FILE_SWA. One of LANE_SWA or IUS_SWA.</td>
     </tr>
@@ -174,20 +176,16 @@ The decider from which all other deciders came</p>
       <td>Used only in combination with –schedule to schedule onto a specific host. If not provided, the default is the local host</td>
     </tr>
 <tr>
-<td>–ignore-previous-runs</td>
-      <td>Allows the decider to run all matches regardless of whether they’ve been run before or not</td>
-    </tr>
-<tr>
 <td>–ignore-skip-flag</td>
       <td>Ignores any ‘skip’ flags on lanes, IUSes, sequencer runs, samples, etc. Use caution.</td>
     </tr>
 <tr>
 <td>–ius-SWID</td>
-      <td>ius-SWID. At least one of [lane-SWID, ius-SWID, study-name, sample-name, root-sample-name, sequencer-run-name, organism, processing-SWID]  or all is required. Specify multiple names by repeating –ius-SWID</td>
+      <td>ius-SWID. At least one of [lane-SWID, ius-SWID, study-name, sample-name, root-sample-name, sequencer-run-name, organism, workflow-run-status, processing-status, processing-SWID]  or all is required. Specify multiple names by repeating –ius-SWID</td>
     </tr>
 <tr>
 <td>–lane-SWID</td>
-      <td>lane-SWID. At least one of [lane-SWID, ius-SWID, study-name, sample-name, root-sample-name, sequencer-run-name, organism, processing-SWID]  or all is required. Specify multiple names by repeating –lane-SWID</td>
+      <td>lane-SWID. At least one of [lane-SWID, ius-SWID, study-name, sample-name, root-sample-name, sequencer-run-name, organism, workflow-run-status, processing-status, processing-SWID]  or all is required. Specify multiple names by repeating –lane-SWID</td>
     </tr>
 <tr>
 <td>–launch-max</td>
@@ -203,7 +201,7 @@ The decider from which all other deciders came</p>
     </tr>
 <tr>
 <td>–organism</td>
-      <td>organism. At least one of [lane-SWID, ius-SWID, study-name, sample-name, root-sample-name, sequencer-run-name, organism, processing-SWID]  or all is required. Specify multiple names by repeating –organism</td>
+      <td>organism. At least one of [lane-SWID, ius-SWID, study-name, sample-name, root-sample-name, sequencer-run-name, organism, workflow-run-status, processing-status, processing-SWID]  or all is required. Specify multiple names by repeating –organism</td>
     </tr>
 <tr>
 <td>–parent-wf-accessions</td>
@@ -211,7 +209,11 @@ The decider from which all other deciders came</p>
     </tr>
 <tr>
 <td>–processing-SWID</td>
-      <td>processing-SWID. At least one of [lane-SWID, ius-SWID, study-name, sample-name, root-sample-name, sequencer-run-name, organism, processing-SWID]  or all is required. Specify multiple names by repeating –processing-SWID</td>
+      <td>processing-SWID. At least one of [lane-SWID, ius-SWID, study-name, sample-name, root-sample-name, sequencer-run-name, organism, workflow-run-status, processing-status, processing-SWID]  or all is required. Specify multiple names by repeating –processing-SWID</td>
+    </tr>
+<tr>
+<td>–processing-status</td>
+      <td>processing-status. At least one of [lane-SWID, ius-SWID, study-name, sample-name, root-sample-name, sequencer-run-name, organism, workflow-run-status, processing-status, processing-SWID]  or all is required. Specify multiple names by repeating –processing-status</td>
     </tr>
 <tr>
 <td>–rerun-max</td>
@@ -219,7 +221,7 @@ The decider from which all other deciders came</p>
     </tr>
 <tr>
 <td>–root-sample-name</td>
-      <td>root-sample-name. At least one of [lane-SWID, ius-SWID, study-name, sample-name, root-sample-name, sequencer-run-name, organism, processing-SWID]  or all is required. Specify multiple names by repeating –root-sample-name</td>
+      <td>root-sample-name. At least one of [lane-SWID, ius-SWID, study-name, sample-name, root-sample-name, sequencer-run-name, organism, workflow-run-status, processing-status, processing-SWID]  or all is required. Specify multiple names by repeating –root-sample-name</td>
     </tr>
 <tr>
 <td>–run</td>
@@ -227,7 +229,7 @@ The decider from which all other deciders came</p>
     </tr>
 <tr>
 <td>–sample-name</td>
-      <td>sample-name. At least one of [lane-SWID, ius-SWID, study-name, sample-name, root-sample-name, sequencer-run-name, organism, processing-SWID]  or all is required. Specify multiple names by repeating –sample-name</td>
+      <td>sample-name. At least one of [lane-SWID, ius-SWID, study-name, sample-name, root-sample-name, sequencer-run-name, organism, workflow-run-status, processing-status, processing-SWID]  or all is required. Specify multiple names by repeating –sample-name</td>
     </tr>
 <tr>
 <td>–schedule</td>
@@ -235,11 +237,11 @@ The decider from which all other deciders came</p>
     </tr>
 <tr>
 <td>–sequencer-run-name</td>
-      <td>sequencer-run-name. At least one of [lane-SWID, ius-SWID, study-name, sample-name, root-sample-name, sequencer-run-name, organism, processing-SWID]  or all is required. Specify multiple names by repeating –sequencer-run-name</td>
+      <td>sequencer-run-name. At least one of [lane-SWID, ius-SWID, study-name, sample-name, root-sample-name, sequencer-run-name, organism, workflow-run-status, processing-status, processing-SWID]  or all is required. Specify multiple names by repeating –sequencer-run-name</td>
     </tr>
 <tr>
 <td>–study-name</td>
-      <td>study-name. At least one of [lane-SWID, ius-SWID, study-name, sample-name, root-sample-name, sequencer-run-name, organism, processing-SWID]  or all is required. Specify multiple names by repeating –study-name</td>
+      <td>study-name. At least one of [lane-SWID, ius-SWID, study-name, sample-name, root-sample-name, sequencer-run-name, organism, workflow-run-status, processing-status, processing-SWID]  or all is required. Specify multiple names by repeating –study-name</td>
     </tr>
 <tr>
 <td>–test</td>
@@ -248,6 +250,10 @@ The decider from which all other deciders came</p>
 <tr>
 <td>–wf-accession</td>
       <td>The workflow accession of the workflow</td>
+    </tr>
+<tr>
+<td>–workflow-run-status</td>
+      <td>workflow-run-status. At least one of [lane-SWID, ius-SWID, study-name, sample-name, root-sample-name, sequencer-run-name, organism, workflow-run-status, processing-status, processing-SWID]  or all is required. Specify multiple names by repeating –workflow-run-status</td>
     </tr>
 </tbody>
 </table>
@@ -396,10 +402,6 @@ A plugin that lets you create, test, and install workflow bundles.</p>
       <td>Optional: When combined with a bundle zip file specified via –bundle this option specifies an input directory to zip to create a bundle output file.</td>
     </tr>
 <tr>
-<td>–t, –test</td>
-      <td>Optional: This will trigger the test setup in the metadata.xml within this bundle.</td>
-    </tr>
-<tr>
 <td>–v, –validate</td>
       <td>Optional: Run a light basic validation on this bundle.</td>
     </tr>
@@ -519,19 +521,19 @@ Generates a tab-delimited report of all output files (and their relationships an
 <tbody>
 <tr>
 <td>–all</td>
-      <td>Operate across everything. At least one of [lane-SWID, ius-SWID, study-name, sample-name, root-sample-name, sequencer-run-name, organism, processing-SWID]  or all is required.</td>
+      <td>Operate across everything. At least one of [lane-SWID, ius-SWID, study-name, sample-name, root-sample-name, sequencer-run-name, organism, workflow-run-status, processing-status, processing-SWID]  or all is required.</td>
     </tr>
 <tr>
 <td>–ius-SWID</td>
-      <td>ius-SWID. At least one of [lane-SWID, ius-SWID, study-name, sample-name, root-sample-name, sequencer-run-name, organism, processing-SWID]  or all is required. Specify multiple names by repeating –ius-SWID</td>
+      <td>ius-SWID. At least one of [lane-SWID, ius-SWID, study-name, sample-name, root-sample-name, sequencer-run-name, organism, workflow-run-status, processing-status, processing-SWID]  or all is required. Specify multiple names by repeating –ius-SWID</td>
     </tr>
 <tr>
 <td>–lane-SWID</td>
-      <td>lane-SWID. At least one of [lane-SWID, ius-SWID, study-name, sample-name, root-sample-name, sequencer-run-name, organism, processing-SWID]  or all is required. Specify multiple names by repeating –lane-SWID</td>
+      <td>lane-SWID. At least one of [lane-SWID, ius-SWID, study-name, sample-name, root-sample-name, sequencer-run-name, organism, workflow-run-status, processing-status, processing-SWID]  or all is required. Specify multiple names by repeating –lane-SWID</td>
     </tr>
 <tr>
 <td>–organism</td>
-      <td>organism. At least one of [lane-SWID, ius-SWID, study-name, sample-name, root-sample-name, sequencer-run-name, organism, processing-SWID]  or all is required. Specify multiple names by repeating –organism</td>
+      <td>organism. At least one of [lane-SWID, ius-SWID, study-name, sample-name, root-sample-name, sequencer-run-name, organism, workflow-run-status, processing-status, processing-SWID]  or all is required. Specify multiple names by repeating –organism</td>
     </tr>
 <tr>
 <td>–out</td>
@@ -539,23 +541,31 @@ Generates a tab-delimited report of all output files (and their relationships an
     </tr>
 <tr>
 <td>–processing-SWID</td>
-      <td>processing-SWID. At least one of [lane-SWID, ius-SWID, study-name, sample-name, root-sample-name, sequencer-run-name, organism, processing-SWID]  or all is required. Specify multiple names by repeating –processing-SWID</td>
+      <td>processing-SWID. At least one of [lane-SWID, ius-SWID, study-name, sample-name, root-sample-name, sequencer-run-name, organism, workflow-run-status, processing-status, processing-SWID]  or all is required. Specify multiple names by repeating –processing-SWID</td>
+    </tr>
+<tr>
+<td>–processing-status</td>
+      <td>processing-status. At least one of [lane-SWID, ius-SWID, study-name, sample-name, root-sample-name, sequencer-run-name, organism, workflow-run-status, processing-status, processing-SWID]  or all is required. Specify multiple names by repeating –processing-status</td>
     </tr>
 <tr>
 <td>–root-sample-name</td>
-      <td>root-sample-name. At least one of [lane-SWID, ius-SWID, study-name, sample-name, root-sample-name, sequencer-run-name, organism, processing-SWID]  or all is required. Specify multiple names by repeating –root-sample-name</td>
+      <td>root-sample-name. At least one of [lane-SWID, ius-SWID, study-name, sample-name, root-sample-name, sequencer-run-name, organism, workflow-run-status, processing-status, processing-SWID]  or all is required. Specify multiple names by repeating –root-sample-name</td>
     </tr>
 <tr>
 <td>–sample-name</td>
-      <td>sample-name. At least one of [lane-SWID, ius-SWID, study-name, sample-name, root-sample-name, sequencer-run-name, organism, processing-SWID]  or all is required. Specify multiple names by repeating –sample-name</td>
+      <td>sample-name. At least one of [lane-SWID, ius-SWID, study-name, sample-name, root-sample-name, sequencer-run-name, organism, workflow-run-status, processing-status, processing-SWID]  or all is required. Specify multiple names by repeating –sample-name</td>
     </tr>
 <tr>
 <td>–sequencer-run-name</td>
-      <td>sequencer-run-name. At least one of [lane-SWID, ius-SWID, study-name, sample-name, root-sample-name, sequencer-run-name, organism, processing-SWID]  or all is required. Specify multiple names by repeating –sequencer-run-name</td>
+      <td>sequencer-run-name. At least one of [lane-SWID, ius-SWID, study-name, sample-name, root-sample-name, sequencer-run-name, organism, workflow-run-status, processing-status, processing-SWID]  or all is required. Specify multiple names by repeating –sequencer-run-name</td>
     </tr>
 <tr>
 <td>–study-name</td>
-      <td>study-name. At least one of [lane-SWID, ius-SWID, study-name, sample-name, root-sample-name, sequencer-run-name, organism, processing-SWID]  or all is required. Specify multiple names by repeating –study-name</td>
+      <td>study-name. At least one of [lane-SWID, ius-SWID, study-name, sample-name, root-sample-name, sequencer-run-name, organism, workflow-run-status, processing-status, processing-SWID]  or all is required. Specify multiple names by repeating –study-name</td>
+    </tr>
+<tr>
+<td>–workflow-run-status</td>
+      <td>workflow-run-status. At least one of [lane-SWID, ius-SWID, study-name, sample-name, root-sample-name, sequencer-run-name, organism, workflow-run-status, processing-status, processing-SWID]  or all is required. Specify multiple names by repeating –workflow-run-status</td>
     </tr>
 </tbody>
 </table>
@@ -698,96 +708,6 @@ This plugin will take in a sw_accession of a processing, and translate the hiera
 </tbody>
 </table>
 </div>
-<div class="section" id="sequencerrunreporter">
-<h2>SequencerRunReporter</h2>
-<p>net.sourceforge.seqware.pipeline.plugins.SequencerRunReporter
-Prints a tab-delimited file describing the sequencer run, lane, sample, and algorithms run on every IUS in the database. For more information, see see http://seqware.github.com/docs/20-sequencer-run-reporter/</p>
-
-<table>
-<thead><tr>
-<th>Command-line option</th>
-      <th>Description</th>
-    </tr></thead>
-<tbody><tr>
-<td>–output, –output-filename</td>
-      <td>Name of the output tab-delimited file.</td>
-    </tr></tbody>
-</table>
-</div>
-<div class="section" id="symlinkfilereporter">
-<h2>SymLinkFileReporter</h2>
-<p>net.sourceforge.seqware.pipeline.plugins.SymLinkFileReporter
-Create a nested tree structure of all of the output files from a particular sample, or all of the samples in a study by using the SymLinkFileReporter plugin. This plugin also creates a CSV file with all of the accompanying information for every file. For more information, see see http://seqware.github.com/docs/21-study-reporter/</p>
-
-<table>
-<thead><tr>
-<th>Command-line option</th>
-      <th>Description</th>
-    </tr></thead>
-<tbody>
-<tr>
-<td>–dump-all</td>
-      <td>Optional: Dumps all of the studies in the database to one file.</td>
-    </tr>
-<tr>
-<td>–duplicates</td>
-      <td>Optional: Allow duplications at the file path level</td>
-    </tr>
-<tr>
-<td>–f, –file-type</td>
-      <td>Optional: The file type to filter on. Only this type will be linked. Default is all files. Permissible file metatypes can found on our website under ‘Module Conventions’</td>
-    </tr>
-<tr>
-<td>–human</td>
-      <td>Optional: will print output in expanded human friendly format</td>
-    </tr>
-<tr>
-<td>–l, –link</td>
-      <td>Optional: make hard links (P) or symlinks (s). Default is symlinks.</td>
-    </tr>
-<tr>
-<td>–no-links</td>
-      <td>Optional: Create only the CSV file, not the symlinked directories.</td>
-    </tr>
-<tr>
-<td>–output-filename</td>
-      <td>Optional: Name of the output CSV file (without the extension)</td>
-    </tr>
-<tr>
-<td>–prod-format</td>
-      <td>Optional: print the directories in prod format</td>
-    </tr>
-<tr>
-<td>–sample</td>
-      <td>Make symlinks for a sample</td>
-    </tr>
-<tr>
-<td>–sequencer-run</td>
-      <td>Make symlinks for a sequencerRun</td>
-    </tr>
-<tr>
-<td>–show-failed-and-running</td>
-      <td>Show all of the files regardless of the workflow run status. Default shows only successful runs.</td>
-    </tr>
-<tr>
-<td>–show-status</td>
-      <td>Show the workflow run status in the output CSV.</td>
-    </tr>
-<tr>
-<td>–stdout</td>
-      <td>Prints to standard out instead of to a file</td>
-    </tr>
-<tr>
-<td>–study</td>
-      <td>Make symlinks for a study</td>
-    </tr>
-<tr>
-<td>–w, –workflow-accession</td>
-      <td>Optional: List all workflow runs with this workflow accession</td>
-    </tr>
-</tbody>
-</table>
-</div>
 <div class="section" id="workflowlauncher">
 <h2>WorkflowLauncher</h2>
 <p>net.sourceforge.seqware.pipeline.plugins.WorkflowLauncher
@@ -873,7 +793,7 @@ A plugin that lets you launch workflow bundles once you have installed them via 
     </tr>
 <tr>
 <td>–workflow-engine</td>
-      <td>Optional: Specifies a workflow engine, one of: pegasus, oozie, oozie-sge. Defaults to oozie.</td>
+      <td>Optional: Specifies a workflow engine, one of: oozie, oozie-sge. Defaults to oozie.</td>
     </tr>
 <tr>
 <td>–workflow-run-accession, –wra</td>
@@ -967,7 +887,7 @@ A plugin that lets you launch workflow bundles once you have installed them via 
     </tr>
 <tr>
 <td>–workflow-engine</td>
-      <td>Optional: Specifies a workflow engine, one of: pegasus, oozie, oozie-sge. Defaults to oozie.</td>
+      <td>Optional: Specifies a workflow engine, one of: oozie, oozie-sge. Defaults to oozie.</td>
     </tr>
 <tr>
 <td>–workflow-run-accession, –wra</td>
@@ -1066,10 +986,6 @@ This plugin lets you monitor the status of running workflows and updates the met
 <tr>
 <td>–fh, –force-host</td>
       <td>Optional: if specified, workflow runs scheduled to this specified host will be checked even if this is not the current host (a dangerous option).</td>
-    </tr>
-<tr>
-<td>–s, –status-cmd</td>
-      <td>Optional: the Pegasus status command, if you specify this option the command will be run, potentially displaying the summarized/parsed errors, but the database will not be updated.</td>
     </tr>
 <tr>
 <td>–threads-in-thread-pool, –tp</td>
