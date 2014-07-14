@@ -10,6 +10,7 @@ net.sourceforge.seqware.common.util.filetools
 net.sourceforge.seqware.common.util.jsontools
 net.sourceforge.seqware.common.util.maptools
 net.sourceforge.seqware.common.util.runtools
+net.sourceforge.seqware.common.util.workflowtools
 net.sourceforge.seqware.common.util.xmltools
 net.sourceforge.seqware.database
 net.sourceforge.seqware.pipeline
@@ -24,6 +25,7 @@ net.sourceforge.seqware.pipeline.tools
 net.sourceforge.seqware.pipeline.tutorial
 net.sourceforge.seqware.pipeline.workflow
 net.sourceforge.seqware.queryengine.webservice.util
+net.sourceforge.seqware.webservice.dto
 net.sourceforge.seqware.webservice.resources
 net.sourceforge.seqware.webservice.resources.filters
 net.sourceforge.seqware.webservice.resources.queries
