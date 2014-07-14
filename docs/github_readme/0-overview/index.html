@@ -152,7 +152,7 @@ you build without running any tests in the trunk directory:</p>
 
 <pre><code>export MAVEN_OPTS="-Xmx1024m -XX:MaxPermSize=512m"  (This ensures that enough memory is allocated for integration tests)
 mvn clean install -DskipITs=false (This runs all unit tests and integration tests that only require postgres as a prerequisite)
-mvn clean install -DskipITs=false -P extITs,embeddedTomcat (runs all unit tests and all integration tests including those that require Oozie)
+mvn clean install -DskipITs=false -P extITs,embeddedTomcat (runs all unit tests and all integration tests including those that require Condor/Globus/Pegasus)
 </code></pre>
 
 <p>In the last case, the extended integration tests profile is used to trigger integration tests that run our command line utilities. 
@@ -276,7 +276,7 @@ along with SeqWare.  If not, see <a href="http://www.gnu.org/licenses/">http://w
 </div>
 <!-- ***** footer ***** -->
 <div id="footer">
-<p>SeqWare © 2007–2014 Brian O&#8217;Connor. SeqWare is released under the a <a rel="license" href="http://www.gnu.org/licenses/licenses.html">GNU GPL v3</a>. This site is built using the excellent <a href="http://nanoc.ws/">nanoc</a> tool and example site along with the <a href="http://www.fonts.info/info/press/free-fonts-for-font-face-embedding.htm">Graublau</a> and <a href="https://en.wikipedia.org/wiki/Gentium">Gentium</a> fonts.</p>
+<p>SeqWare © 2007–2013 Brian O&#8217;Connor. SeqWare is released under the a <a rel="license" href="http://www.gnu.org/licenses/licenses.html">GNU GPL v3</a>. This site is built using the excellent <a href="http://nanoc.ws/">nanoc</a> tool and example site along with the <a href="http://www.fonts.info/info/press/free-fonts-for-font-face-embedding.htm">Graublau</a> and <a href="https://en.wikipedia.org/wiki/Gentium">Gentium</a> fonts.</p>
 </div>
 </body>
 </html>
