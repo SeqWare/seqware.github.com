@@ -191,22 +191,22 @@ PCSI_0006                          4831
 
 <p>Here are several examples of how to use the program:</p>
 
-<pre><code>java -jar seqware-distribution-1.0.11-full.jar --plugin net.sourceforge.seqware.pipeline.plugins.SymLinkFileReporter -- --study PCSI --no-links --output-filename PCSI
+<pre><code>java -jar seqware-distribution-1.0.18-full.jar --plugin net.sourceforge.seqware.pipeline.plugins.SymLinkFileReporter -- --study PCSI --no-links --output-filename PCSI
 </code></pre>
 
 <p>In this example the tool creates only a CSV file named &#8220;PCSI.csv&#8221; that includes all the associated files for that study.  No symlinks are created on the filesystem.</p>
 
-<pre><code>java -jar seqware-distribution-1.0.11-full.jar --plugin net.sourceforge.seqware.pipeline.plugins.SymLinkFileReporter -- --study PCSI
+<pre><code>java -jar seqware-distribution-1.0.18-full.jar --plugin net.sourceforge.seqware.pipeline.plugins.SymLinkFileReporter -- --study PCSI
 </code></pre>
 
 <p>Creates a directory for the study with the title &#8220;PCSI&#8221; with all filetypes linked inside. Also creates a CSV file in the current directory with all of the file information</p>
 
-<pre><code>java -jar seqware-distribution-1.0.11-full.jar --plugin net.sourceforge.seqware.pipeline.plugins.SymLinkFileReporter -- --dump-all --no-links --output-filename DumpAllTheStudies
+<pre><code>java -jar seqware-distribution-1.0.18-full.jar --plugin net.sourceforge.seqware.pipeline.plugins.SymLinkFileReporter -- --dump-all --no-links --output-filename DumpAllTheStudies
 </code></pre>
 
 <p>Creates only a CSV file named &#8220;DumpAllTheStudies.csv&#8221; with all of the files from all of the studies in the database.</p>
 
-<pre><code>java -jar seqware-distribution-1.0.11-full.jar --plugin  net.sourceforge.seqware.pipeline.plugins.SymLinkFileReporter -- --sample PCSI_0119_Sp_R_PE_428_EX --prod-format
+<pre><code>java -jar seqware-distribution-1.0.18-full.jar --plugin  net.sourceforge.seqware.pipeline.plugins.SymLinkFileReporter -- --sample PCSI_0119_Sp_R_PE_428_EX --prod-format
 </code></pre>
 
 <p>Creates a directory and CSV file for the files from the sample named &#8220;PCSI_0119_Sp_R_PE_428_EX&#8221;. The directory will be output in production format (see below).</p>

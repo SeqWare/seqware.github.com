@@ -51,17 +51,17 @@
 
 <div class="section" id="get-a-list-of-all-workflows">
 <h2>Get a list of all workflows</h2>
-<p>URL: GET http://localhost:8080/seqware-webservice-1.0.11/workflows</p>
+<p>URL: GET http://localhost:8080/seqware-webservice-1.0.18/workflows</p>
 
 </div>
 <div class="section" id="get-a-particular-workflow">
 <h2>Get a particular workflow</h2>
-<p>URL: GET http://localhost:8080/seqware-webservice-1.0.11/workflows/11034 (use the sw_accession)</p>
+<p>URL: GET http://localhost:8080/seqware-webservice-1.0.18/workflows/11034 (use the sw_accession)</p>
 
 </div>
 <div class="section" id="get-the-workflow-and-its-parameters">
 <h2>Get the workflow and its parameters</h2>
-<p>URL: GET http://localhost:8080/seqware-webservice-1.0.11/workflows/11034?show=params</p>
+<p>URL: GET http://localhost:8080/seqware-webservice-1.0.18/workflows/11034?show=params</p>
 
 </div>
 <div class="section" id="launch-workflow">
@@ -69,7 +69,7 @@
 
 <p><img src="../../assets/images/metadb/Study_hierarchy.png" alt="Simple DB"></p>
 
-<p>URL: POST to http://localhost:8080/seqware-webservice-1.0.11/workflows/28522/runs with the INI file in the method body and the following query parameters :
+<p>URL: POST to http://localhost:8080/seqware-webservice-1.0.18/workflows/28522/runs with the INI file in the method body and the following query parameters :
 * parent-accessions - comma-separated list of sw_accessions of parents to link the new Processing events to (e.g. a Lane of data, or a Processing object with a data file from previous analysis)
 * link-workflow-run-to-parents - comma-separated list of parents to link the workflow_run to (e.g. the original Lane or IUS that the workflow_run is operating on)
 * no-metadata - run without linking to any parents. If you leave the previous two fields blank, this option is automatically enabled. If it is not specified and the previous two fields are specified, then the runs with metadata by default. If this option is enabled, no metadata is run, regardless of the previous two fields.</p>
@@ -81,17 +81,17 @@
 <p>For example:</p>
 
 <ul>
-<li>POST to http://localhost:8080/seqware-webservice-1.0.11/workflows/11034/runs?no-metadata=true&amp;parent-accessions=4765,4707&amp;link-workflow-run-to-parents=4765,4707 would run without metadata</li>
-  <li>POST to http://localhost:8080/seqware-webservice-1.0.11/workflows/11034/runs?parent-accessions=4765,4707&amp;link-workflow-run-to-parents=4765,4707 would run WITH metadata</li>
-  <li>POST to http://localhost:8080/seqware-webservice-1.0.11/workflows/11034/runs?parent-accessions=4765,4707 would run without metadata</li>
-  <li>POST to http://localhost:8080/seqware-webservice-1.0.11/workflows/11034/runs would run without metadata</li>
+<li>POST to http://localhost:8080/seqware-webservice-1.0.18/workflows/11034/runs?no-metadata=true&amp;parent-accessions=4765,4707&amp;link-workflow-run-to-parents=4765,4707 would run without metadata</li>
+  <li>POST to http://localhost:8080/seqware-webservice-1.0.18/workflows/11034/runs?parent-accessions=4765,4707&amp;link-workflow-run-to-parents=4765,4707 would run WITH metadata</li>
+  <li>POST to http://localhost:8080/seqware-webservice-1.0.18/workflows/11034/runs?parent-accessions=4765,4707 would run without metadata</li>
+  <li>POST to http://localhost:8080/seqware-webservice-1.0.18/workflows/11034/runs would run without metadata</li>
 </ul>
 <p>The request returns a ReturnValue object. The returnValue attribute of this object is the sw_accession for the workflow_run, which you can monitor in the next step.</p>
 
 </div>
 <div class="section" id="monitor-workflow-run">
 <h2>Monitor workflow run</h2>
-<p>URL: GET http://localhost:8080/seqware-webservice-1.0.11/workflowruns/18500 (use the sw_accession)</p>
+<p>URL: GET http://localhost:8080/seqware-webservice-1.0.18/workflowruns/18500 (use the sw_accession)</p>
 
 <p>By checking the ‘status’ attribute of the run, you can see whether it has changed. It may be in any of the following states:</p>
 
