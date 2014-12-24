@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="UTF-8">
-<title>SeqWare › Workflow Metadata File</title>
+<title>SeqWare › ProcessingDataStructure2Dot</title>
 <meta content="nanoc 3.7.1" name="generator">
 <link href="../../../assets/style-v17.css" media="screen" rel="stylesheet" type="text/css">
 <link href="http://feeds.feedburner.com/seqware" rel="alternate" title="The SeqWare Blog" type="application/atom+xml">
@@ -29,7 +29,7 @@
 <li><a href="../../2-installation/"><span>Installation</span></a></li>
 <li><a href="../../3-getting-started/"><span>Getting Started</span></a></li>
 <li>
-<a href="../"><span>SeqWare Pipeline</span></a><ol class="toc"><li><a href="#overview">Overview</a></li></ol>
+<a href="../"><span>SeqWare Pipeline</span></a><ol class="toc"><li><a href="#examples">Examples</a></li></ol>
 </li>
 <li><a href="../../4-metadb/"><span>SeqWare MetaDB</span></a></li>
 <li><a href="../../5-portal/"><span>SeqWare Portal</span></a></li>
@@ -47,27 +47,22 @@
 <div class="body">
 <div class="article">
 <div class="header">
-<h1>Workflow Metadata File</h1>
+<h1>ProcessingDataStructure2Dot</h1>
 </div>
-<div class="section" id="overview">
-<h2>Overview</h2>
+<p>The ProcessingDataStructure2Dot plugin allows you to convert a section of the processing hierarchy into a dot file which can be converted into a graphics format of your choice. This allows you to visualize the processing hierarchy created by a particular workflow.</p>
 
-<p>The workflow manifest (<tt>metadata.xml</tt>) includes the workflow name,
-version, description, test command, and enough information so that the SeqWare
-tools can test, execute, and install the workflow. Here is an example from the
-MyHelloWorld workflow:</p>
+<div class="section" id="examples">
+<h2>Examples</h2>
 
-<pre><code class="language-xml"><span class="nt">&lt;bundle</span> <span class="na">version=</span><span class="s">"1.0"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;workflow</span> <span class="na">name=</span><span class="s">"MyHelloWorld"</span> <span class="na">version=</span><span class="s">"1.0"</span> <span class="na">seqware_version=</span><span class="s">"1.1.0-alpha.1"</span>
-  <span class="na">basedir=</span><span class="s">"${workflow_bundle_dir}/Workflow_Bundle_MyHelloWorld/1.0"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;description&gt;</span>Add a description of the workflow here.<span class="nt">&lt;/description&gt;</span>
-    <span class="nt">&lt;workflow_class</span> <span class="na">path=</span><span class="s">"${workflow_bundle_dir}/Workflow_Bundle_MyHelloWorld/1.0/classes/com/github/seqware/MyHelloWorldWorkflow.java"</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;config</span> <span class="na">path=</span><span class="s">"${workflow_bundle_dir}/Workflow_Bundle_MyHelloWorld/1.0/config/MyHelloWorldWorkflow.ini"</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;requirements</span> <span class="na">compute=</span><span class="s">"single"</span> <span class="na">memory=</span><span class="s">"20M"</span> <span class="na">network=</span><span class="s">"local"</span>  <span class="na">workflow_engine=</span><span class="s">"Pegasus,Oozie"</span> <span class="na">workflow_type=</span><span class="s">"java"</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;/workflow&gt;</span>
-<span class="nt">&lt;/bundle&gt;</span></code></pre>
+<p>Extract the processing hierarchy rooted at the processing SWID 5174:</p>
 
-<p>As mentioned above, you can edit the description and workflow name in the workflow.properties file.</p>
+<pre><code>$java -jar ~/.seqware/self-installs/seqware-distribution-1.1.0-alpha.2-SNAPSHOT-full.jar -p net.sourceforge.seqware.pipeline.plugins.ProcessingDataStructure2Dot -- --parent-accession 5174
+Writing dot file to output.dot
+
+$dot -Tpng output.dot &gt; output.png
+</code></pre>
+
+<p>Note for the latter step, you may need to install graphviz or a dot file viewer of your choice.</p>
 </div>
 </div>
 <p> </p>

@@ -258,11 +258,11 @@ $ mvn archetype:generate
 Choose a number or apply filter (format: [groupId:]artifactId, case sensitive contains): 294: 
 </code></pre>
 
-<p class="warning"><strong>Note:</strong>You can inform Maven about the archetypes by downloading the latest <a href="https://github.com/SeqWare/seqware/releases/download/1.0.18/archetype-catalog.xml">archetype-catalog.xml</a> file and placing it in <code>~/.m2/</code>.</p>
+<p class="warning"><strong>Note:</strong>You can inform Maven about the archetypes by downloading the latest <a href="https://github.com/SeqWare/seqware/releases/download/1.1.0-alpha.1/archetype-catalog.xml">archetype-catalog.xml</a> file and placing it in <code>~/.m2/</code>.</p>
 
 <p>The numbers used to identify  the archetypes will vary 
 depending on what you have installed, so you will need to scan through the list 
-to find the SeqWare archetype you are looking for, in this case “SeqWare Java workflow archetype”.  Following the prompts, use “MyHelloWorld” as the artifactId and accept the defaults for the remaining by just pressing return.</p>
+to find the SeqWare archetype you are looking for, in this case “SeqWare Java workflow archetype”. You can also enter “seqware” as a filter in order to narrow down the possibilities. Following the prompts, use “com.github.seqware” as the package, “MyHelloWorld” as the artifactId, and accept the defaults for the remaining by just pressing return.</p>
 
 <p>Alternately, the archetype can be generated without any interaction:</p>
 
@@ -334,7 +334,7 @@ developers.</p>
 |                   `-- seqware
 |                       `-- MyHelloWorldWorkflow.java
 |-- target
-|   `-- Workflow_Bundle_MyHelloWorld_1.0_SeqWare_1.0.18
+|   `-- Workflow_Bundle_MyHelloWorld_1.0_SeqWare_1.1.0-alpha.1
 |       `-- Workflow_Bundle_MyHelloWorld
 |           `-- 1.0
 |               |-- bin
@@ -348,7 +348,7 @@ developers.</p>
 |               |-- data
 |               |   `-- input.txt
 |               |-- lib
-|               |   `-- seqware-distribution-1.0.18-full.jar
+|               |   `-- seqware-distribution-1.1.0-alpha.1-full.jar
 |               `-- metadata.xml
 |-- workflow
 |   |-- config
@@ -399,7 +399,7 @@ tools can test, execute, and install the workflow. Here is an example from the
 MyHelloWorld workflow:</p>
 
 <pre><code class="language-xml"><span class="nt">&lt;bundle</span> <span class="na">version=</span><span class="s">"1.0"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;workflow</span> <span class="na">name=</span><span class="s">"MyHelloWorld"</span> <span class="na">version=</span><span class="s">"1.0"</span> <span class="na">seqware_version=</span><span class="s">"1.0.18"</span>
+  <span class="nt">&lt;workflow</span> <span class="na">name=</span><span class="s">"MyHelloWorld"</span> <span class="na">version=</span><span class="s">"1.0"</span> <span class="na">seqware_version=</span><span class="s">"1.1.0-alpha.1"</span>
   <span class="na">basedir=</span><span class="s">"${workflow_bundle_dir}/Workflow_Bundle_MyHelloWorld/1.0"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;description&gt;</span>Add a description of the workflow here.<span class="nt">&lt;/description&gt;</span>
     <span class="nt">&lt;workflow_class</span> <span class="na">path=</span><span class="s">"${workflow_bundle_dir}/Workflow_Bundle_MyHelloWorld/1.0/classes/com/github/seqware/MyHelloWorldWorkflow.java"</span><span class="nt">/&gt;</span>
@@ -429,7 +429,7 @@ cluster, a cloud-based cluster, etc).</p>
 <h4>Files</h4>
 
 <pre><code class="language-java">    <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">SqwFile</span><span class="o">&gt;</span> <span class="n">setupFiles</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">SqwFile</span><span class="o">&gt;</span> <span class="nf">setupFiles</span><span class="o">()</span> <span class="o">{</span>
       <span class="k">try</span> <span class="o">{</span>
         <span class="c1">// register an plaintext input file using the information from the INI</span>
         <span class="c1">// provisioning this file to the working directory will be the first step in the workflow</span>
@@ -462,7 +462,7 @@ itself. Here we pull in the information from the INI file using getProperty.</p>
 
     <span class="kd">private</span> <span class="n">SqwFile</span> <span class="nf">createOutputFile</span><span class="o">(</span><span class="n">String</span> <span class="n">workingPath</span><span class="o">,</span> <span class="n">String</span> <span class="n">metatype</span><span class="o">,</span> <span class="kt">boolean</span> <span class="n">manualOutput</span><span class="o">)</span> <span class="o">{</span>
     <span class="c1">// register an output file</span>
-        <span class="n">SqwFile</span> <span class="n">file1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SqwFile</span><span class="o">();</span>
+        <span class="n">SqwFile</span> <span class="n">file1</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">SqwFile</span><span class="o">();</span>
         <span class="n">file1</span><span class="o">.</span><span class="na">setSourcePath</span><span class="o">(</span><span class="n">workingPath</span><span class="o">);</span>
         <span class="n">file1</span><span class="o">.</span><span class="na">setType</span><span class="o">(</span><span class="n">metatype</span><span class="o">);</span>
         <span class="n">file1</span><span class="o">.</span><span class="na">setIsOutput</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
@@ -510,26 +510,33 @@ path is unique.</p>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">buildWorkflow</span><span class="o">()</span> <span class="o">{</span>
 
         <span class="c1">// a simple bash job to call mkdir</span>
-        <span class="c1">// note that this job uses the system's mkdir (which depends on the system being *nix)</span>
-        <span class="n">Job</span> <span class="n">mkdirJob</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">getWorkflow</span><span class="o">().</span><span class="na">createBashJob</span><span class="o">(</span><span class="s">"bash_mkdir"</span><span class="o">);</span>
-        <span class="n">mkdirJob</span><span class="o">.</span><span class="na">getCommand</span><span class="o">().</span><span class="na">addArgument</span><span class="o">(</span><span class="s">"mkdir test1"</span><span class="o">);</span>
-
-        <span class="n">String</span> <span class="n">inputFilePath</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">getFiles</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="s">"file_in_0"</span><span class="o">).</span><span class="na">getProvisionedPath</span><span class="o">();</span>
-
+	<span class="c1">// note that this job uses the system's mkdir (which depends on the system being *nix)</span>
+	<span class="c1">// this also translates into a 3000 h_vmem limit when using sge </span>
+        <span class="n">Job</span> <span class="n">mkdirJob</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">getWorkflow</span><span class="o">().</span><span class="na">createBashJob</span><span class="o">(</span><span class="s">"bash_mkdir"</span><span class="o">).</span><span class="na">setMaxMemory</span><span class="o">(</span><span class="s">"3000"</span><span class="o">);</span>
+        <span class="n">mkdirJob</span><span class="o">.</span><span class="na">getCommand</span><span class="o">().</span><span class="na">addArgument</span><span class="o">(</span><span class="s">"mkdir test1"</span><span class="o">);</span>      
+       
+	<span class="n">String</span> <span class="n">inputFilePath</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">getFiles</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="s">"file_in_0"</span><span class="o">).</span><span class="na">getProvisionedPath</span><span class="o">();</span>
+	 
         <span class="c1">// a simple bash job to cat a file into a test file</span>
-        <span class="c1">// the file is not saved to the metadata database</span>
-        <span class="n">Job</span> <span class="n">copyJob1</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">getWorkflow</span><span class="o">().</span><span class="na">createBashJob</span><span class="o">(</span><span class="s">"bash_cp"</span><span class="o">);</span>
-        <span class="n">copyJob1</span><span class="o">.</span><span class="na">setCommand</span><span class="o">(</span><span class="n">catPath</span> <span class="o">+</span> <span class="s">" "</span> <span class="o">+</span> <span class="n">inputFilePath</span> <span class="o">+</span> <span class="s">"&gt; test1"</span><span class="o">);</span>
+	<span class="c1">// the file is not saved to the metadata database</span>
+        <span class="n">Job</span> <span class="n">copyJob1</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">getWorkflow</span><span class="o">().</span><span class="na">createBashJob</span><span class="o">(</span><span class="s">"bash_cp"</span><span class="o">).</span><span class="na">setMaxMemory</span><span class="o">(</span><span class="s">"3000"</span><span class="o">);</span>
+        <span class="n">copyJob1</span><span class="o">.</span><span class="na">setCommand</span><span class="o">(</span><span class="n">catPath</span> <span class="o">+</span> <span class="s">" "</span> <span class="o">+</span> <span class="n">inputFilePath</span> <span class="o">+</span> <span class="s">"&gt; test1/test.out"</span><span class="o">);</span>
         <span class="n">copyJob1</span><span class="o">.</span><span class="na">addParent</span><span class="o">(</span><span class="n">mkdirJob</span><span class="o">);</span>
-
+	<span class="c1">// this will annotate the processing event associated with the cat of the file above</span>
+        <span class="n">copyJob1</span><span class="o">.</span><span class="na">getAnnotations</span><span class="o">().</span><span class="na">put</span><span class="o">(</span><span class="s">"command.annotation.key.1"</span><span class="o">,</span> <span class="s">"command.annotation.value.1"</span><span class="o">);</span>
+        <span class="n">copyJob1</span><span class="o">.</span><span class="na">getAnnotations</span><span class="o">().</span><span class="na">put</span><span class="o">(</span><span class="s">"command.annotation.key.2"</span><span class="o">,</span> <span class="s">"command.annotation.value.2"</span><span class="o">);</span>
+        
         <span class="c1">// a simple bash job to echo to an output file and concat an input file</span>
-        <span class="c1">// the file IS saved to the metadata database</span>
-        <span class="n">Job</span> <span class="n">copyJob2</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">getWorkflow</span><span class="o">().</span><span class="na">createBashJob</span><span class="o">(</span><span class="s">"bash_cp"</span><span class="o">);</span>
-        <span class="n">copyJob2</span><span class="o">.</span><span class="na">getCommand</span><span class="o">().</span><span class="na">addArgument</span><span class="o">(</span><span class="n">echoPath</span><span class="o">).</span><span class="na">addArgument</span><span class="o">(</span><span class="n">greeting</span><span class="o">).</span><span class="na">addArgument</span><span class="o">(</span><span class="s">" &gt; "</span><span class="o">).</span><span class="na">addArgument</span><span class="o">(</span><span class="s">"dir1/output"</span><span class="o">);</span>
-        <span class="n">copyJob2</span><span class="o">.</span><span class="na">getCommand</span><span class="o">().</span><span class="na">addArgument</span><span class="o">(</span><span class="s">";"</span><span class="o">);</span>
-        <span class="n">copyJob2</span><span class="o">.</span><span class="na">getCommand</span><span class="o">().</span><span class="na">addArgument</span><span class="o">(</span><span class="n">catPath</span> <span class="o">+</span> <span class="s">" "</span> <span class="o">+</span><span class="n">inputFilePath</span><span class="o">+</span> <span class="s">" &gt;&gt; dir1/output"</span><span class="o">);</span>
+	<span class="c1">// the file IS saved to the metadata database</span>
+        <span class="n">Job</span> <span class="n">copyJob2</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">getWorkflow</span><span class="o">().</span><span class="na">createBashJob</span><span class="o">(</span><span class="s">"bash_cp"</span><span class="o">).</span><span class="na">setMaxMemory</span><span class="o">(</span><span class="s">"3000"</span><span class="o">);</span>
+	<span class="n">copyJob2</span><span class="o">.</span><span class="na">getCommand</span><span class="o">().</span><span class="na">addArgument</span><span class="o">(</span><span class="n">echoPath</span><span class="o">).</span><span class="na">addArgument</span><span class="o">(</span><span class="n">greeting</span><span class="o">).</span><span class="na">addArgument</span><span class="o">(</span><span class="s">" &gt; "</span><span class="o">).</span><span class="na">addArgument</span><span class="o">(</span><span class="s">"dir1/output"</span><span class="o">);</span>
+	<span class="n">copyJob2</span><span class="o">.</span><span class="na">getCommand</span><span class="o">().</span><span class="na">addArgument</span><span class="o">(</span><span class="s">";"</span><span class="o">);</span>
+	<span class="n">copyJob2</span><span class="o">.</span><span class="na">getCommand</span><span class="o">().</span><span class="na">addArgument</span><span class="o">(</span><span class="n">catPath</span> <span class="o">+</span> <span class="s">" "</span> <span class="o">+</span><span class="n">inputFilePath</span><span class="o">+</span> <span class="s">" &gt;&gt; dir1/output"</span><span class="o">);</span>
         <span class="n">copyJob2</span><span class="o">.</span><span class="na">addParent</span><span class="o">(</span><span class="n">mkdirJob</span><span class="o">);</span>
-        <span class="n">copyJob2</span><span class="o">.</span><span class="na">addFile</span><span class="o">(</span><span class="n">createOutputFile</span><span class="o">(</span><span class="s">"dir1/output"</span><span class="o">,</span> <span class="s">"txt/plain"</span><span class="o">,</span> <span class="n">manualOutput</span><span class="o">));</span>
+	<span class="n">SqwFile</span> <span class="n">outputFile</span> <span class="o">=</span> <span class="n">createOutputFile</span><span class="o">(</span><span class="s">"dir1/output"</span><span class="o">,</span> <span class="s">"txt/plain"</span><span class="o">,</span> <span class="n">manualOutput</span><span class="o">);</span>
+        <span class="c1">// this will annotate the processing event associated with copying your output file to its final location</span>
+        <span class="n">outputFile</span><span class="o">.</span><span class="na">getAnnotations</span><span class="o">().</span><span class="na">put</span><span class="o">(</span><span class="s">"provision.file.annotation.key.1"</span><span class="o">,</span> <span class="s">"provision.annotation.value.1"</span><span class="o">);</span>
+        <span class="n">copyJob2</span><span class="o">.</span><span class="na">addFile</span><span class="o">(</span><span class="n">outputFile</span><span class="o">);</span>
 
     <span class="o">}</span></code></pre>
 
@@ -681,6 +688,8 @@ for this file using the following:</p>
 <code>sqw.timestamp</code>: the current number of milliseconds since January 1, 1970.</li>
   <li>
 <code>sqw.uuid</code>: a randomly generated <a href="http://en.wikipedia.org/wiki/Universally_unique_identifier#Version_4_.28random.29">universally unique identifier</a>.</li>
+  <li>
+<code>sqw.bundle-seqware-version</code>: the version of seqware that this workflow was built with. You should not have to use this often, but it may be useful if you want to trigger different behaviour based on a version of seqware.</li>
 </ul>
 <p>Each instance of the above <code>sqw.*</code> variables in an ini file will be replaced with a separately resolved value, e.g., multiple instances of <code>${sqw.uuid}</code> will each resolve to different values. If you desire to reuse the same generated value, do somthing akin to the following:</p>
 
@@ -724,11 +733,15 @@ dateJob is now the final job that manipulates the dir1/output file.</p>
         <span class="n">copyJob2</span><span class="o">.</span><span class="na">getCommand</span><span class="o">().</span><span class="na">addArgument</span><span class="o">(</span><span class="s">";"</span><span class="o">);</span>
         <span class="n">copyJob2</span><span class="o">.</span><span class="na">getCommand</span><span class="o">().</span><span class="na">addArgument</span><span class="o">(</span><span class="n">catPath</span> <span class="o">+</span> <span class="s">" "</span> <span class="o">+</span><span class="n">inputFilePath</span><span class="o">+</span> <span class="s">" &gt;&gt; dir1/output"</span><span class="o">);</span>
         <span class="n">copyJob2</span><span class="o">.</span><span class="na">addParent</span><span class="o">(</span><span class="n">mkdirJob</span><span class="o">);</span>
+        <span class="n">SqwFile</span> <span class="n">outputFile</span> <span class="o">=</span> <span class="n">createOutputFile</span><span class="o">(</span><span class="s">"dir1/output"</span><span class="o">,</span> <span class="s">"txt/plain"</span><span class="o">,</span> <span class="n">manualOutput</span><span class="o">);</span>
+        <span class="c1">// this will annotate the processing event associated with copying your output file to its final location</span>
+        <span class="n">outputFile</span><span class="o">.</span><span class="na">getAnnotations</span><span class="o">().</span><span class="na">put</span><span class="o">(</span><span class="s">"provision.file.annotation.key.1"</span><span class="o">,</span> <span class="s">"provision.annotation.value.1"</span><span class="o">);</span>
+
 
 	<span class="n">Job</span> <span class="n">dateJob</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">getWorkflow</span><span class="o">().</span><span class="na">createBashJob</span><span class="o">(</span><span class="s">"date"</span><span class="o">);</span>
 	<span class="n">dateJob</span><span class="o">.</span><span class="na">setCommand</span><span class="o">(</span><span class="s">"date &gt;&gt; dir1/output"</span><span class="o">);</span>
 	<span class="n">dateJob</span><span class="o">.</span><span class="na">addParent</span><span class="o">(</span><span class="n">copyJob2</span><span class="o">);</span>
-        <span class="n">dateJob</span><span class="o">.</span><span class="na">addFile</span><span class="o">(</span><span class="n">createOutputFile</span><span class="o">(</span><span class="s">"dir1/output"</span><span class="o">,</span> <span class="s">"txt/plain"</span><span class="o">,</span> <span class="n">manualOutput</span><span class="o">));</span>
+        <span class="n">dateJob</span><span class="o">.</span><span class="na">addFile</span><span class="o">(</span><span class="n">outputFile</span><span class="o">);</span>
     <span class="o">}</span></code>
 </pre>
 
@@ -847,7 +860,7 @@ Packaging Bundle
 Bundle has been packaged to /home/seqware/packaged-bundles
 </code></pre>
 
-<p>What happens here is the <code>Workflow_Bundle_MyHelloWorld_1.0_SeqWare_1.0.18</code> directory is zip’d up to your output directory (<code>~/packaged-bundles</code>) and that can be provided to an admin for installation.</p>
+<p>What happens here is the <code>Workflow_Bundle_MyHelloWorld_1.0_SeqWare_1.1.0-alpha.1</code> directory is zip’d up to your output directory (<code>~/packaged-bundles</code>) and that can be provided to an admin for installation.</p>
 
 </div>
 <div class="section" id="next-steps">

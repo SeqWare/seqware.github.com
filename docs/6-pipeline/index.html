@@ -35,6 +35,7 @@
 <li><a href="#building-and-installing">Building and Installing</a></li>
 <li><a href="#setup">Setup</a></li>
 <li><a href="#workflows">Workflows</a></li>
+<li><a href="#developer-tutorials">Developer Tutorials</a></li>
 <li><a href="#modules">Modules</a></li>
 <li><a href="#deciders">Deciders</a></li>
 <li><a href="#reporting">Reporting</a></li>
@@ -70,10 +71,20 @@ monitoring workflows.</p>
 
 <p><img width="600" src="../../assets/images/seqware_hpc_oozie.png"></p>
 
-<p>We currently support two workflow languages (FTL markup and Java) and two
-workflow engines (Oozie and Pegasus). Our current recommended combination is
-Java workflows with the Pegasus engine.</p>
+<p>We currently support one workflow language (Java) and four 
+workflow engines (oozie, oozie-sge, whitestar, and whitestar-sge). </p>
 
+<p>(Previously, we also supported Pegasus/Condor/Globus as a workflow engine). </p>
+
+<p>Our current recommended combination is
+Java workflows with the Oozie-sge engine.</p>
+
+<ul>
+<li>Oozie uses the Hadoop Workflow Scheduler to schedule steps in workflows on the Hadoop ecosystem (JobTrackers and TaskTrackers). </li>
+  <li>Oozie-sge uses Oozie, but in conjunction with a oozie-sge plugin to schedule steps in workflows on a pre-existing sge cluster. </li>
+  <li>WhiteStar is a synchronous workflow engine used by SeqWare developers to debug, it runs steps locally via Bash. </li>
+  <li>WhiteStar-sge runs steps on a local sge cluster.     </li>
+</ul>
 <p>We highly recommend you go through the
 <a href="../3-getting-started/user-tutorial/">User</a>,
 <a href="../3-getting-started/developer-tutorial/">Developer</a>, and
@@ -166,12 +177,6 @@ run on a randomly chosen cluster node.</p>
 </li>
   <li>
     <dl>
-<dt><a href="legacy-ftl-workflows/">Deprecated FTL Workflows</a></dt>
-      <dd>This is our older, more verbose workflow language based on FreeMarker. This provides information on the structure of a typical workflow descriptor written in this language. FTL is deprecated, do not use it for new workflows.</dd>
-    </dl>
-</li>
-  <li>
-    <dl>
 <dt><a href="workflow_bundles/">Workflow Bundle Conventions</a></dt>
       <dd>We rely on a bundle format for packaging up and exchanging workflows. This document describes the format and directory structure.</dd>
     </dl>
@@ -195,10 +200,22 @@ run on a randomly chosen cluster node.</p>
       <dd>This document describes the standardized file meta types (MIME-like types) we use in the project and how to add files to a community-writable file type registration.</dd>
     </dl>
 </li>
-  <li>
+</ul>
+</div>
+<div class="section" id="developer-tutorials">
+<h2>Developer Tutorials</h2>
+
+<ul>
+<li>
     <dl>
 <dt><a href="debug-workflows/">Debugging, Troubleshooting, &amp; Restarting Workflow</a></dt>
-      <dd>A guide to debugging, troubleshooting, and restarting failed workflows for both workflow engines (Pegasus and Oozie).</dd>
+      <dd>A guide to debugging, troubleshooting, and restarting failed workflows for the Oozie workflow engine.</dd>
+    </dl>
+</li>
+  <li>
+    <dl>
+<dt><a href="partial_environments/">Developing in Partial SeqWare Environments with Whitestar</a></dt>
+      <dd>A guide to developing without dependencies such as Oozie, SGE/Hadoop, and metadata (via the SeqWare webservice).  </dd>
     </dl>
 </li>
 </ul>
@@ -253,14 +270,8 @@ general workflow developers.</p>
 <ul>
 <li>
     <dl>
-<dt><a href="../21-study-reporter/">Study Reporter</a></dt>
-      <dd>Create a nested tree structure of all of the output files from a particular sample, or all of the samples in a study</dd>
-    </dl>
-</li>
-  <li>
-    <dl>
-<dt><a href="../20-sequencer-run-reporter/">Sequencer Run Reporter</a></dt>
-      <dd>Gives you a view of all the sequencer runs/lanes/barcodes and the associated analysis processing events.</dd>
+<dt>seqware files report</dt>
+      <dd>Gives you a view of all files and their position in the database hierarchy from study on down</dd>
     </dl>
 </li>
   <li>
@@ -313,6 +324,12 @@ general workflow developers.</p>
       <dd>This tool checks whether a SeqWare environment is setup properly. It currently runs for user environments and master environments.</dd>
     </dl>
 </li>
+  <li>
+    <dl>
+<dt><a href="processingdatastructure2dot/">ProcessingDataStructure2Dot</a></dt>
+      <dd>This tool converts a section of the processing hierarchy “below” a processing event into a dot file for visualization. </dd>
+    </dl>
+</li>
 </ul>
 </div>
 <div class="section" id="command-line-reference">
@@ -323,20 +340,24 @@ general workflow developers.</p>
 <pre><code>$ seqware --help
 
 Usage: seqware [&lt;flag&gt;]
-       seqware &lt;command&gt; [--help]
+seqware &lt;command&gt; [--help]
 
 Commands:
-  annotate      Add arbitrary key/value pairs to seqware objects
-  bundle        Interact with a workflow bundle
-  copy          Copy files between local and remote file systems
-  create        Create new seqware objects (e.g., study)
-  files         Extract information about workflow output files
-  workflow      Interact with workflows
-  workflow-run  Interact with workflow runs
+annotate      Add arbitrary key/value pairs to seqware objects
+bundle        Interact with a workflow bundle during development/admin
+copy          Copy files between local and remote file systems
+create        Create new seqware objects (e.g., study)
+files         Extract information about workflow output files
+study         Extract information about studies
+workflow      Interact with workflows
+workflow-run  Interact with workflow runs
+checkdb       Check the seqware database for convention errors
+check         Check the seqware environment for configuration issues
 
 Flags:
-  --help        Print help out
-  --version     Print Seqware's version
+--help        Print help out
+--version     Print Seqware's version
+
 
 $ seqware workflow --help
 

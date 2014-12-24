@@ -70,8 +70,16 @@ This is a simple command runner.</p>
     </tr></thead>
 <tbody>
 <tr>
+<td>–[arguments]</td>
+      <td> </td>
+    </tr>
+<tr>
 <td>–gcr-algorithm</td>
       <td>You can pass in an algorithm name that will be recorded in the metadb if you are writing back to the metadb, otherwise GenericCommandRunner is used.</td>
+    </tr>
+<tr>
+<td>–gcr-annotation-file</td>
+      <td>Specify this option to create annotations on the processing event that is created describing this command.</td>
     </tr>
 <tr>
 <td>–gcr-check-output-file</td>
@@ -86,6 +94,10 @@ This is a simple command runner.</p>
       <td>Specify this option one or more times for each output file created by the command called by this module. The argument is a ‘::’ delimited list of type, meta_type, and file_path.</td>
     </tr>
 <tr>
+<td>–gcr-permanent-storage-prefix</td>
+      <td>Optional: Stream a copy of stdout and stderr to this prefix + .stderr/stdout</td>
+    </tr>
+<tr>
 <td>–gcr-skip-if-missing</td>
       <td>If the registered output files don’t exist don’t worry about it. Useful for workflows that can produce variable file outputs but also potentially dangerous.</td>
     </tr>
@@ -95,19 +107,19 @@ This is a simple command runner.</p>
     </tr>
 <tr>
 <td>–gcr-stderr</td>
-      <td>Optional: Returns the full stderr (stderr of the command called is normally trimmed to gcr-stderr-buffer-size lines</td>
+      <td>Optional: Returns the full stderr as metadata (stderr of the command called is normally trimmed to gcr-stderr-buffer-size lines</td>
     </tr>
 <tr>
 <td>–gcr-stderr-buffer-size</td>
-      <td>Used if gcr-stderr is not set. This sets the number of lines of stderr to report (Default is 10).</td>
+      <td>Optional: Used if gcr-stderr is not set. This sets the number of lines of stderr to report as metadata (Default is 10).</td>
     </tr>
 <tr>
 <td>–gcr-stdout</td>
-      <td>Optional: Reports the full stdout (stdout of the command called is normally trimmed to gcr-stdout-buffer-size lines</td>
+      <td>Optional: Reports the full stdout as metadata (stdout of the command called is normally trimmed to gcr-stdout-buffer-size lines</td>
     </tr>
 <tr>
 <td>–gcr-stdout-buffer-size</td>
-      <td>Used if gcr-stdout is not set. This sets the number of lines of stdout to report (Default is 10).</td>
+      <td>Optional: Used if gcr-stdout is not set. This sets the number of lines of stdout to report as metadata (Default is 10).</td>
     </tr>
 </tbody>
 </table>
@@ -123,6 +135,10 @@ This is a simple metadata saver.</p>
       <th>Description</th>
     </tr></thead>
 <tbody>
+<tr>
+<td>–[arguments]</td>
+      <td> </td>
+    </tr>
 <tr>
 <td>–gms-algorithm</td>
       <td>You can pass in an algorithm name that will be recorded in the metadb if you are writing back to the metadb.</td>
@@ -149,6 +165,10 @@ This is a simple metadata saver.</p>
     </tr></thead>
 <tbody>
 <tr>
+<td>–[arguments]</td>
+      <td> </td>
+    </tr>
+<tr>
 <td>–i, –input-file</td>
       <td>Required: input file, multiple should be specified seperately</td>
     </tr>
@@ -170,8 +190,16 @@ This is a simple metadata saver.</p>
     </tr></thead>
 <tbody>
 <tr>
+<td>–[arguments]</td>
+      <td> </td>
+    </tr>
+<tr>
 <td>–a, –algorithm</td>
       <td>Optional: by default the algorithm is ‘ProvisionFiles’ but you can override here if you like.</td>
+    </tr>
+<tr>
+<td>–annotation-file</td>
+      <td>Specify this option to create annotations on the processing event that is created describing this command.</td>
     </tr>
 <tr>
 <td>–d, –decrypt-key</td>
@@ -259,6 +287,10 @@ This is a simple metadata saver.</p>
     </tr></thead>
 <tbody>
 <tr>
+<td>–[arguments]</td>
+      <td> </td>
+    </tr>
+<tr>
 <td>–a, –all-files</td>
       <td>Optional: if specified, the –s3-url should take the form s3://<bucket>. This option indicates all files in that bucket should have URLs created.</bucket>
 </td>
@@ -286,6 +318,10 @@ This is a simple metadata saver.</p>
     </tr></thead>
 <tbody>
 <tr>
+<td>–[arguments]</td>
+      <td> </td>
+    </tr>
+<tr>
 <td>–f, –s3-url-file</td>
       <td>Optional: a file containing one URL per line of the form s3://<bucket>/<path>/<file></file></path></bucket>
 </td>
@@ -308,6 +344,10 @@ This is a simple metadata saver.</p>
       <th>Description</th>
     </tr></thead>
 <tbody>
+<tr>
+<td>–[arguments]</td>
+      <td> </td>
+    </tr>
 <tr>
 <td>–in-bytes</td>
       <td>Optional: flag, if set values print in bytes rather than human friendsly</td>
@@ -346,6 +386,10 @@ This is a simple metadata saver.</p>
       <th>Description</th>
     </tr></thead>
 <tbody>
+<tr>
+<td>–[arguments]</td>
+      <td> </td>
+    </tr>
 <tr>
 <td>–b, –output-bucket</td>
       <td>Required: the output bucket name in S3</td>

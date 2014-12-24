@@ -122,9 +122,8 @@ Please make sure you are using the latest version, when we post a new one we
 will tweet about it so consider following us on Twitter.</p>
 
 <ul>
-<li><a href="https://s3.amazonaws.com/oicr.vm/public/Seqware_1.0.13_Bindle_1.2_pre-release.ova">SeqWare-1.0.13.ova</a></li>
+<li><a href="https://s3.amazonaws.com/oicr.vm/public/seqware_1.1.0-beta.0.ova">SeqWare_1.1.0-beta.0.ova</a></li>
 <li><a href="https://s3.amazonaws.com/oicr.vm/public/Seqware_1.0.13_Bindle_1.2.1.ova">SeqWare-1.0.13.ova (this is the VM we recommend for the ICGC PanCancer project for data train 2.0)</a></li>
-<li><a href="https://s3.amazonaws.com/oicr.vm/public/Seqware_1.0.18_Bindle_1.2.1_pre-release.ova">SeqWare-1.0.18.ova</a></li>
 </ul>
 <p>Open VirtualBox and use the &#8220;Import Appliance&#8221; tool to create a new SeqWare VM
 on your system. Make sure you set the memory to the max you can afford, I
@@ -160,6 +159,7 @@ makes use of various virtualization extensions which most modern PCs support
 <p>By default the VM will open port 2222 for ssh. You can connect to the running VM from an external console using the following command:</p>
 
 <pre><code>sshpass -p 'vagrant' ssh -p 2222 vagrant@localhost
+sudo -u seqware -i
 </code></pre>
 
 <p class="warning"><strong>Note:</strong>
@@ -232,19 +232,16 @@ subject to change so we refer to Amazon&#8217;s thorough
 <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts.html">this</a> guide
 should be very helpful in learning how to use Linux VMs on Amazon&#8217;s cloud.</p>
 
-<div class="section" id="stable-public-ami-s">
-<h4>Stable Public AMI(s):</h4>
+<div class="section" id="unstable-public-ami-s">
+<h4>Unstable Public AMI(s):</h4>
 
 <ul>
 <li>
-<strong> ami-90da15f8 </strong>
-: 20140718 (SeqWare-1.0.18, Bindle 1.2.1 pre-release) Make sure you launch in Virginia and select the instance type &#8220;m1.xlarge&#8221; since the AMI is designed specifically to work with this type.</li>
+<strong> ami-c82c80bf </strong>
+: 20141015 (SeqWare-1.1.0-alpha.4, Bindle 2.0-alpha.1 (d)) Make sure you launch in Ireland and select the instance type &#8220;m3.2xlarge&#8221; since the AMI is designed specifically to work with this type (we configure SGE based on the CPU and memory of this instance).</li>
 <li>
-<strong> ami-80af40e8 </strong>
-: 20140514 (SeqWare-1.0.13, Bindle 1.2 pre-release) Make sure you launch in Virginia and select the instance type &#8220;m1.xlarge&#8221; since the AMI is designed specifically to work with this type (we use the local disks provided by this instance).</li>
-<li>
-<strong> ami-b1e9f4d8 DEPRECATED</strong>
-: 20140409 (SeqWare-1.0.13, Bindle 1.2 pre-release) Make sure you launch in Virginia and select the instance type &#8220;m1.xlarge&#8221; since the AMI is designed specifically to work with this type (we use the local disks provided by this instance).</li>
+<strong> ami-c8e55da0 </strong>
+: 20141015 (SeqWare-1.1.0-alpha.4, Bindle 2.0-alpha.1 (d)) Make sure you launch in Virginia and select the instance type &#8220;m1.xlarge&#8221; since the AMI is designed specifically to work with this type (we configure SGE based on the CPU and memory of this instance).</li>
 </ul>
 <p>An example of the launching wizard in the Amazon AWS console can be seen below:</p>
 

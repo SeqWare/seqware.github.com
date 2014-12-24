@@ -95,7 +95,7 @@ approach on MacOS (or even another version of Linux).</p>
 <div class="section" id="java">
 <h3>Java</h3>
 
-<p>SeqWare requires Oracle JDK 1.6 or greater, we primarily write and test with JDK 1.6.x.
+<p>SeqWare requires Oracle JDK 1.7 or greater, we primarily write and test with JDK 1.7.x.
 An example of instructions on how to update your Linux installation can be found <a href="https://ccp.cloudera.com/display/CDH4DOC/Before+You+Install+CDH4+on+a+Single+Node#BeforeYouInstallCDH4onaSingleNode-InstalltheOracleJavaDevelopmentKit">here</a>. You will need to use the method appropriate to your distribution to install this.</p>
 
 </div>
@@ -164,7 +164,7 @@ you build without running any tests in the trunk directory:</p>
 <pre><code>mvn clean install -DskipITs=false -P extITs,embeddedTomcat
 </code></pre>
 
-<p>(runs all unit tests and all integration tests including those that require Condor/Globus/Pegasus)</p>
+<p>(runs all unit tests and all integration tests including those that require Oozie)</p>
 
 <p>In the last case, the extended integration tests profile is used to trigger integration tests that run our command line utilities.
 In order to point your command-line tools at the web service brought up by the integration tests, you will need to comment out your crontab and modify your SeqWare ~/.seqware/settings to include:</p>
@@ -216,22 +216,21 @@ mvn clean install
 <div class="section" id="building-our-site">
 <h3>Building Our Site</h3>
 
-<p>In order to publish to legacy.seqware.github.com, checkout our current master and publish our site:</p>
+<p>In order to publish to seqware.io , checkout our current master and publish our site:</p>
 
 <pre><code>git checkout master 
-cd seqware-distribution 
 mvn site-deploy
 </code></pre>
 
-<p>Then you would look at the site at: http://seqware.github.io/legacy.seqware.github.com/</p>
+<p>Then you would look at the site at: http://seqware.io</p>
 
-<p>In order to publish to our current docs supporting the 1.0.x, checkout from develop and publish:</p>
+<p>In order to publish our docs leading up to 1.1.x , checkout from develop and publish:</p>
 
 <pre><code>git checkout develop 
 mvn site-deploy
 </code></pre>
 
-<p>Then you would look at the site at: http://seqware.github.io</p>
+<p>Then you would look at the site at: http://seqware.github.io/unstable.seqware.io/</p>
 
 </div>
 <div class="section" id="problems-with-maven">
@@ -242,6 +241,12 @@ and broken packages. A lot of the time this is an issue with Maven, try
 deleting your ~/.m2 directory and running the build process again.</p>
 
 </div>
+</div>
+<div class="section" id="citations">
+<h2>Citations</h2>
+
+<p>Browse DOI codes for SeqWare and related software for software engineering at OICR at <a href="https://zenodo.org/collection/user-softeng-at-oicr">Software Engineering at Zenodo</a></p>
+
 </div>
 <div class="section" id="installing">
 <h2>Installing</h2>

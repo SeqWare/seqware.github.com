@@ -172,6 +172,8 @@ for this file using the following:</p>
 <code>sqw.timestamp</code>: the current number of milliseconds since January 1, 1970.</li>
   <li>
 <code>sqw.uuid</code>: a randomly generated <a href="http://en.wikipedia.org/wiki/Universally_unique_identifier#Version_4_.28random.29">universally unique identifier</a>.</li>
+  <li>
+<code>sqw.bundle-seqware-version</code>: the version of seqware that this workflow was built with. You should not have to use this often, but it may be useful if you want to trigger different behaviour based on a version of seqware.</li>
 </ul>
 <p>Each instance of the above <code>sqw.*</code> variables in an ini file will be replaced with a separately resolved value, e.g., multiple instances of <code>${sqw.uuid}</code> will each resolve to different values. If you desire to reuse the same generated value, do somthing akin to the following:</p>
 

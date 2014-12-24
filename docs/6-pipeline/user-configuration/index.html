@@ -32,7 +32,6 @@
 <a href="../"><span>SeqWare Pipeline</span></a><ol class="toc">
 <li><a href="#overview">Overview</a></li>
 <li><a href="#oozie-workflow-engine-configuration">Oozie Workflow Engine Configuration</a></li>
-<li><a href="#pegasus-workflow-engine-configuration">Pegasus Workflow Engine Configuration</a></li>
 </ol>
 </li>
 <li><a href="../../4-metadb/"><span>SeqWare MetaDB</span></a></li>
@@ -98,89 +97,132 @@ Our tools will abort and refuse to run if this is not set. </p>
 <span class="c1"># Administrators need COMMON, DELETION, and INSTALL.</span>
 <span class="c1"># Cronjobs/daemon processes will need COMMON and LAUNCH.</span>
 
+<span class="c1"># Keys that are required for a typical Oozie-sge installation with metadata via web service are marked as required.</span>
+
+<span class="c1"># Note that this document was auto-generated using the UserSettingsPlugin</span>
+
 
 <span class="c1"># COMMON</span>
+<span class="c1"># Common Seqware settings</span>
 
-<span class="c1"># SeqWare MetaDB communication method, can be 'database' or 'webservice' or 'none'</span>
+<span class="c1"># required: SeqWare MetaDB communication method, can be 'database' or 'webservice' or 'inmemory' or 'none'</span>
 <span class="na">SW_METADATA_METHOD</span><span class="o">=</span><span class="s">webservice</span>
-
-<span class="c1"># SeqWare webservice settings. Only used if SW_METADATA_METHOD=webservice</span>
-<span class="na">SW_REST_URL</span><span class="o">=</span><span class="s">http://localhost:8080/SeqWareWebService</span>
-<span class="na">SW_REST_USER</span><span class="o">=</span><span class="s">admin@admin.com</span>
-<span class="na">SW_REST_PASS</span><span class="o">=</span><span class="s">admin</span>
-
-<span class="c1"># SeqWare database settings. Only used if SW_METADATA_METHOD=database and by the database check utility</span>
-<span class="na">SW_DB_USER</span><span class="o">=</span><span class="s">seqware</span>
-<span class="na">SW_DB_PASS</span><span class="o">=</span><span class="s">seqware</span>
-<span class="na">SW_DB_SERVER</span><span class="o">=</span><span class="s">localhost</span>
-<span class="na">SW_DB</span><span class="o">=</span><span class="s">seqware_meta_db</span>
-
-<span class="c1"># Amazon cloud settings. Only used if reading and writing to S3 buckets.</span>
+<span class="c1"># optional: Amazon cloud settings. Only used if reading and writing to S3 buckets.</span>
 <span class="na">AWS_ACCESS_KEY</span><span class="o">=</span><span class="s">FILLMEIN</span>
+<span class="c1"># optional: Amazon cloud settings. Only used if reading and writing to S3 buckets.</span>
 <span class="na">AWS_SECRET_KEY</span><span class="o">=</span><span class="s">FILLMEIN</span>
 
+<span class="c1"># COMMON_WS</span>
+<span class="c1"># Seqware webservice settings. Only used if SW_METADATA_METHOD=webservice</span>
 
-<span class="c1"># SCHEDULE, LAUNCH</span>
+<span class="c1"># required: Specify the URL for the seqware-webservice</span>
+<span class="na">SW_REST_URL</span><span class="o">=</span><span class="s">http://localhost:8080/SeqWareWebService</span>
+<span class="c1"># required: Specify the username for the seqware-webservice</span>
+<span class="na">SW_REST_USER</span><span class="o">=</span><span class="s">admin</span>
+<span class="c1"># required: Specify the password for the seqware-webservice</span>
+<span class="na">SW_REST_PASS</span><span class="o">=</span><span class="s">admin@admin.com</span>
 
-<span class="c1"># the default engine to use if otherwise unspecified (one of: oozie, oozie-sge, pegasus)</span>
-<span class="na">SW_DEFAULT_WORKFLOW_ENGINE</span><span class="o">=</span><span class="s">oozie</span>
+<span class="c1"># COMMON_DB</span>
+<span class="c1"># Seqware database settings. Only used if SW_METADATA_METHOD=database and by the database check utility</span>
 
+<span class="c1"># optional: JDBC user for the seqware metadb</span>
+<span class="na">SW_DB_USER</span><span class="o">=</span><span class="s">seqware</span>
+<span class="c1"># optional: JDBC password for the seqware metadb</span>
+<span class="na">SW_DB_PASS</span><span class="o">=</span><span class="s">seqware</span>
+<span class="c1"># optional: Host for the metadb</span>
+<span class="na">SW_DB_SERVER</span><span class="o">=</span><span class="s">localhost</span>
+<span class="c1"># optional: database name</span>
+<span class="na">SW_DB</span><span class="o">=</span><span class="s">seqware_meta_db</span>
 
-<span class="c1"># INSTALL, LAUNCH</span>
+<span class="c1"># SCHEDULE_LAUNCH</span>
+<span class="c1"># Settings used by scheduling and launching bundles</span>
 
-<span class="c1"># The directory containing bundle directories (into which bundle archives are unzipped)</span>
+<span class="c1"># required: the default engine to use if otherwise unspecified (one of: oozie, oozie-sge, whitestar, whitestar-parallel, whitestar-sge)</span>
+<span class="na">SW_DEFAULT_WORKFLOW_ENGINE</span><span class="o">=</span><span class="s">oozie-sge</span>
+
+<span class="c1"># INSTALL_LAUNCH</span>
+<span class="c1"># Settings used by both installing and launching bundles</span>
+
+<span class="c1"># required: The directory containing bundle directories (into which bundle archives are unzipped)</span>
 <span class="na">SW_BUNDLE_DIR</span><span class="o">=</span><span class="s">/home/seqware/SeqWare/provisioned-bundles</span>
 
-
 <span class="c1"># INSTALL</span>
+<span class="c1"># Settings used to configure the installation of workflow bundles</span>
 
-<span class="c1"># The directory containing bundle archives (into which a bundle archive is first copied during install)</span>
+<span class="c1"># required: The directory containing bundle archives (into which a bundle archive is first copied during install)</span>
 <span class="na">SW_BUNDLE_REPO_DIR</span><span class="o">=</span><span class="s">/home/seqware/SeqWare/released-bundles</span>
-<span class="c1"># Default is to use compression, this can be set to OFF to disable compression</span>
+<span class="c1"># optional: Default is to use compression, this can be set to OFF to disable compression</span>
 <span class="na">BUNDLE_COMPRESSION</span><span class="o">=</span><span class="s">ON</span>
 
 <span class="c1"># LAUNCH</span>
-
 <span class="c1"># Oozie engine settings. Only used for both 'oozie' and 'oozie-sge' engines.</span>
+
+<span class="c1"># required: URL for the Oozie webservice</span>
 <span class="na">OOZIE_URL</span><span class="o">=</span><span class="s">http://localhost:11000/oozie</span>
+<span class="c1"># required: HDFS directory for storing workflow xml</span>
 <span class="na">OOZIE_APP_ROOT</span><span class="o">=</span><span class="s">seqware_workflow</span>
-<span class="na">OOZIE_APP_PATH</span><span class="o">=</span><span class="s">hdfs://localhost:8020/user/seqware/</span>
+<span class="c1"># required: Hadoop job tracker, used to schedule jobs for oozie-hadoop engine</span>
 <span class="na">OOZIE_JOBTRACKER</span><span class="o">=</span><span class="s">localhost:8021</span>
+<span class="c1"># required: Hadoop name node, possibly redundant (should be refactored)</span>
 <span class="na">OOZIE_NAMENODE</span><span class="o">=</span><span class="s">hdfs://localhost:8020</span>
+<span class="c1"># required: Hadoop queue onto which to schedule jobs</span>
 <span class="na">OOZIE_QUEUENAME</span><span class="o">=</span><span class="s">default</span>
+<span class="c1"># required: Working directory where your workflow steps execute and where we store generated scripts and logs</span>
 <span class="na">OOZIE_WORK_DIR</span><span class="o">=</span><span class="s">/usr/tmp/seqware-oozie</span>
-
-<span class="c1"># Number of times that Oozie will retry user steps in workflows</span>
+<span class="c1"># optional: Number of times that Oozie will retry user steps in workflows</span>
 <span class="na">OOZIE_RETRY_MAX</span><span class="o">=</span><span class="s">5</span>
-<span class="c1"># Minutes to wait before retry for user steps in workflows</span>
+<span class="c1"># optional: Minutes to wait before retry for user steps in workflows</span>
 <span class="na">OOZIE_RETRY_INTERVAL</span><span class="o">=</span><span class="s">5</span>
-<span class="c1"># Above this threshold, provision file events on the same job/workflow will be batched together  </span>
+<span class="c1"># optional: Above this threshold, provision file events on the same job/workflow will be batched together</span>
 <span class="na">OOZIE_BATCH_THRESHOLD</span><span class="o">=</span><span class="s">10</span>
-<span class="c1"># Number of provision file events that should be batched together</span>
+<span class="c1"># optional: Number of provision file events that should be batched together</span>
 <span class="na">OOZIE_BATCH_SIZE</span><span class="o">=</span><span class="s">100</span>
-
-<span class="na">MAPRED.JOB.TRACKER</span><span class="o">=</span><span class="s">localhost:8021</span>
-<span class="na">FS.DEFAULTFS</span><span class="o">=</span><span class="s">hdfs://localhost:8020</span>
+<span class="c1"># required: HDFS implementation class</span>
 <span class="na">FS.HDFS.IMPL</span><span class="o">=</span><span class="s">org.apache.hadoop.hdfs.DistributedFileSystem</span>
-
-<span class="c1"># Oozie-SGE engine settings. Only used for 'oozie-sge' engine.</span>
-<span class="c1">## Format of qsub flag for specifying number of threads.</span>
-<span class="c1">## If present, ${threads} will be replaced with the job-specific value.</span>
+<span class="c1"># optional: Only used for 'oozie-sge' engine. Format of qsub flag for specifying number of threads. If present, ${threads} will be replaced with the job-specific value.</span>
 <span class="na">OOZIE_SGE_THREADS_PARAM_FORMAT</span><span class="o">=</span><span class="s">-pe serial ${threads}</span>
-<span class="c1">## Format of qsub flag for specifying the max memory.</span>
-<span class="c1">## If present, ${maxMemory} will be replaced with the job-specific value.</span>
+<span class="c1"># required: Format of qsub flag for specifying the max memory. If present, ${maxMemory} will be replaced with the job-specific value.</span>
 <span class="na">OOZIE_SGE_MAX_MEMORY_PARAM_FORMAT</span><span class="o">=</span><span class="s">-l h_vmem=${maxMemory}M</span>
 
-<span class="c1"># Pegasus engine settings.  Only used for 'pegasus' engine.</span>
-<span class="c1">## the name of the cluster as defined in the Pegasus sites.xml config file</span>
-<span class="na">SW_CLUSTER</span><span class="o">=</span><span class="s">seqwarevm</span>
-<span class="c1">## the directory used to store the generated DAX workflow documents before submission to the cluster</span>
-<span class="na">SW_DAX_DIR</span><span class="o">=</span><span class="s">/home/seqware/SeqWare/pegasus-dax</span>
-<span class="c1">## the directory containing all the Pegasus config files this instance of SeqWare should use</span>
-<span class="na">SW_PEGASUS_CONFIG_DIR</span><span class="o">=</span><span class="s">/home/seqware/.seqware/pegasus</span>
+<span class="c1"># ADMIN</span>
+<span class="c1"># Settings used for administrators</span>
 
-<span class="c1">#DELETION</span>
-<span class="na">SW_ADMIN_REST_URL</span><span class="o">=</span><span class="s">http://localhost:38080/seqware-admin-webservice</span></code></pre>
+<span class="c1"># optional: In atypical environments, the default h_vmem constraint for SGE is too stringent. Override them using this (units in megabytes)</span>
+<span class="na">SW_CONTROL_NODE_MEMORY</span><span class="o">=</span><span class="s">3000</span>
+<span class="c1"># optional: Location of the admin web service, currently used for deletion</span>
+<span class="na">SW_ADMIN_REST_URL</span><span class="o">=</span><span class="s">http://localhost:38080/seqware-admin-webservice</span>
+<span class="c1"># optional: Used to override the JUnique lock used to ensure that utilities don't run concurrently</span>
+<span class="na">SW_LOCK_ID</span><span class="o">=</span><span class="s">seqware</span>
+<span class="c1"># optional: Legacy key used to encrypt provisioned files</span>
+<span class="na">SW_ENCRYPT_KEY</span><span class="o">=</span><span class="s">seqware</span>
+<span class="c1"># optional: Legacy key used to decrypt provisioned files</span>
+<span class="na">SW_DECRYPT_KEY</span><span class="o">=</span><span class="s">seqware</span>
+
+<span class="c1"># LAUNCH</span>
+<span class="c1"># Oozie engine settings. Only used for both 'oozie' and 'oozie-sge' engines.</span>
+
+<span class="c1"># optional: Used to determine whether provisioned (out) files should be run through MD5 before and after provisioning</span>
+<span class="na">SW_PROVISION_FILES_MD5</span><span class="o">=</span><span class="s">true</span>
+
+<span class="c1"># TESTING</span>
+<span class="c1"># Used for regression testing</span>
+
+<span class="c1"># optional: Used to designate a database for integration tests</span>
+<span class="na">BASIC_TEST_DB_HOST</span><span class="o">=</span><span class="s">localhost</span>
+<span class="c1"># optional: Used to designate a database name for integration tests</span>
+<span class="na">BASIC_TEST_DB_NAME</span><span class="o">=</span><span class="s">seqware_meta_db</span>
+<span class="c1"># optional: Used to designate a database username for integration tests</span>
+<span class="na">BASIC_TEST_DB_USER</span><span class="o">=</span><span class="s">seqware</span>
+<span class="c1"># optional: Used to designate a database password for integration tests</span>
+<span class="na">BASIC_TEST_DB_PASSWORD</span><span class="o">=</span><span class="s">seqware</span>
+<span class="c1"># optional: Used to designate a database for extended integration tests</span>
+<span class="na">EXTENDED_TEST_DB_HOST</span><span class="o">=</span><span class="s">localhost</span>
+<span class="c1"># optional: Used to designate a database name for extended integration tests</span>
+<span class="na">EXTENDED_TEST_DB_NAME</span><span class="o">=</span><span class="s">seqware_meta_db</span>
+<span class="c1"># optional: Used to designate a database username for extended integration tests</span>
+<span class="na">EXTENDED_TEST_DB_USER</span><span class="o">=</span><span class="s">seqware</span>
+<span class="c1"># optional: Used to designate a database password for extended integration tests</span>
+<span class="na">EXTENDED_TEST_DB_PASSWORD</span><span class="o">=</span><span class="s">seqware</span></code></pre>
 
 </div>
 <div class="section" id="oozie-workflow-engine-configuration">
@@ -204,119 +246,105 @@ that should be made before a job is considered failed in a workflow. </p>
 
 <p>After restarting Oozie, Oozie will use the listed error codes in combination with the OOZIE_RETRY_MAX parameter to determine how many times steps will 
 be retried in case of a specific error. For example, in the above jobs that return with an SGE error code of SGE137 will automatically be retried 30 or 
-OOZIE_RETRY_MAX times, whatever is higher. </p>
+OOZIE_RETRY_MAX times, whatever is higher. The actual error codes will likely be dependent on your site. </p>
 
-</div>
-<div class="section" id="pegasus-workflow-engine-configuration">
-<h2>Pegasus Workflow Engine Configuration</h2>
+<p>For versions of the oozie-sge plugin from 1.0.3 onwards, two kinds of error codes are possible. Error codes of the form SGE[0-9]+ refer to the exit status of the actual Bash scripts that form steps in your workflows. Error codes of the form SGEF[0-9]+ refer to the failure code of the SGE infrastructure itself. </p>
 
-<p>The SeqWare Pipeline project can (currently) use two workflow engines: 1) the Pegasus/Condor/Globus/SGE engine or 2) the Oozie/Hadoop engine. Each requires a bit of additional information to make them work (and, obviously, the underlying cluster tools correctly installed and configured).  For the Pegasus engine you need a few extra files, referenced by the SW_PEGASUS_CONFIG_DIR parameter above:</p>
+<p>For example, the following output from “qacct -j” refers to a workflow step which failed with an error code of 1 (which would correspond to SGE1 for the Oozie XML parameter above). </p>
 
-<div class="section" id="sites-xml3">
-<h3>sites.xml3</h3>
+<pre><code>$ qacct -j 3702
+==============================================================
+qname        main.q              
+hostname     master           
+group        seqware               
+owner        seqware               
+project      NONE                
+department   defaultdepartment   
+jobname      annotate_5          
+jobnumber    3702                
+taskid       undefined
+account      sge                 
+priority     0                   
+qsub_time    Fri Aug 29 16:40:08 2014
+start_time   Fri Aug 29 16:40:20 2014
+end_time     Fri Aug 29 16:40:21 2014
+granted_pe   NONE                
+slots        1                   
+failed       0    
+exit_status  1                   
+ru_wallclock 1            
+ru_utime     1.468        
+ru_stime     0.072        
+ru_maxrss    112212              
+ru_ixrss     0                   
+ru_ismrss    0                   
+ru_idrss     0                   
+ru_isrss     0                   
+ru_minflt    42375               
+ru_majflt    0                   
+ru_nswap     0                   
+ru_inblock   0                   
+ru_oublock   168                 
+ru_msgsnd    0                   
+ru_msgrcv    0                   
+ru_nsignals  0                   
+ru_nvcsw     726                 
+ru_nivcsw    269                 
+cpu          1.540        
+mem          0.306             
+io           0.006             
+iow          0.000             
+maxvmem      557.734M
+arid         undefined
+</code></pre>
 
-<!-- see http://www.opinionatedgeek.com/DotNet/Tools/HTMLEncode/encode.aspx -->
+<p>The following output from “qacct -j” refers to a workflow step where the actual qsub failed since a logging directory was unavailable (leading to a Eqw state). This would correspond to an Oozie error code of SGEF26. </p>
 
-<pre><code class="language-xml"><span class="nt">&lt;sitecatalog</span> <span class="na">xmlns=</span><span class="s">"http://pegasus.isi.edu/schema/sitecatalog"</span> <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span> <span class="na">xsi:schemaLocation=</span><span class="s">"http://pegasus.isi.edu/schema/sitecatalog http://pegasus.isi.edu/schema/sc-3.0.xsd"</span> <span class="na">version=</span><span class="s">"3.0"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;site</span>  <span class="na">handle=</span><span class="s">"local"</span> <span class="na">arch=</span><span class="s">"x86_64"</span> <span class="na">os=</span><span class="s">"LINUX"</span> <span class="na">osrelease=</span><span class="s">""</span> <span class="na">osversion=</span><span class="s">""</span> <span class="na">glibc=</span><span class="s">""</span><span class="nt">&gt;</span>
-                <span class="nt">&lt;grid</span>  <span class="na">type=</span><span class="s">"gt5"</span> <span class="na">contact=</span><span class="s">"seqwarevm/jobmanager-fork"</span> <span class="na">scheduler=</span><span class="s">"Fork"</span> <span class="na">jobtype=</span><span class="s">"auxillary"</span><span class="nt">/&gt;</span>
-                <span class="nt">&lt;grid</span>  <span class="na">type=</span><span class="s">"gt5"</span> <span class="na">contact=</span><span class="s">"seqwarevm/jobmanager-sge"</span> <span class="na">scheduler=</span><span class="s">"SGE"</span> <span class="na">jobtype=</span><span class="s">"compute"</span><span class="nt">/&gt;</span>
-                <span class="nt">&lt;head-fs&gt;</span>
-                        <span class="nt">&lt;scratch&gt;</span>
-                                <span class="nt">&lt;shared&gt;</span>
-                                        <span class="nt">&lt;file-server</span> <span class="na">protocol=</span><span class="s">"gsiftp"</span> <span class="na">url=</span><span class="s">"gsiftp://seqwarevm"</span> <span class="na">mount-point=</span><span class="s">"/home/seqware/SeqWare/pegasus-working"</span><span class="nt">/&gt;</span>
-                                        <span class="nt">&lt;internal-mount-point</span> <span class="na">mount-point=</span><span class="s">"/home/seqware/SeqWare/pegasus-working"</span><span class="nt">/&gt;</span>
-                                <span class="nt">&lt;/shared&gt;</span>
-                        <span class="nt">&lt;/scratch&gt;</span>
-                        <span class="nt">&lt;storage&gt;</span>
-                                <span class="nt">&lt;shared&gt;</span>
-                                        <span class="nt">&lt;file-server</span> <span class="na">protocol=</span><span class="s">"gsiftp"</span> <span class="na">url=</span><span class="s">"gsiftp://seqwarevm"</span> <span class="na">mount-point=</span><span class="s">"/"</span><span class="nt">/&gt;</span>
-                                        <span class="nt">&lt;internal-mount-point</span> <span class="na">mount-point=</span><span class="s">"/"</span><span class="nt">/&gt;</span>
-                                <span class="nt">&lt;/shared&gt;</span>
-                        <span class="nt">&lt;/storage&gt;</span>
-                <span class="nt">&lt;/head-fs&gt;</span>
-                <span class="nt">&lt;replica-catalog</span>  <span class="na">type=</span><span class="s">"LRC"</span> <span class="na">url=</span><span class="s">"rlsn://smarty.isi.edu"</span><span class="nt">/&gt;</span>
-                <span class="nt">&lt;profile</span> <span class="na">namespace=</span><span class="s">"env"</span> <span class="na">key=</span><span class="s">"GLOBUS_LOCATION"</span><span class="nt">&gt;</span>/usr<span class="nt">&lt;/profile&gt;</span>
-                <span class="nt">&lt;profile</span> <span class="na">namespace=</span><span class="s">"env"</span> <span class="na">key=</span><span class="s">"JAVA_HOME"</span><span class="nt">&gt;</span>/usr/java/default<span class="nt">&lt;/profile&gt;</span>
-                <span class="c">&lt;!--profile namespace="env" key="LD_LIBRARY_PATH"&gt;/.mounts/labs/seqware/public/globus/default/lib&lt;/profile--&gt;</span>
-                <span class="nt">&lt;profile</span> <span class="na">namespace=</span><span class="s">"env"</span> <span class="na">key=</span><span class="s">"PEGASUS_HOME"</span><span class="nt">&gt;</span>/opt/pegasus/3.0<span class="nt">&lt;/profile&gt;</span>
-        <span class="nt">&lt;/site&gt;</span>
-        <span class="nt">&lt;site</span>  <span class="na">handle=</span><span class="s">"seqwarevm"</span> <span class="na">arch=</span><span class="s">"x86_64"</span> <span class="na">os=</span><span class="s">"LINUX"</span> <span class="na">osrelease=</span><span class="s">""</span> <span class="na">osversion=</span><span class="s">""</span> <span class="na">glibc=</span><span class="s">""</span><span class="nt">&gt;</span>
-                <span class="nt">&lt;grid</span>  <span class="na">type=</span><span class="s">"gt5"</span> <span class="na">contact=</span><span class="s">"seqwarevm/jobmanager-fork"</span> <span class="na">scheduler=</span><span class="s">"Fork"</span> <span class="na">jobtype=</span><span class="s">"auxillary"</span><span class="nt">/&gt;</span>
-                <span class="nt">&lt;grid</span>  <span class="na">type=</span><span class="s">"gt5"</span> <span class="na">contact=</span><span class="s">"seqwarevm/jobmanager-sge"</span> <span class="na">scheduler=</span><span class="s">"SGE"</span> <span class="na">jobtype=</span><span class="s">"compute"</span><span class="nt">/&gt;</span>
-                <span class="nt">&lt;head-fs&gt;</span>
-                        <span class="nt">&lt;scratch&gt;</span>
-                                <span class="nt">&lt;shared&gt;</span>
-                                        <span class="nt">&lt;file-server</span> <span class="na">protocol=</span><span class="s">"gsiftp"</span> <span class="na">url=</span><span class="s">"gsiftp://seqwarevm"</span> <span class="na">mount-point=</span><span class="s">"/home/seqware/SeqWare/pegasus-working"</span><span class="nt">/&gt;</span>
-                                        <span class="nt">&lt;internal-mount-point</span> <span class="na">mount-point=</span><span class="s">"/home/seqware/SeqWare/pegasus-working"</span><span class="nt">/&gt;</span>
-                                <span class="nt">&lt;/shared&gt;</span>
-                        <span class="nt">&lt;/scratch&gt;</span>
-                        <span class="nt">&lt;storage&gt;</span>
-                                <span class="nt">&lt;shared&gt;</span>
-                                        <span class="nt">&lt;file-server</span> <span class="na">protocol=</span><span class="s">"gsiftp"</span> <span class="na">url=</span><span class="s">"gsiftp://seqwarevm"</span> <span class="na">mount-point=</span><span class="s">"/"</span><span class="nt">/&gt;</span>
-                                        <span class="nt">&lt;internal-mount-point</span> <span class="na">mount-point=</span><span class="s">"/"</span><span class="nt">/&gt;</span>
-                                <span class="nt">&lt;/shared&gt;</span>
-                        <span class="nt">&lt;/storage&gt;</span>
-                <span class="nt">&lt;/head-fs&gt;</span>
-                <span class="nt">&lt;replica-catalog</span>  <span class="na">type=</span><span class="s">"LRC"</span> <span class="na">url=</span><span class="s">"rlsn://smarty.isi.edu"</span><span class="nt">/&gt;</span>
-                <span class="nt">&lt;profile</span> <span class="na">namespace=</span><span class="s">"env"</span> <span class="na">key=</span><span class="s">"GLOBUS_LOCATION"</span><span class="nt">&gt;</span>/usr<span class="nt">&lt;/profile&gt;</span>
-                <span class="nt">&lt;profile</span> <span class="na">namespace=</span><span class="s">"env"</span> <span class="na">key=</span><span class="s">"JAVA_HOME"</span><span class="nt">&gt;</span>/usr/java/default<span class="nt">&lt;/profile&gt;</span>
-                <span class="c">&lt;!--profile namespace="env" key="LD_LIBRARY_PATH"&gt;/.mounts/labs/seqware/public/globus/default/lib&lt;/profile--&gt;</span>
-                <span class="nt">&lt;profile</span> <span class="na">namespace=</span><span class="s">"env"</span> <span class="na">key=</span><span class="s">"PEGASUS_HOME"</span><span class="nt">&gt;</span>/opt/pegasus/3.0<span class="nt">&lt;/profile&gt;</span>
-        <span class="nt">&lt;/site&gt;</span>
-<span class="nt">&lt;/sitecatalog&gt;</span></code></pre>
-
-<p>This file is from Pegasus and the handle=”clustername” is how you tell SeqWare which cluster to submit to. The setup of cluster resources in the sites.xml3 file is beyond the scope of SeqWare so we refer you to the <a href="http://pegasus.isi.edu/">Pegasus documentation</a>.</p>
-
-</div>
-<div class="section" id="properties">
-<h3>properties</h3>
-
-<pre><code class="language-ini"><span class="c1">##########################</span>
-<span class="c1"># PEGASUS USER PROPERTIES</span>
-<span class="c1">##########################</span>
-
-<span class="c1">## SELECT THE REPLICA CATALOG MODE AND URL</span>
-<span class="na">pegasus.catalog.replica</span> <span class="o">=</span> <span class="s">SimpleFile</span>
-<span class="na">pegasus.catalog.replica.file</span> <span class="o">=</span> <span class="s">/home/seqware/.seqware/pegasus/rc.data</span>
-
-<span class="c1">## SELECT THE SITE CATALOG MODE AND FILE</span>
-<span class="na">pegasus.catalog.site</span> <span class="o">=</span> <span class="s">XML3</span>
-<span class="na">pegasus.catalog.site.file</span> <span class="o">=</span> <span class="s">/home/seqware/.seqware/pegasus/sites.xml3</span>
-
-
-<span class="c1">## SELECT THE TRANSFORMATION CATALOG MODE AND FILE</span>
-<span class="na">pegasus.catalog.transformation</span> <span class="o">=</span> <span class="s">File</span>
-<span class="na">pegasus.catalog.transformation.file</span> <span class="o">=</span> <span class="s">/home/seqware/.seqware/pegasus/tc.data</span>
-
-<span class="c1">## USE DAGMAN RETRY FEATURE FOR FAILURES</span>
-<span class="na">dagman.retry</span><span class="o">=</span><span class="s">1</span>
-
-<span class="c1">## STAGE ALL OUR EXECUTABLES OR USE INSTALLED ONES</span>
-<span class="na">pegasus.catalog.transformation.mapper</span> <span class="o">=</span> <span class="s">All</span>
-
-<span class="c1">## CHECK JOB EXIT CODES FOR FAILURE</span>
-<span class="na">pegasus.exitcode.scope</span><span class="o">=</span><span class="s">all</span>
-
-<span class="c1">## OPTIMIZE DATA &amp; EXECUTABLE TRANSFERS</span>
-<span class="na">pegasus.transfer.refiner</span><span class="o">=</span><span class="s">Bundle</span>
-<span class="na">pegasus.transfer.links</span> <span class="o">=</span> <span class="s">true</span>
-
-<span class="c1"># JOB Priorities</span>
-<span class="na">pegasus.job.priority</span><span class="o">=</span><span class="s">10</span>
-<span class="na">pegasus.transfer.*.priority</span><span class="o">=</span><span class="s">100</span>
-
-<span class="c1">#JOB CATEGORIES</span>
-<span class="na">pegasus.dagman.projection.maxjobs</span><span class="o">=</span><span class="s">2</span></code></pre>
-
-<p>The Pegasus properties file controls where the sites.xml3 file lives and a few
-other Pegasus parameters (our tc.data and rc.data files in SeqWare are empty).
-The most important parameter above is “dagman.retry=1” which controls how many
-attempts should be made before job is considered failed in a workflow.  In this
-example “1” means it should be retried once before failing.  There are other
-parameters that might be useful for Pegasus, see the <a href="http://pegasus.isi.edu/">Pegasus
-documentation</a> for more information.</p>
-</div>
+<pre><code>$ qacct -j 3801
+==============================================================
+qname        main.q              
+hostname     master           
+group        seqware               
+owner        seqware               
+project      NONE                
+department   defaultdepartment   
+jobname      start_0             
+jobnumber    3801                
+taskid       undefined
+account      sge                 
+priority     0                   
+qsub_time    Fri Sep 12 15:03:02 2014
+start_time   -/-
+end_time     -/-
+granted_pe   NONE                
+slots        1                   
+failed       26  : opening input/output file
+exit_status  0                   
+ru_wallclock 0            
+ru_utime     0.000        
+ru_stime     0.000        
+ru_maxrss    0                   
+ru_ixrss     0                   
+ru_ismrss    0                   
+ru_idrss     0                   
+ru_isrss     0                   
+ru_minflt    0                   
+ru_majflt    0                   
+ru_nswap     0                   
+ru_inblock   0                   
+ru_oublock   0                   
+ru_msgsnd    0                   
+ru_msgrcv    0                   
+ru_nsignals  0                   
+ru_nvcsw     0                   
+ru_nivcsw    0                   
+cpu          0.000        
+mem          0.000             
+io           0.000             
+iow          0.000             
+maxvmem      0.000
+arid         undefined
+</code></pre>
 </div>
 </div>
 <p> </p>
