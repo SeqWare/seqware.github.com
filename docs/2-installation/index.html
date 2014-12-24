@@ -111,7 +111,7 @@ tires, and see if this is something you want to use.</p>
 
 <p>Getting the local VM is a two-step process.  First, download (or install via
 your OS&#8217;s package management system) the VirtualBox application. This is a
-great piece of software that will let you run the SeqWare CentOS VM on whatever
+great piece of software that will let you run the SeqWare Ubuntu VM on whatever
 OS you currently have.</p>
 
 <ul>
@@ -129,7 +129,7 @@ will tweet about it so consider following us on Twitter.</p>
 on your system. Make sure you set the memory to the max you can afford, I
 recommend at least 12GB of memory for the VM.  You can then launch it and you
 will be presented with a fairly standard Linux desktop with links to the
-project&#8217;s documentation to give you an idea of where to begin (the &#8220;Getting
+project documentation to give you an idea of where to begin (the &#8220;Getting
 Started&#8221; guide here provides a walk-through of using this VM).</p>
 
 <p class="warning"><strong>Note:</strong>
@@ -154,7 +154,8 @@ makes use of various virtualization extensions which most modern PCs support
 <div class="section" id="logging-in">
 <h3>Logging In</h3>
 
-<p>The login username is <kbd>vagrant</kbd> and the password is <kbd>vagrant</kbd>. If you need to become <kbd>root</kbd> use <kbd>sudo bash</kbd>.</p>
+<p>The login username is <kbd>vagrant</kbd> and the password is <kbd>vagrant</kbd>. If you need to become <kbd>root</kbd> use <kbd>sudo bash</kbd>.
+You will initially login as the vagrant user and will then switch to the seqware user which has been setup with our utilities.</p>
 
 <p>By default the VM will open port 2222 for ssh. You can connect to the running VM from an external console using the following command:</p>
 
@@ -195,9 +196,9 @@ Instance</a>. These machines provide
 sufficient for analyzing a human exome within about 4 hours depending on the
 specifics of your workflows.</p>
 
-<p>For development purposes, we have also have had success with m1.xlarge
+<p>For development purposes, we have also have had success with m3.xlarge
 instances. For noninteractive build and integration tests, we have also had
-success with the m1.medium instance type. However, note that these instance
+success with the m3.medium instance type. However, note that these instance
 types are not recommended for production use.</p>
 
 <p>If you are interested in building complete clusters on the Amazon cloud please
@@ -223,7 +224,7 @@ Informatics or DNAnexus.</p>
 <div class="section" id="running-the-vm">
 <h3>Running the VM</h3>
 
-<p>What makes Amazon&#8217;s cloud so amazingly awesome is its excellent support for
+<p>What makes AWS EC2 so amazingly awesome is its excellent support for
 both graphical UIs and programmatic APIs for controlling the cloud.  It is your
 choice on how you want to launch the VM, either through the console or via one
 of the many command line and programmatic tools available. The details are
@@ -236,6 +237,9 @@ should be very helpful in learning how to use Linux VMs on Amazon&#8217;s cloud.
 <h4>Unstable Public AMI(s):</h4>
 
 <ul>
+<li>
+<strong> ami-9c6b05f4 </strong>
+: 20141223 (SeqWare-1.1.0-beta.0) Make sure you launch in Virginia and select the instance type &#8220;m3.xlarge&#8221; since the AMI is designed specifically to work with this type (we configure SGE based on the CPU and memory of this instance).</li>
 <li>
 <strong> ami-c82c80bf </strong>
 : 20141015 (SeqWare-1.1.0-alpha.4, Bindle 2.0-alpha.1 (d)) Make sure you launch in Ireland and select the instance type &#8220;m3.2xlarge&#8221; since the AMI is designed specifically to work with this type (we configure SGE based on the CPU and memory of this instance).</li>
@@ -250,6 +254,15 @@ should be very helpful in learning how to use Linux VMs on Amazon&#8217;s cloud.
 <p class="warning"><strong>Tip:</strong>Make sure you open port 22 for SSH, port 8080 for the SeqWare Portal and Web Service, and port 80 for our landing page that you can access at http://ec2hostname/, you fill in ec2hostname with the name of the server Amazon provisions for you.</p>
 
 
+
+
+<p class="warning"><strong>Note:</strong>
+Note that Amazon may attempt to mount an ephemeral disk &#8220;on top&#8221; of part of our installation. Either disable all ephermeral storage on the &#8220;Add storage&#8221; screen or run the following command when you first login. 
+
+sudo umount /mnt
+</p>
+
+
 </div>
 </div>
 <div class="section" id="logging-in">
@@ -259,7 +272,8 @@ should be very helpful in learning how to use Linux VMs on Amazon&#8217;s cloud.
 
 <p>Specifically, follow <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstancesLinux.html">this</a> Amazon guide for logging into your SeqWare instance using ssh.</p>
 
-<p>You will want to login as the &#8220;ubuntu&#8221; user and then use &#8220;sudo su - seqware&#8221; to become the SeqWare user and walk through the steps of the tutorials.</p>
+<p>You will want to login as the &#8220;ubuntu&#8221; user, use &#8220;sudo umount /mnt&#8221; to disable any ephemeral drives, and then use &#8220;sudo -u seqware -i&#8221; to become the SeqWare user and walk through the steps of the tutorials.
+dd</p>
 
 </div>
 <div class="section" id="what-can-you-do-with-it">
@@ -290,7 +304,7 @@ technology such as VirtualBox, OpenStack, Google Compute Engine, or Amazon Web
 Services.</p>
 
 
-<p>This option leverages the excellent <a href="http://www.vagrantup.com/">Vagrant</a></p>
+<p>Follow the instructions at <a href="https://github.com/CloudBindle/Bindle">Bindle</a>.</p>
 
 </div>
 <div class="section" id="next-steps">
