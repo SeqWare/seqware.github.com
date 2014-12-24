@@ -67,14 +67,14 @@
 
 <p>As described in our ‘Getting Started’ guide, you can create a HelloWorld workflow and use ‘seqware bundle launch’ to run a workflow using Oozie backed by Oozie-sge and with metadata. </p>
 
-<pre><code>$ seqware bundle launch --dir target/Workflow_Bundle_HelloWorld_1.0-SNAPSHOT_SeqWare_1.1.0-alpha.1/
+<pre><code>$ seqware bundle launch --dir target/Workflow_Bundle_HelloWorld_1.0-SNAPSHOT_SeqWare_1.1.0-beta.0/
 Performing launch of workflow 'HelloWorld' version '1.0-SNAPSHOT'
-[--plugin, net.sourceforge.seqware.pipeline.plugins.BundleManager, --, --install-dir-only, --bundle, target/Workflow_Bundle_HelloWorld_1.0-SNAPSHOT_SeqWare_1.1.0-alpha.1/, --out, /tmp/bundle_manager3283774875907860918out]
+[--plugin, net.sourceforge.seqware.pipeline.plugins.BundleManager, --, --install-dir-only, --bundle, target/Workflow_Bundle_HelloWorld_1.0-SNAPSHOT_SeqWare_1.1.0-beta.0/, --out, /tmp/bundle_manager3283774875907860918out]
 Installing Bundle (Working Directory Only)
-Bundle: target/Workflow_Bundle_HelloWorld_1.0-SNAPSHOT_SeqWare_1.1.0-alpha.1/
+Bundle: target/Workflow_Bundle_HelloWorld_1.0-SNAPSHOT_SeqWare_1.1.0-beta.0/
 Added 'HelloWorld' (SWID: 6709)
-Bundle Has Been Installed to the MetaDB and Provisioned to target/Workflow_Bundle_HelloWorld_1.0-SNAPSHOT_SeqWare_1.1.0-alpha.1/!
-[--plugin, io.seqware.pipeline.plugins.WorkflowScheduler, --, --workflow-accession, 6709, --host, odl-dyuen, --out, /tmp/scheduler851239179059254818out, --i, /home/dyuen/workflow-dev/HelloWorld/target/Workflow_Bundle_HelloWorld_1.0-SNAPSHOT_SeqWare_1.1.0-alpha.1/Workflow_Bundle_HelloWorld/1.0-SNAPSHOT/config/HelloWorldWorkflow.ini]
+Bundle Has Been Installed to the MetaDB and Provisioned to target/Workflow_Bundle_HelloWorld_1.0-SNAPSHOT_SeqWare_1.1.0-beta.0/!
+[--plugin, io.seqware.pipeline.plugins.WorkflowScheduler, --, --workflow-accession, 6709, --host, odl-dyuen, --out, /tmp/scheduler851239179059254818out, --i, /home/dyuen/workflow-dev/HelloWorld/target/Workflow_Bundle_HelloWorld_1.0-SNAPSHOT_SeqWare_1.1.0-beta.0/Workflow_Bundle_HelloWorld/1.0-SNAPSHOT/config/HelloWorldWorkflow.ini]
 Created workflow run with SWID: 6710
 [--plugin, io.seqware.pipeline.plugins.WorkflowLauncher, --, --launch-scheduled, 6710]
 [2014/08/13 11:57:18] | Number of submitted workflows: 13
@@ -105,7 +105,7 @@ Application Status : SUCCEEDED
 
 <p>Run your workflows using the whitestar-sge engine. Note that all workflows run by whitestar will run synchronously via the WorkflowLauncher. </p>
 
-<pre><code>$ seqware bundle launch --dir target/Workflow_Bundle_HelloWorld_1.0-SNAPSHOT_SeqWare_1.1.0-alpha.1/ --engine whitestar-sge
+<pre><code>$ seqware bundle launch --dir target/Workflow_Bundle_HelloWorld_1.0-SNAPSHOT_SeqWare_1.1.0-beta.0/ --engine whitestar-sge
 ...
 Using working directory: /usr/tmp/oozie/oozie-2f30c387-6a75-4cd4-8ade-d32208721cff
 [2014/08/13 12:12:19] | Running command: qsub -sync yes -@ /usr/tmp/oozie/oozie-2f30c387-6a75-4cd4-8ade-d32208721cff/generated-scripts/start_0-qsub.opts /usr/tmp/oozie/oozie-2f30c387-6a75-4cd4-8ade-d32208721cff/generated-scripts/start_0-runner.sh
@@ -124,8 +124,8 @@ Workflow run 6719 is now completed
 
 <p>Currently, you have a choice of two workflow engines, whitestar-parallel and whitestar which run workflows using a simple callout to Bash. The two engines run all jobs on a particular level of your job DAG either concurrently or one-by-one respectively.</p>
 
-<pre><code>$ seqware bundle launch --dir target/Workflow_Bundle_HelloWorld_1.0-SNAPSHOT_SeqWare__1.1.0-alpha.1/ --engine whitestar-parallel
-$ seqware bundle launch --dir target/Workflow_Bundle_HelloWorld_1.0-SNAPSHOT_SeqWare_1.1.0-alpha.1/ --engine whitestar
+<pre><code>$ seqware bundle launch --dir target/Workflow_Bundle_HelloWorld_1.0-SNAPSHOT_SeqWare__1.1.0-beta.0/ --engine whitestar-parallel
+$ seqware bundle launch --dir target/Workflow_Bundle_HelloWorld_1.0-SNAPSHOT_SeqWare_1.1.0-beta.0/ --engine whitestar
 </code></pre>
 
 </div>
@@ -148,7 +148,7 @@ $ seqware bundle launch --dir target/Workflow_Bundle_HelloWorld_1.0-SNAPSHOT_Seq
 
 <p>Next, you will need to run your workflows without metadata being recorded for individual steps of your workflows. </p>
 
-<pre><code>$ seqware bundle launch --dir target/Workflow_Bundle_HelloWorld_1.0-SNAPSHOT_SeqWare_1.1.0-alpha.1/ --engine whitestar --no-metadata
+<pre><code>$ seqware bundle launch --dir target/Workflow_Bundle_HelloWorld_1.0-SNAPSHOT_SeqWare_1.1.0-beta.0/ --engine whitestar --no-metadata
 </code></pre>
 
 </div>

@@ -54,7 +54,7 @@
 
 <p>The “FileImport” workflow is already added into the MetadataDB, but this method can be used to create new workflows to link to. </p>
 
-<pre><code>java -jar ~/.seqware/self-installs/seqware-distribution-1.1.0-alpha.1-full.jar  -p net.sourceforge.seqwe.pipeline.plugins.Metadata -- --create --table workflow --field name::FileImport --field version::1.0 --field description::'Imports files into the database, links them to IUSs or Lanes and creates intermediate Processings. Initially used to import files from the LIMS and attach them to IUSes'
+<pre><code>java -jar ~/.seqware/self-installs/seqware-distribution-1.1.0-beta.0-full.jar  -p net.sourceforge.seqwe.pipeline.plugins.Metadata -- --create --table workflow --field name::FileImport --field version::1.0 --field description::'Imports files into the database, links them to IUSs or Lanes and creates intermediate Processings. Initially used to import files from the LIMS and attach them to IUSes'
 </code></pre>
 
 </div>
@@ -102,7 +102,7 @@
 
 <p>You can get the workflow accession using the –list-install option in BundleManager. </p>
 
-<pre><code>java -jar seqware-distribution-1.1.0-alpha.1-SNAPSHOT-full.jar --plugin net.sourceforge.seqware.pipeline.plugins.FileLinker -- \
+<pre><code>java -jar seqware-distribution-1.1.0-beta.0-SNAPSHOT-full.jar --plugin net.sourceforge.seqware.pipeline.plugins.FileLinker -- \
      --file-list-file /home/mtaschuk/Downloads/link_files_report.txt --workflow-accession 375894 --csv-separator ,
 </code></pre>
 
@@ -117,7 +117,7 @@ log4j.appender.console.layout.ConversionPattern=%p %t %c - %m%n
 
 <p>Use ‘’‘-Dlog4j.configuration=file:./log4j.properties’’’ to specify the properties file when running the FileLinker command.</p>
 
-<pre><code>java -Dlog4j.configuration=file:./log4j.properties -jar -jar seqware-distribution-1.1.0-alpha.1-SNAPSHOT-full.jar \
+<pre><code>java -Dlog4j.configuration=file:./log4j.properties -jar -jar seqware-distribution-1.1.0-beta.0-SNAPSHOT-full.jar \
      --plugin net.sourceforge.seqware.pipeline.plugins.FileLinker -- \
      --file-list-file /home/mtaschuk/Downloads/link_files_report.txt --workflow-accession 375894 --csv-separator ,
 </code></pre>

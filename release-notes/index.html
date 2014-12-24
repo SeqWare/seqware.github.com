@@ -36,10 +36,48 @@
 </div>
 <!-- 
 Procedure now is at https://wiki.oicr.on.ca/pages/viewpage.action?pageId=44533172
-   Need to document 1.1.0-alpha.4 and 5 which are builds for pan-cancer
 -->
 
 
+<div class="section" id="1-1-0-beta-0-2014-12-23">
+<h2>1.1.0-beta.0 (2014-12-23)</h2>
+
+<p>This is a major release implementing all remaining features for the 1.1.0 beta release. Following releases in this series will be limited to hotfixes.</p>
+
+<p>New features include updates to the file provenance report to include workflow and workflow run annotations, aggregate skip information across all paths to a particular file, and report input file information. A new reporting resource displays JDBC and version information for the web service, file provisioning for workflows now records and checks file size and md5sum, it is now possible to pull back arbitrary entries and annotations on the CLI, and it is now possible for workflows to annotate processing events and files while a workflow is running.</p>
+
+<div class="section" id="defect">
+<h3>Defect</h3>
+
+<ul>
+<li>[SEQWARE-1993] - When using inmemory metadata method, bundle dry-run fails to execute</li>
+</ul>
+</div>
+<div class="section" id="improvement">
+<h3>Improvement</h3>
+
+<ul>
+<li>[SEQWARE-1889] - Accessing files linked to lanes</li>
+<li>[SEQWARE-1981] - Include workflow run input files into the file provenance report?</li>
+<li>[SEQWARE-1985] - Get version of SeqWare webservice</li>
+</ul>
+</div>
+<div class="section" id="task">
+<h3>Task</h3>
+
+<ul>
+<li>[SEQWARE-1956] - GCR keeps retrying a lock when the filesystem is down</li>
+<li>[SEQWARE-1959] - Create general mechanism to run annotator in workflows</li>
+<li>[SEQWARE-1970] - validate seqware version between CLI and WS</li>
+<li>[SEQWARE-1974] - Provision files module should record file size and md5 checksum</li>
+<li>[SEQWARE-1975] - Store file size and md5sum in the seqware database</li>
+<li>[SEQWARE-1980] - Fix dry-run option on CLI</li>
+<li>[SEQWARE-1991] - Pull back annotation for arbitrary sw_accession</li>
+<li>[SEQWARE-1992] - Make job id on sge cluster unique</li>
+<li>[SEQWARE-1994] - When a file with multiple paths has a path skipped, the file should be skipped</li>
+</ul>
+</div>
+</div>
 <div class="section" id="1-1-0-alpha-5-2014-10-23">
 <h2>1.1.0-alpha.5 (2014-10-23)</h2>
 
