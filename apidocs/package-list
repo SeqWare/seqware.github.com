@@ -24,7 +24,6 @@ net.sourceforge.seqware.common.err
 net.sourceforge.seqware.common.factory
 net.sourceforge.seqware.common.hibernate
 net.sourceforge.seqware.common.hibernate.reports
-net.sourceforge.seqware.common.invitation
 net.sourceforge.seqware.common.metadata
 net.sourceforge.seqware.common.model
 net.sourceforge.seqware.common.model.adapters
@@ -72,9 +71,3 @@ net.sourceforge.seqware.webservice.resources
 net.sourceforge.seqware.webservice.resources.filters
 net.sourceforge.seqware.webservice.resources.queries
 net.sourceforge.seqware.webservice.resources.tables
-net.sourceforge.solexatools
-net.sourceforge.solexatools.authentication
-net.sourceforge.solexatools.util
-net.sourceforge.solexatools.validation
-net.sourceforge.solexatools.webapp.controller
-net.sourceforge.solexatools.webapp.metamodel
