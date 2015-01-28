@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<title>SeqWare › Monitoring Oozie</title>
+<meta content="nanoc 3.7.1" name="generator">
+<link href="../../../assets/style-v17.css" media="screen" rel="stylesheet" type="text/css">
+<link href="http://feeds.feedburner.com/seqware" rel="alternate" title="The SeqWare Blog" type="application/atom+xml">
+<script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script><script type="text/javascript">         var disqus_shortname = 'seqware';          (function() {             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);         })();     </script>
+</head>
+<body>
+<div class="wrapper">
+<!-- ***** navigation ***** -->
+<div class="nav">
+<ol>
+<li><a href="../../../"><span>Home</span></a></li>
+<li><a href="../../../blog/"><span>News</span></a></li>
+<li><a href="../../"><span>Documentation</span></a></li>
+<li><a href="../../../community/"><span>Community</span></a></li>
+<li><a href="../../../partners/"><span>Partners</span></a></li>
+<li><a href="../../../about/"><span>About</span></a></li>
+</ol>
+</div>
+<!-- ***** sidebar ***** -->
+<div class="side">
+<ol>
+<li><a href="../../1-introduction/"><span>Introduction to SeqWare</span></a></li>
+<li><a href="../../2-installation/"><span>Installation</span></a></li>
+<li><a href="../../3-getting-started/"><span>Getting Started</span></a></li>
+<li><a href="../../6-pipeline/"><span>SeqWare Pipeline</span></a></li>
+<li><a href="../../4-metadb/"><span>SeqWare MetaDB</span></a></li>
+<li><a href="../../5-portal/"><span>SeqWare Portal</span></a></li>
+<li><a href="../../7-web-service/"><span>SeqWare Web Service</span></a></li>
+<li><a href="../../8-query-engine/"><span>SeqWare Query Engine</span></a></li>
+<li><a href="../../9-glossary/"><span>Glossary</span></a></li>
+<li><a href="../../10-faq/"><span>Frequently Asked Questions</span></a></li>
+<li><a href="../../11-api/"><span>APIs</span></a></li>
+<li><a href="../../13-code/"><span>Source Code</span></a></li>
+<li><a href="../../17-plugins/"><span>Plugins</span></a></li>
+<li><a href="../../17a-modules/"><span>Modules</span></a></li>
+<li>
+<a href="../"><span>Advanced Topics</span></a><ol class="toc">
+<li><a href="#installing-the-oozie-client">Installing the Oozie client.</a></li>
+<li><a href="#configuring-the-oozie-client">Configuring the Oozie client</a></li>
+<li><a href="#commands-to-query-oozie">Commands to query Oozie:</a></li>
+<li><a href="#terminating-an-oozie-job">Terminating an oozie job:</a></li>
+<li><a href="#restarting-a-terminated-oozie-job">Restarting a terminated Oozie job</a></li>
+<li><a href="#resuming-a-suspended-oozie-job">Resuming a suspended Oozie job</a></li>
+</ol>
+</li>
+</ol>
+</div>
+<!-- ***** body ***** -->
+<div class="body">
+<div class="article">
+<div class="header">
+<h1>Monitoring Oozie</h1>
+</div>
+<div class="section" id="installing-the-oozie-client">
+<h2>Installing the Oozie client.</h2>
+<ol>
+<li>Add the cdh4 repository (detailed cdh4 guide is here:<a href="http://www.cloudera.com/content/cloudera/en/documentation/cdh4/v4-5-0/CDH4-Installation-Guide/cdh4ig_topic_4.html">http://www.cloudera.com/content/cloudera/en/documentation/cdh4/v4-5-0/CDH4-Installation-Guide/cdh4ig_topic_4.html</a>) to your sources list (<code>/etc/apt/sources.list.d/cloudera.list</code>)
+    <pre><code>deb [arch=amd64] http://archive.cloudera.com/cdh4/ubuntu/precise/amd64/cdh precise-cdh4 contrib
+deb-src http://archive.cloudera.com/cdh4/ubuntu/precise/amd64/cdh precise-cdh4 contrib
+</code></pre>
+  </li>
+  <li>Install the oozie client:
+    <pre><code class="language-bash">sudo apt-get update
+sudo apt-get install oozie-client</code></pre>
+  </li>
+</ol>
+</div>
+<div class="section" id="configuring-the-oozie-client">
+<h2>Configuring the Oozie client</h2>
+<ol>
+<li>Add oozie host and timezone to ~/.bashrc:
+    <pre><code class="language-bash"><span class="nb">export </span><span class="nv">OOZIE_URL</span><span class="o">=</span><span class="s2">"http://localhost:11000/oozie"</span>
+<span class="nb">export </span><span class="nv">OOZIE_TIMEZONE</span><span class="o">=</span><span class="s2">"EST"</span></code></pre>
+  </li>
+  <li>Source your bashrc file:
+    <pre><code class="language-bash"><span class="nb">source</span> ~/.bashrc</code></pre>
+  </li>
+  <li>Test your configuration:
+    <pre><code class="language-console"><span class="gp">user@localhost:~$</span> oozie admin -version
+<span class="go">Oozie server build version: 3.3.2-cdh4.5.0</span></code></pre>
+  </li>
+</ol>
+</div>
+<div class="section" id="commands-to-query-oozie">
+<h2>Commands to query Oozie:</h2>
+<ol>
+<li>List top 100 jobs:
+    <pre><code class="language-console"><span class="gp">user@localhost:~$</span> oozie <span class="nb">jobs</span></code></pre>
+  </li>
+  <li>List top 5 (or any other specific number) jobs:
+    <pre><code class="language-console"><span class="gp">user@localhost:~$</span> oozie <span class="nb">jobs</span> -len 5</code></pre>
+  </li>
+  <li>Get detailed information on an oozie job:
+    <pre><code class="language-console"><span class="gp">user@localhost:~$</span> oozie job -info &lt;OOZIE_JOB_ID&gt; <span class="o">[</span>-verbose<span class="o">]</span></code></pre>
+  </li>
+  <li>Get detailed information on an oozie action:
+    <pre><code class="language-console"><span class="gp">user@localhost:~$</span> oozie job -info &lt;OOZIE_ACTION_ID&gt;</code></pre>
+  </li>
+  <li>Get the log for an oozie job:
+    <pre><code class="language-console"><span class="gp">user@localhost:~$</span> oozie job -log &lt;OOZIE_JOB_ID&gt;</code></pre>
+  </li>
+</ol>
+</div>
+<div class="section" id="terminating-an-oozie-job">
+<h2>Terminating an oozie job:</h2>
+<p>First, use get the job ID by finding it in the list from <code>oozie jobs</code> or the details of <code>oozie job -info &lt;OOZIE_JOB_ID&gt;</code>. Then kill the job:</p>
+<pre><code class="language-console"><span class="gp">user@localhost:~$</span> oozie job -kill &lt;OOZIE_JOB_ID&gt;</code></pre>
+
+</div>
+<div class="section" id="restarting-a-terminated-oozie-job">
+<h2>Restarting a terminated Oozie job</h2>
+<ol>
+<li>You will need a “job.properties” file which is used to configure the job when it resumes. If you don’t have one, you can create one. Here is an example:
+    <pre><code class="language-properties"><span class="na">nameNode</span><span class="o">=</span><span class="s">hdfs://localhost:18020</span>
+<span class="na">jobTracker</span><span class="o">=</span><span class="s">localhost:18021</span>
+<span class="na">queueName</span><span class="o">=</span><span class="s">default</span>
+<span class="na">oozie.wf.application.path</span><span class="o">=</span><span class="s">&lt;OOZIE APP PATH, eg: hdfs://localhost:18020/user/someUser/seqware_workflow/oozie-da66ddd3-1f1b-4441-8f04-658db9a8644a&gt;</span>
+<span class="na">oozie.wf.rerun.failnodes</span><span class="o">=</span><span class="s">true</span></code></pre>
+    <p><em>Note:</em> The host and port numbers shown assume that you are running SeqWare in a VirtualBox instance, with the port forwarding configured. See <a href="../setting-up-a-host-as-a-seqware-client/#0-set-up-port-forwarding">here</a> for more details. If you are not connecting to SeqWare running inside a local virtual machine, you may want to adjust these values.</p>
+  </li>
+  <li>Re-run the oozie job using the properties file:
+    <pre><code class="language-console"><span class="gp">user@localhost:~$</span> oozie job -rerun &lt;OOZIE_JOB_ID&gt; -config job.properties</code></pre>
+  </li>
+</ol>
+</div>
+<div class="section" id="resuming-a-suspended-oozie-job">
+<h2>Resuming a suspended Oozie job</h2>
+<ol>
+<li>It’s probably a good idea to first try to determine why the job was suspended. You can chekc the log, or the job info:
+    <pre><code class="language-console"><span class="gp">user@localhost:~$</span> oozie job -info &lt;OOZIE_JOB_ID&gt; <span class="o">[</span>-verbose<span class="o">]</span></code></pre>
+    <p>Or:</p>
+    <pre><code class="language-console"><span class="gp">user@localhost:~$</span> oozie job -log &lt;OOZIE_JOB_ID&gt;</code></pre>
+  </li>
+  <li>Resume the oozie job:
+    <pre><code class="language-console"><span class="gp">user@localhost:~$</span> oozie job -resume &lt;OOZIE_JOB_ID&gt;</code></pre>
+  </li>
+</ol>
+</div>
+</div>
+<p> </p>
+<p> </p>
+<div id="disqus_thread"></div>
+</div>
+</div>
+<!-- ***** footer ***** -->
+<div id="footer">
+<p>SeqWare © 2007–2014 Brian O&#8217;Connor. SeqWare is released under the a <a rel="license" href="http://www.gnu.org/licenses/licenses.html">GNU GPL v3</a>. This site is built using the excellent <a href="http://nanoc.ws/">nanoc</a> tool and example site along with the <a href="http://www.fonts.info/info/press/free-fonts-for-font-face-embedding.htm">Graublau</a> and <a href="https://en.wikipedia.org/wiki/Gentium">Gentium</a> fonts.</p>
+</div>
+</body>
+</html>

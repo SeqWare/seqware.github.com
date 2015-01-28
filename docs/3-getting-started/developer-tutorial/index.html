@@ -54,6 +54,7 @@
 <li><a href="../../13-code/"><span>Source Code</span></a></li>
 <li><a href="../../17-plugins/"><span>Plugins</span></a></li>
 <li><a href="../../17a-modules/"><span>Modules</span></a></li>
+<li><a href="../../26-advanced-topics/"><span>Advanced Topics</span></a></li>
 </ol>
 </div>
 <!-- ***** body ***** -->
@@ -162,6 +163,8 @@ Also, please wait roughly 10 minutes for our startup scripts to run and fully se
 <pre><code>$ sudo su - seqware
 </code></pre>
 
+<p>In some instances using AWS, it may be necessasry to run <code>sudo umount /dev/xvdc</code> as ubuntu user before switching to seqware user.</p>
+
 <p>Both the VirtualBox VM and Amazon AMI include a start page that links to key information
 for the VM such as the URLs for the installed Portal, Web Service, key file locations, etc.
 On the VirtualBox VM, just click the “Start Here” link on the desktop.  For the Amazon instance
@@ -258,7 +261,7 @@ $ mvn archetype:generate
 Choose a number or apply filter (format: [groupId:]artifactId, case sensitive contains): 294: 
 </code></pre>
 
-<p class="warning"><strong>Note:</strong>You can inform Maven about the archetypes by downloading the latest <a href="https://github.com/SeqWare/seqware/releases/download/1.1.0-beta.0/archetype-catalog.xml">archetype-catalog.xml</a> file and placing it in <code>~/.m2/</code>.</p>
+<p class="warning"><strong>Note:</strong>You can inform Maven about the archetypes by downloading the latest <a href="https://github.com/SeqWare/seqware/releases/download/1.1.0-beta.1/archetype-catalog.xml">archetype-catalog.xml</a> file and placing it in <code>~/.m2/</code>.</p>
 
 <p>The numbers used to identify  the archetypes will vary 
 depending on what you have installed, so you will need to scan through the list 
@@ -335,7 +338,7 @@ developers.</p>
 |                   `-- seqware
 |                       `-- MyHelloWorldWorkflow.java
 |-- target
-|   `-- Workflow_Bundle_MyHelloWorld_1.0_SeqWare_1.1.0-beta.0
+|   `-- Workflow_Bundle_MyHelloWorld_1.0_SeqWare_1.1.0-beta.1
 |       `-- Workflow_Bundle_MyHelloWorld
 |           `-- 1.0
 |               |-- bin
@@ -349,7 +352,7 @@ developers.</p>
 |               |-- data
 |               |   `-- input.txt
 |               |-- lib
-|               |   `-- seqware-distribution-1.1.0-beta.0-full.jar
+|               |   `-- seqware-distribution-1.1.0-beta.1-full.jar
 |               `-- metadata.xml
 |-- workflow
 |   |-- config
@@ -400,7 +403,7 @@ tools can test, execute, and install the workflow. Here is an example from the
 MyHelloWorld workflow:</p>
 
 <pre><code class="language-xml"><span class="nt">&lt;bundle</span> <span class="na">version=</span><span class="s">"1.0"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;workflow</span> <span class="na">name=</span><span class="s">"MyHelloWorld"</span> <span class="na">version=</span><span class="s">"1.0"</span> <span class="na">seqware_version=</span><span class="s">"1.1.0-beta.0"</span>
+  <span class="nt">&lt;workflow</span> <span class="na">name=</span><span class="s">"MyHelloWorld"</span> <span class="na">version=</span><span class="s">"1.0"</span> <span class="na">seqware_version=</span><span class="s">"1.1.0-beta.1"</span>
   <span class="na">basedir=</span><span class="s">"${workflow_bundle_dir}/Workflow_Bundle_MyHelloWorld/1.0"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;description&gt;</span>Add a description of the workflow here.<span class="nt">&lt;/description&gt;</span>
     <span class="nt">&lt;workflow_class</span> <span class="na">path=</span><span class="s">"${workflow_bundle_dir}/Workflow_Bundle_MyHelloWorld/1.0/classes/com/github/seqware/MyHelloWorldWorkflow.java"</span><span class="nt">/&gt;</span>
@@ -830,7 +833,6 @@ to run the workflow above you will need to do the following:</p>
 <li>Ensure your .seqware/settings file includes the correct parameters. If you are using our VM this will be true.</li>
   <li>Jobs are run by the ‘mapred’ user not the seqware user (this is not the case with oozie-sge, mentioned below). So when you author and run workflows make sure the output destination can be written to by mapred. In the future we will eliminate this constraint.</li>
   <li>Workflows include bash jobs but in the future we will add other Hadoop-specific types (e.g. MapReduce). For now these are not implemented.</li>
-  <li>The monitoring tools for Oozie are good, but check out Hue for even better interaction (it should already be running on port 8888 on the VM). You can monitor and debug workflows through this very nice web interface.</li>
   <li>This engine will only work on the 1.0.0 release of SeqWare or newer. The 0.13.6.x and earlier releases will only work with the Pegasus workflow engine.</li>
 </ul>
 <p>We also provide an alternate “engine” that will allow jobs to be managed and scheduled by Oozie but
@@ -843,7 +845,7 @@ $ seqware bundle launch --dir target/Workflow_Bundle_* --engine oozie-sge
 </code></pre>
 
 <p>This will cause the workflow to run and not exit until it finishes.  You can also monitor the workflow using the Hue web
-application installed at http://hostname:8888/oozie/. For our VMs the username
+application installed at http://hostname:11000/oozie/. For our VMs the username
 and password are “seqware”. This is a great way to monitor and debug workflows,
 you can very easily get to the logs for each step, for example.</p>
 
@@ -861,7 +863,7 @@ Packaging Bundle
 Bundle has been packaged to /home/seqware/packaged-bundles
 </code></pre>
 
-<p>What happens here is the <code>Workflow_Bundle_MyHelloWorld_1.0_SeqWare_1.1.0-beta.0</code> directory is zip’d up to your output directory (<code>~/packaged-bundles</code>) and that can be provided to an admin for installation.</p>
+<p>What happens here is the <code>Workflow_Bundle_MyHelloWorld_1.0_SeqWare_1.1.0-beta.1</code> directory is zip’d up to your output directory (<code>~/packaged-bundles</code>) and that can be provided to an admin for installation.</p>
 
 </div>
 <div class="section" id="next-steps">

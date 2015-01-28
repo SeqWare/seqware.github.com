@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<title>SeqWare › Setting up a host as a seqware client</title>
+<meta content="nanoc 3.7.1" name="generator">
+<link href="../../../assets/style-v17.css" media="screen" rel="stylesheet" type="text/css">
+<link href="http://feeds.feedburner.com/seqware" rel="alternate" title="The SeqWare Blog" type="application/atom+xml">
+<script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script><script type="text/javascript">         var disqus_shortname = 'seqware';          (function() {             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);         })();     </script>
+</head>
+<body>
+<div class="wrapper">
+<!-- ***** navigation ***** -->
+<div class="nav">
+<ol>
+<li><a href="../../../"><span>Home</span></a></li>
+<li><a href="../../../blog/"><span>News</span></a></li>
+<li><a href="../../"><span>Documentation</span></a></li>
+<li><a href="../../../community/"><span>Community</span></a></li>
+<li><a href="../../../partners/"><span>Partners</span></a></li>
+<li><a href="../../../about/"><span>About</span></a></li>
+</ol>
+</div>
+<!-- ***** sidebar ***** -->
+<div class="side">
+<ol>
+<li><a href="../../1-introduction/"><span>Introduction to SeqWare</span></a></li>
+<li><a href="../../2-installation/"><span>Installation</span></a></li>
+<li><a href="../../3-getting-started/"><span>Getting Started</span></a></li>
+<li><a href="../../6-pipeline/"><span>SeqWare Pipeline</span></a></li>
+<li><a href="../../4-metadb/"><span>SeqWare MetaDB</span></a></li>
+<li><a href="../../5-portal/"><span>SeqWare Portal</span></a></li>
+<li><a href="../../7-web-service/"><span>SeqWare Web Service</span></a></li>
+<li><a href="../../8-query-engine/"><span>SeqWare Query Engine</span></a></li>
+<li><a href="../../9-glossary/"><span>Glossary</span></a></li>
+<li><a href="../../10-faq/"><span>Frequently Asked Questions</span></a></li>
+<li><a href="../../11-api/"><span>APIs</span></a></li>
+<li><a href="../../13-code/"><span>Source Code</span></a></li>
+<li><a href="../../17-plugins/"><span>Plugins</span></a></li>
+<li><a href="../../17a-modules/"><span>Modules</span></a></li>
+<li>
+<a href="../"><span>Advanced Topics</span></a><ol class="toc">
+<li><a href="#0-set-up-port-forwarding">0. Set up port forwarding</a></li>
+<li><a href="#1-download-the-seqware-script">1. Download the seqware script.</a></li>
+<li><a href="#2-remove-your-seqware-folder-if-it-exists">2. Remove your ~/.seqware folder, if it exists.</a></li>
+<li><a href="#3-initialize-seqware">3. Initialize SeqWare</a></li>
+<li><a href="#4-edit-the-settings-file">4. Edit the settings file</a></li>
+<li><a href="#5-schedule-a-workflow">5. Schedule a workflow</a></li>
+</ol>
+</li>
+</ol>
+</div>
+<!-- ***** body ***** -->
+<div class="body">
+<div class="article">
+<div class="header">
+<h1>Setting up a host as a seqware client</h1>
+</div>
+<p>This document will describe how to connect a host to a SeqWare client that is running inside a local VirtualBox image. Please see <a href="../../2-installation/#option-2-installing-with-a-local-vm">this tutorial</a> if you do not know how to start up an instance of SeqWare inside VirtualBox.</p>
+
+<div class="section" id="0-set-up-port-forwarding">
+<h2>0. Set up port forwarding</h2>
+<p>Now that you have an instance of SeqWare running inside VirtualBox…</p>
+
+<p>You will want to set up your VirtualBox port forwarding so that your local client can access the services running withing the virtual machine.</p>
+
+<p>Forwarded ports are:</p>
+
+<table>
+<thead><tr>
+<th>Used by</th>
+      <th>on host machine</th>
+      <th>in virtual machine</th>
+    </tr></thead>
+<tbody>
+<tr>
+<td>Oozie admin console</td>
+      <td>11222</td>
+      <td>11000</td>
+    </tr>
+<tr>
+<td>Seqware web service</td>
+      <td>13245</td>
+      <td>8080</td>
+    </tr>
+<tr>
+<td>HDFS</td>
+      <td>18020</td>
+      <td>8020</td>
+    </tr>
+<tr>
+<td>Jobtracker</td>
+      <td>18021</td>
+      <td>8021</td>
+    </tr>
+</tbody>
+</table>
+<p><em>Optional:</em> If you want to be able to browse the virtual machine’s HDFS, you should also set up these ports:</p>
+
+<table>
+<thead><tr>
+<th>Used by</th>
+      <th>on host machine</th>
+      <th>in virtual machine</th>
+    </tr></thead>
+<tbody>
+<tr>
+<td>Map/Reduce admin page</td>
+      <td>50031</td>
+      <td>50030</td>
+    </tr>
+<tr>
+<td>HDFS admin page</td>
+      <td>50071</td>
+      <td>50070</td>
+    </tr>
+<tr>
+<td>HDFS node browsing page</td>
+      <td>50076</td>
+      <td>50075</td>
+    </tr>
+</tbody>
+</table>
+<p><img src="../../../assets/images/port_forwarding.png" alt="Port Forwarding in VirtualBox" title="Port Forwarding in VirtualBox"></p>
+
+</div>
+<div class="section" id="1-download-the-seqware-script">
+<h2>1. Download the seqware script.</h2>
+<p>The list of releases of SeqWare can be found here: <a href="https://github.com/SeqWare/seqware/releases">https://github.com/SeqWare/seqware/releases</a></p>
+
+<p>In your browser, the URL for a specific version’s script is: <a href="https://github.com/SeqWare/seqware/releases/download/1.1.0-beta.1/seqware">https://github.com/SeqWare/seqware/releases/doiwnload/1.1.0-beta.1/seqware</a></p>
+
+<p>In your terminal, you can get it like this:</p>
+<pre><code class="language-console"><span class="gp">user@host:~$</span> curl -L https://github.com/SeqWare/seqware/releases/download/1.1.0-beta.1/seqware &gt; seqware</code></pre>
+<p>Copy the script to a directory that is on your Path, such as <code>~/bin</code> or <code>/usr/bin</code>.</p>
+<pre><code class="language-console"><span class="gp">user@host:~$</span> <span class="nb">echo</span> <span class="nv">$PATH</span>
+<span class="go">/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/jvm/java-7-oracle-cloudera</span></code></pre>
+<p>You may also need to make the script executable:</p>
+<pre><code class="language-console"><span class="gp">user@host:~$</span> chmod u+x seqware</code></pre>
+<p class="warning"><strong>Note:</strong>SeqWare will require Java 7. If on a machine where you can directly upgrade Java, use your favorite package manager (apt-get or yum) to download Java 1.7 and update your java bin to point to the new location.
+<br><br>
+If installing on your own: Download 1.7 JRE either from Oracle (Do not use the OpenJDK implementation). Unzip it in a stable location, like your home directory or on the Isilon mount. Set JAVA_HOME to be the root directory, and JAVA_CMD to be the direct location of the java executable.
+</p>
+
+</div>
+<div class="section" id="2-remove-your-seqware-folder-if-it-exists">
+<h2>2. Remove your ~/.seqware folder, if it exists.</h2>
+<p>If you have run SeqWare before on this machine, you will already have an existing <code>~/.seqware</code> folder. If you don’t want to delete this folder, you can rename it for now.</p>
+<pre><code class="language-console"><span class="gp">user@host:~$</span> mv ~/.seqware ~./seqware.bk</code></pre>
+
+</div>
+<div class="section" id="3-initialize-seqware">
+<h2>3. Initialize SeqWare</h2>
+<p>SeqWare can now generate your configuration file once it is in your path. Run <code>seqware init</code> to interactively generate a new seqware settings file. To determine the correct URL for the webservice, check the file <code>~/.seqware/settings</code> on the <em>host</em> that is running seqware, and look for the value for the variable <code>SW_REST_URL</code>.</p>
+
+<p>Note that the port number used here is <code>12345</code>. This is because VirtualBox port forwarding is configured to forward requests on port 12345 (from the host machine) to port 8080 in the virtual machine.</p>
+
+<p>If you want to test the URL, try navigating to <a href="http://localhost:12345/SeqWareWebService">http://localhost:12345/SeqWareWebService</a> in your browser. If the service is running properly, you should be prompted to download a JSON file (the contents are a description of the current environment). </p>
+
+<p>Don’t forget to set the default workflow engine to Oozie.</p>
+<pre><code class="language-console"><span class="gp">user@host:~$</span> seqware init
+<span class="go"> </span>
+<span class="go">Initializing Seqware settings:</span>
+<span class="go">  Seqware WebService URL: http://localhost:12345/SeqWareWebService</span>
+<span class="go">  Seqware WebService Username: admin@admin.com</span>
+<span class="go">  Seqware WebService Password: ****************</span>
+<span class="go">  Default Workflow Engine [oozie]: oozie-sge</span>
+<span class="go"> </span>
+<span class="go">Created Seqware settings file at /u/someUser/.seqware/settings</span>
+<span class="go"> </span>
+<span class="go">Seqware is ready to use!</span></code></pre>
+
+</div>
+<div class="section" id="4-edit-the-settings-file">
+<h2>4. Edit the settings file</h2>
+<p>If you are just scheduling workflows, you will not need to have anything else configured. But if you are either directly launching workflows or scheduling and then launching them on the same host, you will need the following in your seqware settings file.</p>
+
+<pre><code class="language-bash"><span class="nv">OOZIE_SGE_MAX_MEMORY_PARAM_FORMAT</span><span class="o">=</span>-l <span class="nv">h_vmem</span><span class="o">=</span><span class="k">${</span><span class="nv">maxMemory</span><span class="k">}</span>M
+<span class="nv">OOZIE_SGE_THREADS_PARAM_FORMAT</span><span class="o">=</span>
+ 
+<span class="nv">OOZIE_URL</span><span class="o">=</span>http://localhost:11222/oozie
+<span class="nv">OOZIE_APP_ROOT</span><span class="o">=</span>seqware_workflow
+<span class="nv">OOZIE_APP_PATH</span><span class="o">=</span>hdfs://localhost:18020/user/someUser/
+<span class="nv">OOZIE_JOBTRACKER</span><span class="o">=</span>localhost:18021
+<span class="nv">OOZIE_NAMENODE</span><span class="o">=</span>hdfs://localhost:18020
+<span class="nv">OOZIE_QUEUENAME</span><span class="o">=</span>default
+<span class="nv">OOZIE_WORK_DIR</span><span class="o">=</span><span class="nv">$HOME</span>/tmp
+FS.DEFAULTFS<span class="o">=</span>hdfs://localhost:18020
+FS.HDFS.IMPL<span class="o">=</span>org.apache.hadoop.hdfs.DistributedFileSystem
+MAPRED.JOB.TRACKER<span class="o">=</span>localhost:18021</code></pre>
+
+</div>
+<div class="section" id="5-schedule-a-workflow">
+<h2>5. Schedule a workflow</h2>
+
+<p>To schedule a workflow, use this command:</p>
+<pre><code class="language-console"><span class="gp">user@localhost:~$</span> seqware workflow schedule --accession <span class="m">2</span> --host master
+<span class="go">Created workflow run with SWID: 21</span></code></pre>
+
+<p><strong>Note:</strong> in the above command, the host specified is <code>master</code>. This is because the job will be scheduled <em>within</em> the virtual machine, and the hostname within the virtual machine is <code>master</code>. If you are not sure what is the hostname inside the virtual machine, log in and run the command <code>hostname</code>.</p>
+</div>
+</div>
+<p> </p>
+<p> </p>
+<div id="disqus_thread"></div>
+</div>
+</div>
+<!-- ***** footer ***** -->
+<div id="footer">
+<p>SeqWare © 2007–2014 Brian O&#8217;Connor. SeqWare is released under the a <a rel="license" href="http://www.gnu.org/licenses/licenses.html">GNU GPL v3</a>. This site is built using the excellent <a href="http://nanoc.ws/">nanoc</a> tool and example site along with the <a href="http://www.fonts.info/info/press/free-fonts-for-font-face-embedding.htm">Graublau</a> and <a href="https://en.wikipedia.org/wiki/Gentium">Gentium</a> fonts.</p>
+</div>
+</body>
+</html>

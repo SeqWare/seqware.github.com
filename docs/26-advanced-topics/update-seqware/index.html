@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<title>SeqWare › Updating your SeqWare executable</title>
+<meta content="nanoc 3.7.1" name="generator">
+<link href="../../../assets/style-v17.css" media="screen" rel="stylesheet" type="text/css">
+<link href="http://feeds.feedburner.com/seqware" rel="alternate" title="The SeqWare Blog" type="application/atom+xml">
+<script type="text/javascript"> var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-34523087-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })(); </script><script type="text/javascript">         var disqus_shortname = 'seqware';          (function() {             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);         })();     </script>
+</head>
+<body>
+<div class="wrapper">
+<!-- ***** navigation ***** -->
+<div class="nav">
+<ol>
+<li><a href="../../../"><span>Home</span></a></li>
+<li><a href="../../../blog/"><span>News</span></a></li>
+<li><a href="../../"><span>Documentation</span></a></li>
+<li><a href="../../../community/"><span>Community</span></a></li>
+<li><a href="../../../partners/"><span>Partners</span></a></li>
+<li><a href="../../../about/"><span>About</span></a></li>
+</ol>
+</div>
+<!-- ***** sidebar ***** -->
+<div class="side">
+<ol>
+<li><a href="../../1-introduction/"><span>Introduction to SeqWare</span></a></li>
+<li><a href="../../2-installation/"><span>Installation</span></a></li>
+<li><a href="../../3-getting-started/"><span>Getting Started</span></a></li>
+<li><a href="../../6-pipeline/"><span>SeqWare Pipeline</span></a></li>
+<li><a href="../../4-metadb/"><span>SeqWare MetaDB</span></a></li>
+<li><a href="../../5-portal/"><span>SeqWare Portal</span></a></li>
+<li><a href="../../7-web-service/"><span>SeqWare Web Service</span></a></li>
+<li><a href="../../8-query-engine/"><span>SeqWare Query Engine</span></a></li>
+<li><a href="../../9-glossary/"><span>Glossary</span></a></li>
+<li><a href="../../10-faq/"><span>Frequently Asked Questions</span></a></li>
+<li><a href="../../11-api/"><span>APIs</span></a></li>
+<li><a href="../../13-code/"><span>Source Code</span></a></li>
+<li><a href="../../17-plugins/"><span>Plugins</span></a></li>
+<li><a href="../../17a-modules/"><span>Modules</span></a></li>
+<li>
+<a href="../"><span>Advanced Topics</span></a><ol class="toc">
+<li><a href="#updating-to-use-the-latest-version-of-seqware">Updating to use the latest version of SeqWare</a></li>
+<li><a href="#1-download-seqware">1. Download SeqWare</a></li>
+<li><a href="#2-copy-the-jar">2.Copy the jar</a></li>
+<li><a href="#3-edit-your-script">3. Edit your script</a></li>
+<li><a href="#4-run-seqware">4. Run seqware</a></li>
+</ol>
+</li>
+</ol>
+</div>
+<!-- ***** body ***** -->
+<div class="body">
+<div class="article">
+<div class="header">
+<h1>Updating your SeqWare executable</h1>
+</div>
+<div class="section" id="updating-to-use-the-latest-version-of-seqware">
+<h2>Updating to use the latest version of SeqWare</h2>
+
+<p>This guide is for updating your SeqWare Command Line Executable (CLI) executable to work with new (or old) versions of SeqWare.</p>
+
+</div>
+<div class="section" id="1-download-seqware">
+<h2>1. Download SeqWare</h2>
+<p>Download the version of SeqWare that you need from Artifactory. Make sure you copy the one JAR with “-full” at the end of its name, e.g. seqware-distribution-1.1.0-beta.1.jar</p>
+<pre><code class="language-console"><span class="gp">user@localhost:~$</span> wget https://seqwaremaven.oicr.on.ca/artifactory/simple/seqware-release/com/github/seqware/seqware-distribution/1.1.0-beta.1/seqware-distribution-1.1.0-beta.1-full.jar</code></pre>
+
+</div>
+<div class="section" id="2-copy-the-jar">
+<h2>2.Copy the jar</h2>
+<p>Copy this jar to your seqware self-installs directory.</p>
+<pre><code class="language-console"><span class="gp">user@localhost:~$</span> mv seqware-distribution-1.1.0-beta.1-full.jar ~/.seqware/self-installs</code></pre>
+
+</div>
+<div class="section" id="3-edit-your-script">
+<h2>3. Edit your script</h2>
+<p>Open up your ~/bin/seqware script that you had installed previously and change the SeqWare version to the newest one by editing “DEFAULT_SEQWARE_VERSION”. Make sure that the name exactly matches what the JAR is called.</p>
+<pre><code class="language-bash"><span class="c">#!/usr/bin/env bash</span>
+<span class="c"># Ensure this file is executable via `chmod a+x seqware`, then place it</span>
+<span class="c"># somewhere on your $PATH, like ~/bin. The rest of SeqWare will be</span>
+<span class="c"># installed upon first run into the ~/.seqware directory.</span>
+<span class="nv">DEFAULT_SEQWARE_VERSION</span><span class="o">=</span><span class="s2">"1.1.0-beta.1"</span></code></pre>
+
+</div>
+<div class="section" id="4-run-seqware">
+<h2>4. Run seqware</h2>
+<p>Run <code>seqware</code> with no arguments. This will trigger SeqWare to download the sanity check file that corresponds to the new version.</p>
+<pre><code class="language-console"><span class="gp">someUser@someHost:~$</span> seqware
+<span class="go">Downloading SeqWare Check to /home/someUser/.seqware/self-installs/seqware-sanity-check-1.1.0-beta.1-jar-paired-with-distribution.jar now...</span>
+<span class="go">  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current</span>
+<span class="go">                                 Dload  Upload   Total   Spent    Left  Speed</span>
+<span class="go">100  174k  100  174k    0     0  7158k      0 --:--:-- --:--:-- --:--:-- 7262k</span>
+
+<span class="go">Usage: seqware [&lt;flag&gt;]</span>
+<span class="go">       seqware &lt;command&gt; [--help]</span>
+
+<span class="go">Commands:</span>
+<span class="go">  annotate      Add arbitrary key/value pairs to seqware objects</span>
+<span class="go">  query         Display ad-hoc information about seqware objects</span>
+<span class="go">  bundle        Interact with a workflow bundle during development/admin</span>
+<span class="go">  copy          Copy files between local and remote file systems</span>
+<span class="go">  create        Create new seqware objects (e.g., study)</span>
+<span class="go">  files         Extract information about workflow output files</span>
+<span class="go">  study         Extract information about studies</span>
+<span class="go">  workflow      Interact with workflows</span>
+<span class="go">  workflow-run  Interact with workflow runs</span>
+<span class="go">  checkdb       Check the seqware database for convention errors</span>
+<span class="go">  check         Check the seqware environment for configuration issues</span>
+<span class="go">  dev           Advanced commands that are useful for developers or debugging</span>
+
+<span class="go">Flags:</span>
+<span class="go">  --help        Print help out</span>
+<span class="go">  --version     Print Seqware's version</span>
+<span class="go">  --metadata    Print metadata environment</span></code></pre>
+</div>
+</div>
+<p> </p>
+<p> </p>
+<div id="disqus_thread"></div>
+</div>
+</div>
+<!-- ***** footer ***** -->
+<div id="footer">
+<p>SeqWare © 2007–2014 Brian O&#8217;Connor. SeqWare is released under the a <a rel="license" href="http://www.gnu.org/licenses/licenses.html">GNU GPL v3</a>. This site is built using the excellent <a href="http://nanoc.ws/">nanoc</a> tool and example site along with the <a href="http://www.fonts.info/info/press/free-fonts-for-font-face-embedding.htm">Graublau</a> and <a href="https://en.wikipedia.org/wiki/Gentium">Gentium</a> fonts.</p>
+</div>
+</body>
+</html>

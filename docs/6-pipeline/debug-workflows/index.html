@@ -45,6 +45,7 @@
 <li><a href="../../13-code/"><span>Source Code</span></a></li>
 <li><a href="../../17-plugins/"><span>Plugins</span></a></li>
 <li><a href="../../17a-modules/"><span>Modules</span></a></li>
+<li><a href="../../26-advanced-topics/"><span>Advanced Topics</span></a></li>
 </ol>
 </div>
 <!-- ***** body ***** -->
@@ -235,7 +236,7 @@ public class BuggyWorkflowWorkflow extends AbstractWorkflowDataModel {
 
 <pre><code>$ mvn clean install
 ...
-$ seqware bundle launch --dir target/Workflow_Bundle_BuggyWorkflow_1.0-SNAPSHOT_SeqWare_1.1.0-beta.0/
+$ seqware bundle launch --dir target/Workflow_Bundle_BuggyWorkflow_1.0-SNAPSHOT_SeqWare_1.1.0-beta.1/
 ...
 Caused by: java.lang.ArithmeticException: / by zero
 	at com.github.seqware.BuggyWorkflowWorkflow.init(BuggyWorkflowWorkflow.java:46)
@@ -251,7 +252,7 @@ java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
 
 <pre><code>$ vim src/main/java/com/github/seqware/BuggyWorkflowWorkflow.java 
 $ mvn clean install
-$ seqware bundle launch --dir target/Workflow_Bundle_BuggyWorkflow_1.0-SNAPSHOT_SeqWare_1.1.0-beta.0/
+$ seqware bundle launch --dir target/Workflow_Bundle_BuggyWorkflow_1.0-SNAPSHOT_SeqWare_1.1.0-beta.1/
 ...
 Caused by: java.lang.NullPointerException
 	at com.github.seqware.BuggyWorkflowWorkflow.setupDirectory(BuggyWorkflowWorkflow.java:59)
@@ -264,7 +265,7 @@ java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
 
 <pre><code>$ vim src/main/java/com/github/seqware/BuggyWorkflowWorkflow.java 
 $ mvn clean install
-$ seqware bundle launch --dir target/Workflow_Bundle_BuggyWorkflow_1.0-SNAPSHOT_SeqWare_1.1.0-beta.0/
+$ seqware bundle launch --dir target/Workflow_Bundle_BuggyWorkflow_1.0-SNAPSHOT_SeqWare_1.1.0-beta.1/
 ...
 Caused by: java.lang.ArrayIndexOutOfBoundsException: 5
 	at com.github.seqware.BuggyWorkflowWorkflow.setupFiles(BuggyWorkflowWorkflow.java:72)
@@ -391,7 +392,7 @@ public class BuggyWorkflowWorkflow extends AbstractWorkflowDataModel {
 <p>Build the workflow and launch using ‘seqware bundle launch’. You should see the workflow launch successfully, submit to Oozie, and then the WorkflowWatcher start up to watch the running of the workflow: </p>
 
 <pre><code>$ mvn clean install
-$ seqware bundle launch --dir target/Workflow_Bundle_BuggyWorkflow_1.0-SNAPSHOT_SeqWare_1.1.0-beta.0/
+$ seqware bundle launch --dir target/Workflow_Bundle_BuggyWorkflow_1.0-SNAPSHOT_SeqWare_1.1.0-beta.1/
 ...
 Files copied to /usr/tmp/oozie/oozie-3967f3de-6153-4618-806e-2e29a51293b9
 Submitted Oozie job: 0000003-140801172645564-oozie-oozi-W

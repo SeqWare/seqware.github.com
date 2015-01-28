@@ -39,6 +39,7 @@
 <li><a href="../13-code/"><span>Source Code</span></a></li>
 <li><a href="../17-plugins/"><span>Plugins</span></a></li>
 <li><a href="../17a-modules/"><span>Modules</span></a></li>
+<li><a href="../26-advanced-topics/"><span>Advanced Topics</span></a></li>
 </ol>
 </div>
 <!-- ***** body ***** -->
@@ -137,22 +138,22 @@ Command-line option</th>    <th>Description</th>
 
 <p>Set the &#8216;skip&#8217; value of lane with SWID 1234 to &#8216;true&#8217;. No key-value annotations are added.</p>
 
-<pre><code>java -jar seqware-distribution/target/seqware-distribution-1.1.0-beta.0-full.jar --plugin net.sourceforge.seqware.pipeline.plugins.AttributeAnnotator -- --lane-accession 1234 --skip true
+<pre><code>java -jar seqware-distribution/target/seqware-distribution-1.1.0-beta.1-full.jar --plugin net.sourceforge.seqware.pipeline.plugins.AttributeAnnotator -- --lane-accession 1234 --skip true
 </code></pre>
 
 <p>Set the &#8216;skip&#8217; value of sequencer run with SWID 3456 to &#8216;true&#8217; and enter a key-value pair with the key &#8220;skip&#8221; and value &#8220;Improperly entered into the LIMS&#8221;. Notice that the key is not specified but defaults to &#8216;skip&#8217;.</p>
 
-<pre><code>java -jar seqware-distribution/target/seqware-distribution-1.1.0-beta.0-full.jar --plugin net.sourceforge.seqware.pipeline.plugins.AttributeAnnotator -- --sequencer-run-accession 3456 --skip true --value "Improperly entered into the LIMS"
+<pre><code>java -jar seqware-distribution/target/seqware-distribution-1.1.0-beta.1-full.jar --plugin net.sourceforge.seqware.pipeline.plugins.AttributeAnnotator -- --sequencer-run-accession 3456 --skip true --value "Improperly entered into the LIMS"
 </code></pre>
 
 <p>Annotate the IUS with SWID 2345 with a key-value pair of key &#8220;dual-barcodes&#8221; and value &#8220;barcode 1&#8221;. The &#8216;skip&#8217; field is not affected.</p>
 
-<pre><code>java -jar seqware-distribution/target/seqware-distribution-1.1.0-beta.0-full.jar --plugin net.sourceforge.seqware.pipeline.plugins.AttributeAnnotator -- --ius-accession 2345 --key "dual-barcodes" --value "barcode 1"
+<pre><code>java -jar seqware-distribution/target/seqware-distribution-1.1.0-beta.1-full.jar --plugin net.sourceforge.seqware.pipeline.plugins.AttributeAnnotator -- --ius-accession 2345 --key "dual-barcodes" --value "barcode 1"
 </code></pre>
 
 <p>Bulk insert attribute annotation with file</p>
 
-<pre><code>java -jar seqware-distribution/target/seqware-distribution-1.1.0-beta.0-full.jar --plugin net.sourceforge.seqware.pipeline.plugins.AttributeAnnotator -- --file file.csv
+<pre><code>java -jar seqware-distribution/target/seqware-distribution-1.1.0-beta.1-full.jar --plugin net.sourceforge.seqware.pipeline.plugins.AttributeAnnotator -- --file file.csv
 </code></pre>
 
 <p>The file is in CSV format</p>

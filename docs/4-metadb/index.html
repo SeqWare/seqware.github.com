@@ -47,6 +47,7 @@
 <li><a href="../13-code/"><span>Source Code</span></a></li>
 <li><a href="../17-plugins/"><span>Plugins</span></a></li>
 <li><a href="../17a-modules/"><span>Modules</span></a></li>
+<li><a href="../26-advanced-topics/"><span>Advanced Topics</span></a></li>
 </ol>
 </div>
 <!-- ***** body ***** -->
@@ -165,7 +166,7 @@ psql -U seqware seqware_meta_db &lt; 1.0.4_to_1.0.5.sql
 
 <p>Second, run the migration plugin:</p>
 
-<pre><code>java -jar seqware-distribution/target/seqware-distribution-1.1.0-beta.0-full.jar -p net.sourceforge.seqware.pipeline.plugins.WorkflowRunFilesInitialPopulationPlugin
+<pre><code>java -jar seqware-distribution/target/seqware-distribution-1.1.0-beta.1-full.jar -p net.sourceforge.seqware.pipeline.plugins.WorkflowRunFilesInitialPopulationPlugin
 </code></pre>
 
 <p>Third, you’ll probably want to create the initial file-provenance-report (note, you’ll probably want this to run on a schedule for updates)</p>

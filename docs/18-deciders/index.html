@@ -39,6 +39,7 @@
 <li><a href="../13-code/"><span>Source Code</span></a></li>
 <li><a href="../17-plugins/"><span>Plugins</span></a></li>
 <li><a href="../17a-modules/"><span>Modules</span></a></li>
+<li><a href="../26-advanced-topics/"><span>Advanced Topics</span></a></li>
 </ol>
 </div>
 <!-- ***** body ***** -->
@@ -363,32 +364,32 @@ $ cd GZ/
 $ mvn clean install 
 (output snipped)
 $ cd ..
-$ seqware bundle package --dir GZ/target/Workflow_Bundle_GZ_1.0-SNAPSHOT_SeqWare_1.1.0-beta.0/
+$ seqware bundle package --dir GZ/target/Workflow_Bundle_GZ_1.0-SNAPSHOT_SeqWare_1.1.0-beta.1/
 Validating Bundle structure
 Packaging Bundle
 Bundle has been packaged to /home/seqware/workflow-dev
-$ seqware bundle package --dir Tar/target/Workflow_Bundle_Tar_1.0-SNAPSHOT_SeqWare_1.1.0-beta.0/
+$ seqware bundle package --dir Tar/target/Workflow_Bundle_Tar_1.0-SNAPSHOT_SeqWare_1.1.0-beta.1/
 Validating Bundle structure
 Packaging Bundle
 Bundle has been packaged to /home/seqware/workflow-dev
-$ seqware bundle install --zip Workflow_Bundle_Tar_1.0-SNAPSHOT_SeqWare_1.1.0-beta.0.zip 
+$ seqware bundle install --zip Workflow_Bundle_Tar_1.0-SNAPSHOT_SeqWare_1.1.0-beta.1.zip 
 Installing Bundle
-Bundle: Workflow_Bundle_Tar_1.0-SNAPSHOT_SeqWare_1.1.0-beta.0.zip
-Now transferring /home/seqware/workflow-dev/Workflow_Bundle_Tar_1.0-SNAPSHOT_SeqWare_1.1.0-beta.0.zip to the directory: /home/seqware/released-bundles Please be aware, this process can take hours if the bundle is many GB in size.
-Processing input: /home/seqware/workflow-dev/Workflow_Bundle_Tar_1.0-SNAPSHOT_SeqWare_1.1.0-beta.0.zip
+Bundle: Workflow_Bundle_Tar_1.0-SNAPSHOT_SeqWare_1.1.0-beta.1.zip
+Now transferring /home/seqware/workflow-dev/Workflow_Bundle_Tar_1.0-SNAPSHOT_SeqWare_1.1.0-beta.1.zip to the directory: /home/seqware/released-bundles Please be aware, this process can take hours if the bundle is many GB in size.
+Processing input: /home/seqware/workflow-dev/Workflow_Bundle_Tar_1.0-SNAPSHOT_SeqWare_1.1.0-beta.1.zip
       output-dir: /home/seqware/released-bundles
 
 Added 'Tar' (SWID: 13)
-Bundle Has Been Installed to the MetaDB and Provisioned to Workflow_Bundle_Tar_1.0-SNAPSHOT_SeqWare_1.1.0-beta.0.zip!
-$ seqware bundle install --zip Workflow_Bundle_GZ_1.0-SNAPSHOT_SeqWare_1.1.0-beta.0.zip 
+Bundle Has Been Installed to the MetaDB and Provisioned to Workflow_Bundle_Tar_1.0-SNAPSHOT_SeqWare_1.1.0-beta.1.zip!
+$ seqware bundle install --zip Workflow_Bundle_GZ_1.0-SNAPSHOT_SeqWare_1.1.0-beta.1.zip 
 Installing Bundle
-Bundle: Workflow_Bundle_GZ_1.0-SNAPSHOT_SeqWare_1.1.0-beta.0.zip
-Now transferring /home/seqware/workflow-dev/Workflow_Bundle_GZ_1.0-SNAPSHOT_SeqWare_1.1.0-beta.0.zip to the directory: /home/seqware/released-bundles Please be aware, this process can take hours if the bundle is many GB in size.
-Processing input: /home/seqware/workflow-dev/Workflow_Bundle_GZ_1.0-SNAPSHOT_SeqWare_1.1.0-beta.0.zip
+Bundle: Workflow_Bundle_GZ_1.0-SNAPSHOT_SeqWare_1.1.0-beta.1.zip
+Now transferring /home/seqware/workflow-dev/Workflow_Bundle_GZ_1.0-SNAPSHOT_SeqWare_1.1.0-beta.1.zip to the directory: /home/seqware/released-bundles Please be aware, this process can take hours if the bundle is many GB in size.
+Processing input: /home/seqware/workflow-dev/Workflow_Bundle_GZ_1.0-SNAPSHOT_SeqWare_1.1.0-beta.1.zip
       output-dir: /home/seqware/released-bundles
 
 Added 'GZ' (SWID: 14)
-Bundle Has Been Installed to the MetaDB and Provisioned to Workflow_Bundle_GZ_1.0-SNAPSHOT_SeqWare_1.1.0-beta.0.zip!
+Bundle Has Been Installed to the MetaDB and Provisioned to Workflow_Bundle_GZ_1.0-SNAPSHOT_SeqWare_1.1.0-beta.1.zip!
 </code></pre>
 
 <p>Next, deciders rely upon an up-to-date files report. Refresh this with the following command (this should probably be in a cron on a production system):</p>
@@ -398,12 +399,12 @@ Bundle Has Been Installed to the MetaDB and Provisioned to Workflow_Bundle_GZ_1.
 
 <p>Now, you are ready to use the basic decider to configure and schedule your workflows. The following command lets the BasicDecider run across the entire database, looking for plain text files that have been imported, in order to schedule TarWorkflows. </p>
 
-<pre><code>$ java -jar ~/.seqware/self-installs/seqware-distribution-1.1.0-beta.0-full.jar -p net.sourceforge.seqware.pipeline.deciders.BasicDecider -- --all --meta-types text/plain --wf-accession 13 
+<pre><code>$ java -jar ~/.seqware/self-installs/seqware-distribution-1.1.0-beta.1-full.jar -p net.sourceforge.seqware.pipeline.deciders.BasicDecider -- --all --meta-types text/plain --wf-accession 13 
 
 Created workflow run with SWID: 15
 Scheduling.
 
-java -jar seqware-distribution-1.1.0-beta.0-full.jar --plugin io.seqware.pipeline.plugins.WorkflowScheduler -- -- --workflow-accession 13 --ini-files /tmp/7745435635015076544835954197.ini --input-files 12 --parent-accessions 9 --link-workflow-run-to-parents 6 --host master 
+java -jar seqware-distribution-1.1.0-beta.1-full.jar --plugin io.seqware.pipeline.plugins.WorkflowScheduler -- -- --workflow-accession 13 --ini-files /tmp/7745435635015076544835954197.ini --input-files 12 --parent-accessions 9 --link-workflow-run-to-parents 6 --host master 
  
 $ seqware workflow-run launch-scheduled 
 
@@ -421,7 +422,7 @@ Submitted Oozie job: 0000071-140609173140913-oozie-oozi-W
 <p>Next, wait for the workflow to run to completion, you can use either the ‘seqware workflow-run report’ or refresh the files report in order to determine when the workflow is complete, but it should take roughly 2 minutes. Another option is the Oozie web interface at http://localhost:11000/oozie/  You may also need to run ‘seqware workflow-run propagate-statuses’ in order to update the seqware meta-db with workflow run statuses if it is not already in your crontab. </p>
 
 <pre><code>$ seqware files refresh
-$ java -jar ~/.seqware/self-installs/seqware-distribution-1.1.0-beta.0-full.jar -p net.sourceforge.seqware.pipeline.deciders.BasicDecider -- --all --meta-types application/x-tar --wf-accession 14 --schedule
+$ java -jar ~/.seqware/self-installs/seqware-distribution-1.1.0-beta.1-full.jar -p net.sourceforge.seqware.pipeline.deciders.BasicDecider -- --all --meta-types application/x-tar --wf-accession 14 --schedule
 
 Created workflow run with SWID: 21
 Launching.
