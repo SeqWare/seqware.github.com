@@ -157,7 +157,7 @@ this one.</p>
 <h2>The SeqWare Command Line Interface</h2>
 
 <p>The SeqWare command line interface (CLI) will allow you to perform common SeqWare operations, and delegate work to the SeqWare Web service (whether it is on a VM, installed on another local
-machine/cluster, or in the cloud) that controls workflow execution, among other things. </p>
+machine/cluster, or in the cloud) that controls workflow execution, among other things.</p>
 
 <p class="warning"><strong>Tip:</strong>You can control which version of SeqWare the CLI will use by setting the <code>SEQWARE_VERSION</code> environment variable, or modifying the associated value at the top of <code>~/bin/seqware</code>. For released versions, SeqWare will be downloaded automatically from the public repository.  If you specify a development release (i.e., suffixed with <code>-SNAPSHOT</code>), it is expected that you have built and installed SeqWare into your local Maven repository.  In all cases, the SeqWare JAR will be copied to <code>~/.seqware/self-installs</code> if it is not already present.</p>
 
@@ -214,7 +214,7 @@ will want to associate a run of a workflow with a particular sample, so that is
 why we start with setting up this information.  You will want to set up your
 study, experiments, and samples before uploading your text or other data files.
 This ensures you have “parents” to attach these files to.  Otherwise you will
-not be able to use them as parameters for workflows. </p>
+not be able to use them as parameters for workflows.</p>
 
 <p class="warning"><strong>Tip:</strong>You can use SeqWare Portal to edit the
 entries you make with the command line tools (or create more studies,
@@ -291,7 +291,7 @@ Created sample with SWID: 4
 
 <p>At this point you should have a nice study/experiment/sample hierarchy.  You
 can, of course, add multiple samples per experiment and multiple experiments
-per study.  For each of the samples you can now upload one or more files.  </p>
+per study.  For each of the samples you can now upload one or more files.</p>
 
 <div class="section" id="associating-files-with-a-sample">
 <h3>Associating Files with a Sample</h3>
@@ -305,7 +305,7 @@ per study.  For each of the samples you can now upload one or more files.  </p>
 information on setting the shared directory it expects to find uploaded files
 in.</p>
 
-<p>Now we can associate that file with a workflow and a run of a workflow (in this case, a stub ‘import’ workflow and a run of it): </p>
+<p>Now we can associate that file with a workflow and a run of a workflow (in this case, a stub ‘import’ workflow and a run of it):</p>
 
 <pre><code>$ seqware create workflow --name FileImport --version 1.0 --description description
 Added 'FileImport' (SWID: 5)
@@ -354,7 +354,7 @@ takes:</p>
 Created 'workflow.ini'.
 </code></pre>
 
-<p>In this example the configurable parameters of workflow “HelloWorld” (SWID: 1) are listed in <code>workflow.ini</code> (you can specify the output file with the <code>--out</code> option). Ini files are based on <a href="http://docs.oracle.com/javase/6/docs/api/java/util/Properties.html#load%28java.io.Reader%29">Java properties</a> file format.  </p>
+<p>In this example the configurable parameters of workflow “HelloWorld” (SWID: 1) are listed in <code>workflow.ini</code> (you can specify the output file with the <code>--out</code> option). Ini files are based on <a href="http://docs.oracle.com/javase/6/docs/api/java/util/Properties.html#load%28java.io.Reader%29">Java properties</a> file format.</p>
 
 <p>The file conforms to the input you can use to parameterize and launch workflows:</p>
 
@@ -439,7 +439,7 @@ workflow run accession which you can use to help monitor the workflow.</p>
 
 <p>You can then monitor workflow progress (and getting a list of the outputs)
 using the <code>workflow report</code> command. This will let you script the monitoring
-of workflow runs. After about ten minutes, the workflow should complete. </p>
+of workflow runs. After about ten minutes, the workflow should complete.</p>
 
 <pre><code>$ seqware workflow report --accession 1
 -[ RECORD 0 ]------------------+-------------------------------------
@@ -525,13 +525,13 @@ looping over the output files.</p>
 
 <p>First, you need to populate the file provenance report. You may wish to add
 the following command to a cron on an interval depending on the size 
-of your database and the number of workflows that you run. </p>
+of your database and the number of workflows that you run.</p>
 
 <pre><code>seqware files refresh 
 </code></pre>
 
 <p>Then you can download the report. Note that while this example filters by
-study name, there are a large number of filters that can be used. </p>
+study name, there are a large number of filters that can be used.</p>
 
 <pre><code>seqware files report --study-name 'New Test Study'
 </code></pre>

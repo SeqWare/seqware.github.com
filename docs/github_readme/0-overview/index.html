@@ -122,7 +122,7 @@ Receiving objects: 100% (8984/8984), 33.57 MiB | 392 KiB/s, done.
 Resolving deltas: 100% (4308/4308), done.
 </pre>
 
-<p>By default, this will land you on the default branch. You will want to check-out the latest release. </p>
+<p>By default, this will land you on the default branch. You will want to check-out the latest release.</p>
 
 <p>For example:</p>
 
@@ -146,11 +146,11 @@ you build without running any tests in the trunk directory:</p>
 <pre><code>mvn clean install  
 </code></pre>
 
-<p>In order to run the integration tests on the entire project, please ensure that you have followed the steps in each of the integration testing guides for our sub-projects. This includes <a href="http://seqware.github.com/docs/github_readme/3-metadb/">MetaDB</a> , <a href="http://seqware.github.com/docs/github_readme/4-webservice/">Web Service</a> , and <a href="http://seqware.github.com/docs/github_readme/2-queryengine/">Query Engine</a>. </p>
+<p>In order to run the integration tests on the entire project, please ensure that you have followed the steps in each of the integration testing guides for our sub-projects. This includes <a href="http://seqware.github.com/docs/github_readme/3-metadb/">MetaDB</a> , <a href="http://seqware.github.com/docs/github_readme/4-webservice/">Web Service</a> , and <a href="http://seqware.github.com/docs/github_readme/2-queryengine/">Query Engine</a>.</p>
 
 <p><strong>WARNING:  While integration and extended tests are running, launching workflows and workflow status checking MUST not occur.  If you have a cronjob performing these tasks it MUST be disabled prior to integration and extended testing.</strong></p>
 
-<p>When this is complete: </p>
+<p>When this is complete:</p>
 
 <pre><code>export MAVEN_OPTS="-Xmx1024m -XX:MaxPermSize=512m"  (This ensures that enough memory is allocated for integration tests)
 mvn clean install -DskipITs=false (This runs all unit tests and integration tests that only require postgres as a prerequisite)
@@ -176,7 +176,7 @@ EXTENDED_TEST_DB_USER=seqware
 EXTENDED_TEST_DB_PASSWORD=seqware
 </code></pre>
 
-<p>Then set your SW_REST_URL to the web service that uses the above database and invoke the following command. Note that you will need to deploy the seqware-webservice war yourself. </p>
+<p>Then set your SW_REST_URL to the web service that uses the above database and invoke the following command. Note that you will need to deploy the seqware-webservice war yourself.</p>
 
 <pre><code>mvn clean install -DskipITs=false -P 'extITs,!embeddedTomcat'
 </code></pre>
@@ -186,12 +186,12 @@ EXTENDED_TEST_DB_PASSWORD=seqware
 <pre><code>mvn clean install -DskipITs=false -P extITs,embeddedTomcat
 </code></pre>
 
-<p>You can also run the integration tests by using a locally installed tomcat instance. Make sure the BASIC_TEST<em>* and EXTENDED_TEST</em>* are defined to get this to work:</p>
+<p>You can also run the integration tests by using a locally installed tomcat instance. Make sure the BASIC_TEST_* and EXTENDED_TEST_* are defined to get this to work:</p>
 
 <pre><code>mvn clean install -DskipITs=false -P extITs
 </code></pre>
 
-<p>You can also build individual components such as the new query engine with: </p>
+<p>You can also build individual components such as the new query engine with:</p>
 
 <pre><code>cd seqware-queryengine
 mvn clean install
@@ -201,7 +201,7 @@ mvn clean install
 <div class="section" id="coding-standards">
 <h3>Coding Standards</h3>
 
-<p>Please refer to SeqWare’s <a href="https://seqware.github.io/docs/100-coding-standards/">Coding Standards</a>. </p>
+<p>Please refer to SeqWare’s <a href="https://seqware.github.io/docs/100-coding-standards/">Coding Standards</a>.</p>
 
 </div>
 <div class="section" id="building-our-site">

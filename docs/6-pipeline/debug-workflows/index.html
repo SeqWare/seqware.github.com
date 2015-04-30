@@ -77,7 +77,7 @@ workflow for more information including stderr/stdout for the jobs.</p>
 <div class="section" id="restarting-workflows">
 <h3>Restarting Workflows</h3>
 
-<p>While Oozie does support workflow re-submission (via the ‘seqware workflow-run retry’ command) the recommended approach for failed workflows in SeqWare is simply to resubmit the workflows. You can either do this by using the ‘seqware workflow schedule’ command anew or by using ‘seqware workflow-run reschedule’ to re-schedule a new workflow-run using exactly the same configuration as a previous schedule of a workflow. </p>
+<p>While Oozie does support workflow re-submission (via the ‘seqware workflow-run retry’ command) the recommended approach for failed workflows in SeqWare is simply to resubmit the workflows. You can either do this by using the ‘seqware workflow schedule’ command anew or by using ‘seqware workflow-run reschedule’ to re-schedule a new workflow-run using exactly the same configuration as a previous schedule of a workflow.</p>
 
 </div>
 </div>
@@ -89,7 +89,7 @@ workflow for more information including stderr/stdout for the jobs.</p>
 
 <p>Here, we will demonstrate a few things that can go wrong when launching a buggy workflow. In this situation, you will be informed about the failures by the WorkflowLauncher. You can demonstrate these failures by running the workflows using the development command ‘seqware bundle launch’. On the seqware VM, you will be able to read the log associated with ‘seqware workflow-run launch-scheduled’ in the crontab for the seqware user.</p>
 
-<p>First, create the workflow that we will demonstrate debugging with. </p>
+<p>First, create the workflow that we will demonstrate debugging with.</p>
 
 <pre><code>mvn archetype:generate -DarchetypeCatalog=local -Dpackage=com.github.seqware -DgupId=com.github.seqware -DarchetypeArtifactId=seqware-archetype-java-workflow -Dversion=1.0-SNAPSHOT -DarchetypeGroupId=com.github.seqware -DartifactId=BuggyWorkflow -Dworkflow-name=BuggyWorkflow -B
 ...
@@ -232,7 +232,7 @@ public class BuggyWorkflowWorkflow extends AbstractWorkflowDataModel {
 }
 </code></pre>
 
-<p>Build the workflow and then test launch it. You should see a stack trace which demonstrates an exception occuring during the launching of the workflow. </p>
+<p>Build the workflow and then test launch it. You should see a stack trace which demonstrates an exception occuring during the launching of the workflow.</p>
 
 <pre><code>$ mvn clean install
 ...
@@ -248,7 +248,7 @@ java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
 	at net.sourceforge.seqware.pipeline.workflowV2.WorkflowDataModelFactory.getWorkflowDataModel(WorkflowDataModelFactory.java:216)
 </code></pre>
 
-<p>Fix the error in the init method as suggested by the stack trace and rebuild plus relaunch. </p>
+<p>Fix the error in the init method as suggested by the stack trace and rebuild plus relaunch.</p>
 
 <pre><code>$ vim src/main/java/com/github/seqware/BuggyWorkflowWorkflow.java 
 $ mvn clean install
@@ -261,7 +261,7 @@ Caused by: java.lang.NullPointerException
 java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
 </code></pre>
 
-<p>Fix the error in the setupDirectory method and rebuild plus relaunch.  </p>
+<p>Fix the error in the setupDirectory method and rebuild plus relaunch.</p>
 
 <pre><code>$ vim src/main/java/com/github/seqware/BuggyWorkflowWorkflow.java 
 $ mvn clean install
@@ -272,7 +272,7 @@ Caused by: java.lang.ArrayIndexOutOfBoundsException: 5
 	... 30 more
 </code></pre>
 
-<p>You know the drill by now, fix the error in the buildWorkflow method and rebuild plus relaunch. </p>
+<p>You know the drill by now, fix the error in the buildWorkflow method and rebuild plus relaunch.</p>
 
 </div>
 <div class="section" id="debugging-workflows-that-fail-during-run-time">
@@ -389,7 +389,7 @@ public class BuggyWorkflowWorkflow extends AbstractWorkflowDataModel {
 }
 </code></pre>
 
-<p>Build the workflow and launch using ‘seqware bundle launch’. You should see the workflow launch successfully, submit to Oozie, and then the WorkflowWatcher start up to watch the running of the workflow: </p>
+<p>Build the workflow and launch using ‘seqware bundle launch’. You should see the workflow launch successfully, submit to Oozie, and then the WorkflowWatcher start up to watch the running of the workflow:</p>
 
 <pre><code>$ mvn clean install
 $ seqware bundle launch --dir target/Workflow_Bundle_BuggyWorkflow_1.0-SNAPSHOT_SeqWare_1.1.0-beta.1/

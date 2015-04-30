@@ -54,7 +54,7 @@
 
 <ul>
 <li>they involve multiple database joins. Populating the values of a particular row would not qualify. For example, displaying an IUS with its lane, processing events and samples would not be a report because all of the information can be acquired with single joins, but reporting all of the samples in a study would be a join of at least 3 tables so would qualify as a report.</li>
-  <li>the output format is intended to be more human readable and scriptable than JAXB’s XML, e.g. CSV, JSON, or XML with an XSD. </li>
+  <li>the output format is intended to be more human readable and scriptable than JAXB’s XML, e.g. CSV, JSON, or XML with an XSD.</li>
 </ul>
 </div>
 <div class="section" id="resources">
@@ -67,32 +67,32 @@
 <th><strong>Description</strong></th>
 </tr>
 <tr>
-<td><a href="workflowruntime_get/" alt="GET /experiments/(experimentSWID)">GET<br>/experiments/(experimentSWID)</a></td>
-<td>Retrieves a list of experiments.</td>
-</tr>
-<tr>
-<td><a href="workflowworkflowruns_get/" alt="GET the workflow run reports for a particular workflow.">GET<br>/reports/workflows/{workflowId}/runs</a></td>
-<td>Retrieves the workflow run reports for a particular workflow using its SeqWare accession, including input and output files.</td>
-</tr>
-<tr>
-<td><a href="fileworkflowruns_get/" alt="GET the workflow run objects for a particular file or set of files.">GET<br>/reports/fileworkflowruns</a></td>
-<td>Retrieves the workflow runs associated with a file or a set of files using one of three search patterns.</td>
-</tr>
-<tr>
 <td><a href="workflow_get/" alt="GET a summary of all runs of a workflow">GET<br>/reports/workflows/{workflowSWID}</a></td>
 <td>Retrieves a summary of all runs of a workflow.</td>
-</tr>
-<tr>
-<td><a href="workflowrun_get/" alt="GET a workflow run report">GET<br>/reports/workflowruns/{workflowRunSWID}</a></td>
-<td>Retrieves a single workflow run report, including input and output files, using its SeqWare accession.</td>
 </tr>
 <tr>
 <td><a href="workflowruns_get/" alt="GET workflow run reports for all runs">GET<br>/reports/workflowruns</a></td>
 <td>Retrieves workflow run report for all runs, including input and output files.</td>
 </tr>
 <tr>
+<td><a href="workflowworkflowruns_get/" alt="GET the workflow run reports for a particular workflow.">GET<br>/reports/workflows/{workflowId}/runs</a></td>
+<td>Retrieves the workflow run reports for a particular workflow using its SeqWare accession, including input and output files.</td>
+</tr>
+<tr>
+<td><a href="workflowruntime_get/" alt="GET /experiments/(experimentSWID)">GET<br>/experiments/(experimentSWID)</a></td>
+<td>Retrieves a list of experiments.</td>
+</tr>
+<tr>
 <td><a href="fileprovenance_get/" alt="GET file provenance report">GET<br>/reports/file-provenance</a></td>
 <td>Retrieves the provenance of files, such that each row traces a distinct path from a study to a file. Files returned are a conjunction of the disjunction of values for each name.</td>
+</tr>
+<tr>
+<td><a href="fileworkflowruns_get/" alt="GET the workflow run objects for a particular file or set of files.">GET<br>/reports/fileworkflowruns</a></td>
+<td>Retrieves the workflow runs associated with a file or a set of files using one of three search patterns.</td>
+</tr>
+<tr>
+<td><a href="workflowrun_get/" alt="GET a workflow run report">GET<br>/reports/workflowruns/{workflowRunSWID}</a></td>
+<td>Retrieves a single workflow run report, including input and output files, using its SeqWare accession.</td>
 </tr>
 </table>
 </div>

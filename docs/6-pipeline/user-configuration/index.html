@@ -80,9 +80,9 @@ ready to go, you will not need to modify it.</p>
 Engine, and Amazon Cloud Settings are all optional, so they do not need to be
 filled in for every deployment of SeqWare, just those using these tools. Also note that the
 settings file needs to have read and write permissions for only the owner for security reasons. 
-Our tools will abort and refuse to run if this is not set. </p>
+Our tools will abort and refuse to run if this is not set.</p>
 
-<p>The format for the settings file is based on <a href="http://docs.oracle.com/javase/6/docs/api/java/util/Properties.html#load%28java.io.Reader%29">Java properties files</a>. </p>
+<p>The format for the settings file is based on <a href="http://docs.oracle.com/javase/6/docs/api/java/util/Properties.html#load%28java.io.Reader%29">Java properties files</a>.</p>
 
 <pre><code class="language-ini"><span class="c1"># SEQWARE PIPELINE SETTINGS</span>
 
@@ -231,9 +231,9 @@ Our tools will abort and refuse to run if this is not set. </p>
 
 <p>In addition to the the user’s ~/.seqware/settings file the only other configuration is that required for 
 automatic retry. Like the Pegasus workflow engine, it is possible to control the number of attempts
-that should be made before a job is considered failed in a workflow. </p>
+that should be made before a job is considered failed in a workflow.</p>
 
-<p>Edit the Oozie site XML and add and/or add to the error codes that are listed. </p>
+<p>Edit the Oozie site XML and add and/or add to the error codes that are listed.</p>
 
 <pre><code>    &lt;property&gt;
         &lt;name&gt;oozie.service.LiteWorkflowStoreService.user.retry.error.code.ext&lt;/name&gt;
@@ -247,11 +247,11 @@ that should be made before a job is considered failed in a workflow. </p>
 
 <p>After restarting Oozie, Oozie will use the listed error codes in combination with the OOZIE_RETRY_MAX parameter to determine how many times steps will 
 be retried in case of a specific error. For example, in the above jobs that return with an SGE error code of SGE137 will automatically be retried 30 or 
-OOZIE_RETRY_MAX times, whatever is higher. The actual error codes will likely be dependent on your site. </p>
+OOZIE_RETRY_MAX times, whatever is higher. The actual error codes will likely be dependent on your site.</p>
 
-<p>For versions of the oozie-sge plugin from 1.0.3 onwards, two kinds of error codes are possible. Error codes of the form SGE[0-9]+ refer to the exit status of the actual Bash scripts that form steps in your workflows. Error codes of the form SGEF[0-9]+ refer to the failure code of the SGE infrastructure itself. </p>
+<p>For versions of the oozie-sge plugin from 1.0.3 onwards, two kinds of error codes are possible. Error codes of the form SGE[0-9]+ refer to the exit status of the actual Bash scripts that form steps in your workflows. Error codes of the form SGEF[0-9]+ refer to the failure code of the SGE infrastructure itself.</p>
 
-<p>For example, the following output from “qacct -j” refers to a workflow step which failed with an error code of 1 (which would correspond to SGE1 for the Oozie XML parameter above). </p>
+<p>For example, the following output from “qacct -j” refers to a workflow step which failed with an error code of 1 (which would correspond to SGE1 for the Oozie XML parameter above).</p>
 
 <pre><code>$ qacct -j 3702
 ==============================================================
@@ -299,7 +299,7 @@ maxvmem      557.734M
 arid         undefined
 </code></pre>
 
-<p>The following output from “qacct -j” refers to a workflow step where the actual qsub failed since a logging directory was unavailable (leading to a Eqw state). This would correspond to an Oozie error code of SGEF26. </p>
+<p>The following output from “qacct -j” refers to a workflow step where the actual qsub failed since a logging directory was unavailable (leading to a Eqw state). This would correspond to an Oozie error code of SGEF26.</p>
 
 <pre><code>$ qacct -j 3801
 ==============================================================

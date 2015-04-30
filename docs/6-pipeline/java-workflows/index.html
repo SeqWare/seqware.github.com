@@ -90,7 +90,7 @@ saw how to create a MyHelloWorld Java workflow using archetype.</p>
 
 <p>The first step to get started is to generate your workflow skeleton using Maven 
 archetypes. You will want to do this in a directory without <code>pom.xml</code> files (i.e. 
-outside of the SeqWare development directories).  Here we are working in the workflow-dev directory: </p>
+outside of the SeqWare development directories).  Here we are working in the workflow-dev directory:</p>
 
 <pre><code>$ cd ~/workflow-dev
 $ mvn archetype:generate
@@ -372,7 +372,7 @@ these files are not available from this.getFiles().get(String).</p>
 <p>The jobs need to have distinct IDs and you can generate these using a for loop
 in FTL if need be. You can put any command in the <tt>argument</tt> section
 but mostly this is used to call GenericCommandRunner which runs the command
-provided in a Bash shell. </p>
+provided in a Bash shell.</p>
 
 <pre><code class="language-java">    <span class="nd">@Override</span>
     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">buildWorkflow</span><span class="o">()</span> <span class="o">{</span>
@@ -424,13 +424,13 @@ to specify job pre-requisites.</p>
 
 <p>This type of dependency is not generally recommended. In most cases you will want to 
 check a dependency into a maven repository or add it into the binary or data directories 
-of a workflow. </p>
+of a workflow.</p>
 
 <p>However, in the following cases, you will need to rely on symbolic links:</p>
 
 <ul>
-<li>The dependency is too large to go into a maven repository </li>
-  <li>The dependency is proprietary or cannot be redistributed </li>
+<li>The dependency is too large to go into a maven repository</li>
+  <li>The dependency is proprietary or cannot be redistributed</li>
 </ul>
 <p>By convention, the symlinks go into a directory in the root of the workflow called links. 
 They should link to a directory, not to a single file (for the purposes of copying the 

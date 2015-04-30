@@ -67,7 +67,7 @@
   <li>Access to a Seqware MetaDB PostgreSQL database (See <a href="../../4-metadb/">SeqWare MetaDB</a>)</li>
   <li>A locally running PostgreSQL install that has a ‘seqware’ user with CREATEDB privileges.</li>
   <li>Maven 2.2.1+</li>
-  <li>The SeqWare WebService source code. (See <a href="../../13-code/">Source Code</a>) </li>
+  <li>The SeqWare WebService source code. (See <a href="../../13-code/">Source Code</a>)</li>
 </ul>
 </div>
 <div class="section" id="integration-testing">
@@ -85,7 +85,7 @@
 <pre><code>mvn tomcat7:run
 </code></pre>
 
-<p>You will need to make sure that your ~/.seqware/settings file includes the line </p>
+<p>You will need to make sure that your ~/.seqware/settings file includes the line</p>
 
 <pre><code>SW_REST_URL=http://localhost:8889/seqware-webservice
 </code></pre>
@@ -133,7 +133,7 @@
 &lt;user username="admin" password="admin" roles="admin,manager"/&gt;
 </code></pre>
 
-<p>In some cases, tomcat will ignore configuring the JAVA_OPTS either on command line or in the /etc/init.d/tomcat7 . In these cases, you can try adding a setenv.sh file with the single line </p>
+<p>In some cases, tomcat will ignore configuring the JAVA_OPTS either on command line or in the /etc/init.d/tomcat7 . In these cases, you can try adding a setenv.sh file with the single line</p>
 
 <pre><code>export JAVA_OPTS="-server -Xss1024K -Xms1G -Xmx2G -XX:MaxPermSize=128M -XX:NewSize=512m"
 </code></pre>

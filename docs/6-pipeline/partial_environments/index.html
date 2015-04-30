@@ -64,9 +64,9 @@
 <div class="section" id="typical-development">
 <h2>Typical Development</h2>
 
-<p>Our <a href="../../2-installation/">docs</a> cover how to start-up a SeqWare environment. We normally recommend either the VirtualBox images or Amazon images as a starting off point. </p>
+<p>Our <a href="../../2-installation/">docs</a> cover how to start-up a SeqWare environment. We normally recommend either the VirtualBox images or Amazon images as a starting off point.</p>
 
-<p>As described in our ‘Getting Started’ guide, you can create a HelloWorld workflow and use ‘seqware bundle launch’ to run a workflow using Oozie backed by Oozie-sge and with metadata. </p>
+<p>As described in our ‘Getting Started’ guide, you can create a HelloWorld workflow and use ‘seqware bundle launch’ to run a workflow using Oozie backed by Oozie-sge and with metadata.</p>
 
 <pre><code>$ seqware bundle launch --dir target/Workflow_Bundle_HelloWorld_1.0-SNAPSHOT_SeqWare_1.1.0-beta.1/
 Performing launch of workflow 'HelloWorld' version '1.0-SNAPSHOT'
@@ -90,7 +90,7 @@ Application Name   : HelloWorld
 Application Status : SUCCEEDED
 </code></pre>
 
-<p>In this default mode, all our dependencies are installed and metadata is tracked both in order to launch the workflow and on each step of your workflow. </p>
+<p>In this default mode, all our dependencies are installed and metadata is tracked both in order to launch the workflow and on each step of your workflow.</p>
 
 </div>
 <div class="section" id="peeling-back-the-onion">
@@ -99,12 +99,12 @@ Application Status : SUCCEEDED
 <div class="section" id="development-without-oozie-but-with-metadata-and-sge">
 <h3>Development without Oozie but with Metadata and SGE</h3>
 
-<p>You can shutdown Oozie if desired to save resources. </p>
+<p>You can shutdown Oozie if desired to save resources.</p>
 
 <pre><code>$ sudo service oozie stop
 </code></pre>
 
-<p>Run your workflows using the whitestar-sge engine. Note that all workflows run by whitestar will run synchronously via the WorkflowLauncher. </p>
+<p>Run your workflows using the whitestar-sge engine. Note that all workflows run by whitestar will run synchronously via the WorkflowLauncher.</p>
 
 <pre><code>$ seqware bundle launch --dir target/Workflow_Bundle_HelloWorld_1.0-SNAPSHOT_SeqWare_1.1.0-beta.1/ --engine whitestar-sge
 ...
@@ -133,21 +133,21 @@ $ seqware bundle launch --dir target/Workflow_Bundle_HelloWorld_1.0-SNAPSHOT_Seq
 <div class="section" id="development-without-oozie-sge-or-metadata">
 <h3>Development without Oozie, SGE, or Metadata</h3>
 
-<p>This is the most degraded environment, you basically only need Linux, Java, and whatever dependencies your workflow bundle requires of course. </p>
+<p>This is the most degraded environment, you basically only need Linux, Java, and whatever dependencies your workflow bundle requires of course.</p>
 
-<p>First change your metadata environment to the in-memory metadata environment. This is a partial implementation of metadata which allows you to only store metadata while a particular JVM is active, sufficient only for launching workflows.  </p>
+<p>First change your metadata environment to the in-memory metadata environment. This is a partial implementation of metadata which allows you to only store metadata while a particular JVM is active, sufficient only for launching workflows.</p>
 
 <p>In your .seqware/settings file, you will be replacing</p>
 
 <pre><code>SW_METADATA_METHOD=webservice
 </code></pre>
 
-<p>with </p>
+<p>with</p>
 
 <pre><code>SW_METADATA_METHOD=inmemory
 </code></pre>
 
-<p>Next, you will need to run your workflows without metadata being recorded for individual steps of your workflows. </p>
+<p>Next, you will need to run your workflows without metadata being recorded for individual steps of your workflows.</p>
 
 <pre><code>$ seqware bundle launch --dir target/Workflow_Bundle_HelloWorld_1.0-SNAPSHOT_SeqWare_1.1.0-beta.1/ --engine whitestar --no-metadata
 </code></pre>

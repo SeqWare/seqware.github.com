@@ -53,7 +53,7 @@
 <div class="section" id="working-on-your-own-workflows">
 <h2>Working on your own Workflows</h2>
 
-<p>Going back to creation of new workflows in the maven-bundles directory, we will explain some of the magic numbers and settings that we skipped over while demoing workflow launching. </p>
+<p>Going back to creation of new workflows in the maven-bundles directory, we will explain some of the magic numbers and settings that we skipped over while demoing workflow launching.</p>
 
 <p>Assuming one uses the Java workflow, use the following options after mvn archetype:generate</p>
 
@@ -151,7 +151,7 @@ seem to work here --><pre>
 </li>
   <li>
     <dl>
-<dt>src </dt>
+<dt>src</dt>
       <dd>This directory contains the Java client. Look in here to modify the .java files (Java workflow). The examples of Java and FTL can be found <a href="../../15-workflow-examples/">here</a>.</dd>
     </dl>
 </li>
@@ -169,13 +169,13 @@ seem to work here --><pre>
 
 <ul>
 <li>
-    <p>${date}: a string representing the date the DAX was created, this is always defined so consider this a reserved variable name. </p>
+    <p>${date}: a string representing the date the DAX was created, this is always defined so consider this a reserved variable name.</p>
   </li>
   <li>
-    <p>${random}: a randomly generated string, this is always defined so consider this a reserved variable name. </p>
+    <p>${random}: a randomly generated string, this is always defined so consider this a reserved variable name.</p>
   </li>
   <li>
-    <p>${workflow_bundle_dir}: if this workflow is part of a workflow bundle this variable will be defined and points to the path of the root of the directory this workflow bundle has been expanded to. </p>
+    <p>${workflow_bundle_dir}: if this workflow is part of a workflow bundle this variable will be defined and points to the path of the root of the directory this workflow bundle has been expanded to.</p>
   </li>
   <li>
     <p>${workflow_base_dir}: ${workflow_bundle_dir}/Workflow_Bundle_{workflow_name}/{workflow_version}</p>

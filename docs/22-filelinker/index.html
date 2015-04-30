@@ -53,7 +53,7 @@
 <div class="section" id="add-the-workflow">
 <h2>Add the Workflow</h2>
 
-<p>The “FileImport” workflow is already added into the MetadataDB, but this method can be used to create new workflows to link to. </p>
+<p>The “FileImport” workflow is already added into the MetadataDB, but this method can be used to create new workflows to link to.</p>
 
 <pre><code>java -jar ~/.seqware/self-installs/seqware-distribution-1.1.0-beta.1-full.jar  -p net.sourceforge.seqwe.pipeline.plugins.Metadata -- --create --table workflow --field name::FileImport --field version::1.0 --field description::'Imports files into the database, links them to IUSs or Lanes and creates intermediate Processings. Initially used to import files from the LIMS and attach them to IUSes'
 </code></pre>
@@ -101,7 +101,7 @@
 <div class="section" id="run-the-tool">
 <h2>Run the tool</h2>
 
-<p>You can get the workflow accession using the –list-install option in BundleManager. </p>
+<p>You can get the workflow accession using the –list-install option in BundleManager.</p>
 
 <pre><code>java -jar seqware-distribution-1.1.0-beta.1-SNAPSHOT-full.jar --plugin net.sourceforge.seqware.pipeline.plugins.FileLinker -- \
      --file-list-file /home/mtaschuk/Downloads/link_files_report.txt --workflow-accession 375894 --csv-separator ,

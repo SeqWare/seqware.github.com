@@ -125,7 +125,7 @@ ius_workflow_runs.</p>
 
 <p>The following is a more complicated database diagram that includes tables used for 
 linking metadata to workflow runs and all attribute tables. This should be more 
-useful for developers rather than users. </p>
+useful for developers rather than users.</p>
 
 <p><img src="../../assets/images/metadb/Db_complicated.png" alt="Complicated DB"></p>
 
@@ -133,14 +133,14 @@ useful for developers rather than users. </p>
 lane, sample, ius, experiment, and study) which have physical counterparts
 and are typically created by migration by the LIMS and the tables at the “bottom” of 
 the database (workflow, workflow_run, processing, and file) which are actually used
-by SeqWare to maintain details on what workflows have been installed and run. </p>
+by SeqWare to maintain details on what workflows have been installed and run.</p>
 
 <p>Note there are also attribute tables for each of the above tables (of the form X_attribute) 
 which maintain arbitrary key value information that can be used to guide custom 
-behaviour at your particular SeqWare site. </p>
+behaviour at your particular SeqWare site.</p>
 
 <p>Finally, there are a host of linking tables (of the form processing_X) which maintain 
-information on which steps in your workflow are attributable to what physical entities. </p>
+information on which steps in your workflow are attributable to what physical entities.</p>
 
 <p>For more in-depth information on our schema including table-by-table descriptions, please refer to <a href="../../metadb-schema">this</a></p>
 
@@ -148,12 +148,12 @@ information on which steps in your workflow are attributable to what physical en
 <div class="section" id="upgrading-from-0-13-6-x-to-1-0-x">
 <h2>Upgrading From 0.13.6.X to 1.0.X</h2>
 
-<p>First, let’s review which tools depend on what. </p>
+<p>First, let’s review which tools depend on what.</p>
 
 <p><img src="../../assets/images/metadb/database_paths.png" alt="Required Infrastructure"></p>
 
 <p>All currently supported command-line utilities from 0.13.6.X use the SeqWare web service and in their 1.0.X incarnation, will rely upon a 1.0.X web service. The new deletion utility relies upon the 1.0.X admin web service (to be documented). The checkDB and migration plugin (used to copy input file paths from the old workflow run reports) rely upon a direct database connection as well. Please refer to 
-<a href="../github_readme/6-pipeline/user-configuration">User Configuration</a> for additional information on setting these up. </p>
+<a href="../github_readme/6-pipeline/user-configuration">User Configuration</a> for additional information on setting these up.</p>
 
 <p>You will need both your SeqWare webservice and SeqWare database settings configured before attempting to update your database. The procedure is as follows:</p>
 

@@ -63,7 +63,7 @@
 <div class="section" id="usage">
 <h2>Usage</h2>
 
-<p>The base plugin is accessible via the CLI. </p>
+<p>The base plugin is accessible via the CLI.</p>
 
 <pre><code>seqware checkdb --help
 
@@ -85,7 +85,7 @@ Description:
   <li>Orphan checks (note that a few of these can be expected, for example, if workflows have not run yet on new data)
     <ul>
 <li>Experiments contain samples</li>
-      <li>IUSes contain processing events </li>
+      <li>IUSes contain processing events</li>
       <li>Files are hooked up to processing events</li>
       <li>Workflows have been run at least once</li>
       <li>All samples and lanes are associated with experiments and sequencer runs respectively</li>
@@ -105,7 +105,7 @@ Description:
 
 <ul>
 <li>The number of ‘Completed’ workflow runs connected to multiple studies (a possible error)</li>
-  <li>Workflow runs with input files via the processing hierarchy but not via workflow_run_input_files (this is expected since input files via the direct table are a subset of those in the processing hierarchy) </li>
+  <li>Workflow runs with input files via the processing hierarchy but not via workflow_run_input_files (this is expected since input files via the direct table are a subset of those in the processing hierarchy)</li>
 </ul>
 </div>
 <div class="section" id="additional-checks">
@@ -146,7 +146,7 @@ public class TestPlugin implements CheckDBPluginInterface {
 }
 </code></pre>
 
-<p>Note that the CheckDB.processOutput is merely a static convenience method that generates warning messages based on a list of integers. All you really are required to do is to run queries using qRunner and insert them into the result map by level. Each level maps to a set of arbitrary warnings. After creating a new plugin, you can use the following procedure to run it alongside the pre-created plugins. </p>
+<p>Note that the CheckDB.processOutput is merely a static convenience method that generates warning messages based on a list of integers. All you really are required to do is to run queries using qRunner and insert them into the result map by level. Each level maps to a set of arbitrary warnings. After creating a new plugin, you can use the following procedure to run it alongside the pre-created plugins.</p>
 
 <pre><code>~/seqware$ javac -cp seqware-distribution/target/seqware-distribution-1.0.7-SNAPSHOT-full.jar TestPlugin.java
 Note: TestPlugin to be registered as a net.sourceforge.seqware.pipeline.plugins.checkdb.CheckDBPluginInterface

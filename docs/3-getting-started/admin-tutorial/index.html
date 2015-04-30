@@ -124,7 +124,7 @@ Bundle Has Been Installed to the MetaDB and Provisioned to /home/seqware/package
 <h2>How to Launch</h2>
 
 <p>In our reference SeqWare environment, we
-typically schedule jobs and then launch them asynchronously via a cronjob. </p>
+typically schedule jobs and then launch them asynchronously via a cronjob.</p>
 
 <p>A user will schedule workflow launches using a command similar to
 that below:</p>
@@ -132,7 +132,7 @@ that below:</p>
 <pre><code>$ seqware workflow schedule --accession 1 --parent-accession 99  --ini workflow.ini --host `hostname --long` 
 </code></pre>
 
-<p>Then in a cronjob we use the following command to launch scheduled jobs: </p>
+<p>Then in a cronjob we use the following command to launch scheduled jobs:</p>
 
 <pre><code>$ seqware workflow-run launch-scheduled
 </code></pre>
@@ -142,7 +142,7 @@ host. When we launch scheduled workflows, we check this value in order to
 determine whether a particular scheduled workflow should be launched on this
 host.  Note that while we normally use a fully qualified hostname,
 any unique string can be used to designate a host for launching  (for example
-on Amazon S3). </p>
+on Amazon S3).</p>
 
 </div>
 <div class="section" id="how-to-monitor">
@@ -191,7 +191,7 @@ On our deployment, we have a cron script which calls the Files Report and <code>
 <p>As an admin the next steps are to explore the various sub-project guides in
 this documentation.  Also take a look at the guide for <a href="../../2a-installation-from-scratch/">creating a SeqWare
 VM</a> which provides low-level, technical
-details on how to install the components of the SeqWare software stack. </p>
+details on how to install the components of the SeqWare software stack.</p>
 
 <!--
 ## Coming Soon
