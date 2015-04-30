@@ -64,14 +64,14 @@
 </div>
 <div class="section" id="1-download-seqware">
 <h2>1. Download SeqWare</h2>
-<p>Download the version of SeqWare that you need from Artifactory. Make sure you copy the one JAR with “-full” at the end of its name, e.g. seqware-distribution-1.1.0-beta.1.jar</p>
-<pre><code class="language-console"><span class="gp">user@localhost:~$</span> wget https://seqwaremaven.oicr.on.ca/artifactory/simple/seqware-release/com/github/seqware/seqware-distribution/1.1.0-beta.1/seqware-distribution-1.1.0-beta.1-full.jar</code></pre>
+<p>Download the version of SeqWare that you need from Artifactory. Make sure you copy the one JAR with “-full” at the end of its name, e.g. seqware-distribution-1.1.0.jar</p>
+<pre><code class="language-console"><span class="gp">user@localhost:~$</span> wget https://seqwaremaven.oicr.on.ca/artifactory/simple/seqware-release/com/github/seqware/seqware-distribution/1.1.0/seqware-distribution-1.1.0-full.jar</code></pre>
 
 </div>
 <div class="section" id="2-copy-the-jar">
 <h2>2.Copy the jar</h2>
 <p>Copy this jar to your seqware self-installs directory.</p>
-<pre><code class="language-console"><span class="gp">user@localhost:~$</span> mv seqware-distribution-1.1.0-beta.1-full.jar ~/.seqware/self-installs</code></pre>
+<pre><code class="language-console"><span class="gp">user@localhost:~$</span> mv seqware-distribution-1.1.0-full.jar ~/.seqware/self-installs</code></pre>
 
 </div>
 <div class="section" id="3-edit-your-script">
@@ -81,14 +81,14 @@
 <span class="c"># Ensure this file is executable via `chmod a+x seqware`, then place it</span>
 <span class="c"># somewhere on your $PATH, like ~/bin. The rest of SeqWare will be</span>
 <span class="c"># installed upon first run into the ~/.seqware directory.</span>
-<span class="nv">DEFAULT_SEQWARE_VERSION</span><span class="o">=</span><span class="s2">"1.1.0-beta.1"</span></code></pre>
+<span class="nv">DEFAULT_SEQWARE_VERSION</span><span class="o">=</span><span class="s2">"1.1.0"</span></code></pre>
 
 </div>
 <div class="section" id="4-run-seqware">
 <h2>4. Run seqware</h2>
 <p>Run <code>seqware</code> with no arguments. This will trigger SeqWare to download the sanity check file that corresponds to the new version.</p>
 <pre><code class="language-console"><span class="gp">someUser@someHost:~$</span> seqware
-<span class="go">Downloading SeqWare Check to /home/someUser/.seqware/self-installs/seqware-sanity-check-1.1.0-beta.1-jar-paired-with-distribution.jar now...</span>
+<span class="go">Downloading SeqWare Check to /home/someUser/.seqware/self-installs/seqware-sanity-check-1.1.0-jar-paired-with-distribution.jar now...</span>
 <span class="go">  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current</span>
 <span class="go">                                 Dload  Upload   Total   Spent    Left  Speed</span>
 <span class="go">100  174k  100  174k    0     0  7158k      0 --:--:-- --:--:-- --:--:-- 7262k</span>

@@ -261,7 +261,7 @@ $ mvn archetype:generate
 Choose a number or apply filter (format: [groupId:]artifactId, case sensitive contains): 294: 
 </code></pre>
 
-<p class="warning"><strong>Note:</strong>You can inform Maven about the archetypes by downloading the latest <a href="https://github.com/SeqWare/seqware/releases/download/1.1.0-beta.1/archetype-catalog.xml">archetype-catalog.xml</a> file and placing it in <code>~/.m2/</code>.</p>
+<p class="warning"><strong>Note:</strong>You can inform Maven about the archetypes by downloading the latest <a href="https://github.com/SeqWare/seqware/releases/download/1.1.0/archetype-catalog.xml">archetype-catalog.xml</a> file and placing it in <code>~/.m2/</code>.</p>
 
 <p>The numbers used to identify  the archetypes will vary 
 depending on what you have installed, so you will need to scan through the list 
@@ -338,7 +338,7 @@ developers.</p>
 |                   `-- seqware
 |                       `-- MyHelloWorldWorkflow.java
 |-- target
-|   `-- Workflow_Bundle_MyHelloWorld_1.0_SeqWare_1.1.0-beta.1
+|   `-- Workflow_Bundle_MyHelloWorld_1.0_SeqWare_1.1.0
 |       `-- Workflow_Bundle_MyHelloWorld
 |           `-- 1.0
 |               |-- bin
@@ -352,7 +352,7 @@ developers.</p>
 |               |-- data
 |               |   `-- input.txt
 |               |-- lib
-|               |   `-- seqware-distribution-1.1.0-beta.1-full.jar
+|               |   `-- seqware-distribution-1.1.0-full.jar
 |               `-- metadata.xml
 |-- workflow
 |   |-- config
@@ -403,7 +403,7 @@ tools can test, execute, and install the workflow. Here is an example from the
 MyHelloWorld workflow:</p>
 
 <pre><code class="language-xml"><span class="nt">&lt;bundle</span> <span class="na">version=</span><span class="s">"1.0"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;workflow</span> <span class="na">name=</span><span class="s">"MyHelloWorld"</span> <span class="na">version=</span><span class="s">"1.0"</span> <span class="na">seqware_version=</span><span class="s">"1.1.0-beta.1"</span>
+  <span class="nt">&lt;workflow</span> <span class="na">name=</span><span class="s">"MyHelloWorld"</span> <span class="na">version=</span><span class="s">"1.0"</span> <span class="na">seqware_version=</span><span class="s">"1.1.0"</span>
   <span class="na">basedir=</span><span class="s">"${workflow_bundle_dir}/Workflow_Bundle_MyHelloWorld/1.0"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;description&gt;</span>Add a description of the workflow here.<span class="nt">&lt;/description&gt;</span>
     <span class="nt">&lt;workflow_class</span> <span class="na">path=</span><span class="s">"${workflow_bundle_dir}/Workflow_Bundle_MyHelloWorld/1.0/classes/com/github/seqware/MyHelloWorldWorkflow.java"</span><span class="nt">/&gt;</span>
@@ -863,7 +863,7 @@ Packaging Bundle
 Bundle has been packaged to /home/seqware/packaged-bundles
 </code></pre>
 
-<p>What happens here is the <code>Workflow_Bundle_MyHelloWorld_1.0_SeqWare_1.1.0-beta.1</code> directory is zip’d up to your output directory (<code>~/packaged-bundles</code>) and that can be provided to an admin for installation.</p>
+<p>What happens here is the <code>Workflow_Bundle_MyHelloWorld_1.0_SeqWare_1.1.0</code> directory is zip’d up to your output directory (<code>~/packaged-bundles</code>) and that can be provided to an admin for installation.</p>
 
 </div>
 <div class="section" id="next-steps">
