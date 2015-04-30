@@ -871,14 +871,14 @@
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code><a href="http://docs.oracle.com/javase/7/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="../../../../../../net/sourceforge/seqware/common/model/LaneAttribute.html" title="class in net.sourceforge.seqware.common.model">LaneAttribute</a>&gt;</code></td>
-<td class="colLast"><span class="strong">LaneAttributeDAOHibernate.</span><code><strong><a href="../../../../../../net/sourceforge/seqware/common/dao/hibernate/LaneAttributeDAOHibernate.html#findAll(net.sourceforge.seqware.common.model.Lane)">findAll</a></strong>(<a href="../../../../../../net/sourceforge/seqware/common/model/Lane.html" title="class in net.sourceforge.seqware.common.model">Lane</a>&nbsp;lane)</code>
+<td class="colLast"><span class="strong">LaneLinkDAO.</span><code><strong><a href="../../../../../../net/sourceforge/seqware/common/dao/hibernate/LaneLinkDAO.html#findAll(net.sourceforge.seqware.common.model.Lane)">findAll</a></strong>(<a href="../../../../../../net/sourceforge/seqware/common/model/Lane.html" title="class in net.sourceforge.seqware.common.model">Lane</a>&nbsp;lane)</code>
 <div class="block">
  findAll.</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code><a href="http://docs.oracle.com/javase/7/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="../../../../../../net/sourceforge/seqware/common/model/LaneAttribute.html" title="class in net.sourceforge.seqware.common.model">LaneAttribute</a>&gt;</code></td>
-<td class="colLast"><span class="strong">LaneLinkDAO.</span><code><strong><a href="../../../../../../net/sourceforge/seqware/common/dao/hibernate/LaneLinkDAO.html#findAll(net.sourceforge.seqware.common.model.Lane)">findAll</a></strong>(<a href="../../../../../../net/sourceforge/seqware/common/model/Lane.html" title="class in net.sourceforge.seqware.common.model">Lane</a>&nbsp;lane)</code>
+<td class="colLast"><span class="strong">LaneLinkDAOHibernate.</span><code><strong><a href="../../../../../../net/sourceforge/seqware/common/dao/hibernate/LaneLinkDAOHibernate.html#findAll(net.sourceforge.seqware.common.model.Lane)">findAll</a></strong>(<a href="../../../../../../net/sourceforge/seqware/common/model/Lane.html" title="class in net.sourceforge.seqware.common.model">Lane</a>&nbsp;lane)</code>
 <div class="block">
  findAll.</div>
 </td>
@@ -892,7 +892,7 @@
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code><a href="http://docs.oracle.com/javase/7/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="../../../../../../net/sourceforge/seqware/common/model/LaneAttribute.html" title="class in net.sourceforge.seqware.common.model">LaneAttribute</a>&gt;</code></td>
-<td class="colLast"><span class="strong">LaneLinkDAOHibernate.</span><code><strong><a href="../../../../../../net/sourceforge/seqware/common/dao/hibernate/LaneLinkDAOHibernate.html#findAll(net.sourceforge.seqware.common.model.Lane)">findAll</a></strong>(<a href="../../../../../../net/sourceforge/seqware/common/model/Lane.html" title="class in net.sourceforge.seqware.common.model">Lane</a>&nbsp;lane)</code>
+<td class="colLast"><span class="strong">LaneAttributeDAOHibernate.</span><code><strong><a href="../../../../../../net/sourceforge/seqware/common/dao/hibernate/LaneAttributeDAOHibernate.html#findAll(net.sourceforge.seqware.common.model.Lane)">findAll</a></strong>(<a href="../../../../../../net/sourceforge/seqware/common/model/Lane.html" title="class in net.sourceforge.seqware.common.model">Lane</a>&nbsp;lane)</code>
 <div class="block">
  findAll.</div>
 </td>
@@ -1002,14 +1002,6 @@
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code><a href="../../../../../../net/sourceforge/seqware/common/model/Lane.html" title="class in net.sourceforge.seqware.common.model">Lane</a></code></td>
-<td class="colLast"><span class="strong">MetadataInMemory.</span><code><strong><a href="../../../../../../net/sourceforge/seqware/common/metadata/MetadataInMemory.html#getLane(int)">getLane</a></strong>(int&nbsp;laneAccession)</code>&nbsp;</td>
-</tr>
-<tr class="rowColor">
-<td class="colFirst"><code><a href="../../../../../../net/sourceforge/seqware/common/model/Lane.html" title="class in net.sourceforge.seqware.common.model">Lane</a></code></td>
-<td class="colLast"><span class="strong">MetadataNoConnection.</span><code><strong><a href="../../../../../../net/sourceforge/seqware/common/metadata/MetadataNoConnection.html#getLane(int)">getLane</a></strong>(int&nbsp;laneAccession)</code>&nbsp;</td>
-</tr>
-<tr class="altColor">
-<td class="colFirst"><code><a href="../../../../../../net/sourceforge/seqware/common/model/Lane.html" title="class in net.sourceforge.seqware.common.model">Lane</a></code></td>
 <td class="colLast"><span class="strong">Metadata.</span><code><strong><a href="../../../../../../net/sourceforge/seqware/common/metadata/Metadata.html#getLane(int)">getLane</a></strong>(int&nbsp;laneAccession)</code>
 <div class="block">
  getLane.</div>
@@ -1017,7 +1009,15 @@
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code><a href="../../../../../../net/sourceforge/seqware/common/model/Lane.html" title="class in net.sourceforge.seqware.common.model">Lane</a></code></td>
+<td class="colLast"><span class="strong">MetadataNoConnection.</span><code><strong><a href="../../../../../../net/sourceforge/seqware/common/metadata/MetadataNoConnection.html#getLane(int)">getLane</a></strong>(int&nbsp;laneAccession)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code><a href="../../../../../../net/sourceforge/seqware/common/model/Lane.html" title="class in net.sourceforge.seqware.common.model">Lane</a></code></td>
 <td class="colLast"><span class="strong">MetadataDB.</span><code><strong><a href="../../../../../../net/sourceforge/seqware/common/metadata/MetadataDB.html#getLane(int)">getLane</a></strong>(int&nbsp;laneAccession)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code><a href="../../../../../../net/sourceforge/seqware/common/model/Lane.html" title="class in net.sourceforge.seqware.common.model">Lane</a></code></td>
+<td class="colLast"><span class="strong">MetadataInMemory.</span><code><strong><a href="../../../../../../net/sourceforge/seqware/common/metadata/MetadataInMemory.html#getLane(int)">getLane</a></strong>(int&nbsp;laneAccession)</code>&nbsp;</td>
 </tr>
 </tbody>
 </table>
@@ -1034,7 +1034,9 @@
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code><a href="http://docs.oracle.com/javase/7/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="../../../../../../net/sourceforge/seqware/common/model/Lane.html" title="class in net.sourceforge.seqware.common.model">Lane</a>&gt;</code></td>
-<td class="colLast"><span class="strong">MetadataInMemory.</span><code><strong><a href="../../../../../../net/sourceforge/seqware/common/metadata/MetadataInMemory.html#getLanesFrom(int)">getLanesFrom</a></strong>(int&nbsp;sequencerRunAccession)</code>&nbsp;</td>
+<td class="colLast"><span class="strong">Metadata.</span><code><strong><a href="../../../../../../net/sourceforge/seqware/common/metadata/Metadata.html#getLanesFrom(int)">getLanesFrom</a></strong>(int&nbsp;sequencerRunAccession)</code>
+<div class="block">Get Lanes from a sequencer run.</div>
+</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code><a href="http://docs.oracle.com/javase/7/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="../../../../../../net/sourceforge/seqware/common/model/Lane.html" title="class in net.sourceforge.seqware.common.model">Lane</a>&gt;</code></td>
@@ -1042,13 +1044,11 @@
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code><a href="http://docs.oracle.com/javase/7/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="../../../../../../net/sourceforge/seqware/common/model/Lane.html" title="class in net.sourceforge.seqware.common.model">Lane</a>&gt;</code></td>
-<td class="colLast"><span class="strong">Metadata.</span><code><strong><a href="../../../../../../net/sourceforge/seqware/common/metadata/Metadata.html#getLanesFrom(int)">getLanesFrom</a></strong>(int&nbsp;sequencerRunAccession)</code>
-<div class="block">Get Lanes from a sequencer run.</div>
-</td>
+<td class="colLast"><span class="strong">MetadataDB.</span><code><strong><a href="../../../../../../net/sourceforge/seqware/common/metadata/MetadataDB.html#getLanesFrom(int)">getLanesFrom</a></strong>(int&nbsp;sequencerRunAccession)</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code><a href="http://docs.oracle.com/javase/7/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="../../../../../../net/sourceforge/seqware/common/model/Lane.html" title="class in net.sourceforge.seqware.common.model">Lane</a>&gt;</code></td>
-<td class="colLast"><span class="strong">MetadataDB.</span><code><strong><a href="../../../../../../net/sourceforge/seqware/common/metadata/MetadataDB.html#getLanesFrom(int)">getLanesFrom</a></strong>(int&nbsp;sequencerRunAccession)</code>&nbsp;</td>
+<td class="colLast"><span class="strong">MetadataInMemory.</span><code><strong><a href="../../../../../../net/sourceforge/seqware/common/metadata/MetadataInMemory.html#getLanesFrom(int)">getLanesFrom</a></strong>(int&nbsp;sequencerRunAccession)</code>&nbsp;</td>
 </tr>
 </tbody>
 </table>
@@ -1066,7 +1066,21 @@
 <tbody>
 <tr class="altColor">
 <td class="colFirst"><code><a href="../../../../../../net/sourceforge/seqware/common/model/Lane.html" title="class in net.sourceforge.seqware.common.model">Lane</a></code></td>
-<td class="colLast"><span class="strong">SequencerRunReportId.</span><code><strong><a href="../../../../../../net/sourceforge/seqware/common/model/SequencerRunReportId.html#getLane()">getLane</a></strong>()</code>
+<td class="colLast"><span class="strong">SampleReportRow.</span><code><strong><a href="../../../../../../net/sourceforge/seqware/common/model/SampleReportRow.html#getLane()">getLane</a></strong>()</code>
+<div class="block">
+ Getter for the field <code>lane</code>.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code><a href="../../../../../../net/sourceforge/seqware/common/model/Lane.html" title="class in net.sourceforge.seqware.common.model">Lane</a></code></td>
+<td class="colLast"><span class="strong">IUS.</span><code><strong><a href="../../../../../../net/sourceforge/seqware/common/model/IUS.html#getLane()">getLane</a></strong>()</code>
+<div class="block">
+ Getter for the field <code>lane</code>.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code><a href="../../../../../../net/sourceforge/seqware/common/model/Lane.html" title="class in net.sourceforge.seqware.common.model">Lane</a></code></td>
+<td class="colLast"><span class="strong">FileReportRow.</span><code><strong><a href="../../../../../../net/sourceforge/seqware/common/model/FileReportRow.html#getLane()">getLane</a></strong>()</code>
 <div class="block">
  Getter for the field <code>lane</code>.</div>
 </td>
@@ -1087,21 +1101,7 @@
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code><a href="../../../../../../net/sourceforge/seqware/common/model/Lane.html" title="class in net.sourceforge.seqware.common.model">Lane</a></code></td>
-<td class="colLast"><span class="strong">IUS.</span><code><strong><a href="../../../../../../net/sourceforge/seqware/common/model/IUS.html#getLane()">getLane</a></strong>()</code>
-<div class="block">
- Getter for the field <code>lane</code>.</div>
-</td>
-</tr>
-<tr class="altColor">
-<td class="colFirst"><code><a href="../../../../../../net/sourceforge/seqware/common/model/Lane.html" title="class in net.sourceforge.seqware.common.model">Lane</a></code></td>
-<td class="colLast"><span class="strong">SampleReportRow.</span><code><strong><a href="../../../../../../net/sourceforge/seqware/common/model/SampleReportRow.html#getLane()">getLane</a></strong>()</code>
-<div class="block">
- Getter for the field <code>lane</code>.</div>
-</td>
-</tr>
-<tr class="rowColor">
-<td class="colFirst"><code><a href="../../../../../../net/sourceforge/seqware/common/model/Lane.html" title="class in net.sourceforge.seqware.common.model">Lane</a></code></td>
-<td class="colLast"><span class="strong">FileReportRow.</span><code><strong><a href="../../../../../../net/sourceforge/seqware/common/model/FileReportRow.html#getLane()">getLane</a></strong>()</code>
+<td class="colLast"><span class="strong">SequencerRunReportId.</span><code><strong><a href="../../../../../../net/sourceforge/seqware/common/model/SequencerRunReportId.html#getLane()">getLane</a></strong>()</code>
 <div class="block">
  Getter for the field <code>lane</code>.</div>
 </td>
@@ -1186,8 +1186,8 @@
 </td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code><a href="http://docs.oracle.com/javase/7/docs/api/java/util/Set.html?is-external=true" title="class or interface in java.util">Set</a>&lt;<a href="../../../../../../net/sourceforge/seqware/common/model/Lane.html" title="class in net.sourceforge.seqware.common.model">Lane</a>&gt;</code></td>
-<td class="colLast"><span class="strong">Processing.</span><code><strong><a href="../../../../../../net/sourceforge/seqware/common/model/Processing.html#getLanes()">getLanes</a></strong>()</code>
+<td class="colFirst"><code><a href="http://docs.oracle.com/javase/7/docs/api/java/util/SortedSet.html?is-external=true" title="class or interface in java.util">SortedSet</a>&lt;<a href="../../../../../../net/sourceforge/seqware/common/model/Lane.html" title="class in net.sourceforge.seqware.common.model">Lane</a>&gt;</code></td>
+<td class="colLast"><span class="strong">SequencerRun.</span><code><strong><a href="../../../../../../net/sourceforge/seqware/common/model/SequencerRun.html#getLanes()">getLanes</a></strong>()</code>
 <div class="block">
  Getter for the field <code>lanes</code>.</div>
 </td>
@@ -1200,8 +1200,8 @@
 </td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code><a href="http://docs.oracle.com/javase/7/docs/api/java/util/SortedSet.html?is-external=true" title="class or interface in java.util">SortedSet</a>&lt;<a href="../../../../../../net/sourceforge/seqware/common/model/Lane.html" title="class in net.sourceforge.seqware.common.model">Lane</a>&gt;</code></td>
-<td class="colLast"><span class="strong">SequencerRun.</span><code><strong><a href="../../../../../../net/sourceforge/seqware/common/model/SequencerRun.html#getLanes()">getLanes</a></strong>()</code>
+<td class="colFirst"><code><a href="http://docs.oracle.com/javase/7/docs/api/java/util/Set.html?is-external=true" title="class or interface in java.util">Set</a>&lt;<a href="../../../../../../net/sourceforge/seqware/common/model/Lane.html" title="class in net.sourceforge.seqware.common.model">Lane</a>&gt;</code></td>
+<td class="colLast"><span class="strong">Processing.</span><code><strong><a href="../../../../../../net/sourceforge/seqware/common/model/Processing.html#getLanes()">getLanes</a></strong>()</code>
 <div class="block">
  Getter for the field <code>lanes</code>.</div>
 </td>
@@ -1225,7 +1225,21 @@
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><span class="strong">SequencerRunReportId.</span><code><strong><a href="../../../../../../net/sourceforge/seqware/common/model/SequencerRunReportId.html#setLane(net.sourceforge.seqware.common.model.Lane)">setLane</a></strong>(<a href="../../../../../../net/sourceforge/seqware/common/model/Lane.html" title="class in net.sourceforge.seqware.common.model">Lane</a>&nbsp;lane)</code>
+<td class="colLast"><span class="strong">SampleReportRow.</span><code><strong><a href="../../../../../../net/sourceforge/seqware/common/model/SampleReportRow.html#setLane(net.sourceforge.seqware.common.model.Lane)">setLane</a></strong>(<a href="../../../../../../net/sourceforge/seqware/common/model/Lane.html" title="class in net.sourceforge.seqware.common.model">Lane</a>&nbsp;lane)</code>
+<div class="block">
+ Setter for the field <code>lane</code>.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><span class="strong">IUS.</span><code><strong><a href="../../../../../../net/sourceforge/seqware/common/model/IUS.html#setLane(net.sourceforge.seqware.common.model.Lane)">setLane</a></strong>(<a href="../../../../../../net/sourceforge/seqware/common/model/Lane.html" title="class in net.sourceforge.seqware.common.model">Lane</a>&nbsp;lane)</code>
+<div class="block">
+ Setter for the field <code>lane</code>.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><span class="strong">FileReportRow.</span><code><strong><a href="../../../../../../net/sourceforge/seqware/common/model/FileReportRow.html#setLane(net.sourceforge.seqware.common.model.Lane)">setLane</a></strong>(<a href="../../../../../../net/sourceforge/seqware/common/model/Lane.html" title="class in net.sourceforge.seqware.common.model">Lane</a>&nbsp;lane)</code>
 <div class="block">
  Setter for the field <code>lane</code>.</div>
 </td>
@@ -1246,21 +1260,7 @@
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><span class="strong">IUS.</span><code><strong><a href="../../../../../../net/sourceforge/seqware/common/model/IUS.html#setLane(net.sourceforge.seqware.common.model.Lane)">setLane</a></strong>(<a href="../../../../../../net/sourceforge/seqware/common/model/Lane.html" title="class in net.sourceforge.seqware.common.model">Lane</a>&nbsp;lane)</code>
-<div class="block">
- Setter for the field <code>lane</code>.</div>
-</td>
-</tr>
-<tr class="altColor">
-<td class="colFirst"><code>void</code></td>
-<td class="colLast"><span class="strong">SampleReportRow.</span><code><strong><a href="../../../../../../net/sourceforge/seqware/common/model/SampleReportRow.html#setLane(net.sourceforge.seqware.common.model.Lane)">setLane</a></strong>(<a href="../../../../../../net/sourceforge/seqware/common/model/Lane.html" title="class in net.sourceforge.seqware.common.model">Lane</a>&nbsp;lane)</code>
-<div class="block">
- Setter for the field <code>lane</code>.</div>
-</td>
-</tr>
-<tr class="rowColor">
-<td class="colFirst"><code>void</code></td>
-<td class="colLast"><span class="strong">FileReportRow.</span><code><strong><a href="../../../../../../net/sourceforge/seqware/common/model/FileReportRow.html#setLane(net.sourceforge.seqware.common.model.Lane)">setLane</a></strong>(<a href="../../../../../../net/sourceforge/seqware/common/model/Lane.html" title="class in net.sourceforge.seqware.common.model">Lane</a>&nbsp;lane)</code>
+<td class="colLast"><span class="strong">SequencerRunReportId.</span><code><strong><a href="../../../../../../net/sourceforge/seqware/common/model/SequencerRunReportId.html#setLane(net.sourceforge.seqware.common.model.Lane)">setLane</a></strong>(<a href="../../../../../../net/sourceforge/seqware/common/model/Lane.html" title="class in net.sourceforge.seqware.common.model">Lane</a>&nbsp;lane)</code>
 <div class="block">
  Setter for the field <code>lane</code>.</div>
 </td>
@@ -1353,14 +1353,14 @@
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><span class="strong">SequencerRunDTO.</span><code><strong><a href="../../../../../../net/sourceforge/seqware/common/model/SequencerRunDTO.html#setLanes(java.util.SortedSet)">setLanes</a></strong>(<a href="http://docs.oracle.com/javase/7/docs/api/java/util/SortedSet.html?is-external=true" title="class or interface in java.util">SortedSet</a>&lt;<a href="../../../../../../net/sourceforge/seqware/common/model/Lane.html" title="class in net.sourceforge.seqware.common.model">Lane</a>&gt;&nbsp;lanes)</code>
+<td class="colLast"><span class="strong">SequencerRun.</span><code><strong><a href="../../../../../../net/sourceforge/seqware/common/model/SequencerRun.html#setLanes(java.util.SortedSet)">setLanes</a></strong>(<a href="http://docs.oracle.com/javase/7/docs/api/java/util/SortedSet.html?is-external=true" title="class or interface in java.util">SortedSet</a>&lt;<a href="../../../../../../net/sourceforge/seqware/common/model/Lane.html" title="class in net.sourceforge.seqware.common.model">Lane</a>&gt;&nbsp;lanes)</code>
 <div class="block">
  Setter for the field <code>lanes</code>.</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><span class="strong">SequencerRun.</span><code><strong><a href="../../../../../../net/sourceforge/seqware/common/model/SequencerRun.html#setLanes(java.util.SortedSet)">setLanes</a></strong>(<a href="http://docs.oracle.com/javase/7/docs/api/java/util/SortedSet.html?is-external=true" title="class or interface in java.util">SortedSet</a>&lt;<a href="../../../../../../net/sourceforge/seqware/common/model/Lane.html" title="class in net.sourceforge.seqware.common.model">Lane</a>&gt;&nbsp;lanes)</code>
+<td class="colLast"><span class="strong">SequencerRunDTO.</span><code><strong><a href="../../../../../../net/sourceforge/seqware/common/model/SequencerRunDTO.html#setLanes(java.util.SortedSet)">setLanes</a></strong>(<a href="http://docs.oracle.com/javase/7/docs/api/java/util/SortedSet.html?is-external=true" title="class or interface in java.util">SortedSet</a>&lt;<a href="../../../../../../net/sourceforge/seqware/common/model/Lane.html" title="class in net.sourceforge.seqware.common.model">Lane</a>&gt;&nbsp;lanes)</code>
 <div class="block">
  Setter for the field <code>lanes</code>.</div>
 </td>
@@ -1639,7 +1639,7 @@
 <tbody>
 <tr class="altColor">
 <td class="colFirst"><code>org.springframework.web.servlet.ModelAndView</code></td>
-<td class="colLast"><span class="strong">LaneController.</span><code><strong><a href="../../../../../../net/sourceforge/solexatools/webapp/controller/LaneController.html#handleCancel(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse, net.sourceforge.seqware.common.model.Lane)">handleCancel</a></strong>(javax.servlet.http.HttpServletRequest&nbsp;request,
+<td class="colLast"><span class="strong">FileController.</span><code><strong><a href="../../../../../../net/sourceforge/solexatools/webapp/controller/FileController.html#handleCancel(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse, net.sourceforge.seqware.common.model.Lane)">handleCancel</a></strong>(javax.servlet.http.HttpServletRequest&nbsp;request,
             javax.servlet.http.HttpServletResponse&nbsp;response,
             <a href="../../../../../../net/sourceforge/seqware/common/model/Lane.html" title="class in net.sourceforge.seqware.common.model">Lane</a>&nbsp;command)</code>
 <div class="block">Handles the user's request to cancel the lane or the lane update page.</div>
@@ -1647,7 +1647,7 @@
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>org.springframework.web.servlet.ModelAndView</code></td>
-<td class="colLast"><span class="strong">FileController.</span><code><strong><a href="../../../../../../net/sourceforge/solexatools/webapp/controller/FileController.html#handleCancel(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse, net.sourceforge.seqware.common.model.Lane)">handleCancel</a></strong>(javax.servlet.http.HttpServletRequest&nbsp;request,
+<td class="colLast"><span class="strong">LaneController.</span><code><strong><a href="../../../../../../net/sourceforge/solexatools/webapp/controller/LaneController.html#handleCancel(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse, net.sourceforge.seqware.common.model.Lane)">handleCancel</a></strong>(javax.servlet.http.HttpServletRequest&nbsp;request,
             javax.servlet.http.HttpServletResponse&nbsp;response,
             <a href="../../../../../../net/sourceforge/seqware/common/model/Lane.html" title="class in net.sourceforge.seqware.common.model">Lane</a>&nbsp;command)</code>
 <div class="block">Handles the user's request to cancel the lane or the lane update page.</div>
@@ -1663,29 +1663,21 @@
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>org.springframework.web.servlet.ModelAndView</code></td>
-<td class="colLast"><span class="strong">LaneController.</span><code><strong><a href="../../../../../../net/sourceforge/solexatools/webapp/controller/LaneController.html#handleReset(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse, net.sourceforge.seqware.common.model.Lane)">handleReset</a></strong>(javax.servlet.http.HttpServletRequest&nbsp;request,
-           javax.servlet.http.HttpServletResponse&nbsp;response,
-           <a href="../../../../../../net/sourceforge/seqware/common/model/Lane.html" title="class in net.sourceforge.seqware.common.model">Lane</a>&nbsp;command)</code>
-<div class="block">Handles the user's request to reset the lane page during a new or update lane.</div>
-</td>
-</tr>
-<tr class="altColor">
-<td class="colFirst"><code>org.springframework.web.servlet.ModelAndView</code></td>
 <td class="colLast"><span class="strong">FileController.</span><code><strong><a href="../../../../../../net/sourceforge/solexatools/webapp/controller/FileController.html#handleReset(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse, net.sourceforge.seqware.common.model.Lane)">handleReset</a></strong>(javax.servlet.http.HttpServletRequest&nbsp;request,
            javax.servlet.http.HttpServletResponse&nbsp;response,
            <a href="../../../../../../net/sourceforge/seqware/common/model/Lane.html" title="class in net.sourceforge.seqware.common.model">Lane</a>&nbsp;command)</code>
 <div class="block">Handles the user's request to reset the lane page during a new or update lane.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>org.springframework.web.servlet.ModelAndView</code></td>
-<td class="colLast"><span class="strong">LaneController.</span><code><strong><a href="../../../../../../net/sourceforge/solexatools/webapp/controller/LaneController.html#handleSubmit(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse, net.sourceforge.seqware.common.model.Lane)">handleSubmit</a></strong>(javax.servlet.http.HttpServletRequest&nbsp;request,
-            javax.servlet.http.HttpServletResponse&nbsp;response,
-            <a href="../../../../../../net/sourceforge/seqware/common/model/Lane.html" title="class in net.sourceforge.seqware.common.model">Lane</a>&nbsp;command)</code>
-<div class="block">Handles the user's request to submit a new lane.</div>
+<td class="colLast"><span class="strong">LaneController.</span><code><strong><a href="../../../../../../net/sourceforge/solexatools/webapp/controller/LaneController.html#handleReset(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse, net.sourceforge.seqware.common.model.Lane)">handleReset</a></strong>(javax.servlet.http.HttpServletRequest&nbsp;request,
+           javax.servlet.http.HttpServletResponse&nbsp;response,
+           <a href="../../../../../../net/sourceforge/seqware/common/model/Lane.html" title="class in net.sourceforge.seqware.common.model">Lane</a>&nbsp;command)</code>
+<div class="block">Handles the user's request to reset the lane page during a new or update lane.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>org.springframework.web.servlet.ModelAndView</code></td>
 <td class="colLast"><span class="strong">FileController.</span><code><strong><a href="../../../../../../net/sourceforge/solexatools/webapp/controller/FileController.html#handleSubmit(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse, net.sourceforge.seqware.common.model.Lane)">handleSubmit</a></strong>(javax.servlet.http.HttpServletRequest&nbsp;request,
             javax.servlet.http.HttpServletResponse&nbsp;response,
@@ -1693,9 +1685,17 @@
 <div class="block">Handles the user's request to submit a new lane.</div>
 </td>
 </tr>
+<tr class="altColor">
+<td class="colFirst"><code>org.springframework.web.servlet.ModelAndView</code></td>
+<td class="colLast"><span class="strong">LaneController.</span><code><strong><a href="../../../../../../net/sourceforge/solexatools/webapp/controller/LaneController.html#handleSubmit(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse, net.sourceforge.seqware.common.model.Lane)">handleSubmit</a></strong>(javax.servlet.http.HttpServletRequest&nbsp;request,
+            javax.servlet.http.HttpServletResponse&nbsp;response,
+            <a href="../../../../../../net/sourceforge/seqware/common/model/Lane.html" title="class in net.sourceforge.seqware.common.model">Lane</a>&nbsp;command)</code>
+<div class="block">Handles the user's request to submit a new lane.</div>
+</td>
+</tr>
 <tr class="rowColor">
 <td class="colFirst"><code>org.springframework.web.servlet.ModelAndView</code></td>
-<td class="colLast"><span class="strong">LaneController.</span><code><strong><a href="../../../../../../net/sourceforge/solexatools/webapp/controller/LaneController.html#handleUpdate(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse, net.sourceforge.seqware.common.model.Lane)">handleUpdate</a></strong>(javax.servlet.http.HttpServletRequest&nbsp;request,
+<td class="colLast"><span class="strong">FileController.</span><code><strong><a href="../../../../../../net/sourceforge/solexatools/webapp/controller/FileController.html#handleUpdate(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse, net.sourceforge.seqware.common.model.Lane)">handleUpdate</a></strong>(javax.servlet.http.HttpServletRequest&nbsp;request,
             javax.servlet.http.HttpServletResponse&nbsp;response,
             <a href="../../../../../../net/sourceforge/seqware/common/model/Lane.html" title="class in net.sourceforge.seqware.common.model">Lane</a>&nbsp;command)</code>
 <div class="block">Handles the user's request to update their lane.</div>
@@ -1703,7 +1703,7 @@
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>org.springframework.web.servlet.ModelAndView</code></td>
-<td class="colLast"><span class="strong">FileController.</span><code><strong><a href="../../../../../../net/sourceforge/solexatools/webapp/controller/FileController.html#handleUpdate(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse, net.sourceforge.seqware.common.model.Lane)">handleUpdate</a></strong>(javax.servlet.http.HttpServletRequest&nbsp;request,
+<td class="colLast"><span class="strong">LaneController.</span><code><strong><a href="../../../../../../net/sourceforge/solexatools/webapp/controller/LaneController.html#handleUpdate(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse, net.sourceforge.seqware.common.model.Lane)">handleUpdate</a></strong>(javax.servlet.http.HttpServletRequest&nbsp;request,
             javax.servlet.http.HttpServletResponse&nbsp;response,
             <a href="../../../../../../net/sourceforge/seqware/common/model/Lane.html" title="class in net.sourceforge.seqware.common.model">Lane</a>&nbsp;command)</code>
 <div class="block">Handles the user's request to update their lane.</div>
