@@ -58,6 +58,7 @@
 <li><a href="#usersettingsplugin">UserSettingsPlugin</a></li>
 <li><a href="#workflowlauncher">WorkflowLauncher</a></li>
 <li><a href="#workflowlifecycle">WorkflowLifecycle</a></li>
+<li><a href="#workflowrelauncher">WorkflowRelauncher</a></li>
 <li><a href="#workflowrescheduler">WorkflowRescheduler</a></li>
 <li><a href="#workflowrunfilesinitialpopulationplugin">WorkflowRunFilesInitialPopulationPlugin</a></li>
 <li><a href="#workflowrunreporter">WorkflowRunReporter</a></li>
@@ -976,6 +977,32 @@ A plugin that lets you (install)/schedule/launch/watch/status check workflows in
 <tr>
 <td>–workflow-engine</td>
       <td>Optional: Specifies a workflow engine, one of: oozie, oozie-sge, whitestar, whitestar-parallel, whitestar-sge. Defaults to oozie.</td>
+    </tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="workflowrelauncher">
+<h2>WorkflowRelauncher</h2>
+<p>io.seqware.pipeline.plugins.WorkflowRelauncher
+A plugin that lets you re-launch failed workflow runs.</p>
+
+<table>
+<thead><tr>
+<th>Command-line option</th>
+      <th>Description</th>
+    </tr></thead>
+<tbody>
+<tr>
+<td>–?, –h, –help</td>
+      <td>Provides this help message.</td>
+    </tr>
+<tr>
+<td>–[arguments]</td>
+      <td> </td>
+    </tr>
+<tr>
+<td>–w, –working-dir</td>
+      <td>Required: The working directory of the workflow run to watch</td>
     </tr>
 </tbody>
 </table>

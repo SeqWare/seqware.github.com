@@ -170,7 +170,7 @@ Our tools will abort and refuse to run if this is not set.</p>
 <span class="na">OOZIE_QUEUENAME</span><span class="o">=</span><span class="s">default</span>
 <span class="c1"># required: Working directory where your workflow steps execute and where we store generated scripts and logs</span>
 <span class="na">OOZIE_WORK_DIR</span><span class="o">=</span><span class="s">/usr/tmp/seqware-oozie</span>
-<span class="c1"># optional: Number of times that Oozie will retry user steps in workflows</span>
+<span class="c1"># optional: Number of times that Oozie and Whitestar will retry user steps in workflows</span>
 <span class="na">OOZIE_RETRY_MAX</span><span class="o">=</span><span class="s">5</span>
 <span class="c1"># optional: Minutes to wait before retry for user steps in workflows</span>
 <span class="na">OOZIE_RETRY_INTERVAL</span><span class="o">=</span><span class="s">5</span>
@@ -178,6 +178,16 @@ Our tools will abort and refuse to run if this is not set.</p>
 <span class="na">OOZIE_BATCH_THRESHOLD</span><span class="o">=</span><span class="s">10</span>
 <span class="c1"># optional: Number of provision file events that should be batched together</span>
 <span class="na">OOZIE_BATCH_SIZE</span><span class="o">=</span><span class="s">100</span>
+
+<span class="c1"># WHITESTAR</span>
+<span class="c1"># WhiteStar engine settings. Only used for the 'whitestar' series of engines.</span>
+
+<span class="c1"># optional: Restrict the number of parallel jobs invoked in WhiteStar to this amount of memory</span>
+<span class="na">WHITESTAR_MEMORY_LIMIT</span><span class="o">=</span><span class="s">2147483647</span>
+
+<span class="c1"># LAUNCH</span>
+<span class="c1"># Oozie engine settings. Only used for both 'oozie' and 'oozie-sge' engines.</span>
+
 <span class="c1"># required: HDFS implementation class</span>
 <span class="na">FS.HDFS.IMPL</span><span class="o">=</span><span class="s">org.apache.hadoop.hdfs.DistributedFileSystem</span>
 <span class="c1"># optional: Only used for 'oozie-sge' engine. Format of qsub flag for specifying number of threads. If present, ${threads} will be replaced with the job-specific value.</span>
