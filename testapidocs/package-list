@@ -1,5 +1,7 @@
+io.seqware
 io.seqware.cli.test
 io.seqware.pipeline
+io.seqware.pipeline.engines.whitestar
 io.seqware.pipeline.plugins
 io.seqware.pipeline.whitestar
 io.seqware.webservice.client

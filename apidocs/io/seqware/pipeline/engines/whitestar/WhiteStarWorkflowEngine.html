@@ -3,13 +3,13 @@
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
-<title>WhiteStarWorkflowEngine (SeqWare 1.1.0 API)</title>
+<title>WhiteStarWorkflowEngine (SeqWare 1.1.1 API)</title>
 <link rel="stylesheet" type="text/css" href="../../../../../stylesheet.css" title="Style">
 </head>
 <body>
 <script type="text/javascript"><!--
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="WhiteStarWorkflowEngine (SeqWare 1.1.0 API)";
+        parent.document.title="WhiteStarWorkflowEngine (SeqWare 1.1.1 API)";
     }
 //-->
 </script>
@@ -35,7 +35,7 @@
 </div>
 <div class="subNav">
 <ul class="navList">
-<li>Prev Class</li>
+<li><a href="../../../../../io/seqware/pipeline/engines/whitestar/Persistence.html" title="class in io.seqware.pipeline.engines.whitestar"><span class="strong">Prev Class</span></a></li>
 <li>Next Class</li>
 </ul>
 <ul class="navList">
@@ -103,7 +103,7 @@
 extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a>
 implements <a href="../../../../../io/seqware/pipeline/api/WorkflowEngine.html" title="interface in io.seqware.pipeline.api">WorkflowEngine</a></pre>
 <div class="block">This is a synchronous bare-bones implementation of the WorkflowEngine for prototyping and debugging.
- 
+
  This re-uses much of the OozieWorkflowXml generation code in order to generate the required Bash scripts and supporting files.</div>
 <dl><dt><span class="strong">Author:</span></dt>
   <dd>dyuen</dd></dl>
@@ -166,9 +166,20 @@ implements <a href="../../../../../io/seqware/pipeline/api/WorkflowEngine.html" 
 </td>
 </tr>
 <tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="../../../../../io/seqware/pipeline/engines/whitestar/WhiteStarWorkflowEngine.html#prepareWorkflow(net.sourceforge.seqware.pipeline.workflowV2.AbstractWorkflowDataModel, java.io.File)">prepareWorkflow</a></strong>(<a href="../../../../../net/sourceforge/seqware/pipeline/workflowV2/AbstractWorkflowDataModel.html" title="class in net.sourceforge.seqware.pipeline.workflowV2">AbstractWorkflowDataModel</a>&nbsp;objectModel,
+               <a href="http://docs.oracle.com/javase/7/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</a>&nbsp;nfsWorkDir)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
 <td class="colFirst"><code><a href="../../../../../net/sourceforge/seqware/common/module/ReturnValue.html" title="class in net.sourceforge.seqware.common.module">ReturnValue</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../io/seqware/pipeline/engines/whitestar/WhiteStarWorkflowEngine.html#runWorkflow()">runWorkflow</a></strong>()</code>
 <div class="block">Run the prepared workflow.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code><a href="../../../../../net/sourceforge/seqware/common/module/ReturnValue.html" title="class in net.sourceforge.seqware.common.module">ReturnValue</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../io/seqware/pipeline/engines/whitestar/WhiteStarWorkflowEngine.html#runWorkflow(java.util.SortedSet)">runWorkflow</a></strong>(<a href="http://docs.oracle.com/javase/7/docs/api/java/util/SortedSet.html?is-external=true" title="class or interface in java.util">SortedSet</a>&lt;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&gt;&nbsp;set)</code>
+<div class="block">Run a workflow, steps contained within set are skipped.</div>
 </td>
 </tr>
 <tr class="altColor">
@@ -237,6 +248,17 @@ implements <a href="../../../../../io/seqware/pipeline/api/WorkflowEngine.html" 
 <dt><span class="strong">Parameters:</span></dt><dd><code>objectModel</code> - model of the workflow to prepare to run</dd></dl>
 </li>
 </ul>
+<a name="prepareWorkflow(net.sourceforge.seqware.pipeline.workflowV2.AbstractWorkflowDataModel, java.io.File)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>prepareWorkflow</h4>
+<pre>public&nbsp;void&nbsp;prepareWorkflow(<a href="../../../../../net/sourceforge/seqware/pipeline/workflowV2/AbstractWorkflowDataModel.html" title="class in net.sourceforge.seqware.pipeline.workflowV2">AbstractWorkflowDataModel</a>&nbsp;objectModel,
+                   <a href="http://docs.oracle.com/javase/7/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</a>&nbsp;nfsWorkDir)</pre>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>objectModel</code> - </dd><dd><code>nfsWorkDir</code> - pass a working directory to skip creation of scripts in the generated-scripts</dd></dl>
+</li>
+</ul>
 <a name="runWorkflow()">
 <!--   -->
 </a>
@@ -249,6 +271,18 @@ implements <a href="../../../../../io/seqware/pipeline/api/WorkflowEngine.html" 
 <dl>
 <dt><strong>Specified by:</strong></dt>
 <dd><code><a href="../../../../../io/seqware/pipeline/api/WorkflowEngine.html#runWorkflow()">runWorkflow</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/seqware/pipeline/api/WorkflowEngine.html" title="interface in io.seqware.pipeline.api">WorkflowEngine</a></code></dd>
+<dt><span class="strong">Returns:</span></dt><dd></dd></dl>
+</li>
+</ul>
+<a name="runWorkflow(java.util.SortedSet)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>runWorkflow</h4>
+<pre>public&nbsp;<a href="../../../../../net/sourceforge/seqware/common/module/ReturnValue.html" title="class in net.sourceforge.seqware.common.module">ReturnValue</a>&nbsp;runWorkflow(<a href="http://docs.oracle.com/javase/7/docs/api/java/util/SortedSet.html?is-external=true" title="class or interface in java.util">SortedSet</a>&lt;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&gt;&nbsp;set)</pre>
+<div class="block">Run a workflow, steps contained within set are skipped.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>set</code> - a sorted set of workflow steps</dd>
 <dt><span class="strong">Returns:</span></dt><dd></dd></dl>
 </li>
 </ul>
@@ -325,7 +359,7 @@ implements <a href="../../../../../io/seqware/pipeline/api/WorkflowEngine.html" 
 </div>
 <div class="subNav">
 <ul class="navList">
-<li>Prev Class</li>
+<li><a href="../../../../../io/seqware/pipeline/engines/whitestar/Persistence.html" title="class in io.seqware.pipeline.engines.whitestar"><span class="strong">Prev Class</span></a></li>
 <li>Next Class</li>
 </ul>
 <ul class="navList">

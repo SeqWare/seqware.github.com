@@ -3,13 +3,13 @@
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
-<title>Sample (SeqWare 1.1.0 API)</title>
+<title>Sample (SeqWare 1.1.1 API)</title>
 <link rel="stylesheet" type="text/css" href="../../../../../stylesheet.css" title="Style">
 </head>
 <body>
 <script type="text/javascript"><!--
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Sample (SeqWare 1.1.0 API)";
+        parent.document.title="Sample (SeqWare 1.1.1 API)";
     }
 //-->
 </script>
@@ -100,13 +100,13 @@
 <li class="blockList">
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><a href="http://docs.oracle.com/javase/7/docs/api/java/io/Serializable.html?is-external=true" title="class or interface in java.io">Serializable</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Comparable.html?is-external=true" title="class or interface in java.lang">Comparable</a>&lt;<a href="../../../../../net/sourceforge/seqware/common/model/Sample.html" title="class in net.sourceforge.seqware.common.model">Sample</a>&gt;, <a href="../../../../../net/sourceforge/seqware/common/model/Annotatable.html" title="interface in net.sourceforge.seqware.common.model">Annotatable</a>&lt;<a href="../../../../../net/sourceforge/seqware/common/model/SampleAttribute.html" title="class in net.sourceforge.seqware.common.model">SampleAttribute</a>&gt;, <a href="../../../../../net/sourceforge/seqware/common/model/ParentAccessionModel.html" title="interface in net.sourceforge.seqware.common.model">ParentAccessionModel</a></dd>
+<dd><a href="http://docs.oracle.com/javase/7/docs/api/java/io/Serializable.html?is-external=true" title="class or interface in java.io">Serializable</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Comparable.html?is-external=true" title="class or interface in java.lang">Comparable</a>&lt;<a href="../../../../../net/sourceforge/seqware/common/model/Sample.html" title="class in net.sourceforge.seqware.common.model">Sample</a>&gt;, <a href="../../../../../net/sourceforge/seqware/common/model/Annotatable.html" title="interface in net.sourceforge.seqware.common.model">Annotatable</a>&lt;<a href="../../../../../net/sourceforge/seqware/common/model/SampleAttribute.html" title="class in net.sourceforge.seqware.common.model">SampleAttribute</a>&gt;, <a href="../../../../../net/sourceforge/seqware/common/model/FirstTierModel.html" title="interface in net.sourceforge.seqware.common.model">FirstTierModel</a>, <a href="../../../../../net/sourceforge/seqware/common/model/ParentAccessionModel.html" title="interface in net.sourceforge.seqware.common.model">ParentAccessionModel</a></dd>
 </dl>
 <hr>
 <br>
 <pre>public class <span class="strong">Sample</span>
 extends <a href="../../../../../net/sourceforge/seqware/common/security/PermissionsAware.html" title="class in net.sourceforge.seqware.common.security">PermissionsAware</a>
-implements <a href="http://docs.oracle.com/javase/7/docs/api/java/io/Serializable.html?is-external=true" title="class or interface in java.io">Serializable</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Comparable.html?is-external=true" title="class or interface in java.lang">Comparable</a>&lt;<a href="../../../../../net/sourceforge/seqware/common/model/Sample.html" title="class in net.sourceforge.seqware.common.model">Sample</a>&gt;, <a href="../../../../../net/sourceforge/seqware/common/model/ParentAccessionModel.html" title="interface in net.sourceforge.seqware.common.model">ParentAccessionModel</a>, <a href="../../../../../net/sourceforge/seqware/common/model/Annotatable.html" title="interface in net.sourceforge.seqware.common.model">Annotatable</a>&lt;<a href="../../../../../net/sourceforge/seqware/common/model/SampleAttribute.html" title="class in net.sourceforge.seqware.common.model">SampleAttribute</a>&gt;</pre>
+implements <a href="http://docs.oracle.com/javase/7/docs/api/java/io/Serializable.html?is-external=true" title="class or interface in java.io">Serializable</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Comparable.html?is-external=true" title="class or interface in java.lang">Comparable</a>&lt;<a href="../../../../../net/sourceforge/seqware/common/model/Sample.html" title="class in net.sourceforge.seqware.common.model">Sample</a>&gt;, <a href="../../../../../net/sourceforge/seqware/common/model/ParentAccessionModel.html" title="interface in net.sourceforge.seqware.common.model">ParentAccessionModel</a>, <a href="../../../../../net/sourceforge/seqware/common/model/Annotatable.html" title="interface in net.sourceforge.seqware.common.model">Annotatable</a>&lt;<a href="../../../../../net/sourceforge/seqware/common/model/SampleAttribute.html" title="class in net.sourceforge.seqware.common.model">SampleAttribute</a>&gt;, <a href="../../../../../net/sourceforge/seqware/common/model/FirstTierModel.html" title="interface in net.sourceforge.seqware.common.model">FirstTierModel</a></pre>
 <dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../serialized-form.html#net.sourceforge.seqware.common.model.Sample">Serialized Form</a></dd></dl>
 </li>
 </ul>
@@ -1434,7 +1434,10 @@ implements <a href="http://docs.oracle.com/javase/7/docs/api/java/io/Serializabl
 <div class="block"><p>
  Getter for the field <code>swAccession</code>.
  </p></div>
-<dl><dt><span class="strong">Returns:</span></dt><dd>a <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Integer.html?is-external=true" title="class or interface in java.lang"><code>Integer</code></a> object.</dd></dl>
+<dl>
+<dt><strong>Specified by:</strong></dt>
+<dd><code><a href="../../../../../net/sourceforge/seqware/common/model/FirstTierModel.html#getSwAccession()">getSwAccession</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../net/sourceforge/seqware/common/model/FirstTierModel.html" title="interface in net.sourceforge.seqware.common.model">FirstTierModel</a></code></dd>
+<dt><span class="strong">Returns:</span></dt><dd>a <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Integer.html?is-external=true" title="class or interface in java.lang"><code>Integer</code></a> object.</dd></dl>
 </li>
 </ul>
 <a name="setSwAccession(java.lang.Integer)">
